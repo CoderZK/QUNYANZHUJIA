@@ -14,13 +14,13 @@
 {
     
     NSMutableDictionary *mDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
-    //    NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
-    //    [mDict setValue:device forKey:@"deviceId"];
-    //    [mDict setValue:@1 forKey:@"channel"];
-    //    NSString *version = [NSString stringWithFormat:@"V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-    //    [mDict setValue:version forKey:@"version"];
-    //    NSString *mdSignature = [NSString stringToMD5:[NSString stringWithFormat:@"%@%@%@%@",device,@1,version,[device substringFromIndex:device.length-5]]];
-    //    [mDict setValue:[NSString stringWithFormat:@"%@1",mdSignature] forKey:@"signature"];
+        NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
+        [mDict setValue:device forKey:@"deviceId"];
+        [mDict setValue:@1 forKey:@"channel"];
+        NSString *version = [NSString stringWithFormat:@"V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+        [mDict setValue:version forKey:@"version"];
+        NSString *mdSignature = [NSString stringToMD5:[NSString stringWithFormat:@"%@%@%@%@",device,@1,version,[device substringFromIndex:device.length-5]]];
+        [mDict setValue:[NSString stringWithFormat:@"%@1",mdSignature] forKey:@"signature"];
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain", @"text/html",@"text/json",@"text/javascript", nil];

@@ -13,4 +13,9 @@ pod 'UMengUShare/Social/Sina'
 pod 'UMengUShare/Social/WeChat'
 pod 'UMengUShare/Social/QQ'
 
+pod 'ReactiveObjC'
+pod 'TZImagePickerController'
+pod 'Masonry'
+pod 'ZFPlayer'
+
 end

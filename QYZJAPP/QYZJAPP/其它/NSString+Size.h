@@ -57,8 +57,15 @@
 /** 根据时间进行判断返回时间*/
 +(NSString *)stringWithDateStr:(NSNumber *)str;
 
-/* MD5字符串 */
+/* MD5字符串 32位小写*/
 + (NSString *)stringToMD5:(NSString *)str;
+// 32位大写
++(NSString *)MD5ForUpper32Bate:(NSString *)str;
+// 16为大写
++(NSString *)MD5ForUpper16Bate:(NSString *)str;
+// 16位小写
++(NSString *)MD5ForLower16Bate:(NSString *)str;
+
 
 /**
  *  汉字的拼音

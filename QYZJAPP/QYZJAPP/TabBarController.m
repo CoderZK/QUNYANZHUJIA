@@ -8,10 +8,10 @@
 
 #import "TabBarController.h"
 #import "BaseViewController.h"
-#import "HomeVC.h"
-#import "MineVC.h"
-#import "HangQingVC.h"
-#import "GuanZhuVC.h"
+#import "QYZJHomeVC.h"
+#import "QYZJMineVC.h"
+#import "QYZJFindVC.h"
+#import "QYZJRecommendVC.h"
 
 @interface TabBarController ()
 {
@@ -38,7 +38,7 @@
     NSArray *imgArr=@[@"ico_shouye_2",@"ico_shouye_2",@"ico_shouye_2",@"ico_shouye_2"];
     NSArray *selectedImgArr=@[@"ico_shouye_1",@"ico_shouye_1",@"ico_shouye_1",@"ico_shouye_1"];
     NSArray *barTitleArr=@[@"首页",@"关注",@"行情",@"我的"];
-    NSArray *className=@[@"HomeVC",@"GuanZhuVC",@"HangQingVC",@"MineVC"];
+    NSArray *className=@[@"QYZJHomeVC",@"QYZJFindVC",@"QYZJMineVC",@"QYZJMineVC"];
     NSMutableArray *arr=[[NSMutableArray alloc] init];
     for (int i=0; i<className.count; i++)
     {
