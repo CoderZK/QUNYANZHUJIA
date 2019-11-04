@@ -150,6 +150,12 @@
     return height;
 }
 
+-(CGFloat)getWidhtWithFontSize:(int)fontSize
+{
+    CGSize size=[self boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading  attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:fontSize]} context:nil].size;
+    return size.width;
+}
+
 - (CGFloat)getHeigtWithIsBlodFontSize:(int)fontSize lineSpace:(int )lineSpace width:(CGFloat )widht {
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self];
     
@@ -211,6 +217,33 @@
     
     
 }
+
+- (NSMutableAttributedString *)getMutableAttributeStringWithFont:(int)fontSize lineSpace:(int)lineSpace textColor:(UIColor *)color textColorTwo:(UIColor *)colorTwo nsrange:(NSRange )range {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self];
+    [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:fontSize] range:NSMakeRange(0, self.length)];
+    [attributedString addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, self.length)];
+    [attributedString addAttribute:NSForegroundColorAttributeName value:colorTwo range:range];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:lineSpace];//调整行间距
+    paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, self.length)];
+    return attributedString;
+}
+
+- (NSMutableAttributedString *)getMutableAttributeStringWithFont:(int)fontSize lineSpace:(int)lineSpace textColor:(UIColor *)color fontTwo:(int)fontTwo nsrange:(NSRange )range {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self];
+    [attributedString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:fontSize] range:NSMakeRange(0, self.length - range.length)];
+    [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:fontTwo] range:range];
+    [attributedString addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, self.length)];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:lineSpace];//调整行间距
+    paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, self.length)];
+    return attributedString;
+}
+
+
+
 
 +(NSString *)stringWithDateStrwithyymmddHHmm:(NSNumber *)str
 {

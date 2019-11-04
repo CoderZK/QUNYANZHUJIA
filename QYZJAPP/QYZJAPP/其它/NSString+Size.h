@@ -29,7 +29,7 @@
 
 -(CGSize)getSizeWithMaxSize:(CGSize)maxSize withFontSize:(int)fontSize;
 
-
+-(CGFloat)getWidhtWithFontSize:(int)fontSize;
 
 //根据行间距 和 行的宽 字的大小计算行的高度
 
@@ -37,6 +37,9 @@
 - (CGFloat)getHeigtWithIsBlodFontSize:(int)fontSize lineSpace:(int )lineSpace width:(CGFloat )widht;
 - (NSMutableAttributedString *)getMutableAttributeStringWithFont:(int)fontSize lineSpace:(int)lineSpace textColor:(UIColor *)color;
 - (NSMutableAttributedString *)getMutableAttributeStringWithFont:(int)fontSize withBlood:(BOOL)isBlood lineSpace:(int)lineSpace textColor:(UIColor *)color;
+
+- (NSMutableAttributedString *)getMutableAttributeStringWithFont:(int)fontSize lineSpace:(int)lineSpace textColor:(UIColor *)color textColorTwo:(UIColor *)colorTwo nsrange:(NSRange )range;
+- (NSMutableAttributedString *)getMutableAttributeStringWithFont:(int)fontSize lineSpace:(int)lineSpace textColor:(UIColor *)color fontTwo:(int)fontTwo nsrange:(NSRange )range;
 
 /**
 把字符串装换成日期型的格式化字符串

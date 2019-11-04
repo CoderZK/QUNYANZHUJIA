@@ -41,6 +41,7 @@
 #import "TZImagePickerController.h"
 #import <Masonry.h>
 #import "QYZJBase64.h"
+#import "QYZhuJiaLoginVC.h"
 
 
 #define iOS11Later ([UIDevice currentDevice].systemVersion.floatValue >= 11.0f)
@@ -77,10 +78,11 @@
 
 #define YellowColor [UIColor colorWithRed:243/255.0 green:193/255.0 blue:108/255.0 alpha:1]
 #define OrangeColor [UIColor colorWithRed:236/255.0 green:156/255.0 blue:113/255.0 alpha:1]
+#define BlueColor [UIColor colorWithRed:162/255.0 green:176/255.0 blue:233/255.0 alpha:1]
 
 //tabbar的字体颜色
-#define TabberGreen [UIColor colorWithRed:255/255.0 green:128/255.0 blue:60/255.0 alpha:1]
+#define TabberGreen [UIColor colorWithRed:255/255.0 green:110/255.0 blue:50/255.0 alpha:1]
 
-
+#define RGB(R,G,B) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1]
 
 #endif /* Header_h */

@@ -121,13 +121,12 @@ typedef void (^Nav2)();
 
 
 
-//- (void)gotoLoginVC {
-//    
-//    LogionTVC * vc =[[LogionTVC alloc] init];
-//    BaseNavigationController * navc =[[BaseNavigationController alloc] initWithRootViewController:vc];;
-//    [self presentViewController:navc animated:YES completion:nil];
-//    
-//    
-//}
+- (void)gotoLoginVC {
+    
+    BaseNavigationController * navc = [[BaseNavigationController alloc] initWithRootViewController:[[QYZhuJiaLoginVC alloc] init]];
+       [self presentViewController:navc animated:YES completion:nil];
+    
+    
+}
 
 @end

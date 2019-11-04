@@ -132,6 +132,7 @@
 {
     
     NSMutableDictionary *mDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
+
     //    NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
     //    [mDict setValue:device forKey:@"deviceId"];
     //    [mDict setValue:@1 forKey:@"channel"];

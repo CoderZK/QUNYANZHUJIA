@@ -114,7 +114,7 @@
     // 阴影透明度，默认0
     theView.layer.shadowOpacity = 0.5;
     // 阴影半径，默认3
-    theView.layer.shadowRadius = 5;
+    theView.layer.shadowRadius = 3;
 
 }
 

@@ -19,6 +19,7 @@
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kcr-1a-0DQ">
                         <rect key="frame" x="15" y="10" width="45" height="45"/>
+                        <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="45" id="Z5I-OB-cWI"/>
                             <constraint firstAttribute="width" constant="45" id="lqi-Qt-gqz"/>
@@ -33,32 +34,35 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="裁判" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPT-Nv-whn">
-                        <rect key="frame" x="180" y="66" width="42" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="裁判" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPT-Nv-whn">
+                        <rect key="frame" x="187" y="60" width="31" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="giK-zb-FJc">
                         <rect key="frame" x="402" y="10" width="45" height="45"/>
+                        <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="交付" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8FR-Te-04r">
-                        <rect key="frame" x="403" y="66" width="42" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交付" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8FR-Te-04r">
+                        <rect key="frame" x="409" y="60" width="31" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yww-Tw-fIB">
                         <rect key="frame" x="642" y="10" width="45" height="45"/>
+                        <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="抢单" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUG-en-jOF">
-                        <rect key="frame" x="645" y="60" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="抢单" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUG-en-jOF">
+                        <rect key="frame" x="649" y="60" width="31" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xYs-ud-kp1">
                         <rect key="frame" x="180" y="10" width="45" height="45"/>
+                        <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </imageView>
                 </subviews>
                 <constraints>
@@ -83,16 +87,16 @@
                     <constraint firstItem="xYs-ud-kp1" firstAttribute="height" secondItem="kcr-1a-0DQ" secondAttribute="height" id="qAr-1d-9T0"/>
                     <constraint firstItem="VPQ-ee-Kn7" firstAttribute="top" secondItem="kcr-1a-0DQ" secondAttribute="bottom" constant="5" id="qei-Fz-2BN"/>
                     <constraint firstItem="giK-zb-FJc" firstAttribute="height" secondItem="kcr-1a-0DQ" secondAttribute="height" id="rRB-9Y-BT6"/>
+                    <constraint firstItem="yww-Tw-fIB" firstAttribute="leading" secondItem="giK-zb-FJc" secondAttribute="trailing" constant="195" id="tge-7h-WtA"/>
                     <constraint firstItem="CPT-Nv-whn" firstAttribute="centerX" secondItem="xYs-ud-kp1" secondAttribute="centerX" id="uNf-m0-jLw"/>
                     <constraint firstItem="8FR-Te-04r" firstAttribute="height" secondItem="VPQ-ee-Kn7" secondAttribute="height" id="ukS-f6-WHR"/>
                     <constraint firstItem="aUG-en-jOF" firstAttribute="centerX" secondItem="yww-Tw-fIB" secondAttribute="centerX" id="wZH-AO-jN0"/>
-                    <constraint firstItem="giK-zb-FJc" firstAttribute="leading" secondItem="xYs-ud-kp1" secondAttribute="trailing" constant="177" id="xyx-Yz-WK2"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="con1" destination="3CD-Ns-f1t" id="5t1-nz-I1M"/>
-                <outlet property="con2" destination="xyx-Yz-WK2" id="UIs-Ao-GgL"/>
+                <outlet property="con2" destination="tge-7h-WtA" id="f04-nw-epN"/>
             </connections>
             <point key="canvasLocation" x="84" y="80"/>
         </tableViewCell>

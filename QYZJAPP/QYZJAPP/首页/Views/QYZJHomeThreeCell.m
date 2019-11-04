@@ -1,25 +1,22 @@
 //
-//  QYZJHomeTwoCell.m
+//  QYZJHomeThreeCell.m
 //  QYZJAPP
 //
 //  Created by zk on 2019/11/4.
 //  Copyright © 2019 kunzhang. All rights reserved.
 //
 
-#import "QYZJHomeTwoCell.h"
+#import "QYZJHomeThreeCell.h"
 
-@interface QYZJHomeTwoCell()
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *con1;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *con2;
-
-
-@end
-
-@implementation QYZJHomeTwoCell
+@implementation QYZJHomeThreeCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.con1.constant = self.con2.constant = (ScreenW - 30 - (4*45))/3.0;
+    
+    self.imgV.layer.cornerRadius = 5;
+    self.imgV.clipsToBounds = YES;
+    self.imgV.backgroundColor = [UIColor redColor];
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
