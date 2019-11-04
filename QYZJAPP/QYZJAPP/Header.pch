@@ -75,10 +75,11 @@
 //线的颜色
 #define lineBackColor [UIColor colorWithRed:180/255.0 green:180/255.0 blue:180/255.0 alpha:1]
 
-#define BlueColor [UIColor colorWithRed:63/255.0 green:136/255.0 blue:189/255.0 alpha:1]
+#define YellowColor [UIColor colorWithRed:243/255.0 green:193/255.0 blue:108/255.0 alpha:1]
+#define OrangeColor [UIColor colorWithRed:236/255.0 green:156/255.0 blue:113/255.0 alpha:1]
 
 //tabbar的字体颜色
-#define TabberGreen [UIColor colorWithRed:0/255.0 green:150/255.0 blue:247/255.0 alpha:1]
+#define TabberGreen [UIColor colorWithRed:255/255.0 green:128/255.0 blue:60/255.0 alpha:1]
 
 
 

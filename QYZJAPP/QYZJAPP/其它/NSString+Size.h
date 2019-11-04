@@ -18,6 +18,11 @@
 // 电话号码验证
 -(BOOL) verifyPhone;
 
+/** 检测字符包含数字和字母 */
+
++ (BOOL)checkStingContainLetterAndNumberWithString:(NSString *)string;
+
+
 /**
  获得字符串的大小
  */

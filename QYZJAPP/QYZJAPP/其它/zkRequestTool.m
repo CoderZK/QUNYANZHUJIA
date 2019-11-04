@@ -14,13 +14,17 @@
 {
     
     NSMutableDictionary *mDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
-        NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
-        [mDict setValue:device forKey:@"deviceId"];
-        [mDict setValue:@1 forKey:@"channel"];
-        NSString *version = [NSString stringWithFormat:@"V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-        [mDict setValue:version forKey:@"version"];
-        NSString *mdSignature = [NSString stringToMD5:[NSString stringWithFormat:@"%@%@%@%@",device,@1,version,[device substringFromIndex:device.length-5]]];
-        [mDict setValue:[NSString stringWithFormat:@"%@1",mdSignature] forKey:@"signature"];
+    NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
+    [mDict setValue:device forKey:@"device_id"];
+    [mDict setValue:@1 forKey:@"channel"];
+    [mDict setValue:@0 forKey:@"type"];
+    NSString *version = [NSString stringWithFormat:@"V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+    [mDict setValue:version forKey:@"version"];
+    
+    //       NSString * str222 = [NSString stringWithFormat:@"%@%@%@%@",device,@1,version,[device substringFromIndex:device.length-5]];
+    
+    NSString *mdSignature = [NSString stringToMD5:[NSString stringWithFormat:@"%@%@%@%@",device,@1,version,[device substringFromIndex:device.length-5]]];
+    [mDict setValue:[NSString stringWithFormat:@"%@1",mdSignature] forKey:@"signature"];
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain", @"text/html",@"text/json",@"text/javascript", nil];
@@ -55,12 +59,12 @@
     
     //    [manager.requestSerializer setValue:@"http://iosapi.jkcsoft.com/public/index.html" forHTTPHeaderField:@"Referer"];
     
-//    NSDictionary * dict = parameters;
-//    //获取josnzi字符串
-//    NSString * josnStr = [NSString convertToJsonData:dict];
-//    //获取MD5字符串
-//    NSString * MD5Str = [NSString stringToMD5:[josnStr stringByAppendingString:@"1375d7ac2b2a8e25"]];
-//    NSDictionary * paraDict = @{@"authCode":MD5Str,@"jsonObj":josnStr};
+    //    NSDictionary * dict = parameters;
+    //    //获取josnzi字符串
+    //    NSString * josnStr = [NSString convertToJsonData:dict];
+    //    //获取MD5字符串
+    //    NSString * MD5Str = [NSString stringToMD5:[josnStr stringByAppendingString:@"1375d7ac2b2a8e25"]];
+    //    NSDictionary * paraDict = @{@"authCode":MD5Str,@"jsonObj":josnStr};
     
     NSURLSessionDataTask * task = [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -92,13 +96,13 @@
 {
     
     NSMutableDictionary *mDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
-//    NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
-//    [mDict setValue:device forKey:@"deviceId"];
-//    [mDict setValue:@1 forKey:@"channel"];
-//    NSString *version = [NSString stringWithFormat:@"V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-//    [mDict setValue:version forKey:@"version"];
-//    NSString *mdSignature = [NSString stringToMD5:[NSString stringWithFormat:@"%@%@%@%@",device,@1,version,[device substringFromIndex:device.length-5]]];
-//    [mDict setValue:[NSString stringWithFormat:@"%@1",mdSignature] forKey:@"signature"];
+    //    NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
+    //    [mDict setValue:device forKey:@"deviceId"];
+    //    [mDict setValue:@1 forKey:@"channel"];
+    //    NSString *version = [NSString stringWithFormat:@"V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+    //    [mDict setValue:version forKey:@"version"];
+    //    NSString *mdSignature = [NSString stringToMD5:[NSString stringWithFormat:@"%@%@%@%@",device,@1,version,[device substringFromIndex:device.length-5]]];
+    //    [mDict setValue:[NSString stringWithFormat:@"%@1",mdSignature] forKey:@"signature"];
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain", @"text/html",@"text/json",@"text/javascript", nil];
@@ -118,7 +122,7 @@
             failure(task,error);
         }
     }];
- 
+    
     return task;
 }
 /**
@@ -128,25 +132,25 @@
 {
     
     NSMutableDictionary *mDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
-//    NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
-//    [mDict setValue:device forKey:@"deviceId"];
-//    [mDict setValue:@1 forKey:@"channel"];
-//    NSString *version = [NSString stringWithFormat:@"V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-//    [mDict setValue:version forKey:@"version"];
-//    NSString *mdSignature = [NSString stringToMD5:[NSString stringWithFormat:@"%@%@%@%@",device,@1,version,[device substringFromIndex:device.length-5]]];
-//    [mDict setValue:[NSString stringWithFormat:@"%@1",mdSignature] forKey:@"signature"];
+    //    NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
+    //    [mDict setValue:device forKey:@"deviceId"];
+    //    [mDict setValue:@1 forKey:@"channel"];
+    //    NSString *version = [NSString stringWithFormat:@"V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+    //    [mDict setValue:version forKey:@"version"];
+    //    NSString *mdSignature = [NSString stringToMD5:[NSString stringWithFormat:@"%@%@%@%@",device,@1,version,[device substringFromIndex:device.length-5]]];
+    //    [mDict setValue:[NSString stringWithFormat:@"%@1",mdSignature] forKey:@"signature"];
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain", @"text/html",@"text/json",@"text/javascript", nil];
     [manager.requestSerializer setValue:@"http://iosapi.jkcsoft.com/public/index.html" forHTTPHeaderField:@"Referer"];
     //    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-//    NSDictionary * dict = parameters;
+    //    NSDictionary * dict = parameters;
     //获取josnzi字符串
-//    NSString * josnStr = [NSString convertToJsonData:dict];
-//    //获取MD5字符串
-//    NSString * MD5Str = [NSString stringToMD5:[josnStr stringByAppendingString:@"1375d7ac2b2a8e25"]];
-//    NSDictionary * paraDict = @{@"authCode":MD5Str,@"jsonObj":josnStr};
+    //    NSString * josnStr = [NSString convertToJsonData:dict];
+    //    //获取MD5字符串
+    //    NSString * MD5Str = [NSString stringToMD5:[josnStr stringByAppendingString:@"1375d7ac2b2a8e25"]];
+    //    NSDictionary * paraDict = @{@"authCode":MD5Str,@"jsonObj":josnStr};
     
     [manager POST:urlStr parameters:mDict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         if (image) {
@@ -225,32 +229,31 @@
 {
     
     NSMutableDictionary *mDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
-//    NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
-//    [mDict setValue:device forKey:@"deviceId"];
-//    [mDict setValue:@1 forKey:@"channel"];
-//    NSString *version = [NSString stringWithFormat:@"V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-//    [mDict setValue:version forKey:@"version"];
-//    NSString *mdSignature = [NSString stringToMD5:[NSString stringWithFormat:@"%@%@%@%@",device,@1,version,[device substringFromIndex:device.length-5]]];
-//    [mDict setValue:[NSString stringWithFormat:@"%@1",mdSignature] forKey:@"signature"];
+    //    NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
+    //    [mDict setValue:device forKey:@"deviceId"];
+    //    [mDict setValue:@1 forKey:@"channel"];
+    //    NSString *version = [NSString stringWithFormat:@"V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+    //    [mDict setValue:version forKey:@"version"];
+    //    NSString *mdSignature = [NSString stringToMD5:[NSString stringWithFormat:@"%@%@%@%@",device,@1,version,[device substringFromIndex:device.length-5]]];
+    //    [mDict setValue:[NSString stringWithFormat:@"%@1",mdSignature] forKey:@"signature"];
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain", @"text/html",@"text/json",@"text/javascript", nil];
     [manager.requestSerializer setValue:@"http://iosapi.jkcsoft.com/public/index.html" forHTTPHeaderField:@"Referer"];
     
     
-//    NSDictionary * dict = parameters;
-//    //获取josnzi字符串
-//    NSString * josnStr = [NSString convertToJsonData:dict];
-//    //获取MD5字符串
-//    NSString * MD5Str = [NSString stringToMD5:[josnStr stringByAppendingString:@"1375d7ac2b2a8e25"]];
-//    NSDictionary * paraDict = @{@"authCode":MD5Str,@"jsonObj":josnStr};
+    //    NSDictionary * dict = parameters;
+    //    //获取josnzi字符串
+    //    NSString * josnStr = [NSString convertToJsonData:dict];
+    //    //获取MD5字符串
+    //    NSString * MD5Str = [NSString stringToMD5:[josnStr stringByAppendingString:@"1375d7ac2b2a8e25"]];
+    //    NSDictionary * paraDict = @{@"authCode":MD5Str,@"jsonObj":josnStr};
     
     [manager POST:urlStr parameters:mDict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
         for (UIImage * image in images)
         {
             [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.5) name:name fileName:@"teswwt1.jpg" mimeType:@"image/jpeg"];
-            
         }
         if (fileData) {
             [formData appendPartWithFileData:fileData name:fileName fileName:@"369369.mp4" mimeType:@"video/quicktime"];

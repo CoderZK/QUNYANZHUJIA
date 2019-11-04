@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>虚拟盘</string>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -38,18 +38,6 @@
 		<string>wechat</string>
 		<string>wtloginmqq2</string>
 	</array>
-    
-   <key>NSAppleMusicUsageDescription</key>
-   <string>群燕筑家需要您的同意,才能访问媒体资料库</string>
-   <key>NSCameraUsageDescription</key>
-   <string>群燕筑家需要您的同意,才能访问相机</string>
-   <key>NSLocationUsageDescriptionApp</key>
-   <string>群燕筑家需要您的同意,才能访问位置</string>
-   <key>NSMicrophoneUsageDescription</key>
-   <string>群燕筑家需要您的同意,才能使用麦克风</string>
-   <key>NSPhotoLibraryUsageDescription</key>
-   <string>群燕筑家需要您的同意,才能访问相册</string>
-    
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -57,6 +45,16 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>群燕筑家需要您的同意,才能访问媒体资料库</string>
+	<key>NSCameraUsageDescription</key>
+	<string>群燕筑家需要您的同意,才能访问相机</string>
+	<key>NSLocationUsageDescriptionApp</key>
+	<string>群燕筑家需要您的同意,才能访问位置</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>群燕筑家需要您的同意,才能使用麦克风</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>群燕筑家需要您的同意,才能访问相册</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

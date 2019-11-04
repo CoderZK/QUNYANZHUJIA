@@ -110,6 +110,18 @@
 }
 
 
++ (BOOL)checkStingContainLetterAndNumberWithString:(NSString *)string {
+    
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"] invertedSet];
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    
+    NSCharacterSet *cs2 = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+    NSString *filtered2 = [[string componentsSeparatedByCharactersInSet:cs2] componentsJoinedByString:@""];
+    
+    return filtered.length > 0 && filtered2.length > 0;
+    
+}
+
 /**
  获得字符串的大小
  */

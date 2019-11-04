@@ -15,7 +15,7 @@
 
 /** 登录 */
 + (NSString * )app_loginURL{
-    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_login.do"];
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_login_nocode.do"];
 }
 ///** 退出登录 */
 //+ (NSString * )getapp_loginURL;
