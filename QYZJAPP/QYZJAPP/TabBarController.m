@@ -38,7 +38,7 @@
     NSArray *imgArr=@[@"ico_shouye_2",@"ico_shouye_2",@"ico_shouye_2",@"ico_shouye_2"];
     NSArray *selectedImgArr=@[@"ico_shouye_1",@"ico_shouye_1",@"ico_shouye_1",@"ico_shouye_1"];
     NSArray *barTitleArr=@[@"首页",@"发现",@"推荐赚钱",@"我的"];
-    NSArray *className=@[@"QYZJHomeVC",@"QYZJFindVC",@"QYZJMineVC",@"QYZJMineVC"];
+    NSArray *className=@[@"QYZJHomeVC",@"QYZJFindVC",@"QYZJRecommendVC",@"QYZJMineVC"];
     NSMutableArray *arr=[[NSMutableArray alloc] init];
     for (int i=0; i<className.count; i++)
     {

@@ -17,8 +17,8 @@
     //self.navigationBar.barTintColor=Red;
     
     //设置背景色,并把黑线去掉
-    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_1"] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationBar setShadowImage:[[UIImage alloc] init]];
+//    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_1"] forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationBar setShadowImage:[[UIImage alloc] init]];
     
     //设置bar的title颜色
     self.navigationBar.titleTextAttributes=@{NSForegroundColorAttributeName:[UIColor blackColor],NSFontAttributeName:[UIFont systemFontOfSize:18]};

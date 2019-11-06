@@ -7,7 +7,7 @@
 //
 
 #import "QYZJFindPasswordVC.h"
-
+#import "QYZJFindPasswordTwoVC.h"
 @interface QYZJFindPasswordVC ()
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
 @property (weak, nonatomic) IBOutlet UITextField *codeTF;
@@ -30,7 +30,9 @@
            //发送验证码
            [self sendCode];
     }else {
-        
+        QYZJFindPasswordTwoVC * vc =[[QYZJFindPasswordTwoVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
 }

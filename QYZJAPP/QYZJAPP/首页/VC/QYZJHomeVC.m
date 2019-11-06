@@ -35,7 +35,8 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+     self.navigationController.navigationBar.hidden = YES;
+//    [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -67,6 +68,9 @@
         NSDictionary * dict = x;
         if ([[NSString stringWithFormat:@"%@",dict[@"key"]] isEqualToString:@"city"]) {
             //点击的是城市
+            QYZJCityChooseTVC * vc =[[QYZJCityChooseTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
         }else {
             //点击的是搜索
         }
@@ -172,12 +176,8 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     BaseNavigationController * navc = [[BaseNavigationController alloc] initWithRootViewController:[[QYZhuJiaLoginVC alloc] init]];
     [self presentViewController:navc animated:YES completion:nil];
-    
-    
-    
 }
 
 

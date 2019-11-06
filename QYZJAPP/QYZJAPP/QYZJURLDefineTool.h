@@ -206,40 +206,28 @@ NS_ASSUME_NONNULL_BEGIN
 /** 创建新单子的交付*/
 +(NSString *)user_createNewTurnoverURL;
 
+/** 获取城市列表*/
++(NSString *)user_cityListURL;
+/** 获取城市列表*/
++(NSString *)app_addressURL;
+/** 用户添加城市*/
++(NSString *)user_localCityURL;
+/** 删除城市列表*/
++(NSString *)user_delUserCityURL;
+/** 获取渠道列表*/
++(NSString *)app_labelListURL;
+/** 获取需求类型列表*/
++(NSString *)app_demandTypeListURL;
 
 
-/** 添加银行卡*/
-+(NSString *)addMyBankCardURL;
-/** 银行卡列表*/
-+(NSString *)getMyBankCardListURL;
-/** 删除银行卡*/
-+(NSString *)deleteMyBankCardURL;
-/** 取消点赞*/
-+(NSString *)notlikeURL;
 
 
 
-/** 删除回话*/
-+(NSString *)deleteUserChatHoldURL;
-/** 我的系统消息列表 */
-+(NSString *)getMySysMsgListURL;
-/** 获取客服*/
-+(NSString *)contactKefURL;
-/** 银行卡列表*/
-+(NSString *)deletePostURL;
-/** 帖子置顶套餐*/
-+(NSString *)getPostTopPkgListURL;
-/** 置顶提交*/
-+(NSString *)postTopURL;
 
-/** 绑定手机和第三方*/
-+(NSString *)bindPhoneAndAppKeyURL;
 
-/** 分享*/
-+(NSString *)shareURL;
+
 /** 更新*/
 +(NSString *)getIosConfigURL;
-
 +(NSString *)getImgURLWithStr:(NSString * )str;
 
 

@@ -46,7 +46,7 @@ static QYZJNoDataView * signleV = nil;
         self.titleLB.text = @"x测试四";
         [self addSubview:self.titleLB];
         
-        self.titleLB.textColor= CharacterDarkColor;
+        self.titleLB.textColor= CharacterBlack70;
         
         
     }

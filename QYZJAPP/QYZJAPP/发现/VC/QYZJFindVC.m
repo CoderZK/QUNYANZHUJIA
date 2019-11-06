@@ -11,6 +11,7 @@
 #import "QYZJFindOneCell.h"
 @interface QYZJFindVC ()
 @property(nonatomic,strong)FindHeadView *navigaV;
+@property(nonatomic,strong)UIButton *faBuBt;
 @end
 
 @implementation QYZJFindVC
@@ -34,9 +35,20 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.estimatedRowHeight = 0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    
      [self addNav];
 }
+
+- (void)addFaTieView {
+     self.faBuBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 100, ScreenH - 240, 60, 60)];
+     [self.faBuBt setBackgroundImage:[UIImage imageNamed:@"qy34"] forState:UIControlStateNormal];
+    [[self.faBuBt rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+       //发帖
+        
+        
+    }];
+     [self.view addSubview:self.faBuBt];
+}
+
 
 - (void)addNav {
     
@@ -78,6 +90,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
+
+
 
 
 @end

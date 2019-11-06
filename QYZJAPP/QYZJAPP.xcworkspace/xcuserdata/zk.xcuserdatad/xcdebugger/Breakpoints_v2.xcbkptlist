@@ -5,73 +5,9 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B95B3427-DCF4-4D81-8147-11B368E48551"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/Views/QYZJNoDataView.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "-initWithFrame:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1AF65E0E-DE81-452C-B7E8-B02E58BF1DCD"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/Views/QYZJNoDataView.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "-initWithFrame:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CC3C48C4-9E92-409A-8703-779E0718F32F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x5176;&#x5b83;/zkRequestTool.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "+networkingPOST:parameters:success:failure:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A18DA05A-5D52-4CC3-B98A-0A2B01B3CBA7"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x5176;&#x5b83;/zkRequestTool.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "+networkingPOST:parameters:success:failure:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
-            uuid = "33187757-3405-401D-8FF9-515194F34835"
+            uuid = "475342A5-66DE-4569-900D-69112E176F36"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -82,64 +18,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "050BD71C-9F3E-44FC-9FC1-FD787D16BBFB"
+            uuid = "202F7186-8889-48EF-B971-207B4B397703"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJHomeVC.m"
+            filePath = "QYZJAPP/&#x5176;&#x5b83;/Base64/QYZJBase64.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "-addNav"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "+stringWithBase64EncodedString:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "69C01B75-D417-4ABA-ACF0-D2E177456F7B"
+            uuid = "C6781051-ED67-4D38-A4FF-F109B9661F9D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJHomeVC.m"
+            filePath = "QYZJAPP/&#x5176;&#x5b83;/Base64/QYZJBase64.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "-addNav"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "+stringWithBase64EncodedString:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B4E632E0-D460-4257-972B-E7B17B8DD1FD"
+            uuid = "25985AED-D7ED-4803-B791-34D95206E37B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJHomeVC.m"
+            filePath = "QYZJAPP/&#x5176;&#x5b83;/zkSignleTool.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "-addNav"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "-uploadDeviceToken"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "38F55740-CB23-4F8E-93F4-B233D7433B0A"
+            uuid = "878599C0-D20B-4680-AEFD-03C55529ED5B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x767b;&#x5f55;&#x6ce8;&#x518c;/QYZhuJiaLoginVC.m"
+            filePath = "QYZJAPP/&#x5176;&#x5b83;/zkSignleTool.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "-clickAction:"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "-uploadDeviceToken"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

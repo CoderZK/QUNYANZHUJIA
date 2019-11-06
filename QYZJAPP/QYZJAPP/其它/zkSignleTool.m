@@ -51,6 +51,33 @@ static zkSignleTool * tool = nil;
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"id"];
 }
 
+- (void)setNick_name:(NSString *)nick_name {
+    [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%@",nick_name] forKey:@"nick_name"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString *)nick_name {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"nick_name"];
+}
+
+- (void)setOpenid_new:(NSString *)openid_new {
+    [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%@",openid_new] forKey:@"openid_new"];
+       [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString *)openid_new {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"openid_new"];
+}
+
+- (void)setTelphone:(NSString *)telphone {
+    [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%@",telphone] forKey:@"telphone"];
+          [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString *)telphone {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"telphone"];
+}
+
 -(void)uploadDeviceToken
 {
     if (self.isLogin&&self.session_token&&self.deviceToken)
@@ -83,6 +110,24 @@ static zkSignleTool * tool = nil;
         return @"1";
     }
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+    
+}
+- (void)setUserModel:(QYZJUserModel *)userModel {
+    if (userModel) {
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:userModel];
+        if (data) {
+            [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"userModel"];
+        }
+    }
+}
+- (QYZJUserModel *)userModel{
+    //取出
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"userModel"];
+    if (data) {
+        QYZJUserModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        return model;
+    }
+    return nil;
     
 }
 

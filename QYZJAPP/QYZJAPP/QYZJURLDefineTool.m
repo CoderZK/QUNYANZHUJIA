@@ -359,4 +359,33 @@
 }
 
 
+
+#pragma marke ---- 其它 --------- 
+/** 获取城市列表*/
++(NSString *)app_addressURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_address.do"];
+}
+/** 获取城市列表*/
++(NSString *)user_cityListURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_cityList.do"];
+}
+
+/** 获取渠道列表*/
++(NSString *)app_labelListURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_labelList.do"];
+}
+/** 获取需求类型列表*/
++(NSString *)app_demandTypeListURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_demandTypeList.do"];
+}
+
+/** 删除城市列表*/
++(NSString *)user_delUserCityURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_delUserCity.do"];
+}
+/** 用户添加城市*/
++(NSString *)user_localCityURL{
+   return [NSString stringWithFormat:@"%@%@",URLOne,@"user_localCity.do"];
+}
+
 @end
