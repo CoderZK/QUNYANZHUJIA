@@ -133,8 +133,12 @@
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_caipanList.do"];
 }
 
+/** 轮播图*/
++(NSString *)user_bannerListURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_bannerList.do"];
+}
 
-#pragma makr ----- 消息部分 -------
+#pragma mark ----- 消息部分 -------
 /** 用户的通知消息*/
 +(NSString *)user_newsURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_news.do"];
@@ -169,7 +173,7 @@
 }
 
 
-#pragma makr ----- 我的小店 -------
+#pragma mark ----- 我的小店 -------
 /** 我的小店*/
 +(NSString *)user_shopInfoURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_shopInfo.do"];
@@ -199,7 +203,7 @@
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_deleteCase.do"];
 }
 
-#pragma makr ----- 我的订单 -------
+#pragma mark ----- 我的订单 -------
 
 /** 我的订单列表*/
 +(NSString *)user_orderListURL{
@@ -226,14 +230,14 @@
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_orderInfo.do"];
 }
 
-#pragma makr ----- 交付 -------
+#pragma mark ----- 交付 -------
 
 /** 设置施工阶段的保修时间*/
 +(NSString *)user_setStageRepairTimeURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_setStageRepairTime.do"];
 }
 
-#pragma makr ----- 推荐答人-------
+#pragma mark ----- 推荐答人-------
 /** 答人主页*/
 +(NSString *)app_getUserInfoURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_getUserInfo.do"];
@@ -295,7 +299,7 @@
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_goodsPayNew.do"];
 }
 
-#pragma makr ----- 需求单 -------
+#pragma mark ----- 需求单 -------
 /** 推荐赚钱单子列表*/
 +(NSString *)user_myDemandListURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_myDemandList.do"];
@@ -348,7 +352,7 @@
 +(NSString *)user_addAppealURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_addAppeal.do"];
 }
-#pragma makr ----- 支付 -------
+#pragma mark ----- 支付 -------
 /**交付列表*/
 +(NSString *)user_turnoverListURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_turnoverList.do"];
@@ -360,7 +364,7 @@
 
 
 
-#pragma marke ---- 其它 --------- 
+#pragma mark ---- 其它 --------- 
 /** 获取城市列表*/
 +(NSString *)app_addressURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_address.do"];

@@ -19,13 +19,22 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.con1.constant = self.con2.constant = (ScreenW - 30 - (4*45))/3.0;
+    self.con1.constant = self.con2.constant = (ScreenW - 50 - (4*45))/3.0;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (IBAction)action:(UIButton *)sender {
+    
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(didClickHomeTwoCellIndex:)]) {
+        [self.delegate didClickHomeTwoCellIndex:sender.tag - 100];
+    }
+    
+    
 }
 
 @end

@@ -7,8 +7,8 @@
 //
 
 #import "QYZJCityChooseTVC.h"
-
-@interface QYZJCityChooseTVC ()
+#import <CoreLocation/CoreLocation.h>
+@interface QYZJCityChooseTVC ()<CLLocationManagerDelegate,UISearchBarDelegate>
 @property(nonatomic,strong)NSMutableDictionary *dataDict;
 @property(nonatomic,strong)NSMutableArray *rightDataArr;
 @property(nonatomic,strong)NSMutableArray<zkPickModel *> *dataArray;
@@ -17,6 +17,10 @@
 @property(nonatomic,strong)UIView *headView,*cityView;
 @property(nonatomic,assign)BOOL isSearch;
 @property(nonatomic,strong)UIButton *addressBt;
+
+//定位管理
+@property (nonatomic, strong) CLLocationManager* locationManager;
+
 @end
 
 @implementation QYZJCityChooseTVC
@@ -45,7 +49,12 @@
     [self acquireDataFromServe];
     [self addheadView];;
     
+ 
+    [self findMe];
+    
 }
+
+
 
 - (void)addheadView {
     
@@ -58,24 +67,26 @@
     
     UISearchBar * searchbar =[[UISearchBar alloc] initWithFrame:CGRectMake(20, 10, ScreenW - 40, 30)];
     searchbar.placeholder = @"搜索城市";
-    searchbar.searchTextField.font = kFont(14);
     searchbar.layer.cornerRadius = 8;
     searchbar.clipsToBounds = YES;
     searchbar.barStyle=UIBarStyleDefault;
     [gayView addSubview:searchbar];
     [searchbar setBarTintColor:[UIColor groupTableViewBackgroundColor]];
-    [searchbar.searchTextField.rac_textSignal  subscribeNext:^(NSString * _Nullable x) {
-       //文字发生改变时
-        if (x.length > 0) {
-            self.isSearch = YES;
-            [self searchAction:x];
-        }else {
-            self.isSearch = NO;
-            [self.tableView reloadData];
-        }
-   
-        
-    }];
+    
+    searchbar.delegate = self;
+    
+//    [searchbar.searchTextField.rac_textSignal  subscribeNext:^(NSString * _Nullable x) {
+//       //文字发生改变时
+//        if (x.length > 0) {
+//            self.isSearch = YES;
+//            [self searchAction:x];
+//        }else {
+//            self.isSearch = NO;
+//            [self.tableView reloadData];
+//        }
+//
+//
+//    }];
     self.tableView.tableHeaderView = self.headView;
     searchbar.backgroundImage = [self imageWithColor:[UIColor groupTableViewBackgroundColor] size:CGSizeMake(1,1)];
     
@@ -99,7 +110,7 @@
     label1.textColor = CharacterBlack70;
     label1.font = kFont(15);
     label1.text = @"切换城市";
-    [self.headView addSubview:label];
+    [self.headView addSubview:label1];
     
     self.cityView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(label1.frame)+5, ScreenW, 20)];
     [self.headView addSubview:self.cityView];
@@ -107,7 +118,72 @@
  
 }
 
+- (void)findMe
+{
 
+    
+    if ([CLLocationManager locationServicesEnabled]) {
+        // 初始化定位管理器
+        self.locationManager=[[CLLocationManager alloc]init];
+        self.locationManager.delegate=self;
+        // 设置定位精确度到千米
+        self.locationManager.desiredAccuracy=kCLLocationAccuracyKilometer;
+        // 设置过滤器为无
+        self.locationManager.distanceFilter=kCLDistanceFilterNone;
+        //这句话ios8以上版本使用
+        [ self.locationManager requestAlwaysAuthorization];
+        //开始定位
+        [ self.locationManager startUpdatingLocation];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无法定位" message:@"请检查你的设备是否开启定位功能" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+     didUpdateLocations:(NSArray *)locations
+{
+    // 1.获取用户位置的对象
+    CLLocation *location = [locations lastObject];
+    CLLocationCoordinate2D coordinate = location.coordinate;
+    NSLog(@"纬度:%f 经度:%f", coordinate.latitude, coordinate.longitude);
+    
+    
+    //根据经纬度反向地理编译出地址信息
+       CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
+       
+       [geoCoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+           
+           for (CLPlacemark * placemark in placemarks) {
+               
+               NSDictionary *address = [placemark addressDictionary];
+               
+               //  Country(国家)  State(省)  City（市）
+               NSLog(@"#####%@",address);
+               
+               NSLog(@"%@", [address objectForKey:@"Country"]);
+               
+               NSLog(@"%@", [address objectForKey:@"State"]);
+               
+               NSLog(@"%@", [address objectForKey:@"City"]);
+              
+               [self.addressBt setTitle:[address objectForKey:@"City"] forState:UIControlStateNormal];
+               
+           }
+           
+       }];
+    
+    // 2.停止定位
+    [manager stopUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error
+{
+    if (error.code == kCLErrorDenied) {
+        // 提示用户出错原因，可按住Option键点击 KCLErrorDenied的查看更多出错信息，可打印error.code值查找原因所在
+    }
+}
 
 
 
@@ -134,12 +210,12 @@
         return;
     }
     
-    CGFloat spaceX  = 10;
+    CGFloat spaceX  = 15;
     CGFloat spaceY  = 20;
-    CGFloat ww = (ScreenW - 30 - 3 * spaceX) / 4;
+    CGFloat ww = (ScreenW - 30 -10- 3 * spaceX) / 4;
     CGFloat hh = 35;
     for (int i = 0;i< arr.count; i++) {
-        UIButton * newProductBTBT = [[UIButton alloc] initWithFrame:CGRectMake(15 + (spaceX + ww) * (i%4) , 40  + (spaceY + hh) * (i/4), ww, hh)];
+        UIButton * newProductBTBT = [[UIButton alloc] initWithFrame:CGRectMake(15 + (spaceX + ww) * (i%4) ,10 +(spaceY + hh) * (i/4), ww, hh)];
         [newProductBTBT setBackgroundImage:[UIImage imageNamed:@"backg"] forState:UIControlStateNormal];
         [newProductBTBT setBackgroundImage:[UIImage imageNamed:@"backr"] forState:UIControlStateSelected];
         newProductBTBT.tag = i+1000;
@@ -147,13 +223,17 @@
         newProductBTBT.layer.cornerRadius = 4;
         newProductBTBT.clipsToBounds = YES;
         [newProductBTBT setTitleColor:CharacterBlack70 forState:UIControlStateNormal];
+        newProductBTBT.layer.cornerRadius = 3;
+        newProductBTBT.layer.borderWidth = 1;
+        newProductBTBT.layer.borderColor = CharacterBlack70.CGColor;
+        newProductBTBT.clipsToBounds = YES;
         [newProductBTBT setTitleColor:WhiteColor forState:UIControlStateSelected];
         [newProductBTBT setTitle:arr[i].name forState:UIControlStateNormal];
         [self.cityView addSubview:newProductBTBT];
         [newProductBTBT addTarget:self action:@selector(selectAction:) forControlEvents:UIControlEventTouchUpInside];
         
         
-        UIButton * delectBt = [[UIButton alloc] initWithFrame:CGRectMake(15 + (spaceX + ww) * (i%4) + ww - 7.5 ,40  + (spaceY + hh) * (i/4) - 7.5 , 15, 15)];
+        UIButton * delectBt = [[UIButton alloc] initWithFrame:CGRectMake(15 + (spaceX + ww) * (i%4) + ww - 7.5 ,10  + (spaceY + hh) * (i/4) - 7.5 , 15, 15)];
         [delectBt setBackgroundImage:[UIImage imageNamed:@"4"] forState:UIControlStateNormal];
         delectBt.tag = 100+i;
         [delectBt addTarget:self action:@selector(delectCity:) forControlEvents:UIControlEventTouchUpInside];
@@ -169,10 +249,10 @@
 }
 
 
-#pragma marke---- 点击切换城市的城市 -------
+#pragma mark---- 点击切换城市的城市 -------
 - (void)selectAction:(UIButton *)button {
     
-    
+    [self addCityAction:self.userCityList[button.tag - 1000].ID cityStr:self.userCityList[button.tag - 1000].name];
     
 }
 
@@ -181,13 +261,47 @@
     NSString * url = [QYZJURLDefineTool user_delUserCityURL];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"token"] = [zkSignleTool shareTool].session_token;
+    dict[@"city_id"] = self.userCityList[button.tag - 100].ID;
     [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         
+        if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] isEqualToString:@"1"]) {
+            [self.userCityList removeObjectAtIndex:button.tag - 100];
+            [self setBiaoQianWithArr:self.userCityList];
+        }
+        
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
         
     }];
     
 }
+
+//添加城市
+- (void)addCityAction:(NSString *)cityId cityStr:(NSString *)cityStr{
+    
+    
+      NSString * url = [QYZJURLDefineTool user_localCityURL];
+      NSMutableDictionary * dict = @{}.mutableCopy;
+      dict[@"token"] = [zkSignleTool shareTool].session_token;
+      dict[@"city_id"] = cityId;
+      [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+          
+           if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] isEqualToString:@"1"]) {
+               if (self.clickCityBlock != nil) {
+                   self.clickCityBlock(cityStr,cityId);
+                   [self.navigationController popViewControllerAnimated:YES];
+               }
+            }
+          
+      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+          
+      }];
+    
+    
+}
+
+
+
 - (void)acquireDataFromServe {
     
     
@@ -248,6 +362,8 @@
        cell.textLabel.text = model.name;
     }
     
+    
+   
    
     cell.textLabel.font = kFont(14);
     return cell;
@@ -323,7 +439,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.isSearch) {
+        zkPickModel * model = self.searchList[indexPath.row];
+        [self addCityAction:model.ID cityStr:model.name];
+    }else {
+        zkPickModel * model = [self.dataDict[self.rightDataArr[indexPath.section]] objectAtIndex:indexPath.row];
+        [self addCityAction:model.ID cityStr:model.name];
+    }
+    
+    
 }
+
+
 
 
 //排序
@@ -439,6 +566,23 @@
     
 }
 
+
+#pragma mark ----- searchBr事件 --------
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    //searchText是searchBar上的文字 每次输入或删除都都会打印全部
+    NSLog(@"%@",searchText);
+
+   //文字发生改变时
+    if (searchText.length > 0) {
+        self.isSearch = YES;
+        [self searchAction:searchText];
+    }else {
+        self.isSearch = NO;
+        [self.tableView reloadData];
+    }
+    
+    
+}
 
 
 /*

@@ -118,6 +118,11 @@
 
 }
 
+- (void)setTitleStr:(NSString *)titleStr {
+    _titleStr = titleStr;
+    self.titlLB.text = titleStr;
+}
+
 ///// 添加单边阴影效果
 //- (void)addShadowToView:(UIView *)theView withColor:(UIColor *)theColor {
 //    theView.layer.shadowColor = theColor.CGColor;

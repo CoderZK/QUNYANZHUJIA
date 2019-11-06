@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJCityChooseTVC : BaseTableViewController
 
+@property(nonatomic,copy)void(^clickCityBlock)(NSString *cityStr,NSString * cityId);
+
 @end
 
 NS_ASSUME_NONNULL_END

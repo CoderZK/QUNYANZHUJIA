@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeNavigationView : UIView
-@property(nonatomic,strong)NSString *titleLB;
+@property(nonatomic,strong)NSString *titleStr;
 @property(nonatomic,strong)RACSubject *delegateSignal;
 @end
 

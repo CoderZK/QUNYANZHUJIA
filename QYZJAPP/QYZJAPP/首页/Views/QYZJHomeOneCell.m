@@ -20,5 +20,13 @@
 
     // Configure the view for the selected state
 }
+- (IBAction)action:(UIButton *)sender {
+    
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(didClickHomeCellIndex:)]) {
+        [self.delegate didClickHomeCellIndex:sender.tag - 100];
+    }
+    
+    
+}
 
 @end

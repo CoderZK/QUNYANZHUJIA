@@ -18,10 +18,14 @@
 #import "QYZJHomeThreeCell.h"
 #import "QYZJHomeFourCell.h"
 #import "QYZJHomeFiveCell.h"
-@interface QYZJHomeVC ()<zkLunBoCellDelegate>
+#import "QYZJHomeTwoTVC.h"
+#import "QYZJHomePayTVC.h"
+#import "QYZJRobOrderTVC.h"
+@interface QYZJHomeVC ()<zkLunBoCellDelegate,QYZJHomeOneCellDelegate,QYZJHomeTwoCellDelegate>
 @property(nonatomic,strong)NSString *passwordStr;
 @property(nonatomic,strong)NSMutableArray<zkBannerModel *> *bannerDataArr;
 @property(nonatomic,strong)HomeNavigationView *navigaV;
+
 @end
 
 @implementation QYZJHomeVC
@@ -35,8 +39,8 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-     self.navigationController.navigationBar.hidden = YES;
-//    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    self.navigationController.navigationBar.hidden = YES;
+    //    [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -47,6 +51,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //    QYZJLocationTool * tool = [[QYZJLocationTool alloc] init];
+    //    [tool locationAction];
+    
     [self.tableView registerClass:[zkLunBoCell class] forCellReuseIdentifier:@"zkLunBoCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.frame = CGRectMake(0, sstatusHeight + 44, ScreenW, ScreenH - sstatusHeight - 44);
@@ -55,8 +62,13 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeTwoCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeTwoCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeThreeCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeThreeCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeFourCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeFourCell"];
-       [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeFiveCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeFiveCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeFiveCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeFiveCell"];
+    
+    
+    [self getBanList];
 }
+
+
 
 - (void)addNav {
     
@@ -64,11 +76,17 @@
     [self.view addSubview:self.navigaV];
     self.navigaV.delegateSignal = [RACSubject subject];
     [self.navigaV.delegateSignal subscribeNext:^(id  _Nullable x) {
-       
+        
         NSDictionary * dict = x;
         if ([[NSString stringWithFormat:@"%@",dict[@"key"]] isEqualToString:@"city"]) {
             //点击的是城市
             QYZJCityChooseTVC * vc =[[QYZJCityChooseTVC alloc] init];
+            __weak QYZJHomeVC * weakSelf = self;
+            vc.clickCityBlock = ^(NSString * _Nonnull cityStr, NSString * _Nonnull cityId) {
+                
+                weakSelf.navigaV.titleStr = cityStr;
+                
+            };
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }else {
@@ -153,16 +171,25 @@
     
     if (indexPath.section == 0) {
         zkLunBoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"zkLunBoCell" forIndexPath:indexPath];
-        cell.dataArr = @[@"http://pic1.win4000.com/wallpaper/b/575fd4f22de59.jpg",@"http://www.leawo.cn/attachment/201409/1/1723875_1409556793I3Eg.jpg",@"http://b-ssl.duitang.com/uploads/item/201604/23/20160423165323_k4rhF.jpeg"];
+        NSMutableArray * arr = @[].mutableCopy;
+        for (zkBannerModel * model  in self.bannerDataArr) {
+            [arr addObject:model.pic];
+        }
+        cell.dataArr = arr;
         cell.delegate = self;
         return cell;
     }else if (indexPath.section == 1) {
-        
-        QYZJHomeOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeOneCell" forIndexPath:indexPath];
-         return cell;
+        if (0) {
+            QYZJHomeOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeOneCell" forIndexPath:indexPath];
+            cell.delegate = self;
+            return cell;
+        }
+        QYZJHomeTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeTwoCell" forIndexPath:indexPath];
+        cell.delegate = self;
+        return cell;
     }else if (indexPath.section == 2) {
         QYZJHomeThreeCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeThreeCell" forIndexPath:indexPath];
-       return cell;
+        return cell;
     }else if (indexPath.section == 3 && indexPath.row == 0) {
         QYZJHomeFourCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeFourCell" forIndexPath:indexPath];
         return cell;
@@ -181,18 +208,76 @@
 }
 
 
-#pragma marke ------ 点击轮播图的事件 -------
+#pragma mark ------ 点击轮播图的事件 -------
 - (void)didSelectLunBoPic:(NSInteger )index {
     
     NSLog(@"%d",index);
     
+    zkBannerModel  * model = self.bannerDataArr[index];
+    LxmWebViewController *vc = [[LxmWebViewController alloc] init];
+    [vc loadHtmlStr:model.path withBaseUrl:nil];
+    vc.navigationItem.title = model.title;
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
     
 }
 
 
-#pragma marke ----  点击更多 -------
+#pragma mark ----  点击更多 -------
 - (void)moreAction:(UIButton *)button {
     
 }
+
+
+#pragma mark ---- 点击首页的教练,裁判等 -----
+- (void)didClickHomeCellIndex:(NSInteger)index {
+    [self pushHomeTwoVCWithIndex:index];
+}
+
+- (void)didClickHomeTwoCellIndex:(NSInteger)index {
+    [self pushHomeTwoVCWithIndex:index];
+}
+
+- (void)pushHomeTwoVCWithIndex:(NSInteger)index {
+    if (index<2) {
+        QYZJHomeTwoTVC * vc =[[QYZJHomeTwoTVC alloc] init];
+        vc.type = index;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 2){
+        
+        QYZJHomePayTVC * vc =[[QYZJHomePayTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else {
+        QYZJRobOrderTVC * vc =[[QYZJRobOrderTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+}
+
+- (void)getBanList {
+    
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"token"] = [zkSignleTool shareTool].session_token;
+    dict[@"city_id"] = @"1004";
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_bannerListURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
+            self.bannerDataArr = [zkBannerModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"bannerList"]];
+            [self.tableView reloadData];
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
+            
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+    }];
+    
+}
+
 
 @end

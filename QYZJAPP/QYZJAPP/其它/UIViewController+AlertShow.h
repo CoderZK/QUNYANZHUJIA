@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UIViewController (AlertShow)
--(void)showAlertWithKey:(NSNumber *)num message:(NSString *)message;
+-(void)showAlertWithKey:(NSString *)num message:(NSString *)message;
 @end

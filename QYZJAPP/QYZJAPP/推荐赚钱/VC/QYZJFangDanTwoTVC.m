@@ -117,7 +117,7 @@
 }
 
 
-#pragma marke ------- 点击筛选 ------
+#pragma mark ------- 点击筛选 ------
 - (void)didSelectLeftIndex:(NSInteger)leftIndex centerIndex:(NSInteger)centerIndex rightIndex:(NSInteger )rightIndex{
     
     NSLog(@"%d---%d----%d",leftIndex,centerIndex,rightIndex);

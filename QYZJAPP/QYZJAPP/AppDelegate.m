@@ -46,7 +46,7 @@
     [self confitUShareSettings];
 
     [self initUment:launchOptions];
-
+    
     // 发送崩溃日志
     
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];

@@ -17,6 +17,7 @@
 @property(nonatomic,strong)NSString *linkUrl;
 @property(nonatomic,strong)NSString *title;
 @property(nonatomic,strong)NSString *updateBy;
-@property(nonatomic,strong)NSString *updateDate;
+@property(nonatomic,strong)NSString *path;
 @property(nonatomic,strong)NSString *type;
+@property(nonatomic,strong)NSString *pic;
 @end

@@ -10,8 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QYZJHomeTwoCell : UITableViewCell
+@protocol QYZJHomeTwoCellDelegate <NSObject>
 
+- (void)didClickHomeTwoCellIndex:(NSInteger)index;
+
+@end
+
+@interface QYZJHomeTwoCell : UITableViewCell
+@property(nonatomic,assign)id<QYZJHomeTwoCellDelegate>delegate;
 @end
 
 NS_ASSUME_NONNULL_END

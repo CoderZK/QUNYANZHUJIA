@@ -84,9 +84,12 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString * )user_editPasswordURL;
 /** 我的预约裁判*/
 +(NSString *)user_caipanListURL;
+/** 轮播图*/
++(NSString *)user_bannerListURL;
 
 
-#pragma makr ----- 消息部分 -------
+
+#pragma mark ----- 消息部分 -------
 /** 用户的通知消息*/
 +(NSString *)user_newsURL;
 /** 用户点赞消息-已读 */
@@ -105,7 +108,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString * )user_systemMessageNewListURL;
 
 
-#pragma makr ----- 我的小店 -------
+#pragma mark ----- 我的小店 -------
 /** 我的小店*/
 +(NSString *)user_shopInfoURL;
 /**  修改我的小店 */
@@ -121,7 +124,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 删除案例*/
 +(NSString *)user_deleteCaseURL;
 
-#pragma makr ----- 我的订单 -------
+#pragma mark ----- 我的订单 -------
 
 /** 我的订单列表*/
 +(NSString *)user_orderListURL;
@@ -136,12 +139,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**订单详情*/
 +(NSString *)user_orderInfoURL;
 
-#pragma makr ----- 交付 -------
+#pragma mark ----- 交付 -------
 
 /** 设置施工阶段的保修时间*/
 +(NSString *)user_setStageRepairTimeURL;
 
-#pragma makr ----- 推荐答人-------
+#pragma mark ----- 推荐答人-------
 /** 答人主页*/
 +(NSString *)app_getUserInfoURL;
 /** 答人列表*/
@@ -173,7 +176,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 商品订单支付*/
 +(NSString *)user_goodsPayNewURL;
 
-#pragma makr ----- 需求单 -------
+#pragma mark ----- 需求单 -------
 /** 推荐赚钱单子列表*/
 +(NSString *)user_myDemandListURL;
 /** 单子详情*/
@@ -200,7 +203,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)app_getCommissonURL;
 /** 提交申诉 */
 +(NSString *)user_addAppealURL;
-#pragma makr ----- 支付 -------
+#pragma mark ----- 支付 -------
 /**交付列表*/
 +(NSString *)user_turnoverListURL;
 /** 创建新单子的交付*/
