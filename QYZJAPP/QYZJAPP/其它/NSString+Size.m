@@ -242,7 +242,18 @@
     return attributedString;
 }
 
-
+- (NSMutableAttributedString *)getMutableAttributeStringWithFont:(int)fontSize lineSpace:(int)lineSpace textColor:(UIColor *)color textColorOne:(UIColor *)colorOne textColorTwo:(UIColor *)colorTwo nsrangeOne:(NSRange )rangeOne nsRangeTwo:(NSRange)rangeTwo {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self];
+      [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:fontSize] range:NSMakeRange(0, self.length)];
+      [attributedString addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, self.length)];
+      [attributedString addAttribute:NSForegroundColorAttributeName value:colorOne range:rangeOne];
+      [attributedString addAttribute:NSForegroundColorAttributeName value:colorTwo range:rangeTwo];
+      NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+      [paragraphStyle setLineSpacing:lineSpace];//调整行间距
+      paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+      [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, self.length)];
+      return attributedString;
+}
 
 
 +(NSString *)stringWithDateStrwithyymmddHHmm:(NSNumber *)str

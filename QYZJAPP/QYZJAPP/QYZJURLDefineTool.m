@@ -392,4 +392,22 @@
    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_localCity.do"];
 }
 
+/** 获取发现广场列表*/
++(NSString *)app_articleListURL{
+   return [NSString stringWithFormat:@"%@%@",URLOne,@"app_articleList.do"];
+}
+/** 名家列表*/
++(NSString *)app_logiciansListURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_logiciansList.do"];
+}
+/** 头条列表*/
++(NSString *)app_headlinenewsListURL{
+   return [NSString stringWithFormat:@"%@%@",URLOne,@"app_headlinenewsList.do"];
+}
+/** 获取旁听列表*/
++(NSString *)app_questionSitListOpenURL{
+   return [NSString stringWithFormat:@"%@%@",URLOne,@"app_questionSitListOpen.do"];
+}
+
+
 @end

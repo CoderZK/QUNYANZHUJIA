@@ -8,6 +8,7 @@
 
 #import "QYZJHomePayTVC.h"
 #import "QYZJHomePayCell.h"
+#import "QYZJMinePayDetailVC.h"
 @interface QYZJHomePayTVC ()
 
 @end
@@ -57,6 +58,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
+    QYZJMinePayDetailVC * vc =[[QYZJMinePayDetailVC alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 

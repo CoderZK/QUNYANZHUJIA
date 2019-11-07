@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *timeLB;
 @property (weak, nonatomic) IBOutlet UIButton *zanBt;
 @property (weak, nonatomic) IBOutlet UIButton *pingLunBt;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewCons;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentCons;
 
 @end
 

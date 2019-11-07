@@ -222,11 +222,14 @@ NS_ASSUME_NONNULL_BEGIN
 /** 获取需求类型列表*/
 +(NSString *)app_demandTypeListURL;
 
-
-
-
-
-
+/** 获取发现广场列表*/
++(NSString *)app_articleListURL;
+/** 名家列表*/
++(NSString *)app_logiciansListURL;
+/** 头条列表*/
++(NSString *)app_headlinenewsListURL;
+/** 获取旁听列表*/
++(NSString *)app_questionSitListOpenURL;
 
 
 /** 更新*/

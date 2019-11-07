@@ -41,6 +41,8 @@
 - (NSMutableAttributedString *)getMutableAttributeStringWithFont:(int)fontSize lineSpace:(int)lineSpace textColor:(UIColor *)color textColorTwo:(UIColor *)colorTwo nsrange:(NSRange )range;
 - (NSMutableAttributedString *)getMutableAttributeStringWithFont:(int)fontSize lineSpace:(int)lineSpace textColor:(UIColor *)color fontTwo:(int)fontTwo nsrange:(NSRange )range;
 
+- (NSMutableAttributedString *)getMutableAttributeStringWithFont:(int)fontSize lineSpace:(int)lineSpace textColor:(UIColor *)color textColorOne:(UIColor *)colorOne textColorTwo:(UIColor *)colorTwo nsrangeOne:(NSRange )rangeOne nsRangeTwo:(NSRange)rangeTwo;
+
 /**
 把字符串装换成日期型的格式化字符串
  */
@@ -92,6 +94,8 @@
 
 
 - (NSString *)getQuanUrl;
+
+
 
 
 
