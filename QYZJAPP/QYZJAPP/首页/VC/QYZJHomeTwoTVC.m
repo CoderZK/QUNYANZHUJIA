@@ -12,6 +12,7 @@
 #import "QYZJHomeFourCell.h"
 #import "QYZJHomeFiveCell.h"
 #import "QYZJCoachCell.h"
+#import "QYZJTypesSearchTVC.h"
 @interface QYZJHomeTwoTVC ()
 @property(nonatomic,strong)FindHeadView *navigaV;
 @property(nonatomic,strong)NSMutableArray<QYZJTongYongModel *> *labelListArr;
@@ -164,15 +165,22 @@
     
     if (indexPath.section == 0){
         QYZJCoachCell* cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJCoachCell" forIndexPath:indexPath];
+        Weak(weakSelf);
         cell.sendStatusBlock = ^(BOOL isMore, BOOL isSpread, BOOL isReload, NSInteger index) {
             if (isReload) {
-                self.isSpread = isSpread;
-                self.isMore = isMore;
-                [self.tableView reloadData];
+                weakSelf.isSpread = isSpread;
+                weakSelf.isMore = isMore;
+                [weakSelf.tableView reloadData];
             }else {
                 
                 NSLog(@"-=-=-=-\n%d",index);
-
+                
+                QYZJTypesSearchTVC * vc =[[QYZJTypesSearchTVC alloc] init];
+                vc.role_id = weakSelf.labelListArr[index].ID;
+                vc.titleStr = weakSelf.labelListArr[index].name;
+                vc.hidesBottomBarWhenPushed = YES;
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+                
                 
             }
         };

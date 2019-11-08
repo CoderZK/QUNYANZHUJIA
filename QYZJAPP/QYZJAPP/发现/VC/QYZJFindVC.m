@@ -11,6 +11,7 @@
 #import "QYZJFindOneCell.h"
 #import "QYZJFindCell.h"
 #import "QYZJHomeFiveCell.h"
+#import "QYZJFindTwoCell.h"
 @interface QYZJFindVC ()
 @property(nonatomic,strong)FindHeadView *navigaV;
 @property(nonatomic,strong)UIButton *faBuBt;
@@ -43,6 +44,7 @@
     [self.tableView registerClass:[QYZJFindCell class] forCellReuseIdentifier:@"QYZJFindCell"];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeFiveCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeFiveCell"];
+      [self.tableView registerNib:[UINib nibWithNibName:@"QYZJFindTwoCell" bundle:nil] forCellReuseIdentifier:@"QYZJFindTwoCell"];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.estimatedRowHeight = 1;
@@ -58,6 +60,8 @@
         [self getDataWithType:self.type];
     }];
     
+    
+
     
     
 }
@@ -147,7 +151,7 @@
     }else if (self.type == 1) {
         return 125;
     }else if (self.type == 2) {
-        
+        return 130+10;
     }else {
         
     }
@@ -164,6 +168,9 @@
           return cell;
     }else if(self.type == 1){
         QYZJHomeFiveCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeFiveCell" forIndexPath:indexPath];
+        return cell;
+    }else if (self.type == 2) {
+        QYZJFindTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJFindTwoCell" forIndexPath:indexPath];
         return cell;
     }
     QYZJFindCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJFindCell" forIndexPath:indexPath];

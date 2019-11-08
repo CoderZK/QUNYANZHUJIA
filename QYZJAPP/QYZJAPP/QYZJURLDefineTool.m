@@ -409,5 +409,10 @@
    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_questionSitListOpen.do"];
 }
 
+/** 类型*/
++(NSString *)app_findLabelByTypeListURL {
+   return [NSString stringWithFormat:@"%@%@",URLOne,@"app_findLabelByTypeList.do"];
+}
+
 
 @end

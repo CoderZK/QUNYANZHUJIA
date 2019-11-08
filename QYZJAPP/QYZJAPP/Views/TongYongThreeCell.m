@@ -15,13 +15,13 @@
         
         self.leftLB = [[UILabel alloc] initWithFrame:CGRectMake(15, 15, 150, 20)];
         self.leftLB.font = kFont(15);
-        self.leftLB.textColor = CharacterBlack70;
+        self.leftLB.textColor = CharacterBlackColor;
         [self addSubview:self.leftLB];
         
         self.TF = [[UITextField alloc] initWithFrame:CGRectMake(170 , 10, ScreenW - 185, 30)];
         self.TF.textAlignment = NSTextAlignmentRight;
         self.TF.placeholder = @"请填写或选择";
-        self.TF.textColor = CharacterBlack70;
+        self.TF.textColor = CharacterBlackColor;
         self.TF.font = kFont(14);
         [self addSubview:self.TF];
         self.TF.userInteractionEnabled = NO;

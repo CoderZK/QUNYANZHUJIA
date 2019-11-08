@@ -61,7 +61,7 @@
         
         NSMutableDictionary *attrs = [NSMutableDictionary dictionary];
         attrs[NSFontAttributeName] = [UIFont systemFontOfSize:12];
-        attrs[NSForegroundColorAttributeName] = CharacterGrayColor;
+        attrs[NSForegroundColorAttributeName] = CharacterColor80;
         NSMutableDictionary *selectedAttrs = [NSMutableDictionary dictionary];
         selectedAttrs[NSFontAttributeName] = attrs[NSFontAttributeName];
         selectedAttrs[NSForegroundColorAttributeName] = TabberGreen;

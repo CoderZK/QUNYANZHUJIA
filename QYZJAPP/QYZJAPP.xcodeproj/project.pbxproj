@@ -46,6 +46,13 @@
 		33DC822E20EA1CA700D1C283 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DC821E20EA17F700D1C283 /* libc++.1.tbd */; };
 		33DC823320EA20D700D1C283 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33DC823020EA20D600D1C283 /* TabBarController.m */; };
 		33DC823420EA20D700D1C283 /* LYGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33DC823220EA20D700D1C283 /* LYGuideViewController.m */; };
+		5830538D23751FCA002A1AA5 /* QYZJTypesSearchTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5830538C23751FC9002A1AA5 /* QYZJTypesSearchTVC.m */; };
+		5830539023752003002A1AA5 /* QYZJSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5830538F23752003002A1AA5 /* QYZJSearchView.m */; };
+		58305393237541F2002A1AA5 /* QYZJSearchLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58305392237541F2002A1AA5 /* QYZJSearchLabelView.m */; };
+		58305396237555D3002A1AA5 /* QYZJMineHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58305395237555D3002A1AA5 /* QYZJMineHeadView.m */; };
+		5830539A23756088002A1AA5 /* HHYMineFourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5830539823756087002A1AA5 /* HHYMineFourCell.m */; };
+		5830539B23756088002A1AA5 /* HHYMineFourCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5830539923756088002A1AA5 /* HHYMineFourCell.xib */; };
+		5830539E23756376002A1AA5 /* QYZJMIneTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5830539D23756376002A1AA5 /* QYZJMIneTwoCell.m */; };
 		583A4D57236BC65A00180E27 /* QYZJURLDefineTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 583A4D56236BC65A00180E27 /* QYZJURLDefineTool.m */; };
 		583A4D5B236BDF8500180E27 /* QYZJNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 583A4D5A236BDF8500180E27 /* QYZJNoDataView.m */; };
 		583A4D61236BE50800180E27 /* QYZJHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 583A4D60236BE50800180E27 /* QYZJHomeVC.m */; };
@@ -213,6 +220,19 @@
 		33DC823020EA20D600D1C283 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		33DC823120EA20D600D1C283 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		33DC823220EA20D700D1C283 /* LYGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYGuideViewController.m; sourceTree = "<group>"; };
+		5830538B23751FC9002A1AA5 /* QYZJTypesSearchTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYZJTypesSearchTVC.h; sourceTree = "<group>"; };
+		5830538C23751FC9002A1AA5 /* QYZJTypesSearchTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYZJTypesSearchTVC.m; sourceTree = "<group>"; };
+		5830538E23752002002A1AA5 /* QYZJSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYZJSearchView.h; sourceTree = "<group>"; };
+		5830538F23752003002A1AA5 /* QYZJSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYZJSearchView.m; sourceTree = "<group>"; };
+		58305391237541F2002A1AA5 /* QYZJSearchLabelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJSearchLabelView.h; sourceTree = "<group>"; };
+		58305392237541F2002A1AA5 /* QYZJSearchLabelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJSearchLabelView.m; sourceTree = "<group>"; };
+		58305394237555D3002A1AA5 /* QYZJMineHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMineHeadView.h; sourceTree = "<group>"; };
+		58305395237555D3002A1AA5 /* QYZJMineHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMineHeadView.m; sourceTree = "<group>"; };
+		5830539723756087002A1AA5 /* HHYMineFourCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHYMineFourCell.h; sourceTree = "<group>"; };
+		5830539823756087002A1AA5 /* HHYMineFourCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHYMineFourCell.m; sourceTree = "<group>"; };
+		5830539923756088002A1AA5 /* HHYMineFourCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HHYMineFourCell.xib; sourceTree = "<group>"; };
+		5830539C23756376002A1AA5 /* QYZJMIneTwoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMIneTwoCell.h; sourceTree = "<group>"; };
+		5830539D23756376002A1AA5 /* QYZJMIneTwoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMIneTwoCell.m; sourceTree = "<group>"; };
 		583A4D55236BC65A00180E27 /* QYZJURLDefineTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJURLDefineTool.h; sourceTree = "<group>"; };
 		583A4D56236BC65A00180E27 /* QYZJURLDefineTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJURLDefineTool.m; sourceTree = "<group>"; };
 		583A4D59236BDF8500180E27 /* QYZJNoDataView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJNoDataView.h; sourceTree = "<group>"; };
@@ -635,6 +655,13 @@
 		33DC823920EA21BD00D1C283 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5830539723756087002A1AA5 /* HHYMineFourCell.h */,
+				5830539823756087002A1AA5 /* HHYMineFourCell.m */,
+				5830539923756088002A1AA5 /* HHYMineFourCell.xib */,
+				5830539C23756376002A1AA5 /* QYZJMIneTwoCell.h */,
+				5830539D23756376002A1AA5 /* QYZJMIneTwoCell.m */,
+				58305394237555D3002A1AA5 /* QYZJMineHeadView.h */,
+				58305395237555D3002A1AA5 /* QYZJMineHeadView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -713,6 +740,8 @@
 				5846916B2372CD8B0056BA4A /* QYZJMinePayDetailVC.m */,
 				584691502372983D0056BA4A /* QYZJRobOrderTVC.h */,
 				584691512372983D0056BA4A /* QYZJRobOrderTVC.m */,
+				5830538B23751FC9002A1AA5 /* QYZJTypesSearchTVC.h */,
+				5830538C23751FC9002A1AA5 /* QYZJTypesSearchTVC.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -753,6 +782,10 @@
 				58434594237118A50087A2D9 /* TongYongTwoCell.m */,
 				58434596237118D10087A2D9 /* TongYongThreeCell.h */,
 				58434597237118D10087A2D9 /* TongYongThreeCell.m */,
+				5830538E23752002002A1AA5 /* QYZJSearchView.h */,
+				5830538F23752003002A1AA5 /* QYZJSearchView.m */,
+				58305391237541F2002A1AA5 /* QYZJSearchLabelView.h */,
+				58305392237541F2002A1AA5 /* QYZJSearchLabelView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1053,6 +1086,7 @@
 				337F3EB020EA014600C5526A /* noneDataBg.png in Resources */,
 				584691692372BC610056BA4A /* QYZJQianDanOneCell.xib in Resources */,
 				584331A0236FE84A0046C0BD /* QYZJHomeThreeCell.xib in Resources */,
+				5830539B23756088002A1AA5 /* HHYMineFourCell.xib in Resources */,
 				584331CC23703C010046C0BD /* QYZJFindOneCell.xib in Resources */,
 				584331A5236FF3F00046C0BD /* QYZhuJiaLoginVC.xib in Resources */,
 				584331B723700BB50046C0BD /* QYZJHomeFourCell.xib in Resources */,
@@ -1136,7 +1170,9 @@
 				583A4D75236BE60300180E27 /* QYZJRecommendVC.m in Sources */,
 				584331CB23703C010046C0BD /* QYZJFindOneCell.m in Sources */,
 				5843319A236FD3BC0046C0BD /* QYZJHomeTwoCell.m in Sources */,
+				5830539E23756376002A1AA5 /* QYZJMIneTwoCell.m in Sources */,
 				584345BE23713F230087A2D9 /* QYZJCityChooseTVC.m in Sources */,
+				5830539023752003002A1AA5 /* QYZJSearchView.m in Sources */,
 				58433185236FAF6D0046C0BD /* LaJi.m in Sources */,
 				584331A4236FF3F00046C0BD /* QYZhuJiaLoginVC.m in Sources */,
 				5843459B237125770087A2D9 /* QYZJFangDanTwoTVC.m in Sources */,
@@ -1162,7 +1198,9 @@
 				5843458C23710F3F0087A2D9 /* zkPickView.m in Sources */,
 				583ED6A52373E7B80070441A /* PublicFuntionTool.m in Sources */,
 				337F3EB420EA040400C5526A /* UIView+BSExtension.m in Sources */,
+				5830538D23751FCA002A1AA5 /* QYZJTypesSearchTVC.m in Sources */,
 				584345C823716FD90087A2D9 /* QYZJFindPasswordTwoVC.m in Sources */,
+				58305393237541F2002A1AA5 /* QYZJSearchLabelView.m in Sources */,
 				583A4D5B236BDF8500180E27 /* QYZJNoDataView.m in Sources */,
 				584691602372B25B0056BA4A /* QYZJHomePayCell.m in Sources */,
 				584691642372B5220056BA4A /* QYZJQianDanNavigaTitleView.m in Sources */,
@@ -1174,6 +1212,7 @@
 				337F3EAE20EA014600C5526A /* BaseCollectionReusableView.m in Sources */,
 				5846915C2372B0330056BA4A /* LxmWebViewController.m in Sources */,
 				5843317B236FAB2D0046C0BD /* TYPageControl.m in Sources */,
+				5830539A23756088002A1AA5 /* HHYMineFourCell.m in Sources */,
 				584331B623700BB50046C0BD /* QYZJHomeFourCell.m in Sources */,
 				583A4D57236BC65A00180E27 /* QYZJURLDefineTool.m in Sources */,
 				5843317D236FAB2D0046C0BD /* TYCyclePagerTransformLayout.m in Sources */,
@@ -1203,6 +1242,7 @@
 				5843317A236FAB2D0046C0BD /* zkLunBoTwoCell.m in Sources */,
 				337F3EAF20EA014600C5526A /* BaseViewController+PublicMethod.m in Sources */,
 				5843319F236FE84A0046C0BD /* QYZJHomeThreeCell.m in Sources */,
+				58305396237555D3002A1AA5 /* QYZJMineHeadView.m in Sources */,
 				584691682372BC610056BA4A /* QYZJQianDanOneCell.m in Sources */,
 				583ED69923739F6A0070441A /* QYZJTongYongHeadFootView.m in Sources */,
 			);
@@ -1376,6 +1416,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N6ZU25A67U;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QYZJAPP/3rd",
@@ -1408,6 +1449,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QYZJAPP/3rd",

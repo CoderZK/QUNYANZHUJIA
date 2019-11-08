@@ -55,6 +55,7 @@
 #import "QYZJFindModel.h"
 #import "PublicFuntionTool.h"
 #import "zkPhotoShowVC.h"
+#import "QYZJTongYongHeadFootView.h"
 
 
 //高德地图key
@@ -82,9 +83,9 @@
 //白底黑字
 #define CharacterBlackColor [UIColor colorWithRed:30/255.0 green:30/255.0 blue:30/255.0 alpha:1]
 //白底淡黑
-#define CharacterGrayColor [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1]
+#define CharacterColor80 [UIColor colorWithRed:80/255.0 green:80/255.0 blue:80/255.0 alpha:1]
 
-#define CharacterBlack70 [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1]
+#define CharacterBlack112 [UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1]
 //白底灰字
 #define CharacterBackColor [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1]
 //时间用

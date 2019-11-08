@@ -231,6 +231,10 @@ NS_ASSUME_NONNULL_BEGIN
 /** 获取旁听列表*/
 +(NSString *)app_questionSitListOpenURL;
 
+/** 类型*/
++(NSString *)app_findLabelByTypeListURL;
+
+
 
 /** 更新*/
 +(NSString *)getIosConfigURL;

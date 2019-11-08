@@ -91,7 +91,7 @@
     searchbar.backgroundImage = [self imageWithColor:[UIColor groupTableViewBackgroundColor] size:CGSizeMake(1,1)];
     
     UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(gayView.frame)+5, ScreenW-30, 20)];
-    label.textColor = CharacterBlack70;
+    label.textColor = CharacterBlack112;
     label.font = kFont(15);
     label.text = @"定位城市";
     [self.headView addSubview:label];
@@ -107,7 +107,7 @@
     self.addressBt = button;
     
     UILabel * label1 = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(button.frame)+5, ScreenW-30, 20)];
-    label1.textColor = CharacterBlack70;
+    label1.textColor = CharacterBlack112;
     label1.font = kFont(15);
     label1.text = @"切换城市";
     [self.headView addSubview:label1];
@@ -222,10 +222,10 @@
         newProductBTBT.titleLabel.font = kFont(14);
         newProductBTBT.layer.cornerRadius = 4;
         newProductBTBT.clipsToBounds = YES;
-        [newProductBTBT setTitleColor:CharacterBlack70 forState:UIControlStateNormal];
+        [newProductBTBT setTitleColor:CharacterBlack112 forState:UIControlStateNormal];
         newProductBTBT.layer.cornerRadius = 3;
         newProductBTBT.layer.borderWidth = 1;
-        newProductBTBT.layer.borderColor = CharacterBlack70.CGColor;
+        newProductBTBT.layer.borderColor = CharacterBlack112.CGColor;
         newProductBTBT.clipsToBounds = YES;
         [newProductBTBT setTitleColor:WhiteColor forState:UIControlStateSelected];
         [newProductBTBT setTitle:arr[i].name forState:UIControlStateNormal];

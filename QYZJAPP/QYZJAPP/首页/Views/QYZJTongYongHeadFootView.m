@@ -28,8 +28,6 @@
         self.rightBt = [[UIButton alloc] init];
         
         
-        
-        
     }
     self.backgroundColor = [UIColor whiteColor];
     

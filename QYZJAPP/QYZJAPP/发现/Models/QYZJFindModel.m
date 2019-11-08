@@ -20,4 +20,17 @@
     _goodsList = [QYZJFindModel mj_objectArrayWithKeyValuesArray:goodsList];
 }
 
+
+
+/** 看得见的
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ */
+
+
 @end

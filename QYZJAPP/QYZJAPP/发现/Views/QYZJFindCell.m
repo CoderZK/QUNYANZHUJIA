@@ -98,7 +98,7 @@
         self.timeLB = [[UILabel alloc] init];
         self.timeLB.font = kFont(14);
         self.timeLB.text = @"42天前";
-        self.timeLB.textColor = CharacterBlack70;
+        self.timeLB.textColor = CharacterBlack112;
         [self.viewThree addSubview:self.timeLB];
         [self.timeLB mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -109,7 +109,7 @@
         }];
         
         self.pingLunBt = [[UIButton alloc] init];
-        [self.pingLunBt setTitleColor:CharacterBlack70 forState:UIControlStateNormal];
+        [self.pingLunBt setTitleColor:CharacterBlack112 forState:UIControlStateNormal];
         [self.pingLunBt setImage:[UIImage imageNamed:@"1"] forState:UIControlStateNormal];
         self.pingLunBt.titleLabel.font = kFont(14);
         [self.pingLunBt setTitle:@"666" forState:UIControlStateNormal];
@@ -123,7 +123,7 @@
         }];
         
         self.zanBt = [[UIButton alloc] init];
-        [self.zanBt setTitleColor:CharacterBlack70 forState:UIControlStateNormal];
+        [self.zanBt setTitleColor:CharacterBlack112 forState:UIControlStateNormal];
         [self.zanBt setImage:[UIImage imageNamed:@"2"] forState:UIControlStateNormal];
         [self.zanBt setTitle:@"2365" forState:UIControlStateNormal];
         [self.zanBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
