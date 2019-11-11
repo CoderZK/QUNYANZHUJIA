@@ -7,7 +7,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
-            uuid = "D31764D7-135A-45EB-A3CF-6CE15EA7B42F"
+            uuid = "C5EA13A5-F7DB-478C-8CC0-EC12AC5EF21E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -18,139 +18,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9CC17AAA-836A-4D34-BC7A-82D29CF5B293"
+            uuid = "9704E18E-99F3-48D6-B7AA-096108B49390"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x53d1;&#x73b0;/Views/QYZJFindCell.m"
+            filePath = "QYZJAPP/&#x53d1;&#x73b0;/Views/QYZJFindGuangChangDetailView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "-setZanPinViewWithArr:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0E88A4B8-D3F7-40E9-9B00-5D343F6133CC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QYZJAPP/&#x53d1;&#x73b0;/Views/QYZJFindGuangChangDetailView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "-setModel:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "6B220E6C-FE37-4C6C-823A-84C11AD1CB36"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/Views/cityChoose/QYZJCityChooseTVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "291"
-            endingLineNumber = "291"
-            landmarkName = "-addCityAction:cityStr:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9AC8F8F4-058C-4E2B-888C-81C20CBE34BA"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJHomeVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "-addNav"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "9AC8F8F4-058C-4E2B-888C-81C20CBE34BA - ea4dada6b6456abf"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__20-[QYZJHomeVC addNav]_block_invoke"
-                  moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E9%A6%96%E9%A1%B5/VC/QYZJHomeVC.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "331">
-               </Location>
-               <Location
-                  uuid = "9AC8F8F4-058C-4E2B-888C-81C20CBE34BA - e78c4d766155d6b2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__20-[QYZJHomeVC addNav]_block_invoke_2"
-                  moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E9%A6%96%E9%A1%B5/VC/QYZJHomeVC.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "87"
-                  endingLineNumber = "87"
-                  offsetFromSymbolStart = "75">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
-         <BreakpointContent
-            uuid = "96477142-0516-416B-9549-4A5AF2BF517E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            scope = "1"
-            stopOnStyle = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DF0E4D3C-7AD2-49D5-8CB1-FCB3515ECF4C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJTypesSearchTVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "-setheadV"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2C20EC43-E438-4BD1-9DFC-E300F2175FC7"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJTypesSearchTVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "-getLeiXingData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "55106555-2998-4CF2-A769-C082E3F5200B"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/Views/QYZJSearchView.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "-clickAction:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

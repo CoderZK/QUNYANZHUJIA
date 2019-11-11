@@ -396,6 +396,10 @@
 +(NSString *)app_articleListURL{
    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_articleList.do"];
 }
+/** 获取发现广场详情*/
++(NSString *)app_articleDetailsURL {
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_articleDetails.do"];
+}
 /** 名家列表*/
 +(NSString *)app_logiciansListURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_logiciansList.do"];

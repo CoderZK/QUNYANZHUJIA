@@ -12,6 +12,7 @@
 #import "QYZJFindCell.h"
 #import "QYZJHomeFiveCell.h"
 #import "QYZJFindTwoCell.h"
+#import "QYZJFindGuangChangDetailTVC.h"
 @interface QYZJFindVC ()
 @property(nonatomic,strong)FindHeadView *navigaV;
 @property(nonatomic,strong)UIButton *faBuBt;
@@ -180,6 +181,14 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.type == 0) {
+        QYZJFindGuangChangDetailTVC * vc =[[QYZJFindGuangChangDetailTVC alloc] init];
+        vc.ID = self.dataArray[indexPath.row].ID;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    
     
 }
 

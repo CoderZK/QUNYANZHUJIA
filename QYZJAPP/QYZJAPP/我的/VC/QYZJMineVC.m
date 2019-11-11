@@ -12,6 +12,7 @@
 #import "HHYMineFourCell.h"
 #import "QYZJMIneTwoCell.h"
 #import "QYZJSettingTVC.h"
+#import "QYZJMessageTVC.h"
 @interface QYZJMineVC ()
 @property(nonatomic,strong)QYZJMineHeadView *headV;
 @property(nonatomic,strong)NSArray *headTitleArr;
@@ -49,7 +50,9 @@
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else {
             //点击消息
-            
+            QYZJMessageTVC * vc =[[QYZJMessageTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
         }
     };
     self.tableView.tableHeaderView = self.headV;

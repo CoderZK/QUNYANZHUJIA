@@ -19,8 +19,13 @@
 - (void)setGoodsList:(NSMutableArray<QYZJFindModel *> *)goodsList {
     _goodsList = [QYZJFindModel mj_objectArrayWithKeyValuesArray:goodsList];
 }
+- (void)setGoodList:(NSMutableArray<QYZJFindModel *> *)goodList {
+    _goodList = [QYZJFindModel mj_objectArrayWithKeyValuesArray:goodList];
+}
 
-
+- (void)setArticle:(QYZJFindModel *)article {
+    _article = [QYZJFindModel mj_objectWithKeyValues:article];
+}
 
 /** 看得见的
  

@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *refShopId;
 @property(nonatomic,strong)NSString *articleId;
 @property(nonatomic,strong)NSString *commentContent;
-
+@property(nonatomic,strong)NSString *goodNum;//点赞人数
 @property(nonatomic,strong)NSString *toUserId;
 @property(nonatomic,strong)NSString *articleType;
 @property(nonatomic,strong)NSString *articleContent;
@@ -40,12 +40,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *context;
 @property(nonatomic,strong)NSString *shopId;
 @property(nonatomic,strong)NSString *commentId;//关联ID
-
-
+@property(nonatomic,strong)NSString *headerPic;
+@property(nonatomic,strong)QYZJFindModel *article;
 
 
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *commentList;
-@property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *goodsList;
+@property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *goodsList; //商品列表
+@property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *goodList; //点赞列表
 @property(nonatomic,strong)NSMutableArray *videos;
 @property(nonatomic,strong)NSMutableArray *pictures;
 
@@ -59,6 +60,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL isRead;
 @property(nonatomic,assign)BOOL isOpen;
 @property(nonatomic,assign)BOOL isAuth;
+
+
 
 
 @property(nonatomic,assign)CGFloat price;

@@ -30,8 +30,34 @@
     self.leftArr = @[@[@"我的头像",@"昵称",@"省市区",@"详细地址"],@[@"换绑手机",@"绑定微信",@"登录密码修改",@"支付密码修改"],@[@"清除缓存"]];
     self.cityArray = @[].mutableCopy;
     [self getCityData];
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 70, 0);
+    [self setFootV];
     
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 100, 0);
+}
+
+- (void)setFootV {
+    
+    UIView * footV = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenH - 70 - sstatusHeight - 44 - 30, ScreenW, 70)];
+    [self.view addSubview:footV];
+    footV.backgroundColor = [UIColor whiteColor];
+    
+    UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(20, 10, ScreenW - 40, 45)];
+    button.layer.cornerRadius = 3;
+    button.clipsToBounds = YES;
+    [button addTarget:self action:@selector(outLoginActio:) forControlEvents:UIControlEventTouchUpInside];
+    [button setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
+    [button setTitle:@"退出登录" forState:UIControlStateNormal];
+    button.titleLabel.font = kFont(14);
+    [footV addSubview:button];
+    
+    
+    
+}
+
+//退出登录
+- (void)outLoginActio:(UIButton *)button {
+    
+    
     
     
 }

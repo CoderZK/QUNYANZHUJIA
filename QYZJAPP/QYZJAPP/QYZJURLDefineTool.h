@@ -224,6 +224,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 获取发现广场列表*/
 +(NSString *)app_articleListURL;
+/** 获取发现广场详情*/
++(NSString *)app_articleDetailsURL;
 /** 名家列表*/
 +(NSString *)app_logiciansListURL;
 /** 头条列表*/
