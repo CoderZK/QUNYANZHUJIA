@@ -49,6 +49,8 @@
         self.mesageBt.mj_x = CGRectGetMaxX(self.titleLB.frame) + 10;
         [self.mesageBt setImage:[UIImage imageNamed:@"9"] forState:UIControlStateNormal];
         [self addSubview:self.mesageBt];
+        self.mesageBt.tag = 2;
+        [self.mesageBt addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
         
         self.redV = [[UIView alloc] initWithFrame:CGRectMake(self.mesageBt.frame.size.width / 2 + 8, 3, 6, 6)];
         self.redV.backgroundColor = [UIColor redColor];
@@ -111,7 +113,9 @@
 
 
 - (void)clickAction:(UIButton *)button {
-    
+    if (self.clickMineHeadBlock != nil) {
+        self.clickMineHeadBlock(button.tag);
+    }
 }
 
 @end

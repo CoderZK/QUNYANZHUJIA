@@ -56,7 +56,8 @@
 #import "PublicFuntionTool.h"
 #import "zkPhotoShowVC.h"
 #import "QYZJTongYongHeadFootView.h"
-
+#import "MXPhotoPickerController.h"
+#import "UIViewController+MXPhotoPicker.h"
 
 //高德地图key
 #define GaoDeMapKey @"41b13a74e89d26ad21b1c4968f13b0d3"

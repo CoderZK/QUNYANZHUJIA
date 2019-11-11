@@ -11,6 +11,7 @@
 #import "QYZJMineHeadView.h"
 #import "HHYMineFourCell.h"
 #import "QYZJMIneTwoCell.h"
+#import "QYZJSettingTVC.h"
 @interface QYZJMineVC ()
 @property(nonatomic,strong)QYZJMineHeadView *headV;
 @property(nonatomic,strong)NSArray *headTitleArr;
@@ -37,6 +38,20 @@
     [super viewDidLoad];
 
     self.headV = [[QYZJMineHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 160)];
+    Weak(weakSelf);
+    self.headV.clickMineHeadBlock = ^(NSInteger index) {
+        if (index == 0) {
+            //点击头像
+            
+        }else if (index == 1){
+            QYZJSettingTVC * vc =[[QYZJSettingTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }else {
+            //点击消息
+            
+        }
+    };
     self.tableView.tableHeaderView = self.headV;
     
     self.tableView.frame = CGRectMake(0, -sstatusHeight, ScreenW, ScreenH+sstatusHeight);

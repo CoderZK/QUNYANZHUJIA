@@ -165,7 +165,7 @@
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
     
-    if (self.arrayType == AreaArray) {
+    if (self.arrayType == AreaArray ||  self.arrayType == ArerArrayNormal) {
         return  3 ;
     }else{
         return 1;
@@ -176,13 +176,20 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
     
-    if (self.arrayType == AreaArray) {
+    if (self.arrayType == AreaArray || self.arrayType == ArerArrayNormal) {
         
         zkPickModel *province=self.array[self.selectRowWithProvince];
         zkPickModel *city=province.cityList[self.selectRowWithCity];
         if (component==0) return self.array.count;
         if (component==1) return province.cityList.count;
-        if (component==2) return city.areaList.count + 1;
+        if (component==2) {
+            if (self.arrayType == AreaArray) {
+                return city.areaList.count + 1;
+            }else {
+                return city.areaList.count;
+            }
+           
+        }
         return 0;
     }
     else{
@@ -202,7 +209,7 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    if (self.arrayType == AreaArray) {
+    if (self.arrayType == AreaArray || self.arrayType == ArerArrayNormal) {
         if (component==0) {                    // 只有点击了第一列才去刷新第二个列对应的数据
             self.selectRowWithProvince=row;   //  刷新的下标
             self.selectRowWithCity=0;
@@ -223,7 +230,7 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     
-    if (self.arrayType == AreaArray) {
+    if (self.arrayType == AreaArray || self.arrayType == ArerArrayNormal) {
         NSString *showTitleValue=@"";
         if (component==0){
             zkPickModel *province=self.array[row];
@@ -238,12 +245,20 @@
             
             zkPickModel *province=self.array[self.selectRowWithProvince];
             zkPickModel *city=province.cityList[self.selectRowWithCity];
-            zkPickModel * model = [[zkPickModel alloc] init];
-            model.ID = @"0";
-            model.name = @"不限";
-            NSMutableArray<zkPickModel *> * ddd = [city.areaList mutableCopy];
-            [ddd insertObject:model atIndex:0];
-            showTitleValue =  ddd[row].name;
+            
+            if (self.arrayType == AreaArray) {
+                zkPickModel * model = [[zkPickModel alloc] init];
+                model.ID = @"0";
+                model.name = @"不限";
+                NSMutableArray<zkPickModel *> * ddd = [city.areaList mutableCopy];
+                [ddd insertObject:model atIndex:0];
+                showTitleValue =  ddd[row].name;
+            }else {
+                zkPickModel * model = city.areaList[row];
+                 showTitleValue = model.name;
+            }
+            
+          
             
         }
         return showTitleValue;
@@ -266,7 +281,7 @@
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
 {
     
-    if ( self.arrayType == AreaArray) {
+    if ( self.arrayType == AreaArray || self.arrayType == ArerArrayNormal) {
         
         return (ScreenWidth - 30)/3.0;
         

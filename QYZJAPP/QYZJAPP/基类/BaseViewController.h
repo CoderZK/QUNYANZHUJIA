@@ -33,6 +33,9 @@
  */
 - (void)setNavRightBtnWithImg:(NSString *)imgName title:(NSString *)title withBlock:(void (^)(UIButton *rightBtn))rightBtn handleBtn:(void(^)())buttonClick;
 
+- (BOOL)isCanUsePhotos;
+- (BOOL)isCanUsePicture;
+
 
 @end
 

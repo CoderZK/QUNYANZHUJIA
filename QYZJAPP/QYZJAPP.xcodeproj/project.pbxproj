@@ -46,6 +46,26 @@
 		33DC822E20EA1CA700D1C283 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DC821E20EA17F700D1C283 /* libc++.1.tbd */; };
 		33DC823320EA20D700D1C283 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33DC823020EA20D600D1C283 /* TabBarController.m */; };
 		33DC823420EA20D700D1C283 /* LYGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33DC823220EA20D700D1C283 /* LYGuideViewController.m */; };
+		582F74B82378F0F300F6FCB6 /* cacheClear.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F74B72378F0F300F6FCB6 /* cacheClear.m */; };
+		582F74CD2378F29000F6FCB6 /* MXImageListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F74BD2378F29000F6FCB6 /* MXImageListController.m */; };
+		582F74CE2378F29000F6FCB6 /* mx_pic_selected_yes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 582F74BE2378F29000F6FCB6 /* mx_pic_selected_yes@2x.png */; };
+		582F74CF2378F29000F6FCB6 /* MXImagePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F74BF2378F29000F6FCB6 /* MXImagePreviewCell.m */; };
+		582F74D02378F29000F6FCB6 /* UIViewController+MXPhotoPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F74C02378F29000F6FCB6 /* UIViewController+MXPhotoPicker.m */; };
+		582F74D12378F29000F6FCB6 /* mx_picker_back_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 582F74C12378F29000F6FCB6 /* mx_picker_back_image@2x.png */; };
+		582F74D22378F29000F6FCB6 /* MXImagePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F74C32378F29000F6FCB6 /* MXImagePreviewController.m */; };
+		582F74D32378F29000F6FCB6 /* MXALAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F74C52378F29000F6FCB6 /* MXALAsset.m */; };
+		582F74D42378F29000F6FCB6 /* MXImageEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F74C62378F29000F6FCB6 /* MXImageEditController.m */; };
+		582F74D52378F29000F6FCB6 /* mx_pic_selected_no@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 582F74C72378F29000F6FCB6 /* mx_pic_selected_no@2x.png */; };
+		582F74D62378F29000F6FCB6 /* MXPhotoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F74C82378F29000F6FCB6 /* MXPhotoPickerController.m */; };
+		582F74D72378F29000F6FCB6 /* MXImageGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F74CC2378F29000F6FCB6 /* MXImageGroupController.m */; };
+		582F74DB2378F80A00F6FCB6 /* QYZJChangePhoneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F74D92378F80A00F6FCB6 /* QYZJChangePhoneVC.m */; };
+		582F74DC2378F80A00F6FCB6 /* QYZJChangePhoneVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582F74DA2378F80A00F6FCB6 /* QYZJChangePhoneVC.xib */; };
+		582F74E02378F85C00F6FCB6 /* QYZJChangePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F74DE2378F85C00F6FCB6 /* QYZJChangePasswordVC.m */; };
+		582F74E12378F85C00F6FCB6 /* QYZJChangePasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582F74DF2378F85C00F6FCB6 /* QYZJChangePasswordVC.xib */; };
+		582F74E52378F8DE00F6FCB6 /* QYZJChangePayPasswordOneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F74E32378F8DE00F6FCB6 /* QYZJChangePayPasswordOneVC.m */; };
+		582F74E62378F8DE00F6FCB6 /* QYZJChangePayPasswordOneVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582F74E42378F8DE00F6FCB6 /* QYZJChangePayPasswordOneVC.xib */; };
+		582F74EA2378F8F700F6FCB6 /* QYZJChangePayPasswordTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F74E82378F8F700F6FCB6 /* QYZJChangePayPasswordTwoVC.m */; };
+		582F74EB2378F8F700F6FCB6 /* QYZJChangePayPasswordTwoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582F74E92378F8F700F6FCB6 /* QYZJChangePayPasswordTwoVC.xib */; };
 		5830538D23751FCA002A1AA5 /* QYZJTypesSearchTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5830538C23751FC9002A1AA5 /* QYZJTypesSearchTVC.m */; };
 		5830539023752003002A1AA5 /* QYZJSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5830538F23752003002A1AA5 /* QYZJSearchView.m */; };
 		58305393237541F2002A1AA5 /* QYZJSearchLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58305392237541F2002A1AA5 /* QYZJSearchLabelView.m */; };
@@ -53,6 +73,9 @@
 		5830539A23756088002A1AA5 /* HHYMineFourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5830539823756087002A1AA5 /* HHYMineFourCell.m */; };
 		5830539B23756088002A1AA5 /* HHYMineFourCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5830539923756088002A1AA5 /* HHYMineFourCell.xib */; };
 		5830539E23756376002A1AA5 /* QYZJMIneTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5830539D23756376002A1AA5 /* QYZJMIneTwoCell.m */; };
+		5836BCEB2378E5C300F02783 /* QYZJSettingTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5836BCEA2378E5C300F02783 /* QYZJSettingTVC.m */; };
+		5836BCEF2378E94300F02783 /* QYZJSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5836BCED2378E94300F02783 /* QYZJSettingCell.m */; };
+		5836BCF02378E94300F02783 /* QYZJSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5836BCEE2378E94300F02783 /* QYZJSettingCell.xib */; };
 		583A4D57236BC65A00180E27 /* QYZJURLDefineTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 583A4D56236BC65A00180E27 /* QYZJURLDefineTool.m */; };
 		583A4D5B236BDF8500180E27 /* QYZJNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 583A4D5A236BDF8500180E27 /* QYZJNoDataView.m */; };
 		583A4D61236BE50800180E27 /* QYZJHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 583A4D60236BE50800180E27 /* QYZJHomeVC.m */; };
@@ -220,6 +243,39 @@
 		33DC823020EA20D600D1C283 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		33DC823120EA20D600D1C283 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		33DC823220EA20D700D1C283 /* LYGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYGuideViewController.m; sourceTree = "<group>"; };
+		582F74B62378F0F300F6FCB6 /* cacheClear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cacheClear.h; sourceTree = "<group>"; };
+		582F74B72378F0F300F6FCB6 /* cacheClear.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cacheClear.m; sourceTree = "<group>"; };
+		582F74BA2378F29000F6FCB6 /* MXPhotoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXPhotoPickerController.h; sourceTree = "<group>"; };
+		582F74BB2378F29000F6FCB6 /* MXImageEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXImageEditController.h; sourceTree = "<group>"; };
+		582F74BC2378F29000F6FCB6 /* MXALAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXALAsset.h; sourceTree = "<group>"; };
+		582F74BD2378F29000F6FCB6 /* MXImageListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXImageListController.m; sourceTree = "<group>"; };
+		582F74BE2378F29000F6FCB6 /* mx_pic_selected_yes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_pic_selected_yes@2x.png"; sourceTree = "<group>"; };
+		582F74BF2378F29000F6FCB6 /* MXImagePreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXImagePreviewCell.m; sourceTree = "<group>"; };
+		582F74C02378F29000F6FCB6 /* UIViewController+MXPhotoPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MXPhotoPicker.m"; sourceTree = "<group>"; };
+		582F74C12378F29000F6FCB6 /* mx_picker_back_image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_picker_back_image@2x.png"; sourceTree = "<group>"; };
+		582F74C22378F29000F6FCB6 /* MXImageGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXImageGroupController.h; sourceTree = "<group>"; };
+		582F74C32378F29000F6FCB6 /* MXImagePreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXImagePreviewController.m; sourceTree = "<group>"; };
+		582F74C42378F29000F6FCB6 /* MXImageListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXImageListController.h; sourceTree = "<group>"; };
+		582F74C52378F29000F6FCB6 /* MXALAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXALAsset.m; sourceTree = "<group>"; };
+		582F74C62378F29000F6FCB6 /* MXImageEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXImageEditController.m; sourceTree = "<group>"; };
+		582F74C72378F29000F6FCB6 /* mx_pic_selected_no@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_pic_selected_no@2x.png"; sourceTree = "<group>"; };
+		582F74C82378F29000F6FCB6 /* MXPhotoPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXPhotoPickerController.m; sourceTree = "<group>"; };
+		582F74C92378F29000F6FCB6 /* UIViewController+MXPhotoPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MXPhotoPicker.h"; sourceTree = "<group>"; };
+		582F74CA2378F29000F6FCB6 /* MXImagePreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXImagePreviewCell.h; sourceTree = "<group>"; };
+		582F74CB2378F29000F6FCB6 /* MXImagePreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXImagePreviewController.h; sourceTree = "<group>"; };
+		582F74CC2378F29000F6FCB6 /* MXImageGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXImageGroupController.m; sourceTree = "<group>"; };
+		582F74D82378F80A00F6FCB6 /* QYZJChangePhoneVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJChangePhoneVC.h; sourceTree = "<group>"; };
+		582F74D92378F80A00F6FCB6 /* QYZJChangePhoneVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJChangePhoneVC.m; sourceTree = "<group>"; };
+		582F74DA2378F80A00F6FCB6 /* QYZJChangePhoneVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJChangePhoneVC.xib; sourceTree = "<group>"; };
+		582F74DD2378F85C00F6FCB6 /* QYZJChangePasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJChangePasswordVC.h; sourceTree = "<group>"; };
+		582F74DE2378F85C00F6FCB6 /* QYZJChangePasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJChangePasswordVC.m; sourceTree = "<group>"; };
+		582F74DF2378F85C00F6FCB6 /* QYZJChangePasswordVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJChangePasswordVC.xib; sourceTree = "<group>"; };
+		582F74E22378F8DE00F6FCB6 /* QYZJChangePayPasswordOneVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJChangePayPasswordOneVC.h; sourceTree = "<group>"; };
+		582F74E32378F8DE00F6FCB6 /* QYZJChangePayPasswordOneVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJChangePayPasswordOneVC.m; sourceTree = "<group>"; };
+		582F74E42378F8DE00F6FCB6 /* QYZJChangePayPasswordOneVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJChangePayPasswordOneVC.xib; sourceTree = "<group>"; };
+		582F74E72378F8F700F6FCB6 /* QYZJChangePayPasswordTwoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJChangePayPasswordTwoVC.h; sourceTree = "<group>"; };
+		582F74E82378F8F700F6FCB6 /* QYZJChangePayPasswordTwoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJChangePayPasswordTwoVC.m; sourceTree = "<group>"; };
+		582F74E92378F8F700F6FCB6 /* QYZJChangePayPasswordTwoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJChangePayPasswordTwoVC.xib; sourceTree = "<group>"; };
 		5830538B23751FC9002A1AA5 /* QYZJTypesSearchTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYZJTypesSearchTVC.h; sourceTree = "<group>"; };
 		5830538C23751FC9002A1AA5 /* QYZJTypesSearchTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYZJTypesSearchTVC.m; sourceTree = "<group>"; };
 		5830538E23752002002A1AA5 /* QYZJSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYZJSearchView.h; sourceTree = "<group>"; };
@@ -233,6 +289,11 @@
 		5830539923756088002A1AA5 /* HHYMineFourCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HHYMineFourCell.xib; sourceTree = "<group>"; };
 		5830539C23756376002A1AA5 /* QYZJMIneTwoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMIneTwoCell.h; sourceTree = "<group>"; };
 		5830539D23756376002A1AA5 /* QYZJMIneTwoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMIneTwoCell.m; sourceTree = "<group>"; };
+		5836BCE92378E5C300F02783 /* QYZJSettingTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJSettingTVC.h; sourceTree = "<group>"; };
+		5836BCEA2378E5C300F02783 /* QYZJSettingTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJSettingTVC.m; sourceTree = "<group>"; };
+		5836BCEC2378E94300F02783 /* QYZJSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJSettingCell.h; sourceTree = "<group>"; };
+		5836BCED2378E94300F02783 /* QYZJSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJSettingCell.m; sourceTree = "<group>"; };
+		5836BCEE2378E94300F02783 /* QYZJSettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJSettingCell.xib; sourceTree = "<group>"; };
 		583A4D55236BC65A00180E27 /* QYZJURLDefineTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJURLDefineTool.h; sourceTree = "<group>"; };
 		583A4D56236BC65A00180E27 /* QYZJURLDefineTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJURLDefineTool.m; sourceTree = "<group>"; };
 		583A4D59236BDF8500180E27 /* QYZJNoDataView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJNoDataView.h; sourceTree = "<group>"; };
@@ -525,6 +586,7 @@
 		337F3E8E20E9FF3500C5526A /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				5836BCE52378E44C00F02783 /* 设置 */,
 				33DC823A20EA21BD00D1C283 /* Models */,
 				33DC823820EA21BD00D1C283 /* VC */,
 				33DC823920EA21BD00D1C283 /* Views */,
@@ -557,6 +619,7 @@
 		337F3EB120EA040400C5526A /* 其它 */ = {
 			isa = PBXGroup;
 			children = (
+				582F74B92378F29000F6FCB6 /* MXPhotoPickerController */,
 				583ED6A62373F0660070441A /* zk_picShow */,
 				5843316D236FAB2D0046C0BD /* lunBoV */,
 				583A4D79236C077100180E27 /* Base64 */,
@@ -564,6 +627,8 @@
 				335010EA20EE05C000F8486B /* NSString+Size.m */,
 				335010EC20EE05C100F8486B /* UIButton+Badge.h */,
 				335010EB20EE05C000F8486B /* UIButton+Badge.m */,
+				582F74B62378F0F300F6FCB6 /* cacheClear.h */,
+				582F74B72378F0F300F6FCB6 /* cacheClear.m */,
 				335010D520EDF8E200F8486B /* Clear.h */,
 				335010D620EDF8E300F8486B /* Clear.m */,
 				335010D820EDF8E400F8486B /* UIViewController+AlertShow.h */,
@@ -766,6 +831,80 @@
 				D3E49E1E01514DB2F4C7786C /* libPods-QYZJAPP.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		582F74B92378F29000F6FCB6 /* MXPhotoPickerController */ = {
+			isa = PBXGroup;
+			children = (
+				582F74BA2378F29000F6FCB6 /* MXPhotoPickerController.h */,
+				582F74BB2378F29000F6FCB6 /* MXImageEditController.h */,
+				582F74BC2378F29000F6FCB6 /* MXALAsset.h */,
+				582F74BD2378F29000F6FCB6 /* MXImageListController.m */,
+				582F74BE2378F29000F6FCB6 /* mx_pic_selected_yes@2x.png */,
+				582F74BF2378F29000F6FCB6 /* MXImagePreviewCell.m */,
+				582F74C02378F29000F6FCB6 /* UIViewController+MXPhotoPicker.m */,
+				582F74C12378F29000F6FCB6 /* mx_picker_back_image@2x.png */,
+				582F74C22378F29000F6FCB6 /* MXImageGroupController.h */,
+				582F74C32378F29000F6FCB6 /* MXImagePreviewController.m */,
+				582F74C42378F29000F6FCB6 /* MXImageListController.h */,
+				582F74C52378F29000F6FCB6 /* MXALAsset.m */,
+				582F74C62378F29000F6FCB6 /* MXImageEditController.m */,
+				582F74C72378F29000F6FCB6 /* mx_pic_selected_no@2x.png */,
+				582F74C82378F29000F6FCB6 /* MXPhotoPickerController.m */,
+				582F74C92378F29000F6FCB6 /* UIViewController+MXPhotoPicker.h */,
+				582F74CA2378F29000F6FCB6 /* MXImagePreviewCell.h */,
+				582F74CB2378F29000F6FCB6 /* MXImagePreviewController.h */,
+				582F74CC2378F29000F6FCB6 /* MXImageGroupController.m */,
+			);
+			path = MXPhotoPickerController;
+			sourceTree = "<group>";
+		};
+		5836BCE52378E44C00F02783 /* 设置 */ = {
+			isa = PBXGroup;
+			children = (
+				5836BCE62378E44C00F02783 /* models */,
+				5836BCE72378E44C00F02783 /* vcs */,
+				5836BCE82378E44C00F02783 /* views */,
+			);
+			path = "设置";
+			sourceTree = "<group>";
+		};
+		5836BCE62378E44C00F02783 /* models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		5836BCE72378E44C00F02783 /* vcs */ = {
+			isa = PBXGroup;
+			children = (
+				5836BCE92378E5C300F02783 /* QYZJSettingTVC.h */,
+				5836BCEA2378E5C300F02783 /* QYZJSettingTVC.m */,
+				582F74D82378F80A00F6FCB6 /* QYZJChangePhoneVC.h */,
+				582F74D92378F80A00F6FCB6 /* QYZJChangePhoneVC.m */,
+				582F74DA2378F80A00F6FCB6 /* QYZJChangePhoneVC.xib */,
+				582F74DD2378F85C00F6FCB6 /* QYZJChangePasswordVC.h */,
+				582F74DE2378F85C00F6FCB6 /* QYZJChangePasswordVC.m */,
+				582F74DF2378F85C00F6FCB6 /* QYZJChangePasswordVC.xib */,
+				582F74E22378F8DE00F6FCB6 /* QYZJChangePayPasswordOneVC.h */,
+				582F74E32378F8DE00F6FCB6 /* QYZJChangePayPasswordOneVC.m */,
+				582F74E42378F8DE00F6FCB6 /* QYZJChangePayPasswordOneVC.xib */,
+				582F74E72378F8F700F6FCB6 /* QYZJChangePayPasswordTwoVC.h */,
+				582F74E82378F8F700F6FCB6 /* QYZJChangePayPasswordTwoVC.m */,
+				582F74E92378F8F700F6FCB6 /* QYZJChangePayPasswordTwoVC.xib */,
+			);
+			path = vcs;
+			sourceTree = "<group>";
+		};
+		5836BCE82378E44C00F02783 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				5836BCEC2378E94300F02783 /* QYZJSettingCell.h */,
+				5836BCED2378E94300F02783 /* QYZJSettingCell.m */,
+				5836BCEE2378E94300F02783 /* QYZJSettingCell.xib */,
+			);
+			path = views;
 			sourceTree = "<group>";
 		};
 		583A4D58236BDF1E00180E27 /* Views */ = {
@@ -1076,6 +1215,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				582F74D12378F29000F6FCB6 /* mx_picker_back_image@2x.png in Resources */,
+				582F74CE2378F29000F6FCB6 /* mx_pic_selected_yes@2x.png in Resources */,
 				584345852371039E0087A2D9 /* TongYongCell.xib in Resources */,
 				337F3ED920EA13CF00C5526A /* AlipaySDK.bundle in Resources */,
 				583ED69623739D530070441A /* QYZJHomePayDetailOneCell.xib in Resources */,
@@ -1086,17 +1227,23 @@
 				337F3EB020EA014600C5526A /* noneDataBg.png in Resources */,
 				584691692372BC610056BA4A /* QYZJQianDanOneCell.xib in Resources */,
 				584331A0236FE84A0046C0BD /* QYZJHomeThreeCell.xib in Resources */,
+				582F74E12378F85C00F6FCB6 /* QYZJChangePasswordVC.xib in Resources */,
 				5830539B23756088002A1AA5 /* HHYMineFourCell.xib in Resources */,
 				584331CC23703C010046C0BD /* QYZJFindOneCell.xib in Resources */,
 				584331A5236FF3F00046C0BD /* QYZhuJiaLoginVC.xib in Resources */,
 				584331B723700BB50046C0BD /* QYZJHomeFourCell.xib in Resources */,
 				337F3E6620E9FE5300C5526A /* LaunchScreen.storyboard in Resources */,
+				582F74DC2378F80A00F6FCB6 /* QYZJChangePhoneVC.xib in Resources */,
+				582F74D52378F29000F6FCB6 /* mx_pic_selected_no@2x.png in Resources */,
 				5843319B236FD3BC0046C0BD /* QYZJHomeTwoCell.xib in Resources */,
+				5836BCF02378E94300F02783 /* QYZJSettingCell.xib in Resources */,
 				583ED6B123741A3D0070441A /* QYZJFindTwoCell.xib in Resources */,
 				584331B2236FF88C0046C0BD /* QYZJFindPasswordVC.xib in Resources */,
 				584691612372B25B0056BA4A /* QYZJHomePayCell.xib in Resources */,
 				58433196236FD2850046C0BD /* QYZJHomeOneCell.xib in Resources */,
 				584331BF2370107D0046C0BD /* QYZJHomeFiveCell.xib in Resources */,
+				582F74EB2378F8F700F6FCB6 /* QYZJChangePayPasswordTwoVC.xib in Resources */,
+				582F74E62378F8DE00F6FCB6 /* QYZJChangePayPasswordOneVC.xib in Resources */,
 				584331CE23703FA80046C0BD /* Assets.xcassets in Resources */,
 				337F3E6120E9FE3C00C5526A /* Main.storyboard in Resources */,
 			);
@@ -1168,15 +1315,22 @@
 				337F3EAA20EA014600C5526A /* BaseViewController.m in Sources */,
 				33DC823420EA20D700D1C283 /* LYGuideViewController.m in Sources */,
 				583A4D75236BE60300180E27 /* QYZJRecommendVC.m in Sources */,
+				582F74D22378F29000F6FCB6 /* MXImagePreviewController.m in Sources */,
+				582F74B82378F0F300F6FCB6 /* cacheClear.m in Sources */,
+				5836BCEB2378E5C300F02783 /* QYZJSettingTVC.m in Sources */,
 				584331CB23703C010046C0BD /* QYZJFindOneCell.m in Sources */,
 				5843319A236FD3BC0046C0BD /* QYZJHomeTwoCell.m in Sources */,
 				5830539E23756376002A1AA5 /* QYZJMIneTwoCell.m in Sources */,
+				582F74D62378F29000F6FCB6 /* MXPhotoPickerController.m in Sources */,
 				584345BE23713F230087A2D9 /* QYZJCityChooseTVC.m in Sources */,
 				5830539023752003002A1AA5 /* QYZJSearchView.m in Sources */,
 				58433185236FAF6D0046C0BD /* LaJi.m in Sources */,
 				584331A4236FF3F00046C0BD /* QYZhuJiaLoginVC.m in Sources */,
 				5843459B237125770087A2D9 /* QYZJFangDanTwoTVC.m in Sources */,
+				5836BCEF2378E94300F02783 /* QYZJSettingCell.m in Sources */,
 				337F3EAB20EA014600C5526A /* BaseNavigationController.m in Sources */,
+				582F74E52378F8DE00F6FCB6 /* QYZJChangePayPasswordOneVC.m in Sources */,
+				582F74DB2378F80A00F6FCB6 /* QYZJChangePhoneVC.m in Sources */,
 				335010E320EDFC9300F8486B /* zkSignleTool.m in Sources */,
 				583B67B82372602600EDE846 /* QYZJLocationTool.m in Sources */,
 				583ED69C2373B0390070441A /* QYZJPicShowCell.m in Sources */,
@@ -1188,6 +1342,7 @@
 				584345842371039E0087A2D9 /* TongYongCell.m in Sources */,
 				5846916C2372CD8B0056BA4A /* QYZJMinePayDetailVC.m in Sources */,
 				583B683F23728D0700EDE846 /* QYZJHomeTwoTVC.m in Sources */,
+				582F74D02378F29000F6FCB6 /* UIViewController+MXPhotoPicker.m in Sources */,
 				337F3EAD20EA014600C5526A /* BaseTableViewHeaderFooterView.m in Sources */,
 				337F3EAC20EA014600C5526A /* BaseTableViewController.m in Sources */,
 				337F3E6920E9FE5300C5526A /* main.m in Sources */,
@@ -1201,6 +1356,7 @@
 				5830538D23751FCA002A1AA5 /* QYZJTypesSearchTVC.m in Sources */,
 				584345C823716FD90087A2D9 /* QYZJFindPasswordTwoVC.m in Sources */,
 				58305393237541F2002A1AA5 /* QYZJSearchLabelView.m in Sources */,
+				582F74EA2378F8F700F6FCB6 /* QYZJChangePayPasswordTwoVC.m in Sources */,
 				583A4D5B236BDF8500180E27 /* QYZJNoDataView.m in Sources */,
 				584691602372B25B0056BA4A /* QYZJHomePayCell.m in Sources */,
 				584691642372B5220056BA4A /* QYZJQianDanNavigaTitleView.m in Sources */,
@@ -1208,11 +1364,14 @@
 				5846915823729D160056BA4A /* QYZJTongYongModel.m in Sources */,
 				584345782370FC760087A2D9 /* QYZJFaTieTVC.m in Sources */,
 				335010EE20EE05C100F8486B /* NSString+Size.m in Sources */,
+				582F74CD2378F29000F6FCB6 /* MXImageListController.m in Sources */,
 				584345802371035F0087A2D9 /* QYZJRecommendDetailTVC.m in Sources */,
 				337F3EAE20EA014600C5526A /* BaseCollectionReusableView.m in Sources */,
+				582F74D42378F29000F6FCB6 /* MXImageEditController.m in Sources */,
 				5846915C2372B0330056BA4A /* LxmWebViewController.m in Sources */,
 				5843317B236FAB2D0046C0BD /* TYPageControl.m in Sources */,
 				5830539A23756088002A1AA5 /* HHYMineFourCell.m in Sources */,
+				582F74E02378F85C00F6FCB6 /* QYZJChangePasswordVC.m in Sources */,
 				584331B623700BB50046C0BD /* QYZJHomeFourCell.m in Sources */,
 				583A4D57236BC65A00180E27 /* QYZJURLDefineTool.m in Sources */,
 				5843317D236FAB2D0046C0BD /* TYCyclePagerTransformLayout.m in Sources */,
@@ -1227,6 +1386,8 @@
 				58433195236FD2850046C0BD /* QYZJHomeOneCell.m in Sources */,
 				33DC823320EA20D700D1C283 /* TabBarController.m in Sources */,
 				58433188236FB80C0046C0BD /* HomeNavigationView.m in Sources */,
+				582F74D32378F29000F6FCB6 /* MXALAsset.m in Sources */,
+				582F74CF2378F29000F6FCB6 /* MXImagePreviewCell.m in Sources */,
 				5846915523729AC30056BA4A /* QYZJCoachCell.m in Sources */,
 				584331AC236FF4230046C0BD /* QYZJRegistVC.m in Sources */,
 				335010D920EDF8E400F8486B /* Clear.m in Sources */,
@@ -1238,6 +1399,7 @@
 				5843317C236FAB2D0046C0BD /* TYCyclePagerView.m in Sources */,
 				5843457C2370FDB90087A2D9 /* QYZJRecommendOneCell.m in Sources */,
 				58434595237118A50087A2D9 /* TongYongTwoCell.m in Sources */,
+				582F74D72378F29000F6FCB6 /* MXImageGroupController.m in Sources */,
 				335010EF20EE05C100F8486B /* UIButton+Badge.m in Sources */,
 				5843317A236FAB2D0046C0BD /* zkLunBoTwoCell.m in Sources */,
 				337F3EAF20EA014600C5526A /* BaseViewController+PublicMethod.m in Sources */,
