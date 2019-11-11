@@ -165,6 +165,8 @@
 		587611B8237944F400A9DBA5 /* QYZJsystemNTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 587611B7237944F400A9DBA5 /* QYZJsystemNTVC.m */; };
 		587611BB2379484300A9DBA5 /* QYZJFindGuangChangDetailTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 587611BA2379484300A9DBA5 /* QYZJFindGuangChangDetailTVC.m */; };
 		587611BE2379486500A9DBA5 /* QYZJFindGuangChangDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 587611BD2379486500A9DBA5 /* QYZJFindGuangChangDetailView.m */; };
+		587611C22379684700A9DBA5 /* QYZJPingLunNeiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 587611C02379684700A9DBA5 /* QYZJPingLunNeiCell.m */; };
+		587611C32379684700A9DBA5 /* QYZJPingLunNeiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587611C12379684700A9DBA5 /* QYZJPingLunNeiCell.xib */; };
 		AE1A7CF29DF9D6E7166E507C /* libPods-QYZJAPP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E49E1E01514DB2F4C7786C /* libPods-QYZJAPP.a */; };
 /* End PBXBuildFile section */
 
@@ -461,6 +463,9 @@
 		587611BA2379484300A9DBA5 /* QYZJFindGuangChangDetailTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJFindGuangChangDetailTVC.m; sourceTree = "<group>"; };
 		587611BC2379486500A9DBA5 /* QYZJFindGuangChangDetailView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJFindGuangChangDetailView.h; sourceTree = "<group>"; };
 		587611BD2379486500A9DBA5 /* QYZJFindGuangChangDetailView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJFindGuangChangDetailView.m; sourceTree = "<group>"; };
+		587611BF2379684700A9DBA5 /* QYZJPingLunNeiCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJPingLunNeiCell.h; sourceTree = "<group>"; };
+		587611C02379684700A9DBA5 /* QYZJPingLunNeiCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJPingLunNeiCell.m; sourceTree = "<group>"; };
+		587611C12379684700A9DBA5 /* QYZJPingLunNeiCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJPingLunNeiCell.xib; sourceTree = "<group>"; };
 		93517C6A5478579AE5177242 /* Pods-QYZJAPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QYZJAPP.release.xcconfig"; path = "Pods/Target Support Files/Pods-QYZJAPP/Pods-QYZJAPP.release.xcconfig"; sourceTree = "<group>"; };
 		C0333005ECB5A67F63F21483 /* Pods-QYZJAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QYZJAPP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QYZJAPP/Pods-QYZJAPP.debug.xcconfig"; sourceTree = "<group>"; };
 		D3E49E1E01514DB2F4C7786C /* libPods-QYZJAPP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QYZJAPP.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1106,6 +1111,9 @@
 				583ED6AF23741A3D0070441A /* QYZJFindTwoCell.xib */,
 				587611BC2379486500A9DBA5 /* QYZJFindGuangChangDetailView.h */,
 				587611BD2379486500A9DBA5 /* QYZJFindGuangChangDetailView.m */,
+				587611BF2379684700A9DBA5 /* QYZJPingLunNeiCell.h */,
+				587611C02379684700A9DBA5 /* QYZJPingLunNeiCell.m */,
+				587611C12379684700A9DBA5 /* QYZJPingLunNeiCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1278,6 +1286,7 @@
 				584331A0236FE84A0046C0BD /* QYZJHomeThreeCell.xib in Resources */,
 				582F74E12378F85C00F6FCB6 /* QYZJChangePasswordVC.xib in Resources */,
 				5830539B23756088002A1AA5 /* HHYMineFourCell.xib in Resources */,
+				587611C32379684700A9DBA5 /* QYZJPingLunNeiCell.xib in Resources */,
 				584331CC23703C010046C0BD /* QYZJFindOneCell.xib in Resources */,
 				584331A5236FF3F00046C0BD /* QYZhuJiaLoginVC.xib in Resources */,
 				584331B723700BB50046C0BD /* QYZJHomeFourCell.xib in Resources */,
@@ -1422,6 +1431,7 @@
 				335010EE20EE05C100F8486B /* NSString+Size.m in Sources */,
 				582F74CD2378F29000F6FCB6 /* MXImageListController.m in Sources */,
 				584345802371035F0087A2D9 /* QYZJRecommendDetailTVC.m in Sources */,
+				587611C22379684700A9DBA5 /* QYZJPingLunNeiCell.m in Sources */,
 				337F3EAE20EA014600C5526A /* BaseCollectionReusableView.m in Sources */,
 				582F74D42378F29000F6FCB6 /* MXImageEditController.m in Sources */,
 				5846915C2372B0330056BA4A /* LxmWebViewController.m in Sources */,

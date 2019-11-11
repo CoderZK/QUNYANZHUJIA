@@ -83,9 +83,12 @@
     
     [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:model.headImg] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"]];
     self.nameLB.text = model.nickName;
-    self.contentLB.attributedText = [model.article.context getMutableAttributeStringWithFont:14 lineSpace:3 textColor:[UIColor blackColor]];
-    CGFloat contentH =  [model.article.context getHeigtWithFontSize:14 lineSpace:3 width:ScreenW - 20];
+    self.contentLB.attributedText = [model.article.content getMutableAttributeStringWithFont:14 lineSpace:3 textColor:[UIColor blackColor]];
+    CGFloat contentH =  [model.article.content getHeigtWithFontSize:14 lineSpace:3 width:ScreenW - 20];
     self.contentLB.mj_h = contentH;
+    
+    self.timeLB.text = model.article.timeNow;
+    
     
     [self setPicWithideos:nil andPictArr:model.article.pictures];
     [self setVideosWithArr:model.article.videos];
@@ -297,7 +300,7 @@
     UIImageView * imgV = (UIImageView *)tap.view;
     NSInteger tag = imgV.tag - 100;
     //无视频
-    NSArray * arr = self.model.pictures;
+    NSArray * arr = self.model.article.pictures;
     NSMutableArray * picArr = @[].mutableCopy;
     for (NSString * str  in arr) {
         [picArr addObject:[NSString stringWithFormat:@"%@",str]];
@@ -309,7 +312,7 @@
     UIImageView * imgV = (UIImageView *)tap.view;
     NSInteger tag = imgV.tag - 100;
     //视频
-    [PublicFuntionTool presentVideoVCWithNSString:self.model.videos[tag] isBenDiPath:NO];
+    [PublicFuntionTool presentVideoVCWithNSString:self.model.article.videos[tag] isBenDiPath:NO];
 }
 
 

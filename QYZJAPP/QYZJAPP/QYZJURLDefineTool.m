@@ -418,5 +418,19 @@
    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_findLabelByTypeList.do"];
 }
 
+//图片地址
++(NSString *)getImgURLWithStr:(NSString * )str{
+    
+    NSString * picStr = @"";
+    if (str) {
+        if ([str hasPrefix:@"http:"] || [str hasPrefix:@"https:"]) {
+            picStr = str;
+        }else{
+            picStr = [NSString stringWithFormat:@"%@%@",ImgURL,str];
+        }
+    }
+    return picStr;
+
+}
 
 @end
