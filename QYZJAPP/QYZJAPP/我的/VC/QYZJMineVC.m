@@ -13,7 +13,8 @@
 #import "QYZJMIneTwoCell.h"
 #import "QYZJSettingTVC.h"
 #import "QYZJMessageTVC.h"
-@interface QYZJMineVC ()
+#import "QYZJfansAndAttentionTVC.h"
+@interface QYZJMineVC ()<HHYMineFourCellDelegate>
 @property(nonatomic,strong)QYZJMineHeadView *headV;
 @property(nonatomic,strong)NSArray *headTitleArr;
 @property(nonatomic,strong)NSArray *titleArr,*imgTitleArr;
@@ -37,7 +38,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.headV = [[QYZJMineHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 160)];
     Weak(weakSelf);
     self.headV.clickMineHeadBlock = ^(NSInteger index) {
@@ -65,7 +66,7 @@
     
     self.titleArr = @[@[],@[@"我的收藏",@"我的支付",@"我的保修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入住",@"服务方修改",@"我的优惠",@"增值服务",@"我的标签"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
     
-     self.imgTitleArr = @[@[],@[@"我的收藏",@"我的支付",@"我的保修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入住",@"服务方修改",@"我的优惠",@"增值服务",@"我的标签"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
+    self.imgTitleArr = @[@[],@[@"我的收藏",@"我的支付",@"我的保修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入住",@"服务方修改",@"我的优惠",@"增值服务",@"我的标签"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -122,8 +123,8 @@
     if (view == nil) {
         view = [[QYZJTongYongHeadFootView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 50)];
         UIView * backV =[[UIView alloc] initWithFrame:CGRectMake(0, 49.4, ScreenW, 0.6)];
-         backV.backgroundColor = lineBackColor;
-         [view addSubview:backV];
+        backV.backgroundColor = lineBackColor;
+        [view addSubview:backV];
     }
     view.leftLB.text = self.headTitleArr[section];
     view.backgroundColor = WhiteColor;
@@ -138,8 +139,8 @@
     
     if (indexPath.section == 0) {
         HHYMineFourCell * cell =[tableView dequeueReusableCellWithIdentifier:@"HHYMineFourCell" forIndexPath:indexPath];
-          
-          return cell;
+        cell.delegate = self;
+        return cell;
     }else {
         QYZJMIneTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJMIneTwoCell" forIndexPath:indexPath];
         NSArray * arr = self.titleArr[indexPath.section];
@@ -167,5 +168,22 @@
     
 }
 
+
+#pragma mark ----- 点击粉丝,关注等 ----
+- (void)didClickView:(HHYMineFourCell *)cell withIndex:(NSInteger )index {
+    
+    if (index == 0) {
+        
+    }else if (index < 3) {
+        QYZJfansAndAttentionTVC * vc =[[QYZJfansAndAttentionTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.type = index;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else {
+        
+    }
+    
+    
+}
 
 @end

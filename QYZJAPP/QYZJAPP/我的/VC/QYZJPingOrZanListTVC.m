@@ -22,7 +22,7 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJPingOrZanCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
+    self.navigationItem.title = @"详情";
     
     
     
@@ -70,6 +70,8 @@
     [self.left1Bt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.left1Bt setTitleColor:OrangeColor forState:UIControlStateSelected];
     self.left1Bt.tag = 100;
+    self.left1Bt.selected = YES;
+    [self.left1Bt setTitle:@"未读" forState:UIControlStateNormal];
     [self.left1Bt addTarget:self action:@selector(action:) forControlEvents:UIControlEventTouchUpInside];
     [headV addSubview:self.left1Bt];
     
@@ -78,6 +80,7 @@
     [self.left2Bt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.left2Bt setTitleColor:OrangeColor forState:UIControlStateSelected];
     self.left2Bt.tag = 101;
+    [self.left2Bt setTitle:@"已读" forState:UIControlStateNormal];
     [self.left2Bt addTarget:self action:@selector(action:) forControlEvents:UIControlEventTouchUpInside];
     [headV addSubview:self.left2Bt];
     
@@ -87,8 +90,10 @@
     [self.rightBt setTitleColor:WhiteColor forState:UIControlStateNormal];
     self.rightBt.layer.cornerRadius = 3;
     self.rightBt.clipsToBounds = YES;;
+  
     [self.rightBt setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
     self.rightBt.tag = 102;
+    [self.rightBt setTitle:@"全部标记为已读" forState:UIControlStateNormal];
     [self.rightBt addTarget:self action:@selector(action:) forControlEvents:UIControlEventTouchUpInside];
     [headV addSubview:self.rightBt];
     

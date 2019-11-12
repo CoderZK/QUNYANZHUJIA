@@ -76,6 +76,15 @@
 		5836BCEB2378E5C300F02783 /* QYZJSettingTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5836BCEA2378E5C300F02783 /* QYZJSettingTVC.m */; };
 		5836BCEF2378E94300F02783 /* QYZJSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5836BCED2378E94300F02783 /* QYZJSettingCell.m */; };
 		5836BCF02378E94300F02783 /* QYZJSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5836BCEE2378E94300F02783 /* QYZJSettingCell.xib */; };
+		58394F51237A3DF40017505B /* QYZJfansAndAttentionTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 58394F50237A3DF40017505B /* QYZJfansAndAttentionTVC.m */; };
+		58394F54237A3F4C0017505B /* QYZJMineAskTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 58394F53237A3F4C0017505B /* QYZJMineAskTVC.m */; };
+		58394F57237A3F980017505B /* QYZJMineShopTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 58394F56237A3F980017505B /* QYZJMineShopTVC.m */; };
+		58394F5A237A3FAC0017505B /* QYZJMineShopListTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 58394F59237A3FAC0017505B /* QYZJMineShopListTVC.m */; };
+		58394F5E237A412B0017505B /* HHYMineFiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58394F5C237A412B0017505B /* HHYMineFiveCell.m */; };
+		58394F5F237A412B0017505B /* HHYMineFiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58394F5D237A412B0017505B /* HHYMineFiveCell.xib */; };
+		58394F62237A48CF0017505B /* QYZJMineShopHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58394F61237A48CF0017505B /* QYZJMineShopHeadView.m */; };
+		58394F66237A811C0017505B /* QYZJMineShopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58394F64237A811C0017505B /* QYZJMineShopCell.m */; };
+		58394F67237A811C0017505B /* QYZJMineShopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58394F65237A811C0017505B /* QYZJMineShopCell.xib */; };
 		583A4D57236BC65A00180E27 /* QYZJURLDefineTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 583A4D56236BC65A00180E27 /* QYZJURLDefineTool.m */; };
 		583A4D5B236BDF8500180E27 /* QYZJNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 583A4D5A236BDF8500180E27 /* QYZJNoDataView.m */; };
 		583A4D61236BE50800180E27 /* QYZJHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 583A4D60236BE50800180E27 /* QYZJHomeVC.m */; };
@@ -307,6 +316,22 @@
 		5836BCEC2378E94300F02783 /* QYZJSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJSettingCell.h; sourceTree = "<group>"; };
 		5836BCED2378E94300F02783 /* QYZJSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJSettingCell.m; sourceTree = "<group>"; };
 		5836BCEE2378E94300F02783 /* QYZJSettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJSettingCell.xib; sourceTree = "<group>"; };
+		58394F4F237A3DF40017505B /* QYZJfansAndAttentionTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJfansAndAttentionTVC.h; sourceTree = "<group>"; };
+		58394F50237A3DF40017505B /* QYZJfansAndAttentionTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJfansAndAttentionTVC.m; sourceTree = "<group>"; };
+		58394F52237A3F4C0017505B /* QYZJMineAskTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMineAskTVC.h; sourceTree = "<group>"; };
+		58394F53237A3F4C0017505B /* QYZJMineAskTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMineAskTVC.m; sourceTree = "<group>"; };
+		58394F55237A3F980017505B /* QYZJMineShopTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMineShopTVC.h; sourceTree = "<group>"; };
+		58394F56237A3F980017505B /* QYZJMineShopTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMineShopTVC.m; sourceTree = "<group>"; };
+		58394F58237A3FAC0017505B /* QYZJMineShopListTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMineShopListTVC.h; sourceTree = "<group>"; };
+		58394F59237A3FAC0017505B /* QYZJMineShopListTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMineShopListTVC.m; sourceTree = "<group>"; };
+		58394F5B237A412B0017505B /* HHYMineFiveCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HHYMineFiveCell.h; sourceTree = "<group>"; };
+		58394F5C237A412B0017505B /* HHYMineFiveCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HHYMineFiveCell.m; sourceTree = "<group>"; };
+		58394F5D237A412B0017505B /* HHYMineFiveCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HHYMineFiveCell.xib; sourceTree = "<group>"; };
+		58394F60237A48CF0017505B /* QYZJMineShopHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMineShopHeadView.h; sourceTree = "<group>"; };
+		58394F61237A48CF0017505B /* QYZJMineShopHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMineShopHeadView.m; sourceTree = "<group>"; };
+		58394F63237A811C0017505B /* QYZJMineShopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMineShopCell.h; sourceTree = "<group>"; };
+		58394F64237A811C0017505B /* QYZJMineShopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMineShopCell.m; sourceTree = "<group>"; };
+		58394F65237A811C0017505B /* QYZJMineShopCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJMineShopCell.xib; sourceTree = "<group>"; };
 		583A4D55236BC65A00180E27 /* QYZJURLDefineTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJURLDefineTool.h; sourceTree = "<group>"; };
 		583A4D56236BC65A00180E27 /* QYZJURLDefineTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJURLDefineTool.m; sourceTree = "<group>"; };
 		583A4D59236BDF8500180E27 /* QYZJNoDataView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJNoDataView.h; sourceTree = "<group>"; };
@@ -754,6 +779,14 @@
 				587611AA23792B4A00A9DBA5 /* QYZJPingOrZanListTVC.m */,
 				587611B6237944F400A9DBA5 /* QYZJsystemNTVC.h */,
 				587611B7237944F400A9DBA5 /* QYZJsystemNTVC.m */,
+				58394F4F237A3DF40017505B /* QYZJfansAndAttentionTVC.h */,
+				58394F50237A3DF40017505B /* QYZJfansAndAttentionTVC.m */,
+				58394F52237A3F4C0017505B /* QYZJMineAskTVC.h */,
+				58394F53237A3F4C0017505B /* QYZJMineAskTVC.m */,
+				58394F55237A3F980017505B /* QYZJMineShopTVC.h */,
+				58394F56237A3F980017505B /* QYZJMineShopTVC.m */,
+				58394F58237A3FAC0017505B /* QYZJMineShopListTVC.h */,
+				58394F59237A3FAC0017505B /* QYZJMineShopListTVC.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -764,6 +797,9 @@
 				5830539723756087002A1AA5 /* HHYMineFourCell.h */,
 				5830539823756087002A1AA5 /* HHYMineFourCell.m */,
 				5830539923756088002A1AA5 /* HHYMineFourCell.xib */,
+				58394F5B237A412B0017505B /* HHYMineFiveCell.h */,
+				58394F5C237A412B0017505B /* HHYMineFiveCell.m */,
+				58394F5D237A412B0017505B /* HHYMineFiveCell.xib */,
 				5830539C23756376002A1AA5 /* QYZJMIneTwoCell.h */,
 				5830539D23756376002A1AA5 /* QYZJMIneTwoCell.m */,
 				58305394237555D3002A1AA5 /* QYZJMineHeadView.h */,
@@ -777,6 +813,11 @@
 				587611B1237940B200A9DBA5 /* QYZJSystemCell.h */,
 				587611B2237940B200A9DBA5 /* QYZJSystemCell.m */,
 				587611B3237940B200A9DBA5 /* QYZJSystemCell.xib */,
+				58394F60237A48CF0017505B /* QYZJMineShopHeadView.h */,
+				58394F61237A48CF0017505B /* QYZJMineShopHeadView.m */,
+				58394F63237A811C0017505B /* QYZJMineShopCell.h */,
+				58394F64237A811C0017505B /* QYZJMineShopCell.m */,
+				58394F65237A811C0017505B /* QYZJMineShopCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1272,6 +1313,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58394F5F237A412B0017505B /* HHYMineFiveCell.xib in Resources */,
 				582F74D12378F29000F6FCB6 /* mx_picker_back_image@2x.png in Resources */,
 				582F74CE2378F29000F6FCB6 /* mx_pic_selected_yes@2x.png in Resources */,
 				584345852371039E0087A2D9 /* TongYongCell.xib in Resources */,
@@ -1307,6 +1349,7 @@
 				584331CE23703FA80046C0BD /* Assets.xcassets in Resources */,
 				337F3E6120E9FE3C00C5526A /* Main.storyboard in Resources */,
 				587611B023792DD400A9DBA5 /* QYZJPingOrZanCell.xib in Resources */,
+				58394F67237A811C0017505B /* QYZJMineShopCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1372,11 +1415,13 @@
 				583ED69F2373BAB10070441A /* QYZJFindCell.m in Sources */,
 				335010DA20EDF8E400F8486B /* UIViewController+AlertShow.m in Sources */,
 				587611BB2379484300A9DBA5 /* QYZJFindGuangChangDetailTVC.m in Sources */,
+				58394F62237A48CF0017505B /* QYZJMineShopHeadView.m in Sources */,
 				5843458F23710F830087A2D9 /* zkPickModel.m in Sources */,
 				337F3E5E20E9FE3C00C5526A /* ViewController.m in Sources */,
 				337F3EAA20EA014600C5526A /* BaseViewController.m in Sources */,
 				33DC823420EA20D700D1C283 /* LYGuideViewController.m in Sources */,
 				583A4D75236BE60300180E27 /* QYZJRecommendVC.m in Sources */,
+				58394F54237A3F4C0017505B /* QYZJMineAskTVC.m in Sources */,
 				587611A32379255000A9DBA5 /* QYZJMessageTVC.m in Sources */,
 				582F74D22378F29000F6FCB6 /* MXImagePreviewController.m in Sources */,
 				582F74B82378F0F300F6FCB6 /* cacheClear.m in Sources */,
@@ -1399,6 +1444,7 @@
 				335010E320EDFC9300F8486B /* zkSignleTool.m in Sources */,
 				583B67B82372602600EDE846 /* QYZJLocationTool.m in Sources */,
 				583ED69C2373B0390070441A /* QYZJPicShowCell.m in Sources */,
+				58394F51237A3DF40017505B /* QYZJfansAndAttentionTVC.m in Sources */,
 				584331B1236FF88C0046C0BD /* QYZJFindPasswordVC.m in Sources */,
 				58434598237118D10087A2D9 /* TongYongThreeCell.m in Sources */,
 				583A4D74236BE60300180E27 /* QYZJFindVC.m in Sources */,
@@ -1410,6 +1456,7 @@
 				582F74D02378F29000F6FCB6 /* UIViewController+MXPhotoPicker.m in Sources */,
 				337F3EAD20EA014600C5526A /* BaseTableViewHeaderFooterView.m in Sources */,
 				337F3EAC20EA014600C5526A /* BaseTableViewController.m in Sources */,
+				58394F66237A811C0017505B /* QYZJMineShopCell.m in Sources */,
 				337F3E6920E9FE5300C5526A /* main.m in Sources */,
 				584345C423716A2A0087A2D9 /* QYZJUserModel.m in Sources */,
 				584691522372983D0056BA4A /* QYZJRobOrderTVC.m in Sources */,
@@ -1470,9 +1517,12 @@
 				58434595237118A50087A2D9 /* TongYongTwoCell.m in Sources */,
 				582F74D72378F29000F6FCB6 /* MXImageGroupController.m in Sources */,
 				335010EF20EE05C100F8486B /* UIButton+Badge.m in Sources */,
+				58394F57237A3F980017505B /* QYZJMineShopTVC.m in Sources */,
 				587611AF23792DD400A9DBA5 /* QYZJPingOrZanCell.m in Sources */,
 				5843317A236FAB2D0046C0BD /* zkLunBoTwoCell.m in Sources */,
+				58394F5A237A3FAC0017505B /* QYZJMineShopListTVC.m in Sources */,
 				337F3EAF20EA014600C5526A /* BaseViewController+PublicMethod.m in Sources */,
+				58394F5E237A412B0017505B /* HHYMineFiveCell.m in Sources */,
 				5843319F236FE84A0046C0BD /* QYZJHomeThreeCell.m in Sources */,
 				58305396237555D3002A1AA5 /* QYZJMineHeadView.m in Sources */,
 				584691682372BC610056BA4A /* QYZJQianDanOneCell.m in Sources */,
