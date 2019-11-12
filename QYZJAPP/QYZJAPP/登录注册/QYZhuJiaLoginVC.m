@@ -69,6 +69,7 @@
         NSMutableDictionary * dict = @{}.mutableCopy;
         dict[@"mobile"] = self.phoneTF.text;
         dict[@"password"] = [self.passWordTF.text base64EncodedString];
+        dict[@"type"] = @"0";
         [zkRequestTool networkingPOST:[QYZJURLDefineTool app_loginURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
             
             if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] isEqualToString:@"1"]) {

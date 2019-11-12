@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface QYZJMineShopHeadView : UIView
 @property(nonatomic,assign)CGFloat  headHeight;
 @property(nonatomic,copy)void(^clickShopHeadBlock)(NSInteger index);
+@property(nonatomic,strong)QYZJUserModel *dataModel;
 @end
 
 NS_ASSUME_NONNULL_END

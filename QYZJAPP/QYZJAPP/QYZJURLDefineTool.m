@@ -418,6 +418,9 @@
    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_findLabelByTypeList.do"];
 }
 
+
+
+
 //图片地址
 +(NSString *)getImgURLWithStr:(NSString * )str{
     

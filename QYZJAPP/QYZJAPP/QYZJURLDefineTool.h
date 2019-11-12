@@ -238,6 +238,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
+
 /** 更新*/
 +(NSString *)getIosConfigURL;
 +(NSString *)getImgURLWithStr:(NSString * )str;

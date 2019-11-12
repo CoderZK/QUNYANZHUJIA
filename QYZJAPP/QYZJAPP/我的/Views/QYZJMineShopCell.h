@@ -18,8 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *leftMoneyLB;
 @property (weak, nonatomic) IBOutlet UILabel *rightMoneyLB;
 @property (weak, nonatomic) IBOutlet UIButton *leftEditBt;
-@property (weak, nonatomic) IBOutlet UIButton *rightEdibtLB;
-
+@property (weak, nonatomic) IBOutlet UIButton *rightEdibtBt;
+@property(nonatomic,strong)NSArray<QYZJFindModel *> *dataArray;
 @end
 
 NS_ASSUME_NONNULL_END

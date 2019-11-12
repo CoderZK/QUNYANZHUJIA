@@ -21,4 +21,28 @@
     // Configure the view for the selected state
 }
 
+- (void)setDataArray:(NSArray<QYZJFindModel *> *)dataArray {
+    _dataArray = dataArray;
+    QYZJFindModel * modelLeft = dataArray[0];
+    QYZJFindModel * modelRight = nil;
+    if (dataArray.count == 2) {
+        modelRight = dataArray[1];
+        self.rightImgV.hidden = self.rightEdibtBt.hidden = self.rightMoneyLB.hidden = self.rightTitleLB.hidden = NO;
+        [self.rightImgV sd_setImageWithURL:[NSURL URLWithString:modelRight.pic] placeholderImage:[UIImage imageNamed:@"369"]];
+        self.rightTitleLB.text = modelRight.name;
+       
+        self.rightMoneyLB.text = [NSString stringWithFormat:@"￥%0.2f",modelRight.price];
+    }else {
+        self.rightImgV.hidden = self.rightEdibtBt.hidden = self.rightMoneyLB.hidden = self.rightTitleLB.hidden = YES;
+    }
+     [self.leftImgV sd_setImageWithURL:[NSURL URLWithString:modelLeft.pic] placeholderImage:[UIImage imageNamed:@"369"]];
+     self.leftTitleLB.text = modelLeft.name;
+    
+     self.leftMoneyLB.text = [NSString stringWithFormat:@"￥%0.2f",modelLeft.price];
+    
+    
+}
+
+
+
 @end

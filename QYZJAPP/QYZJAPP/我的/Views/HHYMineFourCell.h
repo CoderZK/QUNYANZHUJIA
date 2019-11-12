@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,assign)id<HHYMineFourCellDelegate>delegate;
 
+@property(nonatomic,strong)QYZJUserModel *model;
 @end
 
 NS_ASSUME_NONNULL_END

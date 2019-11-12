@@ -118,4 +118,67 @@
     }
 }
 
+
+- (void)setDataModel:(QYZJUserModel *)dataModel {
+    _dataModel = dataModel;
+    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:dataModel.head_img] forState:(UIControlStateNormal) placeholderImage:[UIImage imageNamed:@"369"]];
+    self.titleLB.text = dataModel.nick_name;
+    self.titleLB.width = [dataModel.nick_name getWidhtWithFontSize:16]+5;
+    self.mesageBt.mj_x = CGRectGetMaxX(self.titleLB.frame);
+    if (dataModel.isNews) {
+        self.redV.hidden = NO;
+    }else {
+        self.redV.hidden = YES;
+    }
+    
+    
+    if (dataModel.is_vip) {
+        _LB1.text = @"VIP会员";
+        _LB1.mj_w = [_LB1.text getWidhtWithFontSize:14] + 10;
+    }else {
+        _LB1.hidden = YES;
+    }
+    
+    if (dataModel.is_coach) {
+        _LB2.text = @"教练";
+        _LB2.mj_w = [_LB2.text getWidhtWithFontSize:14] + 10;
+        if (dataModel.is_vip == NO) {
+            _LB2.mj_x = CGRectGetMaxX(self.headBt.frame) + 10;
+        }else {
+            _LB2.mj_x = CGRectGetMaxX(self.LB1.frame) + 8;
+        }
+    }else {
+        _LB2.hidden = YES;
+    }
+    
+    if (dataModel.role_name.length > 0) {
+        _LB3.text = dataModel.role_name;
+        _LB3.mj_w = [_LB3.text getWidhtWithFontSize:14] + 10;
+        if (dataModel.is_vip == NO) {
+            
+            if (dataModel.is_coach) {
+                _LB3.mj_x = CGRectGetMaxX(self.LB2.frame) + 8;
+            }else {
+                _LB3.mj_x = CGRectGetMaxX(self.LB1.frame) + 8;
+            }
+        }  else {
+            if (dataModel.is_coach) {
+                _LB3.mj_x = CGRectGetMaxX(self.LB2.frame) + 8;
+            }else {
+                _LB3.mj_x = CGRectGetMaxX(self.headBt.frame) + 10;
+            }
+        }
+        
+        
+    }else {
+        _LB3.hidden = YES;
+    }
+    
+    
+    
+    
+    
+}
+
+
 @end

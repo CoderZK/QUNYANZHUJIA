@@ -14,10 +14,12 @@
 #import "QYZJSettingTVC.h"
 #import "QYZJMessageTVC.h"
 #import "QYZJfansAndAttentionTVC.h"
+#import "QYZJMineShopTVC.h"
 @interface QYZJMineVC ()<HHYMineFourCellDelegate>
 @property(nonatomic,strong)QYZJMineHeadView *headV;
 @property(nonatomic,strong)NSArray *headTitleArr;
 @property(nonatomic,strong)NSArray *titleArr,*imgTitleArr;
+@property(nonatomic,strong)QYZJUserModel *dataModel;
 @end
 
 @implementation QYZJMineVC
@@ -33,7 +35,7 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    //    self.navigationController.navigationBar.hidden = YES;;
+
 }
 
 - (void)viewDidLoad {
@@ -67,6 +69,31 @@
     self.titleArr = @[@[],@[@"我的收藏",@"我的支付",@"我的保修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入住",@"服务方修改",@"我的优惠",@"增值服务",@"我的标签"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
     
     self.imgTitleArr = @[@[],@[@"我的收藏",@"我的支付",@"我的保修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入住",@"服务方修改",@"我的优惠",@"增值服务",@"我的标签"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
+    
+    
+    [self getUserInfo];
+}
+
+
+- (void)getUserInfo {
+    [SVProgressHUD show];
+    
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"token"] = [zkSignleTool shareTool].session_token;
+    
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_centerInfoURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [SVProgressHUD dismiss];
+        if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
+            self.dataModel = [QYZJUserModel mj_objectWithKeyValues:responseObject[@"result"]];
+            self.headV.dataModel = self.dataModel;
+            [self.tableView reloadData];
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+    
+    }];
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -140,6 +167,7 @@
     if (indexPath.section == 0) {
         HHYMineFourCell * cell =[tableView dequeueReusableCellWithIdentifier:@"HHYMineFourCell" forIndexPath:indexPath];
         cell.delegate = self;
+        cell.model = self.dataModel;
         return cell;
     }else {
         QYZJMIneTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJMIneTwoCell" forIndexPath:indexPath];
@@ -180,7 +208,11 @@
         vc.type = index;
         [self.navigationController pushViewController:vc animated:YES];
     }else {
-        
+        //点击店铺
+        QYZJMineShopTVC * vc =[[QYZJMineShopTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.dataModel = self.dataModel;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
     

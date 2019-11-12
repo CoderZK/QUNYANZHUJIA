@@ -38,6 +38,13 @@ typedef void (^Nav2)();
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [SVProgressHUD setDefaultStyle:(SVProgressHUDStyleCustom)];
+    [SVProgressHUD setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.7]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+    [SVProgressHUD setMaximumDismissTimeInterval:2.0];
+    
     self.view.backgroundColor=[UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     
@@ -74,7 +81,7 @@ typedef void (^Nav2)();
                                            action : nil ];
         negativeSpacer. width = - 20 ;//这个数值可以根据情况自由变化
         self.navigationItem.leftBarButtonItems = @[ negativeSpacer, leftBarButon2 ] ;
-       
+        
     } else{
         self.navigationItem.leftBarButtonItem = leftBarButon2;
     }
@@ -124,7 +131,7 @@ typedef void (^Nav2)();
 - (void)gotoLoginVC {
     
     BaseNavigationController * navc = [[BaseNavigationController alloc] initWithRootViewController:[[QYZhuJiaLoginVC alloc] init]];
-       [self presentViewController:navc animated:YES completion:nil];
+    [self presentViewController:navc animated:YES completion:nil];
     
     
 }
