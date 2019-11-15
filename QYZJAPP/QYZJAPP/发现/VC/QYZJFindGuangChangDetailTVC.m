@@ -27,34 +27,39 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.estimatedRowHeight = 1;
     
-    self.whiteView = [[UIView alloc] init];
-    self.whiteView.layer.cornerRadius = 3;
-    self.whiteView.clipsToBounds = YES;
-    self.whiteView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.whiteView.mj_w = ScreenW ;
-    self.whiteView.mj_h = 60;
-    self.whiteView.mj_x = 15;
-    [self.view addSubview:self.whiteView];
-    
-    UIView * backV =[[UIView alloc] initWithFrame:CGRectMake(15, 10, ScreenW, 40)];
-    backV.backgroundColor = WhiteColor;
-    [self.whiteView addSubview:backV];
-    
+       self.whiteView = [[UIView alloc] init];
 
-    
-    self.TF = [[UITextField alloc] initWithFrame:CGRectMake(10, 5, ScreenW - 50, 30)];
-    self.TF.font = kFont(14);
-    self.TF.placeholder = @"请输入评论";
-    [backV addSubview:self.TF];
-    
-    
-    if (sstatusHeight > 20) {
-        self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - sstatusHeight - 44 - 34 - 60);
-        self.whiteView.mj_y = ScreenH - sstatusHeight - 44 - 34 -60;
-    }else {
-        self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - sstatusHeight - 44 -60);
+     self.whiteView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+     self.whiteView.mj_w = ScreenW ;
+     self.whiteView.mj_h = 60;
+     self.whiteView.mj_x = 0;
+     [self.view addSubview:self.whiteView];
+
+     
+     UIView * backV =[[UIView alloc] initWithFrame:CGRectMake(15, 10, ScreenW - 30, 40)];
+     backV.backgroundColor = [UIColor whiteColor];
+     [self.view addSubview:backV];
+     backV.layer.cornerRadius = 3;
+     backV.clipsToBounds = YES;
+     [self.whiteView addSubview:backV];
+     
+
+     
+     self.TF = [[UITextField alloc] initWithFrame:CGRectMake(10, 5, ScreenW - 50, 30)];
+     self.TF.font = kFont(14);
+     self.TF.placeholder = @"请输入评论";
+     [backV addSubview:self.TF];
+     
+     
+     if (sstatusHeight > 20) {
+         self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 34 - 60);
+         self.whiteView.mj_y = ScreenH - sstatusHeight - 44 - 34 -60;
+     }else {
+         self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  -60);
          self.whiteView.mj_y = ScreenH - sstatusHeight - 44  -60;
-    }
+     }
+    
+    
     
     
     

@@ -35,7 +35,7 @@
         self.titlLB.text = @"定位中";
         
         self.buttonLeft = [[UIButton alloc] init];
-        self.buttonLeft.backgroundColor =[UIColor redColor];
+        [self.buttonLeft setImage:[UIImage imageNamed:@"xia"] forState:UIControlStateNormal];
         [self addSubview:self.buttonLeft];
         [self.buttonLeft mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.width.equalTo(@35);

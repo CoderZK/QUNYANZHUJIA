@@ -28,10 +28,11 @@
     for (int i  = 0 ; i < 4; i++) {
         UIView * view = [[UIView alloc] initWithFrame:CGRectMake(space + (space + ww) * i, 10, ww,ww)];
         view.tag = 100+i;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapInView:)];
+        [view addGestureRecognizer:tap];
         [self addSubview:view];
         
         UIImageView * imgV = [[UIImageView alloc] initWithFrame:CGRectMake(ww/2-35/2.0, 5, imgW, imgW)];
-        imgV.backgroundColor = [UIColor yellowColor];
         [view addSubview:imgV];
         imgV.tag = 200;
         
@@ -68,6 +69,23 @@
     
 }
 
+
+
+//点击图片
+- (void)tapInView:(UITapGestureRecognizer *)tap {
+    UIImageView * imgV = (UIImageView *)tap.view;
+    NSInteger tag = imgV.tag - 100;
+    
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(didlMineTwoCell:index:)]) {
+        
+        [self.delegate didlMineTwoCell:self index:tag];
+        
+        
+    }
+    
+    
+
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

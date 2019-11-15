@@ -86,6 +86,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)user_caipanListURL;
 /** 轮播图*/
 +(NSString *)user_bannerListURL;
+/** 收藏*/
++(NSString *)app_collectListURL;
 
 
 
@@ -106,6 +108,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString * )user_turnoverRepairNewListURL;
 /** 用户的最新系统消息列表*/
 + (NSString * )user_systemMessageNewListURL;
+/** 头条详情*/
++ (NSString * )app_headlinenewsDetailsURL;
 
 
 #pragma mark ----- 我的小店 -------
@@ -235,6 +239,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 类型*/
 +(NSString *)app_findLabelByTypeListURL;
+
 
 
 

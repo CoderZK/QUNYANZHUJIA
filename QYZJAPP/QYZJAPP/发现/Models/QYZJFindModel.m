@@ -27,6 +27,14 @@
     _article = [QYZJFindModel mj_objectWithKeyValues:article];
 }
 
+- (void)setHeadlinenews:(QYZJFindModel *)headlinenews {
+    _headlinenews = [QYZJFindModel mj_objectWithKeyValues:headlinenews];
+}
+
+- (void)setMediaList:(NSMutableArray<QYZJFindModel *> *)mediaList {
+    _mediaList = [QYZJFindModel mj_objectArrayWithKeyValuesArray:mediaList];
+}
+
 /** 看得见的
  
  

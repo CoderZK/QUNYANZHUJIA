@@ -25,7 +25,10 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *answerCons;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *typeOneCons;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *typeTwoCons;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *vipLeftCons;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *baoLeftCons;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *vpLeftCons;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *answerLeftCons;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleNameCons;
 
 
 @end
@@ -58,6 +61,78 @@
     self.requestLB.textColor = BlueColor;
     self.requestLB.layer.borderColor = BlueColor.CGColor;
 
+    
+    
+}
+- (void)setType:(NSInteger)type {
+    _type = type;
+}
+
+- (void)setModel:(QYZJFindModel *)model {
+    _model = model;
+    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:model.head_img] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+    self.titleLB.text = model.nick_name;
+//    self.titleNameCons.constant =
+    self.scoreLB.text = [NSString stringWithFormat:@"%@分",model.score];
+    
+    CGFloat space = 10;
+
+    if (model.is_bond) {
+       self.baoCon.constant = [@"保" getWidhtWithFontSize:14] + space;
+    }else {
+        self.baoCon.constant = 0;
+        self.baoLeftCons.constant = 0;
+    }
+    if (model.is_vip) {
+        self.vipCons.constant = [@"VIP" getWidhtWithFontSize:14] + space;
+        self.vpLeftCons.constant = 10;
+    }else {
+        self.vipCons.constant = 0;
+        self.vpLeftCons.constant = 0;
+    }
+    if (model.is_question) {
+        self.answerCons.constant = [@"可提问" getWidhtWithFontSize:14] + space;
+        self.answerLeftCons.constant = 10;
+    }else {
+       self.answerCons.constant = 0;
+       self.answerLeftCons.constant = 0;
+    }
+    
+    self.fansLB.text = model.fans_num;
+    self.answerLB.text = model.answer_num;
+    
+    NSString * str = model.role_name;
+    NSArray * arr = @[];
+    self.tyepLB2.hidden = self.typeLB1.hidden = YES;
+    if (str.length == 0) {
+        
+    }else{
+        arr = [str componentsSeparatedByString:@","];
+    
+        if ( arr.count > 0) {
+            self.typeLB1.text = arr[0];
+            self.typeOneCons.constant = [arr[0] getWidhtWithFontSize:14]+10;
+            self.typeLB1.hidden = NO;
+            
+        }
+//        if (arr.count > 1) {
+//            self.typeLB1.text = arr[0];
+//            self.typeOneCons.constant = [arr[0] getWidhtWithFontSize:14]+10;
+//
+//            self.tyepLB2.text = arr[0];
+//            self.typeTwoCons.constant = [arr[1] getWidhtWithFontSize:14]+10;
+//            self.tyepLB2.hidden = self.typeLB1.hidden = NO;
+//        }
+    }
+
+    if (model.question_price>0 && model.appoint_price > 0) {
+        self.moneyLB.text = [NSString stringWithFormat:@"提问:￥%0.2f  预约:￥%0.2f",model.question_price,model.appoint_price];
+    }else if (model.question_price > 0 && model.appoint_price == 0) {
+          self.moneyLB.text = [NSString stringWithFormat:@"提问:￥%0.2f",model.question_price];
+    }else if (model.question_price == 0 && model.appoint_price > 0) {
+        self.moneyLB.text = [NSString stringWithFormat:@"预约:￥%0.2f",model.appoint_price];
+    }
+    
     
     
 }

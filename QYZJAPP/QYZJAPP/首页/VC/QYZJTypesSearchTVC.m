@@ -36,6 +36,8 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeFiveCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeFiveCell"];
      self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
+
+    
 }
 
 

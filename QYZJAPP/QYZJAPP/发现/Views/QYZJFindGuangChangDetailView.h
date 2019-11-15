@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface QYZJFindGuangChangDetailView : UIView
 @property(nonatomic,strong)QYZJFindModel *model;
 @property(nonatomic,assign)CGFloat headHeight;
+
 @end
 
 NS_ASSUME_NONNULL_END

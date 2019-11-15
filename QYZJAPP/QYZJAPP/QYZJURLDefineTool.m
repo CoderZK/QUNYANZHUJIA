@@ -138,6 +138,11 @@
      return [NSString stringWithFormat:@"%@%@",URLOne,@"user_bannerList.do"];
 }
 
+/** 收藏*/
++(NSString *)app_collectListURL{
+   return [NSString stringWithFormat:@"%@%@",URLOne,@"app_collectList.do"];
+}
+
 #pragma mark ----- 消息部分 -------
 /** 用户的通知消息*/
 +(NSString *)user_newsURL{
@@ -418,6 +423,10 @@
    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_findLabelByTypeList.do"];
 }
 
+/** 头条详情*/
++ (NSString * )app_headlinenewsDetailsURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_headlinenewsDetails.do"];
+}
 
 
 

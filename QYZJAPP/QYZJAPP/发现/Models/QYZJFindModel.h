@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *goodsIds;
 @property(nonatomic,strong)NSString *goodsNum;
 @property(nonatomic,strong)NSString *headImg;
+@property(nonatomic,strong)NSString *head_img;
 @property(nonatomic,strong)NSString *nickName;
 @property(nonatomic,strong)NSString *timeNow;
 @property(nonatomic,strong)NSString *picture;
@@ -41,12 +42,32 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *shopId;
 @property(nonatomic,strong)NSString *commentId;//关联ID
 @property(nonatomic,strong)NSString *headerPic;
+@property(nonatomic,strong)NSString *title;
+@property(nonatomic,strong)NSString *time;
+@property(nonatomic,strong)NSString *showContent;
+@property(nonatomic,strong)NSString *label;
+@property(nonatomic,strong)NSString *score;
+@property(nonatomic,strong)NSString *fans_num;
+@property(nonatomic,strong)NSString *appoint_num;
+@property(nonatomic,strong)NSString *answer_num;
+@property(nonatomic,strong)NSString *role_name;
+@property(nonatomic,strong)NSString *nick_name;
+@property(nonatomic,strong)NSString *contents;
+@property(nonatomic,strong)NSString *sit_on_num;
+
+
+
+
 @property(nonatomic,strong)QYZJFindModel *article;
+@property(nonatomic,strong)QYZJFindModel *headlinenews;
 
 
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *commentList;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *goodsList; //商品列表
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *goodList; //点赞列表
+@property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *mediaList;
+
+
 @property(nonatomic,strong)NSMutableArray *videos;
 @property(nonatomic,strong)NSMutableArray *pictures;
 
@@ -60,11 +81,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL isRead;
 @property(nonatomic,assign)BOOL isOpen;
 @property(nonatomic,assign)BOOL isAuth;
-
-
+@property(nonatomic,assign)BOOL is_question;
+@property(nonatomic,assign)BOOL is_vip;
+@property(nonatomic,assign)BOOL is_appoint;
+@property(nonatomic,assign)BOOL is_coach;
+@property(nonatomic,assign)BOOL is_bond; //是否保证金
+@property(nonatomic,assign)BOOL is_referee;
 
 
 @property(nonatomic,assign)CGFloat price;
+@property(nonatomic,assign)CGFloat appoint_price;
+@property(nonatomic,assign)CGFloat question_price;
 
 @property(nonatomic,assign)CGFloat cellHeight;
 

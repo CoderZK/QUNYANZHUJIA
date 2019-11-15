@@ -43,14 +43,14 @@
     self.dataArray = @[].mutableCopy;;
     Weak(weakSelf);
     self.headV.clickShopHeadBlock = ^(NSInteger index) {
-      
-       if (index == 0) {
-           [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        
+        if (index == 0) {
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
         }else if (index == 1) {
-          //分享
+            //分享
             
         }else if (index == 2) {
-           //头像
+            //头像
             
         }else if (index == 3) {
             //编辑
@@ -93,7 +93,14 @@
         [self.tableView.mj_footer endRefreshing];
         [SVProgressHUD dismiss];
         if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
-            self.dataArray = [QYZJFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
+            NSArray<QYZJFindModel *>*arr = [QYZJFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
+            if (self.page == 1) {
+                [self.dataArray removeAllObjects];
+            }
+            [self.dataArray addObjectsFromArray:arr];
+            if (self.dataArray.count == 0) {
+                [SVProgressHUD showSuccessWithStatus:@"暂无数据"];
+            }
             [self.tableView reloadData];
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
@@ -123,7 +130,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     QYZJMineShopCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-   
+    
     if (indexPath.row * 2 + 2 <= self.dataArray.count) {
         cell.dataArray = [self.dataArray subarrayWithRange:NSMakeRange(indexPath.row * 2 , 2)];
     }else {

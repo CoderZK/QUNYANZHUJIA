@@ -15,6 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *contentLB;
 @property (weak, nonatomic) IBOutlet UILabel *timeLB;
 @property (weak, nonatomic) IBOutlet UIImageView *imgV;
+@property (weak, nonatomic) IBOutlet UIButton *deleteCollectbT;
+@property (weak, nonatomic) IBOutlet UIButton *zanBt;
+@property (weak, nonatomic) IBOutlet UIButton *pingLunBt;
+@property (weak, nonatomic) IBOutlet UIButton *collectBt;
+@property(nonatomic,assign)NSInteger type; // 0 发现广场 1 收藏
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomCons;
+@property(nonatomic,strong)QYZJFindModel *model;
 
 @end
 

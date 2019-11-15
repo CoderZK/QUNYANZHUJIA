@@ -9,7 +9,7 @@
 #import "QYZJFindCell.h"
 
 @interface QYZJFindCell()
-@property(nonatomic,strong)UIButton *headBt,*zanBt,*pingLunBt,*jinDaBt;
+@property(nonatomic,strong)UIButton *headBt,*zanBt,*pingLunBt,*jinDaBt,*collectBt,*deleteCollectBt;
 @property(nonatomic,strong)UILabel *contentLB,*timeLB,*nameLB;
 @property(nonatomic,strong)UIView * ViewOne,*viewTwo,*viewThree,*viewFour;
 
@@ -27,7 +27,8 @@
         self.headBt.clipsToBounds = YES;
         self.headBt.backgroundColor = [UIColor redColor];
         [self addSubview:self.headBt];
-        
+        self.headBt.tag = 0;
+        [self.headBt addTarget:self action:@selector(goodBtAction:) forControlEvents:UIControlEventTouchUpInside];
         self.nameLB = [[UILabel alloc] init];
         self.nameLB.font = kFont(15);
         [self addSubview:self.nameLB];
@@ -49,8 +50,8 @@
             make.right.equalTo(self).offset(-15);
             
         }];
-        
-        
+        self.jinDaBt.tag = 1;
+        [self.jinDaBt addTarget:self action:@selector(goodBtAction:) forControlEvents:UIControlEventTouchUpInside];
         self.contentLB = [[UILabel alloc] init];
         self.contentLB.font = kFont(14);
         self.contentLB.numberOfLines = 0;
@@ -91,6 +92,7 @@
         }];
         
         
+        
         UIView *lineV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW - 20, 0.6)];
         lineV.backgroundColor = lineBackColor;
         [self.viewThree addSubview:lineV];
@@ -108,6 +110,40 @@
             make.height.equalTo(@20);
         }];
         
+        self.collectBt = [[UIButton alloc] init];
+        [self.collectBt setImage:[UIImage imageNamed:@"xing2"] forState:UIControlStateNormal];
+        self.collectBt.titleLabel.font = kFont(14);
+        [self.viewThree addSubview:self.collectBt];
+        [self.collectBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+        [self.collectBt mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.viewThree);
+            make.height.equalTo(@35);
+            make.width.equalTo(@35);
+            make.centerY.equalTo(self.viewThree.mas_centerY);
+        }];
+        self.collectBt.tag = 2;
+        [self.collectBt addTarget:self action:@selector(goodBtAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        self.deleteCollectBt = [[UIButton alloc] init];
+        [self.deleteCollectBt setTitleColor:OrangeColor forState:UIControlStateNormal];
+        self.deleteCollectBt.layer.cornerRadius = 3;
+        self.deleteCollectBt.clipsToBounds = YES;
+        self.deleteCollectBt.layer.borderColor = OrangeColor.CGColor;
+        self.deleteCollectBt.layer.borderWidth = 1;
+        [self.deleteCollectBt setTitle:@"取消收藏" forState:UIControlStateNormal];
+        self.deleteCollectBt.titleLabel.font = kFont(14);
+        [self.viewThree addSubview:self.deleteCollectBt];
+        [self.deleteCollectBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+        [self.deleteCollectBt mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.viewThree);
+            make.height.equalTo(@25);
+            make.width.equalTo(@80);
+            make.centerY.equalTo(self.viewThree.mas_centerY);
+        }];
+        self.deleteCollectBt.tag = 5;
+        self.deleteCollectBt.hidden = YES;
+        [self.deleteCollectBt addTarget:self action:@selector(goodBtAction:) forControlEvents:UIControlEventTouchUpInside];
+        
         self.pingLunBt = [[UIButton alloc] init];
         [self.pingLunBt setTitleColor:CharacterBlack112 forState:UIControlStateNormal];
         [self.pingLunBt setImage:[UIImage imageNamed:@"1"] forState:UIControlStateNormal];
@@ -116,12 +152,13 @@
         [self.viewThree addSubview:self.pingLunBt];
         [self.pingLunBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
         [self.pingLunBt mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.viewThree);
-            make.height.equalTo(@35);
-            make.width.equalTo(@80);
+            make.right.equalTo(self.collectBt.mas_left).offset(-15);
+            make.height.equalTo(@25);
+            make.width.equalTo(@75);
             make.centerY.equalTo(self.viewThree.mas_centerY);
         }];
-        
+        self.pingLunBt.tag = 3;
+        [self.pingLunBt addTarget:self action:@selector(goodBtAction:) forControlEvents:UIControlEventTouchUpInside];
         self.zanBt = [[UIButton alloc] init];
         [self.zanBt setTitleColor:CharacterBlack112 forState:UIControlStateNormal];
         [self.zanBt setImage:[UIImage imageNamed:@"2"] forState:UIControlStateNormal];
@@ -134,7 +171,8 @@
             make.height.equalTo(@35);
             make.width.equalTo(@80);
         }];
-        
+        self.zanBt.tag = 4;
+        [self.zanBt addTarget:self action:@selector(goodBtAction:) forControlEvents:UIControlEventTouchUpInside];
         self.viewFour = [[UIView alloc] init];
         [self addSubview:self.viewFour];
         [self.viewFour mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -167,6 +205,19 @@
     return self;
 }
 
+- (void)setType:(NSInteger)type {
+    _type = type;
+    if (type == 1) {
+        self.zanBt.hidden = self.pingLunBt.hidden = self.collectBt.hidden = self.headBt.hidden = self.nameLB.hidden = self.jinDaBt.hidden = self.collectBt.hidden =  YES;
+        self.deleteCollectBt.hidden = NO;
+        [self.contentLB mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self).offset(10);
+        }];
+        [self.viewThree mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@50);
+        }];
+    }
+}
 
 - (void)setModel:(QYZJFindModel *)model {
     _model = model;
@@ -181,14 +232,27 @@
     [self setGoodsListwitArr:model.goodsList];
     
     self.timeLB.text = model.timeNow;
-    [self.zanBt setTitle:model.goodsNum forState:UIControlStateNormal];
+    [self.zanBt setTitle:model.goodNum forState:UIControlStateNormal];
+    if (model.isGood) {
+        [self.zanBt setImage:[UIImage imageNamed:@"17"] forState:UIControlStateNormal];
+    }else {
+        [self.zanBt setImage:[UIImage imageNamed:@"2"] forState:UIControlStateNormal];
+    }
     [self.pingLunBt setTitle:model.commentNum forState:UIControlStateNormal];
+    if (model.isConllect) {
+        [self.collectBt setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateNormal];
+    }else {
+        [self.collectBt setImage:[UIImage imageNamed:@"xing2"] forState:UIControlStateNormal];
+    }
     
     [self setPingLunWithArr:model.commentList];
     
-//    model.cellHeight = CGRectGetMaxY(self.viewFour.frame) + 10;
+    //    model.cellHeight = CGRectGetMaxY(self.viewFour.frame) + 10;
     
 }
+
+
+
 //设置评论
 - (void)setPingLunWithArr:(NSMutableArray<QYZJFindModel *>*)commentList {
     
@@ -199,14 +263,14 @@
             make.height.equalTo(@0);
         }];
     }else {
-//        UILabel * lb1 = (UILabel *)[self.viewFour viewWithTag:1000];
-//        UILabel * lb2 = (UILabel *)[self.viewFour viewWithTag:1001];
-//        UILabel * lb3 = (UILabel *)[self.viewFour viewWithTag:1002];
+        //        UILabel * lb1 = (UILabel *)[self.viewFour viewWithTag:1000];
+        //        UILabel * lb2 = (UILabel *)[self.viewFour viewWithTag:1001];
+        //        UILabel * lb3 = (UILabel *)[self.viewFour viewWithTag:1002];
         
         CGFloat th = 10;
         
         for (int i = 0 ; i<3; i++) {
-           UILabel * lb1 = (UILabel *)[self.viewFour viewWithTag:1000+i];
+            UILabel * lb1 = (UILabel *)[self.viewFour viewWithTag:1000+i];
             if (i < commentList.count) {
                 QYZJFindModel * model = commentList[i];
                 if ([model.commentId intValue] > 0) {
@@ -238,15 +302,15 @@
             }
         }
         
-//        if (commentList.count == 1) {
-//            lb1.hidden = NO;
-//            lb2.hidden = lb3.hidden = YES;
-//        }else if (commentList.count == 2) {
-//            lb1.hidden = lb2.hidden = NO;
-//            lb3.hidden = YES;
-//        }else {
-//            lb1.hidden =lb2.hidden = lb3.hidden = NO;
-//        }
+        //        if (commentList.count == 1) {
+        //            lb1.hidden = NO;
+        //            lb2.hidden = lb3.hidden = YES;
+        //        }else if (commentList.count == 2) {
+        //            lb1.hidden = lb2.hidden = NO;
+        //            lb3.hidden = YES;
+        //        }else {
+        //            lb1.hidden =lb2.hidden = lb3.hidden = NO;
+        //        }
         
         
     }
@@ -274,7 +338,7 @@
             googBt.layer.cornerRadius = 5;
             googBt.clipsToBounds = YES;
             googBt.backgroundColor = [UIColor groupTableViewBackgroundColor];
-            googBt.tag = i;
+            googBt.tag = i+100;
             [googBt addTarget:self action:@selector(goodBtAction:) forControlEvents:UIControlEventTouchUpInside];
             UIImageView * imgV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
             imgV.layer.cornerRadius = 5;
@@ -389,8 +453,12 @@
 
 #pragma makr ------------- 点击商店  -------------
 - (void)goodBtAction:(UIButton *)button {
-    
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(didClickFindCell:index:)]) {
+        [self.delegate didClickFindCell:self index:button.tag];
+    }
 }
+
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -407,22 +475,3 @@
 
 
 
-@implementation QYZJPingLunCell
-
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        
-        self.contentLB = [[UILabel alloc] init];
-        self.contentLB.numberOfLines = 0;
-        [self addSubview:self.contentLB];
-        [self.contentLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.top.equalTo(self).offset(10);
-            make.bottom.equalTo(self);
-            make.right.equalTo(self).offset(-10);
-        }];
-    }
-    return self;
-}
-
-@end

@@ -13,7 +13,8 @@
 #import "QYZJHomeFiveCell.h"
 #import "QYZJFindTwoCell.h"
 #import "QYZJFindGuangChangDetailTVC.h"
-@interface QYZJFindVC ()
+#import "QYZJFindTouTiaoDetailTVC.h"
+@interface QYZJFindVC ()<QYZJFindCellDelegate>
 @property(nonatomic,strong)FindHeadView *navigaV;
 @property(nonatomic,strong)UIButton *faBuBt;
 @property(nonatomic,strong)NSArray *titleArr;
@@ -85,7 +86,15 @@
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
-            self.dataArray = [QYZJFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
+            
+            NSArray<QYZJFindModel *>*arr = [QYZJFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
+            if (self.page == 1) {
+                [self.dataArray removeAllObjects];
+            }
+            [self.dataArray addObjectsFromArray:arr];
+            if (self.dataArray.count == 0) {
+                [SVProgressHUD showSuccessWithStatus:@"暂无数据"];
+            }
             [self.tableView reloadData];
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
@@ -152,7 +161,7 @@
     }else if (self.type == 1) {
         return 125;
     }else if (self.type == 2) {
-        return 130+10;
+        return 130+10 + 45;
     }else {
         
     }
@@ -166,12 +175,17 @@
     if (self.type == 0) {
         QYZJFindCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJFindCell" forIndexPath:indexPath];
           cell.model = self.dataArray[indexPath.row];
+        cell.delegate = self;
           return cell;
     }else if(self.type == 1){
         QYZJHomeFiveCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeFiveCell" forIndexPath:indexPath];
+        cell.type = 1;
+        cell.model = self.dataArray[indexPath.row];
         return cell;
     }else if (self.type == 2) {
         QYZJFindTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJFindTwoCell" forIndexPath:indexPath];
+     
+        cell.model = self.dataArray[indexPath.row];
         return cell;
     }
     QYZJFindCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJFindCell" forIndexPath:indexPath];
@@ -186,13 +200,32 @@
         vc.ID = self.dataArray[indexPath.row].ID;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
+    }else if (self.type == 1) {
+        
+    }else if (self.type == 2) {
+        QYZJFindTouTiaoDetailTVC * vc =[[QYZJFindTouTiaoDetailTVC alloc] init];
+        vc.ID = self.dataArray[indexPath.row].ID;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else {
+        
     }
     
     
     
 }
 
+#pragma mark ------- 点击cell  ----
 
-
+- (void)didClickFindCell:(QYZJFindCell *)cell index:(NSInteger)index {
+    
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    
+    
+    
+    
+    
+    
+}
 
 @end

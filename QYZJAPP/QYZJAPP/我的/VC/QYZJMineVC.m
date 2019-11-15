@@ -15,7 +15,9 @@
 #import "QYZJMessageTVC.h"
 #import "QYZJfansAndAttentionTVC.h"
 #import "QYZJMineShopTVC.h"
-@interface QYZJMineVC ()<HHYMineFourCellDelegate>
+#import "QYZJMineCollectTVC.h"
+#import "QYZJMineQuestTVC.h"
+@interface QYZJMineVC ()<HHYMineFourCellDelegate,QYZJMIneTwoCellDelegate>
 @property(nonatomic,strong)QYZJMineHeadView *headV;
 @property(nonatomic,strong)NSArray *headTitleArr;
 @property(nonatomic,strong)NSArray *titleArr,*imgTitleArr;
@@ -68,7 +70,7 @@
     
     self.titleArr = @[@[],@[@"我的收藏",@"我的支付",@"我的保修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入住",@"服务方修改",@"我的优惠",@"增值服务",@"我的标签"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
     
-    self.imgTitleArr = @[@[],@[@"我的收藏",@"我的支付",@"我的保修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入住",@"服务方修改",@"我的优惠",@"增值服务",@"我的标签"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
+    self.imgTitleArr = @[@[],@[@"wd_1",@"wd_2",@"wd_3",@"wd_4",@"wd_5",@"wd_6",@"wd_7",@"wd_8",@"wd_9"],@[@"zc_1",@"zc_2",@"zc_6",@"zc_3",@"zc_4",@"zc_5"],@[@"zxgj_1",@"zxgj_2",@"zxgj_3",@"zxgj_4"],@[@"lxkf_1",@"lxkf_2"]];
     
     
     [self getUserInfo];
@@ -182,6 +184,7 @@
             cell.titleArr = [arr subarrayWithRange:NSMakeRange(indexPath.row * 4, arr.count - indexPath.row * 4)];
             
         }
+        cell.delegate = self;
         
         return cell;
     }
@@ -196,12 +199,39 @@
     
 }
 
+#pragma mark ----- dainji ------
+- (void)didlMineTwoCell:(QYZJMIneTwoCell *)cell index:(NSInteger)index {
+    
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    if (indexPath.section == 1) {
+        if (index == 0) {
+            QYZJMineCollectTVC * vc =[[QYZJMineCollectTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }else if (indexPath.section == 2) {
+        
+    }else if (indexPath.section == 3) {
+        
+    }else if (indexPath.section == 4) {
+        
+    }else if (indexPath.section == 5){
+        
+    }
+    
+    
+    
+    
+}
+
 
 #pragma mark ----- 点击粉丝,关注等 ----
 - (void)didClickView:(HHYMineFourCell *)cell withIndex:(NSInteger )index {
     
     if (index == 0) {
-        
+        QYZJMineQuestTVC * vc =[[QYZJMineQuestTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }else if (index < 3) {
         QYZJfansAndAttentionTVC * vc =[[QYZJfansAndAttentionTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
