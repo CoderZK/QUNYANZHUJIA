@@ -82,6 +82,7 @@
     dict[@"token"] = [zkSignleTool shareTool].session_token;
     dict[@"city_id"] = @"1004";
     dict[@"page"] = @(self.page);
+    dict[@"pageSize"] = @(10);
     [zkRequestTool networkingPOST:urlStr parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];

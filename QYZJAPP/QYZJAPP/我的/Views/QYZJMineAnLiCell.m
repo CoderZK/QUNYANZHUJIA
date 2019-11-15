@@ -1,14 +1,14 @@
 //
-//  QYZJHomePayCell.m
+//  QYZJMineAnLiCell.m
 //  QYZJAPP
 //
-//  Created by zk on 2019/11/6.
+//  Created by zk on 2019/11/15.
 //  Copyright © 2019 kunzhang. All rights reserved.
 //
 
-#import "QYZJHomePayCell.h"
+#import "QYZJMineAnLiCell.h"
 
-@implementation QYZJHomePayCell
+@implementation QYZJMineAnLiCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -23,14 +23,10 @@
 
 - (void)setModel:(QYZJFindModel *)model {
     _model = model;
-    self.titleLB.text = model.custom_nick_name;
-    self.contentLB.text = model.custom_telphone;
-    self.timeLB.text = model.custom_telphone;
-    
-    self.typeLB1.text = [NSString stringWithFormat:@"%@m2",model.area];
-    self.typeLB2.text = model.type_name;
+    [self.imgV sd_setImageWithURL:[NSURL URLWithString:model.pic] placeholderImage:[UIImage imageNamed:@"369"]];
+    self.titelLB.text = model.title;
+    self.contentLB.text = model.context;
     
 }
-
 
 @end

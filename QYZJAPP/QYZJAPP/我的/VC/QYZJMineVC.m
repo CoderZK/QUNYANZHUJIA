@@ -17,6 +17,16 @@
 #import "QYZJMineShopTVC.h"
 #import "QYZJMineCollectTVC.h"
 #import "QYZJMineQuestTVC.h"
+#import "QYZJHomePayTVC.h"
+#import "QYZJMineOrderTVC.h"
+#import "QYZJMineInviteVC.h"
+#import "QYZJMinePublicTVC.h"
+#import "QYZJMineCaiPanTVC.h"
+#import "QYZJAboutUsVC.h"
+#import "QYZJMineAnLiTVC.h"
+#import "QYZJMineWalletTVC.h"
+#import "QYZJMineServicePeopleVC.h"
+#import "QYZJMineZhuangXiuDaiVC.h"
 @interface QYZJMineVC ()<HHYMineFourCellDelegate,QYZJMIneTwoCellDelegate>
 @property(nonatomic,strong)QYZJMineHeadView *headV;
 @property(nonatomic,strong)NSArray *headTitleArr;
@@ -37,7 +47,7 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-
+    
 }
 
 - (void)viewDidLoad {
@@ -93,7 +103,7 @@
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-    
+        
     }];
     
 }
@@ -203,20 +213,93 @@
 - (void)didlMineTwoCell:(QYZJMIneTwoCell *)cell index:(NSInteger)index {
     
     NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    NSInteger dd = index + indexPath.row * 4;
     if (indexPath.section == 1) {
-        if (index == 0) {
+        
+        if (dd == 0) {
             QYZJMineCollectTVC * vc =[[QYZJMineCollectTVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
+        }else if (dd == 1) {
+            QYZJHomePayTVC * vc =[[QYZJHomePayTVC alloc] init];
+                       vc.hidesBottomBarWhenPushed = YES;
+                       [self.navigationController pushViewController:vc animated:YES];
+        }else if (dd == 2) {
+           QYZJMineTongYongTVC * vc =[[QYZJMineTongYongTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.type = 1;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if (dd == 3) {
+            QYZJMineOrderTVC * vc =[[QYZJMineOrderTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if (dd == 4) {
+            
+        }else if (dd == 5) {
+            QYZJMineInviteVC * vc =[[QYZJMineInviteVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if (dd == 6) {
+            QYZJMinePublicTVC * vc =[[QYZJMinePublicTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if (dd == 7) {
+            QYZJMineAnLiTVC * vc =[[QYZJMineAnLiTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if (dd == 8) {
+            
         }
     }else if (indexPath.section == 2) {
-        
+        if (dd == 0) {
+            QYZJMineWalletTVC * vc =[[QYZJMineWalletTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if (dd == 1) {
+           
+        }else if (dd == 2) {
+            
+        }else if (dd == 3) {
+            
+        }else if (dd == 4) {
+            
+        }else if (dd == 5) {
+            
+        }else if (dd == 6) {
+            
+        }
     }else if (indexPath.section == 3) {
-        
+        if (dd == 3) {
+            QYZJMineZhuangXiuDaiVC * vc =[[QYZJMineZhuangXiuDaiVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else {
+            [SVProgressHUD showSuccessWithStatus:@"该功能暂未开放"];
+        }
     }else if (indexPath.section == 4) {
-        
+        if (dd == 0) {
+            QYZJMineWalletTVC * vc =[[QYZJMineWalletTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if (dd == 1) {
+            
+        }else if (dd == 2) {
+            
+        }else if (dd == 3) {
+            QYZJMineZhuangXiuDaiVC * vc =[[QYZJMineZhuangXiuDaiVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }else if (indexPath.section == 5){
-        
+        if (dd == 0) {
+            QYZJMineServicePeopleVC * vc =[[QYZJMineServicePeopleVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if (dd == 1) {
+            QYZJAboutUsVC * vc =[[QYZJAboutUsVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
     
     

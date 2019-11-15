@@ -89,7 +89,7 @@
 
 
     
-    waiModel.cellHeight = CGRectGetMaxY(self.tableView.frame);
+    waiModel.cellHeight = CGRectGetMaxY(self.tableView.frame) + 15;
     if (waiModel.mediaList.count == 0) {
         
         waiModel.cellHeight = CGRectGetMaxY(self.rightLB.frame) + 15;

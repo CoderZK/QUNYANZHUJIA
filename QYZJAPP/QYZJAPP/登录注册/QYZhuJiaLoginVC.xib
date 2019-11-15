@@ -116,7 +116,7 @@
                 <constraint firstItem="OtU-Zi-aPg" firstAttribute="leading" secondItem="NZs-n3-YUJ" secondAttribute="leading" id="rCE-LZ-9q9"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="NZs-n3-YUJ"/>
-            <point key="canvasLocation" x="-233" y="-78"/>
+            <point key="canvasLocation" x="130" y="-139"/>
         </view>
     </objects>
     <resources>

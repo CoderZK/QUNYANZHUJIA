@@ -12,11 +12,7 @@
 @property(nonatomic,strong)UIView *rightView;
 @property(nonatomic,strong)UITextField *TF;
 @property(nonatomic,strong)UIButton *searchBt;
-
 @property(nonatomic,strong)UIView *orangeV;
-
-
-
 @end
 
 @implementation FindHeadView

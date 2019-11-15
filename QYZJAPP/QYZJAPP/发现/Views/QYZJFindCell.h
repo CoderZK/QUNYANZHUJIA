@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface QYZJFindCell : UITableViewCell
-@property(nonatomic,assign)NSInteger type; // 0 发现广场 1 收藏
+@property(nonatomic,assign)NSInteger type; // 0 发现广场 1 收藏 // 2 发布
 @property(nonatomic,strong)QYZJFindModel *model;
 @property(nonatomic,assign)id<QYZJFindCellDelegate>delegate;
 @end

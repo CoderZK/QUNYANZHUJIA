@@ -54,8 +54,26 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *nick_name;
 @property(nonatomic,strong)NSString *contents;
 @property(nonatomic,strong)NSString *sit_on_num;
+@property(nonatomic,strong)NSString *turnoverStageName;
+@property(nonatomic,strong)NSString *con;
+@property(nonatomic,strong)NSString *constructionStageId;
 
+@property(nonatomic,strong)NSString *b_recomend_name;
+@property(nonatomic,strong)NSString *demand_grab_sheet_id;
+@property(nonatomic,strong)NSString *type_name;
+@property(nonatomic,strong)NSString *area;
+@property(nonatomic,strong)NSString *commission_type;
+@property(nonatomic,strong)NSString *b_recomend_address;
+@property(nonatomic,strong)NSString *telphone;
+@property(nonatomic,strong)NSString *user_status;
+@property(nonatomic,strong)NSString *custom_telphone;
+@property(nonatomic,strong)NSString *status;
+@property(nonatomic,strong)NSString *custom_nick_name;
 
+@property(nonatomic,strong)NSString *goods_pic;
+@property(nonatomic,strong)NSString *osn;
+@property(nonatomic,strong)NSString *goods_name;
+@property(nonatomic,strong)NSString *goods_price;
 
 
 @property(nonatomic,strong)QYZJFindModel *article;
@@ -67,11 +85,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *goodList; //点赞列表
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *mediaList;
 
-
 @property(nonatomic,strong)NSMutableArray *videos;
 @property(nonatomic,strong)NSMutableArray *pictures;
-
-
 
 @property(nonatomic,assign)BOOL isReturn;
 @property(nonatomic,assign)BOOL isMy;
@@ -87,12 +102,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL is_coach;
 @property(nonatomic,assign)BOOL is_bond; //是否保证金
 @property(nonatomic,assign)BOOL is_referee;
+@property(nonatomic,assign)BOOL isService;
+@property(nonatomic,assign)BOOL isSale;
 
 
 @property(nonatomic,assign)CGFloat price;
 @property(nonatomic,assign)CGFloat appoint_price;
 @property(nonatomic,assign)CGFloat question_price;
-
 @property(nonatomic,assign)CGFloat cellHeight;
 
 

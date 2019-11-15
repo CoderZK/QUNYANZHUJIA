@@ -239,7 +239,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 类型*/
 +(NSString *)app_findLabelByTypeListURL;
-
+/** 我的保修列表*/
++(NSString *)user_repairListURL;
 
 
 

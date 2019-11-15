@@ -50,7 +50,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     //    QYZJLocationTool * tool = [[QYZJLocationTool alloc] init];
     //    [tool locationAction];
     

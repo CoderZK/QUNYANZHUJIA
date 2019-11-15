@@ -66,6 +66,7 @@
 }
 - (void)setType:(NSInteger)type {
     _type = type;
+    
 }
 
 - (void)setModel:(QYZJFindModel *)model {

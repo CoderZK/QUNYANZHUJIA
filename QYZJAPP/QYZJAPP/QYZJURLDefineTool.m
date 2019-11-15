@@ -427,7 +427,10 @@
 + (NSString * )app_headlinenewsDetailsURL{
      return [NSString stringWithFormat:@"%@%@",URLOne,@"app_headlinenewsDetails.do"];
 }
-
+/** 我的保修列表*/
++(NSString *)user_repairListURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_repairList.do"];
+}
 
 
 //图片地址

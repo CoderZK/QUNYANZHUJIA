@@ -96,6 +96,7 @@
     dict[@"token"] = [zkSignleTool shareTool].session_token;
     dict[@"page"] = @(self.page);
     dict[@"type"] = @(self.type);
+    dict[@"pageSize"] = @(10);
     [zkRequestTool networkingPOST:[QYZJURLDefineTool app_collectListURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];

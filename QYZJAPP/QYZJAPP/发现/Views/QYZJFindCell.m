@@ -216,6 +216,10 @@
         [self.viewThree mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@50);
         }];
+    }else if (type == 2) {
+        self.zanBt.hidden = self.pingLunBt.hidden = self.collectBt.hidden = YES;
+        self.deleteCollectBt.hidden = NO;
+        [self.deleteCollectBt setTitle:@"删除" forState:UIControlStateNormal];
     }
 }
 
@@ -232,7 +236,7 @@
     [self setGoodsListwitArr:model.goodsList];
     
     self.timeLB.text = model.timeNow;
-    [self.zanBt setTitle:model.goodNum forState:UIControlStateNormal];
+    [self.zanBt setTitle:model.goodsNum forState:UIControlStateNormal];
     if (model.isGood) {
         [self.zanBt setImage:[UIImage imageNamed:@"17"] forState:UIControlStateNormal];
     }else {
@@ -244,8 +248,16 @@
     }else {
         [self.collectBt setImage:[UIImage imageNamed:@"xing2"] forState:UIControlStateNormal];
     }
-    
-    [self setPingLunWithArr:model.commentList];
+
+   
+    if (self.type == 2) {
+        [self.viewFour mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@0);
+        }];
+        self.viewFour.clipsToBounds = YES;
+    }else {
+         [self setPingLunWithArr:model.commentList];
+    }
     
     //    model.cellHeight = CGRectGetMaxY(self.viewFour.frame) + 10;
     
@@ -458,6 +470,12 @@
     }
 }
 
+//点击首页cell  
+- (void)didClickFindCell:(QYZJFindCell *)cell index:(NSInteger)index {
+    
+    
+    
+}
 
 
 - (void)awakeFromNib {
