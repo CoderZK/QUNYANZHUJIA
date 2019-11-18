@@ -26,7 +26,7 @@
 
 - (UIView *)orangeV {
     if (_orangeV == nil) {
-        _orangeV = [[UIView alloc] initWithFrame:CGRectMake(0, 43, 40, 2)];
+        _orangeV = [[UIView alloc] initWithFrame:CGRectMake(0, 43, 45, 2)];
         _orangeV.backgroundColor = OrangeColor;
         [self addSubview:_orangeV];
     }
@@ -36,7 +36,7 @@
 
 - (void)addButtons {
     
-    NSArray * arr = @[@"广场",@"名家",@"头条",@"旁听"];
+    NSArray * arr = @[@"全部",@"待支付",@"待发货",@"已发货",@"待评价"];
     CGFloat width = 60;
     CGFloat space = (ScreenW - 5*width)/6;
     for (int i = 0 ; i<arr.count;i++) {

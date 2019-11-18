@@ -22,7 +22,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOa-jp-W1A">
                     <rect key="frame" x="0.0" y="64" width="414" height="50"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="舒服时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p5R-En-19e">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="服务身份" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p5R-En-19e">
                             <rect key="frame" x="10" y="15" width="70" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="3ll-2i-vqo"/>
@@ -34,7 +34,7 @@
                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ohi-kd-CEU">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="you" translatesAutoresizingMaskIntoConstraints="NO" id="Ohi-kd-CEU">
                             <rect key="frame" x="386" y="15" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="20" id="kQy-5P-gNv"/>
@@ -101,13 +101,13 @@
                         <action selector="clickAction:" destination="-1" eventType="touchUpInside" id="mHt-zY-6eA"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="spR-yr-zWl">
+                <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="spR-yr-zWl">
                     <rect key="frame" x="108" y="757" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="XxB-Vu-uFc"/>
                         <constraint firstAttribute="height" constant="30" id="q4x-7P-lJG"/>
                     </constraints>
-                    <state key="normal" backgroundImage="11"/>
+                    <state key="normal" image="xuanze_1"/>
                     <connections>
                         <action selector="clickAction:" destination="-1" eventType="touchUpInside" id="6zf-Uk-uwe"/>
                     </connections>
@@ -131,7 +131,8 @@
         </view>
     </objects>
     <resources>
-        <image name="11" width="16" height="16"/>
         <image name="backorange" width="367" height="85"/>
+        <image name="xuanze_1" width="16" height="16"/>
+        <image name="you" width="24" height="24"/>
     </resources>
 </document>

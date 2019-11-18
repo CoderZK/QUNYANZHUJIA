@@ -84,7 +84,7 @@
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="Cvk-X4-8bj" firstAttribute="leading" secondItem="B95-7c-CB1" secondAttribute="leading" constant="10" id="0Js-n3-Lh4"/>
                         <constraint firstItem="yh3-PR-cbq" firstAttribute="top" secondItem="n5q-MQ-TSQ" secondAttribute="bottom" constant="15" id="3eo-Sl-SSS"/>

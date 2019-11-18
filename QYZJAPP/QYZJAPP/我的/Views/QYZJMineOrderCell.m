@@ -30,7 +30,7 @@
     self.leftLB.text = model.goods_name;
     self.timeLB.text = model.time;
     [self.leftImgV sd_setImageWithURL:[NSURL URLWithString:model.goods_pic] placeholderImage:[UIImage imageNamed:@"369"]];
-    self.moneyLB.text = [NSString stringWithFormat:@"￥%@",model.goods_pic];
+    self.moneyLB.text = [NSString stringWithFormat:@"￥%@",model.goods_price];
 }
 
 @end

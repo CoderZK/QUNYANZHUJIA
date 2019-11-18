@@ -37,16 +37,17 @@
 
 - (void)setFootV {
  
-    self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - sstatusHeight - 44 - 60);
+    self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - 60);
     if (sstatusHeight > 20) {
-        self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - sstatusHeight - 44 - 60 - 34);
+        self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34);
     }
 
     UIView * footV = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenH - sstatusHeight - 44 - 60, ScreenW, 60)];
+    footV.backgroundColor = WhiteColor;
     
       footV.layer.shadowColor = [UIColor blackColor].CGColor;
       // 设置阴影偏移量
-      footV.layer.shadowOffset = CGSizeMake(0,-5);
+      footV.layer.shadowOffset = CGSizeMake(0,-3);
       // 设置阴影透明度
       footV.layer.shadowOpacity = 0.3;
       // 设置阴影半径
@@ -64,7 +65,7 @@
     [footV addSubview:button];
     [button addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
 
-    
+    [self.view addSubview:footV];
 }
 //点击发布案例
 - (void)clickAction:(UIButton *)button {

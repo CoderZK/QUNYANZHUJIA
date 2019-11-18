@@ -14,6 +14,8 @@
 #import "QYZJFindTwoCell.h"
 #import "QYZJFindGuangChangDetailTVC.h"
 #import "QYZJFindTouTiaoDetailTVC.h"
+#import "QYZJFindQuestionListCell.h"
+#import "QYZJQuestionListDetailTVC.h"
 @interface QYZJFindVC ()<QYZJFindCellDelegate>
 @property(nonatomic,strong)FindHeadView *navigaV;
 @property(nonatomic,strong)UIButton *faBuBt;
@@ -44,6 +46,7 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJFindOneCell" bundle:nil] forCellReuseIdentifier:@"QYZJFindOneCell"];
     [self.tableView registerClass:[QYZJFindCell class] forCellReuseIdentifier:@"QYZJFindCell"];
+    [self.tableView registerClass:[QYZJFindQuestionListCell class] forCellReuseIdentifier:@"QYZJFindQuestionListCell"];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeFiveCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeFiveCell"];
       [self.tableView registerNib:[UINib nibWithNibName:@"QYZJFindTwoCell" bundle:nil] forCellReuseIdentifier:@"QYZJFindTwoCell"];
@@ -164,7 +167,7 @@
     }else if (self.type == 2) {
         return 130+10 + 45;
     }else {
-        
+        return 135;
     }
     return 100;
 
@@ -188,6 +191,11 @@
      
         cell.model = self.dataArray[indexPath.row];
         return cell;
+    }else if (self.type == 3) {
+        QYZJFindQuestionListCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJFindQuestionListCell" forIndexPath:indexPath];
+        
+           cell.model = self.dataArray[indexPath.row];
+           return cell;
     }
     QYZJFindCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJFindCell" forIndexPath:indexPath];
     cell.model = self.dataArray[indexPath.row];
@@ -209,7 +217,10 @@
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else {
-        
+        QYZJQuestionListDetailTVC * vc =[[QYZJQuestionListDetailTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.ID = self.dataArray[indexPath.row].ID;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
     

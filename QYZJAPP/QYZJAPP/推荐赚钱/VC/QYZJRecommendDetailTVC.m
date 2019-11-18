@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    self.navigationItem.title = @"详情";
     [self.tableView registerNib:[UINib nibWithNibName:@"TongYongCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     

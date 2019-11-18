@@ -26,14 +26,14 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJMineOrderCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    self.tableView.frame = CGRectMake(0, 45, ScreenW, ScreenH - sstatusHeight -44 - 45);
-    QYZJMineOrderHeadView * headV = [[QYZJMineOrderHeadView alloc] initWithFrame:CGRectMake(0, sstatusHeight + 44, ScreenW, 45)];
+    self.tableView.frame = CGRectMake(0, 45, ScreenW, ScreenH  - 45);
+    QYZJMineOrderHeadView * headV = [[QYZJMineOrderHeadView alloc] initWithFrame:CGRectMake(0,0, ScreenW, 45)];
 
     [self.view addSubview:headV];
-    
-    [headV.delegateSignal subscribeNext:^(id  _Nullable x) {
+    headV.delegateSignal = [[RACSubject alloc] init];
+    [headV.delegateSignal subscribeNext:^(NSNumber*  x) {
         self.page = 1;
-        self.page = 1;
+        self.type = [x integerValue];
         [self getDataWithType:self.type];
     }];
     self.page = 1;

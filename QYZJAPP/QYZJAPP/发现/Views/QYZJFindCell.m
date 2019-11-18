@@ -254,7 +254,11 @@
         [self.viewFour mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@0);
         }];
+
         self.viewFour.clipsToBounds = YES;
+        [self.viewThree mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@50);
+        }];
     }else {
          [self setPingLunWithArr:model.commentList];
     }

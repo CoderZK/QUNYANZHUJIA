@@ -23,6 +23,7 @@
     self.navigationItem.title = @"装修贷";
     self.TV.layer.borderWidth = 0.6f;
     self.TV.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
 }
 
 

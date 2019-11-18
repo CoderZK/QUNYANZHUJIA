@@ -35,6 +35,12 @@
     _mediaList = [QYZJFindModel mj_objectArrayWithKeyValuesArray:mediaList];
 }
 
+
+- (void)setAnswer_list:(NSMutableArray<QYZJFindModel *> *)answer_list
+{
+    _answer_list = [QYZJFindModel mj_objectArrayWithKeyValuesArray:answer_list];
+}
+
 /** 看得见的
  
  

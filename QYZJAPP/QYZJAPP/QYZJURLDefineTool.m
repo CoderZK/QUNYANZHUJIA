@@ -431,6 +431,10 @@
 +(NSString *)user_repairListURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_repairList.do"];
 }
+/**邀请收入*/
++(NSString *)user_moneyListInvitationURL{
+   return [NSString stringWithFormat:@"%@%@",URLOne,@"user_moneyListInvitation.do"];
+}
 
 
 //图片地址

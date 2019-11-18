@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *goodsIds;
 @property(nonatomic,strong)NSString *goodsNum;
 @property(nonatomic,strong)NSString *headImg;
+@property(nonatomic,strong)NSString *a_head_img;
 @property(nonatomic,strong)NSString *head_img;
 @property(nonatomic,strong)NSString *nickName;
 @property(nonatomic,strong)NSString *timeNow;
@@ -51,9 +52,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *appoint_num;
 @property(nonatomic,strong)NSString *answer_num;
 @property(nonatomic,strong)NSString *role_name;
+@property(nonatomic,strong)NSString *a_role_name;
+@property(nonatomic,strong)NSString *roleName;
 @property(nonatomic,strong)NSString *nick_name;
+@property(nonatomic,strong)NSString *a_nick_name;
 @property(nonatomic,strong)NSString *contents;
 @property(nonatomic,strong)NSString *sit_on_num;
+@property(nonatomic,strong)NSString *sitOnNum;
 @property(nonatomic,strong)NSString *turnoverStageName;
 @property(nonatomic,strong)NSString *con;
 @property(nonatomic,strong)NSString *constructionStageId;
@@ -74,7 +79,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *osn;
 @property(nonatomic,strong)NSString *goods_name;
 @property(nonatomic,strong)NSString *goods_price;
-
+@property(nonatomic,strong)NSString *media_url;
+@property(nonatomic,strong)NSString *mediaUrl;
+@property(nonatomic,strong)NSString *video_url;
+@property(nonatomic,strong)NSString *pic_url;
 
 @property(nonatomic,strong)QYZJFindModel *article;
 @property(nonatomic,strong)QYZJFindModel *headlinenews;
@@ -84,6 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *goodsList; //商品列表
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *goodList; //点赞列表
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *mediaList;
+@property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *answer_list;
 
 @property(nonatomic,strong)NSMutableArray *videos;
 @property(nonatomic,strong)NSMutableArray *pictures;
@@ -107,6 +116,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @property(nonatomic,assign)CGFloat price;
+@property(nonatomic,assign)CGFloat sitPrice;
 @property(nonatomic,assign)CGFloat appoint_price;
 @property(nonatomic,assign)CGFloat question_price;
 @property(nonatomic,assign)CGFloat cellHeight;

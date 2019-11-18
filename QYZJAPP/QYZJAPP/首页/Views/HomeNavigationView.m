@@ -64,7 +64,7 @@
         [self addShadowToView:self.rightView withColor:[UIColor blackColor]];
 
         self.searchBt = [[UIButton alloc] init];
-        self.searchBt.backgroundColor = [UIColor redColor];
+        [self.searchBt setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
         [self.rightView addSubview:self.searchBt];
         [self.searchBt mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.width.equalTo(@30);

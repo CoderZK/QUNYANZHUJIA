@@ -27,6 +27,8 @@
 #import "QYZJMineWalletTVC.h"
 #import "QYZJMineServicePeopleVC.h"
 #import "QYZJMineZhuangXiuDaiVC.h"
+#import "QYZJShengQingRuZhuVC.h"
+#import "QYZJZengZhiFuWuTVC.h"
 @interface QYZJMineVC ()<HHYMineFourCellDelegate,QYZJMIneTwoCellDelegate>
 @property(nonatomic,strong)QYZJMineHeadView *headV;
 @property(nonatomic,strong)NSArray *headTitleArr;
@@ -256,15 +258,19 @@
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }else if (dd == 1) {
-           
+            QYZJShengQingRuZhuVC* vc =[[QYZJShengQingRuZhuVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
         }else if (dd == 2) {
             
         }else if (dd == 3) {
             
         }else if (dd == 4) {
-            
+            QYZJZengZhiFuWuTVC * vc =[[QYZJZengZhiFuWuTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
         }else if (dd == 5) {
-            
+        
         }else if (dd == 6) {
             
         }
@@ -276,21 +282,7 @@
         }else {
             [SVProgressHUD showSuccessWithStatus:@"该功能暂未开放"];
         }
-    }else if (indexPath.section == 4) {
-        if (dd == 0) {
-            QYZJMineWalletTVC * vc =[[QYZJMineWalletTVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (dd == 1) {
-            
-        }else if (dd == 2) {
-            
-        }else if (dd == 3) {
-            QYZJMineZhuangXiuDaiVC * vc =[[QYZJMineZhuangXiuDaiVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-    }else if (indexPath.section == 5){
+    }else if (indexPath.section == 4){
         if (dd == 0) {
             QYZJMineServicePeopleVC * vc =[[QYZJMineServicePeopleVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;

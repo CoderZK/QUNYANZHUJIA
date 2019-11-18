@@ -25,6 +25,7 @@
     self.leftTitleArray = @[@"联系方式",@"地址",@"详细地址"];
     [self getCityData];
     [self addFootView];
+    self.navigationItem.title = @"放单";
   
     
 }
