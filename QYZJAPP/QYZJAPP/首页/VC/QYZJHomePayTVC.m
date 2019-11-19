@@ -9,6 +9,8 @@
 #import "QYZJHomePayTVC.h"
 #import "QYZJHomePayCell.h"
 #import "QYZJMinePayDetailVC.h"
+#import "QYZJAddWorkMomentTVC.h"
+#import "QYZJChangeDetailedListTVC.h"
 @interface QYZJHomePayTVC ()
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
 @property(nonatomic,assign)NSInteger page;
@@ -28,7 +30,15 @@
        button.layer.cornerRadius = 0;
        button.clipsToBounds = YES;
        [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+           
+           QYZJChangeDetailedListTVC * vc =[[QYZJChangeDetailedListTVC alloc] init];
+           vc.hidesBottomBarWhenPushed = YES;
+           [self.navigationController pushViewController:vc animated:YES];
          
+//           QYZJAddWorkMomentTVC * vc =[[QYZJAddWorkMomentTVC alloc] init];
+//           vc.hidesBottomBarWhenPushed = YES;
+//           [self.navigationController pushViewController:vc animated:YES];
+           
        }];
        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     

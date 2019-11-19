@@ -66,6 +66,29 @@
     
 }
 
+
+- (void)timeAction {
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerStar) userInfo:nil repeats:YES];
+    self.codeBt.userInteractionEnabled = NO;
+    self.number = 60;
+    
+    
+}
+
+- (void)timerStar {
+    _number = _number -1;
+    if (self.number > 0) {
+        [self.codeBt setTitle:[NSString stringWithFormat:@"%lds后重发",_number] forState:UIControlStateNormal];
+    }else {
+        [self.codeBt setTitle:@"重新发送" forState:UIControlStateNormal];
+        [self.timer invalidate];
+        self.timer = nil;
+        self.codeBt.userInteractionEnabled = YES;
+    }
+    
+    
+}
+
 - (void)registerAction{
     if (self.phoneTF.text.length == 0) {
         [SVProgressHUD showErrorWithStatus:@"请输入手机号"];

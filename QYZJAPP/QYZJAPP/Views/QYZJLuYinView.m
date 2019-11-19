@@ -32,6 +32,8 @@ static QYZJLuYinView * tool = nil;
         self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
         
         UIButton * bb = [[UIButton alloc] initWithFrame:self.bounds];
+        [self addSubview:bb];
+        [bb addTarget:self action:@selector(diss) forControlEvents:UIControlEventTouchUpInside];
         
         
         self.Bt = [[UIButton alloc] initWithFrame:CGRectMake((ScreenW - 100)/2, (ScreenH - 100)/2-30, 100, 100)];
@@ -47,60 +49,39 @@ static QYZJLuYinView * tool = nil;
         self.Bt.titleLabel.font = kFont(14);
         [self addSubview:self.Bt];
         
-        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longClick:)];
+        //        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longClick:)];
+        //
+        //        longPress.minimumPressDuration=0.2;
+        //
+        //        [self.Bt addGestureRecognizer:longPress];
         
-        longPress.minimumPressDuration=0.2;
-        
-        [self.Bt addGestureRecognizer:longPress];
-        
-        
+        [self.Bt addTarget:self action:@selector(BtnAction:forEvent:) forControlEvents:UIControlEventAllTouchEvents];
         
         
     }
     return self;
 }
 
-
-- (void)longClick:(UILongPressGestureRecognizer *)longPress
-
-{
+- (void)BtnAction:(id)sender forEvent:(UIEvent *)event{
     
-    switch (longPress.state) {
-        case UIGestureRecognizerStateBegan:{
-            //长按开始
-            NSLog(@"\n----%@",@"开始");
-            
-            if (![self.audioRecorder isRecording]) {
-                [self.audioRecorder record];//首次使用应用时如果调用record方法会询问用户是否允许使用麦克风
-                if (self.statusBlock != nil) {
-                    self.statusBlock(NO);
-                }
-            }
-            
-            break;
-        }
-        case UIGestureRecognizerStateChanged:{
-            //移动中
-            NSLog(@"\n----%@",@"移动");
-        }
-        case UIGestureRecognizerStateEnded:{
-            //结束
-            NSLog(@"\n----%@",@"结束");
-            [self.audioRecorder stop];
+    UITouchPhase phase =event.allTouches.anyObject.phase;
+    if (phase == UITouchPhaseBegan) {
+        NSLog(@"\n----%@",@"开始");
+        if (![self.audioRecorder isRecording]) {
+            [self.audioRecorder record];//首次使用应用时如果调用record方法会询问用户是否允许使用麦克风
             if (self.statusBlock != nil) {
-                self.statusBlock(NO);
+                self.statusBlock(YES);
             }
         }
-            
-            
-        default:
-            break;
     }
-    
+    else if(phase == UITouchPhaseEnded){
+        NSLog(@"\n----%@",@"结束");
+        [self.audioRecorder stop];
+        if (self.statusBlock != nil) {
+            self.statusBlock(NO);
+        }
+    }
 }
-
-
-
 
 - (void)show {
     

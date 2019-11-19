@@ -12,7 +12,7 @@
 #import "QYZJChangePhoneVC.h"
 #import "QYZJChangePasswordVC.h"
 #import "QYZJChangePayPasswordOneVC.h"
-@interface QYZJSettingTVC ()<zkPickViewDelelgate>
+@interface QYZJSettingTVC ()<zkPickViewDelelgate,TZImagePickerControllerDelegate>
 @property(nonatomic,strong)NSArray *leftArr;
 @property(nonatomic,copy)NSString *nickName,*phoneStr,*addressStr;
 @property(nonatomic,strong)NSMutableArray<zkPickModel *> *cityArray;
@@ -246,11 +246,28 @@
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         if ([self isCanUsePhotos]) {
-            [self showMXPhotoCameraAndNeedToEdit:YES completion:^(UIImage *image, UIImage *originImage, CGRect cutRect) {
-                
-                self.img = image;
-                [self.tableView reloadData];
-            }];
+            
+            TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
+                       imagePickerVc.showSelectBtn = NO;
+                       imagePickerVc.allowCrop = YES;
+                       imagePickerVc.needCircleCrop = NO;
+                       imagePickerVc.allowPickingImage = NO;
+                       imagePickerVc.cropRectPortrait = CGRectMake(0, (ScreenH - ScreenW)/2, ScreenW, ScreenW);
+                       imagePickerVc.cropRectLandscape = CGRectMake(0, (ScreenW - ScreenH)/2, ScreenH, ScreenH);
+                       imagePickerVc.circleCropRadius = ScreenW/2;
+                       [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+                           if (photos.count > 0) {
+                               self.img = photos[0];
+                           }
+                           [self.tableView reloadData];
+                       }];
+                       [self presentViewController:imagePickerVc animated:YES completion:nil];
+            
+//            [self showMXPhotoCameraAndNeedToEdit:YES completion:^(UIImage *image, UIImage *originImage, CGRect cutRect) {
+//
+//                self.img = image;
+//                [self.tableView reloadData];
+//            }];
         }else{
             UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"无法使用相机" message:@"请在iPhone的""设置-隐私-相机""中允许访问相机" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alert show];
@@ -290,6 +307,17 @@
 }
 
 
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingVideo:(UIImage *)coverImage sourceAssets:(PHAsset *)asset {
+    
+    NSLog(@"%@",asset);
+
+//    [PublicFuntionTool getImageFromPHAsset:asset Complete:^(NSData * _Nonnull data, NSString * _Nonnull str) {
+//
+//
+//
+//    }];
+}
+
 #pragma mark ------- 点击筛选 ------
 - (void)didSelectLeftIndex:(NSInteger)leftIndex centerIndex:(NSInteger)centerIndex rightIndex:(NSInteger )rightIndex{
     
@@ -297,6 +325,12 @@
     
     
 }
+
+- (void )add:(NSInteger )a{
+    
+}
+
+
 
 
 @end

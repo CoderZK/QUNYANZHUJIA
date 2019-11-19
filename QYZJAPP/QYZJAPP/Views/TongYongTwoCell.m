@@ -35,6 +35,19 @@
         backV.backgroundColor = [UIColor clearColor];
         [self addSubview:backV];
         self.lineV = backV;
+        
+        self.swith = [[UISwitch alloc] initWithFrame:CGRectMake(ScreenW - 75  , 10, 60, 30)];
+        [self addSubview:self.swith];
+        self.swith.hidden = YES;
+        self.swith.on = YES;
+        [self.swith setOnTintColor:OrangeColor];
+        
+        self.rightLB = [[UILabel alloc] initWithFrame:CGRectMake(ScreenW - 60, 15, 50, 20)];
+        self.rightLB.font = kFont(14);
+        self.rightLB.hidden = YES;
+        self.rightLB.textAlignment = NSTextAlignmentRight;
+        [self addSubview:self.rightLB];
+        
 
     }
     return self;

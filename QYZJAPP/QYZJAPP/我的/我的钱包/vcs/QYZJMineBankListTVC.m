@@ -44,34 +44,48 @@
 - (void)setFootV {
 
     self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - 60);
-    if (sstatusHeight > 20) {
-        self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34);
-    }
+      if (sstatusHeight > 20) {
+          self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34);
+      }
 
-    UIView * footV = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenH - sstatusHeight - 44 - 60, ScreenW, 60)];
-    footV.backgroundColor = WhiteColor;
-    footV.layer.shadowColor = [UIColor blackColor].CGColor;
-      // 设置阴影偏移量
-      footV.layer.shadowOffset = CGSizeMake(0,-3);
-      // 设置阴影透明度
-      footV.layer.shadowOpacity = 0.1;
-      // 设置阴影半径
-      footV.layer.shadowRadius = 5;
-      footV.clipsToBounds = NO;
+      UIView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"添加银行卡" andImgaeName:@"jia"];
+      Weak(weakSelf);
+      [PublicFuntionTool shareTool].finshClickBlock = ^(UIButton * _Nonnull button) {
+          NSLog(@"\n\n%@",@"添加银行卡");
+
+      };
+      [self.view addSubview:view];
     
-    UIButton * button =[UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(20, 10, ScreenW - 40, 40);
-    [button setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
-    [button setImage:[UIImage imageNamed:@"jia"] forState:UIControlStateNormal];
-    [button setTitle:@"添加银行卡" forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:14];
-    [button setTitleColor:WhiteColor forState:UIControlStateNormal];
-    button.layer.cornerRadius = 3;
-    button.clipsToBounds = YES;
-    [footV addSubview:button];
-    [button addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
-
-    [self.view addSubview:footV];
+    
+//    self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - 60);
+//    if (sstatusHeight > 20) {
+//        self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34);
+//    }
+//
+//    UIView * footV = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenH - sstatusHeight - 44 - 60, ScreenW, 60)];
+//    footV.backgroundColor = WhiteColor;
+//    footV.layer.shadowColor = [UIColor blackColor].CGColor;
+//      // 设置阴影偏移量
+//      footV.layer.shadowOffset = CGSizeMake(0,-3);
+//      // 设置阴影透明度
+//      footV.layer.shadowOpacity = 0.1;
+//      // 设置阴影半径
+//      footV.layer.shadowRadius = 5;
+//      footV.clipsToBounds = NO;
+//
+//    UIButton * button =[UIButton buttonWithType:UIButtonTypeCustom];
+//    button.frame = CGRectMake(20, 10, ScreenW - 40, 40);
+//    [button setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
+//    [button setImage:[UIImage imageNamed:@"jia"] forState:UIControlStateNormal];
+//    [button setTitle:@"添加银行卡" forState:UIControlStateNormal];
+//    button.titleLabel.font = [UIFont systemFontOfSize:14];
+//    [button setTitleColor:WhiteColor forState:UIControlStateNormal];
+//    button.layer.cornerRadius = 3;
+//    button.clipsToBounds = YES;
+//    [footV addSubview:button];
+//    [button addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
+//
+//    [self.view addSubview:footV];
 }
 
 - (void)getData {

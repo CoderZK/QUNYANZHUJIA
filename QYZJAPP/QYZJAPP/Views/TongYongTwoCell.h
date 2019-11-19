@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UITextField *TF;
 @property(nonatomic,strong)UIView *lineV;
 @property(nonatomic,strong)UIImageView *moreImgV;
+@property(nonatomic,strong)UISwitch *swith;
+@property(nonatomic,strong)UILabel *rightLB;
 @end
 
 NS_ASSUME_NONNULL_END

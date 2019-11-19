@@ -37,25 +37,25 @@
     button.clipsToBounds = YES;
     [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
         
-        [[QYZJLuYinView LuYinTool] show];
-        Weak(weakSelf);
-        [QYZJLuYinView LuYinTool].statusBlock = ^(BOOL isStare) {
-            
-            dispatch_async(dispatch_get_main_queue() , ^{
-                if (isStare) {
-                    weakSelf.navigationItem.title = @"正在录音";
-                }else {
-                    weakSelf.navigationItem.title = @"详情";
-                }
-            });
-            
-            
-        };
+//        [[QYZJLuYinView LuYinTool] show];
+//        Weak(weakSelf);
+//        [QYZJLuYinView LuYinTool].statusBlock = ^(BOOL isStare) {
+//
+//            dispatch_async(dispatch_get_main_queue() , ^{
+//                if (isStare) {
+//                    weakSelf.navigationItem.title = @"正在录音...";
+//                }else {
+//                    weakSelf.navigationItem.title = @"详情";
+//                }
+//            });
+//
+//
+//        };
         
-        //           //点击放单
-        //           QYZJFangDanOneTVC * vc =[[QYZJFangDanOneTVC alloc] init];
-        //           vc.hidesBottomBarWhenPushed = YES;
-        //           [self.navigationController pushViewController:vc animated:YES];
+                   //点击放单
+                   QYZJFangDanOneTVC * vc =[[QYZJFangDanOneTVC alloc] init];
+                   vc.hidesBottomBarWhenPushed = YES;
+                   [self.navigationController pushViewController:vc animated:YES];
     }];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     

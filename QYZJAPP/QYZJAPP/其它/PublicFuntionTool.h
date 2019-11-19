@@ -19,7 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)presentVideoVCWithNSString:(NSString *)videoStr isBenDiPath:(BOOL)isBenDi;
 - (void)palyMp3WithNSSting:(NSString *)meidaStr isLocality:(BOOL )isLocality;
 @property(nonatomic,copy)void(^findPlayBlock)(void);
-
+@property(nonatomic,copy)void(^finshClickBlock)(UIButton *button);
+- (UIView *) createFootvWithTitle:(NSString *)title andImgaeName:(NSString *)imgName;
++ (void)getImageFromPHAsset:(PHAsset *)asset Complete:(void(^)(NSData * data,NSString * str))result;
 @end
 
 NS_ASSUME_NONNULL_END
