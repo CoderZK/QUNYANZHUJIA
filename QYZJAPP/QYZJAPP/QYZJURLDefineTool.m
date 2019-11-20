@@ -435,7 +435,10 @@
 +(NSString *)user_moneyListInvitationURL{
    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_moneyListInvitation.do"];
 }
-
+/**交付详情*/
++(NSString *)user_turnoverDetailsURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_turnoverDetails.do"];
+}
 
 //图片地址
 +(NSString *)getImgURLWithStr:(NSString * )str{

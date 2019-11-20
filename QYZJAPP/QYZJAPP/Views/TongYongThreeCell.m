@@ -36,6 +36,8 @@
         self.swith.hidden = YES;
         self.swith.on = YES;
         [self.swith setOnTintColor:OrangeColor];
+        
+        
     }
     return self;
 }

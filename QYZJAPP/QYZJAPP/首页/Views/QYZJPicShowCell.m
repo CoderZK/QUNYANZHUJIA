@@ -37,7 +37,13 @@
            anNiuBt.tag = 100+i;
            anNiuBt.clipsToBounds = YES;
            anNiuBt.backgroundColor = RGB(250, 250, 250);
-//           [anNiuBt setBackgroundImage:picsArr[i] forState:UIControlStateNormal];
+           if ([picsArr[i] isKindOfClass:[NSString class]]) {
+              [anNiuBt sd_setBackgroundImageWithURL:[NSURL URLWithString:picsArr[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+           }else {
+             [anNiuBt setBackgroundImage:picsArr[i] forState:UIControlStateNormal];
+           }
+           
+           
            [anNiuBt addTarget:self action:@selector(hitAction:) forControlEvents:UIControlEventTouchUpInside];
            [self.scrollview addSubview:anNiuBt];
            
@@ -70,10 +76,7 @@
 
 //点击图片
 - (void)hitAction:(UIButton *)anNiuBt {
-    
- 
-    
-    
+    [[zkPhotoShowVC alloc] initWithArray:self.picsArr index:anNiuBt.tag - 100];
 }
 
 

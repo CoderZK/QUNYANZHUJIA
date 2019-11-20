@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *moneyLB;
 @property(nonatomic,strong)QYZJFindModel *model;
 @property(nonatomic,assign)NSInteger type; // 0首页 1 我的支付
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *statusCons;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -107,6 +107,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     QYZJHomePayCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    cell.moneyLB.hidden = YES;
     cell.model = self.dataArray[indexPath.row];
     return cell;
     

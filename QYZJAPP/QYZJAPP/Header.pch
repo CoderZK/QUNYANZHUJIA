@@ -63,7 +63,8 @@
 #import "QYZJMoneyModel.h"
 #import "QYZJLuYinView.h"
 #import "QYZJMoreChooseView.h"
-#import <Photos/Photos.h> 
+#import <Photos/Photos.h>
+#import "QYZJWorkModel.h"
 //高德地图key
 #define GaoDeMapKey @"41b13a74e89d26ad21b1c4968f13b0d3"
 
@@ -107,7 +108,7 @@
 #define YellowColor [UIColor colorWithRed:243/255.0 green:193/255.0 blue:108/255.0 alpha:1]
 #define OrangeColor [UIColor colorWithRed:255/255.0 green:114/255.0 blue:49/255.0 alpha:1]
 #define BlueColor [UIColor colorWithRed:162/255.0 green:176/255.0 blue:233/255.0 alpha:1]
-
+#define GreenColor [UIColor colorWithRed:40/255.0 green:170/255.0 blue:97/255.0 alpha:1]
 //tabbar的字体颜色
 #define TabberGreen [UIColor colorWithRed:255/255.0 green:110/255.0 blue:50/255.0 alpha:1]
 

@@ -16,10 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *timeLB;
 @property (weak, nonatomic) IBOutlet UILabel *typeLB1;
 @property (weak, nonatomic) IBOutlet UILabel *typeLB2;
-@property (weak, nonatomic) IBOutlet UILabel *qianDanLB;
 @property (weak, nonatomic) IBOutlet UIButton *qianDanBt;
-
-
+@property (weak, nonatomic) IBOutlet UIButton *gouTongBt;
+@property (weak, nonatomic) IBOutlet UILabel *moneyLB;
+@property (weak, nonatomic) IBOutlet UILabel *statusLB;
+@property(nonatomic,strong)QYZJFindModel *model;
 @end
 
 NS_ASSUME_NONNULL_END

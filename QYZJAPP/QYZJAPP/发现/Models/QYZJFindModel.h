@@ -70,7 +70,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *commission_type;
 @property(nonatomic,strong)NSString *b_recomend_address;
 @property(nonatomic,strong)NSString *telphone;
+
+
+/** 服务方：待发起交付1、待客户确认2、待客户支付3、施工中4、待阶段验收5、待客户支付尾款6、待评价7、交付完成8；
+ 客户：待服务方发起交付1、待确认2、待支付3、施工中4、待阶段验收5、待支付尾款6、待评价7、交付完成8 */
 @property(nonatomic,strong)NSString *user_status;
+
+
+
 @property(nonatomic,strong)NSString *custom_telphone;
 @property(nonatomic,strong)NSString *status;
 @property(nonatomic,strong)NSString *custom_nick_name;
@@ -112,13 +119,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL is_bond; //是否保证金
 @property(nonatomic,assign)BOOL is_referee;
 @property(nonatomic,assign)BOOL isService;
-@property(nonatomic,assign)BOOL isSale;
+@property(nonatomic,assign)BOOL  is_service;//是否五服务方
+@property(nonatomic,assign)BOOL  isSale;
 
 
 @property(nonatomic,assign)CGFloat price;
 @property(nonatomic,assign)CGFloat sitPrice;
 @property(nonatomic,assign)CGFloat appoint_price;
 @property(nonatomic,assign)CGFloat question_price;
+@property(nonatomic,assign)CGFloat allPrice;
+
+
 @property(nonatomic,assign)CGFloat cellHeight;
 
 

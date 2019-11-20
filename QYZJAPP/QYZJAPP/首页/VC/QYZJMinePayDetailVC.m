@@ -11,8 +11,11 @@
 #import "QYZJHomePayDetailOneCell.h"
 #import "QYZJTongYongHeadFootView.h"
 #import "QYZJPicShowCell.h"
+
 @interface QYZJMinePayDetailVC ()
 @property(nonatomic,strong)NSArray *headTitleArr;
+@property(nonatomic,strong)QYZJWorkModel *dataModel;
+@property(nonatomic,strong)QYZJFindModel *titleModel;
 @end
 
 @implementation QYZJMinePayDetailVC
@@ -27,7 +30,43 @@
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.headTitleArr = @[@"",@"支付",@"合同",@"预算",@"图纸",@"变更相册"];
+    
+    [self getData];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self getData];
+    }];
+
+    
 }
+
+- (void)getData {
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"id"] = @"78";
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_turnoverDetailsURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            self.dataModel = [QYZJWorkModel mj_objectWithKeyValues:responseObject[@"result"]];
+            self.titleModel = [QYZJFindModel mj_objectWithKeyValues:responseObject[@"result"][@"demand"]];
+            self.titleModel.allPrice = self.dataModel.turnoverList.allPrice;
+            [self.tableView reloadData];
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+}
+
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2+4;
@@ -99,7 +138,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         QYZJHomePayCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomePayCell" forIndexPath:indexPath];
-        cell.contentLB.hidden = YES;
+        cell.type = 1;
+        cell.model = self.titleModel;
         return cell;
     }else if (indexPath.section == 1) {
         QYZJHomePayDetailOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomePayDetailOneCell" forIndexPath:indexPath];

@@ -243,6 +243,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)user_repairListURL;
 /**邀请收入*/
 +(NSString *)user_moneyListInvitationURL;
+/**交付详情*/
++(NSString *)user_turnoverDetailsURL;
 
 
 

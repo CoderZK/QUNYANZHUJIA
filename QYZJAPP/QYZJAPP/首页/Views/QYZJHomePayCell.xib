@@ -136,12 +136,13 @@
                 <outlet property="contentLB" destination="Gml-xH-Ezz" id="Zdm-2g-blC"/>
                 <outlet property="moneyLB" destination="feq-Ci-B6u" id="nbS-Zr-ojz"/>
                 <outlet property="qianDanLB" destination="OWr-Xv-LQM" id="mdz-az-EPb"/>
+                <outlet property="statusCons" destination="kSA-UR-bLV" id="nCf-Wx-c9H"/>
                 <outlet property="timeLB" destination="l5W-YW-DT5" id="7VT-Tx-fdb"/>
                 <outlet property="titleLB" destination="DWg-b1-u08" id="9r1-8z-eIN"/>
                 <outlet property="typeLB1" destination="ngT-oS-MbB" id="8Cx-Cy-0Bv"/>
                 <outlet property="typeLB2" destination="dfC-pp-ijQ" id="CXj-Ug-z6J"/>
             </connections>
-            <point key="canvasLocation" x="126.81159420289856" y="41.517857142857139"/>
+            <point key="canvasLocation" x="388" y="43"/>
         </tableViewCell>
     </objects>
 </document>

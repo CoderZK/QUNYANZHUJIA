@@ -32,7 +32,7 @@
         [self.leftBt addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
         
         self.rightBt = [[UIButton alloc] initWithFrame:CGRectMake(frame.size.width / 2, 0, frame.size.width / 2, frame.size.height)];
-        [self.rightBt setTitle:@"待抢单" forState:UIControlStateNormal];
+        [self.rightBt setTitle:@"我抢的单" forState:UIControlStateNormal];
         self.rightBt.titleLabel.font = kFont(15);
         [self.rightBt setTitleColor:OrangeColor forState:UIControlStateNormal];
         self.rightBt.backgroundColor = WhiteColor;
