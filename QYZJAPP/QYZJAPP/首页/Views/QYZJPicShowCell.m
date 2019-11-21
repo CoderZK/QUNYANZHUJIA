@@ -29,14 +29,13 @@
 }
 
 - (void)setPicsArr:(NSArray *)picsArr {
-    
+    _picsArr = picsArr;
     [self.scrollview.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
        for (int i = 0 ; i < picsArr.count; i++) {
            UIButton * anNiuBt = [[UIButton alloc] initWithFrame:CGRectMake(15 +  ((ScreenW - 60) /3 +15 )* i , 0, (ScreenW - 60) /3, (ScreenW - 60) /3)];
            anNiuBt.layer.cornerRadius = 3;
            anNiuBt.tag = 100+i;
            anNiuBt.clipsToBounds = YES;
-           anNiuBt.backgroundColor = RGB(250, 250, 250);
            if ([picsArr[i] isKindOfClass:[NSString class]]) {
               [anNiuBt sd_setBackgroundImageWithURL:[NSURL URLWithString:picsArr[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
            }else {

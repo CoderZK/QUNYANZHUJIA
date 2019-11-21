@@ -476,6 +476,26 @@
     return distanceStr;
 }
 
+//返回月日
++(NSString *)stringWithDatemmdd:(NSString *)str withIsDian:(BOOL)isDian {
+    
+    NSString * yue = @"";
+    NSString * ri = @"";
+    
+    if (str.length >=7) {
+        yue = [str substringWithRange:NSMakeRange(5, 2)];
+    }
+    if (str.length >= 10) {
+        ri = [str substringWithRange:NSMakeRange(8, 2)];
+    }
+    
+    if (isDian) {
+        return [NSString stringWithFormat:@"%@.%@",yue,ri];
+    }else {
+         return [NSString stringWithFormat:@"%@-%@",yue,ri];
+    }
+    
+}
 
 
 //根据时间判断

@@ -43,6 +43,10 @@
 
 - (NSMutableAttributedString *)getMutableAttributeStringWithFont:(int)fontSize lineSpace:(int)lineSpace textColor:(UIColor *)color textColorOne:(UIColor *)colorOne textColorTwo:(UIColor *)colorTwo nsrangeOne:(NSRange )rangeOne nsRangeTwo:(NSRange)rangeTwo;
 
+
+//获取月日
++(NSString *)stringWithDatemmdd:(NSString *)str withIsDian:(BOOL)isDian;
+
 /**
 把字符串装换成日期型的格式化字符串
  */

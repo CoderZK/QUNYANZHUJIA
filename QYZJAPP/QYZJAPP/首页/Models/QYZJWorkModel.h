@@ -48,6 +48,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *des;
 @property(nonatomic,strong)NSString *evaluateCon;
 @property(nonatomic,strong)NSString *commitTime;
+@property(nonatomic,strong)NSString *title;
+@property(nonatomic,strong)NSString *content;
 /** 服务方：待发起交付1、待客户确认2、待客户支付3、施工中4、待阶段验收5、待客户支付尾款6、待评价7、交付完成8；
 客户：待服务方发起交付1、待确认2、待支付3、施工中4、待阶段验收5、待支付尾款6、待评价7、交付完成8 */
 @property(nonatomic,strong)NSString *user_status;
@@ -68,6 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *reason;
 @property(nonatomic,strong)NSString *feedback_reply;
 @property(nonatomic,strong)NSString *appeal_reason;
+@property(nonatomic,strong)NSString *allDays;
 
 
 @property(nonatomic,strong)NSMutableArray<QYZJWorkModel *> *changeTurnoverLists;
@@ -76,12 +79,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray<QYZJWorkModel *> *selfStage;
 @property(nonatomic,strong)NSMutableArray<QYZJWorkModel *> *media_url;
 @property(nonatomic,strong)NSMutableArray<QYZJWorkModel *> *other;
+@property(nonatomic,strong)NSMutableArray<QYZJWorkModel *> *constructionStage;
 
 @property(nonatomic,strong)QYZJWorkModel *turnover;
 @property(nonatomic,strong)QYZJWorkModel *turnoverListOrderFirst;
 @property(nonatomic,strong)QYZJWorkModel *demandUser;
 @property(nonatomic,strong)QYZJWorkModel *turnoverListOrderFinal;
-@property(nonatomic,strong)QYZJWorkModel *constructionStage;
+
 @property(nonatomic,strong)QYZJWorkModel *turnoverList;
 @property(nonatomic,strong)QYZJWorkModel *demand;
 
@@ -97,6 +101,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL isQuestion;
 @property(nonatomic,assign)BOOL isReferee;
 @property(nonatomic,assign)BOOL isVip;
+@property(nonatomic,assign)BOOL is_self;//是不是自己的单子
+@property(nonatomic,assign)BOOL is_service;//(0：不是客户；1：是客户)
 
 
 @property(nonatomic,assign)CGFloat price;
@@ -111,6 +117,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)CGFloat budget;
 @property(nonatomic,assign)CGFloat commission_price;
 @property(nonatomic,assign)CGFloat sign_money;
+
+
+@property(nonatomic,assign)CGFloat cellHeight;
 
 @property(nonatomic,assign)NSInteger audit_status; //单子审核状态 0：未审核 1：审核成功 2：审核失败
 @property(nonatomic,assign)NSInteger appeal_status;

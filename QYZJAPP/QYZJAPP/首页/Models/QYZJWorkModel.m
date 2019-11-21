@@ -23,8 +23,12 @@
     _changeConstructionStage = [QYZJWorkModel mj_objectArrayWithKeyValuesArray:changeConstructionStage];
 }
 
+- (void)setConstructionStage:(NSMutableArray<QYZJWorkModel *> *)constructionStage {
+    _constructionStage = [QYZJWorkModel mj_objectArrayWithKeyValuesArray:constructionStage];
+}
+
 - (void)setTurnoverLists:(NSMutableArray<QYZJWorkModel *> *)turnoverLists {
-    _changeTurnoverLists = [QYZJWorkModel mj_objectArrayWithKeyValuesArray:turnoverLists];
+    _turnoverLists = [QYZJWorkModel mj_objectArrayWithKeyValuesArray:turnoverLists];
 }
 
 - (void)setTurnover:(QYZJWorkModel *)turnover {
@@ -52,5 +56,6 @@
 - (void)setOther:(NSMutableArray<QYZJWorkModel *> *)other {
     _other = [QYZJWorkModel mj_objectArrayWithKeyValuesArray:other];
 }
+
 
 @end

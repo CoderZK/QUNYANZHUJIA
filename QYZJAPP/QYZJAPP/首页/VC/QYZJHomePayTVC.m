@@ -31,13 +31,13 @@
        button.clipsToBounds = YES;
        [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
            
-           QYZJChangeDetailedListTVC * vc =[[QYZJChangeDetailedListTVC alloc] init];
-           vc.hidesBottomBarWhenPushed = YES;
-           [self.navigationController pushViewController:vc animated:YES];
-         
-//           QYZJAddWorkMomentTVC * vc =[[QYZJAddWorkMomentTVC alloc] init];
+//           QYZJChangeDetailedListTVC * vc =[[QYZJChangeDetailedListTVC alloc] init];
 //           vc.hidesBottomBarWhenPushed = YES;
 //           [self.navigationController pushViewController:vc animated:YES];
+         
+           QYZJAddWorkMomentTVC * vc =[[QYZJAddWorkMomentTVC alloc] init];
+           vc.hidesBottomBarWhenPushed = YES;
+           [self.navigationController pushViewController:vc animated:YES];
            
        }];
        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];

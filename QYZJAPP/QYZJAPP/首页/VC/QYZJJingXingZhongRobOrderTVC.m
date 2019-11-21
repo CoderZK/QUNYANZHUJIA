@@ -9,6 +9,7 @@
 #import "QYZJJingXingZhongRobOrderTVC.h"
 #import "QYZJRobOrderDetailCell.h"
 #import "QYZJPicShowCell.h"
+#import "QYZJZhiFuVC.h"
 @interface QYZJJingXingZhongRobOrderTVC ()
 @property(nonatomic,strong)QYZJWorkModel *dataModel;
 @property(nonatomic,strong)NSArray *headTitleArr;
@@ -43,6 +44,11 @@
     Weak(weakSelf);
     [PublicFuntionTool shareTool].finshClickBlock = ^(UIButton * _Nonnull button) {
         NSLog(@"\n\n%@",@"完成");
+        
+        QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
     };
     [self.view addSubview:view];
 }

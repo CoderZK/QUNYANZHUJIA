@@ -16,6 +16,7 @@
 #import "QYZJFindTouTiaoDetailTVC.h"
 #import "QYZJFindQuestionListCell.h"
 #import "QYZJQuestionListDetailTVC.h"
+#import "QYZJPostMessageTVC.h"
 @interface QYZJFindVC ()<QYZJFindCellDelegate>
 @property(nonatomic,strong)FindHeadView *navigaV;
 @property(nonatomic,strong)UIButton *faBuBt;
@@ -66,6 +67,7 @@
     }];
     
     
+    [self addFaTieView];
 
     
     
@@ -116,11 +118,19 @@
 
 
 - (void)addFaTieView {
-     self.faBuBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 100, ScreenH - 240, 60, 60)];
-     [self.faBuBt setBackgroundImage:[UIImage imageNamed:@"qy34"] forState:UIControlStateNormal];
+     self.faBuBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 100, ScreenH - 150, 60, 60)];
+     [self.faBuBt setImage:[UIImage imageNamed:@"qy35"] forState:UIControlStateNormal];
+    self.faBuBt.backgroundColor = [UIColor whiteColor];
+    self.faBuBt.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.faBuBt.layer.shadowRadius = 5;
+    self.faBuBt.layer.cornerRadius = 30;
+    self.faBuBt.layer.shadowOpacity = 0.3;
+    self.faBuBt.layer.shadowOffset = CGSizeMake(0, 0);
     [[self.faBuBt rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
        //发帖
-        
+        QYZJPostMessageTVC * vc =[[QYZJPostMessageTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
         
     }];
      [self.view addSubview:self.faBuBt];

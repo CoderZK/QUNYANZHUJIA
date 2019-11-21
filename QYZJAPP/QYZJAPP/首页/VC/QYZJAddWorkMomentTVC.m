@@ -35,6 +35,7 @@
     [self addPicsWithArr:@[].mutableCopy];
     self.videoStr = nil;
     self.navigationItem.title = @"创建施工阶段";
+    self.tableView.backgroundColor =[UIColor groupTableViewBackgroundColor];
     
 }
 
@@ -192,7 +193,6 @@
         anNiuBt.layer.cornerRadius = 3;
         anNiuBt.tag = 100+i;
         anNiuBt.clipsToBounds = YES;
-        anNiuBt.backgroundColor = RGB(250, 250, 250);
         [anNiuBt addTarget:self action:@selector(hitAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.scrollView addSubview:anNiuBt];
         

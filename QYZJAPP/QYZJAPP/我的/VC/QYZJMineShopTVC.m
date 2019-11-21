@@ -80,8 +80,7 @@
 
 
 - (void)getData {
-    
-    
+
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"page"] = @(self.page);
@@ -136,7 +135,7 @@
     }else {
         cell.dataArray = [self.dataArray subarrayWithRange:NSMakeRange(indexPath.row * 2 , 1)];
     }
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
     
 }

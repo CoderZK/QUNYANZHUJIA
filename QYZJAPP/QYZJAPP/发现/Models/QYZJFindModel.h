@@ -121,6 +121,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL isService;
 @property(nonatomic,assign)BOOL  is_service;//是否五服务方
 @property(nonatomic,assign)BOOL  isSale;
+@property(nonatomic,assign)BOOL  isSelect;
+
 
 
 @property(nonatomic,assign)CGFloat price;

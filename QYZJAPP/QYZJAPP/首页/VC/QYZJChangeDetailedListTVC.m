@@ -29,6 +29,7 @@
     [self.tableView registerClass:[TongYongTwoCell class] forCellReuseIdentifier:@"cell"];
     self.leftTitleArr = @[@"施工阶段",@"施工金额",@"工期",@"时间段"];
     self.placeHolderArr = @[@"请输入施工阶段",@"请输入金额",@"请输入工期",@"请选择时间段"];
+    self.tableView.backgroundColor =[UIColor groupTableViewBackgroundColor];
     
 }
 
@@ -106,7 +107,6 @@
         anNiuBt.layer.cornerRadius = 3;
         anNiuBt.tag = 100+i;
         anNiuBt.clipsToBounds = YES;
-        anNiuBt.backgroundColor = RGB(250, 250, 250);
         [anNiuBt addTarget:self action:@selector(hitAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.scrollView addSubview:anNiuBt];
         
