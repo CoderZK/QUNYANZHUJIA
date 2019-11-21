@@ -19,7 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *LB6;
 @property (weak, nonatomic) IBOutlet UIView *lineV;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLB;
-
+@property(nonatomic,strong)QYZJWorkModel *model;
+@property(nonatomic,assign)NSInteger type;
 @end
 
 NS_ASSUME_NONNULL_END

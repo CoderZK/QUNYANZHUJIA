@@ -124,7 +124,6 @@
             case 8:
             {
                 str = @"交付完成";
-                self.qianDanLB.textColor = GreenColor;
                 break;
             }
                 

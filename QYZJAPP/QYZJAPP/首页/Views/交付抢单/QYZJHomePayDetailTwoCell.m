@@ -1,14 +1,14 @@
 //
-//  QYZJHomePayDetailOneCell.m
+//  QYZJHomePayDetailTwoCell.m
 //  QYZJAPP
 //
-//  Created by zk on 2019/11/7.
+//  Created by zk on 2019/11/21.
 //  Copyright © 2019 kunzhang. All rights reserved.
 //
 
-#import "QYZJHomePayDetailOneCell.h"
+#import "QYZJHomePayDetailTwoCell.h"
 
-@implementation QYZJHomePayDetailOneCell
+@implementation QYZJHomePayDetailTwoCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
