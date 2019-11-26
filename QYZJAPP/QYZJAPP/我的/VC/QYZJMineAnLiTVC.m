@@ -9,6 +9,7 @@
 
 #import "QYZJMineAnLiTVC.h"
 #import "QYZJMineAnLiCell.h"
+#import "QYZJAnLiDetailTVC.h"
 @interface QYZJMineAnLiTVC ()
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
@@ -111,7 +112,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -121,13 +122,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     QYZJMineAnLiCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
+    cell.model = self.dataArray[indexPath.row];
     return cell;
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    QYZJAnLiDetailTVC * vc =[[QYZJAnLiDetailTVC alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    vc.ID = self.dataArray[indexPath.row].ID;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 /*

@@ -308,7 +308,7 @@
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (index < 3) {
-        QYZJfansAndAttentionTVC * vc =[[QYZJfansAndAttentionTVC alloc] init];
+        QYZJfansAndAttentionTVC * vc =[[QYZJfansAndAttentionTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
         vc.hidesBottomBarWhenPushed = YES;
         vc.type = index;
         [self.navigationController pushViewController:vc animated:YES];

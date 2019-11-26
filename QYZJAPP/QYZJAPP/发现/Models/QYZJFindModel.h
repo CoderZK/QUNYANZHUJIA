@@ -63,6 +63,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *con;
 @property(nonatomic,strong)NSString *constructionStageId;
 
+
+@property(nonatomic,strong)NSString *q_head_img;
+@property(nonatomic,strong)NSString *q_nick_name;
+
+
+
 @property(nonatomic,strong)NSString *b_recomend_name;
 @property(nonatomic,strong)NSString *demand_grab_sheet_id;
 @property(nonatomic,strong)NSString *type_name;

@@ -440,6 +440,11 @@
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_turnoverDetails.do"];
 }
 
+/**获取系统参数*/
++(NSString *)app_systemParamURL {
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_systemParam.do"];
+}
+
 //图片地址
 +(NSString *)getImgURLWithStr:(NSString * )str{
     

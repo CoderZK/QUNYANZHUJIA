@@ -11,7 +11,7 @@
 static PublicFuntionTool * tool = nil;
 @interface PublicFuntionTool()<AVAudioPlayerDelegate>
 @property(nonatomic,strong)AVAudioPlayer *player;
-
+@property(nonatomic,strong)UIView *footV;
 @end
 
 @implementation PublicFuntionTool
@@ -62,9 +62,9 @@ static PublicFuntionTool * tool = nil;
 
 - (void)palyMp3WithNSSting:(NSString *)meidaStr isLocality:(BOOL )isLocality {
     if (isLocality) {
-
+        
     }else {
-       
+        
         NSURL * url = [[NSURL alloc] initWithString:meidaStr];
         NSData * data = [[NSData alloc] initWithContentsOfURL:url];
         self.player = [[AVAudioPlayer alloc] initWithData:data error:nil];
@@ -72,7 +72,7 @@ static PublicFuntionTool * tool = nil;
         self.player.volume =0.8;
         [self.player play];
         self.player.delegate = self;
-
+        
     }
     
     
@@ -81,70 +81,72 @@ static PublicFuntionTool * tool = nil;
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 
 {
-
+    
     //播放结束时执行的动作
     if (self.findPlayBlock != nil) {
         self.findPlayBlock();
     }
-
+    
 }
 
 
 
- 
 
- 
+
+
 
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error;
 
 {
-
+    
     //解码错误执行的动作
-
+    
 }
 
 
- 
+
 
 - (void)audioPlayerBeginInterruption:(AVAudioPlayer *)player;
 
 {
-
+    
     //处理中断的代码
-
+    
 }
 
 - (void)audioPlayerEndInterruption:(AVAudioPlayer *)player
 
 {
-
+    
     [player play];
-
+    
 }
 
 
 
-- (UIView *) createFootvWithTitle:(NSString *)title andImgaeName:(NSString *)imgName{
-
-    UIView * footV = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenH - sstatusHeight - 44 - 60, ScreenW, 60)];
+- (KKKKFootView *) createFootvWithTitle:(NSString *)title andImgaeName:(NSString *)imgName{
+    
+    KKKKFootView * footV = [[KKKKFootView alloc] initWithFrame:CGRectMake(0, ScreenH - sstatusHeight - 44 - 60, ScreenW, 60)];
     if (sstatusHeight > 20) {
         footV.frame = CGRectMake(0, ScreenH - sstatusHeight - 44 - 60 - 34, ScreenW, 60);
     }
     footV.backgroundColor = WhiteColor;
     footV.layer.shadowColor = [UIColor blackColor].CGColor;
-      // 设置阴影偏移量
-      footV.layer.shadowOffset = CGSizeMake(0,-3);
-      // 设置阴影透明度
-      footV.layer.shadowOpacity = 0.1;
-      // 设置阴影半径
-      footV.layer.shadowRadius = 5;
-      footV.clipsToBounds = NO;
+    // 设置阴影偏移量
+    footV.layer.shadowOffset = CGSizeMake(0,-3);
+    // 设置阴影透明度
+    footV.layer.shadowOpacity = 0.1;
+    // 设置阴影半径
+    footV.layer.shadowRadius = 5;
+    footV.clipsToBounds = NO;
     
     UIButton * button =[UIButton buttonWithType:UIButtonTypeCustom];
+    button.tag = 100;
     button.frame = CGRectMake(20, 10, ScreenW - 40, 40);
     [button setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
     if (imgName.length > 0) {
-         [button setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
+        [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 0)];
     }
     [button setTitle:title forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -153,15 +155,84 @@ static PublicFuntionTool * tool = nil;
     button.clipsToBounds = YES;
     [footV addSubview:button];
     [button addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
-
+    
     return footV;
 }
 
+
+- (KKKKFootView *) createFootvTwoWithLeftTitle:(NSString *)title letfTietelColor:(UIColor *)leftColor rightTitle:(NSString *)rightTitle rightColor:(UIColor *)rightColor {
+    
+    KKKKFootView * footV = [[KKKKFootView alloc] initWithFrame:CGRectMake(0, ScreenH - sstatusHeight - 44 - 60, ScreenW, 60)];
+    if (sstatusHeight > 20) {
+        footV.frame = CGRectMake(0, ScreenH - sstatusHeight - 44 - 60 - 34, ScreenW, 60);
+    }
+    footV.backgroundColor = WhiteColor;
+    footV.layer.shadowColor = [UIColor blackColor].CGColor;
+    // 设置阴影偏移量
+    footV.layer.shadowOffset = CGSizeMake(0,-3);
+    // 设置阴影透明度
+    footV.layer.shadowOpacity = 0.1;
+    // 设置阴影半径
+    footV.layer.shadowRadius = 5;
+    footV.clipsToBounds = NO;
+    CGFloat ww = (ScreenW - 80)/2;
+    UIButton * button1 =[UIButton buttonWithType:UIButtonTypeCustom];
+    button1.frame = CGRectMake(20, 10,ww , 40);
+    [button1 setTitle:title forState:UIControlStateNormal];
+    button1.titleLabel.font = [UIFont systemFontOfSize:14];
+    [button1 setTitleColor:leftColor forState:UIControlStateNormal];
+    button1.layer.cornerRadius = 3;
+    button1.clipsToBounds = YES;
+    button1.tag = 0;;
+    [footV addSubview:button1];
+    [button1 addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
+    if ([leftColor isEqual:WhiteColor]) {
+        [button1 setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
+    }else {
+        button1.layer.borderColor = leftColor.CGColor;
+        button1.layer.borderWidth = 1;
+    }
+    [button1 setTitle:title forState:UIControlStateNormal];
+    
+    UIButton * button2 =[UIButton buttonWithType:UIButtonTypeCustom];
+    button2.frame = CGRectMake(60 + ww , 10,ww , 40);
+    [button2 setTitle:title forState:UIControlStateNormal];
+    button2.titleLabel.font = [UIFont systemFontOfSize:14];
+    [button2 setTitleColor:rightColor forState:UIControlStateNormal];
+    button2.layer.cornerRadius = 3;
+    button2.clipsToBounds = YES;
+    button2.tag = 1;;
+    [footV addSubview:button2];
+    [button2 addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
+    if ([rightColor isEqual:WhiteColor]) {
+        [button2 setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
+    }else {
+        button2.layer.borderColor = rightColor.CGColor;
+        button2.layer.borderWidth = 1;
+    }
+    [button2 setTitle:rightTitle forState:UIControlStateNormal];
+    self.footV = footV;
+    
+    return footV;
+    
+}
+
+
 - (void)clickAction:(UIButton *)button {
     
-    if (self.finshClickBlock != nil) {
-        self.finshClickBlock(button);
+    KKKKFootView * view = (KKKKFootView *)button.superview;
+    if (view.footViewClickBlock != nil) {
+        view.footViewClickBlock(button);
     }
+    
+    
+//    if (self.footV.viewBlock != nil) {
+//        self.footV.viewBlock(button);
+//    }
+    
+//    if (self.finshClickBlock != nil) {
+//        self.finshClickBlock(button);
+//    }
     
 }
 
@@ -181,8 +252,8 @@ static PublicFuntionTool * tool = nil;
            NSString *dataUTI,
            UIImageOrientation orientation,
            NSDictionary *info) {
-             data = [NSData dataWithData:imageData];
-         }];
+            data = [NSData dataWithData:imageData];
+        }];
     }
     
     if (result) {
@@ -193,5 +264,32 @@ static PublicFuntionTool * tool = nil;
         }
     }
 }
+
+@end
+
+
+@implementation KKKKFootView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self =[super initWithFrame:frame];
+    if (self) {
+        
+    }
+    return self;
+}
+
+- (void)setFootViewClickBlock:(void (^)(UIButton *))footViewClickBlock {
+    _footViewClickBlock = footViewClickBlock;
+}
+
+- (void)setTitleStr:(NSString *)titleStr {
+    _titleStr = titleStr;
+    
+    UIButton * button = [self viewWithTag:100];
+    [button setTitle:titleStr forState:UIControlStateNormal];
+    
+    
+}
+
 
 @end

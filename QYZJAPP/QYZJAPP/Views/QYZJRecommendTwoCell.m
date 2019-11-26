@@ -15,14 +15,14 @@
     if (self) {
         self.leftLB = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 80, 20)];
         self.leftLB.font = kFont(15);
-        self.leftLB.textColor = CharacterBlack112;
+        self.leftLB.textColor = CharacterBlackColor;
         self.leftLB.text = @"需求描述";
         [self addSubview:self.leftLB];
         
-        self.TV = [[IQTextView alloc] initWithFrame:CGRectMake(100 , 10, ScreenW - 110, 60)];
+        self.TV = [[IQTextView alloc] initWithFrame:CGRectMake(95 , 10, ScreenW - 110, 60)];
         self.TV.textAlignment = NSTextAlignmentLeft;
         self.TV.placeholder = @"请输入需求描述";
-        self.TV.textColor = CharacterBlack112;
+        self.TV.textColor = CharacterBlackColor;
         self.TV.font = kFont(14);
         [self addSubview:self.TV];
         
@@ -44,9 +44,15 @@
         [self.listBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 25, 0,  0)];
         [self addSubview:self.listBt];
         
-        UIView * backV =[[UIView alloc] initWithFrame:CGRectMake(15, 134.4, ScreenW-30, 0.6)];
+        UIView * backV =[[UIView alloc] init];
         backV.backgroundColor = [UIColor clearColor];
         [self addSubview:backV];
+        
+        [backV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.equalTo(self);
+            make.height.equalTo(@0.6);
+        }];
+        
         self.lineV = backV;
         
         

@@ -13,6 +13,7 @@
 @property(nonatomic,strong)UITextField *codeTF;
 @property(nonatomic,strong)NSTimer *timer;
 @property(nonatomic,assign)NSInteger number;
+@property(nonatomic,strong)UIView  *whiteOne,*whiteTwo;
 @end
 
 @implementation QYZJRecommendFootV
@@ -37,6 +38,7 @@
         [self addSubview:whiteV];
         whiteV.backgroundColor = WhiteColor;
         [whiteV addSubview:buttonOne];
+        self.whiteOne = whiteV;
         
         UIView * whiteTwoV = [[UIView alloc] initWithFrame:CGRectMake(0, 60, ScreenW, 50)];
         
@@ -44,7 +46,8 @@
         leftLB.font = kFont(15);
         leftLB.textColor = CharacterBlackColor;
         leftLB.text = @"验证码";
-        [whiteTwoV addSubview:leftLB];
+        [whiteTwoV addSubview:leftLB];\
+        self.whiteTwo = whiteTwoV;
         
         UITextField * TF = [[UITextField alloc] initWithFrame:CGRectMake(100 , 10, ScreenW - 130  - 100 - 20, 30)];
         TF.textAlignment = NSTextAlignmentLeft;
@@ -56,10 +59,11 @@
         [whiteTwoV addSubview:TF];
         
         
-        UIButton * buttonTwo = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 130, 0, 120, 50)];
+        UIButton * buttonTwo = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 130, 0, 115, 50)];
         [buttonTwo setTitle:@"发送验证码" forState:UIControlStateNormal];
         buttonTwo.titleLabel.font = kFont(14);
-        [buttonTwo setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [buttonTwo setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+        [buttonTwo setTitleColor:OrangeColor forState:UIControlStateNormal];
         [buttonTwo setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
         buttonTwo.tag = 100;
         [buttonTwo addTarget:self action:@selector(action:) forControlEvents:UIControlEventTouchUpInside];
@@ -71,6 +75,16 @@
         
     }
     return self;
+}
+
+- (void)setType:(NSInteger)type {
+    
+    _type = type;
+    if (type == 1) {
+        self.whiteTwo.mj_y = 0;
+        self.whiteOne.hidden = YES;
+    }
+    
 }
 
 

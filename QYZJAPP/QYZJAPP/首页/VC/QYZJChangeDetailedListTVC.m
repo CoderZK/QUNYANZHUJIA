@@ -40,11 +40,11 @@
            self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34);
        }
        
-       UIView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"提交" andImgaeName:@""];
-       Weak(weakSelf);
-       [PublicFuntionTool shareTool].finshClickBlock = ^(UIButton * _Nonnull button) {
-           NSLog(@"\n\n%@",@" 提交");
-       };
+       KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"提交" andImgaeName:@""];
+        Weak(weakSelf);
+           view.footViewClickBlock = ^(UIButton *button) {
+                    NSLog(@"\n\n%@",@"完成");
+          };
        [self.view addSubview:view];
     self.tableView.backgroundColor = [UIColor whiteColor];
     UIView * footV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 100)];

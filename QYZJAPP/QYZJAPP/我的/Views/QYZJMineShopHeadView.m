@@ -67,7 +67,7 @@
         [self.editBt setTitleColor:OrangeColor forState:UIControlStateNormal];
         self.editBt.titleLabel.font = kFont(14);
         [self.whiteOneV addSubview:self.editBt];
-        self.editBt.tag = 2;
+        self.editBt.tag = 3;
         [self.editBt addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
         
         self.gayV = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.whiteOneV.frame), ScreenW, 10)];

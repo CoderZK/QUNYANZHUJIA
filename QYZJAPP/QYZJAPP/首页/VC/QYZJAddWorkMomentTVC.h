@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJAddWorkMomentTVC : BaseTableViewController
-
+@property(nonatomic,assign)NSInteger type; //0 添加施工阶段 1 修改案例
+@property(nonatomic,strong)NSString *titleStr,*contentStr;
 @end
 
 NS_ASSUME_NONNULL_END

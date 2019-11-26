@@ -23,7 +23,14 @@
 
 - (void)setModel:(QYZJFindModel *)model {
     _model = model;
-    [self.imgV sd_setImageWithURL:[NSURL URLWithString:model.pic] placeholderImage:[UIImage imageNamed:@"369"]];
+    
+    NSString * str = @"";
+    if ([model.pic containsString:@","]) {
+        str = [[model.pic componentsSeparatedByString:@","] firstObject];
+    }else {
+        str = model.pic;
+    }
+    [self.imgV sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"369"]];
     self.titelLB.text = model.title;
     self.contentLB.text = model.context;
     

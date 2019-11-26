@@ -151,6 +151,9 @@
 
 - (void)setArray:(NSMutableArray *)array {
     _array = array;
+    if (array.count == 0) {
+        return;
+    }
     if (array.count != 0) {
         [self.pickerV reloadAllComponents];
     }

@@ -98,10 +98,10 @@
         self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34);
     }
     
-    UIView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"发布" andImgaeName:@""];
+    KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"发布" andImgaeName:@""];
     Weak(weakSelf);
-    [PublicFuntionTool shareTool].finshClickBlock = ^(UIButton * _Nonnull button) {
-        NSLog(@"\n\n%@",@"完成");
+    view.footViewClickBlock = ^(UIButton *button) {
+           NSLog(@"\n\n%@",@"完成");
     };
     [self.view addSubview:view];
 }
@@ -127,7 +127,7 @@
     [self.headV addSubview:lb2];
     
     
-    self.desTV = [[IQTextView alloc] initWithFrame:CGRectMake(100, CGRectGetMaxY(backV1.frame) + 10, ScreenW - 110, 60)];
+    self.desTV = [[IQTextView alloc] initWithFrame:CGRectMake(95, CGRectGetMaxY(backV1.frame) + 10, ScreenW - 110, 60)];
     self.desTV.font = kFont(14);
     self.desTV.placeholder = @"请输入这一刻的想法....";
     [self.headV addSubview:self.desTV];

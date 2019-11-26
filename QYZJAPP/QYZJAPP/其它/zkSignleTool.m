@@ -78,6 +78,15 @@ static zkSignleTool * tool = nil;
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"telphone"];
 }
 
+- (void)setDataArray:(NSArray *)dataArray {
+    [[NSUserDefaults standardUserDefaults]setObject:dataArray forKey:@"dataArray"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSArray *)dataArray {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"dataArray"];
+}
+
 -(void)uploadDeviceToken
 {
     if (self.isLogin&&self.session_token&&self.deviceToken)

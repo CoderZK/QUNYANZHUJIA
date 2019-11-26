@@ -17,6 +17,8 @@
 @property(nonatomic,strong)UIView *headView,*cityView;
 @property(nonatomic,assign)BOOL isSearch;
 @property(nonatomic,strong)UIButton *addressBt;
+@property(nonatomic,strong)NSString *cityID,*cityStr;
+@property(nonatomic,strong)NSMutableArray<zkPickModel *> *cityListArr;
 
 //定位管理
 @property (nonatomic, strong) CLLocationManager* locationManager;
@@ -103,6 +105,7 @@
     [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [button setTitle:@"定位中..." forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.headView addSubview:button];
     self.addressBt = button;
     
@@ -117,6 +120,14 @@
     
  
 }
+
+//点击定位城市
+- (void)clickAction:(UIButton *)button {
+    if (self.clickCityBlock != nil && self.cityID != nil) {
+        self.clickCityBlock(self.cityStr, self.cityID);
+    }
+}
+
 
 - (void)findMe
 {
@@ -168,6 +179,8 @@
                NSLog(@"%@", [address objectForKey:@"City"]);
               
                [self.addressBt setTitle:[address objectForKey:@"City"] forState:UIControlStateNormal];
+               self.cityStr = [NSString stringWithFormat:@"%@",[address objectForKey:@"City"]];
+               
                
            }
            
@@ -176,6 +189,17 @@
     // 2.停止定位
     [manager stopUpdatingLocation];
 }
+
+- (void)sendCity {
+    
+    for (zkPickModel * model  in self.cityListArr) {
+        if ([self.cityStr isEqualToString:model.name]) {
+            self.cityID = model.ID;
+        }
+    }
+    
+}
+
 
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error
@@ -216,16 +240,16 @@
     CGFloat hh = 35;
     for (int i = 0;i< arr.count; i++) {
         UIButton * newProductBTBT = [[UIButton alloc] initWithFrame:CGRectMake(15 + (spaceX + ww) * (i%4) ,10 +(spaceY + hh) * (i/4), ww, hh)];
-        [newProductBTBT setBackgroundImage:[UIImage imageNamed:@"backg"] forState:UIControlStateNormal];
-        [newProductBTBT setBackgroundImage:[UIImage imageNamed:@"backr"] forState:UIControlStateSelected];
+        [newProductBTBT setBackgroundImage:[UIImage imageNamed:@"kuang"] forState:UIControlStateNormal];
+        [newProductBTBT setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateSelected];
         newProductBTBT.tag = i+1000;
         newProductBTBT.titleLabel.font = kFont(14);
         newProductBTBT.layer.cornerRadius = 4;
         newProductBTBT.clipsToBounds = YES;
         [newProductBTBT setTitleColor:CharacterBlack112 forState:UIControlStateNormal];
-        newProductBTBT.layer.cornerRadius = 3;
-        newProductBTBT.layer.borderWidth = 1;
-        newProductBTBT.layer.borderColor = CharacterBlack112.CGColor;
+//        newProductBTBT.layer.cornerRadius = 3;
+//        newProductBTBT.layer.borderWidth = 1;
+//        newProductBTBT.layer.borderColor = CharacterBlack112.CGColor;
         newProductBTBT.clipsToBounds = YES;
         [newProductBTBT setTitleColor:WhiteColor forState:UIControlStateSelected];
         [newProductBTBT setTitle:arr[i].name forState:UIControlStateNormal];
@@ -242,7 +266,9 @@
             self.cityView.mj_h = 20 + newProductBTBT.mj_y + hh;
             self.headView.mj_h = CGRectGetMaxY(self.cityView.frame) + 10;
         }
-        
+        if (i == 0) {
+            newProductBTBT.selected = YES;
+        }
 
     }
     self.tableView.tableHeaderView = self.headView;
@@ -312,7 +338,11 @@
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         if ([responseObject[@"key"] intValue]== 1) {
+            
+            
+            
             NSArray * arr = [zkPickModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"cityList"]];
+            self.cityListArr = arr;
             self.userCityList = [zkPickModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"userCityList"]];
             [self setBiaoQianWithArr:self.userCityList];
             [self.dataArray removeAllObjects];

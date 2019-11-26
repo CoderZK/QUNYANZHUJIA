@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+@class QYZJMineShopCell;
+@protocol QYZJMineShopCellDelegate <NSObject>
+
+- (void)didClickQYZJMineShopCell:(QYZJMineShopCell*)cell index:(NSInteger)index isEdit:(BOOL)isEdit;
+
+@end
 
 @interface QYZJMineShopCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *leftImgV;
@@ -20,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *leftEditBt;
 @property (weak, nonatomic) IBOutlet UIButton *rightEdibtBt;
 @property(nonatomic,strong)NSArray<QYZJFindModel *> *dataArray;
+@property(nonatomic,assign)id<QYZJMineShopCellDelegate>delegate;
 @end
 
 NS_ASSUME_NONNULL_END

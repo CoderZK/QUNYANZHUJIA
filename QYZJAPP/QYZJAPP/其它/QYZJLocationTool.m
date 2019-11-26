@@ -10,21 +10,19 @@
 
 @interface QYZJLocationTool()<CLLocationManagerDelegate>
 @property (nonatomic, strong) CLLocationManager* locationManager;
+@property(nonatomic,strong)NSMutableArray<zkPickModel *> *dataArray;
+@property(nonatomic,strong)NSString *cityStr;
 @end
 
 @implementation QYZJLocationTool
 - (void)locationAction{
     [self findMe];
+    [self getCityList];
 }
-
-
-
 
 
 - (void)findMe
 {
-
-    
     if ([CLLocationManager locationServicesEnabled]) {
         // 初始化定位管理器
         self.locationManager=[[CLLocationManager alloc]init];
@@ -69,9 +67,12 @@
                NSLog(@"%@", [address objectForKey:@"State"]);
                
                NSLog(@"%@", [address objectForKey:@"City"]);
-              
+               self.cityStr = [NSString stringWithFormat:@"%@",[address objectForKey:@"City"]];;
                if (self.locationBlock != nil) {
-                   self.locationBlock([address objectForKey:@"City"]);
+//                   self.locationBlock([address objectForKey:@"City"]);
+                   [self sendCity];
+                   
+                   
                }
                
            }
@@ -88,6 +89,46 @@
     if (error.code == kCLErrorDenied) {
         // 提示用户出错原因，可按住Option键点击 KCLErrorDenied的查看更多出错信息，可打印error.code值查找原因所在
     }
+}
+
+
+- (void)getCityList {
+    
+    
+    NSString * url = [QYZJURLDefineTool user_cityListURL];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"token"] = [zkSignleTool shareTool].session_token;
+    [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+
+        if ([responseObject[@"key"] intValue]== 1) {
+
+            [zkSignleTool shareTool].dataArray = responseObject[@"result"][@"cityList"];
+            
+            NSArray * arr = [zkPickModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"cityList"]];
+            self.dataArray = arr;
+            
+            [self sendCity];
+            
+        
+        }else {
+          
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+     
+    }];
+}
+
+- (void)sendCity {
+    
+    for (zkPickModel * model  in self.dataArray) {
+        if ([self.cityStr isEqualToString:model.name]) {
+            if (self.locationBlock != nil) {
+                self.locationBlock(self.cityStr, model.ID);
+            }
+        }
+    }
+    
 }
 
 

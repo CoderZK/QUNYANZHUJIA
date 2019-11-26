@@ -43,6 +43,22 @@
     
 }
 
+- (IBAction)click:(UIButton *)sender {
+    
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(didClickQYZJMineShopCell:index:isEdit:)]) {
+        
+        if (sender.tag < 200) {
+            [self.delegate didClickQYZJMineShopCell:self index:sender.tag - 100 isEdit: YES];
+        }else {
+            [self.delegate didClickQYZJMineShopCell:self index:sender.tag - 200 isEdit: NO];
+        }
+        
+        
+    }
+    
+}
+
+
 
 
 @end

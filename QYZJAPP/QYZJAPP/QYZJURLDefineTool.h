@@ -245,7 +245,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)user_moneyListInvitationURL;
 /**交付详情*/
 +(NSString *)user_turnoverDetailsURL;
-
+/**获取系统参数*/
++(NSString *)app_systemParamURL;
 
 
 

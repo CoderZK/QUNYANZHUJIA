@@ -8,7 +8,7 @@
 
 #import "FindHeadView.h"
 
-@interface FindHeadView()
+@interface FindHeadView()<UITextFieldDelegate>
 @property(nonatomic,strong)UIView *rightView;
 @property(nonatomic,strong)UITextField *TF;
 @property(nonatomic,strong)UIButton *searchBt;
@@ -49,7 +49,7 @@
             make.height.width.equalTo(@30);
             make.centerY.equalTo(self.rightView.mas_centerY);
             make.right.equalTo(self.rightView.mas_right).offset(-10);
-
+            
         }];
         
         [[self.searchBt rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
@@ -63,6 +63,7 @@
         self.TF.font = kFont(14);
         self.TF.placeholder = @"搜索";
         [self.rightView addSubview:self.TF];
+        self.TF.delegate = self;
         
         [self.TF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@30);
@@ -100,6 +101,14 @@
     }
     
     
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (self.delegateSignal) {
+        
+        [self.delegateSignal sendNext:@{@"key":@"search",@"text":self.TF.text}];
+    }
+    return NO;
 }
 
 - (void)clickAction:(UIButton *)button {

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "QYZJFindModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJUserModel : NSObject<NSCoding>
@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *label;
 @property(nonatomic,strong)NSString *invitation_code;
 
+@property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *goods_list;
+@property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *case_list;
 
 @property(nonatomic,assign)BOOL is_vip;
 @property(nonatomic,assign)BOOL is_coach;
@@ -42,8 +44,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)NSInteger fans_num;
 @property(nonatomic,assign)NSInteger goods_num;
 @property(nonatomic,assign)NSInteger question_num;
+@property(nonatomic,assign)NSInteger answer_num;
+@property(nonatomic,assign)NSInteger appoint_num;
 
 @property(nonatomic,assign)float bond_money;
+@property(nonatomic,assign)float score;
 
 @end
 

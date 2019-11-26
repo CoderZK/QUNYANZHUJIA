@@ -8,7 +8,7 @@
 
 #import "HomeNavigationView.h"
 
-@interface HomeNavigationView()
+@interface HomeNavigationView()<UITextFieldDelegate>
 @property(nonatomic,strong)UILabel *titlLB;
 @property(nonatomic,strong)UIButton *buttonLeft;
 @property(nonatomic,strong)UIView *rightView;
@@ -54,7 +54,7 @@
         [self addSubview:self.rightView];
         [self.rightView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@30);
-//            make.width.equalTo(@200);
+            //            make.width.equalTo(@200);
             make.right.equalTo(self).offset(-15);
             make.centerY.equalTo(self.mas_centerY);
             make.left.equalTo(self.buttonLeft.mas_right).offset(30);
@@ -62,7 +62,7 @@
         
         self.rightView.backgroundColor = [UIColor whiteColor];
         [self addShadowToView:self.rightView withColor:[UIColor blackColor]];
-
+        
         self.searchBt = [[UIButton alloc] init];
         [self.searchBt setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
         [self.rightView addSubview:self.searchBt];
@@ -70,37 +70,62 @@
             make.height.width.equalTo(@30);
             make.centerY.equalTo(self.rightView.mas_centerY);
             make.right.equalTo(self.rightView.mas_right).offset(-10);
-
-
+            
+            
         }];
-
+        
         [[self.searchBt rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
-                  if (self.delegateSignal) {
-                      if (self.TF.text.length == 0) {
-                          [SVProgressHUD showErrorWithStatus:@"请输入搜索的内容"];
-                      }else {
-                          [self.delegateSignal sendNext:@{@"key":@"search",@"text":self.TF.text}];
-                      }
-                  }
-              }];
+            if (self.delegateSignal) {
+
+                [self.delegateSignal sendNext:@{@"key":@"search",@"text":self.TF.text}];
+
+            }
+        }];
+        
+        
         
         self.TF = [[UITextField alloc] init];
         self.TF.font = kFont(14);
         self.TF.placeholder = @"搜索";
         [self.rightView addSubview:self.TF];
-
+        
         [self.TF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@30);
             make.centerY.equalTo(self.rightView.mas_centerY);
             make.left.equalTo(self.rightView.mas_left).offset(20);
             make.right.equalTo(self.searchBt.mas_left).offset(-8);
         }];
-        
+        self.TF.delegate = self;
 
+//        UIButton * button = [[UIButton alloc] init];
+//        button.backgroundColor = [UIColor redColor];
+//        [self.TF addSubview:button];
+//        [button mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.bottom.right.top.equalTo(self.TF);;
+//        }];
+//
+//
+//        [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+//            if (self.delegateSignal) {
+//
+//                [self.delegateSignal sendNext:@{@"key":@"search",@"text":self.TF.text}];
+//
+//            }
+//        }];
         
         
     }
     return self;
+}
+
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (self.delegateSignal) {
+
+        [self.delegateSignal sendNext:@{@"key":@"search",@"text":self.TF.text}];
+
+    }
+    return NO;
 }
 
 /// 添加四边阴影效果
@@ -110,12 +135,12 @@
     // 阴影偏移，默认(0, -3)
     theView.layer.shadowOffset = CGSizeMake(0,0);
     theView.layer.cornerRadius = 10;
-//    theView.clipsToBounds = YES;
+    //    theView.clipsToBounds = YES;
     // 阴影透明度，默认0
     theView.layer.shadowOpacity = 0.5;
     // 阴影半径，默认3
     theView.layer.shadowRadius = 3;
-
+    
 }
 
 - (void)setTitleStr:(NSString *)titleStr {

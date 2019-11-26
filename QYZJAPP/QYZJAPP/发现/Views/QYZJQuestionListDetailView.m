@@ -88,7 +88,7 @@
     }
     self.mediaView.mj_y = CGRectGetMaxY(self.picView.frame);
     if (dataModel.media_url.length == 0) {
-        self.picView.mj_h = 0;
+        self.mediaView.mj_h = 0;
     }else {
         
         self.listBt = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 200, 25)];

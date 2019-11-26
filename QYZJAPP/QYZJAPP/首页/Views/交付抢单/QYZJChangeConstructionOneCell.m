@@ -82,11 +82,11 @@
                 centerLB.text = @"施工阶段付款金额";
                 rightLB.text = @"施工阶段工期";
                 [statusBt setTitle:@"状态" forState:UIControlStateNormal];
-                [statusBt setTitleColor:CharacterColor180 forState:UIControlStateNormal];
+                [statusBt setTitleColor:CharacterBlack112 forState:UIControlStateNormal];
             }else {
                 QYZJWorkModel * model = self.dataArray[i-1];
                 leftLB.text = model.stageName;
-                centerLB.text = [NSString stringWithFormat:@"￥0.0%f",model.price];
+                centerLB.text = [NSString stringWithFormat:@"￥%0.0f",model.price];
                 rightLB.text = [NSString stringWithFormat:@"%@ - %@",[NSString stringWithDatemmdd:model.timeStart withIsDian:YES],[NSString stringWithDatemmdd:model.timeEnd withIsDian:YES]];
                 statusBt.layer.cornerRadius = 3;
                 statusBt.layer.borderColor = OrangeColor.CGColor;

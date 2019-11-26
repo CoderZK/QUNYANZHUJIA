@@ -35,6 +35,9 @@
     [self addPicsWithArr:@[].mutableCopy];
     self.videoStr = nil;
     self.navigationItem.title = @"创建施工阶段";
+    if (self.type == 1) {
+        self.navigationItem.title = @"修改案例";
+    }
     self.tableView.backgroundColor =[UIColor groupTableViewBackgroundColor];
     
 }
@@ -45,11 +48,16 @@
         self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34);
     }
     
-    UIView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"完成" andImgaeName:@""];
+    
+    KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"完成" andImgaeName:@""];
+    
+    if (self.type == 1) {
+        view.titleStr = @"发布";
+    }
     Weak(weakSelf);
-    [PublicFuntionTool shareTool].finshClickBlock = ^(UIButton * _Nonnull button) {
-        NSLog(@"\n\n%@",@"完成");
-    };
+        view.footViewClickBlock = ^(UIButton *button) {
+                 NSLog(@"\n\n%@",@"完成");
+       };
     [self.view addSubview:view];
 }
 
@@ -67,6 +75,7 @@
     self.titleTF = [[UITextField alloc] initWithFrame:CGRectMake(100, 10, ScreenW - 110, 30)];
     self.titleTF.font = kFont(14);
     self.titleTF.placeholder = @"请输入标题";
+    self.titleTF.text = self.titleStr;
     [self.headV addSubview:self.titleTF];
     
     UIView * backV1 =[[UIView alloc] initWithFrame:CGRectMake(0, 50, ScreenW, 0.6)];
@@ -78,14 +87,20 @@
     lb2.textColor = CharacterBlack112;
     lb2.font = kFont(14);
     lb2.text = @"阶段描述";
+    if (self.type == 1) {
+        lb2.text = @"内容";
+    }
     [self.headV addSubview:lb2];
     
     
-    self.desTV = [[IQTextView alloc] initWithFrame:CGRectMake(100, CGRectGetMaxY(backV1.frame) + 10, ScreenW - 110, 60)];
+    self.desTV = [[IQTextView alloc] initWithFrame:CGRectMake(95, CGRectGetMaxY(backV1.frame) + 10, ScreenW - 110, 60)];
     self.desTV.font = kFont(14);
     self.desTV.placeholder = @"请输入阶段描述";
+    if (self.type == 1) {
+        self.desTV.placeholder = @"请输入内容";
+    }
     [self.headV addSubview:self.desTV];
-    
+    self.desTV.text = self.contentStr;
     UIView * backV2 =[[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.desTV.frame) + 10, ScreenW, 0.6)];
     backV2.backgroundColor = lineBackColor;
     [self.headV addSubview:backV2];

@@ -11,6 +11,8 @@
 #import "QYZJMinePayDetailVC.h"
 #import "QYZJAddWorkMomentTVC.h"
 #import "QYZJChangeDetailedListTVC.h"
+#import "QYZJJiaoFuListTVC.h"
+#import "QYZJCreateShiGongQingDanTVC.h"
 @interface QYZJHomePayTVC ()
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
 @property(nonatomic,assign)NSInteger page;
@@ -31,13 +33,24 @@
        button.clipsToBounds = YES;
        [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
            
+           
+//           QYZJCreateShiGongQingDanTVC * vc =[[QYZJCreateShiGongQingDanTVC alloc] init];
+//           vc.hidesBottomBarWhenPushed = YES;
+//           [self.navigationController pushViewController:vc animated:YES];
+           
+           QYZJJiaoFuListTVC * vc =[[QYZJJiaoFuListTVC alloc] init];
+           vc.hidesBottomBarWhenPushed = YES;
+           [self.navigationController pushViewController:vc animated:YES];
+           
+//           //更改施工阶段
 //           QYZJChangeDetailedListTVC * vc =[[QYZJChangeDetailedListTVC alloc] init];
 //           vc.hidesBottomBarWhenPushed = YES;
 //           [self.navigationController pushViewController:vc animated:YES];
-         
-           QYZJAddWorkMomentTVC * vc =[[QYZJAddWorkMomentTVC alloc] init];
-           vc.hidesBottomBarWhenPushed = YES;
-           [self.navigationController pushViewController:vc animated:YES];
+//
+//           //创建新的施工阶段
+//           QYZJAddWorkMomentTVC * vc =[[QYZJAddWorkMomentTVC alloc] init];
+//           vc.hidesBottomBarWhenPushed = YES;
+//           [self.navigationController pushViewController:vc animated:YES];
            
        }];
        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];

@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)void(^clickRecommendFootVBlock)(void);
 @property(nonatomic,strong)NSString *phoneStr;
 @property(nonatomic,strong)NSString *codeStr;
+@property(nonatomic,assign)NSInteger type; // 0含有添加按钮 1 只有短信验证码部分
 @end
 
 NS_ASSUME_NONNULL_END

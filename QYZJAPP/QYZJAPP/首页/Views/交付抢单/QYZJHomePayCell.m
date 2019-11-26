@@ -124,6 +124,7 @@
             case 8:
             {
                 str = @"交付完成";
+                self.qianDanLB.textColor = GreenColor;
                 break;
             }
                 
@@ -132,7 +133,7 @@
         }
     }
     
-    
+    self.qianDanLB.text = str;
     
     if (self.type == 1 ) {
         if ([model.user_status intValue] == 3 || [model.user_status intValue] == 1) {

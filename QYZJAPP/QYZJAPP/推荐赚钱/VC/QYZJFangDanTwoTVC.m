@@ -58,10 +58,10 @@
         self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34);
     }
 
-    UIView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"完成" andImgaeName:@""];
+    KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"完成" andImgaeName:@""];
     Weak(weakSelf);
-    [PublicFuntionTool shareTool].finshClickBlock = ^(UIButton * _Nonnull button) {
-         NSLog(@"\n\n%@",@"完成");
+     view.footViewClickBlock = ^(UIButton *button) {
+              NSLog(@"\n\n%@",@"完成");
     };
     [self.view addSubview:view];
 }

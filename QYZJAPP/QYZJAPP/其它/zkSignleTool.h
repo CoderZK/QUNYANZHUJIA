@@ -23,6 +23,7 @@
 @property(nonatomic,strong)NSString *isSame;
 @property(nonatomic,strong)NSString * deviceToken;
 @property(nonatomic,strong)QYZJUserModel *userModel;
+@property(nonatomic,strong)NSArray *dataArray;
 
 -(void)uploadDeviceToken;
 @end

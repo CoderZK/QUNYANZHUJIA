@@ -15,7 +15,7 @@
     
     self.imgV.layer.cornerRadius = 5;
     self.imgV.clipsToBounds = YES;
-    self.imgV.backgroundColor = [UIColor redColor];
+
     
 }
 

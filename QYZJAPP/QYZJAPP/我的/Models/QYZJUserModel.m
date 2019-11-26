@@ -59,4 +59,12 @@
     return self;
 }
 
+
+- (void)setGoods_list:(NSMutableArray<QYZJFindModel *> *)goods_list {
+    _goods_list =[QYZJFindModel mj_objectArrayWithKeyValuesArray:goods_list];
+}
+- (void)setCase_list:(NSMutableArray<QYZJFindModel *> *)case_list {
+    _case_list = [QYZJFindModel mj_objectArrayWithKeyValuesArray:case_list];
+}
+
 @end

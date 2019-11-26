@@ -9,7 +9,7 @@
 #import "QYZJHomeFiveCell.h"
 
 @interface QYZJHomeFiveCell()
-@property (weak, nonatomic) IBOutlet UIButton *headBt;
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLB;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLB;
 @property (weak, nonatomic) IBOutlet UILabel *baoLB;
@@ -41,6 +41,9 @@
     self.baoLB.text = @"保";
     self.vipLB.text = @"VIP";
     self.requestLB.text = @"可提问";
+    
+    self.headBt.layer.cornerRadius = 40;
+    self.headBt.clipsToBounds = YES;
     
     CGFloat space = 10;
     

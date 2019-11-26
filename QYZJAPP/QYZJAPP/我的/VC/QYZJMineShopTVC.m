@@ -9,11 +9,14 @@
 #import "QYZJMineShopTVC.h"
 #import "QYZJMineShopHeadView.h"
 #import "QYZJMineShopCell.h"
-@interface QYZJMineShopTVC ()
+#import "QYZJShopDetailTVC.h"
+#import "QYZJAddGoodsOrEditGoodsTVC.h"
+@interface QYZJMineShopTVC ()<QYZJMineShopCellDelegate>
 @property(nonatomic,strong)QYZJMineShopHeadView *headV;
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,assign)NSInteger type;//1已上架 0 待审核 3 已下架
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
+@property(nonatomic,strong)UIButton *faBuBt;
 @end
 
 @implementation QYZJMineShopTVC
@@ -75,7 +78,26 @@
         [self getData];
     }];
     
-    
+    [self addFaTieView];
+}
+
+- (void)addFaTieView {
+     self.faBuBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 100, ScreenH - 150, 60, 60)];
+     [self.faBuBt setImage:[UIImage imageNamed:@"qy36"] forState:UIControlStateNormal];
+    self.faBuBt.backgroundColor = [UIColor whiteColor];
+    self.faBuBt.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.faBuBt.layer.shadowRadius = 5;
+    self.faBuBt.layer.cornerRadius = 30;
+    self.faBuBt.layer.shadowOpacity = 0.3;
+    self.faBuBt.layer.shadowOffset = CGSizeMake(0, 0);
+    [[self.faBuBt rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+       //发不商品
+        QYZJAddGoodsOrEditGoodsTVC * vc =[[QYZJAddGoodsOrEditGoodsTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }];
+     [self.view addSubview:self.faBuBt];
 }
 
 
@@ -136,6 +158,7 @@
         cell.dataArray = [self.dataArray subarrayWithRange:NSMakeRange(indexPath.row * 2 , 1)];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.delegate = self;
     return cell;
     
 }
@@ -143,5 +166,31 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
+
+#pragma mark ----- 点击 ----
+- (void)didClickQYZJMineShopCell:(QYZJMineShopCell*)cell index:(NSInteger)index isEdit:(BOOL)isEdit
+{
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    if (isEdit) {
+        
+        QYZJAddGoodsOrEditGoodsTVC * vc =[[QYZJAddGoodsOrEditGoodsTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.dataModel = self.dataArray[indexPath.row * 2+index];
+        vc.type = 1;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else {
+        QYZJFindModel * model = self.dataArray[indexPath.row * 2+index];
+        QYZJShopDetailTVC * vc =[[QYZJShopDetailTVC alloc] init];
+        vc.ID = model.ID;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+    }
+    
+    
+}
+
 
 @end

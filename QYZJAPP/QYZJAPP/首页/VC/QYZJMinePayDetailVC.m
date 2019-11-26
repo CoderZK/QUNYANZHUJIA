@@ -36,8 +36,8 @@
     [self.tableView registerClass:[QYZJConstructionProgressCell class] forCellReuseIdentifier:@"QYZJConstructionProgressCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     //分为如下区,如果存在则展示,不存在则隐藏
-    self.headTitleArr = @[@"",@"支付",@"合同",@"预算",@"图纸",@"变更相册",@"整体进度",@"施工",@"变更清单"];
-//    self.headTitleArr = @[@"",@"支付",@"合同",@"预算",@"图纸",@"变更相册",@"整体进度",@"施工",@"变更清单",@"实际施工阶段列表",@"变更施工阶段列表"];
+    self.headTitleArr = @[@"",@"支付",@"合同",@"预算",@"图纸",@"变更相册",@"整体进度",@"施工",@"变更清单",@"实际施工阶段列表",@"变更施工阶段列表"];
+    //    self.headTitleArr = @[@"",@"支付",@"合同",@"预算",@"图纸",@"变更相册",@"整体进度",@"施工",@"变更清单",@"实际施工阶段列表",@"变更施工阶段列表"];
     [self getData];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self getData];
@@ -80,9 +80,9 @@
         return 2;
     }else if (section<=5) {
         return 1;
-    }else if (section <= 9) {
+    }else if (section <= 8) {
         return 1;
-    }else if (section == 10 ) {
+    }else if (section == 9) {
         return self.dataModel.constructionStage.count;
     }else if (section == 10) {
         return self.dataModel.changeConstructionStage.count;
@@ -219,7 +219,7 @@
     }else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             QYZJHomePayDetailOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomePayDetailOneCell" forIndexPath:indexPath];
-                  cell.clipsToBounds = YES;
+            cell.clipsToBounds = YES;
             cell.model = self.dataModel.turnoverListOrderFirst;
             return cell;
         }else {
@@ -236,7 +236,7 @@
                 return cell;
             }
         }
-
+        
     }else if (indexPath.section <=5) {
         QYZJPicShowCell* cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJPicShowCell" forIndexPath:indexPath];
         if (indexPath.section == 2){
@@ -255,13 +255,23 @@
         cell.dataArray = self.dataModel.turnoverLists;
         return cell;
     }else if (indexPath.section == 7) {
-       QYZJConstructionCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJConstructionCell" forIndexPath:indexPath];
+        QYZJConstructionCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJConstructionCell" forIndexPath:indexPath];
         cell.dataArray = self.dataModel.turnoverLists;
         cell.model = self.dataModel.turnoverList;
         return cell;
     }else if (indexPath.section == 8) {
-       QYZJChangeConstructionOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJChangeConstructionOneCell" forIndexPath:indexPath];
+        QYZJChangeConstructionOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJChangeConstructionOneCell" forIndexPath:indexPath];
         cell.dataArray = self.dataModel.changeConstructionStage;
+        return cell;
+    }else if (indexPath.section == 9) {
+        
+        QYZJConstructionListCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJConstructionListCell" forIndexPath:indexPath];
+        cell.model = self.dataModel.constructionStage[indexPath.row];
+        return cell;
+        
+    }else if (indexPath.section == 10) {
+        QYZJConstructionListCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJConstructionListCell" forIndexPath:indexPath];
+        cell.model = self.dataModel.changeConstructionStage[indexPath.row];
         return cell;
     }
     QYZJHomePayDetailOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomePayDetailOneCell" forIndexPath:indexPath];

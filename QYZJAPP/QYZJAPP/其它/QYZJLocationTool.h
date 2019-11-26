@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJLocationTool : NSObject
 - (void)locationAction;
-@property(nonatomic,copy)void(^locationBlock)(NSString *cityStr);
+@property(nonatomic,copy)void(^locationBlock)(NSString *cityStr,NSString * cityID);
 @end
 
 NS_ASSUME_NONNULL_END

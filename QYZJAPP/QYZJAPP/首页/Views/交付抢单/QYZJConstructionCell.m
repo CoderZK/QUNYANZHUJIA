@@ -102,7 +102,7 @@
             }else {
                 QYZJWorkModel * model = self.dataArray[i-1];
                 leftLB.text = model.stageName;
-                centerLB.text = [NSString stringWithFormat:@"￥%f",model.price];
+                centerLB.text = [NSString stringWithFormat:@"￥%0.0f",model.price];
                 rightLB.text = [NSString stringWithFormat:@"%@ - %@",[NSString stringWithDatemmdd:model.timeStart withIsDian:YES],[NSString stringWithDatemmdd:model.timeEnd withIsDian:YES]];;
             }
         }

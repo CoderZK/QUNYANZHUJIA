@@ -48,11 +48,10 @@
           self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34);
       }
 
-      UIView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"添加银行卡" andImgaeName:@"jia"];
+      KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"添加银行卡" andImgaeName:@"jia"];
       Weak(weakSelf);
-      [PublicFuntionTool shareTool].finshClickBlock = ^(UIButton * _Nonnull button) {
-          NSLog(@"\n\n%@",@"添加银行卡");
-
+       view.footViewClickBlock = ^(UIButton *button) {
+                NSLog(@"\n\n%@",@"完成");
       };
       [self.view addSubview:view];
     

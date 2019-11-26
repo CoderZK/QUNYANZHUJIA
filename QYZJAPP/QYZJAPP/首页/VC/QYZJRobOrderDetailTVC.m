@@ -40,9 +40,9 @@
         self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34);
     }
     
-    UIView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"查看交付" andImgaeName:@""];
+    KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"查看交付" andImgaeName:@""];
     Weak(weakSelf);
-    [PublicFuntionTool shareTool].finshClickBlock = ^(UIButton * _Nonnull button) {
+    view.footViewClickBlock = ^(UIButton *button) {
         NSLog(@"\n\n%@",@"完成");
     };
     [self.view addSubview:view];
@@ -280,7 +280,7 @@
     }else if (row == 2) {
         hh = self.dataModel.b_recomend_name.length > 0 ? 50:0;
     }else if (row == 3) {
-         hh = self.dataModel.manner > 0 ? 50:0;
+        hh = self.dataModel.manner > 0 ? 50:0;
     }else if (row == 4) {
         hh = self.dataModel.house_model > 0 ? 50:0;
     }else if (row == 5) {
@@ -289,17 +289,17 @@
         hh = self.dataModel.type_name.length > 0 ? 50:0;
     }else if (row == 7) {
         hh = 50;
-//         hh = self.dataModel.budget> 0 ? 50:0;
+        //         hh = self.dataModel.budget> 0 ? 50:0;
     }else if (row == 8) {
-         hh = self.dataModel.area.length > 0 ? 50:0;
+        hh = self.dataModel.area.length > 0 ? 50:0;
     }else if (row == 9) {
         hh = 50;
     }else if (row == 10) {
-         hh = self.dataModel.real_tel.length > 0 ? 50:0;
-    
+        hh = self.dataModel.real_tel.length > 0 ? 50:0;
+        
     }else if (row == 11) {
-         hh = self.dataModel.reason.length > 0 ? 50:0;
-       
+        hh = self.dataModel.reason.length > 0 ? 50:0;
+        
     }else  {
         hh = 50;
     }

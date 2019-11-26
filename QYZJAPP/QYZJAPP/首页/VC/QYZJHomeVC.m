@@ -21,10 +21,17 @@
 #import "QYZJHomeTwoTVC.h"
 #import "QYZJHomePayTVC.h"
 #import "QYZJRobOrderTVC.h"
+#import "QYZJYuYueFangDanTVC.h"
+#import "QYZJXiaoYanZiVC.h"
+#import "QYZJSearchListTVC.h"
 @interface QYZJHomeVC ()<zkLunBoCellDelegate,QYZJHomeOneCellDelegate,QYZJHomeTwoCellDelegate>
 @property(nonatomic,strong)NSString *passwordStr;
 @property(nonatomic,strong)NSMutableArray<zkBannerModel *> *bannerDataArr;
 @property(nonatomic,strong)HomeNavigationView *navigaV;
+@property(nonatomic,assign)NSInteger page;
+@property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
+@property(nonatomic,strong)NSString *cityID;
+@property(nonatomic,strong)NSString *searchWord;
 
 @end
 
@@ -51,8 +58,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    //    QYZJLocationTool * tool = [[QYZJLocationTool alloc] init];
-    //    [tool locationAction];
+    QYZJLocationTool * tool = [[QYZJLocationTool alloc] init];
+    [tool locationAction];
+    Weak(weakSelf);
+    tool.locationBlock = ^(NSString * _Nonnull cityStr, NSString * _Nonnull cityID) {
+        weakSelf.navigaV.titleStr = cityStr;
+        weakSelf.cityID = cityID;
+        weakSelf.page = 1;
+        [weakSelf getData];
+    };
     
     [self.tableView registerClass:[zkLunBoCell class] forCellReuseIdentifier:@"zkLunBoCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -66,6 +80,29 @@
     
     
     [self getBanList];
+    self.page = 1;
+    self.dataArray = @[].mutableCopy;
+    [self getData];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.page = 1;
+        [self getData];
+        
+          QYZJLocationTool * tool = [[QYZJLocationTool alloc] init];
+          [tool locationAction];
+          Weak(weakSelf);
+          tool.locationBlock = ^(NSString * _Nonnull cityStr, NSString * _Nonnull cityID) {
+              weakSelf.navigaV.titleStr = cityStr;
+              weakSelf.cityID = cityID;
+              weakSelf.page = 1;
+              [weakSelf getData];
+          };
+        
+    }];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        self.page++;
+        [self getData];
+    }];
+    
 }
 
 
@@ -80,29 +117,36 @@
         NSDictionary * dict = x;
         if ([[NSString stringWithFormat:@"%@",dict[@"key"]] isEqualToString:@"city"]) {
             //点击的是城市
-            QYZJCityChooseTVC * vc =[[QYZJCityChooseTVC alloc] init];
+            QYZJCityChooseTVC * vc =[[QYZJCityChooseTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
             __weak QYZJHomeVC * weakSelf = self;
             vc.clickCityBlock = ^(NSString * _Nonnull cityStr, NSString * _Nonnull cityId) {
                 
                 weakSelf.navigaV.titleStr = cityStr;
-                
+                weakSelf.cityID = cityId;
+                weakSelf.page = 1;
+                [weakSelf getData];
             };
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }else {
             //点击的是搜索
+            QYZJSearchListTVC * vc =[[QYZJSearchListTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.type = 0;
+            vc.cityID = self.cityID;
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }];
     
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 3) {
-        return 5;
+        return self.dataArray.count + 1;
     }
     return 1;
 }
@@ -145,7 +189,7 @@
         [button setTitleColor:CharacterBackColor forState:UIControlStateNormal];
         button.titleLabel.font = kFont(14);
         button.tag = 100;
-        [button setTitle:@"更多   >" forState:UIControlStateNormal];
+        [button setTitle:@" >" forState:UIControlStateNormal];
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [view addSubview:button];
     }
@@ -195,6 +239,9 @@
         return cell;
     }else {
         QYZJHomeFiveCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeFiveCell" forIndexPath:indexPath];
+        cell.model = self.dataArray[indexPath.row - 1];
+        cell.headBt.tag = indexPath.row - 1;
+        [cell.headBt addTarget:self action:@selector(gotoZhuYeAction:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
     QYZJHomeTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeTwoCell" forIndexPath:indexPath];
@@ -203,10 +250,41 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    BaseNavigationController * navc = [[BaseNavigationController alloc] initWithRootViewController:[[QYZhuJiaLoginVC alloc] init]];
-    [self presentViewController:navc animated:YES completion:nil];
+    
+    if (indexPath.section == 2) {
+     
+        QYZJYuYueFangDanTVC * vc =[[QYZJYuYueFangDanTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+        
+    }else if (indexPath.section == 3) {
+        if (indexPath.row == 0) {
+            QYZJXiaoYanZiVC * vc =[[QYZJXiaoYanZiVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else {
+            QYZJMineZhuYeTVC * vc =[[QYZJMineZhuYeTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.ID = self.dataArray[indexPath.row].ID;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }else {
+        BaseNavigationController * navc = [[BaseNavigationController alloc] initWithRootViewController:[[QYZhuJiaLoginVC alloc] init]];
+        [self presentViewController:navc animated:YES completion:nil];
+    }
+    
+ 
 }
-
+#pragma mark ------- 取他人的主页 ------
+- (void)gotoZhuYeAction:(UIButton *)button {
+    
+    QYZJMineZhuYeTVC * vc =[[QYZJMineZhuYeTVC alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    vc.ID = self.dataArray[button.tag].ID;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
 
 #pragma mark ------ 点击轮播图的事件 -------
 - (void)didSelectLunBoPic:(NSInteger )index {
@@ -243,7 +321,7 @@
 - (void)pushHomeTwoVCWithIndex:(NSInteger)index {
     if (index<2) {
         QYZJHomeTwoTVC * vc =[[QYZJHomeTwoTVC alloc] init];
-        vc.type = index;
+        vc.type = index+1;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (index == 2){
@@ -259,6 +337,45 @@
     }
     
 }
+
+
+- (void)getData {
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"page"] = @(self.page);
+    dict[@"pageSize"] = @(10);
+    dict[@"type"] = @"0";
+    dict[@"city_id"] = self.cityID;
+    dict[@"search_word"] = self.searchWord;
+    dict[@"search_type"] = @"0";
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_searchURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
+            NSArray<QYZJFindModel *>*arr = [QYZJFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
+            if (self.page == 1) {
+                [self.dataArray removeAllObjects];
+            }
+            [self.dataArray addObjectsFromArray:arr];
+            if (self.dataArray.count == 0) {
+                [SVProgressHUD showSuccessWithStatus:@"暂无数据"];
+            }
+            [self.tableView reloadData];
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+    }];
+    
+    
+    
+}
+
 
 - (void)getBanList {
     
