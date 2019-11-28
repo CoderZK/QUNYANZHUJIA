@@ -176,6 +176,11 @@
 + (NSString * )user_systemMessageNewListURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_systemMessageNewList.do"];
 }
+/**获取用户的角色*/
++(NSString *)user_basicInfoURL{
+   return [NSString stringWithFormat:@"%@%@",URLOne,@"user_basicInfo.do"];
+}
+
 
 
 #pragma mark ----- 我的小店 -------
@@ -445,6 +450,25 @@
     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_systemParam.do"];
 }
 
+/**上传图片*/
++(NSString *)app_uploadImgTokenURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_uploadImgToken.do"];
+}
+
+/**上传视频*/
++(NSString *)app_uploadVideoTokenURL{
+   return [NSString stringWithFormat:@"%@%@",URLOne,@"app_uploadVideoToken.do"];
+}
+/**发布动态*/
++(NSString *)app_insertArticleURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_insertArticle.do"];
+}
+/**删除动态*/
++(NSString *)app_articleDelURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_articleDel.do"];
+}
+
+
 //图片地址
 +(NSString *)getImgURLWithStr:(NSString * )str{
     
@@ -453,11 +477,26 @@
         if ([str hasPrefix:@"http:"] || [str hasPrefix:@"https:"]) {
             picStr = str;
         }else{
-            picStr = [NSString stringWithFormat:@"%@%@",ImgURL,str];
+            picStr = [NSString stringWithFormat:@"%@%@",QiNiuImgURL,str];
         }
     }
     return picStr;
 
 }
+
++(NSString *)getVideoURLWithStr:(NSString * )str {
+    
+   NSString * picStr = @"";
+    if (str) {
+        if ([str hasPrefix:@"http:"] || [str hasPrefix:@"https:"]) {
+            picStr = str;
+        }else{
+            picStr = [NSString stringWithFormat:@"%@%@",QiNiuVideoURL,str];
+        }
+    }
+    return picStr;
+    
+}
+
 
 @end

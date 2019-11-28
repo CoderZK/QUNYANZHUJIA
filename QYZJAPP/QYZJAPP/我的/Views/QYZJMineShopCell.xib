@@ -139,10 +139,12 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
+                <outlet property="leftBt" destination="JWs-ut-mTl" id="XHR-4u-rwp"/>
                 <outlet property="leftEditBt" destination="YS5-nA-96Y" id="t6y-jp-OWz"/>
                 <outlet property="leftImgV" destination="zuh-su-NxM" id="Aw3-Ek-NwJ"/>
                 <outlet property="leftMoneyLB" destination="mhH-LH-1sA" id="3BG-Fb-RVT"/>
                 <outlet property="leftTitleLB" destination="CAw-Xg-gNS" id="C5d-dl-mzz"/>
+                <outlet property="rightBt" destination="5V9-ur-jHd" id="Zee-qA-msZ"/>
                 <outlet property="rightEdibtBt" destination="cff-eX-67s" id="uDv-6j-JDT"/>
                 <outlet property="rightImgV" destination="dZK-IT-V3d" id="G1z-jf-VEE"/>
                 <outlet property="rightMoneyLB" destination="END-9X-WkK" id="DCj-qG-Dfo"/>

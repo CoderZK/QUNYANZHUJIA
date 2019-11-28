@@ -47,6 +47,7 @@
     dict[@"token"] = [zkSignleTool shareTool].session_token;
     dict[@"page"] = @(self.page);
     dict[@"pageSize"] = @(10);
+    dict[@"isMy"] = @"1";
     [zkRequestTool networkingPOST:urlStr parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [SVProgressHUD dismiss];
         [self.tableView.mj_header endRefreshing];
@@ -97,5 +98,40 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
+
+- (void)didClickFindCell:(QYZJFindCell *)cell index:(NSInteger)index {
+    
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    if (index == 5) {
+        
+        [self deletaPostWithIndexPath:indexPath];
+        
+    }
+    
+}
+
+
+
+- (void)deletaPostWithIndexPath:(NSIndexPath *)indexPath {
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"id"] = self.dataArray[indexPath.row].ID;
+    zkRequestTongYongTool * tool = [[zkRequestTongYongTool alloc] init];
+    tool.subject = [[RACSubject alloc] init];
+    [tool requestWithUrl:[QYZJURLDefineTool app_articleDelURL] andDict:dict];
+    @weakify(self);
+    [tool.subject subscribeNext:^(id  _Nullable x) {
+        @strongify(self);
+        if (x !=nil && [x[@"key"] intValue] == 1) {
+            [self.dataArray removeObjectAtIndex:indexPath.row];
+            [SVProgressHUD showSuccessWithStatus:@"删除动态成功"];
+            [self.tableView reloadData];
+        }else {
+            [SVProgressHUD dismiss];
+        }
+    }];
+}
+
 
 @end

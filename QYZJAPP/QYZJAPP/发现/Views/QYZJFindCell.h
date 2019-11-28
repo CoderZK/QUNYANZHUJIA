@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @class QYZJFindCell;
 @protocol QYZJFindCellDelegate <NSObject>
-
+// 0 0 头像 1 进店 2 收藏 3评论 4赞   5删除
 - (void)didClickFindCell:(QYZJFindCell *)cell index:(NSInteger)index;
 
 @end

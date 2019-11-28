@@ -12,13 +12,16 @@
 
 @interface QYZJMineQuestCell : UITableViewCell
 @property(nonatomic,strong)QYZJFindModel *waiModel;
+@property(nonatomic,assign)BOOL isServer;
 @end
 
 
 
 @interface QYZJMineQuestNeiCell : UITableViewCell
+@property(nonatomic,strong)UIButton *listBt;
 @property(nonatomic,strong)UILabel *titelLB;
 @property(nonatomic,strong)QYZJFindModel *model;
+
 @end
 
 

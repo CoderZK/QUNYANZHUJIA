@@ -153,7 +153,7 @@
         tap.cancelsTouchesInView = YES;//设置成N O表示当前控件响应后会传播到其他控件上，默认为YES
         [imageView addGestureRecognizer:tap];
         [self.picView addSubview:imageView];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:picArr[i]] placeholderImage:[UIImage imageNamed:@"369"]];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:picArr[i]]] placeholderImage:[UIImage imageNamed:@"369"]];
   
     }
     
@@ -178,7 +178,7 @@
 
 - (void)videoPlayAction:(UIButton *)button {
     
-     [PublicFuntionTool presentVideoVCWithNSString:self.dataModel.video_url isBenDiPath:NO];
+     [PublicFuntionTool presentVideoVCWithNSString:[QYZJURLDefineTool getVideoURLWithStr:self.dataModel.video_url] isBenDiPath:NO];
     
     
 }

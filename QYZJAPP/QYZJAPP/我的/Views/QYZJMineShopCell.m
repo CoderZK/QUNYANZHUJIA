@@ -20,28 +20,50 @@
 
     // Configure the view for the selected state
 }
-
+- (void)setIsShenHe:(NSInteger)isShenHe {
+    _isShenHe = isShenHe;
+}
 - (void)setDataArray:(NSArray<QYZJFindModel *> *)dataArray {
     _dataArray = dataArray;
+    
+    if (dataArray.count == 0) {
+        return;
+    }
+    
     QYZJFindModel * modelLeft = dataArray[0];
     QYZJFindModel * modelRight = nil;
     if (dataArray.count == 2) {
         modelRight = dataArray[1];
-        self.rightImgV.hidden = self.rightEdibtBt.hidden = self.rightMoneyLB.hidden = self.rightTitleLB.hidden = NO;
-        [self.rightImgV sd_setImageWithURL:[NSURL URLWithString:modelRight.pic] placeholderImage:[UIImage imageNamed:@"369"]];
+
+        NSString * rightStr = @"";
+        if (modelRight.pic.length > 0) {
+           rightStr = [[modelRight.pic componentsSeparatedByString:@","] firstObject];
+        }
+        [self.rightImgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:rightStr]] placeholderImage:[UIImage imageNamed:@"369"]];
         self.rightTitleLB.text = modelRight.name;
-       
         self.rightMoneyLB.text = [NSString stringWithFormat:@"￥%0.2f",modelRight.price];
+        self.rightImgV.hidden = self.rightEdibtBt.hidden = self.rightMoneyLB.hidden = self.rightTitleLB.hidden = self.rightBt.hidden = NO;
+        if (self.isShenHe){
+            self.rightEdibtBt.hidden = YES;
+        }
     }else {
-        self.rightImgV.hidden = self.rightEdibtBt.hidden = self.rightMoneyLB.hidden = self.rightTitleLB.hidden = YES;
-    }
-     [self.leftImgV sd_setImageWithURL:[NSURL URLWithString:modelLeft.pic] placeholderImage:[UIImage imageNamed:@"369"]];
-     self.leftTitleLB.text = modelLeft.name;
     
+      self.rightImgV.hidden = self.rightEdibtBt.hidden = self.rightMoneyLB.hidden = self.rightTitleLB.hidden = self.rightBt.hidden = YES;
+    }
+    NSString * leftStr = @"";
+    if (modelLeft.pic.length > 0) {
+       leftStr = [[modelLeft.pic componentsSeparatedByString:@","] firstObject];
+    }
+    
+     self.leftEditBt.hidden = self.isShenHe;
+     [self.leftImgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:leftStr]] placeholderImage:[UIImage imageNamed:@"369"]];
+     self.leftTitleLB.text = modelLeft.name;
      self.leftMoneyLB.text = [NSString stringWithFormat:@"￥%0.2f",modelLeft.price];
     
     
 }
+
+
 
 - (IBAction)click:(UIButton *)sender {
     

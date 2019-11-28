@@ -126,8 +126,8 @@
 
 - (void)setDataModel:(QYZJUserModel *)dataModel {
     _dataModel = dataModel;
-    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:dataModel.head_img] forState:(UIControlStateNormal) placeholderImage:[UIImage imageNamed:@"369"]];
-    self.titelLB.text = dataModel.nick_name;
+    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:dataModel.pic]] forState:(UIControlStateNormal) placeholderImage:[UIImage imageNamed:@"369"]];
+    self.titelLB.text = dataModel.name;
     
 }
 

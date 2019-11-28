@@ -156,4 +156,21 @@ typedef void (^Nav2)();
     return YES;
 }
 
+
+- (void)getUserBaseicInfo {
+    zkRequestTongYongTool * tool = [[zkRequestTongYongTool alloc] init];
+    [tool requestWithUrl:[QYZJURLDefineTool user_basicInfoURL] andDict:@{}];
+    tool.subject = [[RACSubject alloc] init];
+    @weakify(self);
+    [tool.subject subscribeNext:^(id  _Nullable x) {
+           @strongify(self);
+           if (x !=nil && [x[@"key"] intValue] == 1) {
+               [zkSignleTool shareTool].role = [[NSString stringWithFormat:@"%@",x[@"result"][@"role"]] intValue];
+           }else {
+               [SVProgressHUD dismiss];
+           }
+    }];
+}
+
+
 @end

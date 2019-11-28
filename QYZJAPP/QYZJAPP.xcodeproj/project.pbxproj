@@ -70,6 +70,11 @@
 		58271EF6238D12EF00587919 /* QYZJAddGoodsOrEditGoodsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 58271EF5238D12EF00587919 /* QYZJAddGoodsOrEditGoodsTVC.m */; };
 		5828E2B423851177008BF9D7 /* QYZJRobOrderDetailTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5828E2B323851177008BF9D7 /* QYZJRobOrderDetailTVC.m */; };
 		5828E2BC23853B1C008BF9D7 /* QYZJJingXingZhongRobOrderTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5828E2BB23853B1C008BF9D7 /* QYZJJingXingZhongRobOrderTVC.m */; };
+		5829CEC4238F5A2A00A4CFF0 /* QYZJEditShopNameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5829CEC2238F5A2A00A4CFF0 /* QYZJEditShopNameVC.m */; };
+		5829CEC5238F5A2A00A4CFF0 /* QYZJEditShopNameVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5829CEC3238F5A2A00A4CFF0 /* QYZJEditShopNameVC.xib */; };
+		5829CEC8238F9EB000A4CFF0 /* QYZJYanShouOrBaoXiuTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5829CEC7238F9EB000A4CFF0 /* QYZJYanShouOrBaoXiuTVC.m */; };
+		5829CECC238F9F5F00A4CFF0 /* QYZJYanShouOrBaoXiuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5829CECA238F9F5F00A4CFF0 /* QYZJYanShouOrBaoXiuCell.m */; };
+		5829CECD238F9F5F00A4CFF0 /* QYZJYanShouOrBaoXiuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5829CECB238F9F5F00A4CFF0 /* QYZJYanShouOrBaoXiuCell.xib */; };
 		582D2F842384C4D400CA70BF /* QYZJWorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 582D2F832384C4D400CA70BF /* QYZJWorkModel.m */; };
 		582E6DF6237FED28008BA3EE /* QYZJZengZhiOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 582E6DF4237FED28008BA3EE /* QYZJZengZhiOneCell.m */; };
 		582E6DF7237FED28008BA3EE /* QYZJZengZhiOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582E6DF5237FED28008BA3EE /* QYZJZengZhiOneCell.xib */; };
@@ -96,6 +101,7 @@
 		582F74EB2378F8F700F6FCB6 /* QYZJChangePayPasswordTwoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582F74E92378F8F700F6FCB6 /* QYZJChangePayPasswordTwoVC.xib */; };
 		582F84FD237E51B200CB8637 /* QYZJMineBaoXiuCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 582F84FB237E51B200CB8637 /* QYZJMineBaoXiuCellTableViewCell.m */; };
 		582F84FE237E51B200CB8637 /* QYZJMineBaoXiuCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 582F84FC237E51B200CB8637 /* QYZJMineBaoXiuCellTableViewCell.xib */; };
+		582FDDC3238E721B00A7FB4B /* zkRequestTongYongTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 582FDDC2238E721B00A7FB4B /* zkRequestTongYongTool.m */; };
 		5830538D23751FCA002A1AA5 /* QYZJTypesSearchTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5830538C23751FC9002A1AA5 /* QYZJTypesSearchTVC.m */; };
 		5830539023752003002A1AA5 /* QYZJSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5830538F23752003002A1AA5 /* QYZJSearchView.m */; };
 		58305393237541F2002A1AA5 /* QYZJSearchLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58305392237541F2002A1AA5 /* QYZJSearchLabelView.m */; };
@@ -404,6 +410,14 @@
 		5828E2B323851177008BF9D7 /* QYZJRobOrderDetailTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJRobOrderDetailTVC.m; sourceTree = "<group>"; };
 		5828E2BA23853B1C008BF9D7 /* QYZJJingXingZhongRobOrderTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJJingXingZhongRobOrderTVC.h; sourceTree = "<group>"; };
 		5828E2BB23853B1C008BF9D7 /* QYZJJingXingZhongRobOrderTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJJingXingZhongRobOrderTVC.m; sourceTree = "<group>"; };
+		5829CEC1238F5A2A00A4CFF0 /* QYZJEditShopNameVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJEditShopNameVC.h; sourceTree = "<group>"; };
+		5829CEC2238F5A2A00A4CFF0 /* QYZJEditShopNameVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJEditShopNameVC.m; sourceTree = "<group>"; };
+		5829CEC3238F5A2A00A4CFF0 /* QYZJEditShopNameVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJEditShopNameVC.xib; sourceTree = "<group>"; };
+		5829CEC6238F9EB000A4CFF0 /* QYZJYanShouOrBaoXiuTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJYanShouOrBaoXiuTVC.h; sourceTree = "<group>"; };
+		5829CEC7238F9EB000A4CFF0 /* QYZJYanShouOrBaoXiuTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJYanShouOrBaoXiuTVC.m; sourceTree = "<group>"; };
+		5829CEC9238F9F5F00A4CFF0 /* QYZJYanShouOrBaoXiuCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJYanShouOrBaoXiuCell.h; sourceTree = "<group>"; };
+		5829CECA238F9F5F00A4CFF0 /* QYZJYanShouOrBaoXiuCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJYanShouOrBaoXiuCell.m; sourceTree = "<group>"; };
+		5829CECB238F9F5F00A4CFF0 /* QYZJYanShouOrBaoXiuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJYanShouOrBaoXiuCell.xib; sourceTree = "<group>"; };
 		582D2F822384C4D400CA70BF /* QYZJWorkModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJWorkModel.h; sourceTree = "<group>"; };
 		582D2F832384C4D400CA70BF /* QYZJWorkModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJWorkModel.m; sourceTree = "<group>"; };
 		582E6DF3237FED28008BA3EE /* QYZJZengZhiOneCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJZengZhiOneCell.h; sourceTree = "<group>"; };
@@ -447,6 +461,8 @@
 		582F84FA237E51B200CB8637 /* QYZJMineBaoXiuCellTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMineBaoXiuCellTableViewCell.h; sourceTree = "<group>"; };
 		582F84FB237E51B200CB8637 /* QYZJMineBaoXiuCellTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMineBaoXiuCellTableViewCell.m; sourceTree = "<group>"; };
 		582F84FC237E51B200CB8637 /* QYZJMineBaoXiuCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJMineBaoXiuCellTableViewCell.xib; sourceTree = "<group>"; };
+		582FDDC1238E721B00A7FB4B /* zkRequestTongYongTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zkRequestTongYongTool.h; sourceTree = "<group>"; };
+		582FDDC2238E721B00A7FB4B /* zkRequestTongYongTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zkRequestTongYongTool.m; sourceTree = "<group>"; };
 		5830538B23751FC9002A1AA5 /* QYZJTypesSearchTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYZJTypesSearchTVC.h; sourceTree = "<group>"; };
 		5830538C23751FC9002A1AA5 /* QYZJTypesSearchTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYZJTypesSearchTVC.m; sourceTree = "<group>"; };
 		5830538E23752002002A1AA5 /* QYZJSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYZJSearchView.h; sourceTree = "<group>"; };
@@ -963,6 +979,8 @@
 				337F3EB320EA040400C5526A /* UIView+BSExtension.m */,
 				335010DB20EDF9AE00F8486B /* zkRequestTool.h */,
 				335010DC20EDF9AE00F8486B /* zkRequestTool.m */,
+				582FDDC1238E721B00A7FB4B /* zkRequestTongYongTool.h */,
+				582FDDC2238E721B00A7FB4B /* zkRequestTongYongTool.m */,
 				335010E120EDFC9300F8486B /* zkSignleTool.h */,
 				335010E220EDFC9300F8486B /* zkSignleTool.m */,
 				583B67B62372602600EDE846 /* QYZJLocationTool.h */,
@@ -1049,12 +1067,17 @@
 				587611AA23792B4A00A9DBA5 /* QYZJPingOrZanListTVC.m */,
 				587611B6237944F400A9DBA5 /* QYZJsystemNTVC.h */,
 				587611B7237944F400A9DBA5 /* QYZJsystemNTVC.m */,
+				5829CEC6238F9EB000A4CFF0 /* QYZJYanShouOrBaoXiuTVC.h */,
+				5829CEC7238F9EB000A4CFF0 /* QYZJYanShouOrBaoXiuTVC.m */,
 				58394F4F237A3DF40017505B /* QYZJfansAndAttentionTVC.h */,
 				58394F50237A3DF40017505B /* QYZJfansAndAttentionTVC.m */,
 				58394F52237A3F4C0017505B /* QYZJMineAskTVC.h */,
 				58394F53237A3F4C0017505B /* QYZJMineAskTVC.m */,
 				58394F55237A3F980017505B /* QYZJMineShopTVC.h */,
 				58394F56237A3F980017505B /* QYZJMineShopTVC.m */,
+				5829CEC1238F5A2A00A4CFF0 /* QYZJEditShopNameVC.h */,
+				5829CEC2238F5A2A00A4CFF0 /* QYZJEditShopNameVC.m */,
+				5829CEC3238F5A2A00A4CFF0 /* QYZJEditShopNameVC.xib */,
 				58271EEE238D0C3600587919 /* QYZJShopDetailTVC.h */,
 				58271EEF238D0C3600587919 /* QYZJShopDetailTVC.m */,
 				58271EF4238D12EF00587919 /* QYZJAddGoodsOrEditGoodsTVC.h */,
@@ -1152,6 +1175,9 @@
 				58271EEC238CFC8600587919 /* QYZJAnLiDetailHeadView.m */,
 				58271EF1238D0C8200587919 /* QYZJShopDetailHeadView.h */,
 				58271EF2238D0C8200587919 /* QYZJShopDetailHeadView.m */,
+				5829CEC9238F9F5F00A4CFF0 /* QYZJYanShouOrBaoXiuCell.h */,
+				5829CECA238F9F5F00A4CFF0 /* QYZJYanShouOrBaoXiuCell.m */,
+				5829CECB238F9F5F00A4CFF0 /* QYZJYanShouOrBaoXiuCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1820,6 +1846,7 @@
 				584331CC23703C010046C0BD /* QYZJFindOneCell.xib in Resources */,
 				584331A5236FF3F00046C0BD /* QYZhuJiaLoginVC.xib in Resources */,
 				583536812386657100D9BE26 /* QYZJHomePayDetailTwoCell.xib in Resources */,
+				5829CEC5238F5A2A00A4CFF0 /* QYZJEditShopNameVC.xib in Resources */,
 				584331B723700BB50046C0BD /* QYZJHomeFourCell.xib in Resources */,
 				337F3E6620E9FE5300C5526A /* LaunchScreen.storyboard in Resources */,
 				582F74DC2378F80A00F6FCB6 /* QYZJChangePhoneVC.xib in Resources */,
@@ -1843,6 +1870,7 @@
 				582F74E62378F8DE00F6FCB6 /* QYZJChangePayPasswordOneVC.xib in Resources */,
 				5819750D237E996D00FC77EE /* QYZJMineServicePeopleVC.xib in Resources */,
 				58309F6823878E8F00CCAEA6 /* QYZJXiaoYanZiVC.xib in Resources */,
+				5829CECD238F9F5F00A4CFF0 /* QYZJYanShouOrBaoXiuCell.xib in Resources */,
 				583536892386657100D9BE26 /* QYZJQianDanOneCell.xib in Resources */,
 				587611B5237940B200A9DBA5 /* QYZJSystemCell.xib in Resources */,
 				584331CE23703FA80046C0BD /* Assets.xcassets in Resources */,
@@ -2051,10 +2079,12 @@
 				584A1CE22383BDF4007FDC3D /* QYZJChangeDetailedListTVC.m in Sources */,
 				335010DD20EDF9AE00F8486B /* zkRequestTool.m in Sources */,
 				5835369C23866C6E00D9BE26 /* QYZJConstructionProgressCell.m in Sources */,
+				5829CEC4238F5A2A00A4CFF0 /* QYZJEditShopNameVC.m in Sources */,
 				58433180236FAB880046C0BD /* zkBannerModel.m in Sources */,
 				583ED6A22373DF0F0070441A /* QYZJFindModel.m in Sources */,
 				58434592237117C80087A2D9 /* QYZJFangDanOneTVC.m in Sources */,
 				584331BE2370107D0046C0BD /* QYZJHomeFiveCell.m in Sources */,
+				582FDDC3238E721B00A7FB4B /* zkRequestTongYongTool.m in Sources */,
 				58309F6E2387A50B00CCAEA6 /* QYZJMineZhuYeHeadVIew.m in Sources */,
 				587611AB23792B4A00A9DBA5 /* QYZJPingOrZanListTVC.m in Sources */,
 				583ED6B023741A3D0070441A /* QYZJFindTwoCell.m in Sources */,
@@ -2066,6 +2096,7 @@
 				58433188236FB80C0046C0BD /* HomeNavigationView.m in Sources */,
 				582F74D32378F29000F6FCB6 /* MXALAsset.m in Sources */,
 				5819751B237EA45E00FC77EE /* QYZJShengQingRuZhuVC.m in Sources */,
+				5829CECC238F9F5F00A4CFF0 /* QYZJYanShouOrBaoXiuCell.m in Sources */,
 				582F74CF2378F29000F6FCB6 /* MXImagePreviewCell.m in Sources */,
 				58219ABF237D379000556CC3 /* QYZJMineQuestCell.m in Sources */,
 				581974F8237E7B4900FC77EE /* QYZJMineOrderHeadView.m in Sources */,
@@ -2102,6 +2133,7 @@
 				58394F5E237A412B0017505B /* HHYMineFiveCell.m in Sources */,
 				5843319F236FE84A0046C0BD /* QYZJHomeThreeCell.m in Sources */,
 				58305396237555D3002A1AA5 /* QYZJMineHeadView.m in Sources */,
+				5829CEC8238F9EB000A4CFF0 /* QYZJYanShouOrBaoXiuTVC.m in Sources */,
 				583ED69923739F6A0070441A /* QYZJTongYongHeadFootView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

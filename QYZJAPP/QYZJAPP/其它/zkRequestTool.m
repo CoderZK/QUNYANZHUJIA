@@ -40,7 +40,7 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        [SVProgressHUD dismiss];
+        [SVProgressHUD showErrorWithStatus:@"请求异常,稍后再试"];
         if (failure)
         {
             failure(task,error);
@@ -69,16 +69,14 @@
     NSURLSessionDataTask * task = [manager POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if (success)
+            
         {
             success(task,responseObject);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        
-        if ( [[NSString stringWithFormat:@"%@",error.userInfo[@"NSLocalizedDescription"]] isEqualToString:@"cancelled"]) {
-            return ;
-        }
-        
+  
+         [SVProgressHUD showErrorWithStatus:@"请求异常,稍后再试"];
         if (failure)
         {
             failure(task,error);
@@ -113,10 +111,10 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        if ( [[NSString stringWithFormat:@"%@",error.userInfo[@"NSLocalizedDescription"]] isEqualToString:@"cancelled"]) {
-            return ;
-        }
-        [SVProgressHUD showErrorWithStatus:@"网络异常"];
+//        if ( [[NSString stringWithFormat:@"%@",error.userInfo[@"NSLocalizedDescription"]] isEqualToString:@"cancelled"]) {
+//            return ;
+//        }
+         [SVProgressHUD showErrorWithStatus:@"请求异常,稍后再试"];
         if (failure)
         {
             failure(task,error);
@@ -201,7 +199,7 @@
         
         for (UIImage * image in images)
         {
-            [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.5) name:name fileName:@"teswwt1.jpg" mimeType:@"image/jpeg"];
+            [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.5) name:name fileName:[NSString stringWithFormat:@"%ld.jpg",random() / 100] mimeType:@"image/jpeg"];
             
         }
         
@@ -275,6 +273,142 @@
         }
     }];
 }
+
+
++ (void)getUpdateImgeModelWithCompleteModel:(void(^)(QYZJTongYongModel * model))completeBlock {
+    
+    NSMutableDictionary *mDict = [NSMutableDictionary dictionary];
+       NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
+       [mDict setValue:device forKey:@"device_id"];
+       [mDict setValue:@1 forKey:@"channel"];
+       mDict[@"token"] = [zkSignleTool shareTool].session_token;
+       NSString *version = [NSString stringWithFormat:@"V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+       [mDict setValue:version forKey:@"version"];
+       
+       //       NSString * str222 = [NSString stringWithFormat:@"%@%@%@%@",device,@1,version,[device substringFromIndex:device.length-5]];
+       
+       NSString *mdSignature = [NSString stringToMD5:[NSString stringWithFormat:@"%@%@%@%@",device,@1,version,[device substringFromIndex:device.length-5]]];
+       [mDict setValue:[NSString stringWithFormat:@"%@1",mdSignature] forKey:@"signature"];
+       
+       AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+       //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain", @"text/html",@"text/json",@"text/javascript", nil];
+       //    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+       //    [manager.requestSerializer setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+       manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain", @"text/html",@"text/json",@"text/javascript", nil];
+       [manager.requestSerializer setValue:@"http://iosapi.jkcsoft.com/public/index.html" forHTTPHeaderField:@"Referer"];
+       
+       [manager POST:[QYZJURLDefineTool app_uploadImgTokenURL] parameters:mDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+           if (completeBlock)
+           {
+               QYZJTongYongModel * model2 = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
+               completeBlock(model2);
+           }
+       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+           
+           [SVProgressHUD dismiss];
+           
+           if (completeBlock)
+                {
+                    completeBlock(nil);
+                }
+           
+       }];
+    
+    
+}
+
++ (void)getUpdateVideoModelWithCompleteModel:(void(^)(QYZJTongYongModel * model))completeBlock {
+    
+    NSMutableDictionary *mDict = [NSMutableDictionary dictionary];
+    NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
+    [mDict setValue:device forKey:@"device_id"];
+    [mDict setValue:@1 forKey:@"channel"];
+    mDict[@"token"] = [zkSignleTool shareTool].session_token;
+    NSString *version = [NSString stringWithFormat:@"V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+    [mDict setValue:version forKey:@"version"];
+    
+    //       NSString * str222 = [NSString stringWithFormat:@"%@%@%@%@",device,@1,version,[device substringFromIndex:device.length-5]];
+    
+    NSString *mdSignature = [NSString stringToMD5:[NSString stringWithFormat:@"%@%@%@%@",device,@1,version,[device substringFromIndex:device.length-5]]];
+    [mDict setValue:[NSString stringWithFormat:@"%@1",mdSignature] forKey:@"signature"];
+    
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain", @"text/html",@"text/json",@"text/javascript", nil];
+    //    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    //    [manager.requestSerializer setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain", @"text/html",@"text/json",@"text/javascript", nil];
+    [manager.requestSerializer setValue:@"http://iosapi.jkcsoft.com/public/index.html" forHTTPHeaderField:@"Referer"];
+    
+    [manager POST:[QYZJURLDefineTool app_uploadVideoTokenURL] parameters:mDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (completeBlock)
+        {
+            QYZJTongYongModel * model2 = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
+            completeBlock(model2);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        [SVProgressHUD dismiss];
+        
+        if (completeBlock)
+             {
+                 completeBlock(nil);
+             }
+        
+    }];
+    
+}
+
+/**  上传音频和视频 */
+
++(void)NetWorkingUpLoadmediOrVeidoWithfileData:(NSData *)fileData  parameters:(id)parameters success:(SuccessBlock)success failure:(FailureBlock)failure{
+    
+   
+    NSMutableDictionary *mDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
+      //    NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
+      //    [mDict setValue:device forKey:@"deviceId"];
+      //    [mDict setValue:@1 forKey:@"channel"];
+      //    NSString *version = [NSString stringWithFormat:@"V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+      //    [mDict setValue:version forKey:@"version"];
+      //    NSString *mdSignature = [NSString stringToMD5:[NSString stringWithFormat:@"%@%@%@%@",device,@1,version,[device substringFromIndex:device.length-5]]];
+      //    [mDict setValue:[NSString stringWithFormat:@"%@1",mdSignature] forKey:@"signature"];
+      
+      AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+      manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain", @"text/html",@"text/json",@"text/javascript", nil];
+      [manager.requestSerializer setValue:@"http://iosapi.jkcsoft.com/public/index.html" forHTTPHeaderField:@"Referer"];
+      
+      
+      //    NSDictionary * dict = parameters;
+      //    //获取josnzi字符串
+      //    NSString * josnStr = [NSString convertToJsonData:dict];
+      //    //获取MD5字符串
+      //    NSString * MD5Str = [NSString stringToMD5:[josnStr stringByAppendingString:@"1375d7ac2b2a8e25"]];
+      //    NSDictionary * paraDict = @{@"authCode":MD5Str,@"jsonObj":josnStr};
+      
+      [manager POST:QiNiuYunUploadURL parameters:mDict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+          
+          if (fileData) {
+              [formData appendPartWithFileData:fileData name:@"file" fileName:@"369369.mp4" mimeType:@"video/quicktime"];
+          }
+          
+      } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+          
+          if (success)
+          {
+              success(task,responseObject);
+          }
+          
+      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+          [SVProgressHUD showSuccessWithStatus:@"网络异常"];
+          if (failure)
+          {
+              failure(task,error);
+          }
+      }];
+    
+    
+    
+}
+
 
 
 @end

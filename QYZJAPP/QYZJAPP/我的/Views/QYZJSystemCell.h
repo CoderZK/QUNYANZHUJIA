@@ -17,7 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *contentLB;
 @property (weak, nonatomic) IBOutlet UILabel *timeLB;
 @property (weak, nonatomic) IBOutlet UIView *whiteVTwo;
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *picCons;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *picHcons;
+@property(nonatomic,strong)UIScrollView *scrollView;
+@property(nonatomic,strong)QYZJFindModel *model;
 @end
 
 NS_ASSUME_NONNULL_END

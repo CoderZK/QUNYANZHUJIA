@@ -190,6 +190,7 @@
         return cell;
     }else if (indexPath.section == 1) {
         QYZJMineShopCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJMineShopCell" forIndexPath:indexPath];
+         cell.isShenHe = YES;
         if (indexPath.row * 2 + 2 <= self.dataModel.goods_list.count) {
                cell.dataArray = [self.dataModel.goods_list subarrayWithRange:NSMakeRange(indexPath.row * 2 , 2)];
            }else {

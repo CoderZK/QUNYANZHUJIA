@@ -35,7 +35,8 @@
 
 - (BOOL)isCanUsePhotos;
 - (BOOL)isCanUsePicture;
-
+//获取个人的身份
+- (void)getUserBaseicInfo;
 
 @end
 

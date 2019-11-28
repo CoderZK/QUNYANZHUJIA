@@ -225,7 +225,7 @@
 
 - (void)setModel:(QYZJFindModel *)model {
     _model = model;
-    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:model.headImg] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"]];
+    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.headImg]]  forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"]];
     self.nameLB.text = model.nickName;
     self.contentLB.attributedText = [model.content getMutableAttributeStringWithFont:14 lineSpace:3 textColor:[UIColor blackColor]];
     CGFloat contentH =  [model.content getHeigtWithFontSize:14 lineSpace:3 width:ScreenW - 20];
@@ -359,7 +359,7 @@
             UIImageView * imgV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
             imgV.layer.cornerRadius = 5;
             imgV.clipsToBounds = YES;
-            [imgV sd_setImageWithURL:[NSURL URLWithString:goodArr[i].pic] placeholderImage:[UIImage imageNamed:@"369"]];
+            [imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:goodArr[i].pic]] placeholderImage:[UIImage imageNamed:@"369"]];
             [googBt addSubview:imgV];
             
             UILabel * titleLB = [[UILabel alloc] initWithFrame:CGRectMake(70 , 10,  ScreenW - 20 -80, 20)];
@@ -432,7 +432,7 @@
                 button.userInteractionEnabled = NO;
             }else {
                 //无视频
-                [imageView sd_setImageWithURL:[NSURL URLWithString:arr[i]] placeholderImage:[UIImage imageNamed:@"369"]];
+                [imageView sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:arr[i]]]  placeholderImage:[UIImage imageNamed:@"369"]];
                 
             }
             
@@ -452,7 +452,7 @@
     if (tag <self.model.videos.count ) {
         //有视频
         
-        [PublicFuntionTool presentVideoVCWithNSString:self.model.videos[tag] isBenDiPath:NO];
+        [PublicFuntionTool presentVideoVCWithNSString:[QYZJURLDefineTool getVideoURLWithStr:self.model.videos[tag]] isBenDiPath:NO];
         
     }else {
         //无视频

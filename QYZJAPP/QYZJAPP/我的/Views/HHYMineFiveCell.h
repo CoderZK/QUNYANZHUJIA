@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *friendsLB;
 @property (weak, nonatomic) IBOutlet UILabel *subscribeLB;
 @property(nonatomic,assign)id<HHYMineFiveCellDelegate>delegate;
+@property(nonatomic,strong)QYZJUserModel *model;
 @end
 
 NS_ASSUME_NONNULL_END

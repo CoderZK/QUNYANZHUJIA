@@ -29,7 +29,7 @@
     if (dataArray.count == 2) {
         modelRight = dataArray[1];
         self.rightImgV.hidden = self.rightMoneyLB.hidden = self.rightTitleLB.hidden = NO;
-        [self.rightImgV sd_setImageWithURL:[NSURL URLWithString:modelRight.pic] placeholderImage:[UIImage imageNamed:@"369"]];
+        [self.rightImgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:modelRight.pic]]  placeholderImage:[UIImage imageNamed:@"369"]];
         self.rightTitleLB.text = modelRight.name;
         self.rightMoneyLB.text = [NSString stringWithFormat:@"￥%0.2f",modelRight.price];
         if (modelRight.isSelect) {
@@ -40,7 +40,7 @@
     }else {
         self.rightImgV.hidden = self.rightMoneyLB.hidden = self.rightTitleLB.hidden = YES;
     }
-     [self.leftImgV sd_setImageWithURL:[NSURL URLWithString:modelLeft.pic] placeholderImage:[UIImage imageNamed:@"369"]];
+     [self.leftImgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:modelLeft.pic]]  placeholderImage:[UIImage imageNamed:@"369"]];
      self.leftTitleLB.text = modelLeft.name;
     
      self.leftMoneyLB.text = [NSString stringWithFormat:@"￥%0.2f",modelLeft.price];

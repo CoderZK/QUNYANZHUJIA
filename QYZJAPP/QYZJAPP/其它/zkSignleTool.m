@@ -107,6 +107,23 @@ static zkSignleTool * tool = nil;
     
 }
 
+- (void)setRole:(NSInteger)role {
+    [[NSUserDefaults standardUserDefaults] setInteger:role forKey:@"role"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSInteger)role {
+    return [[NSUserDefaults standardUserDefaults] integerForKey:@"role"];
+}
+
+//- (void)setRole:(NSString *)role {
+//    [[NSUserDefaults standardUserDefaults] setInteger:role forKey:@"role"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//}
+//- (NSString *)role {
+//    return [[NSUserDefaults standardUserDefaults] integerForKey:@"role"];
+//}
+
 - (void)setDeviceToken:(NSString *)deviceToken {
     
     [[NSUserDefaults standardUserDefaults] setObject:deviceToken forKey:@"deviceToken"];

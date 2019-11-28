@@ -55,9 +55,26 @@
     self.navigationController.navigationBar.hidden = NO;
 }
 
+
+- (void)update {
+    
+    NSString *token = @"39yV6r_IF9odSp3yygRrCkeUmEg-7wEi5nkEomTL:hW48mH_kJhbuAzXooQOuEkqgbd4=:eyJmc2l6ZUxpbWl0IjoxMDQ4NTc2MCwic2NvcGUiOiJiaXlvdS1zcGFjZSIsInJldHVybkJvZHkiOiJ7XCJrZXlcIjpcIiQoa2V5KVwiLFwiaGFzaFwiOlwiJChldGFnKVwiLFwiYnVja2V0XCI6XCIkKGJ1Y2tldClcIixcImZuYW1lXCI6JChmbmFtZSl9IiwibWltZUxpbWl0IjoiaW1hZ2UvKiIsImRlYWRsaW5lIjoxNTc0ODIzNTk0fQ==";
+    QNUploadManager *upManager = [[QNUploadManager alloc] init];
+    NSData *data = [@"Hello, World!" dataUsingEncoding : NSUTF8StringEncoding];
+    [upManager putData:data key:@"hello" token:token
+    complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+    NSLog(@"%@", info);
+    NSLog(@"%@", resp);
+    } option:nil];
+    
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self update];
+    
     QYZJLocationTool * tool = [[QYZJLocationTool alloc] init];
     [tool locationAction];
     Weak(weakSelf);
@@ -102,6 +119,9 @@
         self.page++;
         [self getData];
     }];
+    
+    
+    [self getUserBaseicInfoHome];
     
 }
 
@@ -223,14 +243,16 @@
         cell.delegate = self;
         return cell;
     }else if (indexPath.section == 1) {
-        if (0) {
+        if ([zkSignleTool shareTool].role == 0) {
             QYZJHomeOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeOneCell" forIndexPath:indexPath];
             cell.delegate = self;
             return cell;
+        }else {
+            QYZJHomeTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeTwoCell" forIndexPath:indexPath];
+                   cell.delegate = self;
+                   return cell;
         }
-        QYZJHomeTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeTwoCell" forIndexPath:indexPath];
-        cell.delegate = self;
-        return cell;
+       
     }else if (indexPath.section == 2) {
         QYZJHomeThreeCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeThreeCell" forIndexPath:indexPath];
         return cell;
@@ -395,6 +417,24 @@
     }];
     
 }
+
+
+- (void)getUserBaseicInfoHome {
+    zkRequestTongYongTool * tool = [[zkRequestTongYongTool alloc] init];
+    [tool requestWithUrl:[QYZJURLDefineTool user_basicInfoURL] andDict:@{}];
+    tool.subject = [[RACSubject alloc] init];
+    @weakify(self);
+    [tool.subject subscribeNext:^(id  _Nullable x) {
+           @strongify(self);
+           if (x !=nil && [x[@"key"] intValue] == 1) {
+               [zkSignleTool shareTool].role = [[NSString stringWithFormat:@"%@",x[@"result"][@"role"]] intValue];
+               [self.tableView reloadData];
+           }else {
+               [SVProgressHUD dismiss];
+           }
+    }];
+}
+
 
 
 @end

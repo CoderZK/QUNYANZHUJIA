@@ -226,13 +226,13 @@ static PublicFuntionTool * tool = nil;
     }
     
     
-//    if (self.footV.viewBlock != nil) {
-//        self.footV.viewBlock(button);
-//    }
+    //    if (self.footV.viewBlock != nil) {
+    //        self.footV.viewBlock(button);
+    //    }
     
-//    if (self.finshClickBlock != nil) {
-//        self.finshClickBlock(button);
-//    }
+    //    if (self.finshClickBlock != nil) {
+    //        self.finshClickBlock(button);
+    //    }
     
 }
 
@@ -240,29 +240,53 @@ static PublicFuntionTool * tool = nil;
 + (void)getImageFromPHAsset:(PHAsset *)asset Complete:(void(^)(NSData * data,NSString * str))result {
     __block NSData *data;
     PHAssetResource *resource = [[PHAssetResource assetResourcesForAsset:asset] firstObject];
-    if (asset.mediaType == PHAssetMediaTypeImage) {
-        PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+    //    if (asset.mediaType == PHAssetMediaTypeImage) {
+    //        PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+    //        options.version = PHImageRequestOptionsVersionCurrent;
+    //        options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+    //        options.synchronous = YES;
+    //        [[PHImageManager defaultManager] requestImageDataForAsset:asset
+    //                                                          options:options
+    //                                                    resultHandler:
+    //         ^(NSData *imageData,
+    //           NSString *dataUTI,
+    //           UIImageOrientation orientation,
+    //           NSDictionary *info) {
+    //            data = [NSData dataWithData:imageData];
+    //        }];
+    //    }
+    
+    if (asset.mediaType == PHAssetMediaTypeVideo) {
+        
+        PHVideoRequestOptions *options = [[PHVideoRequestOptions alloc] init];
+        
         options.version = PHImageRequestOptionsVersionCurrent;
-        options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
-        options.synchronous = YES;
-        [[PHImageManager defaultManager] requestImageDataForAsset:asset
-                                                          options:options
-                                                    resultHandler:
-         ^(NSData *imageData,
-           NSString *dataUTI,
-           UIImageOrientation orientation,
-           NSDictionary *info) {
-            data = [NSData dataWithData:imageData];
+        
+        options.deliveryMode = PHVideoRequestOptionsDeliveryModeAutomatic;
+        
+        PHImageManager *manager = [PHImageManager defaultManager];
+        
+        [manager requestAVAssetForVideo:asset options:options resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
+            
+            AVURLAsset *urlAsset = (AVURLAsset *)asset;
+            
+            NSURL *url = urlAsset.URL;
+            
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            
+            if (result) {
+                if (data.length <= 0) {
+                    result(nil, nil);
+                } else {
+                    result(data, resource.originalFilename);
+                }
+            }
+            
         }];
+        
     }
     
-    if (result) {
-        if (data.length <= 0) {
-            result(nil, nil);
-        } else {
-            result(data, resource.originalFilename);
-        }
-    }
+    
 }
 
 @end
@@ -290,6 +314,9 @@ static PublicFuntionTool * tool = nil;
     
     
 }
+
+
+
 
 
 @end

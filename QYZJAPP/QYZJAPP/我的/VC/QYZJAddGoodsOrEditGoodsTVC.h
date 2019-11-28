@@ -11,8 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJAddGoodsOrEditGoodsTVC : BaseTableViewController
-@property(nonatomic,strong)QYZJFindModel *dataModel;
-@property(nonatomic,assign)NSInteger type; //0 修改 1 添加
+@property(nonatomic,assign)NSInteger type; //1 修改 0 添加 2 已下架
+@property(nonatomic,strong)NSString *shopId;
+@property(nonatomic,strong)NSString *goodsId;
 @end
 
 NS_ASSUME_NONNULL_END

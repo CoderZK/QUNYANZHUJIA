@@ -16,12 +16,16 @@
 @property(nonatomic,strong)UIView *headV;
 @property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)NSMutableArray *picsArr;
+@property(nonatomic,strong)NSMutableArray *picsStrArr;
 @property(nonatomic,strong)NSString *videoStr;
 @property(nonatomic,assign)BOOL   isChooseVideo;
 @property(nonatomic,assign)BOOL isShowShop;
+@property(nonatomic,strong)UIButton *deleteBt;
 
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
+@property(nonatomic,strong)QYZJTongYongModel *imgModel,*videoModel;
+
 
 
 @end
@@ -34,6 +38,7 @@
     [self setFootV];
     [self createHeadV];
     self.picsArr = @[].mutableCopy;
+    self.picsArr  = @[].mutableCopy;
     [self addPicsWithArr:@[].mutableCopy];
     self.videoStr = nil;
     self.navigationItem.title = @"发布动态";
@@ -53,9 +58,28 @@
        }];
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
+    [self getImgDict];
+    [self getVideoDict];
     
 }
 
+- (void)getImgDict {
+    
+
+    
+    [zkRequestTool getUpdateImgeModelWithCompleteModel:^(QYZJTongYongModel *model) {
+           self.imgModel = model;
+       }];
+    
+}
+
+- (void)getVideoDict {
+    
+    [zkRequestTool getUpdateVideoModelWithCompleteModel:^(QYZJTongYongModel *model) {
+        self.videoModel = model;
+    }];
+    
+}
 
 - (void)getData {
 
@@ -75,9 +99,6 @@
                 [self.dataArray removeAllObjects];
             }
             [self.dataArray addObjectsFromArray:arr];
-            if (self.dataArray.count == 0) {
-                [SVProgressHUD showSuccessWithStatus:@"暂无数据"];
-            }
             [self.tableView reloadData];
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
@@ -101,7 +122,9 @@
     KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"发布" andImgaeName:@""];
     Weak(weakSelf);
     view.footViewClickBlock = ^(UIButton *button) {
-           NSLog(@"\n\n%@",@"完成");
+          
+        [weakSelf FaBuDongTai];
+        
     };
     [self.view addSubview:view];
 }
@@ -152,7 +175,7 @@
     [self.whiteOneV addSubview:lb3];
     [self.headV addSubview:self.whiteOneV];
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(100, 10, ScreenW, ww+20)];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(100, 10, ScreenW - 110, ww+20)];
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.backgroundColor = WhiteColor;
     [self.whiteOneV addSubview:self.scrollView];
@@ -195,12 +218,15 @@
     [imageView addSubview:button];
     button.alpha = 0.8;
     [button addTarget:self action:@selector(play) forControlEvents:UIControlEventTouchUpInside];
-    button.userInteractionEnabled = NO;
+    button.userInteractionEnabled = YES;
     imageView.hidden = YES;
     
     UIButton * delectVideoBt = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) - 10, 3, 20, 20)];
     [delectVideoBt setImage:[UIImage imageNamed:@"11"] forState:UIControlStateNormal];
-    [imageView addSubview:delectVideoBt];
+    [delectVideoBt addTarget:self action:@selector(deleteVideo) forControlEvents:UIControlEventTouchUpInside];
+    [self.whiteTwoV addSubview:delectVideoBt];
+    self.deleteBt.hidden = YES;
+    self.deleteBt = delectVideoBt;
 
     
     self.headV.mj_h = CGRectGetMaxY(self.whiteTwoV.frame);
@@ -209,7 +235,9 @@
     
 }
 
-
+- (void)deleteVideo {
+    self.videoStr = nil;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 0.6;
@@ -305,14 +333,16 @@
         self.videoImgV.hidden = YES;
         self.headV.mj_h = CGRectGetMaxY(self.whiteTwoV.frame);
         self.tableView.tableHeaderView = self.headV;
+        self.deleteBt.hidden = YES;
         
     }else {
         self.addBt.hidden = YES;
         self.videoImgV.hidden = NO;
         self.whiteTwoV.mj_h = (ScreenW - 110)*9/16 + 20;
-        self.videoImgV.image = [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:videoStr] size:CGSizeMake((ScreenW - 110), (ScreenW - 110)*9/16)];
+        self.videoImgV.image = [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",QiNiuVideoURL,videoStr]] size:CGSizeMake((ScreenW - 110), (ScreenW - 110)*9/16)];
         self.headV.mj_h = CGRectGetMaxY(self.whiteTwoV.frame);
         self.tableView.tableHeaderView = self.headV;
+        self.deleteBt.hidden = NO;
         
     }
 }
@@ -344,8 +374,12 @@
             deleteBt.tag = 100+i;
             [deleteBt addTarget:self action:@selector(deleteHitAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.scrollView addSubview:deleteBt];
-            [anNiuBt setBackgroundImage:picsArr[i] forState:UIControlStateNormal];
             
+            if ([picsArr[i] isKindOfClass:[NSString class]]) {
+                 [anNiuBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:picsArr[i]]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+            }else {
+                 [anNiuBt setBackgroundImage:picsArr[i] forState:UIControlStateNormal];
+            }
         }
         
         
@@ -355,6 +389,50 @@
     
     
 }
+
+- (void)FaBuDongTai {
+    
+    if (self.desTV.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请输入动态内容"];
+        return;
+    }
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"type"] = @"0";
+    dict[@"video"] = self.videoStr;
+    dict[@"picture"] = [self.picsArr componentsJoinedByString:@","];
+    NSMutableArray * goodsA = @[].mutableCopy;
+    for (QYZJFindModel * model in self.dataArray) {
+        if (model.isSelect) {
+            [goodsA addObject:model.ID];
+        }
+    }
+    dict[@"gooddIds"] = [goodsA componentsJoinedByString:@","];
+    dict[@"content"] = self.desTV.text;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_insertArticleURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            [SVProgressHUD showSuccessWithStatus:@"发帖成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+}
+
 
 - (void)deleteHitAction:(UIButton *)button {
     [self.picsArr removeObjectAtIndex:button.tag - 100];
@@ -373,7 +451,7 @@
     }
 }
 
-
+//添加选图片
 - (void)addVideoaction {
     self.isChooseVideo = YES;
     TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
@@ -397,14 +475,10 @@
     
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
         if ([self isCanUsePhotos]) {
             [self showMXPhotoCameraAndNeedToEdit:YES completion:^(UIImage *image, UIImage *originImage, CGRect cutRect) {
-                
                 [self.picsArr addObject:image];
-                
-    
-                
+                [self updateImgsToQiNiuYun];
             }];
         }else{
             UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"无法使用相机" message:@"请在iPhone的""设置-隐私-相机""中允许访问相机" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
@@ -431,10 +505,8 @@
             imagePickerVc.cropRectLandscape = CGRectMake(0, (ScreenW - ScreenH)/2, ScreenH, ScreenH);
             imagePickerVc.circleCropRadius = ScreenW/2;
             [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
-                
                 [self.picsArr addObjectsFromArray:photos];
-                [self addPicsWithArr:self.picsArr];
-                
+                [self updateImgsToQiNiuYun];
             }];
             [self presentViewController:imagePickerVc animated:YES completion:nil];
         }else{
@@ -458,23 +530,64 @@
     
 }
 
-- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingVideo:(UIImage *)coverImage sourceAssets:(PHAsset *)asset {
-    
-    NSLog(@"%@",asset);
-    
-    //    [PublicFuntionTool getImageFromPHAsset:asset Complete:^(NSData * _Nonnull data, NSString * _Nonnull str) {
-    //
-    //
-    //
-    //    }];
-}
-
-
 - (void)play {
-    
-    [PublicFuntionTool presentVideoVCWithNSString:self.videoStr isBenDiPath:NO];
-    
+    [PublicFuntionTool presentVideoVCWithNSString:[QYZJURLDefineTool getVideoURLWithStr:self.videoStr] isBenDiPath:NO];
 }
+
+#pragma mark ------ 如下是图片和视频的处理上传过程 ------
+//视频选择结束
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingVideo:(UIImage *)coverImage sourceAssets:(PHAsset *)asset {
+    [PublicFuntionTool getImageFromPHAsset:asset Complete:^(NSData * _Nonnull data, NSString * _Nonnull str) {
+        NSMutableDictionary * dict = @{}.mutableCopy;
+        dict[@"token"] = self.videoModel.token;
+ 
+        [zkRequestTool NetWorkingUpLoadmediOrVeidoWithfileData:data parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+            [SVProgressHUD showSuccessWithStatus:@"上传视频成功"];
+            self.videoStr = [NSString stringWithFormat:@"%@",responseObject[@"key"]];
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            NSLog(@"\n\n------%@",error);
+        }];
+    }];
+}
+
+//创建上传图片队列
+- (void)updateImgsToQiNiuYun {
+    //创建队列组
+    dispatch_group_t group = dispatch_group_create();
+    //创建队列
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    for (int i = 0 ; i < self.picsArr.count; i++) {
+        if ([self.picsArr[i] isKindOfClass:[UIImage class]]) {
+            dispatch_group_async(group, queue, ^{
+                [self upimgWithindex:i withgrop:group];
+            });
+        }
+    }
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+       //全部上传成功
+        [SVProgressHUD showSuccessWithStatus:@"上传图片成功"];
+        [self addPicsWithArr:self.picsArr];
+    });
+}
+//上传图片操作
+- (void)upimgWithindex:(NSInteger)index withgrop:(dispatch_group_t)group{
+    dispatch_group_enter(group);
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"token"] = self.imgModel.token;
+    [zkRequestTool NetWorkingUpLoad:QiNiuYunUploadURL image:self.picsArr[index] andName:@"file" parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSLog(@"%@",@"京东卡的风控安徽");
+        [self.picsArr removeObjectAtIndex:index];
+        [self.picsArr insertObject:[NSString stringWithFormat:@"%@",responseObject[@"key"]] atIndex:index];
+        dispatch_group_leave(group);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+    }];
+
+}
+
+
 
 @end
 

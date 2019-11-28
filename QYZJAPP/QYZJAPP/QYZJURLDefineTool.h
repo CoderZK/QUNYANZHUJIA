@@ -13,8 +13,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 ////测试本地
 #define URLOne @"http://mobile.qunyanzhujia.com:8098/qyzj/"
+
 ////图片地址
-#define ImgURL @"http://47.100.198.68/upload"
+#define QiNiuImgURL @"http://web.qunyanzhujia.com/"
+////视频地址地址
+#define QiNiuVideoURL @"http://media.qunyanzhujia.com/"
+//骑牛云的上传地址
+#define QiNiuYunUploadURL @"http://upload.qiniup.com/"
+
 
 ////测试本地映射
 //#define URL @"http://jgcbxt.natappfree.cc"
@@ -247,12 +253,26 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)user_turnoverDetailsURL;
 /**获取系统参数*/
 +(NSString *)app_systemParamURL;
+/**上传图片*/
++(NSString *)app_uploadImgTokenURL;
+
+/**上传视频*/
++(NSString *)app_uploadVideoTokenURL;
+/**发布动态*/
++(NSString *)app_insertArticleURL;
+/**删除动态*/
++(NSString *)app_articleDelURL;
+/**获取用户的角色*/
++(NSString *)user_basicInfoURL;
+
 
 
 
 /** 更新*/
 +(NSString *)getIosConfigURL;
 +(NSString *)getImgURLWithStr:(NSString * )str;
++(NSString *)getVideoURLWithStr:(NSString * )str;
+
 
 
 @end

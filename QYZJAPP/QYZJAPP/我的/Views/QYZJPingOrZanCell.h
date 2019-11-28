@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *contentLB;
 @property (weak, nonatomic) IBOutlet UILabel *rightLB;
 @property (weak, nonatomic) IBOutlet UILabel *timeLB;
-
+@property(nonatomic,strong)QYZJFindModel *model;
 @end
 
 NS_ASSUME_NONNULL_END

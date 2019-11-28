@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *shopName;
 @property(nonatomic,strong)NSString *cityId;
 @property(nonatomic,strong)NSString *pic;
+@property(nonatomic,strong)NSString *pics;
 @property(nonatomic,strong)NSString *video;
 @property(nonatomic,strong)NSString *type;
 @property(nonatomic,strong)NSString *content;
@@ -53,6 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *answer_num;
 @property(nonatomic,strong)NSString *role_name;
 @property(nonatomic,strong)NSString *a_role_name;
+@property(nonatomic,strong)NSString *a_role;
 @property(nonatomic,strong)NSString *roleName;
 @property(nonatomic,strong)NSString *nick_name;
 @property(nonatomic,strong)NSString *a_nick_name;
@@ -62,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *turnoverStageName;
 @property(nonatomic,strong)NSString *con;
 @property(nonatomic,strong)NSString *constructionStageId;
-
+@property(nonatomic,strong)NSString *addTime;
 
 @property(nonatomic,strong)NSString *q_head_img;
 @property(nonatomic,strong)NSString *q_nick_name;
@@ -106,6 +108,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *goodList; //点赞列表
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *mediaList;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *answer_list;
+@property(nonatomic,strong)NSMutableArray<QYZJFindModel *> answerList;
 
 @property(nonatomic,strong)NSMutableArray *videos;
 @property(nonatomic,strong)NSMutableArray *pictures;
@@ -128,6 +131,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL  is_service;//是否五服务方
 @property(nonatomic,assign)BOOL  isSale;
 @property(nonatomic,assign)BOOL  isSelect;
+@property(nonatomic,assign)BOOL  isPlaying;
 
 
 

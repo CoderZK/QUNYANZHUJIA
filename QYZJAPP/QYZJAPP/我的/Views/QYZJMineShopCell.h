@@ -25,8 +25,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *rightMoneyLB;
 @property (weak, nonatomic) IBOutlet UIButton *leftEditBt;
 @property (weak, nonatomic) IBOutlet UIButton *rightEdibtBt;
+@property (weak, nonatomic) IBOutlet UIButton *leftBt;
+@property (weak, nonatomic) IBOutlet UIButton *rightBt;
 @property(nonatomic,strong)NSArray<QYZJFindModel *> *dataArray;
 @property(nonatomic,assign)id<QYZJMineShopCellDelegate>delegate;
+@property(nonatomic,assign)NSInteger isShenHe;
 @end
 
 NS_ASSUME_NONNULL_END

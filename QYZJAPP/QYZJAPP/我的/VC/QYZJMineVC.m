@@ -29,7 +29,8 @@
 #import "QYZJMineZhuangXiuDaiVC.h"
 #import "QYZJShengQingRuZhuVC.h"
 #import "QYZJZengZhiFuWuTVC.h"
-@interface QYZJMineVC ()<HHYMineFourCellDelegate,QYZJMIneTwoCellDelegate>
+#import "HHYMineFiveCell.h"
+@interface QYZJMineVC ()<HHYMineFourCellDelegate,QYZJMIneTwoCellDelegate,HHYMineFiveCellDelegate>
 @property(nonatomic,strong)QYZJMineHeadView *headV;
 @property(nonatomic,strong)NSArray *headTitleArr;
 @property(nonatomic,strong)NSArray *titleArr,*imgTitleArr;
@@ -49,7 +50,8 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    
+    [self getUserInfo];
+    [self getUserBaseicInfo];
 }
 
 - (void)viewDidLoad {
@@ -76,6 +78,7 @@
     
     self.tableView.frame = CGRectMake(0, -sstatusHeight, ScreenW, ScreenH+sstatusHeight);
     [self.tableView registerNib:[UINib nibWithNibName:@"HHYMineFourCell" bundle:nil] forCellReuseIdentifier:@"HHYMineFourCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"HHYMineFiveCell" bundle:nil] forCellReuseIdentifier:@"HHYMineFiveCell"];
     [self.tableView registerClass:[QYZJMIneTwoCell class] forCellReuseIdentifier:@"QYZJMIneTwoCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.headTitleArr = @[@"",@"我的",@"资产",@"装修工具",@"联系客服"];
@@ -84,8 +87,11 @@
     
     self.imgTitleArr = @[@[],@[@"wd_1",@"wd_2",@"wd_3",@"wd_4",@"wd_5",@"wd_6",@"wd_7",@"wd_8",@"wd_9"],@[@"zc_1",@"zc_2",@"zc_6",@"zc_3",@"zc_4",@"zc_5"],@[@"zxgj_1",@"zxgj_2",@"zxgj_3",@"zxgj_4"],@[@"lxkf_1",@"lxkf_2"]];
     
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self getUserInfo];
+    }];
     
-    [self getUserInfo];
+    
 }
 
 
@@ -97,6 +103,7 @@
     
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_centerInfoURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [SVProgressHUD dismiss];
+        [self.tableView.mj_header endRefreshing];
         if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
             self.dataModel = [QYZJUserModel mj_objectWithKeyValues:responseObject[@"result"]];
             self.headV.dataModel = self.dataModel;
@@ -105,7 +112,7 @@
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
+        [self.tableView.mj_header endRefreshing];
     }];
     
 }
@@ -179,10 +186,20 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section == 0) {
-        HHYMineFourCell * cell =[tableView dequeueReusableCellWithIdentifier:@"HHYMineFourCell" forIndexPath:indexPath];
-        cell.delegate = self;
-        cell.model = self.dataModel;
-        return cell;
+        
+        if ([zkSignleTool shareTool].role == 0) {
+            HHYMineFiveCell * cell =[tableView dequeueReusableCellWithIdentifier:@"HHYMineFiveCell" forIndexPath:indexPath];
+            cell.delegate = self;
+            cell.model = self.dataModel;
+            return cell;
+        }else {
+            HHYMineFourCell * cell =[tableView dequeueReusableCellWithIdentifier:@"HHYMineFourCell" forIndexPath:indexPath];
+            cell.delegate = self;
+            cell.model = self.dataModel;
+            return cell;
+        }
+        
+        
     }else {
         QYZJMIneTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJMIneTwoCell" forIndexPath:indexPath];
         NSArray * arr = self.titleArr[indexPath.section];
@@ -224,10 +241,10 @@
             [self.navigationController pushViewController:vc animated:YES];
         }else if (dd == 1) {
             QYZJHomePayTVC * vc =[[QYZJHomePayTVC alloc] init];
-                       vc.hidesBottomBarWhenPushed = YES;
-                       [self.navigationController pushViewController:vc animated:YES];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
         }else if (dd == 2) {
-           QYZJMineTongYongTVC * vc =[[QYZJMineTongYongTVC alloc] init];
+            QYZJMineTongYongTVC * vc =[[QYZJMineTongYongTVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             vc.type = 1;
             [self.navigationController pushViewController:vc animated:YES];
@@ -270,7 +287,7 @@
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }else if (dd == 5) {
-        
+            
         }else if (dd == 6) {
             
         }
@@ -320,6 +337,21 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     
+    
+}
+
+- (void)didClickFiveCellWithIndex:(NSInteger)index {
+    
+    if (index == 0) {
+        QYZJMineQuestTVC * vc =[[QYZJMineQuestTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index < 3) {
+        QYZJfansAndAttentionTVC * vc =[[QYZJfansAndAttentionTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.type = index;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
 }
 

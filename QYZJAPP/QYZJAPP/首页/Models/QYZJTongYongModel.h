@@ -15,9 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString*ID;
 @property(nonatomic,strong)NSString *typeName;
 @property(nonatomic,strong)NSString*roleId;
-
 @property(nonatomic,assign)BOOL isSelect;
-
+@property(nonatomic,strong)NSString *token;
+@property(nonatomic,strong)NSString *imgPath;
+@property(nonatomic,strong)NSString *videoPath;
 @end
 
 NS_ASSUME_NONNULL_END

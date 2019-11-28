@@ -70,7 +70,7 @@
 - (void)setModel:(QYZJFindModel *)model {
 
     self.nameLB.text = model.a_nick_name;
-    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:model.a_head_img] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.a_head_img]]  forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
     self.nameLB.mj_w = [self.nameLB.text getWidhtWithFontSize:14];
     self.typeLB.text= model.a_role_name;
     self.typeLB.mj_w = [self.typeLB.text getWidhtWithFontSize:14] + 15;

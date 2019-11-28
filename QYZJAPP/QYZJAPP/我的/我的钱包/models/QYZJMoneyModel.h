@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *moneyType;
 @property(nonatomic,strong)NSString *status;
 @property(nonatomic,strong)NSString *addtime;
+@property(nonatomic,strong)NSString *stage_name;
+@property(nonatomic,strong)NSString *con;
 
 
 @property(nonatomic,assign)CGFloat sr_money;
@@ -28,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)CGFloat yj_money;
 
 @property(nonatomic,assign)BOOL isSelect;
+//@property(nonatomic,assign)BOOL isRead;
 
 @end
 

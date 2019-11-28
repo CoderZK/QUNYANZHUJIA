@@ -74,7 +74,7 @@
 
 - (void)setModel:(QYZJFindModel *)model {
     _model = model;
-    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:model.head_img] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+    [self.headBt sd_setBackgroundImageWithURL: [NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.head_img]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
     self.titleLB.text = model.nick_name;
 //    self.titleNameCons.constant =
     self.scoreLB.text = [NSString stringWithFormat:@"%@分",model.score];

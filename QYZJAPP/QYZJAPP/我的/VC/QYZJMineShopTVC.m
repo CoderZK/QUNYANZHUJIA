@@ -11,6 +11,7 @@
 #import "QYZJMineShopCell.h"
 #import "QYZJShopDetailTVC.h"
 #import "QYZJAddGoodsOrEditGoodsTVC.h"
+#import "QYZJEditShopNameVC.h"
 @interface QYZJMineShopTVC ()<QYZJMineShopCellDelegate>
 @property(nonatomic,strong)QYZJMineShopHeadView *headV;
 @property(nonatomic,assign)NSInteger page;
@@ -32,6 +33,9 @@
     self.navigationController.navigationBar.hidden = YES;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     //    self.navigationController.navigationBar.hidden = YES;;
+    self.page = 1;
+    [self getData];
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,7 +43,7 @@
     self.tableView.frame = CGRectMake(0, -sstatusHeight, ScreenW, ScreenH + sstatusHeight);
     self.headV = [[QYZJMineShopHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 100)];
     self.headV.mj_h = self.headV.headHeight;
-    self.headV.dataModel = self.dataModel;
+    
     self.tableView.tableHeaderView = self.headV;
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJMineShopCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -58,6 +62,14 @@
         }else if (index == 3) {
             //编辑
             
+            QYZJEditShopNameVC * vc =[[QYZJEditShopNameVC alloc] init];
+            vc.sendShopNameBlock = ^(NSString * _Nonnull name) {
+                weakSelf.dataModel.name = name;
+                weakSelf.headV.dataModel = weakSelf.dataModel;
+            };
+            vc.hidesBottomBarWhenPushed = YES;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+            
         } else if (index == 4) {
             weakSelf.type = 1;
         }else if (index == 5) {
@@ -68,7 +80,7 @@
         weakSelf.page = 1;
         [weakSelf getData];
     };
-    [self getData];
+    
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.page = 1;
         [self getData];
@@ -78,7 +90,36 @@
         [self getData];
     }];
     
+    [self getShopInfo];
     [self addFaTieView];
+}
+
+
+- (void)getShopInfo {
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_shopInfoURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            self.dataModel = [QYZJUserModel mj_objectWithKeyValues:responseObject[@"result"]];
+            self.headV.dataModel = self.dataModel;
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+    
 }
 
 - (void)addFaTieView {
@@ -94,6 +135,7 @@
        //发不商品
         QYZJAddGoodsOrEditGoodsTVC * vc =[[QYZJAddGoodsOrEditGoodsTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
+        vc.shopId = self.dataModel.ID;
         [self.navigationController pushViewController:vc animated:YES];
         
     }];
@@ -151,12 +193,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     QYZJMineShopCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
+    if (self.type == 0) {
+        cell.isShenHe = YES;;
+    }else {
+        cell.isShenHe = NO;
+    }
     if (indexPath.row * 2 + 2 <= self.dataArray.count) {
         cell.dataArray = [self.dataArray subarrayWithRange:NSMakeRange(indexPath.row * 2 , 2)];
     }else {
         cell.dataArray = [self.dataArray subarrayWithRange:NSMakeRange(indexPath.row * 2 , 1)];
     }
+  
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
     return cell;
@@ -175,8 +222,12 @@
         
         QYZJAddGoodsOrEditGoodsTVC * vc =[[QYZJAddGoodsOrEditGoodsTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
-        vc.dataModel = self.dataArray[indexPath.row * 2+index];
+        vc.goodsId = self.dataArray[indexPath.row * 2+index].ID;
         vc.type = 1;
+        if (self.type == 3) {
+            vc.type = 2;
+        }
+        vc.shopId = self.dataModel.ID;
         [self.navigationController pushViewController:vc animated:YES];
         
     }else {

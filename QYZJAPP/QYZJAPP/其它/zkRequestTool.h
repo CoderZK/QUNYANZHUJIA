@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AFNetworking.h>
+#import "QYZJTongYongModel.h"
 typedef void(^SuccessBlock)(NSURLSessionDataTask * task,id responseObject);
 typedef void(^FailureBlock)(NSURLSessionDataTask * task,NSError * error);
 
@@ -40,10 +41,19 @@ typedef void(^FailureBlock)(NSURLSessionDataTask * task,NSError * error);
  多张上传图片
  */
 +(void)NetWorkingUpLoad:(NSString *)urlStr images:(NSArray<UIImage *> *)images name:(NSString *)name parameters:(id)parameters success:(SuccessBlock)success failure:(FailureBlock)failure;
+
+/** 上传音频或者视频 */
++(void)NetWorkingUpLoadmediOrVeidoWithfileData:(NSData *)fileData  parameters:(id)parameters success:(SuccessBlock)success failure:(FailureBlock)failure;
+
+
 /**
  多张上传图片和视频或者音频
  */
 +(void)NetWorkingUpLoad:(NSString *)urlStr images:(NSArray<UIImage *> *)images imgName:(NSString *)name fileData:(NSData *)fileData andFileName:(NSString *)fileName parameters:(id)parameters success:(SuccessBlock)success failure:(FailureBlock)failure;
+
+
++ (void)getUpdateImgeModelWithCompleteModel:(void(^)(QYZJTongYongModel * model))completeBlock;
++ (void)getUpdateVideoModelWithCompleteModel:(void(^)(QYZJTongYongModel * model))completeBlock;
 
 
 

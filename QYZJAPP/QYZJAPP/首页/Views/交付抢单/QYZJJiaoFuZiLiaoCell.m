@@ -30,7 +30,7 @@
         [self.whiteOneV addSubview:lb3];
         [self addSubview:self.whiteOneV];
         
-        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(100, 10, ScreenW, ww+20)];
+        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(100, 10, ScreenW-110, ww+20)];
         self.scrollView.showsVerticalScrollIndicator = NO;
         [self.whiteOneV addSubview:self.scrollView];
 
@@ -70,7 +70,11 @@
             deleteBt.tag = 100+i;
             [deleteBt addTarget:self action:@selector(deleteHitAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.scrollView addSubview:deleteBt];
-            [anNiuBt setBackgroundImage:picsArr[i] forState:UIControlStateNormal];
+             if ([picsArr[i] isKindOfClass:[NSString class]]) {
+                            [anNiuBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:picsArr[i]]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+                       }else {
+                            [anNiuBt setBackgroundImage:picsArr[i] forState:UIControlStateNormal];
+                       }
             
         }
         

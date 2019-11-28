@@ -12,13 +12,25 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.imageView.layer.cornerRadius = 25;
-    self.imageView.clipsToBounds = YES;
+    self.imgVOne.layer.cornerRadius = 25;
+    self.imgVOne.clipsToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
 }
+
+- (void)setModel:(QYZJFindModel *)model {
+    _model = model;
+    
+    [self.imgVOne sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.headerPic]] placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+    self.titleLB.text = model.nickName;
+    self.contentLB.text = model.commentContent;
+    self.rightLB.text = model.articleContent;
+    self.timeLB.text = model.time;
+    
+}
+
 
 @end

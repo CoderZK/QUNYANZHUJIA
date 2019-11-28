@@ -184,7 +184,7 @@
 
 - (void)setDataModel:(QYZJUserModel *)dataModel {
     _dataModel = dataModel;
-    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:dataModel.head_img] forState:(UIControlStateNormal) placeholderImage:[UIImage imageNamed:@"369"]];
+    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:dataModel.head_img]] forState:(UIControlStateNormal) placeholderImage:[UIImage imageNamed:@"369"]];
     self.nickNameLB.text = dataModel.nick_name;
     self.nickNameLB.mj_w = [dataModel.nick_name getWidhtWithFontSize:15];
     self.scoreLB.mj_x = CGRectGetMaxX(self.nickNameLB.frame) + 10;

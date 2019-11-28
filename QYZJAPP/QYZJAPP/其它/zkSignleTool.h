@@ -18,12 +18,13 @@
 @property(nonatomic,strong)NSString * session_uid;
 @property(nonatomic,strong)NSString * openid_new;
 @property(nonatomic,strong)NSString * telphone;
-@property(nonatomic,strong)NSString * role;
+
 @property(nonatomic,strong)NSString *nick_name;
 @property(nonatomic,strong)NSString *isSame;
 @property(nonatomic,strong)NSString * deviceToken;
 @property(nonatomic,strong)QYZJUserModel *userModel;
 @property(nonatomic,strong)NSArray *dataArray;
+@property(nonatomic,assign)NSInteger role;
 
 -(void)uploadDeviceToken;
 @end

@@ -41,6 +41,10 @@
     _answer_list = [QYZJFindModel mj_objectArrayWithKeyValuesArray:answer_list];
 }
 
+- (void)setAnswerList:(NSMutableArray<QYZJFindModel *> *)answerList {
+    _answerList = [QYZJFindModel mj_objectArrayWithKeyValuesArray:answerList];
+}
+
 /** 看得见的
  
  

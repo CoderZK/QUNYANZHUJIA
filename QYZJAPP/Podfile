@@ -17,6 +17,7 @@ pod 'ReactiveObjC'
 pod 'TZImagePickerController'
 pod 'Masonry'
 pod 'ZFPlayer'
+pod "Qiniu"
 
 
 end

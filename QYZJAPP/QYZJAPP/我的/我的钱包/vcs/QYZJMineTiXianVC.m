@@ -66,7 +66,7 @@
         if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
             NSArray<QYZJMoneyModel *>*arr = [QYZJMoneyModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
             if (arr.count > 0) {
-                [self.imgV sd_setImageWithURL:[NSURL URLWithString:arr[0].logo] placeholderImage:[UIImage imageNamed:@"369"]];
+                [self.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:arr[0].logo]]  placeholderImage:[UIImage imageNamed:@"369"]];
                 self.rightLB.hidden = YES;
                 self.titleLB.text = arr[0].name;
                 self.numberLB.text = arr[0].bank_account;

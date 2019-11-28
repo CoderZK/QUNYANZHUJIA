@@ -10,19 +10,49 @@
 #import "QYZJMessageCell.h"
 #import "QYZJPingOrZanListTVC.h"
 #import "QYZJsystemNTVC.h"
+#import "QYZJYanShouOrBaoXiuTVC.h"
 @interface QYZJMessageTVC ()
 @property(nonatomic,strong)NSArray *titleArr;
+@property(nonatomic,strong)NSDictionary *dataDict;
 @end
 
 @implementation QYZJMessageTVC
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"消息";
-    self.titleArr = @[@"点赞",@"评论",@"验收",@"保修",@"系统通知"];
+    self.titleArr = @[@"点赞",@"评论",@"验收",@"报修",@"系统通知"];
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJMessageCell" bundle:nil] forCellReuseIdentifier:@"QYZJMessageCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+
+
+
+
+- (void)getData {
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    zkRequestTongYongTool * tool = [[zkRequestTongYongTool alloc] init];
+    tool.subject = [[RACSubject alloc] init];
+    [tool requestWithUrl:[QYZJURLDefineTool user_newsURL] andDict:dict];
+    @weakify(self);
+    [tool.subject subscribeNext:^(id  _Nullable x) {
+        @strongify(self);
+        if (x !=nil && [x[@"key"] intValue] == 1) {
+            self.dataDict = x[@"result"];
+            [self.tableView reloadData];
+        }else {
+            [SVProgressHUD dismiss];
+        }
+    }];
+    
 }
 
 
@@ -70,6 +100,22 @@
     cell.imgV.image = [UIImage imageNamed:[NSString stringWithFormat:@"xx_%ld",indexPath.row + 1]];
     cell.titleLB.text = self.titleArr[indexPath.row];
     cell.numberStr = [NSString stringWithFormat:@"%ld",indexPath.row * 3];
+    
+    if (self.dataDict != nil) {
+        if (indexPath.row == 0) {
+             cell.numberStr = [NSString stringWithFormat:@"%@",self.dataDict[@"goodNum"]];
+         }else if (indexPath.row == 1) {
+             cell.numberStr = [NSString stringWithFormat:@"%@",self.dataDict[@"commentNum"]];
+         }else if (indexPath.row ==2) {
+            cell.numberStr = [NSString stringWithFormat:@"%@",self.dataDict[@"comfirmNum"]];
+         }else if (indexPath.row == 3) {
+            cell.numberStr = [NSString stringWithFormat:@"%@",self.dataDict[@"repairNum"]];
+         }else if (indexPath.row == 4) {
+            cell.numberStr = [NSString stringWithFormat:@"%@",self.dataDict[@"systemNum"]];
+         }
+    }
+ 
+    
     return cell;
     
 }
@@ -82,10 +128,11 @@
          vc.type = indexPath.row;
          [self.navigationController pushViewController:vc animated:YES];
         
-    }else if (indexPath.row == 2) {
-        
-    }else if (indexPath.row == 3) {
-        
+    }else if (indexPath.row <= 3) {
+        QYZJYanShouOrBaoXiuTVC * vc =[[QYZJYanShouOrBaoXiuTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.type = indexPath.row;
+        [self.navigationController pushViewController:vc animated:YES];
     }else {
         //系统通知
         QYZJsystemNTVC * vc =[[QYZJsystemNTVC alloc] init];

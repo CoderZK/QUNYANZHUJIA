@@ -30,4 +30,26 @@
     
 }
 
+- (void)setModel:(QYZJUserModel *)model {
+    _model = model;
+    
+    CGFloat uu = 10000.0;
+    
+    if (model.question_num > uu) {
+        self.friendsLB.text = [NSString stringWithFormat:@"%0.2f万",model.question_num/uu];
+    }else {
+        self.friendsLB.text = [NSString stringWithFormat:@"%ld",model.question_num];
+    }
+    
+     if (model.follow_num > uu) {
+          self.subscribeLB.text = [NSString stringWithFormat:@"%0.2f万",model.follow_num/uu];
+      }else {
+          self.subscribeLB.text = [NSString stringWithFormat:@"%ld",model.follow_num];
+      }
+    
+
+    
+}
+
+
 @end

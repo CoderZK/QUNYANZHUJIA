@@ -63,7 +63,6 @@
         self.gatyV.backgroundColor = [UIColor groupTableViewBackgroundColor];
         [self addSubview:self.gatyV];
         
-        self.backgroundColor = [UIColor redColor];
         
         
         
@@ -110,8 +109,7 @@
        }else {
            [self setPictWIthArr:[dataModel.pic componentsSeparatedByString:@","]  isTwoPic:YES];
        }
-    self.height = CGRectGetMaxY(self.picViewTwo.frame) + 10;
-    
+    self.headHeight = CGRectGetMaxY(self.picViewTwo.frame) + 10;
 }
 
 
@@ -147,7 +145,7 @@
         }else {
             [self.picView addSubview:imageView];
         }
-        [imageView sd_setImageWithURL:[NSURL URLWithString:picArr[i]] placeholderImage:[UIImage imageNamed:@"369"]];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:picArr[i]]] placeholderImage:[UIImage imageNamed:@"369"]];
         
     }
     
@@ -172,7 +170,7 @@
 
 - (void)videoPlayAction:(UIButton *)button {
     
-    [PublicFuntionTool presentVideoVCWithNSString:self.dataModel.video_url isBenDiPath:NO];
+    [PublicFuntionTool presentVideoVCWithNSString:[QYZJURLDefineTool getVideoURLWithStr:self.dataModel.video_url] isBenDiPath:NO];
     
     
 }

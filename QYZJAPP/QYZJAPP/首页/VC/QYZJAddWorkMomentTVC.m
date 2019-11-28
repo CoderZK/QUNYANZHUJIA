@@ -19,6 +19,7 @@
 @property(nonatomic,strong)NSMutableArray *picsArr;
 @property(nonatomic,strong)NSString *videoStr;
 @property(nonatomic,assign)BOOL   isChooseVideo;
+@property(nonatomic,strong)UIButton *deleteBt;
 //@property(nonatomic,strong)UILabel *lb4;
 
 
@@ -121,7 +122,7 @@
     [self.whiteOneV addSubview:lb3];
     [self.headV addSubview:self.whiteOneV];
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(100, 10, ScreenW, ww+20)];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(100, 10, ScreenW-110, ww+20)];
     self.scrollView.showsVerticalScrollIndicator = NO;
     [self.whiteOneV addSubview:self.scrollView];
     
@@ -164,7 +165,8 @@
     
     UIButton * delectVideoBt = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) - 10, 3, 20, 20)];
     [delectVideoBt setImage:[UIImage imageNamed:@"11"] forState:UIControlStateNormal];
-    [imageView addSubview:delectVideoBt];
+    [self.whiteTwoV addSubview:delectVideoBt];
+    self.deleteBt = delectVideoBt;
     
     self.headV.mj_h = CGRectGetMaxY(self.whiteTwoV.frame);
     self.tableView.tableHeaderView = self.headV;
@@ -179,13 +181,13 @@
         
         self.addBt.hidden = NO;
         self.whiteTwoV.mj_h = 110;
-        self.videoImgV.hidden = YES;
+        self.videoImgV.hidden =self.deleteBt.hidden = YES;
         self.headV.mj_h = CGRectGetMaxY(self.whiteTwoV.frame);
         self.tableView.tableHeaderView = self.headV;
         
     }else {
         self.addBt.hidden = YES;
-        self.videoImgV.hidden = NO;
+        self.videoImgV.hidden =self.deleteBt.hidden = NO;
         self.whiteTwoV.mj_h = (ScreenW - 110)*9/16 + 20;
         self.videoImgV.image = [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:videoStr] size:CGSizeMake((ScreenW - 110), (ScreenW - 110)*9/16)];
         self.headV.mj_h = CGRectGetMaxY(self.whiteTwoV.frame);
@@ -221,7 +223,11 @@
             deleteBt.tag = 100+i;
             [deleteBt addTarget:self action:@selector(deleteHitAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.scrollView addSubview:deleteBt];
-            [anNiuBt setBackgroundImage:picsArr[i] forState:UIControlStateNormal];
+             if ([picsArr[i] isKindOfClass:[NSString class]]) {
+                            [anNiuBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:picsArr[i]]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+                       }else {
+                            [anNiuBt setBackgroundImage:picsArr[i] forState:UIControlStateNormal];
+                       }
             
         }
         
@@ -349,7 +355,7 @@
 
 - (void)play {
     
-    [PublicFuntionTool presentVideoVCWithNSString:self.videoStr isBenDiPath:NO];
+    [PublicFuntionTool presentVideoVCWithNSString:[QYZJURLDefineTool getVideoURLWithStr:self.videoStr] isBenDiPath:NO];
     
 }
 

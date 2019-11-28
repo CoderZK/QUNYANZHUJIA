@@ -54,7 +54,7 @@
         [self.collectBt setImage:[UIImage imageNamed:@"xing2"] forState:UIControlStateNormal];
     }
     [self.pingLunBt setTitle:model.commentNum forState:UIControlStateNormal];
-    [self.imgV sd_setImageWithURL:[NSURL URLWithString:model.showContent] placeholderImage:[UIImage imageNamed:@"369"]];
+    [self.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.showContent]]  placeholderImage:[UIImage imageNamed:@"369"]];
 }
 
 @end
