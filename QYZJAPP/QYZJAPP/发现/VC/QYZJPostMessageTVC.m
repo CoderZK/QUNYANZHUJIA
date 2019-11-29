@@ -64,13 +64,9 @@
 }
 
 - (void)getImgDict {
-    
-
-    
     [zkRequestTool getUpdateImgeModelWithCompleteModel:^(QYZJTongYongModel *model) {
            self.imgModel = model;
        }];
-    
 }
 
 - (void)getVideoDict {

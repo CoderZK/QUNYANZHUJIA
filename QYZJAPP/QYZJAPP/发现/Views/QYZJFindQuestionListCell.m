@@ -63,17 +63,11 @@
         [self.listBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 25, 0,  0)];
         [self addSubview:self.listBt];
         
-        
         UIView * backV =[[UIView alloc] initWithFrame:CGRectMake(0, 134.4, ScreenW, 0.6)];
         backV.backgroundColor = lineBackColor;
         [self addSubview:backV];
-        
         [self.listBt addTarget:self action:@selector(listAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        
-        
-        
+
     }
     return self;
 }
@@ -91,10 +85,6 @@
     self.numberLB.text = [NSString stringWithFormat:@"%@人旁听",model.sitOnNum];
     
     [self.listBt setTitle:[NSString stringWithFormat:@"￥%0.2f元旁听",model.sitPrice] forState:UIControlStateNormal];
-    
-    
-    
-    
     
 }
 

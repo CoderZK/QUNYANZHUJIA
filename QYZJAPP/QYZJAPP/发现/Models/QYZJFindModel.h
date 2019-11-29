@@ -21,18 +21,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *type;
 @property(nonatomic,strong)NSString *content;
 @property(nonatomic,strong)NSString *goodsIds;
-@property(nonatomic,strong)NSString *goodsNum;
 @property(nonatomic,strong)NSString *headImg;
 @property(nonatomic,strong)NSString *a_head_img;
 @property(nonatomic,strong)NSString *head_img;
 @property(nonatomic,strong)NSString *nickName;
 @property(nonatomic,strong)NSString *timeNow;
 @property(nonatomic,strong)NSString *picture;
-@property(nonatomic,strong)NSString *commentNum;
 @property(nonatomic,strong)NSString *refShopId;
 @property(nonatomic,strong)NSString *articleId;
 @property(nonatomic,strong)NSString *commentContent;
-@property(nonatomic,strong)NSString *goodNum;//点赞人数
 @property(nonatomic,strong)NSString *toUserId;
 @property(nonatomic,strong)NSString *articleType;
 @property(nonatomic,strong)NSString *articleContent;
@@ -49,9 +46,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *showContent;
 @property(nonatomic,strong)NSString *label;
 @property(nonatomic,strong)NSString *score;
-@property(nonatomic,strong)NSString *fans_num;
-@property(nonatomic,strong)NSString *appoint_num;
-@property(nonatomic,strong)NSString *answer_num;
 @property(nonatomic,strong)NSString *role_name;
 @property(nonatomic,strong)NSString *a_role_name;
 @property(nonatomic,strong)NSString *a_role;
@@ -59,18 +53,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *nick_name;
 @property(nonatomic,strong)NSString *a_nick_name;
 @property(nonatomic,strong)NSString *contents;
-@property(nonatomic,strong)NSString *sit_on_num;
-@property(nonatomic,strong)NSString *sitOnNum;
 @property(nonatomic,strong)NSString *turnoverStageName;
 @property(nonatomic,strong)NSString *con;
 @property(nonatomic,strong)NSString *constructionStageId;
 @property(nonatomic,strong)NSString *addTime;
-
 @property(nonatomic,strong)NSString *q_head_img;
 @property(nonatomic,strong)NSString *q_nick_name;
-
-
-
 @property(nonatomic,strong)NSString *b_recomend_name;
 @property(nonatomic,strong)NSString *demand_grab_sheet_id;
 @property(nonatomic,strong)NSString *type_name;
@@ -108,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *goodList; //点赞列表
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *mediaList;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *answer_list;
-@property(nonatomic,strong)NSMutableArray<QYZJFindModel *> answerList;
+@property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *answerList;
 
 @property(nonatomic,strong)NSMutableArray *videos;
 @property(nonatomic,strong)NSMutableArray *pictures;
@@ -117,9 +105,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL isMy;
 @property(nonatomic,assign)BOOL isGood;
 @property(nonatomic,assign)BOOL isDelete;
-@property(nonatomic,assign)BOOL isConllect;
+//@property(nonatomic,assign)BOOL isConllect;
+@property(nonatomic,assign)BOOL isCollect;
 @property(nonatomic,assign)BOOL isRead;
 @property(nonatomic,assign)BOOL isOpen;
+@property(nonatomic,assign)BOOL is_open;
 @property(nonatomic,assign)BOOL isAuth;
 @property(nonatomic,assign)BOOL is_question;
 @property(nonatomic,assign)BOOL is_vip;
@@ -133,7 +123,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL  isSelect;
 @property(nonatomic,assign)BOOL  isPlaying;
 
-
+@property(nonatomic,assign)NSInteger goodsNum;
+@property(nonatomic,assign)NSInteger commentNum;
+@property(nonatomic,assign)NSInteger fans_num;
+@property(nonatomic,assign)NSInteger appoint_num;
+@property(nonatomic,assign)NSInteger answer_num;
+@property(nonatomic,assign)NSInteger sitOnNum;
+@property(nonatomic,assign)NSInteger goodNum;//点赞人数
+@property(nonatomic,assign)NSInteger sit_on_num;
+@property(nonatomic,assign)NSInteger collectNum;
 
 @property(nonatomic,assign)CGFloat price;
 @property(nonatomic,assign)CGFloat sitPrice;

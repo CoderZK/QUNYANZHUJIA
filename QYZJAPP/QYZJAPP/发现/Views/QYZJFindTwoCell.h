@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class QYZJFindTwoCell;
+
+@protocol QYZJFindTwoCellDelegate <NSObject>
+
+- (void)didClickFindTwoCell:(QYZJFindTwoCell *)cell withIndex:(NSInteger)index;
+
+@end
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJFindTwoCell : UITableViewCell
@@ -22,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)NSInteger type; // 0 发现广场 1 收藏
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomCons;
 @property(nonatomic,strong)QYZJFindModel *model;
+
+@property(nonatomic,assign)id<QYZJFindTwoCellDelegate>delegate;
 
 @end
 

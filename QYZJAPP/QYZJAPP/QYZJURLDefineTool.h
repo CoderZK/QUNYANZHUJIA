@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 登录 */
 + (NSString * )app_loginURL;
 ///** 退出登录 */
-//+ (NSString * )getapp_loginURL;
++ (NSString * )user_app_logoutURL;
 /** 获取个人信息 */
 + (NSString * )user_centerInfoURL;
 /** 我的提问列表*/
@@ -92,9 +92,18 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)user_caipanListURL;
 /** 轮播图*/
 +(NSString *)user_bannerListURL;
-/** 收藏*/
+/** 收藏列表*/
 +(NSString *)app_collectListURL;
-
+/** 头条取消和收藏*/
++(NSString *)app_headlinenewsCollectURL;
+/** 头条取消和点赞*/
++(NSString *)app_headlinenewsGoodURL;
+/** 广场取消和收藏*/
++(NSString *)app_articleCollectURL;
+/** 广场取消和点赞*/
++(NSString *)app_articleGoodURL;
+/**删除帖子*/
++(NSString *)app_articleCommentDelURL;
 
 
 #pragma mark ----- 消息部分 -------
@@ -264,6 +273,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)app_articleDelURL;
 /**获取用户的角色*/
 +(NSString *)user_basicInfoURL;
+
 
 
 

@@ -48,6 +48,7 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
     //    self.navigationController.navigationBar.hidden = YES;;
+    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -434,7 +435,6 @@
            }
     }];
 }
-
 
 
 @end

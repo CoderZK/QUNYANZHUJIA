@@ -66,6 +66,7 @@
         }else if (index == 1){
             QYZJSettingTVC * vc =[[QYZJSettingTVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
+            vc.dataModel = weakSelf.dataModel;
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else {
             //点击消息
@@ -333,6 +334,7 @@
         //点击店铺
         QYZJMineShopTVC * vc =[[QYZJMineShopTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
+        vc.isMine = YES;
         vc.dataModel = self.dataModel;
         [self.navigationController pushViewController:vc animated:YES];
     }

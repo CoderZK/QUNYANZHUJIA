@@ -22,7 +22,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.tieltLB = [[UILabel alloc] initWithFrame:CGRectMake(15, 15, ScreenW - 30, 20)];
+        self.tieltLB = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, ScreenW - 20, 20)];
         self.tieltLB.font = [UIFont boldSystemFontOfSize:15];
         self.tieltLB.numberOfLines = 0;
         
@@ -35,6 +35,7 @@
         [self addSubview:self.rightLB];
         
         _tableView=[[UITableView alloc] init];
+        //        _tableView.backgroundColor = [UIColor greenColor];
         _tableView.delegate=self;
         _tableView.dataSource=self;
         _tableView.scrollEnabled = NO;
@@ -44,23 +45,18 @@
         [self.tableView registerClass:[QYZJMineQuestNeiCell class] forCellReuseIdentifier:@"cell"];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
- 
+        
         self.LB2 = [[UILabel alloc] init];
         self.LB2.textColor= CharacterBlack112;
         self.LB2.text = @"回复答人: ";
         self.LB2.font = kFont(13);
         [self addSubview:self.LB2];
         [self.LB2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.mas_centerY);
-            make.left.equalTo(self).offset(15);
+            make.top.equalTo(self.rightLB.mas_bottom).offset(15);
+            make.left.equalTo(self).offset(10);
             make.width.equalTo(@70);
             make.height.equalTo(@20);
         }];
-        
-
-        
-        
-        
         
     }
     return self;
@@ -73,38 +69,29 @@
 - (void)setWaiModel:(QYZJFindModel *)waiModel {
     _waiModel = waiModel;
     
-    if (waiModel.mediaList.count == 0) {
-        self.rightLB.text = @"待回复·公开";
-        if (!waiModel.isOpen) {
-            self.rightLB.text = @"待回复";
-        }
-    }else {
-        self.rightLB.text = [NSString stringWithFormat:@"已答复·公开·%@人旁听",waiModel.sit_on_num];
-    }
-    
+    CGFloat ww = ScreenW - 110;
     if (self.isServer) {
-        //服务人员
-    
-        
-    }else {
-        //非服务人员
-        //        self.whiteV.hidden = NO;
-        //        if (waiModel.a_role.length > 0){
-        //            self.roleNameLB.text = [[waiModel.a_role componentsSeparatedByString:@","] firstObject];
-        //            CGFloat ww = [self.roleNameLB.text getWidhtWithFontSize:13] + 8;
-        //            [self.roleNameLB mas_updateConstraints:^(MASConstraintMaker *make) {
-        //                make.width.equalTo(@(ww));
-        //            }];
-        //
-        //        }
-        //        self.nameLB.text = waiModel.
-        
+        ScreenW - 20;
+    }
+    NSString * str = @"";
+    if ([waiModel.status intValue]== 1) {
+        str = @"待回复";
+    }else if ([waiModel.status intValue]== 2) {
+        str = @"已回复";
+    } else {
+        str = @"待支付";
     }
     
-    
+    if (waiModel.is_open ) {
+       str = [NSString stringWithFormat:@"%@·%@·%@人旁听",str,@"公开",waiModel.sit_on_num];
+    }else {
+         str = [NSString stringWithFormat:@"%@·%@·%@人旁听",str,@"不公开",waiModel.sit_on_num];
+        
+    }
+    self.rightLB.text = str;
     CGFloat rW = [self.rightLB.text getWidhtWithFontSize:13];
     CGFloat lW = [waiModel.title getWidhtWithFontSize:16];
-    CGFloat lH = [waiModel.title getHeigtWithIsBlodFontSize:15 lineSpace:0 width:ScreenW - 30];
+    CGFloat lH = [waiModel.title getHeigtWithIsBlodFontSize:15 lineSpace:0 width:ww];
     if (lH < 20) {
         lH = 20;
     }
@@ -118,31 +105,57 @@
         self.tieltLB.width = ScreenW - 30;
         self.rightLB.frame = CGRectMake(15, CGRectGetMaxY(self.tieltLB.frame) + 5, ScreenW - 30, 20);
     }
-    
+    self.tableView.mj_w = ww;
     [self.tableView reloadData];
     
-    CGFloat hh = 0;
-    for (QYZJFindModel * model  in waiModel.mediaList) {
-        CGFloat hnei = [[NSString stringWithFormat:@"回复内容: %@",model.contents] getHeigtWithFontSize:14 lineSpace:3 width:ScreenW - 20] + 10;
-        if (model.media_url.length > 0) {
-            hnei = hnei + 30;
+    if (self.isServer) {
+        CGFloat hh = 0;
+        for (QYZJFindModel * model  in waiModel.mediaList) {
+            CGFloat hnei = [[NSString stringWithFormat:@"回复内容: %@",model.contents] getHeigtWithFontSize:14 lineSpace:3 width:ScreenW - 20] + 10;
+            if (model.media_url.length > 0) {
+                hnei = hnei + 30;
+            }
+            if (model.contents.length == 0) {
+                hnei = 35;
+            }
+            hh = hh + hnei;
         }
-        if (model.contents.length == 0) {
-            hnei = 35;
+        self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.rightLB.frame) + 5, ScreenW, hh);
+        self.LB2.hidden = YES;
+        if (waiModel.mediaList.count == 0) {
+            waiModel.cellHeight = CGRectGetMaxY(self.rightLB.frame) + 15;
         }
-        hh = hh + hnei;
-    }
-    self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.rightLB.frame) + 5, ScreenW, hh);
-    
-    
-    
-    
-    waiModel.cellHeight = CGRectGetMaxY(self.tableView.frame) + 15;
-    if (waiModel.mediaList.count == 0) {
+    }else {
         
-        waiModel.cellHeight = CGRectGetMaxY(self.rightLB.frame) + 15;
+        CGFloat hh = 0;
+        
+        for (QYZJFindModel * anModel in waiModel.answerList) {
+            
+            for (QYZJFindModel * model  in anModel.mediaList) {
+                CGFloat hnei = [[NSString stringWithFormat:@"回复内容: %@",model.contents] getHeigtWithFontSize:14 lineSpace:3 width:ww] + 10;
+                if (model.media_url.length > 0) {
+                    hnei = hnei + 30;
+                }
+                if (model.contents.length == 0) {
+                    hnei = 35;
+                }
+                hh = hh + hnei ;
+            }
+            
+        }
+        hh = hh + waiModel.answerList.count * 40;
+        self.tableView.frame = CGRectMake(90, CGRectGetMaxY(self.rightLB.frame) + 5, ScreenW - 90, hh);
+        if (waiModel.answerList.count == 0) {
+            waiModel.cellHeight = CGRectGetMaxY(self.rightLB.frame) + 15;
+        }
+        self.LB2.hidden = NO;
+        if (waiModel.answerList.count == 0) {
+            self.LB2.hidden = YES;
+        }
     }
+    waiModel.cellHeight = CGRectGetMaxY(self.tableView.frame) + 15;
     
+    NSLog(@"\n ---titleLBHeight ---%@",NSStringFromCGRect(self.tieltLB.frame));
     NSLog(@"\n--=-=-%f",waiModel.cellHeight);
     
     
@@ -158,11 +171,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.isServer) {
-       return self.waiModel.mediaList.count;
+        return self.waiModel.mediaList.count;
     }else {
         return self.waiModel.answerList[section].mediaList.count;
     }
-   
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -175,6 +188,10 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
+    if (self.isServer) {
+        return nil;
+    }
+    
     UIView * view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"head"];
     if (view == nil) {
         view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW - 100, 40)];
@@ -183,7 +200,7 @@
         [view addSubview:headBt];
         [headBt mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.width.equalTo(@35);
-            make.left.equalTo(view).offset(0);
+            make.left.equalTo(view).offset(10);
             make.centerY.equalTo(view.mas_centerY);
         }];
         headBt.layer.cornerRadius = 17.5;
@@ -193,7 +210,8 @@
         UILabel * roleNameLB = [[UILabel alloc] init];
         roleNameLB.layer.cornerRadius = 3;
         roleNameLB.layer.borderColor = OrangeColor.CGColor;
-       roleNameLB.layer.borderWidth = 1;
+        roleNameLB.layer.borderWidth = 1;
+        roleNameLB.textColor = OrangeColor;
         roleNameLB.font = kFont(13);
         roleNameLB.textAlignment = NSTextAlignmentCenter;
         [view addSubview:roleNameLB];
@@ -217,18 +235,48 @@
         nameLB.tag = 102;
         
     }
+    QYZJFindModel * model = self.waiModel.answerList[section];
+    UIButton * headBt = (UIButton *)[view viewWithTag:100];
+    UILabel *nameLB = (UILabel *)[view viewWithTag:102];
+    UILabel * roleLB = (UILabel *)[view viewWithTag:101];
+    [headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.a_head_img]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+    if (model.a_role.length > 0) {
+        roleLB.text = [[model.a_role componentsSeparatedByString:@","] firstObject];
+        CGFloat ww = [roleLB.text getWidhtWithFontSize:13] + 10;
+        [roleLB mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@(ww));
+        }];
+    }else {
+        [roleLB mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@(0));
+        }];
+        roleLB.hidden = YES;
+    }
+    nameLB.text = model.a_nick_name;
     return view;
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.waiModel.mediaList[indexPath.row].cellHeight;
+    if (self.isServer) {
+        return self.waiModel.mediaList[indexPath.row].cellHeight;
+    }else {
+        return self.waiModel.answerList[indexPath.section].mediaList[indexPath.row].cellHeight;
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     QYZJMineQuestNeiCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.model = self.waiModel.mediaList[indexPath.row];
+    cell.isServer = self.isServer;
+    if (self.isServer) {
+        cell.model = self.waiModel.mediaList[indexPath.row];
+    }else {
+        cell.model = self.waiModel.answerList[indexPath.section].mediaList[indexPath.row];
+    }
+    NSLog(@"\n titleLBFrme %@",NSStringFromCGRect(cell.titelLB.frame));
+    
     cell.clipsToBounds = YES;
     cell.listBt.tag = indexPath.row;
     [cell.listBt addTarget:self action:@selector(listAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -242,16 +290,34 @@
 }
 
 - (void)listAction:(UIButton *)button {
-    QYZJFindModel * model = self.waiModel.mediaList[button.tag];
-    if (model.media_url.length > 0) {
-        [[PublicFuntionTool shareTool] palyMp3WithNSSting:model.media_url isLocality:NO];
-        model.isPlaying = YES;
-        [self.tableView reloadData];
-        Weak(weakSelf);
-        [PublicFuntionTool shareTool].findPlayBlock = ^{
-            model.isPlaying = NO;
-            [weakSelf.tableView reloadData];
-        };
+    
+    QYZJMineQuestNeiCell * cell = (QYZJMineQuestNeiCell *)button.superview;
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    if (self.isServer) {
+        QYZJFindModel * model = self.waiModel.mediaList[button.tag];
+        if (model.media_url.length > 0) {
+            [[PublicFuntionTool shareTool] palyMp3WithNSSting:model.media_url isLocality:NO];
+            model.isPlaying = YES;
+            [self.tableView reloadData];
+            Weak(weakSelf);
+            [PublicFuntionTool shareTool].findPlayBlock = ^{
+                model.isPlaying = NO;
+                [weakSelf.tableView reloadData];
+            };
+        }
+    }else {
+        
+        QYZJFindModel * model = self.waiModel.answerList[indexPath.section].mediaList[indexPath.row];
+        if (model.media_url.length > 0) {
+            [[PublicFuntionTool shareTool] palyMp3WithNSSting:model.media_url isLocality:NO];
+            model.isPlaying = YES;
+            [self.tableView reloadData];
+            Weak(weakSelf);
+            [PublicFuntionTool shareTool].findPlayBlock = ^{
+                model.isPlaying = NO;
+                [weakSelf.tableView reloadData];
+            };
+        }
     }
 }
 
@@ -280,12 +346,14 @@
         
         
         self.titelLB = [[UILabel alloc] init];
+        self.titelLB.numberOfLines = 0;
+        //        self.titelLB.backgroundColor =[UIColor redColor];
         [self addSubview:self.titelLB];
         [self.titelLB mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self).offset(10);
-            make.bottom.equalTo(self).offset(-5);
             make.right.equalTo(self).offset(-10);
             make.top.equalTo(self.listBt.mas_bottom).offset(5);
+            make.bottom.equalTo(self).offset(-5);
         }];
         
     }
@@ -294,7 +362,13 @@
 
 - (void)setModel:(QYZJFindModel *)model {
     _model = model;
-    self.titelLB.attributedText = [[NSString stringWithFormat:@"回复内容: %@",model.contents] getMutableAttributeStringWithFont:14 lineSpace:3 textColor:CharacterColor80 textColorTwo:[UIColor blackColor] nsrange:NSMakeRange(0, 5)];
+    
+    CGFloat ww = ScreenW - 110;
+    if (self.isServer) {
+        ScreenW - 20;
+    }
+    
+    self.titelLB.attributedText = [[NSString stringWithFormat:@"回复内容: %@",model.contents] getMutableAttributeStringWithFont:14 lineSpace:2.8 textColor:CharacterColor80 textColorTwo:[UIColor blackColor] nsrange:NSMakeRange(0, 5)];
     
     if (model.isPlaying) {
         [self.listBt setTitle:@"播放中..." forState:UIControlStateNormal];
@@ -304,22 +378,32 @@
     
     if (model.media_url.length > 0) {
         self.listBt.hidden = NO;
+        
+        CGFloat conH =  [[NSString stringWithFormat:@"回复内容: %@",model.contents] getHeigtWithFontSize:14 lineSpace:3 width:ww];
         [self.titelLB mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.listBt.mas_bottom).offset(5);
+            //            make.height.equalTo(@(conH));
         }];
-        model.cellHeight = [[NSString stringWithFormat:@"回复内容: %@",model.contents] getHeigtWithFontSize:14 lineSpace:3 width:ScreenW - 20] + 10 + 30 ;
+        NSLog(@"\n111111====%@---%f",model.contents,conH);
+        
+        model.cellHeight = conH + 15 + 25;
         if (model.contents.length == 0) {
-            model.cellHeight = 35;
+            model.cellHeight = 10+25;
             self.titelLB.hidden = YES;
         }else {
             self.titelLB.hidden = NO;
         }
     }else {
         self.listBt.hidden = YES;
+        CGFloat conH =  [[NSString stringWithFormat:@"回复内容: %@",model.contents] getHeigtWithFontSize:14 lineSpace:3 width:ww] ;
         [self.titelLB mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self).offset(5);
+            //             make.height.equalTo(@(conH));
         }];
-        model.cellHeight = [[NSString stringWithFormat:@"回复内容: %@",model.contents] getHeigtWithFontSize:14 lineSpace:3 width:ScreenW - 20] + 10;
+        model.cellHeight = conH + 10;
+        
+        NSLog(@"\n111111====%@---%f",model.contents,conH);
+        
     }
     NSLog(@"\n+++++++%f",model.cellHeight);
     

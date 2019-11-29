@@ -17,7 +17,7 @@
 @property(nonatomic,copy)NSString *nickName,*phoneStr,*addressStr;
 @property(nonatomic,strong)NSMutableArray<zkPickModel *> *cityArray;
 @property(nonatomic,strong)UIImage *img;
-
+@property(nonatomic,strong)QYZJTongYongModel *imgModel;
 @end
 
 @implementation QYZJSettingTVC
@@ -32,7 +32,13 @@
     [self getCityData];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 70, 0);
     [self setFootV];
-    
+    [self getImgDict];
+}
+
+- (void)getImgDict {
+    [zkRequestTool getUpdateImgeModelWithCompleteModel:^(QYZJTongYongModel *model) {
+           self.imgModel = model;
+       }];
 }
 
 - (void)setFootV {
@@ -57,7 +63,27 @@
 //退出登录
 - (void)outLoginActio:(UIButton *)button {
     
-    
+
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_app_logoutURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+//            [zkSignleTool shareTool].session_token = nil;
+//            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
     
     
 }
@@ -121,15 +147,16 @@
     }
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-           
+            [cell.headImg sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:self.dataModel.head_img]] placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+            cell.headImg.layer.cornerRadius = 25;
+            cell.headImg.clipsToBounds = YES;
         }else if (indexPath.row == 1) {
-            
-            cell.rightLB.text = self.nickName;
+            cell.rightLB.text = self.dataModel.nick_name;
             
         }else if (indexPath.row == 2) {
-        
+           cell.rightLB.text = [NSString stringWithFormat:@"%@%@%@",self.dataModel.pro_name,self.dataModel.city_name,self.dataModel.area_name];
         }else {
-            cell.rightLB.text = self.addressStr;
+            cell.rightLB.text = self.dataModel.address;
         }
         
     }else if (indexPath.section == 1) {
@@ -146,11 +173,11 @@
         cell.rightLB.text = [NSString stringWithFormat:@"%0.1fM",[cacheClear folderSizeAtPath]];
     }
     
-    if (((indexPath.row == 3 ||indexPath.row == 1) && indexPath.section == 0) || indexPath.section == 2) {
-        cell.jianTouImgV.hidden = YES;
-    }else {
-       cell.jianTouImgV.hidden = NO;
-    }
+//    if (((indexPath.row == 3 ||indexPath.row == 1) && indexPath.section == 0) || indexPath.section == 2) {
+//        cell.jianTouImgV.hidden = YES;
+//    }else {
+//       cell.jianTouImgV.hidden = NO;
+//    }
     
     return cell;
     
@@ -170,14 +197,17 @@
                 
                 UITextField*userNameTF = alertController.textFields.firstObject;
                 
-                self.nickName = userNameTF.text;
+                 self.dataModel.nick_name = userNameTF.text;
                  [self.tableView reloadData];
+                [self editUserInfoWithDict:@{@"nick_name":userNameTF.text}];
+
                 
             }]];
             
             [alertController addTextFieldWithConfigurationHandler:^(UITextField*_Nonnull textField) {
                 
                 textField.placeholder=@"请输入昵称";
+                
                 
                 
             }];
@@ -199,7 +229,8 @@
                 
                 UITextField*userNameTF = alertController.textFields.firstObject;
                 
-                self.addressStr = userNameTF.text;
+                  self.dataModel.address = userNameTF.text;
+                  [self editUserInfoWithDict:@{@"address":userNameTF.text}];
                 [self.tableView reloadData];
                 
             }]];
@@ -257,9 +288,8 @@
                        imagePickerVc.circleCropRadius = ScreenW/2;
                        [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
                            if (photos.count > 0) {
-                               self.img = photos[0];
+                               [self updateImgWithImg:photos[0]];
                            }
-                           [self.tableView reloadData];
                        }];
                        [self presentViewController:imagePickerVc animated:YES completion:nil];
             
@@ -287,9 +317,8 @@
             imagePickerVc.circleCropRadius = ScreenW/2;
             [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
                 if (photos.count > 0) {
-                    self.img = photos[0];
+                    [self updateImgWithImg:photos[0]];
                 }
-                [self.tableView reloadData];
             }];
             [self presentViewController:imagePickerVc animated:YES completion:nil];
         }else{
@@ -323,6 +352,16 @@
     
     NSLog(@"%d---%d----%d",leftIndex,centerIndex,rightIndex);
     
+    self.dataModel.pro_name = self.cityArray[leftIndex].pname;
+    self.dataModel.pro_id = self.cityArray[leftIndex].pid;
+    self.dataModel.city_name = self.cityArray[leftIndex].cityList[centerIndex].cname;
+    self.dataModel.city_id = self.cityArray[leftIndex].cityList[centerIndex].cid;
+    self.dataModel.area_name = self.cityArray[leftIndex].cityList[centerIndex].areaList[rightIndex].name;
+    self.dataModel.area_id = self.cityArray[leftIndex].cityList[centerIndex].areaList[rightIndex].ID;
+    
+    [self editUserInfoWithDict:@{@"pro_id":self.dataModel.pro_id,@"city_id":self.dataModel.city_id,@"area_id":self.dataModel.area_id}];
+    [self.tableView reloadData];
+    
     
 }
 
@@ -330,7 +369,43 @@
     
 }
 
+- (void)updateImgWithImg:(UIImage *)image {
+    
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"token"] = self.imgModel.token;
+    [zkRequestTool NetWorkingUpLoad:QiNiuYunUploadURL image:image andName:@"file" parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        self.dataModel.head_img = responseObject[@"key"];
+        [self.tableView reloadData];
+        [self editUserInfoWithDict:@{@"head_img":responseObject[@"key"]}];
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+    }];
+    
+    
+}
 
+- (void)editUserInfoWithDict:(NSDictionary*)dict {
+    
+    [SVProgressHUD show];
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_editInfoURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+   
+        
+    }];
+    
+}
 
 
 @end

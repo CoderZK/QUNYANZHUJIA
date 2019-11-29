@@ -87,7 +87,7 @@
     self.zanBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 35-10 - 80, 10, 80, 35)];
     [self.zanBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     [self.zanBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.zanBt setTitle:self.model.goodNum forState:UIControlStateNormal];
+    [self.zanBt setTitle:[NSString stringWithFormat:@"%ld",self.model.goodNum] forState:UIControlStateNormal];
     if (self.model.headlinenews.isGood) {
         [self.zanBt setImage:[UIImage imageNamed:@"17"] forState:UIControlStateNormal];
     }else {
@@ -100,7 +100,7 @@
     self.collectBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 45, 10, 35, 35)];
     [self.whiteV addSubview:self.collectBt];
     self.collectBt.tag = 1;
-    if (self.model.headlinenews.isConllect) {
+    if (self.model.headlinenews.isCollect) {
         [self.collectBt setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateNormal];
     }else{
         [self.collectBt setImage:[UIImage imageNamed:@"xing2"] forState:UIControlStateNormal];

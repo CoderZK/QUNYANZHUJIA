@@ -20,11 +20,24 @@
     self.navigationItem.title = @"商品详情";
     
       self.headV = [[QYZJShopDetailHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 20)];
+      [self getData];
+    if (!self.isMine) {
+        
+        self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - 60);
+        if (sstatusHeight > 20) {
+            self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34);
+        }
+        KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"购买" andImgaeName:@""];
+        Weak(weakSelf);
+        view.footViewClickBlock = ^(UIButton *button) {
+            
+            
+            
+        };
+        [self.view addSubview:view];
+        
+    }
 
-       [self getData];
-//          self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//              [self getData];
-//          }];
     
 }
 

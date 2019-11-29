@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJShopDetailTVC : BaseTableViewController
 @property(nonatomic,strong)NSString *ID;
+@property(nonatomic,assign)NSInteger isMine;
 @end
 
 NS_ASSUME_NONNULL_END

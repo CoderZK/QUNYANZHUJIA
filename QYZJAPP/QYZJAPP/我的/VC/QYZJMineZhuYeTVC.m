@@ -254,6 +254,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else {
         QYZJMineShopTVC * vc =[[QYZJMineShopTVC alloc] init];
+        
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }

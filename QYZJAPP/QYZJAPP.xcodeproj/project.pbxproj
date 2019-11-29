@@ -262,6 +262,7 @@
 		584A1CDC23839ECC007FDC3D /* QYZJMoreChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 584A1CDB23839ECC007FDC3D /* QYZJMoreChooseView.m */; };
 		584A1CDF2383BDA3007FDC3D /* QYZJAddWorkMomentTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 584A1CDE2383BDA3007FDC3D /* QYZJAddWorkMomentTVC.m */; };
 		584A1CE22383BDF4007FDC3D /* QYZJChangeDetailedListTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 584A1CE12383BDF4007FDC3D /* QYZJChangeDetailedListTVC.m */; };
+		58578BC223910B2C00EA518C /* QYZJAppShopTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 58578BC123910B2C00EA518C /* QYZJAppShopTVC.m */; };
 		587611A32379255000A9DBA5 /* QYZJMessageTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 587611A22379255000A9DBA5 /* QYZJMessageTVC.m */; };
 		587611A7237926BC00A9DBA5 /* QYZJMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 587611A5237926BC00A9DBA5 /* QYZJMessageCell.m */; };
 		587611A8237926BC00A9DBA5 /* QYZJMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587611A6237926BC00A9DBA5 /* QYZJMessageCell.xib */; };
@@ -746,6 +747,8 @@
 		584A1CDE2383BDA3007FDC3D /* QYZJAddWorkMomentTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJAddWorkMomentTVC.m; sourceTree = "<group>"; };
 		584A1CE02383BDF4007FDC3D /* QYZJChangeDetailedListTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJChangeDetailedListTVC.h; sourceTree = "<group>"; };
 		584A1CE12383BDF4007FDC3D /* QYZJChangeDetailedListTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJChangeDetailedListTVC.m; sourceTree = "<group>"; };
+		58578BC023910B2C00EA518C /* QYZJAppShopTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJAppShopTVC.h; sourceTree = "<group>"; };
+		58578BC123910B2C00EA518C /* QYZJAppShopTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJAppShopTVC.m; sourceTree = "<group>"; };
 		587611A12379255000A9DBA5 /* QYZJMessageTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMessageTVC.h; sourceTree = "<group>"; };
 		587611A22379255000A9DBA5 /* QYZJMessageTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMessageTVC.m; sourceTree = "<group>"; };
 		587611A4237926BC00A9DBA5 /* QYZJMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMessageCell.h; sourceTree = "<group>"; };
@@ -1075,6 +1078,8 @@
 				58394F53237A3F4C0017505B /* QYZJMineAskTVC.m */,
 				58394F55237A3F980017505B /* QYZJMineShopTVC.h */,
 				58394F56237A3F980017505B /* QYZJMineShopTVC.m */,
+				58578BC023910B2C00EA518C /* QYZJAppShopTVC.h */,
+				58578BC123910B2C00EA518C /* QYZJAppShopTVC.m */,
 				5829CEC1238F5A2A00A4CFF0 /* QYZJEditShopNameVC.h */,
 				5829CEC2238F5A2A00A4CFF0 /* QYZJEditShopNameVC.m */,
 				5829CEC3238F5A2A00A4CFF0 /* QYZJEditShopNameVC.xib */,
@@ -2075,6 +2080,7 @@
 				584331B623700BB50046C0BD /* QYZJHomeFourCell.m in Sources */,
 				583A4D57236BC65A00180E27 /* QYZJURLDefineTool.m in Sources */,
 				5843317D236FAB2D0046C0BD /* TYCyclePagerTransformLayout.m in Sources */,
+				58578BC223910B2C00EA518C /* QYZJAppShopTVC.m in Sources */,
 				583ED6AB2373F0660070441A /* zkPhotoShowVC.m in Sources */,
 				584A1CE22383BDF4007FDC3D /* QYZJChangeDetailedListTVC.m in Sources */,
 				335010DD20EDF9AE00F8486B /* zkRequestTool.m in Sources */,

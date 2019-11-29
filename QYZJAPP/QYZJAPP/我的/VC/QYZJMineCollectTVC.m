@@ -9,7 +9,7 @@
 #import "QYZJMineCollectTVC.h"
 #import "QYZJFindCell.h"
 #import "QYZJFindTwoCell.h"
-@interface QYZJMineCollectTVC ()
+@interface QYZJMineCollectTVC ()<QYZJFindTwoCellDelegate>
 @property(nonatomic,strong)UIButton *leftBt,*rightBt;
 @property(nonatomic,strong)UIView *headV;
 @property(nonatomic,assign)NSInteger type;//1头条 2 动态
@@ -58,10 +58,12 @@
     [self.leftBt addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     
     self.rightBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW/2 + 10, 10, 100, 35)];
-    [self.rightBt setTitle:@"待抢单" forState:UIControlStateNormal];
+    [self.rightBt setTitle:@"动态" forState:UIControlStateNormal];
     self.rightBt.titleLabel.font = kFont(15);
     [self.rightBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.rightBt.backgroundColor = WhiteColor;
+    self.rightBt.layer.borderColor = OrangeColor.CGColor;
+    self.rightBt.layer.borderWidth = 1;
     [self.headV addSubview:self.rightBt];
     self.rightBt.tag = 101;
     [self.rightBt addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -76,9 +78,13 @@
         self.rightBt.backgroundColor = WhiteColor;
         [self.leftBt setTitleColor:WhiteColor forState:UIControlStateNormal];
         self.leftBt.backgroundColor = OrangeColor;
+        self.rightBt.layer.borderWidth = 1;
+        self.rightBt.layer.borderColor = OrangeColor.CGColor;
     }else {
         [self.rightBt setTitleColor:WhiteColor forState:UIControlStateNormal];
         self.rightBt.backgroundColor = OrangeColor;
+        self.leftBt.layer.borderWidth = 1;
+        self.leftBt.layer.borderColor = OrangeColor.CGColor;
         [self.leftBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         self.leftBt.backgroundColor = WhiteColor;
     }
@@ -124,7 +130,6 @@
 }
 
 
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -149,12 +154,45 @@
     }else {
         QYZJFindTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJFindTwoCell" forIndexPath:indexPath];
         cell.type = 1;
+        cell.delegate = self;
+        cell.model = self.dataArray[indexPath.row];
         return cell;
     }
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
+
+
+- (void)didClickFindTwoCell:(QYZJFindTwoCell *)cell withIndex:(NSInteger)index {
+     NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    
+    QYZJFindModel * model = self.dataArray[indexPath.row];
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    NSString * str =@"";
+   
+    str = [QYZJURLDefineTool app_headlinenewsCollectURL];
+    dict[@"status"] = @"1";
+    dict[@"headlinenews_id"] = model.ID;
+    [zkRequestTool networkingPOST:str parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            [self.dataArray removeObjectAtIndex:indexPath.row];
+            [self.tableView reloadData];
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+
     
 }
 

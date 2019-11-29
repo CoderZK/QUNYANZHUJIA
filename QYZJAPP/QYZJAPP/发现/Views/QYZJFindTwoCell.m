@@ -35,25 +35,36 @@
     
     // Configure the view for the selected state
 }
+- (IBAction)action:(UIButton *)sender {
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(didClickFindTwoCell:withIndex:)]) {
+        [self.delegate didClickFindTwoCell:self withIndex: sender.tag-100];
+    }
+    
+    
+}
 
 
 -(void)setModel:(QYZJFindModel *)model {
     _model = model;
     self.titleLB.text = model.title;
     self.timeLB.text = model.timeNow;
-    [self.zanBt setTitle:model.goodNum forState:UIControlStateNormal];
+   
     if (model.isGood) {
         [self.zanBt setImage:[UIImage imageNamed:@"17"] forState:UIControlStateNormal];
     }else {
         [self.zanBt setImage:[UIImage imageNamed:@"2"] forState:UIControlStateNormal];
     }
-    [self.pingLunBt setTitle:model.commentNum forState:UIControlStateNormal];
-    if (model.isConllect) {
+    [self.pingLunBt setTitle:[NSString stringWithFormat:@"%ld",model.commentNum] forState:UIControlStateNormal];
+    if (model.isCollect) {
         [self.collectBt setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateNormal];
     }else {
         [self.collectBt setImage:[UIImage imageNamed:@"xing2"] forState:UIControlStateNormal];
     }
-    [self.pingLunBt setTitle:model.commentNum forState:UIControlStateNormal];
+    
+    
+    [self.collectBt setTitle:[NSString stringWithFormat:@"%ld",model.collectNum] forState:UIControlStateNormal];
+    [self.pingLunBt setTitle:[NSString stringWithFormat:@"%ld",model.commentNum] forState:UIControlStateNormal];
+    [self.zanBt setTitle:[NSString stringWithFormat:@"%ld",model.goodNum] forState:UIControlStateNormal];
     [self.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.showContent]]  placeholderImage:[UIImage imageNamed:@"369"]];
 }
 

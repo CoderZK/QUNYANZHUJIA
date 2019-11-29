@@ -18,7 +18,9 @@
     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_login_nocode.do"];
 }
 ///** 退出登录 */
-//+ (NSString * )getapp_loginURL;
++ (NSString * )user_app_logoutURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_app_logout.do"];
+}
 /** 获取个人信息 */
 + (NSString * )user_centerInfoURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_centerInfo.do"];
@@ -466,6 +468,27 @@
 /**删除动态*/
 +(NSString *)app_articleDelURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_articleDel.do"];
+}
+
+/** 取消和收藏*/
++(NSString *)app_headlinenewsCollectURL {
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_headlinenewsCollect.do"];
+}
+/** 头条取消和点赞*/
++(NSString *)app_headlinenewsGoodURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_headlinenewsGood.do"];
+}
+/** 广场取消和收藏*/
++(NSString *)app_articleCollectURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_articleCollect.do"];
+}
+/** 广场取消和点赞*/
++(NSString *)app_articleGoodURL{
+   return [NSString stringWithFormat:@"%@%@",URLOne,@"app_articleGood.do"];
+}
+/**删除帖子*/
++(NSString *)app_articleCommentDelURL{
+   return [NSString stringWithFormat:@"%@%@",URLOne,@"app_articleCommentDel.do"];
 }
 
 

@@ -21,6 +21,7 @@
 @property(nonatomic,strong)UIButton *listBt;
 @property(nonatomic,strong)UILabel *titelLB;
 @property(nonatomic,strong)QYZJFindModel *model;
+@property(nonatomic,assign)BOOL isServer;
 
 @end
 

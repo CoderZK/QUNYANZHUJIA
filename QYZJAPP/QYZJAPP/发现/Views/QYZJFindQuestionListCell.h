@@ -8,10 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
+@class QYZJFindQuestionListCell;
+
+@protocol QYZJFindQuestionListCellDelegate <NSObject>
+
+- (void)didClickFindQuestListCell:(QYZJFindQuestionListCell *)cell withIndex:(NSInteger)index;
+
+@end
+
+
 
 @interface QYZJFindQuestionListCell : UITableViewCell
 @property(nonatomic,strong)QYZJFindModel *model;
+@property(nonatomic,assign)id<QYZJFindQuestionListCellDelegate>delegate;
+
 @end
 
-NS_ASSUME_NONNULL_END
+

@@ -18,7 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    self.navigationItem.title = @"修改支付密码";
+    
 }
 - (IBAction)action:(UIButton *)sender {
     if (sender.tag == 100) {

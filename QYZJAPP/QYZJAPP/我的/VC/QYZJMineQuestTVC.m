@@ -89,6 +89,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     QYZJMineQuestCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    if ([zkSignleTool shareTool].role == 1) {
+        cell.isServer = YES;
+    }else {
+        cell.isServer = NO;
+    }
     cell.waiModel = self.dataArray[indexPath.row];
     return cell;
     

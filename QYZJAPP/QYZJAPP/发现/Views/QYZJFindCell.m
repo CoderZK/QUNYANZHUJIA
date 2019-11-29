@@ -41,6 +41,11 @@
         self.jinDaBt = [[UIButton alloc] init];
         [self.jinDaBt setTitleColor:WhiteColor forState:UIControlStateNormal];
         self.jinDaBt.titleLabel.font = kFont(14);
+        [self.jinDaBt setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
+        self.jinDaBt.layer.cornerRadius = 3;
+        self.jinDaBt.clipsToBounds = YES;
+        [self.jinDaBt setTitle:@"进店" forState:UIControlStateNormal];
+        self.jinDaBt.titleLabel.font = kFont(14);
         [self addSubview:self.jinDaBt];
         [self.jinDaBt mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -235,15 +240,19 @@
     [self setPicWithideos:model.videos andPictArr:model.pictures];
     [self setGoodsListwitArr:model.goodsList];
     
+    if (self.type == 0 && [model.refShopId intValue] > 0) {
+        self.jinDaBt.hidden = NO;
+    }
+    
     self.timeLB.text = model.timeNow;
-    [self.zanBt setTitle:model.goodsNum forState:UIControlStateNormal];
+    [self.zanBt setTitle:[NSString stringWithFormat:@"%ld",model.goodsNum] forState:UIControlStateNormal];
     if (model.isGood) {
         [self.zanBt setImage:[UIImage imageNamed:@"17"] forState:UIControlStateNormal];
     }else {
         [self.zanBt setImage:[UIImage imageNamed:@"2"] forState:UIControlStateNormal];
     }
-    [self.pingLunBt setTitle:model.commentNum forState:UIControlStateNormal];
-    if (model.isConllect) {
+    [self.pingLunBt setTitle:[NSString stringWithFormat:@"%ld",model.commentNum] forState:UIControlStateNormal];
+    if (model.isCollect) {
         [self.collectBt setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateNormal];
     }else {
         [self.collectBt setImage:[UIImage imageNamed:@"xing2"] forState:UIControlStateNormal];

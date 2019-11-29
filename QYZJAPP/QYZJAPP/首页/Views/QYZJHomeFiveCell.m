@@ -102,8 +102,8 @@
        self.answerLeftCons.constant = 0;
     }
     
-    self.fansLB.text = model.fans_num;
-    self.answerLB.text = model.answer_num;
+    self.fansLB.text = [NSString stringWithFormat:@"%ld",model.fans_num]; ;
+    self.answerLB.text = [NSString stringWithFormat:@"%ld",model.answer_num];
     
     NSString * str = model.role_name;
     NSArray * arr = @[];

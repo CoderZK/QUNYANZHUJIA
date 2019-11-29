@@ -9,8 +9,7 @@
 #import "QYZJMineShopHeadView.h"
 
 @interface QYZJMineShopHeadView()
-@property(nonatomic,strong)UIButton *backBt,*shareBt,*headBt,*editBt,*leftBt,*centerBt,*rightBt;
-@property(nonatomic,strong)UILabel *titelLB;
+@property(nonatomic,strong)UIButton *backBt,*leftBt,*centerBt,*rightBt;
 @property(nonatomic,strong)UIImageView *imgV;
 @property(nonatomic,strong)UIView *gayV,*redV,*lineV,*whiteOneV,*whiteTwoView;
 

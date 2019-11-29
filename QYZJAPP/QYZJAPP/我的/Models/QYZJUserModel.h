@@ -33,6 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *invitation_code;
 @property(nonatomic,strong)NSString *pic;
 @property(nonatomic,strong)NSString *name;
+@property(nonatomic,strong)NSString *address;
 
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *goods_list;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *case_list;

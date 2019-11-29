@@ -234,6 +234,7 @@
         QYZJFindModel * model = self.dataArray[indexPath.row * 2+index];
         QYZJShopDetailTVC * vc =[[QYZJShopDetailTVC alloc] init];
         vc.ID = model.ID;
+        vc.isMine = YES;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
         

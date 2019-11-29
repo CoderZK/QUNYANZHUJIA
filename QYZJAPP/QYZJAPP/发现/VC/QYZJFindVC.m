@@ -17,7 +17,9 @@
 #import "QYZJFindQuestionListCell.h"
 #import "QYZJQuestionListDetailTVC.h"
 #import "QYZJPostMessageTVC.h"
-@interface QYZJFindVC ()<QYZJFindCellDelegate>
+#import "QYZJAppShopTVC.h"
+#import "QYZJShopDetailTVC.h"
+@interface QYZJFindVC ()<QYZJFindCellDelegate,QYZJFindTwoCellDelegate>
 @property(nonatomic,strong)FindHeadView *navigaV;
 @property(nonatomic,strong)UIButton *faBuBt;
 @property(nonatomic,strong)NSArray *titleArr;
@@ -39,23 +41,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.type = 0;
     self.page = 1;
     self.dataArray = [NSMutableArray array];
-     self.tableView.frame = CGRectMake(0, sstatusHeight + 110, ScreenW, ScreenH - sstatusHeight - 110);
-    
+    self.tableView.frame = CGRectMake(0, sstatusHeight + 110, ScreenW, ScreenH - sstatusHeight - 110);
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJFindOneCell" bundle:nil] forCellReuseIdentifier:@"QYZJFindOneCell"];
     [self.tableView registerClass:[QYZJFindCell class] forCellReuseIdentifier:@"QYZJFindCell"];
     [self.tableView registerClass:[QYZJFindQuestionListCell class] forCellReuseIdentifier:@"QYZJFindQuestionListCell"];
-    
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeFiveCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeFiveCell"];
-      [self.tableView registerNib:[UINib nibWithNibName:@"QYZJFindTwoCell" bundle:nil] forCellReuseIdentifier:@"QYZJFindTwoCell"];
-    
+    [self.tableView registerNib:[UINib nibWithNibName:@"QYZJFindTwoCell" bundle:nil] forCellReuseIdentifier:@"QYZJFindTwoCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.estimatedRowHeight = 1;
     [self addNav];
-    
     [self getDataWithType:self.type];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.page = 1;
@@ -65,16 +62,9 @@
         self.page++;
         [self getDataWithType:self.type];
     }];
-    
-    
     [self addFaTieView];
-
-    
-    
 }
-
 - (void)getDataWithType:(NSInteger )type {
-    
     NSString * urlStr = [QYZJURLDefineTool app_articleListURL];
     if (type == 1) {
         urlStr = [QYZJURLDefineTool app_logiciansListURL];
@@ -85,7 +75,7 @@
     }
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"token"] = [zkSignleTool shareTool].session_token;
-    dict[@"city_id"] = @"1004";
+    dict[@"city_id"] = @"0";
     dict[@"page"] = @(self.page);
     dict[@"pageSize"] = @(10);
     [zkRequestTool networkingPOST:urlStr parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -153,7 +143,6 @@
             self.type = [number intValue];
             self.page = 1;
             [self getDataWithType:self.type];
-            
             NSLog(@"%@",number);
 
         }
@@ -188,7 +177,8 @@
     
     if (self.type == 0) {
         QYZJFindCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJFindCell" forIndexPath:indexPath];
-          cell.model = self.dataArray[indexPath.row];
+        cell.type = 0;
+        cell.model = self.dataArray[indexPath.row];
         cell.delegate = self;
           return cell;
     }else if(self.type == 1){
@@ -198,7 +188,7 @@
         return cell;
     }else if (self.type == 2) {
         QYZJFindTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJFindTwoCell" forIndexPath:indexPath];
-     
+        cell.delegate = self;
         cell.model = self.dataArray[indexPath.row];
         return cell;
     }else if (self.type == 3) {
@@ -238,17 +228,110 @@
 }
 
 #pragma mark ------- 点击cell  ----
-
+// 0 0 头像 1 进店 2 收藏 3评论 4赞   5删除
 - (void)didClickFindCell:(QYZJFindCell *)cell index:(NSInteger)index {
-    
     NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    NSString * str =@"";
+    BOOL isZan = NO;
+       if (index == 4) {
+           //点赞取消
+           str = [QYZJURLDefineTool app_articleGoodURL];
+           isZan = YES;
+            [self zanOrNOCollectOrNOWithIndexPath:indexPath andUrlStr:str isZanOpAction:isZan];
+       }else if (index == 2) {
+           str = [QYZJURLDefineTool app_articleCollectURL];
+           isZan = NO;
+            [self zanOrNOCollectOrNOWithIndexPath:indexPath andUrlStr:str isZanOpAction:isZan];
+       }else if (index == 1) {
+           QYZJAppShopTVC * vc =[[QYZJAppShopTVC alloc] init];
+           vc.hidesBottomBarWhenPushed = YES;
+           vc.shopId = self.dataArray[indexPath.row].refShopId;
+           [self.navigationController pushViewController:vc animated:YES];
+       }else if (index >= 100) {
+           
+           QYZJShopDetailTVC * vc =[[QYZJShopDetailTVC alloc] init];
+           vc.hidesBottomBarWhenPushed = YES;
+           vc.ID = self.dataArray[indexPath.row].goodsList[index-100].ID;
+           [self.navigationController pushViewController:vc animated:YES];
+           
+           
+       }
+   
+}
+
+- (void)didClickFindTwoCell:(QYZJFindTwoCell *)cell withIndex:(NSInteger)index {
+     NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    
+    NSString * str =@"";
+    BOOL isZan = NO;
+       if (index == 0) {
+           //点赞取消
+           str = [QYZJURLDefineTool app_headlinenewsGoodURL];
+           isZan = YES;
+           [self zanOrNOCollectOrNOWithIndexPath:indexPath andUrlStr:str isZanOpAction:isZan];
+       }else if (index == 2) {
+           str = [QYZJURLDefineTool app_headlinenewsCollectURL];
+           isZan = NO;
+           [self zanOrNOCollectOrNOWithIndexPath:indexPath andUrlStr:str isZanOpAction:isZan];
+       }
+    
+}
+
+- (void)zanOrNOCollectOrNOWithIndexPath:(NSIndexPath *)indexPath andUrlStr:(NSString *)str isZanOpAction:(BOOL)isZanOp{
     
     
-    
-    
-    
+      QYZJFindModel * model = self.dataArray[indexPath.row];
+      [SVProgressHUD show];
+      NSMutableDictionary * dict = @{}.mutableCopy;
+      if (isZanOp) {
+          //点赞取消
+          if (model.isGood) {
+              dict[@"is_good"] = @"0";
+          }else {
+              dict[@"is_good"] = @"1";
+          }
+      }else {
+          if (model.isCollect) {
+              dict[@"status"] = @"1";
+          }else {
+              dict[@"status"] = @"0";
+          }
+      }
+      dict[@"headlinenews_id"] = model.ID;
+      dict[@"article_id"] = model.ID;
+      [zkRequestTool networkingPOST:str parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+          [SVProgressHUD dismiss];
+          if ([responseObject[@"key"] intValue]== 1) {
+              if (isZanOp) {
+                  if (model.isGood) {
+                      model.goodNum=model.goodNum-1;
+                      model.goodsNum = model.goodsNum -1;
+                  }else {
+                       model.goodNum=model.goodNum+1;
+                      model.goodsNum = model.goodsNum + 1;
+                  }
+                  model.isGood = !model.isGood;
+              } else {
+                  if (model.isCollect) {
+                      model.collectNum=model.collectNum-1;
+                  }else {
+                       model.collectNum=model.collectNum+1;
+                  }
+                  model.isCollect = !model.isCollect;
+              }
+              [self.tableView reloadData];
+          }else {
+              [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+          }
+      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+          
+          [self.tableView.mj_header endRefreshing];
+          [self.tableView.mj_footer endRefreshing];
+          
+      }];
     
     
 }
+
 
 @end
