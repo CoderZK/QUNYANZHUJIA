@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJYanShouOrBaoXiuTVC : BaseTableViewController
-@property(nonatomic,assign)NSInteger type; // 2 验收 3 保修
+@property(nonatomic,assign)NSInteger type; // 2 验收 3 报修
 @end
 
 NS_ASSUME_NONNULL_END

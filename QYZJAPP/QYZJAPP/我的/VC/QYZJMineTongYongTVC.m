@@ -18,6 +18,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (self.type == 1) {
+        self.navigationItem.title = @"我的报修";
+    }else {
+        self.navigationItem.title = @"我的案例";
+    }
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJMineBaoXiuCellTableViewCell" bundle:nil] forCellReuseIdentifier:@"QYZJMineBaoXiuCellTableViewCell"];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -75,7 +82,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -88,8 +95,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (self.type == 1) {
-       QYZJMineBaoXiuCellTableViewCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJMineBaoXiuCellTableViewCell" forIndexPath:indexPath];
-    
+        QYZJMineBaoXiuCellTableViewCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJMineBaoXiuCellTableViewCell" forIndexPath:indexPath];
+        cell.model = self.dataArray[indexPath.row];
         return cell;
     }else if (self.type == 2) {
       

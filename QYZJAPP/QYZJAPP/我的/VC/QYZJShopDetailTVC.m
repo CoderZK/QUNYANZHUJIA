@@ -8,9 +8,11 @@
 
 #import "QYZJShopDetailTVC.h"
 #import "QYZJShopDetailHeadView.h"
+#import "QYZJBuyOrderDetailTVC.h"
 @interface QYZJShopDetailTVC ()
 @property(nonatomic,strong)QYZJShopDetailHeadView *headV;
 @property(nonatomic,strong)QYZJFindModel *dataModel;
+@property(nonatomic,strong)UIButton * shareBt;
 @end
 
 @implementation QYZJShopDetailTVC
@@ -30,14 +32,23 @@
         KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"购买" andImgaeName:@""];
         Weak(weakSelf);
         view.footViewClickBlock = ^(UIButton *button) {
-            
-            
-            
+            QYZJBuyOrderDetailTVC * vc =[[QYZJBuyOrderDetailTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
         };
         [self.view addSubview:view];
         
     }
+    self.shareBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 50, sstatusHeight + 2, 40, 40)];
+    self.shareBt.tag = 1;
+    [self.shareBt addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.shareBt setImage:[UIImage imageNamed:@"34"] forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.shareBt];
+ 
+}
 
+//点击分享
+- (void)clickAction:(UIButton *)button {
     
 }
 

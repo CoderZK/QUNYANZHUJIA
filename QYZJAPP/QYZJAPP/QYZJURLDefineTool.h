@@ -104,6 +104,13 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)app_articleGoodURL;
 /**删除帖子*/
 +(NSString *)app_articleCommentDelURL;
+/**发送验证码*/
++(NSString *)app_sendmobileURL;
+/**验证验证码*/
++(NSString *)app_checkSendCodeURL;
+/**修改忘记密码*/
++(NSString *)app_findPasswordURL;
+
 
 
 #pragma mark ----- 消息部分 -------
@@ -160,7 +167,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark ----- 交付 -------
 
-/** 设置施工阶段的保修时间*/
+/** 设置施工阶段的报修时间*/
 +(NSString *)user_setStageRepairTimeURL;
 
 #pragma mark ----- 推荐答人-------
@@ -254,7 +261,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 类型*/
 +(NSString *)app_findLabelByTypeListURL;
-/** 我的保修列表*/
+/** 我的报修列表*/
 +(NSString *)user_repairListURL;
 /**邀请收入*/
 +(NSString *)user_moneyListInvitationURL;

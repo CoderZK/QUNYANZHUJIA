@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJFindPasswordTwoVC : BaseViewController
-
+@property(nonatomic,strong)NSString *phoneStr;
 @end
 
 NS_ASSUME_NONNULL_END

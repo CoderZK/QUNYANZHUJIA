@@ -9,6 +9,7 @@
 #import "QYZJMineOrderTVC.h"
 #import "QYZJMineOrderCell.h"
 #import "QYZJMineOrderHeadView.h"
+#import "QYZJMineOrderInfoTVC.h"
 @interface QYZJMineOrderTVC ()
 @property(nonatomic,assign)NSInteger type; // 0
 @property(nonatomic,assign)NSInteger page;
@@ -106,14 +107,24 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     QYZJMineOrderCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.model = self.dataArray[indexPath.row];;
+    cell.model = self.dataArray[indexPath.row];
+    cell.statusBt.tag = indexPath.row;
+    cell.statusBt.userInteractionEnabled = NO;
+//    [cell.statusBt addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    QYZJMineOrderInfoTVC * vc =[[QYZJMineOrderInfoTVC alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    vc.dataModel = self.dataArray[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
+    
     
 }
+
+
 
 
 @end

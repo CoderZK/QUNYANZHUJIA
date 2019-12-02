@@ -244,7 +244,7 @@
 
 #pragma mark ----- 交付 -------
 
-/** 设置施工阶段的保修时间*/
+/** 设置施工阶段的报修时间*/
 +(NSString *)user_setStageRepairTimeURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_setStageRepairTime.do"];
 }
@@ -434,7 +434,7 @@
 + (NSString * )app_headlinenewsDetailsURL{
      return [NSString stringWithFormat:@"%@%@",URLOne,@"app_headlinenewsDetails.do"];
 }
-/** 我的保修列表*/
+/** 我的报修列表*/
 +(NSString *)user_repairListURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_repairList.do"];
 }
@@ -489,6 +489,19 @@
 /**删除帖子*/
 +(NSString *)app_articleCommentDelURL{
    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_articleCommentDel.do"];
+}
+/**发送验证码*/
++(NSString *)app_sendmobileURL {
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_sendmobile.do"];
+}
+/**验证验证码*/
++(NSString *)app_checkSendCodeURL{
+   return [NSString stringWithFormat:@"%@%@",URLOne,@"app_checkSendCode.do"];
+}
+
+/**修改忘记密码*/
++(NSString *)app_findPasswordURL {
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_findPassword.do"];
 }
 
 

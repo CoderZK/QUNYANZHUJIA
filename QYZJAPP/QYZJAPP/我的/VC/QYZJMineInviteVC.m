@@ -7,7 +7,7 @@
 //
 
 #import "QYZJMineInviteVC.h"
-
+#import "QYZJMineYaoQingTVC.h"
 @interface QYZJMineInviteVC ()
 @property (weak, nonatomic) IBOutlet UIButton *leftBt;
 @property (weak, nonatomic) IBOutlet UIButton *rightBt;
@@ -28,7 +28,9 @@
     if(sender.tag == 100) {
         
     }else if (sender.tag == 101) {
-        
+        QYZJMineYaoQingTVC * vc =[[QYZJMineYaoQingTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }else {
         
         
@@ -36,14 +38,6 @@
     
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

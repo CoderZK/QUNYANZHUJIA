@@ -42,21 +42,44 @@
         return;
     }
     NSMutableDictionary * dataDict = @{@"phone":self.oldTF.text,@"type":@"1"}.mutableCopy;
-    dataDict[@"deviceId"] = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
-//    [zkRequestTool networkingPOST:[HHYURLDefineTool sendValidCodeURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
-//        if ([responseObject[@"code"] intValue]== 0) {
-//            [self timeAction];
-//        }else {
-//            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
-//        }
-//
-//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//
-//
-//
-//    }];
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_sendmobileURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([responseObject[@"key"] intValue]== 1) {
+            [SVProgressHUD showSuccessWithStatus:@"验证码已发送"];
+            [self timeAction];
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        
+        
+    }];
     
 }
+
+- (void)timeAction {
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerStar) userInfo:nil repeats:YES];
+    self.codeBt.userInteractionEnabled = NO;
+    self.number = 60;
+    
+    
+}
+
+- (void)timerStar {
+    _number = _number -1;
+    if (self.number > 0) {
+        [self.codeBt setTitle:[NSString stringWithFormat:@"%lds后重发",_number] forState:UIControlStateNormal];
+    }else {
+        [self.codeBt setTitle:@"重新发送" forState:UIControlStateNormal];
+        [self.timer invalidate];
+        self.timer = nil;
+        self.codeBt.userInteractionEnabled = YES;
+    }
+    
+    
+}
+
 
 - (void)registerAction{
 //    if (self.phoneTF.text.length == 0) {

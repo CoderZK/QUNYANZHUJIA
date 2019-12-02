@@ -20,14 +20,34 @@
     // Do any additional setup after loading the view from its nib.
 }
 
-/*
-#pragma mark - Navigation
+- (IBAction)action:(id)sender {
+    
+    if (![NSString checkStingContainLetterAndNumberWithString:self.passWordTF.text]) {
+        [SVProgressHUD showErrorWithStatus:@"请输入6~15包含数字和字母的密码"];
+    }
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"mobile"] = self.phoneStr;
+    dict[@"type"] = @"1";
+    dict[@"password"] = [self.passWordTF.text base64EncodedString];
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_findPasswordURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            [SVProgressHUD showSuccessWithStatus:@"修改密码成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            });
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+        
+    }];
+    
 }
-*/
+
 
 @end

@@ -48,18 +48,18 @@
 //        return;
 //    }
 //    NSMutableDictionary * dataDict = @{@"phone":self.phoneTF.text,@"type":@"1"}.mutableCopy;
-//    dataDict[@"deviceId"] = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
-//    [zkRequestTool networkingPOST:[HHYURLDefineTool sendValidCodeURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
-//        if ([responseObject[@"code"] intValue]== 0) {
+//    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_sendmobileURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
+//        if ([responseObject[@"key"] intValue]== 1) {
+//            [SVProgressHUD showSuccessWithStatus:@"验证码已发送"];
 //            [self timeAction];
 //        }else {
 //            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
 //        }
-//
+//        
 //    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//
-//
-//
+//        
+//        
+//        
 //    }];
     
 }

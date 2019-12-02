@@ -8,16 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface QYZJMineOrderCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *titleLB;
+@property (weak, nonatomic) IBOutlet UILabel *titleRightLB;
 @property (weak, nonatomic) IBOutlet UIImageView *leftImgV;
 @property (weak, nonatomic) IBOutlet UILabel *leftLB;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLB;
 @property (weak, nonatomic) IBOutlet UILabel *timeLB;
 @property (weak, nonatomic) IBOutlet UIButton *statusBt;
 @property(nonatomic,strong)QYZJFindModel *model;
+
 @end
 
-NS_ASSUME_NONNULL_END
+

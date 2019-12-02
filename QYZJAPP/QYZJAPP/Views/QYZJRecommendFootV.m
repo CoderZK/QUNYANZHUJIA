@@ -106,28 +106,28 @@
 
 - (void)sendCode {
     
-    //    if (self.phoneTF.text.length == 0) {
-    //        [SVProgressHUD showErrorWithStatus:@"请输入手机号"];
-    //        return;
-    //    }
-    //    if (self.phoneTF.text.length != 11) {
-    //        [SVProgressHUD showErrorWithStatus:@"请输入正确手机号"];
-    //        return;
-    //    }
-    //    NSMutableDictionary * dataDict = @{@"phone":self.phoneTF.text,@"type":@"1"}.mutableCopy;
-    //    dataDict[@"deviceId"] = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
-    //    [zkRequestTool networkingPOST:[HHYURLDefineTool sendValidCodeURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
-    //        if ([responseObject[@"code"] intValue]== 0) {
-    //            [self timeAction];
-    //        }else {
-    //            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
-    //        }
-    //
-    //    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-    //
-    //
-    //
-    //    }];
+//        if (self.phoneTF.text.length == 0) {
+//            [SVProgressHUD showErrorWithStatus:@"请输入手机号"];
+//            return;
+//        }
+//        if (self.phoneTF.text.length != 11) {
+//            [SVProgressHUD showErrorWithStatus:@"请输入正确手机号"];
+//            return;
+//        }
+//        NSMutableDictionary * dataDict = @{@"phone":self.phoneTF.text,@"type":@"1"}.mutableCopy;
+//        dataDict[@"deviceId"] = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
+//        [zkRequestTool networkingPOST:[HHYURLDefineTool sendValidCodeURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
+//            if ([responseObject[@"code"] intValue]== 0) {
+//                [self timeAction];
+//            }else {
+//                [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+//            }
+//    
+//        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//    
+//    
+//    
+//        }];
     
 }
 

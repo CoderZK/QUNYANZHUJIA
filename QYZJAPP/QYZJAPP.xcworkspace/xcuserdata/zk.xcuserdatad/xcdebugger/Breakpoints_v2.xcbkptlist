@@ -370,16 +370,128 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E7C24220-FCEE-4F33-98D2-22CB888C92A3"
+            uuid = "8AC89861-8A95-4F62-9C18-7009C0E64B22"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x53d1;&#x73b0;/VC/QYZJFindVC.m"
+            filePath = "QYZJAPP/&#x6211;&#x7684;/VC/QYZJPingJiaTVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
-            landmarkName = "-didClickFindCell:index:"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "-tijiaoAction:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8AC89861-8A95-4F62-9C18-7009C0E64B22 - c2b58cb406a15573"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[QYZJPingJiaTVC tijiaoAction:]"
+                  moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E6%88%91%E7%9A%84/VC/QYZJPingJiaTVC.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "138"
+                  endingLineNumber = "138"
+                  offsetFromSymbolStart = "680">
+               </Location>
+               <Location
+                  uuid = "8AC89861-8A95-4F62-9C18-7009C0E64B22 - de92c66015542ecb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__31-[QYZJPingJiaTVC tijiaoAction:]_block_invoke"
+                  moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E6%88%91%E7%9A%84/VC/QYZJPingJiaTVC.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "138"
+                  endingLineNumber = "138"
+                  offsetFromSymbolStart = "15">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "824C7627-5550-4774-9D09-99D8D7ED65D5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QYZJAPP/&#x6211;&#x7684;/VC/QYZJPingJiaTVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "-tijiaoAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CE9F21DB-40D3-4BC0-BD53-581F089FE0FF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QYZJAPP/&#x767b;&#x5f55;&#x6ce8;&#x518c;/QYZJFindPasswordTwoVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "-action:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CE9F21DB-40D3-4BC0-BD53-581F089FE0FF - 3e63f2d80f71ca9e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[QYZJFindPasswordTwoVC action:]"
+                  moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C/QYZJFindPasswordTwoVC.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "609">
+               </Location>
+               <Location
+                  uuid = "CE9F21DB-40D3-4BC0-BD53-581F089FE0FF - 6e0aafe9e40e5f61"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__32-[QYZJFindPasswordTwoVC action:]_block_invoke"
+                  moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C/QYZJFindPasswordTwoVC.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "72">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "838D8971-5A21-4A1A-AA0D-8E319966E414"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QYZJAPP/&#x6211;&#x7684;/VC/QYZJMineYaoQingTVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "-getData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

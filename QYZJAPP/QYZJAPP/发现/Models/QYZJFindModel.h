@@ -87,6 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *video_url;
 @property(nonatomic,strong)NSString *pic_url;
 
+
 @property(nonatomic,strong)QYZJFindModel *article;
 @property(nonatomic,strong)QYZJFindModel *headlinenews;
 
@@ -132,6 +133,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)NSInteger goodNum;//点赞人数
 @property(nonatomic,assign)NSInteger sit_on_num;
 @property(nonatomic,assign)NSInteger collectNum;
+@property(nonatomic,assign)NSInteger sign_num;
+@property(nonatomic,assign)NSInteger ok_num;
+@property(nonatomic,assign)NSInteger demand_num;
+
 
 @property(nonatomic,assign)CGFloat price;
 @property(nonatomic,assign)CGFloat sitPrice;
