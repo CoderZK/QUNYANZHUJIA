@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJMineBankListTVC : BaseTableViewController
-
+@property(nonatomic,copy)void(^sendBankBlock)(QYZJMoneyModel *model);
 @end
 
 NS_ASSUME_NONNULL_END

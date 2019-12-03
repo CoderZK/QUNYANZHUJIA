@@ -52,6 +52,11 @@
       Weak(weakSelf);
        view.footViewClickBlock = ^(UIButton *button) {
                 NSLog(@"\n\n%@",@"完成");
+           QYZJAddBankTVC * vc =[[QYZJAddBankTVC alloc] init];
+           vc.hidesBottomBarWhenPushed = YES;
+           [weakSelf.navigationController pushViewController:vc animated:YES];
+           
+           
       };
       [self.view addSubview:view];
     
@@ -124,9 +129,7 @@
 
 //点击发布案例
 - (void)clickAction:(UIButton *)button {
-    QYZJAddBankTVC * vc =[[QYZJAddBankTVC alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES]; 
+    
 }
 
 
@@ -152,6 +155,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (self.sendBankBlock != nil) {
+        self.sendBankBlock(self.dataArray[indexPath.row]);
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 @end

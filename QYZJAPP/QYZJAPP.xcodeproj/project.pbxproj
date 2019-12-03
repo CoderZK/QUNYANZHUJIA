@@ -128,6 +128,10 @@
 		58309F6E2387A50B00CCAEA6 /* QYZJMineZhuYeHeadVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 58309F6D2387A50B00CCAEA6 /* QYZJMineZhuYeHeadVIew.m */; };
 		58309F722387BD2A00CCAEA6 /* QYZJZhuYeYuYinCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58309F702387BD2A00CCAEA6 /* QYZJZhuYeYuYinCell.m */; };
 		58309F732387BD2A00CCAEA6 /* QYZJZhuYeYuYinCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58309F712387BD2A00CCAEA6 /* QYZJZhuYeYuYinCell.xib */; };
+		5831E8122395F25300D68710 /* QYZJAddBankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831E8102395F25300D68710 /* QYZJAddBankCell.m */; };
+		5831E8132395F25300D68710 /* QYZJAddBankCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5831E8112395F25300D68710 /* QYZJAddBankCell.xib */; };
+		5831E81D2396125000D68710 /* QYZJShenQingRuZhuTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831E81B2396125000D68710 /* QYZJShenQingRuZhuTwoVC.m */; };
+		5831E81E2396125000D68710 /* QYZJShenQingRuZhuTwoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5831E81C2396125000D68710 /* QYZJShenQingRuZhuTwoVC.xib */; };
 		5833D9E9238B6140007DE9EC /* QYZJJiaoFuListTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833D9E8238B6140007DE9EC /* QYZJJiaoFuListTVC.m */; };
 		5833D9ED238B63E1007DE9EC /* QYZJJiaoFuListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5833D9EB238B63E1007DE9EC /* QYZJJiaoFuListCell.m */; };
 		5833D9EE238B63E1007DE9EC /* QYZJJiaoFuListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5833D9EC238B63E1007DE9EC /* QYZJJiaoFuListCell.xib */; };
@@ -293,6 +297,11 @@
 		587611C32379684700A9DBA5 /* QYZJPingLunNeiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587611C12379684700A9DBA5 /* QYZJPingLunNeiCell.xib */; };
 		58AB2303237E588D00CB926E /* QYZJMineOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AB2301237E588D00CB926E /* QYZJMineOrderCell.m */; };
 		58AB2304237E588D00CB926E /* QYZJMineOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58AB2302237E588D00CB926E /* QYZJMineOrderCell.xib */; };
+		58E4F05E23964B73009480B5 /* QYZJRuZhuThreeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E4F05C23964B73009480B5 /* QYZJRuZhuThreeVC.m */; };
+		58E4F05F23964B73009480B5 /* QYZJRuZhuThreeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58E4F05D23964B73009480B5 /* QYZJRuZhuThreeVC.xib */; };
+		58E4F06223965C9B009480B5 /* QYZJMineYuHuiQuanTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E4F06123965C9B009480B5 /* QYZJMineYuHuiQuanTVC.m */; };
+		58E4F06623965CC9009480B5 /* QYZJMineYuHuiQuanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E4F06423965CC9009480B5 /* QYZJMineYuHuiQuanCell.m */; };
+		58E4F06723965CC9009480B5 /* QYZJMineYuHuiQuanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58E4F06523965CC9009480B5 /* QYZJMineYuHuiQuanCell.xib */; };
 		AE1A7CF29DF9D6E7166E507C /* libPods-QYZJAPP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E49E1E01514DB2F4C7786C /* libPods-QYZJAPP.a */; };
 /* End PBXBuildFile section */
 
@@ -524,6 +533,12 @@
 		58309F6F2387BD2A00CCAEA6 /* QYZJZhuYeYuYinCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJZhuYeYuYinCell.h; sourceTree = "<group>"; };
 		58309F702387BD2A00CCAEA6 /* QYZJZhuYeYuYinCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJZhuYeYuYinCell.m; sourceTree = "<group>"; };
 		58309F712387BD2A00CCAEA6 /* QYZJZhuYeYuYinCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJZhuYeYuYinCell.xib; sourceTree = "<group>"; };
+		5831E80F2395F25300D68710 /* QYZJAddBankCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJAddBankCell.h; sourceTree = "<group>"; };
+		5831E8102395F25300D68710 /* QYZJAddBankCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJAddBankCell.m; sourceTree = "<group>"; };
+		5831E8112395F25300D68710 /* QYZJAddBankCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJAddBankCell.xib; sourceTree = "<group>"; };
+		5831E81A2396125000D68710 /* QYZJShenQingRuZhuTwoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJShenQingRuZhuTwoVC.h; sourceTree = "<group>"; };
+		5831E81B2396125000D68710 /* QYZJShenQingRuZhuTwoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJShenQingRuZhuTwoVC.m; sourceTree = "<group>"; };
+		5831E81C2396125000D68710 /* QYZJShenQingRuZhuTwoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJShenQingRuZhuTwoVC.xib; sourceTree = "<group>"; };
 		5833D9E7238B6140007DE9EC /* QYZJJiaoFuListTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJJiaoFuListTVC.h; sourceTree = "<group>"; };
 		5833D9E8238B6140007DE9EC /* QYZJJiaoFuListTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJJiaoFuListTVC.m; sourceTree = "<group>"; };
 		5833D9EA238B63E1007DE9EC /* QYZJJiaoFuListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJJiaoFuListCell.h; sourceTree = "<group>"; };
@@ -814,6 +829,14 @@
 		58AB2300237E588D00CB926E /* QYZJMineOrderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMineOrderCell.h; sourceTree = "<group>"; };
 		58AB2301237E588D00CB926E /* QYZJMineOrderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMineOrderCell.m; sourceTree = "<group>"; };
 		58AB2302237E588D00CB926E /* QYZJMineOrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJMineOrderCell.xib; sourceTree = "<group>"; };
+		58E4F05B23964B73009480B5 /* QYZJRuZhuThreeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJRuZhuThreeVC.h; sourceTree = "<group>"; };
+		58E4F05C23964B73009480B5 /* QYZJRuZhuThreeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJRuZhuThreeVC.m; sourceTree = "<group>"; };
+		58E4F05D23964B73009480B5 /* QYZJRuZhuThreeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJRuZhuThreeVC.xib; sourceTree = "<group>"; };
+		58E4F06023965C9B009480B5 /* QYZJMineYuHuiQuanTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMineYuHuiQuanTVC.h; sourceTree = "<group>"; };
+		58E4F06123965C9B009480B5 /* QYZJMineYuHuiQuanTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMineYuHuiQuanTVC.m; sourceTree = "<group>"; };
+		58E4F06323965CC9009480B5 /* QYZJMineYuHuiQuanCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMineYuHuiQuanCell.h; sourceTree = "<group>"; };
+		58E4F06423965CC9009480B5 /* QYZJMineYuHuiQuanCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMineYuHuiQuanCell.m; sourceTree = "<group>"; };
+		58E4F06523965CC9009480B5 /* QYZJMineYuHuiQuanCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJMineYuHuiQuanCell.xib; sourceTree = "<group>"; };
 		93517C6A5478579AE5177242 /* Pods-QYZJAPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QYZJAPP.release.xcconfig"; path = "Pods/Target Support Files/Pods-QYZJAPP/Pods-QYZJAPP.release.xcconfig"; sourceTree = "<group>"; };
 		C0333005ECB5A67F63F21483 /* Pods-QYZJAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QYZJAPP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QYZJAPP/Pods-QYZJAPP.debug.xcconfig"; sourceTree = "<group>"; };
 		D3E49E1E01514DB2F4C7786C /* libPods-QYZJAPP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QYZJAPP.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1166,6 +1189,12 @@
 				58197518237EA45E00FC77EE /* QYZJShengQingRuZhuVC.h */,
 				58197519237EA45E00FC77EE /* QYZJShengQingRuZhuVC.m */,
 				5819751A237EA45E00FC77EE /* QYZJShengQingRuZhuVC.xib */,
+				5831E81A2396125000D68710 /* QYZJShenQingRuZhuTwoVC.h */,
+				5831E81B2396125000D68710 /* QYZJShenQingRuZhuTwoVC.m */,
+				5831E81C2396125000D68710 /* QYZJShenQingRuZhuTwoVC.xib */,
+				58E4F05B23964B73009480B5 /* QYZJRuZhuThreeVC.h */,
+				58E4F05C23964B73009480B5 /* QYZJRuZhuThreeVC.m */,
+				58E4F05D23964B73009480B5 /* QYZJRuZhuThreeVC.xib */,
 				58271EE8238CFC4B00587919 /* QYZJAnLiDetailTVC.h */,
 				58271EE9238CFC4B00587919 /* QYZJAnLiDetailTVC.m */,
 				5854CEE82394EAE30098A4BF /* QYZJMineAddressTVC.h */,
@@ -1175,6 +1204,8 @@
 				5854CEED2394EB0D0098A4BF /* QYZJAddAddressVC.xib */,
 				58755398239501E900AEC845 /* QYZJMineYaoQingTVC.h */,
 				58755399239501E900AEC845 /* QYZJMineYaoQingTVC.m */,
+				58E4F06023965C9B009480B5 /* QYZJMineYuHuiQuanTVC.h */,
+				58E4F06123965C9B009480B5 /* QYZJMineYuHuiQuanTVC.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1248,6 +1279,9 @@
 				5875539B2395021500AEC845 /* QYZJMineYaoQingCell.h */,
 				5875539C2395021500AEC845 /* QYZJMineYaoQingCell.m */,
 				5875539D2395021500AEC845 /* QYZJMineYaoQingCell.xib */,
+				58E4F06323965CC9009480B5 /* QYZJMineYuHuiQuanCell.h */,
+				58E4F06423965CC9009480B5 /* QYZJMineYuHuiQuanCell.m */,
+				58E4F06523965CC9009480B5 /* QYZJMineYuHuiQuanCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1421,6 +1455,9 @@
 				58307973237FBD0800039E12 /* QYZJMineTiXianCell.h */,
 				58307974237FBD0800039E12 /* QYZJMineTiXianCell.m */,
 				58307975237FBD0800039E12 /* QYZJMineTiXianCell.xib */,
+				5831E80F2395F25300D68710 /* QYZJAddBankCell.h */,
+				5831E8102395F25300D68710 /* QYZJAddBankCell.m */,
+				5831E8112395F25300D68710 /* QYZJAddBankCell.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1906,6 +1943,7 @@
 				583536882386657100D9BE26 /* QYZJHomePayDetailOneCell.xib in Resources */,
 				58197508237E992D00FC77EE /* QYZJMineZhuangXiuDaiVC.xib in Resources */,
 				5843457D2370FDB90087A2D9 /* QYZJRecommendOneCell.xib in Resources */,
+				5831E81E2396125000D68710 /* QYZJShenQingRuZhuTwoVC.xib in Resources */,
 				5819751C237EA45E00FC77EE /* QYZJShengQingRuZhuVC.xib in Resources */,
 				337F3EB020EA014600C5526A /* noneDataBg.png in Resources */,
 				582E6DF7237FED28008BA3EE /* QYZJZengZhiOneCell.xib in Resources */,
@@ -1925,6 +1963,7 @@
 				337F3E6620E9FE5300C5526A /* LaunchScreen.storyboard in Resources */,
 				582F74DC2378F80A00F6FCB6 /* QYZJChangePhoneVC.xib in Resources */,
 				582F74D52378F29000F6FCB6 /* mx_pic_selected_no@2x.png in Resources */,
+				58E4F06723965CC9009480B5 /* QYZJMineYuHuiQuanCell.xib in Resources */,
 				5843319B236FD3BC0046C0BD /* QYZJHomeTwoCell.xib in Resources */,
 				58307964237F969500039E12 /* QYZJBankListCell.xib in Resources */,
 				5836BCF02378E94300F02783 /* QYZJSettingCell.xib in Resources */,
@@ -1935,6 +1974,7 @@
 				584331B2236FF88C0046C0BD /* QYZJFindPasswordVC.xib in Resources */,
 				58307977237FBD0800039E12 /* QYZJMineTiXianCell.xib in Resources */,
 				58420A6E237E493A0068CC20 /* QYZJMineInviteVC.xib in Resources */,
+				58E4F05F23964B73009480B5 /* QYZJRuZhuThreeVC.xib in Resources */,
 				5830795F237F901F00039E12 /* QYZJMineTiXianVC.xib in Resources */,
 				58433196236FD2850046C0BD /* QYZJHomeOneCell.xib in Resources */,
 				5854CEE12394ADA30098A4BF /* QYZJMineOrderInfoNumberCell.xib in Resources */,
@@ -1953,6 +1993,7 @@
 				587611B023792DD400A9DBA5 /* QYZJPingOrZanCell.xib in Resources */,
 				58394F67237A811C0017505B /* QYZJMineShopCell.xib in Resources */,
 				5833D9EE238B63E1007DE9EC /* QYZJJiaoFuListCell.xib in Resources */,
+				5831E8132395F25300D68710 /* QYZJAddBankCell.xib in Resources */,
 				583536872386657100D9BE26 /* QYZJHomePayCell.xib in Resources */,
 				583536842386657100D9BE26 /* QYZJRobOrderDetailCell.xib in Resources */,
 			);
@@ -2033,6 +2074,7 @@
 				58307963237F969500039E12 /* QYZJBankListCell.m in Sources */,
 				58394F62237A48CF0017505B /* QYZJMineShopHeadView.m in Sources */,
 				5843458F23710F830087A2D9 /* zkPickModel.m in Sources */,
+				58E4F05E23964B73009480B5 /* QYZJRuZhuThreeVC.m in Sources */,
 				337F3E5E20E9FE3C00C5526A /* ViewController.m in Sources */,
 				337F3EAA20EA014600C5526A /* BaseViewController.m in Sources */,
 				33DC823420EA20D700D1C283 /* LYGuideViewController.m in Sources */,
@@ -2158,6 +2200,7 @@
 				5833D9FA238B8869007DE9EC /* QYZJJiaoFuZiLiaoTVC.m in Sources */,
 				584331B623700BB50046C0BD /* QYZJHomeFourCell.m in Sources */,
 				583A4D57236BC65A00180E27 /* QYZJURLDefineTool.m in Sources */,
+				58E4F06223965C9B009480B5 /* QYZJMineYuHuiQuanTVC.m in Sources */,
 				5843317D236FAB2D0046C0BD /* TYCyclePagerTransformLayout.m in Sources */,
 				58578BC223910B2C00EA518C /* QYZJAppShopTVC.m in Sources */,
 				583ED6AB2373F0660070441A /* zkPhotoShowVC.m in Sources */,
@@ -2189,6 +2232,7 @@
 				584331AC236FF4230046C0BD /* QYZJRegistVC.m in Sources */,
 				335010D920EDF8E400F8486B /* Clear.m in Sources */,
 				58433179236FAB2D0046C0BD /* zkLunBoCell.m in Sources */,
+				58E4F06623965CC9009480B5 /* QYZJMineYuHuiQuanCell.m in Sources */,
 				337F3EA920EA014600C5526A /* BaseCollectionViewController.m in Sources */,
 				584331C7237031800046C0BD /* FindHeadView.m in Sources */,
 				583A4D64236BE51B00180E27 /* QYZJMineVC.m in Sources */,
@@ -2196,6 +2240,7 @@
 				583ED6AC2373F0660070441A /* zkPhotoShowCell.m in Sources */,
 				5843317C236FAB2D0046C0BD /* TYCyclePagerView.m in Sources */,
 				5843457C2370FDB90087A2D9 /* QYZJRecommendOneCell.m in Sources */,
+				5831E81D2396125000D68710 /* QYZJShenQingRuZhuTwoVC.m in Sources */,
 				5833DA00238BA4D2007DE9EC /* QYZJTongYongFootView.m in Sources */,
 				58434595237118A50087A2D9 /* TongYongTwoCell.m in Sources */,
 				582F74D72378F29000F6FCB6 /* MXImageGroupController.m in Sources */,
@@ -2211,6 +2256,7 @@
 				5843317A236FAB2D0046C0BD /* zkLunBoTwoCell.m in Sources */,
 				58394F5A237A3FAC0017505B /* QYZJMineShopListTVC.m in Sources */,
 				583536132386155D00D9BE26 /* QYZJPostMessageTVC.m in Sources */,
+				5831E8122395F25300D68710 /* QYZJAddBankCell.m in Sources */,
 				58307956237F833400039E12 /* QYZJMineTongYongCell.m in Sources */,
 				581974FC237E8A0D00FC77EE /* QYZJMineAnLiCell.m in Sources */,
 				5830795A237F8A6000039E12 /* QYZJMoneyModel.m in Sources */,

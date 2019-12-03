@@ -14,6 +14,7 @@
 @property(nonatomic,strong)NSMutableArray<QYZJTongYongModel *> *dataArray;
 - (void)show;
 - (void)diss;
+@property(nonatomic,copy)void(^chooseViewMoreBlockFinsh)();
 @end
 
 @interface QYZJMoreChooseCell : UITableViewCell

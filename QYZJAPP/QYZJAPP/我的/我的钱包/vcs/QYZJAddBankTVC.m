@@ -7,8 +7,8 @@
 //
 
 #import "QYZJAddBankTVC.h"
-
-@interface QYZJAddBankTVC ()<zkPickViewDelelgate>
+#import "QYZJAddBankCell.h"
+@interface QYZJAddBankTVC ()<zkPickViewDelelgate,UITextFieldDelegate>
 @property(nonatomic,strong)NSArray *leftTitleArray;
 @property(nonatomic,strong)NSMutableArray<QYZJMoneyModel *> *bankArr;
 @property(nonatomic,strong)NSString *str1,*str2,*str3,*ID;
@@ -19,20 +19,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [self.tableView registerClass:[TongYongTwoCell class] forCellReuseIdentifier:@"cell"];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerNib:[UINib nibWithNibName:@"QYZJAddBankCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     self.leftTitleArray = @[@"联系方式",@"地址",@"详细地址"];
     self.bankArr = @[].mutableCopy;
     [self getCityData];
     [self addFootView];
-    self.navigationItem.title = @"放单";
+    self.navigationItem.title = @"添加银行卡";
     
+    [self.tableView reloadData];
   
     
 }
 
 - (void)addFootView {
-    
+
     UIView * footV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 200)];
     footV.backgroundColor = [UIColor groupTableViewBackgroundColor];
     UIButton * nextBt = [[UIButton alloc] initWithFrame:CGRectMake(20, 40, ScreenW - 40, 45)];
@@ -43,9 +43,9 @@
     [nextBt setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
     [nextBt setTitleColor:WhiteColor forState:UIControlStateNormal];
     [[nextBt rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
-      
-       
-        
+
+        [self addBank];
+
     }];
     [footV addSubview:nextBt];
     self.tableView.tableFooterView = footV;
@@ -54,6 +54,8 @@
 
 
 - (void)addBank {
+    
+    [self.tableView endEditing:YES];
     
     if (self.str1.length == 0) {
         [SVProgressHUD showErrorWithStatus:@"请输入姓名"];
@@ -93,7 +95,7 @@
 
 - (void)getCityData {
     
-    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_bankListURL] parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_bankListURL] parameters:@{@"NoToken":@"0"} success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] isEqualToString:@"1"]) {
             self.bankArr = [QYZJMoneyModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
@@ -119,26 +121,22 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    TongYongTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.leftLB.text = self.leftTitleArray[indexPath.row];
-    cell.moreImgV.hidden = YES;
+    QYZJAddBankCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    cell.TF.placeholder = self.leftTitleArray[indexPath.row];
+    cell.backgroundColor = WhiteColor;
+    cell.contentView.backgroundColor = WhiteColor;
     cell.TF.userInteractionEnabled = YES;
-    [cell.TF.rac_textSignal subscribeNext:^(NSString * _Nullable x) {
-        if (indexPath.row == 0) {
-            self.str1 = x;
-        }else if (indexPath.row == 2) {
-            self.str3 = x;
-        }
-        [tableView reloadData];
-    }];
+    cell.rightImgV.hidden = YES;
+    cell.TF.delegate = self;
+    cell.leftImgV.image = [UIImage imageNamed:[NSString stringWithFormat:@"ico_%ld",indexPath.row+10]];
     if (indexPath.row == 0) {
         cell.TF.text = self.str1;
         cell.TF.placeholder = @"请输入姓名";
     }else if (indexPath.row == 1) {
         cell.TF.text = self.str2;
-        cell.moreImgV.hidden = NO;
-        cell.TF.userInteractionEnabled = NO;
-         cell.TF.placeholder = @"请选择银行卡";
+        cell.rightImgV.hidden = NO;
+        cell.TF.userInteractionEnabled = cell.rightImgV.hidden = NO;
+        cell.TF.placeholder = @"请选择银行卡";
     }else {
         cell.TF.text = self.str3;
         cell.TF.placeholder = @"请输入银行卡号";
@@ -150,6 +148,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 1) {
+        
+        if (self.bankArr.count == 0) {
+            return;
+        }
         zkPickView *picker = [[zkPickView alloc]initWithFrame:[UIScreen mainScreen].bounds];
         picker.delegate = self ;
         NSMutableArray * titleArr = @[].mutableCopy;
@@ -161,6 +163,18 @@
         picker.selectLb.text = @"请选择银行卡";
         [picker show];
     }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    QYZJAddBankCell * cell = (QYZJAddBankCell *)textField.superview.superview;
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    if (indexPath.row == 0) {
+        self.str1 = textField.text;
+    }else {
+        self.str3 = textField.text;
+    }
+    
+    
 }
 
 #pragma mark ------- 点击筛选 ------

@@ -54,6 +54,7 @@
         yesBtn.frame = CGRectMake((ScreenW/2 - 100)/2 + ScreenW / 2, 0, 100, 49);
         [yesBtn setTitle:@"确定" forState:UIControlStateNormal];
         [yesBtn setTitleColor:OrangeColor forState:UIControlStateNormal];
+        [yesBtn addTarget:self action:@selector(yesAction:) forControlEvents:UIControlEventTouchUpInside];
         yesBtn.titleLabel.font = kFont(15);
         [self.topV addSubview:yesBtn];
         [self.wihteV addSubview:self.topV];
@@ -94,6 +95,16 @@
     
     
 }
+
+- (void)yesAction:(UIButton *)button  {
+    [self diss];
+    if (self.chooseViewMoreBlockFinsh != nil) {
+        self.chooseViewMoreBlockFinsh();
+    }
+    
+    
+}
+
 
 - (void)setDataArray:(NSMutableArray<QYZJTongYongModel *> *)dataArray {
     _dataArray = dataArray;

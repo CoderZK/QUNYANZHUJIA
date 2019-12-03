@@ -170,7 +170,7 @@
         [self.moreChooseV show];
         
     }else if (indexPath.row == 2) {
-        zkPickView *picker = [[zkPickView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+        zkPickView *picker = [[zkPickView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         picker.delegate = self ;
         picker.arrayType = NormalArray
         ;

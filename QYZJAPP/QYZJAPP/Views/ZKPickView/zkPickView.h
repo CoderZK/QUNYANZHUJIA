@@ -11,10 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, ARRAYTYPE) {
-    NormalArray,
-    titleArray,
-    AreaArray,
-    ArerArrayNormal
+    NormalArray,// 取出 zkpickModel 的名字
+    titleArray,//单列标题
+    AreaArray,//地区不限
+    AreaArrayTwo,//地区和城市不限
+    ArerArrayNormal//正常三列城市
     
 };
 

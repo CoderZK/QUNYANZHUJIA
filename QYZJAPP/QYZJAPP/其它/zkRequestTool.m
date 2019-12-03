@@ -17,7 +17,10 @@
     NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
     [mDict setValue:device forKey:@"device_id"];
     [mDict setValue:@1 forKey:@"channel"];
-    mDict[@"token"] = [zkSignleTool shareTool].session_token;
+    if (![mDict.allKeys containsObject:@"NoToken"]) {
+        //不传token
+        mDict[@"token"] = [zkSignleTool shareTool].session_token;
+    }
     NSString *version = [NSString stringWithFormat:@"V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
     [mDict setValue:version forKey:@"version"];
     

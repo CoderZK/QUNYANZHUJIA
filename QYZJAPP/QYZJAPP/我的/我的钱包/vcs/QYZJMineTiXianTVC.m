@@ -18,6 +18,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"提现记录";
+    if (self.type == 1) {
+        self.navigationItem.title = @"消费记录";
+    }else if (self.type == 2) {
+        self.navigationItem.title = @"佣金返利记录";
+    }else if (self.type == 3) {
+        self.navigationItem.title = @"店铺收入";
+    }else if (self.type == 4) {
+        self.navigationItem.title = @"邀请赏金记录";
+    }
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJMineTiXianCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     

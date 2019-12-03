@@ -83,9 +83,9 @@
     }
     
     if (waiModel.is_open ) {
-       str = [NSString stringWithFormat:@"%@·%@·%@人旁听",str,@"公开",waiModel.sit_on_num];
+       str = [NSString stringWithFormat:@"%@·%@·%ld人旁听",str,@"公开",waiModel.sit_on_num];
     }else {
-         str = [NSString stringWithFormat:@"%@·%@·%@人旁听",str,@"不公开",waiModel.sit_on_num];
+         str = [NSString stringWithFormat:@"%@·%@·%ld人旁听",str,@"不公开",waiModel.sit_on_num];
         
     }
     self.rightLB.text = str;

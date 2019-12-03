@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QYZJShengQingRuZhuVC">
             <connections>
+                <outlet property="selectBt" destination="spR-yr-zWl" id="QVq-ay-Dyb"/>
                 <outlet property="titleTF" destination="kFw-3X-ok5" id="pSo-Uh-f4O"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -108,6 +109,7 @@
                         <constraint firstAttribute="height" constant="30" id="q4x-7P-lJG"/>
                     </constraints>
                     <state key="normal" image="xuanze_1"/>
+                    <state key="selected" image="xuanze_2"/>
                     <connections>
                         <action selector="clickAction:" destination="-1" eventType="touchUpInside" id="6zf-Uk-uwe"/>
                     </connections>
@@ -133,6 +135,7 @@
     <resources>
         <image name="backorange" width="367" height="85"/>
         <image name="xuanze_1" width="16" height="16"/>
+        <image name="xuanze_2" width="16" height="16"/>
         <image name="you" width="24" height="24"/>
     </resources>
 </document>

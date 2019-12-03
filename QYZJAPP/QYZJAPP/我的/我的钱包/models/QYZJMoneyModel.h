@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *addtime;
 @property(nonatomic,strong)NSString *stage_name;
 @property(nonatomic,strong)NSString *con;
+@property(nonatomic,strong)NSString *nickName;
 
 
 @property(nonatomic,assign)CGFloat sr_money;

@@ -14,6 +14,7 @@
                 <outlet property="desLB" destination="bEF-oF-uKs" id="UkH-0x-ijS"/>
                 <outlet property="imgV" destination="CTv-ps-JOh" id="2oT-8p-Wm8"/>
                 <outlet property="moneyLBOne" destination="mgI-DM-03Q" id="krV-Tf-jWC"/>
+                <outlet property="moneyTF" destination="TBc-ES-uFK" id="OT2-G6-d2g"/>
                 <outlet property="moneyTwoLB" destination="bNE-iZ-7Pp" id="xJt-2q-caG"/>
                 <outlet property="numberLB" destination="WQp-Ds-Rdb" id="ZB7-mw-zQQ"/>
                 <outlet property="rightLB" destination="AOG-fZ-6fQ" id="Ot5-gh-BEG"/>
