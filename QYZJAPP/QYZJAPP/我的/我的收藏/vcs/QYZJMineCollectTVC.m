@@ -46,6 +46,10 @@
 - (void)setheadV  {
     self.headV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 50)];
     
+    UIView * backV =[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 0.6)];
+    backV.backgroundColor = lineBackColor;
+    [self.headV addSubview:backV];
+
     self.leftBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW/2 - 100 - 10, 10, 100, 35)];
     [self.leftBt setTitle:@"头条" forState:UIControlStateNormal];
     self.leftBt.titleLabel.font = kFont(15);

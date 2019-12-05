@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.contentTwoLB.hidden = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -26,7 +26,7 @@
     self.titleLB.text = model.turnoverStageName;
     self.contentLB.text = model.con;
     self.timeLB.text = model.time;
-
+    self.contentTwoLB.text = [NSString stringWithFormat:@"交付订单:%@",model.turnoverTitle];
     NSInteger sta = [model.status intValue];
     
     NSString * statusStr = @"";

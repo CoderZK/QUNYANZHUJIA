@@ -111,7 +111,7 @@
     if (self.isServer) {
         CGFloat hh = 0;
         for (QYZJFindModel * model  in waiModel.mediaList) {
-            CGFloat hnei = [[NSString stringWithFormat:@"回复内容: %@",model.contents] getHeigtWithFontSize:14 lineSpace:3 width:ScreenW - 20] + 10;
+            CGFloat hnei = [[NSString stringWithFormat:@"回复内容: %@",model.contents] getHeigtWithFontSize:14 lineSpace:3 width:ww] + 10;
             if (model.media_url.length > 0) {
                 hnei = hnei + 30;
             }
