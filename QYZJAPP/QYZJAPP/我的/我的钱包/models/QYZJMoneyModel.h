@@ -23,15 +23,22 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *con;
 @property(nonatomic,strong)NSString *nickName;
 
+@property(nonatomic,strong)NSString *num;
+@property(nonatomic,strong)NSString *free_question_num;
+@property(nonatomic,strong)NSString *free_appoint_num;
+@property(nonatomic,strong)NSString *end_time;
+@property(nonatomic,strong)NSString *telphone;
+
 
 @property(nonatomic,assign)CGFloat sr_money;
 @property(nonatomic,assign)CGFloat pay_money;
 @property(nonatomic,assign)CGFloat yq_money;
 @property(nonatomic,assign)CGFloat money;
 @property(nonatomic,assign)CGFloat yj_money;
+@property(nonatomic,assign)CGFloat realMoney;
 
 @property(nonatomic,assign)BOOL isSelect;
-//@property(nonatomic,assign)BOOL isRead;
+@property(nonatomic,assign)BOOL isAble;
 
 @end
 

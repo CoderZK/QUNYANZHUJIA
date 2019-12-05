@@ -45,6 +45,8 @@
     }
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"old_pass"] = [self.oldpassdTF.text base64EncodedString];
+    dict[@"new_pass"] = [self.nPassdTF.text base64EncodedString];
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_editPasswordURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {

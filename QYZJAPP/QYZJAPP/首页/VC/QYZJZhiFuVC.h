@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJZhiFuVC : BaseViewController
-
+@property(nonatomic,strong)NSString *osn;
+@property(nonatomic,assign)CGFloat money;
 @end
 
 NS_ASSUME_NONNULL_END

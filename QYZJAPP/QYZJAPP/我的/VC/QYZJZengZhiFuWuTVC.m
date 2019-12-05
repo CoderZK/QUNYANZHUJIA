@@ -9,12 +9,14 @@
 #import "QYZJZengZhiFuWuTVC.h"
 #import "QYZJZengZhiFWCell.h"
 #import "QYZJZengZhiOneCell.h"
+#import "QYZJZhiFuVC.h"
 @interface QYZJZengZhiFuWuTVC ()
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,strong)NSMutableArray<QYZJMoneyModel *> *dataArray;
 @property(nonatomic,strong)NSMutableArray<QYZJMoneyModel *> *dataArrayTwo;
 @property(nonatomic,strong)NSArray *headTitleArr;
 @property(nonatomic,strong)UIView *footV;
+
 @end
 
 @implementation QYZJZengZhiFuWuTVC
@@ -51,11 +53,64 @@
      [button setTitle:@"确认充值" forState:UIControlStateNormal];
      button.clipsToBounds = YES;
      [button setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
+     @weakify(self);
      [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+         @strongify(self);
+         
+         [self VipAction];
          
      }];
      [self.footV addSubview:button];
 }
+
+- (void)VipAction {
+    
+    NSMutableArray * arr = @[].mutableCopy;
+    CGFloat money = 0;
+    for (QYZJMoneyModel * model  in self.dataArray) {
+        if (model.isSelect) {
+            [arr addObject:model.ID];
+            money = money + model.realMoney;
+        }
+    }
+    for (QYZJMoneyModel * model  in self.dataArrayTwo) {
+           if (model.isSelect) {
+               [arr addObject:model.ID];
+               money = money + model.realMoney;
+           }
+       }
+    
+    if (arr.count == 0) {
+        [SVProgressHUD showErrorWithStatus:@"至少选择一个套餐!"];
+        return;
+    }
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"package_id"] = [arr componentsJoinedByString:@","];
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_setVipURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.osn = responseObject[@"result"][@"osn"];
+            vc.money = money;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+
+    }];
+    
+    
+}
+
 
 - (void)getData {
     
@@ -164,7 +219,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section == 0) {
-      QYZJZengZhiOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJZengZhiOneCell" forIndexPath:indexPath];
+        QYZJZengZhiOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJZengZhiOneCell" forIndexPath:indexPath];
+        [cell.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:self.headImg]] placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+        cell.nameLB.text = self.nameStr;
         return cell;
     }else {
         

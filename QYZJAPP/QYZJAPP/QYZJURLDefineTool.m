@@ -374,6 +374,10 @@
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_createNewTurnover.do"];
 }
 
+/**修改服务方资料*/
++(NSString *)user_editAppointAndQuestionURL{
+   return [NSString stringWithFormat:@"%@%@",URLOne,@"user_editAppointAndQuestion.do"];
+}
 
 
 #pragma mark ---- 其它 --------- 

@@ -110,6 +110,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)app_checkSendCodeURL;
 /**修改忘记密码*/
 +(NSString *)app_findPasswordURL;
+/**修改服务方资料*/
++(NSString *)user_editAppointAndQuestionURL;
 
 
 

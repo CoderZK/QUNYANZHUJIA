@@ -166,6 +166,7 @@ typedef void (^Nav2)();
            @strongify(self);
            if (x !=nil && [x[@"key"] intValue] == 1) {
                [zkSignleTool shareTool].role = [[NSString stringWithFormat:@"%@",x[@"result"][@"role"]] intValue];
+              
            }else {
                [SVProgressHUD dismiss];
            }

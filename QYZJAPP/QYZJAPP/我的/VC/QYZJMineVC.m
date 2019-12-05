@@ -30,6 +30,8 @@
 #import "QYZJShengQingRuZhuVC.h"
 #import "QYZJZengZhiFuWuTVC.h"
 #import "HHYMineFiveCell.h"
+#import "QYZJMineYuHuiQuanTVC.h"
+#import "QYZJXiuGaiFuWuVC.h"
 @interface QYZJMineVC ()<HHYMineFourCellDelegate,QYZJMIneTwoCellDelegate,HHYMineFiveCellDelegate>
 @property(nonatomic,strong)QYZJMineHeadView *headV;
 @property(nonatomic,strong)NSArray *headTitleArr;
@@ -51,7 +53,33 @@
     self.navigationController.navigationBar.hidden = YES;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [self getUserInfo];
-    [self getUserBaseicInfo];
+    [self getUserBaseicInfoTwo];
+}
+
+- (void)getUserBaseicInfoTwo {
+    zkRequestTongYongTool * tool = [[zkRequestTongYongTool alloc] init];
+    [tool requestWithUrl:[QYZJURLDefineTool user_basicInfoURL] andDict:@{}];
+    tool.subject = [[RACSubject alloc] init];
+    @weakify(self);
+    [tool.subject subscribeNext:^(id  _Nullable x) {
+           @strongify(self);
+           if (x !=nil && [x[@"key"] intValue] == 1) {
+               [zkSignleTool shareTool].role = [[NSString stringWithFormat:@"%@",x[@"result"][@"role"]] intValue];
+               if ([zkSignleTool shareTool].role == 0) {
+                   self.titleArr = @[@[],@[@"我的收藏",@"我的支付",@"我的报修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入住",@"我的优惠",@"增值服务"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
+                   
+                   self.imgTitleArr = @[@[],@[@"wd_1",@"wd_2",@"wd_3",@"wd_4",@"wd_5",@"wd_6",@"wd_7",@"wd_8",@"wd_9"],@[@"zc_1",@"zc_2",@"zc_3",@"zc_4"],@[@"zxgj_1",@"zxgj_2",@"zxgj_3",@"zxgj_4"],@[@"lxkf_1",@"lxkf_2"]];
+                   [self.tableView reloadData];
+               }else {
+                   self.titleArr = @[@[],@[@"我的收藏",@"我的支付",@"我的报修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入住",@"服务方修改",@"我的优惠",@"增值服务",@"我的标签"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
+                   
+                   self.imgTitleArr = @[@[],@[@"wd_1",@"wd_2",@"wd_3",@"wd_4",@"wd_5",@"wd_6",@"wd_7",@"wd_8",@"wd_9"],@[@"zc_1",@"zc_2",@"zc_6",@"zc_3",@"zc_4",@"zc_5"],@[@"zxgj_1",@"zxgj_2",@"zxgj_3",@"zxgj_4"],@[@"lxkf_1",@"lxkf_2"]];
+                   [self.tableView reloadData];
+               }
+           }else {
+               [SVProgressHUD dismiss];
+           }
+    }];
 }
 
 - (void)viewDidLoad {
@@ -279,19 +307,49 @@
             QYZJShengQingRuZhuVC* vc =[[QYZJShengQingRuZhuVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
-        }else if (dd == 2) {
+        }else {
             
-        }else if (dd == 3) {
-            
-        }else if (dd == 4) {
-            QYZJZengZhiFuWuTVC * vc =[[QYZJZengZhiFuWuTVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (dd == 5) {
-            
-        }else if (dd == 6) {
-            
+            if ([zkSignleTool shareTool].role == 0) {
+                if (dd == 2) {
+                    QYZJMineYuHuiQuanTVC * vc =[[QYZJMineYuHuiQuanTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else if (dd == 3) {
+                    QYZJZengZhiFuWuTVC * vc =[[QYZJZengZhiFuWuTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    vc.nameStr = self.dataModel.nick_name;
+                    vc.headImg = self.dataModel.head_img;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+            }else {
+                if (dd == 2) {
+                    QYZJXiuGaiFuWuVC * vc =[[QYZJXiuGaiFuWuVC alloc] init];
+                   vc.hidesBottomBarWhenPushed = YES;
+                   vc.proId = self.dataModel.pro_id;
+                   vc.cityId = self.dataModel.city_id;
+                   vc.aearId = self.dataModel.area_id;
+                   vc.proStr = self.dataModel.pro_name;
+                   vc.cityStr = self.dataModel.city_name;
+                   vc.aearStr = self.dataModel.area_name;
+                   [self.navigationController pushViewController:vc animated:YES];
+                }else if (dd == 3) {
+                    QYZJMineYuHuiQuanTVC * vc =[[QYZJMineYuHuiQuanTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else if (dd == 4) {
+                    QYZJZengZhiFuWuTVC * vc =[[QYZJZengZhiFuWuTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    vc.nameStr = self.dataModel.nick_name;
+                    vc.headImg = self.dataModel.head_img;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else if (dd == 5){
+                    
+                    
+                }
+               
+            }
         }
+
     }else if (indexPath.section == 3) {
         if (dd == 3) {
             QYZJMineZhuangXiuDaiVC * vc =[[QYZJMineZhuangXiuDaiVC alloc] init];

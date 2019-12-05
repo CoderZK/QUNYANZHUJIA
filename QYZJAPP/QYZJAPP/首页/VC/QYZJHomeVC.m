@@ -227,7 +227,7 @@
     }else if (indexPath.section == 1) {
         return 100;
     }else if (indexPath.section == 2) {
-        return 200;
+        return (ScreenW - 30) * 125 / 375;
     }
     return 110;
 }
@@ -256,6 +256,7 @@
        
     }else if (indexPath.section == 2) {
         QYZJHomeThreeCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeThreeCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else if (indexPath.section == 3 && indexPath.row == 0) {
         QYZJHomeFourCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeFourCell" forIndexPath:indexPath];

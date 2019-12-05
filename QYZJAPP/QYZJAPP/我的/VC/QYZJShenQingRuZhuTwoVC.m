@@ -93,7 +93,7 @@
     dict[@"pro_id"] = self.proId;
     dict[@"city_id"] = self.cityId;
     dict[@"area_id"] = self.aearId;
-    dict[@"label"] = self.proId;
+    dict[@"label"] = self.labelsID;
     
     QYZJRuZhuThreeVC * vc =[[QYZJRuZhuThreeVC alloc] init];
     vc.dataDict = dict;

@@ -82,49 +82,53 @@
 
 
 - (void)registerAction{
-//    if (self.phoneTF.text.length == 0) {
-//        [SVProgressHUD showErrorWithStatus:@"请输入手机号"];
-//        return;
-//    }
-//    if (self.phoneTF.text.length != 11) {
-//        [SVProgressHUD showErrorWithStatus:@"请输入正确手机号"];
-//        return;
-//    }
-//    
-//    if (self.codeTF.text.length == 0) {
-//        [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
-//        return;
-//    }
-//    
-//    if (self.passWordTF.text.length == 0) {
-//        [SVProgressHUD showErrorWithStatus:@"请输入密码"];
-//        return;
-//    }
-//    NSMutableDictionary * dataDict = @{@"phone":self.phoneTF.text}.mutableCopy;
-//    dataDict[@"code"] = self.codeTF.text;
-//    dataDict[@"password"] = [NSString stringToMD5:self.passWordTF.text];
-//    [zkRequestTool networkingPOST:[HHYURLDefineTool validCodeURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
-//        if ([responseObject[@"code"] intValue]== 0) {
-//            if (self.isTherd) {
-//                [self bindOrRegist];
-//            }else {
-//                HHYAddZiLiaoTVC * vc =[[HHYAddZiLiaoTVC alloc] init];
-//                vc.passdWord = self.passWordTF.text;
-//                vc.phoneStr = self.phoneTF.text;
-//                vc.yaoQingStr = self.yaoQingCodeTF.text;
-//                vc.hidesBottomBarWhenPushed = YES;
-//                [self.navigationController pushViewController:vc animated:YES];
-//            }
-//        }else {
-//            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
-//        }
-//
-//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//
-//
-//
-//    }];
+    if (self.oldTF.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请输入原手机号"];
+        return;
+    }
+    if (self.oldTF.text.length != 11) {
+        [SVProgressHUD showErrorWithStatus:@"请输入正确手机号"];
+        return;
+    }
     
+    if (self.codeTF.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
+        return;
+    }
+
+    if (self.nPhoneTF.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请输入新手机号"];
+        return;
+    }
+    if (self.nPhoneTF.text.length != 11) {
+        [SVProgressHUD showErrorWithStatus:@"请输入正确手机号"];
+        return;
+    }
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_editPhoneURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            [SVProgressHUD showSuccessWithStatus:@"修改手机号成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+
+        
+    }];
+    
+ 
 }
 
 @end

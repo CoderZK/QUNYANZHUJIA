@@ -36,18 +36,40 @@
         
         [LLPassWordAlertView showWithTitle:@"支付密码" desStr:@"请输入支付密码" finish:^(NSString *pwStr) {
             
+            [self checkPayPasswordWith:pwStr];
+            
         }];
-        
-//        [LLPassWordAlertView showWithTitle:@"支付密码" desStr:@"请输入支付密码" finish:^(NSString *pwStr) {
-//            NSLog(@"输入密码完成:%@",pwStr);
-//        } canelBtnOnClick:^(){
-//            //取消显示按钮被点击
-//            NSLog(@"取消按钮被点击");
-//        }];
-        
     }
 }
 
+//检测密码
+- (void)checkPayPasswordWith:(NSString *)password {
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"pay_pass"] = [password base64EncodedString];
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_checkPayPassURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
 
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            });
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+
+        
+    }];
+    
+    
+}
 
 @end
