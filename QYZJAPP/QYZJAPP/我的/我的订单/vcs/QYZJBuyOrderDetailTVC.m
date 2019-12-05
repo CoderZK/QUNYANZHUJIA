@@ -14,6 +14,8 @@
 @interface QYZJBuyOrderDetailTVC ()
 @property(nonatomic,strong)UILabel *moneyLB;
 @property(nonatomic,strong)UIButton *payBt;
+@property(nonatomic,assign)NSInteger page;
+@property(nonatomic,strong)NSMutableArray<QYZJMoneyModel *> *dataArray;
 @end
 
 @implementation QYZJBuyOrderDetailTVC
@@ -25,6 +27,19 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJMineOrderCell" bundle:nil] forCellReuseIdentifier:@"QYZJMineOrderCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJMineOrderInfoAddreeCell" bundle:nil] forCellReuseIdentifier:@"QYZJMineOrderInfoAddreeCell"];
     [self setFootv];
+    
+    self.page = 1;
+    self.dataArray = @[].mutableCopy;
+    [self getData];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.page = 1;
+        [self getData];
+    }];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        self.page++;
+        [self getData];
+    }];
+    
     
 }
 
@@ -69,7 +84,19 @@
     if (indexPath.section == 0) {
         QYZJMineOrderInfoAddreeCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJMineOrderInfoAddreeCell" forIndexPath:indexPath];
         [cell.addBt addTarget:self action:@selector(addAddressAction:) forControlEvents:UIControlEventTouchUpInside];
-        
+        if (self.dataArray.count>0) {
+            [cell.addBt setTitle:@"" forState:UIControlStateNormal];
+            [cell.addBt setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+            cell.dizhiImgV.hidden = cell.titleLB.hidden = cell.dizhiImgV.hidden = cell.addressLB.hidden = cell.phoneLB.hidden = NO;
+            QYZJMoneyModel * model = self.dataArray[0];
+            cell.titleLB.text = model.address;
+            cell.addressLB.text = model.addressPca;
+            cell.phoneLB.text = model.linkTel;
+        }else {
+            [cell.addBt setImage:[UIImage imageNamed:@"18"] forState:UIControlStateNormal];
+            [cell.addBt setTitle:@"新增地址" forState:UIControlStateNormal];
+            cell.dizhiImgV.hidden = cell.titleLB.hidden = cell.dizhiImgV.hidden = cell.addressLB.hidden = cell.phoneLB.hidden = YES;
+        }
         return cell;
     }else   {
         QYZJMineOrderCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJMineOrderCell" forIndexPath:indexPath];
@@ -81,11 +108,44 @@
     
 }
 
+- (void)getData {
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"page"] = @(1);
+    dict[@"pageSize"] = @(10);
+    dict[@"token"] = [zkSignleTool shareTool].session_token;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_bankListURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
+            self.dataArray = [QYZJMoneyModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
+            [self.tableView reloadData];
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+    }];
+    
+    
+    
+}
+
+
 //添加地址
 - (void)addAddressAction:(UIButton *)button {
     
     QYZJMineAddressTVC * vc =[[QYZJMineAddressTVC alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
+    Weak(weakSelf);
+    vc.chooseAddressBlock = ^(QYZJMoneyModel * _Nonnull model) {
+        [weakSelf.dataArray insertObject:model atIndex:0];
+        [weakSelf.tableView reloadData];
+    };
     [self.navigationController pushViewController:vc animated:YES];
     
 }

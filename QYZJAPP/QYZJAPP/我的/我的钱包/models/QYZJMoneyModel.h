@@ -23,6 +23,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *con;
 @property(nonatomic,strong)NSString *nickName;
 
+@property(nonatomic,strong)NSString *address;
+@property(nonatomic,strong)NSString *addressPca;
+@property(nonatomic,strong)NSString *linkTel;
+@property(nonatomic,strong)NSString *pro;
+@property(nonatomic,strong)NSString *city;
+@property(nonatomic,strong)NSString *area;
+
+
 @property(nonatomic,strong)NSString *num;
 @property(nonatomic,strong)NSString *free_question_num;
 @property(nonatomic,strong)NSString *free_appoint_num;

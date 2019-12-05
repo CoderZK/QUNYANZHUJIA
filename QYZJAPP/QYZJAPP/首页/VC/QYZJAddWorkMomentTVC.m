@@ -42,6 +42,8 @@
         self.navigationItem.title = @"修改案例";
     }else if (self.type == 2) {
         self.navigationItem.title = @"创建播报";
+    }else if (self.type == 3) {
+        self.navigationItem.title = @"创建案例";
     }
     self.tableView.backgroundColor =[UIColor groupTableViewBackgroundColor];
     
@@ -95,21 +97,41 @@
         [SVProgressHUD showErrorWithStatus:@"请输入动态内容"];
         return;
     }
-   
-    
+
     [SVProgressHUD show];
+    
+    NSString * url = @"";
+    
+    if (self.type == 1) {
+        url = [QYZJURLDefineTool user_updateCaseURL];
+    }else if (self.type == 2) {
+        url = [QYZJURLDefineTool user_createRepairBroadcastURL];
+    }else if (self.type == 3) {
+        url = [QYZJURLDefineTool user_addCaseURL];
+    }
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"constructionStageId"] = self.ID;
-    dict[@"video"] = self.videoStr;
-    dict[@"picture"] = [self.picsArr componentsJoinedByString:@","];
+    dict[@"videoUrl"] = self.videoStr;
+    dict[@"video_url"] = self.videoStr;
+    dict[@"picUrl"] = [self.picsArr componentsJoinedByString:@","];
+    dict[@"pic"] = [self.picsArr componentsJoinedByString:@","];
     dict[@"title"] = self.titleTF.text;
     dict[@"content"] = self.desTV.text;
-    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_createRepairBroadcastURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+    dict[@"context"] = self.titleTF.text;
+    dict[@"id"] = self.ID;
+    [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
-            [SVProgressHUD showSuccessWithStatus:@"添加播报成功"];
+            if (self.type == 1) {
+               [SVProgressHUD showSuccessWithStatus:@"修改例成功"];
+            }else if (self.type == 2) {
+                [SVProgressHUD showSuccessWithStatus:@"添加播报成功"];
+            }else if (self.type == 3) {
+                [SVProgressHUD showSuccessWithStatus:@"创建案例成功"];
+            }
+            
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });
@@ -155,7 +177,7 @@
     lb2.textColor = CharacterBlack112;
     lb2.font = kFont(14);
     lb2.text = @"阶段描述";
-    if (self.type == 1) {
+    if (self.type == 1 || self.type == 3) {
         lb2.text = @"内容";
     }else if (self.type == 2) {
         lb2.text = @"播报描述";
@@ -166,7 +188,7 @@
     self.desTV = [[IQTextView alloc] initWithFrame:CGRectMake(95, CGRectGetMaxY(backV1.frame) + 10, ScreenW - 110, 60)];
     self.desTV.font = kFont(14);
     self.desTV.placeholder = @"请输入阶段描述";
-    if (self.type == 1) {
+    if (self.type == 1 || self.type == 3) {
         self.desTV.placeholder = @"请输入内容";
     }else if (self.type == 2) {
         self.desTV.placeholder = @"请输入播报描述";
@@ -260,7 +282,7 @@
         self.addBt.hidden = YES;
         self.videoImgV.hidden =self.deleteBt.hidden = NO;
         self.whiteTwoV.mj_h = (ScreenW - 110)*9/16 + 20;
-        self.videoImgV.image = [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:videoStr] size:CGSizeMake((ScreenW - 110), (ScreenW - 110)*9/16)];
+        self.videoImgV.image = [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:[QYZJURLDefineTool getVideoURLWithStr:videoStr]] size:CGSizeMake((ScreenW - 110), (ScreenW - 110)*9/16)];
         self.headV.mj_h = CGRectGetMaxY(self.whiteTwoV.frame);
         self.tableView.tableHeaderView = self.headV;
         
@@ -320,6 +342,7 @@
     if (button.tag == self.picsArr.count + 100) {
         //添加图片
         self.isChooseVideo = NO;
+        [self.tableView endEditing:YES];
         [self addPict];
     }else {
         [[zkPhotoShowVC alloc] initWithArray:self.picsArr index:button.tag - 100];
@@ -348,7 +371,7 @@
 }
 
 - (void)addPict {
-    
+    [self.tableView endEditing:YES];
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
@@ -356,7 +379,7 @@
             [self showMXPhotoCameraAndNeedToEdit:YES completion:^(UIImage *image, UIImage *originImage, CGRect cutRect) {
                 
                 [self.picsArr addObject:image];
-                 [self updateImgsToQiNiuYun];
+                [self updateImgsToQiNiuYun];
     
                 
             }];

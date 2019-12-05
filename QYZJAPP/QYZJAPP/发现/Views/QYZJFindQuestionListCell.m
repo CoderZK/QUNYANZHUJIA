@@ -82,7 +82,7 @@
     self.typeLB.text= model.roleName;
     self.typeLB.mj_w = [self.typeLB.text getWidhtWithFontSize:14] + 15;
     self.typeLB.mj_x = CGRectGetMaxX(self.nameLB.frame) + 10;
-    self.numberLB.text = [NSString stringWithFormat:@"%@人旁听",model.sitOnNum];
+    self.numberLB.text = [NSString stringWithFormat:@"%ld人旁听",model.sitOnNum];
     
     [self.listBt setTitle:[NSString stringWithFormat:@"￥%0.2f元旁听",model.sitPrice] forState:UIControlStateNormal];
     

@@ -17,6 +17,11 @@
 
 @implementation QYZJMineAnLiTVC
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.page = 1;
+    [self getData];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我的案例";
@@ -24,7 +29,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.page = 1;
     self.dataArray = @[].mutableCopy;;
-    [self getData];
+   
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.page = 1;
         [self getData];
@@ -70,7 +75,11 @@
 }
 //点击发布案例
 - (void)clickAction:(UIButton *)button {
+    QYZJAddWorkMomentTVC * vc =[[QYZJAddWorkMomentTVC alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
     
+    vc.type = 3;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

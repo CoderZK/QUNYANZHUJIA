@@ -300,7 +300,7 @@
 }
 
 - (void)click:(UIButton *)button {
-    
+    [self.tableView endEditing:YES];
     zkPickView * pickV = [[zkPickView alloc] init];
     pickV.arrayType = titleArray;
     pickV.array = self.typeArr.mutableCopy;
@@ -332,7 +332,7 @@
         self.addBt.hidden = YES;
         self.videoImgV.hidden = NO;
         self.whiteTwoV.mj_h = (ScreenW - 110)*9/16 + 20;
-        self.videoImgV.image = [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:videoStr] size:CGSizeMake((ScreenW - 110), (ScreenW - 110)*9/16)];
+        self.videoImgV.image = [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:[QYZJURLDefineTool getVideoURLWithStr:videoStr]] size:CGSizeMake((ScreenW - 110), (ScreenW - 110)*9/16)];
         self.headV.mj_h = CGRectGetMaxY(self.whiteTwoV.frame);
         self.tableView.tableHeaderView = self.headV;
         
@@ -391,6 +391,7 @@
     
     if (button.tag == self.picsArr.count + 100) {
         //添加图片
+        [self.tableView endEditing:YES];
         self.isChooseVideo = NO;
         [self addPict];
     }else {

@@ -16,13 +16,16 @@
 
 @implementation QYZJAnLiDetailTVC
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"案例详情";
 
     self.headV = [[QYZJAnLiDetailHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 20)];
-    
-    [self getData];
        self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
            [self getData];
        }];
@@ -46,17 +49,45 @@
              vc.type = 1;
              vc.titleStr = self.dataModel.title;
              vc.contentStr = self.dataModel.context;
+             vc.ID = self.ID;
              vc.hidesBottomBarWhenPushed = YES;
              [self.navigationController pushViewController:vc animated:YES];
          }else {
              
-             
+             [self delectAnLi];
              
          }
          
          
     };
     [self.view addSubview:view];
+    
+}
+
+- (void)delectAnLi {
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"id"] = self.ID;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_deleteCaseURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            [SVProgressHUD showSuccessWithStatus:@"删除案例成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+       
+        
+    }];
     
 }
 

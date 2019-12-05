@@ -74,10 +74,10 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nrl-LX-Eju">
-                        <rect key="frame" x="557" y="125" width="70" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nrl-LX-Eju">
+                        <rect key="frame" x="507" y="125" width="120" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="70" id="CKc-gC-7q6"/>
+                            <constraint firstAttribute="width" constant="120" id="CKc-gC-7q6"/>
                             <constraint firstAttribute="height" constant="30" id="JhE-tJ-4v4"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>

@@ -78,7 +78,7 @@
     self.nameLB.mj_h = [dataModel.title getHeigtWithFontSize:14 lineSpace:3 width:ScreenW - 20];
      self.titleLB.mj_h = hh;
     
-    self.numberLB.text = [NSString stringWithFormat:@"%@人旁听",dataModel.sit_on_num];
+    self.numberLB.text = [NSString stringWithFormat:@"%ld人旁听",dataModel.sit_on_num];
     self.picView.mj_y = CGRectGetMaxY(self.nameLB.frame);
     if (dataModel.pic_url.length == 0) {
         self.picView.mj_h = 0;

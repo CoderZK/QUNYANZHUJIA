@@ -20,14 +20,8 @@
     self =[super initWithFrame:frame];
     if (self) {
  
-        
-        UIView * backV =[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 10)];
-        backV.backgroundColor = [UIColor groupTableViewBackgroundColor];
-        [self addSubview:backV];
-        
-        
-        
-        self.titleLB = [[UILabel alloc] initWithFrame:CGRectMake(10, 25, ScreenW - 20, 20)];
+
+        self.titleLB = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, ScreenW - 20, 20)];
         self.titleLB.numberOfLines = 0;
         self.titleLB.font = kFont(15);
         [self addSubview:self.titleLB];
@@ -80,7 +74,7 @@
      self.titleLB.mj_h = hh;
     
 //    self.numberLB.text = [NSString stringWithFormat:@"%@人旁听",dataModel.sit_on_num];
-    self.picView.mj_y = CGRectGetMaxY(self.nameLB.frame);
+    self.picView.mj_y = CGRectGetMaxY(self.nameLB.frame) + 5;
     if (dataModel.pic.length == 0) {
         self.picView.mj_h = 0;
        

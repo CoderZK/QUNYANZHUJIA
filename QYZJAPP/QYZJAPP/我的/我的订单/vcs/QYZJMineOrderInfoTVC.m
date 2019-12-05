@@ -109,6 +109,7 @@
         if ([self.dataDict.allKeys containsObject:@"link_tel"]) {
             cell.phoneLB.text = self.dataDict[@"link_tel"];
         }
+        cell.addBt.hidden = YES;
         return cell;
     }else if (indexPath.section == 1) {
         QYZJMineOrderCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJMineOrderCell" forIndexPath:indexPath];

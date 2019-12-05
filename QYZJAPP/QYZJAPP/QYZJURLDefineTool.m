@@ -386,8 +386,27 @@
 +(NSString *)user_createRepairBroadcastURL{
      return [NSString stringWithFormat:@"%@%@",URLOne,@"user_createRepairBroadcast.do"];
 }
+/**删除播报*/
++(NSString *)user_repairBoradcastDelURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_repairBoradcastDel.do"];
+}
+/**回复播报*/
++(NSString *)user_repairBroadcastReplyURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_repairBroadcastReply.do"];
+}
+/*用户地址*/
++(NSString *)user_addressListURL{
+   return [NSString stringWithFormat:@"%@%@",URLOne,@"user_addressList.do"];
+}
 
-
+/*删除地址*/
++(NSString *)user_deleteAddressURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_deleteAddress.do"];
+}
+/*增加地址*/
++(NSString *)user_addAddressURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_addAddress.do"];
+}
 
 #pragma mark ---- 其它 --------- 
 /** 获取城市列表*/

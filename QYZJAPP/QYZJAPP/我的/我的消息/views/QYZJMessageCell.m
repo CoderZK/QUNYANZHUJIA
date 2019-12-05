@@ -36,6 +36,9 @@
     }else {
         self.numberLB.hidden = NO;
         CGFloat w = [numberStr getWidhtWithFontSize:13] + 10;
+        if (w<20) {
+            w = 20;
+        }
         self.numberCons.constant = w;
     }
    

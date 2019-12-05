@@ -32,9 +32,14 @@
         self.whiteV = [[UIView alloc] initWithFrame:CGRectMake(0, -50, ScreenW, 50)];
         self.whiteV.backgroundColor = WhiteColor;
         [self addSubview:self.whiteV];
+        self.whiteV.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.whiteV.layer.shadowOpacity = 0.4;
+        self.whiteV.layer.shadowOffset = CGSizeMake(0, 5);
+        self.whiteV.layer.shadowRadius = 5;
         
         UITextField * tf = [[UITextField alloc] initWithFrame:CGRectMake(10, 10, ScreenW - 100, 30)];
-        tf.borderStyle =  UITextBorderStyleLine;
+        tf.layer.borderColor = CharacterBlack112.CGColor;
+        tf.layer.borderWidth = 0.8;
         tf.layer.cornerRadius = 3;
         tf.clipsToBounds = YES;
         tf.returnKeyType = UIReturnKeySend;
@@ -42,8 +47,10 @@
         self.tf = tf;
         [self.whiteV addSubview:tf];
         
-        UIButton * button  = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 80, 15, 70, 30)];
+        UIButton * button  = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 80, 10, 70, 30)];
         button.titleLabel.font = kFont(14);
+        button.layer.cornerRadius = 4;
+        button.clipsToBounds = YES;
         [button setTitle:@"提交" forState:UIControlStateNormal];
         [button setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
         [self.whiteV addSubview:button];

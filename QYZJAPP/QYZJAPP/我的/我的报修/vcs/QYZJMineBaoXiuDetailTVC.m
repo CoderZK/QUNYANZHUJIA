@@ -15,7 +15,7 @@
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,strong)QYZJPingLunShowView *showView;
-@property(nonatomic,strong)NSIndexPath *idexPath;
+@property(nonatomic,strong)NSIndexPath *indexPath;
 @end
 
 @implementation QYZJMineBaoXiuDetailTVC
@@ -50,7 +50,7 @@
     self.showView = [[QYZJPingLunShowView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH)];
     Weak(weakSelf);
     self.showView.sendPingLunBlock = ^(NSString * _Nonnull message) {
-        
+        [weakSelf delectOrPingAction:message];
     };
     
 }
@@ -136,8 +136,9 @@
     [view.rightBt setTitleColor:OrangeColor forState:UIControlStateNormal];
     [view.rightBt addTarget:self action:@selector(addBoBao) forControlEvents:UIControlEventTouchUpInside];
     [view.rightBt setTitle:@"创建播报" forState:UIControlStateNormal];
-    [view.rightBt setImage:[UIImage imageNamed:@"jia"] forState:UIControlStateNormal];
-    [view.rightBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 0)];
+    [view.rightBt setImage:[UIImage imageNamed:@"18"] forState:UIControlStateNormal];
+    [view.rightBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+    [view.rightBt setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];
     view.leftLB.text = @"播报";
     view.backgroundColor = WhiteColor;
     view.contentView.backgroundColor = WhiteColor;
@@ -187,9 +188,73 @@
     QYZJBaoXiuDetailCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJBaoXiuDetailCell" forIndexPath:indexPath];
     cell.waiModel = self.dataArray[indexPath.row];
     cell.isServer = self.model.isService;
+    [cell.fuHuiBt addTarget:self action:@selector(fuhuiAction:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.deleteBt addTarget:self action:@selector(delectAction:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
     
 }
+
+- (void)fuhuiAction:(UIButton *)button {
+    
+    QYZJBaoXiuDetailCell * cell = (QYZJBaoXiuDetailCell *)button.superview.superview;
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    [self.showView show];
+    self.indexPath = indexPath;
+    
+}
+
+- (void)delectAction:(UIButton *)button {
+    QYZJBaoXiuDetailCell * cell = (QYZJBaoXiuDetailCell *)button.superview.superview;
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    self.indexPath = indexPath;
+    [self delectOrPingAction:@""];
+    
+}
+
+
+- (void)delectOrPingAction:(NSString *)titleStr {
+    
+    [SVProgressHUD show];
+    NSString * url = [QYZJURLDefineTool user_repairBroadcastReplyURL];
+    if (titleStr.length == 0) {
+        url = [QYZJURLDefineTool user_repairBoradcastDelURL];
+    }
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"id"] = self.dataArray[self.indexPath.row].ID;
+    dict[@"content"] = titleStr;
+    [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            if (titleStr.length > 0) {
+                //回复播报
+              
+                self.page = 1;
+                [self getData];
+                [self.showView diss];
+                
+            }else {
+                //删除播报
+                [self.dataArray removeObjectAtIndex:self.indexPath.row];
+                [self.tableView reloadData];
+            }
+  
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+    
+    
+}
+
 
 
 @end

@@ -116,6 +116,17 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)user_repairBroadcastListURL;
 /**添加播报*/
 +(NSString *)user_createRepairBroadcastURL;
+/**删除播报*/
++(NSString *)user_repairBoradcastDelURL;
+/**回复播报*/
++(NSString *)user_repairBroadcastReplyURL;
+/*用户地址*/
++(NSString *)user_addressListURL;
+/*删除地址*/
++(NSString *)user_deleteAddressURL;
+/*增加地址*/
++(NSString *)user_addAddressURL;
+
 
 #pragma mark ----- 消息部分 -------
 /** 用户的通知消息*/
