@@ -22,6 +22,8 @@
 @property(nonatomic,strong)UIButton *deleteBt;
 //@property(nonatomic,strong)UILabel *lb4;
 
+@property(nonatomic,strong)QYZJTongYongModel *imgModel,*videoModel;
+
 
 @end
 
@@ -38,8 +40,29 @@
     self.navigationItem.title = @"创建施工阶段";
     if (self.type == 1) {
         self.navigationItem.title = @"修改案例";
+    }else if (self.type == 2) {
+        self.navigationItem.title = @"创建播报";
     }
     self.tableView.backgroundColor =[UIColor groupTableViewBackgroundColor];
+    
+    
+    [self getImgDict];
+     [self getVideoDict];
+    
+    
+}
+
+- (void)getImgDict {
+    [zkRequestTool getUpdateImgeModelWithCompleteModel:^(QYZJTongYongModel *model) {
+           self.imgModel = model;
+       }];
+}
+
+- (void)getVideoDict {
+    
+    [zkRequestTool getUpdateVideoModelWithCompleteModel:^(QYZJTongYongModel *model) {
+        self.videoModel = model;
+    }];
     
 }
 
@@ -57,10 +80,54 @@
     }
     Weak(weakSelf);
         view.footViewClickBlock = ^(UIButton *button) {
-                 NSLog(@"\n\n%@",@"完成");
+            [weakSelf FaBuAction];
        };
     [self.view addSubview:view];
 }
+
+- (void)FaBuAction {
+    
+    if (self.titleTF.text.length ==0) {
+           [SVProgressHUD showErrorWithStatus:@"请输入标题"];
+           return;
+       }
+    if (self.desTV.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请输入动态内容"];
+        return;
+    }
+   
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"constructionStageId"] = self.ID;
+    dict[@"video"] = self.videoStr;
+    dict[@"picture"] = [self.picsArr componentsJoinedByString:@","];
+    dict[@"title"] = self.titleTF.text;
+    dict[@"content"] = self.desTV.text;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_createRepairBroadcastURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            [SVProgressHUD showSuccessWithStatus:@"添加播报成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+}
+
+
 
 
 - (void)createHeadV {
@@ -90,6 +157,8 @@
     lb2.text = @"阶段描述";
     if (self.type == 1) {
         lb2.text = @"内容";
+    }else if (self.type == 2) {
+        lb2.text = @"播报描述";
     }
     [self.headV addSubview:lb2];
     
@@ -99,6 +168,8 @@
     self.desTV.placeholder = @"请输入阶段描述";
     if (self.type == 1) {
         self.desTV.placeholder = @"请输入内容";
+    }else if (self.type == 2) {
+        self.desTV.placeholder = @"请输入播报描述";
     }
     [self.headV addSubview:self.desTV];
     self.desTV.text = self.contentStr;
@@ -285,7 +356,7 @@
             [self showMXPhotoCameraAndNeedToEdit:YES completion:^(UIImage *image, UIImage *originImage, CGRect cutRect) {
                 
                 [self.picsArr addObject:image];
-                
+                 [self updateImgsToQiNiuYun];
     
                 
             }];
@@ -316,7 +387,7 @@
             [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
                 
                 [self.picsArr addObjectsFromArray:photos];
-                [self addPicsWithArr:self.picsArr];
+                [self updateImgsToQiNiuYun];
                 
             }];
             [self presentViewController:imagePickerVc animated:YES completion:nil];
@@ -341,16 +412,6 @@
     
 }
 
-- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingVideo:(UIImage *)coverImage sourceAssets:(PHAsset *)asset {
-    
-    NSLog(@"%@",asset);
-    
-    //    [PublicFuntionTool getImageFromPHAsset:asset Complete:^(NSData * _Nonnull data, NSString * _Nonnull str) {
-    //
-    //
-    //
-    //    }];
-}
 
 
 - (void)play {
@@ -358,5 +419,60 @@
     [PublicFuntionTool presentVideoVCWithNSString:[QYZJURLDefineTool getVideoURLWithStr:self.videoStr] isBenDiPath:NO];
     
 }
+
+
+#pragma mark ------ 如下是图片和视频的处理上传过程 ------
+//视频选择结束
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingVideo:(UIImage *)coverImage sourceAssets:(PHAsset *)asset {
+    [PublicFuntionTool getImageFromPHAsset:asset Complete:^(NSData * _Nonnull data, NSString * _Nonnull str) {
+        NSMutableDictionary * dict = @{}.mutableCopy;
+        dict[@"token"] = self.videoModel.token;
+ 
+        [zkRequestTool NetWorkingUpLoadmediOrVeidoWithfileData:data parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+            [SVProgressHUD showSuccessWithStatus:@"上传视频成功"];
+            self.videoStr = [NSString stringWithFormat:@"%@",responseObject[@"key"]];
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            NSLog(@"\n\n------%@",error);
+        }];
+    }];
+}
+
+//创建上传图片队列
+- (void)updateImgsToQiNiuYun {
+    //创建队列组
+    dispatch_group_t group = dispatch_group_create();
+    //创建队列
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    for (int i = 0 ; i < self.picsArr.count; i++) {
+        if ([self.picsArr[i] isKindOfClass:[UIImage class]]) {
+            dispatch_group_async(group, queue, ^{
+                [self upimgWithindex:i withgrop:group];
+            });
+        }
+    }
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+       //全部上传成功
+        [SVProgressHUD showSuccessWithStatus:@"上传图片成功"];
+        [self addPicsWithArr:self.picsArr];
+    });
+}
+//上传图片操作
+- (void)upimgWithindex:(NSInteger)index withgrop:(dispatch_group_t)group{
+    dispatch_group_enter(group);
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"token"] = self.imgModel.token;
+    [zkRequestTool NetWorkingUpLoad:QiNiuYunUploadURL image:self.picsArr[index] andName:@"file" parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSLog(@"%@",@"京东卡的风控安徽");
+        [self.picsArr removeObjectAtIndex:index];
+        [self.picsArr insertObject:[NSString stringWithFormat:@"%@",responseObject[@"key"]] atIndex:index];
+        dispatch_group_leave(group);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+    }];
+
+}
+
 
 @end

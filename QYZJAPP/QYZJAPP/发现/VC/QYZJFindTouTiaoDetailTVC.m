@@ -122,7 +122,7 @@
 
     }
     view.rightBt.hidden = YES;
-    view.leftLB.text = [NSString stringWithFormat:@"评论(%@)",self.dataModel.commentNum];;
+    view.leftLB.text = [NSString stringWithFormat:@"评论(%ld)",self.dataModel.commentNum];;
     view.backgroundColor = WhiteColor;
     view.contentView.backgroundColor = WhiteColor;
     view.clipsToBounds = YES;

@@ -134,7 +134,7 @@
     UILabel * titleLB = [[UILabel alloc] initWithFrame:CGRectMake((ww + space) * arr.count + 10, 15, 180, 30)];
     titleLB.font = kFont(13);
     titleLB.textColor = CharacterBlack112;
-    titleLB.text = [NSString stringWithFormat:@"已有%@人为他点赞",self.model.goodNum];
+    titleLB.text = [NSString stringWithFormat:@"已有%ld人为他点赞",self.model.goodNum];
     [self.viewFour addSubview:titleLB];
     
     

@@ -54,10 +54,18 @@
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             
-            [SVProgressHUD showSuccessWithStatus:@"支付成功"];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.navigationController popToRootViewControllerAnimated:YES];
-            });
+            NSInteger a  = [[NSString stringWithFormat:@"%@",responseObject[@"result"]] intValue];
+            if (a==0) {
+                [SVProgressHUD showErrorWithStatus:@"支付密码为空"];
+            }else if (a==1) {
+                [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+                           dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                               [self.navigationController popToRootViewControllerAnimated:YES];
+                           });
+            }else if (a==2){
+                 [SVProgressHUD showErrorWithStatus:@"支付密码错误"];
+            }
+           
             
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];

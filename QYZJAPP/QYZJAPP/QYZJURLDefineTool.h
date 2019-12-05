@@ -112,8 +112,10 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)app_findPasswordURL;
 /**修改服务方资料*/
 +(NSString *)user_editAppointAndQuestionURL;
-
-
+/**报修详情*/
++(NSString *)user_repairBroadcastListURL;
+/**添加播报*/
++(NSString *)user_createRepairBroadcastURL;
 
 #pragma mark ----- 消息部分 -------
 /** 用户的通知消息*/

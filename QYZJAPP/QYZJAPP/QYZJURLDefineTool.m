@@ -378,6 +378,15 @@
 +(NSString *)user_editAppointAndQuestionURL{
    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_editAppointAndQuestion.do"];
 }
+/**报修详情*/
++(NSString *)user_repairBroadcastListURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_repairBroadcastList.do"];
+}
+/**添加播报*/
++(NSString *)user_createRepairBroadcastURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_createRepairBroadcast.do"];
+}
+
 
 
 #pragma mark ---- 其它 --------- 

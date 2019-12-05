@@ -9,6 +9,7 @@
 #import "QYZJMineTongYongTVC.h"
 #import "QYZJMineBaoXiuCellTableViewCell.h"
 #import "QYZJMineOrderCell.h"
+#import "QYZJMineBaoXiuDetailTVC.h"
 @interface QYZJMineTongYongTVC ()
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
 @property(nonatomic,assign)NSInteger page;
@@ -109,6 +110,13 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.type == 1) {
+        //报修详情
+        QYZJMineBaoXiuDetailTVC * vc =[[QYZJMineBaoXiuDetailTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.model = self.dataArray[indexPath.row];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
 }
 @end

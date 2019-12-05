@@ -45,6 +45,10 @@
     _answerList = [QYZJFindModel mj_objectArrayWithKeyValuesArray:answerList];
 }
 
+- (void)setBroadcastReply:(NSMutableArray<QYZJFindModel *> *)broadcastReply {
+    _broadcastReply = [QYZJFindModel mj_objectArrayWithKeyValuesArray:broadcastReply];
+}
+
 /** 看得见的
  
  

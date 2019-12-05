@@ -26,7 +26,16 @@
         }];
         
         self.rightBt = [[UIButton alloc] init];
-        
+        [self addSubview:self.rightBt];
+        [self.rightBt mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.mas_centerY).offset(5);
+            make.height.equalTo(@35);
+            make.width.equalTo(@120);
+            make.right.equalTo(self).offset(-10);
+        }];
+        self.rightBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        self.rightBt.hidden = YES;
+        self.rightBt.titleLabel.font = kFont(14);
         
     }
     self.backgroundColor = [UIColor whiteColor];

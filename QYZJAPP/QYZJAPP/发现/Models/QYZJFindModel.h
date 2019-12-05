@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *cityId;
 @property(nonatomic,strong)NSString *pic;
 @property(nonatomic,strong)NSString *pics;
+@property(nonatomic,strong)NSString *picUrl;
 @property(nonatomic,strong)NSString *video;
 @property(nonatomic,strong)NSString *type;
 @property(nonatomic,strong)NSString *content;
@@ -66,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *commission_type;
 @property(nonatomic,strong)NSString *b_recomend_address;
 @property(nonatomic,strong)NSString *telphone;
-
+@property(nonatomic,strong)NSString *turnoverTitle;
 
 /** 服务方：待发起交付1、待客户确认2、待客户支付3、施工中4、待阶段验收5、待客户支付尾款6、待评价7、交付完成8；
  客户：待服务方发起交付1、待确认2、待支付3、施工中4、待阶段验收5、待支付尾款6、待评价7、交付完成8 */
@@ -98,6 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *mediaList;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *answer_list;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *answerList;
+@property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *broadcastReply;
 
 @property(nonatomic,strong)NSMutableArray *videos;
 @property(nonatomic,strong)NSMutableArray *pictures;
