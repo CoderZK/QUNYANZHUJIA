@@ -49,6 +49,10 @@
     _broadcastReply = [QYZJFindModel mj_objectArrayWithKeyValuesArray:broadcastReply];
 }
 
+- (void)setApponitUsers:(NSMutableArray<QYZJFindModel *> *)apponitUsers {
+    _apponitUsers = [QYZJFindModel mj_objectArrayWithKeyValuesArray:apponitUsers];
+}
+
 /** 看得见的
  
  

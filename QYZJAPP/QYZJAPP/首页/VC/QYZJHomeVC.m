@@ -49,6 +49,9 @@
     self.navigationController.navigationBar.hidden = YES;
     //    self.navigationController.navigationBar.hidden = YES;;
     [self.tableView reloadData];
+    
+
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -121,7 +124,7 @@
         [self getData];
     }];
     
-    
+    [self seysTemparam];
     [self getUserBaseicInfoHome];
     
 }
@@ -406,6 +409,7 @@
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"token"] = [zkSignleTool shareTool].session_token;
     dict[@"city_id"] = @"1004";
+    dict[@"key"] = @"manner,houseModel";
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_bannerListURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
             self.bannerDataArr = [zkBannerModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"bannerList"]];
@@ -419,6 +423,7 @@
     }];
     
 }
+
 
 
 - (void)getUserBaseicInfoHome {

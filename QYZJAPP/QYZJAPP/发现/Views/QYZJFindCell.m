@@ -162,6 +162,8 @@
             make.width.equalTo(@75);
             make.centerY.equalTo(self.viewThree.mas_centerY);
         }];
+        self.pingLunBt.userInteractionEnabled = NO;
+        
         self.pingLunBt.tag = 3;
         [self.pingLunBt addTarget:self action:@selector(goodBtAction:) forControlEvents:UIControlEventTouchUpInside];
         self.zanBt = [[UIButton alloc] init];
@@ -242,6 +244,8 @@
     
     if (self.type == 0 && [model.refShopId intValue] > 0) {
         self.jinDaBt.hidden = NO;
+    }else {
+        self.jinDaBt.hidden = YES;
     }
     
     self.timeLB.text = model.timeNow;

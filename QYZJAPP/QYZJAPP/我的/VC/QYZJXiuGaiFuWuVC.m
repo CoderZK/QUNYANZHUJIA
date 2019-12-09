@@ -89,7 +89,7 @@
     NSMutableDictionary * dict = @{}.mutableCopy;
     
     dict[@"question_price"] = self.questMoneyTF.text;
-    dict[@"appoint_price"] = self.yuYueMoneyTF.text;
+    dict[@"apponit_price"] = self.yuYueMoneyTF.text;
     dict[@"sit_price"] = self.pangTingMoneyTF.text;
     dict[@"pro_id"] = self.proId;
     dict[@"city_id"] = self.cityId;

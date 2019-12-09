@@ -141,6 +141,9 @@
 		583536902386664500D9BE26 /* QYZJChangeConstructionOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5835368F2386664500D9BE26 /* QYZJChangeConstructionOneCell.m */; };
 		5835369923866BCB00D9BE26 /* QYZJConstructionListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5835369823866BCB00D9BE26 /* QYZJConstructionListCell.m */; };
 		5835369C23866C6E00D9BE26 /* QYZJConstructionProgressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5835369B23866C6E00D9BE26 /* QYZJConstructionProgressCell.m */; };
+		58359EC4239A480D0070EF75 /* QYZJMineCaiPanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58359EC3239A480D0070EF75 /* QYZJMineCaiPanCell.m */; };
+		58359EC8239A48220070EF75 /* QYZJMineCaiPanTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58359EC6239A48220070EF75 /* QYZJMineCaiPanTwoCell.m */; };
+		58359EC9239A48220070EF75 /* QYZJMineCaiPanTwoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58359EC7239A48220070EF75 /* QYZJMineCaiPanTwoCell.xib */; };
 		5836BCEB2378E5C300F02783 /* QYZJSettingTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5836BCEA2378E5C300F02783 /* QYZJSettingTVC.m */; };
 		5836BCEF2378E94300F02783 /* QYZJSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5836BCED2378E94300F02783 /* QYZJSettingCell.m */; };
 		5836BCF02378E94300F02783 /* QYZJSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5836BCEE2378E94300F02783 /* QYZJSettingCell.xib */; };
@@ -562,6 +565,11 @@
 		5835369823866BCB00D9BE26 /* QYZJConstructionListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJConstructionListCell.m; sourceTree = "<group>"; };
 		5835369A23866C6E00D9BE26 /* QYZJConstructionProgressCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJConstructionProgressCell.h; sourceTree = "<group>"; };
 		5835369B23866C6E00D9BE26 /* QYZJConstructionProgressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJConstructionProgressCell.m; sourceTree = "<group>"; };
+		58359EC2239A480D0070EF75 /* QYZJMineCaiPanCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMineCaiPanCell.h; sourceTree = "<group>"; };
+		58359EC3239A480D0070EF75 /* QYZJMineCaiPanCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMineCaiPanCell.m; sourceTree = "<group>"; };
+		58359EC5239A48220070EF75 /* QYZJMineCaiPanTwoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMineCaiPanTwoCell.h; sourceTree = "<group>"; };
+		58359EC6239A48220070EF75 /* QYZJMineCaiPanTwoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMineCaiPanTwoCell.m; sourceTree = "<group>"; };
+		58359EC7239A48220070EF75 /* QYZJMineCaiPanTwoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJMineCaiPanTwoCell.xib; sourceTree = "<group>"; };
 		5836BCE92378E5C300F02783 /* QYZJSettingTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJSettingTVC.h; sourceTree = "<group>"; };
 		5836BCEA2378E5C300F02783 /* QYZJSettingTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJSettingTVC.m; sourceTree = "<group>"; };
 		5836BCEC2378E94300F02783 /* QYZJSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJSettingCell.h; sourceTree = "<group>"; };
@@ -1430,21 +1438,21 @@
 		583536712386657100D9BE26 /* 交付抢单 */ = {
 			isa = PBXGroup;
 			children = (
-				583536722386657100D9BE26 /* QYZJHomePayDetailTwoCell.xib */,
-				583536732386657100D9BE26 /* QYZJHomePayDetailOneCell.m */,
-				583536742386657100D9BE26 /* QYZJQianDanOneCell.m */,
-				583536752386657100D9BE26 /* QYZJRobOrderDetailCell.xib */,
-				583536762386657100D9BE26 /* QYZJHomePayDetailTwoCell.h */,
-				583536772386657100D9BE26 /* QYZJHomePayCell.m */,
-				583536782386657100D9BE26 /* QYZJRobOrderDetailCell.m */,
 				583536792386657100D9BE26 /* QYZJHomePayDetailOneCell.h */,
-				5835367A2386657100D9BE26 /* QYZJQianDanOneCell.h */,
-				5835367B2386657100D9BE26 /* QYZJHomePayCell.xib */,
+				583536732386657100D9BE26 /* QYZJHomePayDetailOneCell.m */,
 				5835367C2386657100D9BE26 /* QYZJHomePayDetailOneCell.xib */,
+				5835367A2386657100D9BE26 /* QYZJQianDanOneCell.h */,
+				583536742386657100D9BE26 /* QYZJQianDanOneCell.m */,
 				5835367D2386657100D9BE26 /* QYZJQianDanOneCell.xib */,
-				5835367E2386657100D9BE26 /* QYZJHomePayDetailTwoCell.m */,
 				5835367F2386657100D9BE26 /* QYZJRobOrderDetailCell.h */,
+				583536782386657100D9BE26 /* QYZJRobOrderDetailCell.m */,
+				583536752386657100D9BE26 /* QYZJRobOrderDetailCell.xib */,
 				583536802386657100D9BE26 /* QYZJHomePayCell.h */,
+				583536772386657100D9BE26 /* QYZJHomePayCell.m */,
+				5835367B2386657100D9BE26 /* QYZJHomePayCell.xib */,
+				583536762386657100D9BE26 /* QYZJHomePayDetailTwoCell.h */,
+				5835367E2386657100D9BE26 /* QYZJHomePayDetailTwoCell.m */,
+				583536722386657100D9BE26 /* QYZJHomePayDetailTwoCell.xib */,
 				5835369A23866C6E00D9BE26 /* QYZJConstructionProgressCell.h */,
 				5835369B23866C6E00D9BE26 /* QYZJConstructionProgressCell.m */,
 				5835368B238665C000D9BE26 /* QYZJConstructionCell.h */,
@@ -1637,18 +1645,18 @@
 			isa = PBXGroup;
 			children = (
 				583B343A2398D6E500148350 /* QYZJAppShopTVC.h */,
+				583B34432398D6E500148350 /* QYZJAppShopTVC.m */,
 				583B343B2398D6E500148350 /* QYZJEditShopNameVC.h */,
+				583B34422398D6E500148350 /* QYZJEditShopNameVC.m */,
 				583B343C2398D6E500148350 /* QYZJEditShopNameVC.xib */,
+				583B34412398D6E500148350 /* QYZJMineShopTVC.h */,
 				583B343D2398D6E500148350 /* QYZJMineShopTVC.m */,
 				583B343E2398D6E500148350 /* QYZJShopDetailTVC.h */,
-				583B343F2398D6E500148350 /* QYZJMineShopListTVC.h */,
-				583B34402398D6E500148350 /* QYZJAddGoodsOrEditGoodsTVC.m */,
-				583B34412398D6E500148350 /* QYZJMineShopTVC.h */,
-				583B34422398D6E500148350 /* QYZJEditShopNameVC.m */,
-				583B34432398D6E500148350 /* QYZJAppShopTVC.m */,
 				583B34442398D6E500148350 /* QYZJShopDetailTVC.m */,
-				583B34452398D6E500148350 /* QYZJAddGoodsOrEditGoodsTVC.h */,
+				583B343F2398D6E500148350 /* QYZJMineShopListTVC.h */,
 				583B34462398D6E500148350 /* QYZJMineShopListTVC.m */,
+				583B34452398D6E500148350 /* QYZJAddGoodsOrEditGoodsTVC.h */,
+				583B34402398D6E500148350 /* QYZJAddGoodsOrEditGoodsTVC.m */,
 			);
 			path = vcs;
 			sourceTree = "<group>";
@@ -1775,6 +1783,11 @@
 		583B346E2398D6E700148350 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				58359EC2239A480D0070EF75 /* QYZJMineCaiPanCell.h */,
+				58359EC3239A480D0070EF75 /* QYZJMineCaiPanCell.m */,
+				58359EC5239A48220070EF75 /* QYZJMineCaiPanTwoCell.h */,
+				58359EC6239A48220070EF75 /* QYZJMineCaiPanTwoCell.m */,
+				58359EC7239A48220070EF75 /* QYZJMineCaiPanTwoCell.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -2282,6 +2295,7 @@
 				584345852371039E0087A2D9 /* TongYongCell.xib in Resources */,
 				58309F732387BD2A00CCAEA6 /* QYZJZhuYeYuYinCell.xib in Resources */,
 				337F3ED920EA13CF00C5526A /* AlipaySDK.bundle in Resources */,
+				58359EC9239A48220070EF75 /* QYZJMineCaiPanTwoCell.xib in Resources */,
 				5835361823861B7600D9BE26 /* QYZJFindShopCell.xib in Resources */,
 				337F3EB920EA050000C5526A /* Podfile in Resources */,
 				583B34FF2398D6EB00148350 /* QYZJMineAnLiCell.xib in Resources */,
@@ -2515,6 +2529,7 @@
 				5835369923866BCB00D9BE26 /* QYZJConstructionListCell.m in Sources */,
 				5846914F237298140056BA4A /* QYZJHomePayTVC.m in Sources */,
 				5840E744238233FD00821A16 /* QYZJFindQuestionListCell.m in Sources */,
+				58359EC8239A48220070EF75 /* QYZJMineCaiPanTwoCell.m in Sources */,
 				5843458C23710F3F0087A2D9 /* zkPickView.m in Sources */,
 				583ED6A52373E7B80070441A /* PublicFuntionTool.m in Sources */,
 				337F3EB420EA040400C5526A /* UIView+BSExtension.m in Sources */,
@@ -2554,6 +2569,7 @@
 				582F74E02378F85C00F6FCB6 /* QYZJChangePasswordVC.m in Sources */,
 				5833D9FA238B8869007DE9EC /* QYZJJiaoFuZiLiaoTVC.m in Sources */,
 				584331B623700BB50046C0BD /* QYZJHomeFourCell.m in Sources */,
+				58359EC4239A480D0070EF75 /* QYZJMineCaiPanCell.m in Sources */,
 				583B35052398D6EB00148350 /* QYZJPingJiaTVC.m in Sources */,
 				583B34D42398D6EB00148350 /* QYZJShopDetailTVC.m in Sources */,
 				583A4D57236BC65A00180E27 /* QYZJURLDefineTool.m in Sources */,

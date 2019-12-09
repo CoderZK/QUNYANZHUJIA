@@ -33,7 +33,7 @@
     self.timeLB.text = model.custom_telphone;
     
     self.moneyLB.text = [NSString stringWithFormat:@"￥%0.2f",model.allPrice];
-    self.typeLB1.text = [NSString stringWithFormat:@"%@m2",model.area];
+    self.typeLB1.text = [NSString stringWithFormat:@"%@m²",model.area];
     self.typeLB2.text = model.type_name;
     self.qianDanLB.textColor = OrangeColor;
     NSString * str = @"";

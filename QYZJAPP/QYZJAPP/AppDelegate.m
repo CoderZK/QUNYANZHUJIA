@@ -38,6 +38,8 @@
     self.window.rootViewController = [self instantiateRootVC];
     [self.window makeKeyAndVisible];
     
+    
+    
     /* 设置友盟appkey */
     [[UMSocialManager defaultManager] setUmSocialAppkey:UMKey];
 

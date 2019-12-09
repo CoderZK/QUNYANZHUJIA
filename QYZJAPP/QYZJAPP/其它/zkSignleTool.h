@@ -26,5 +26,11 @@
 @property(nonatomic,strong)NSArray *dataArray;
 @property(nonatomic,assign)NSInteger role;
 
+@property(nonatomic,strong)NSString *questMoney;
+@property(nonatomic,strong)NSArray *mannerArr;
+@property(nonatomic,strong)NSArray *houseModelArr;
+@property(nonatomic,strong)NSArray *renvoationTimeArr;
+
+
 -(void)uploadDeviceToken;
 @end

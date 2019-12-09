@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *desLB;
 @property (weak, nonatomic) IBOutlet UILabel *bottomLB;
 @property(nonatomic,strong)QYZJMoneyModel *model;
+@property(nonatomic,assign)BOOL isQuest;
 @end
 
 NS_ASSUME_NONNULL_END

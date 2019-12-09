@@ -310,6 +310,28 @@
 +(NSString *)user_goodsPayNewURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_goodsPayNew.do"];
 }
+/** 帖子评论更多*/
++ (NSString * )app_articleDetailsCommentURL {
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_articleDetailsComment.do"];
+}
+
+/*回复帖子*/
++(NSString *)app_articleCommentURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_articleComment.do"];
+}
+/*头条评论更多*/
++(NSString *)app_headlinenewsDetailsCommentURL {
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_headlinenewsDetailsComment.do"];
+}
+
+/*头条评论*/
++(NSString *)app_headlinenewsCommentURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_headlinenewsComment.do"];
+}
+/*旁听支付*/
++(NSString *)user_sitPayURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_sitPay.do"];
+}
 
 #pragma mark ----- 需求单 -------
 /** 推荐赚钱单子列表*/

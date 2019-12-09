@@ -43,12 +43,53 @@
     KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"抢单" andImgaeName:@""];
     Weak(weakSelf);
     view.footViewClickBlock = ^(UIButton *button) {
-        NSLog(@"\n\n%@",@"完成");
-        QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        [weakSelf robDemandAction];
     };  
     [self.view addSubview:view];
+}
+
+//抢单
+- (void)robDemandAction {
+    
+     UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"抢单提示" message:@"确定抢单吗?" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction * actionOne = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+        [SVProgressHUD show];
+          NSMutableDictionary * dict = @{}.mutableCopy;
+          dict[@"id"] = self.ID;
+          [zkRequestTool networkingPOST:[QYZJURLDefineTool user_grabDemandURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+          
+              [SVProgressHUD dismiss];
+              if ([responseObject[@"key"] intValue]== 1) {
+                 
+                  [SVProgressHUD showSuccessWithStatus:@"抢单成功"];
+                  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                      [self.navigationController popViewControllerAnimated:YES];
+                  });
+                  
+              }else {
+                  [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+              }
+              
+          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+              
+           
+              
+          }];
+          
+        
+    }];
+    
+    UIAlertAction * actionTwo = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alertVC addAction:actionTwo];
+    [alertVC addAction:actionOne];
+    [self presentViewController:alertVC animated:YES completion:nil];
+    
+    
+  
 }
 
 - (void)getData {
@@ -144,6 +185,7 @@
     
     if (indexPath.section == 0) {
         QYZJRobOrderDetailCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJRobOrderDetailCell" forIndexPath:indexPath];
+        
         cell.clipsToBounds = YES;
         return cell;
     }else  {
@@ -175,17 +217,23 @@
         }else if (row == 2) {
             cell.TF.text = self.dataModel.b_recomend_name.length > 0 ? self.dataModel.b_recomend_name:@"未填写";
         }else if (row == 3) {
-            //            cell.TF.text = self.dataModel.b_recomend_address.length > 0 ? self.dataModel.b_recomend_address:@"未填写";
+            if (self.dataModel.manner >0 && [zkSignleTool shareTool].mannerArr.count > 0) {
+                cell.TF.text = [zkSignleTool shareTool].mannerArr[self.dataModel.manner];
+            }
         }else if (row == 4) {
-            //            cell.TF.text = self.dataModel.b_recomend_address.length > 0 ? self.dataModel.b_recomend_address:@"未填写";
+           if (self.dataModel.house_model >0 && [zkSignleTool shareTool].houseModelArr.count >=self.dataModel.house_model) {
+                cell.TF.text = [zkSignleTool shareTool].houseModelArr[self.dataModel.house_model];
+            }
         }else if (row == 5) {
-            //            cell.TF.text = self.dataModel.b_recomend_address.length > 0 ? self.dataModel.b_recomend_address:@"未填写";
+            if (self.dataModel.renovation_time >0 && [zkSignleTool shareTool].renvoationTimeArr.count > 0) {
+                cell.TF.text = [zkSignleTool shareTool].renvoationTimeArr[self.dataModel.renovation_time];
+            }
         }else if (row == 6) {
-            //            cell.TF.text = self.dataModel.b_recomend_address.length > 0 ? self.dataModel.b_recomend_address:@"未填写";
+            cell.TF.text = self.dataModel.type_name.length > 0 ? self.dataModel.type_name:@"未填写";
         }else if (row == 7) {
             cell.TF.text = self.dataModel.budget > 0 ? [NSString stringWithFormat:@"%0.2f元",self.dataModel.budget]:@"未填写";
         }else if (row == 8) {
-            cell.TF.text = self.dataModel.area.length > 0 ? [NSString stringWithFormat:@"%@m2",self.dataModel.area]:@"未填写";
+            cell.TF.text = self.dataModel.area.length > 0 ? [NSString stringWithFormat:@"%@m²",self.dataModel.area]:@"未填写";
         }else if (row == 9) {
             cell.TF.text = self.dataModel.demand_context.length > 0 ? self.dataModel.demand_context:@"未填写";
         }else if (row == 10) {

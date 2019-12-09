@@ -34,6 +34,8 @@
         view.footViewClickBlock = ^(UIButton *button) {
             QYZJBuyOrderDetailTVC * vc =[[QYZJBuyOrderDetailTVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
+            self.dataModel.ID = self.ID;
+            vc.dataModel = self.dataModel;
             [weakSelf.navigationController pushViewController:vc animated:YES];
         };
         [self.view addSubview:view];

@@ -37,6 +37,7 @@
 - (BOOL)isCanUsePicture;
 //获取个人的身份
 - (void)getUserBaseicInfo;
-
+//获取系统参数
+- (void)seysTemparam;
 @end
 

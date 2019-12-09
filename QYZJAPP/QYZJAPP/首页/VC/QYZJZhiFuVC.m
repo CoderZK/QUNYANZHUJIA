@@ -58,10 +58,8 @@
             if (a==0) {
                 [SVProgressHUD showErrorWithStatus:@"支付密码为空"];
             }else if (a==1) {
-                [SVProgressHUD showSuccessWithStatus:@"支付成功"];
-                           dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                               [self.navigationController popToRootViewControllerAnimated:YES];
-                           });
+                //加测密码成功
+                [self payAction];
             }else if (a==2){
                  [SVProgressHUD showErrorWithStatus:@"支付密码错误"];
             }
@@ -74,6 +72,37 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
 
+        
+    }];
+    
+    
+}
+
+- (void)payAction {
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"pay_type"] = @"2";
+    dict[@"pay_money"] = @(self.money);
+    dict[@"answer_id"] = self.ID;
+    NSString * url = @"";
+    if (self.type == 0) {
+        url = [QYZJURLDefineTool user_sitPayURL];
+    }
+    [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+      
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+      
         
     }];
     

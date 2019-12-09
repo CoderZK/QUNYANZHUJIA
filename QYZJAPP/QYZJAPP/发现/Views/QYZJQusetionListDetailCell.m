@@ -9,7 +9,7 @@
 #import "QYZJQusetionListDetailCell.h"
 
 @interface QYZJQusetionListDetailCell()
-@property(nonatomic,strong)UIButton *headBt,*listBt;
+@property(nonatomic,strong)UIButton *headBt;
 @property(nonatomic,strong)UILabel *nameLB,*typeLB;
 
 
@@ -75,7 +75,12 @@
     self.typeLB.text= model.a_role_name;
     self.typeLB.mj_w = [self.typeLB.text getWidhtWithFontSize:14] + 15;
     self.typeLB.mj_x = CGRectGetMaxX(self.nameLB.frame) + 10;
-    [self.listBt setTitle:@"点击播放" forState:UIControlStateNormal];
+    if (model.is_pay) {
+      [self.listBt setTitle:[NSString stringWithFormat:@"￥%0.2f元旁听",model.sit_price] forState:UIControlStateNormal];
+    }else {
+      [self.listBt setTitle:@"点击播放" forState:UIControlStateNormal];
+    }
+    
 }
 
 

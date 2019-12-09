@@ -1,8 +1,8 @@
 //
-//  QYZJQusetionListDetailCell.h
+//  QYZJMineCaiPanCell.h
 //  QYZJAPP
 //
-//  Created by zk on 2019/11/18.
+//  Created by zk on 2019/12/6.
 //  Copyright © 2019 kunzhang. All rights reserved.
 //
 
@@ -10,9 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QYZJQusetionListDetailCell : UITableViewCell
+@interface QYZJMineCaiPanCell : UITableViewCell
 @property(nonatomic,strong)QYZJFindModel *model;
-@property(nonatomic,strong)UIButton *listBt;
 @end
 
 NS_ASSUME_NONNULL_END

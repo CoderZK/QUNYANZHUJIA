@@ -28,11 +28,21 @@
     
     self.cityArray = @[].mutableCopy;
     
+    self.navigationItem.title = @"新增地址";
+    [self getCityData];
+    
+    
 }
 - (IBAction)action:(UIButton *)sender {
     
     if (sender.tag == 100) {
         //点击城市
+        
+        if (self.cityArray.count == 0) {
+            [SVProgressHUD showErrorWithStatus:@"获取地址失败,请返回在重新进入"];
+            return;
+        }
+        
         zkPickView *picker = [[zkPickView alloc]initWithFrame:[UIScreen mainScreen].bounds];
         picker.delegate = self ;
         picker.arrayType = ArerArrayNormal;
@@ -80,17 +90,16 @@
     dict[@"pro_id"] = self.proId;
     dict[@"city_id"] = self.cityId;
     dict[@"area_id"] = self.aearId;
-    dict[@"address_pca"] = self.addreddTF.text;
+    dict[@"address_pca"] = self.addressCityTF.text;
+    dict[@"address"] = self.addreddTF.text;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_addAddressURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
 
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
-            
             [SVProgressHUD showSuccessWithStatus:@"添加地址成功"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });
-            
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
         }
@@ -130,8 +139,8 @@
     self.cityId = self.cityArray[leftIndex].cityList[centerIndex].cid;
     
     
-    self.aearStr = self.cityArray[leftIndex].cityList[centerIndex-1].areaList[rightIndex].name;
-    self.aearId = self.cityArray[leftIndex].cityList[centerIndex-1].areaList[rightIndex].ID;
+    self.aearStr = self.cityArray[leftIndex].cityList[centerIndex].areaList[rightIndex].name;
+    self.aearId = self.cityArray[leftIndex].cityList[centerIndex].areaList[rightIndex].ID;
     
     self.addressCityTF.text = [NSString stringWithFormat:@"%@%@%@",self.proStr,self.cityStr,self.aearStr];
     

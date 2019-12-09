@@ -42,12 +42,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *questionNum;
 @property(nonatomic,strong)NSString *role;
 @property(nonatomic,strong)NSString *roleId;
+@property(nonatomic,strong)NSString *shop_id;
 @property(nonatomic,strong)NSString *roleName;
 @property(nonatomic,strong)NSString *salt;
 @property(nonatomic,strong)NSString *telphone;
 @property(nonatomic,strong)NSString *des;
 @property(nonatomic,strong)NSString *evaluateCon;
 @property(nonatomic,strong)NSString *commitTime;
+@property(nonatomic,strong)NSString *community_name;
 @property(nonatomic,strong)NSString *title;
 @property(nonatomic,strong)NSString *content;
 /** 服务方：待发起交付1、待客户确认2、待客户支付3、施工中4、待阶段验收5、待客户支付尾款6、待评价7、交付完成8；
@@ -66,11 +68,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *demandId;
 @property(nonatomic,strong)NSString *area;
 @property(nonatomic,strong)NSString *demand_context;
+@property(nonatomic,strong)NSString * demand_voice;
 @property(nonatomic,strong)NSString *real_tel;
 @property(nonatomic,strong)NSString *reason;
 @property(nonatomic,strong)NSString *feedback_reply;
 @property(nonatomic,strong)NSString *appeal_reason;
 @property(nonatomic,strong)NSString *allDays;
+@property(nonatomic,strong)NSString *appeal_plateReason;
 
 
 @property(nonatomic,strong)NSMutableArray<QYZJWorkModel *> *changeTurnoverLists;

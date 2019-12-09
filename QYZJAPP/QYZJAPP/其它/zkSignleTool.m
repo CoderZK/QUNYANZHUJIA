@@ -124,6 +124,42 @@ static zkSignleTool * tool = nil;
 //    return [[NSUserDefaults standardUserDefaults] integerForKey:@"role"];
 //}
 
+- (void)setQuestMoney:(NSString *)questMoney {
+    [[NSUserDefaults standardUserDefaults] setObject:questMoney forKey:@"questMoney"];
+       [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString *)questMoney {
+     return [[NSUserDefaults standardUserDefaults] objectForKey:@"questMoney"];
+}
+
+- (void)setMannerArr:(NSArray *)mannerArr {
+    [[NSUserDefaults standardUserDefaults] setObject:mannerArr forKey:@"mannerArr"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSArray *)mannerArr  {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"mannerArr"];
+}
+
+- (void)setHouseModelArr:(NSArray *)houseModelArr {
+    [[NSUserDefaults standardUserDefaults] setObject:houseModelArr forKey:@"houseModelArr"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSArray *)houseModelArr {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"houseModelArr"];
+}
+
+- (void)setRenvoationTimeArr:(NSArray *)renvoationTimeArr {
+    [[NSUserDefaults standardUserDefaults] setObject:renvoationTimeArr forKey:@"renvoationTimeArr"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSArray *)renvoationTimeArr {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"renvoationTimeArr"];
+}
+
 - (void)setDeviceToken:(NSString *)deviceToken {
     
     [[NSUserDefaults standardUserDefaults] setObject:deviceToken forKey:@"deviceToken"];

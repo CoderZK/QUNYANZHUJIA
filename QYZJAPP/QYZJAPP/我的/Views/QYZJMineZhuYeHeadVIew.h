@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)CGFloat  headHeight;
 @property(nonatomic,copy)void(^clickZhuYeHeadBlock)(NSInteger index,UIButton *button);
 @property(nonatomic,strong)QYZJUserModel *dataModel;
+@property(nonatomic,strong)UIButton *editBt;
 @end
 
 NS_ASSUME_NONNULL_END

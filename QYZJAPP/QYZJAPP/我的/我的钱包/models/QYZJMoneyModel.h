@@ -35,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *free_question_num;
 @property(nonatomic,strong)NSString *free_appoint_num;
 @property(nonatomic,strong)NSString *end_time;
+@property(nonatomic,strong)NSString *add_time;
 @property(nonatomic,strong)NSString *telphone;
 
 

@@ -49,21 +49,21 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v14-dq-EmM">
-                        <rect key="frame" x="35" y="60" width="390" height="20"/>
+                        <rect key="frame" x="35" y="60" width="405" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="92f-JC-C13"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="免费预约次数" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3n-1H-uJr">
-                        <rect key="frame" x="440" y="60" width="100" height="20"/>
+                        <rect key="frame" x="455" y="60" width="85" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="5Vd-CS-oSg"/>
+                            <constraint firstAttribute="width" constant="85" id="5Vd-CS-oSg"/>
                             <constraint firstAttribute="height" constant="20" id="fTi-V2-A6K"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>

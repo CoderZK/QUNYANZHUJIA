@@ -26,6 +26,7 @@
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
 @property(nonatomic,assign)NSInteger type;
 @property(nonatomic,assign)NSInteger page;
+@property(nonatomic,strong)NSString *searchText;
 @end
 
 @implementation QYZJFindVC
@@ -43,6 +44,7 @@
     [super viewDidLoad];
     self.type = 0;
     self.page = 1;
+    self.searchText = @"";
     self.dataArray = [NSMutableArray array];
     self.tableView.frame = CGRectMake(0, sstatusHeight + 110, ScreenW, ScreenH - sstatusHeight - 110);
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJFindOneCell" bundle:nil] forCellReuseIdentifier:@"QYZJFindOneCell"];
@@ -73,12 +75,20 @@
     }else if (type == 3){
        urlStr = [QYZJURLDefineTool app_questionSitListOpenURL];
     }
+    
+    [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"token"] = [zkSignleTool shareTool].session_token;
     dict[@"city_id"] = @"0";
     dict[@"page"] = @(self.page);
     dict[@"pageSize"] = @(10);
+    dict[@"title"] = self.searchText;
+    dict[@"content"] = self.searchText;
+    dict[@"nick_name"] = self.searchText;
+    dict[@"city_id"] = @"1004";
+
     [zkRequestTool networkingPOST:urlStr parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [SVProgressHUD dismiss];
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
@@ -135,15 +145,24 @@
     [self.navigaV.delegateSignal subscribeNext:^(id  _Nullable x) {
        
         NSDictionary * dict = x;
-        if ([[NSString stringWithFormat:@"%@",dict[@"search"]] isEqualToString:@"city"]) {
+        if ([[NSString stringWithFormat:@"%@",dict[@"key"]] isEqualToString:@"search"]) {
             //点击搜索
+            self.searchText = dict[@"text"];
+            self.page = 1;
+            [self getDataWithType:self.type];
         }else {
             NSNumber *number = dict[@"text"];
-            
             self.type = [number intValue];
             self.page = 1;
             [self getDataWithType:self.type];
             NSLog(@"%@",number);
+            
+            if (self.type == 0) {
+                self.faBuBt.hidden  = NO;
+            }else {
+                self.faBuBt.hidden = YES;
+            }
+            
 
         }
     }];

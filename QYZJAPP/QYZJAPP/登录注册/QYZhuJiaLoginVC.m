@@ -81,6 +81,8 @@
                 [zkSignleTool shareTool].isLogin = YES;
                 [self dismissViewControllerAnimated:YES completion:nil];
                 
+            } else {
+                [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
             }
             
             

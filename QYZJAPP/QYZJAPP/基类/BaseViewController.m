@@ -173,5 +173,36 @@ typedef void (^Nav2)();
     }];
 }
 
+- (void)seysTemparam {
+    
+      NSMutableDictionary * dict = @{}.mutableCopy;
+      dict[@"key"] = @"manner,houseModel,renovationTime,ptkfyy";
+      [zkRequestTool networkingPOST:[QYZJURLDefineTool app_systemParamURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+          if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
+              
+              for (NSDictionary * dict in responseObject[@"result"]) {
+                  if ([dict[@"key"] isEqualToString:@"ptkfyy"]) {
+                      [zkSignleTool shareTool].questMoney = [NSString stringWithFormat:@"%@",dict[@"value"]];;
+                  }
+                  if ([dict[@"key"] isEqualToString:@"manner"]) {
+                      [zkSignleTool shareTool].mannerArr = [[NSString stringWithFormat:@"%@",dict[@"value"]] componentsSeparatedByString:@","];
+                  }
+                  if ([dict[@"key"] isEqualToString:@"houseModel"]) {
+                      [zkSignleTool shareTool].houseModelArr = [[NSString stringWithFormat:@"%@",dict[@"value"]] componentsSeparatedByString:@","];
+                  }
+                  if ([dict[@"key"] isEqualToString:@"renovationTime"]) {
+                      [zkSignleTool shareTool].renvoationTimeArr = [[NSString stringWithFormat:@"%@",dict[@"value"]] componentsSeparatedByString:@","];
+                  }
+              }
+          }else {
+              [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
+              
+          }
+      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+          
+      }];
+}
+
+
 
 @end

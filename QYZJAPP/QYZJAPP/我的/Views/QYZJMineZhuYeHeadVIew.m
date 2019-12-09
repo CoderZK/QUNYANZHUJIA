@@ -9,7 +9,7 @@
 #import "QYZJMineZhuYeHeadVIew.h"
 
 @interface QYZJMineZhuYeHeadVIew()
-@property(nonatomic,strong)UIButton *backBt,*shareBt,*headBt,*editBt,*leftBt,*centerBt,*rightBt;
+@property(nonatomic,strong)UIButton *backBt,*shareBt,*headBt,*leftBt,*centerBt,*rightBt;
 @property(nonatomic,strong)UILabel *titelLB,*nickNameLB,*scoreLB,*vipLB,*typeLB1,*typeLB2,*typeLB3,*typeLB4;
 @property(nonatomic,strong)UIImageView *imgV;
 @property(nonatomic,strong)UIView *whiteOneV,*whiteTwoView;
@@ -191,6 +191,11 @@
     self.scoreLB.text = [NSString stringWithFormat:@"%0.1f分",dataModel.score];
     self.scoreLB.mj_w = [self.scoreLB.text getWidhtWithFontSize:15];
     
+    if (dataModel.is_follow) {
+        [self.editBt setTitle:@"已关注" forState:UIControlStateNormal];
+    }else {
+        [self.editBt setTitle:@"关注" forState:UIControlStateNormal];
+    }
     CGFloat mx = CGRectGetMaxX(self.scoreLB.frame) + 15;;
     self.vipLB.mj_x= CGRectGetMaxX(self.scoreLB.frame) + 15;
     if (dataModel.is_vip) {
@@ -237,11 +242,11 @@
     self.LB2.mj_x = CGRectGetMaxX(self.LB1.frame) + 5;
     self.LB3.mj_x= CGRectGetMaxX(self.LB2.frame) + 5;
     self.LB3.text= [NSString stringWithFormat:@"%ld",dataModel.fans_num];
-    self.LB3.mj_w = [self.LB1.text getWidhtWithFontSize:14];
+    self.LB3.mj_w = [self.LB3.text getWidhtWithFontSize:14];
     self.LB4.mj_x = CGRectGetMaxX(self.LB3.frame) + 5;
     self.LB5.mj_x= CGRectGetMaxX(self.LB4.frame) + 5;
     self.LB5.text= [NSString stringWithFormat:@"%ld",dataModel.appoint_num];
-    self.LB5.mj_w = [self.LB1.text getWidhtWithFontSize:14];
+    self.LB5.mj_w = [self.LB5.text getWidhtWithFontSize:14];
     self.LB6.mj_x = CGRectGetMaxX(self.LB5.frame) + 5;
 
 }

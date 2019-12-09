@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *city_name;
 @property(nonatomic,strong)NSString *pro_id;
 @property(nonatomic,strong)NSString *city_id;
+@property(nonatomic,strong)NSString *shop_id;
 @property(nonatomic,strong)NSString *area_name;
 @property(nonatomic,strong)NSString *head_img;
 @property(nonatomic,strong)NSString *role_name;
@@ -41,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL is_vip;
 @property(nonatomic,assign)BOOL is_coach;
 @property(nonatomic,assign)BOOL isNews;
-
+@property(nonatomic,assign)BOOL is_follow;
 
 @property(nonatomic,assign)NSInteger follow_num;
 @property(nonatomic,assign)NSInteger fans_num;

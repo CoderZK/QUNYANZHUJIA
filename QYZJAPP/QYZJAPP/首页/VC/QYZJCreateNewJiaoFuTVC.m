@@ -111,7 +111,7 @@
             cell.TF.userInteractionEnabled = YES;
             if (indexPath.row == 5) {
                 cell.rightLB.hidden = NO;
-                cell.rightLB.text = @"m2";
+                cell.rightLB.text = @"m²";
             }
         }
         return cell;

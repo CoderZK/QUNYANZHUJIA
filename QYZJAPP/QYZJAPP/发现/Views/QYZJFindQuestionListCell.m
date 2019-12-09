@@ -80,6 +80,11 @@
     [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.headImg]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
     self.nameLB.mj_w = [self.nameLB.text getWidhtWithFontSize:14];
     self.typeLB.text= model.roleName;
+    if (model.roleName.length == 0) {
+        self.typeLB.hidden = YES;
+    }else {
+        self.typeLB.hidden = NO;
+    }
     self.typeLB.mj_w = [self.typeLB.text getWidhtWithFontSize:14] + 15;
     self.typeLB.mj_x = CGRectGetMaxX(self.nameLB.frame) + 10;
     self.numberLB.text = [NSString stringWithFormat:@"%ld人旁听",model.sitOnNum];
@@ -90,8 +95,12 @@
 
 - (void)listAction:(UIButton *)button {
     
-//    [[PublicFuntionTool shareTool] palyMp3WithNSSting:self.model.mediaUrl isLocality:NO];;
-    
+    [[PublicFuntionTool shareTool] palyMp3WithNSSting:self.model.mediaUrl isLocality:NO];;
+    [button setTitle:@"正在播放..." forState:UIControlStateNormal];
+       [[PublicFuntionTool shareTool] palyMp3WithNSSting:self.model.mediaUrl isLocality:NO];
+       [PublicFuntionTool shareTool].findPlayBlock = ^{
+           [button setTitle:@"点击播放" forState:UIControlStateNormal];
+       };
     
     
 }

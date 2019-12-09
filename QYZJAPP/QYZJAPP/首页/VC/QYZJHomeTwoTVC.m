@@ -118,6 +118,7 @@
     
     self.navigaV = [[FindHeadView alloc] initWithFrame:CGRectMake(0, sstatusHeight, ScreenW, 60)];
     self.navigaV.clipsToBounds = YES;
+    self.navigaV.isPresentVC = YES;
     
     self.navigaV.delegateSignal = [RACSubject subject];
      @weakify(self);

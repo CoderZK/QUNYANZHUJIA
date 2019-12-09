@@ -53,6 +53,19 @@
         self.mediaView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.picView.frame), ScreenW, 0)];
         [self addSubview:self.mediaView];
         
+        self.listBt = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 200, 25)];
+              [self.listBt setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
+              [self.listBt setImage:[UIImage imageNamed:@"sy"] forState:UIControlStateNormal];
+              [self.listBt setTitle:@"32" forState:UIControlStateNormal];
+              self.listBt.titleLabel.font = kFont(14);
+              self.listBt.layer.cornerRadius = 12.5;
+              self.listBt.clipsToBounds = YES;
+              self.listBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+              [self.listBt setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 15)];
+              [self.listBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 25, 0,  0)];
+              [self.mediaView addSubview:self.listBt];
+        
+        
         self.videoView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.mediaView.frame), ScreenW, 0)];
         [self addSubview:self.videoView];
         self.gatyV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 10)];
@@ -91,17 +104,13 @@
         self.mediaView.mj_h = 0;
     }else {
         
-        self.listBt = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 200, 25)];
-        [self.listBt setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
-        [self.listBt setImage:[UIImage imageNamed:@"sy"] forState:UIControlStateNormal];
-        [self.listBt setTitle:@"32" forState:UIControlStateNormal];
-        self.listBt.titleLabel.font = kFont(14);
-        self.listBt.layer.cornerRadius = 12.5;
-        self.listBt.clipsToBounds = YES;
-        self.listBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [self.listBt setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 15)];
-        [self.listBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 25, 0,  0)];
-        [self.mediaView addSubview:self.listBt];
+        if (dataModel.is_open) {
+            [self.listBt setTitle:@"点击播放" forState:UIControlStateNormal];
+            [self.listBt addTarget:self action:@selector(listAction:) forControlEvents:UIControlEventTouchUpInside];
+        }else {
+            [self.listBt setTitle:@"不公开" forState:UIControlStateNormal];
+        }
+      
         self.mediaView.mj_h = 45;
         
         
@@ -129,6 +138,18 @@
     }
     self.gatyV.mj_y = CGRectGetMaxY(self.videoView.frame);
     self.headHeight = CGRectGetMaxY(self.gatyV.frame);
+    
+}
+
+- (void)listAction:(UIButton *)button {
+    
+    [[PublicFuntionTool shareTool] palyMp3WithNSSting:self.dataModel.media_url isLocality:NO];;
+    [button setTitle:@"正在播放..." forState:UIControlStateNormal];
+       [[PublicFuntionTool shareTool] palyMp3WithNSSting:self.dataModel.media_url isLocality:NO];
+       [PublicFuntionTool shareTool].findPlayBlock = ^{
+           [button setTitle:@"点击播放" forState:UIControlStateNormal];
+       };
+    
     
 }
 

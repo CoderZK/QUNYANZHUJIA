@@ -35,6 +35,8 @@
     self.statusBt.clipsToBounds = YES;
     self.statusBt.layer.borderColor = OrangeColor.CGColor;
     self.statusBt.layer.borderWidth = 0;
+    self.statusCons.constant = 100;
+    self.statusBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     //NO 卖家 Yes 卖家
     NSInteger hh = [model.status integerValue];
     NSString * ss = @"";
@@ -42,13 +44,14 @@
         switch (hh) {
             case 0:
             {
-                ss = @"待支付";
+                ss = @"待买家支付";
                 break;
             }
                 case 1:
                 {
-                    ss = @"发货";
+                    ss = @"确认发货";
                     self.statusBt.layer.borderColor = OrangeColor.CGColor;
+                    self.statusBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
                     self.statusBt.layer.borderWidth = 1;
                     break;
                 }
@@ -59,7 +62,7 @@
                 }
                 case 3:
                 {
-                    ss = @"待评价";
+                    ss = @"待买家评价";
                     break;
                 }
             default:
@@ -72,25 +75,34 @@
         switch (hh) {
                   case 0:
                   {
-                      ss = @"待支付";
+                      ss = @"支付";
+                      self.statusBt.layer.borderColor = OrangeColor.CGColor;
+                      self.statusBt.layer.borderWidth = 1;
+                      self.statusBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
                       break;
                   }
                       case 1:
                       {
-                          ss = @"待卖家发货";
-                          
+                          ss = @"提醒发货";
+                           self.statusBt.layer.borderColor = OrangeColor.CGColor;
+                           self.statusBt.layer.borderWidth = 1;
+                           self.statusBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
                           break;
                       }
                       case 2:
                       {
-                          ss = @"收货";
+                          ss = @"确认收货";
+                          self.statusBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
                           self.statusBt.layer.borderColor = OrangeColor.CGColor;
                           self.statusBt.layer.borderWidth = 1;
                           break;
                       }
                       case 3:
                       {
-                          ss = @"待评价";
+                          ss = @"评价";
+                          self.statusBt.layer.borderColor = OrangeColor.CGColor;
+                          self.statusBt.layer.borderWidth = 1;
+                          self.statusBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
                           break;
                       }
                   default:

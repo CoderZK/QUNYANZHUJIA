@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLB;
 @property (weak, nonatomic) IBOutlet UIButton *statusBt;
 @property(nonatomic,strong)QYZJFindModel *model;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *statusCons;
 
 @end
 

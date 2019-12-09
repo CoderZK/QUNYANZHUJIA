@@ -13,7 +13,10 @@
 #import "QYZJMineShopCell.h"
 #import "QYZJMineAnLiCell.h"
 #import "QYZJMineZhuYeHeadVIew.h"
-@interface QYZJMineZhuYeTVC ()
+#import "QYZJAnLiDetailTVC.h"
+#import "QYZJShopDetailTVC.h"
+#import "QYZJAppShopTVC.h"
+@interface QYZJMineZhuYeTVC ()<QYZJMineShopCellDelegate>
 @property(nonatomic,strong)QYZJUserModel * dataModel;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
 @property(nonatomic,strong)NSArray *leftArr;
@@ -58,7 +61,7 @@
             
         }else if (index == 3) {
             //关注
-            
+            [weakSelf followAction];
         }
     };
 
@@ -95,6 +98,42 @@
     
 }
 
+
+- (void)followAction{
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    if (self.dataModel.is_follow) {
+        dict[@"type"] = @"2";
+    }else {
+        dict[@"type"] = @"1";
+    }
+    dict[@"other_user_id"] = self.ID;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_followURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            self.dataModel.is_follow = !self.dataModel.is_follow;
+            self.headV.dataModel = self.dataModel;
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+    
+}
+
+
 - (void)getData {
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
@@ -108,7 +147,12 @@
             self.dataModel = [QYZJUserModel mj_objectWithKeyValues:responseObject[@"result"]];
             self.headV.mj_h = self.headV.headHeight;
             self.headV.dataModel = self.dataModel;
+            if ([self.ID isEqual:[zkSignleTool shareTool].session_uid]) {
+                self.headV.editBt.hidden = YES;
+            }
             self.tableView.tableHeaderView = self.headV;
+            
+            [self.tableView reloadData];
             
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
@@ -141,9 +185,6 @@
                 [self.dataArray removeAllObjects];
             }
             [self.dataArray addObjectsFromArray:arr];
-            if (self.dataArray.count == 0) {
-                [SVProgressHUD showSuccessWithStatus:@"暂无数据"];
-            }
             [self.tableView reloadData];
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
@@ -197,6 +238,7 @@
                cell.dataArray = [self.dataModel.goods_list subarrayWithRange:NSMakeRange(indexPath.row * 2 , 1)];
            }
            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.delegate = self;
         return cell;
     }else {
         QYZJZhuYeYuYinCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJZhuYeYuYinCell" forIndexPath:indexPath];
@@ -206,6 +248,12 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 0) {
+        QYZJAnLiDetailTVC * vc =[[QYZJAnLiDetailTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.ID = self.dataModel.case_list[indexPath.row].ID;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
 }
 
@@ -249,17 +297,55 @@
 - (void)moreAction:(UIButton *)button {
     NSInteger ta = button.superview.tag;
     if (ta == 0) {
+        if (self.dataModel.case_list.count == 0) {
+            return;
+        }
         QYZJMineAnLiTVC * vc =[[QYZJMineAnLiTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
+        vc.user_id = self.ID;
         [self.navigationController pushViewController:vc animated:YES];
     }else {
-        QYZJMineShopTVC * vc =[[QYZJMineShopTVC alloc] init];
         
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        if (self.dataModel.goods_list.count == 0) {
+            return;
+        }
+        
+        if ([self.ID isEqualToString:[zkSignleTool shareTool].session_uid]) {
+            QYZJMineShopTVC * vc =[[QYZJMineShopTVC alloc] init];
+            vc.user_id = self.ID;
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else {
+            QYZJAppShopTVC * vc =[[QYZJAppShopTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.shopId = self.dataModel.shop_id;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        
+        
     }
+}
+
+#pragma mark ----- 点击 ----
+- (void)didClickQYZJMineShopCell:(QYZJMineShopCell*)cell index:(NSInteger)index isEdit:(BOOL)isEdit
+{
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    QYZJFindModel * model = self.dataModel.goods_list[indexPath.row * 2+index];
+    QYZJShopDetailTVC * vc =[[QYZJShopDetailTVC alloc] init];
+    vc.ID = model.ID;
+    if ([self.ID isEqual:[zkSignleTool shareTool].session_uid]) {
+       vc.isMine = YES;
+    }else {
+       vc.isMine = NO;
+    }
+    
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+        
+
     
     
 }
+
 
 @end

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJMineAnLiTVC : BaseTableViewController
 @property(nonatomic,strong)QYZJFindModel *model;
+@property(nonatomic,strong)NSString *user_id;
 @end
 
 NS_ASSUME_NONNULL_END

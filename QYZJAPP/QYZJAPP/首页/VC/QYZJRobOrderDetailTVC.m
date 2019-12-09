@@ -232,18 +232,24 @@
             cell.TF.text = self.dataModel.b_recomend_address.length > 0 ? self.dataModel.b_recomend_address:@"未填写";
         }else if (row == 2) {
             cell.TF.text = self.dataModel.b_recomend_name.length > 0 ? self.dataModel.b_recomend_name:@"未填写";
-        }else if (row == 3) {
-            //            cell.TF.text = self.dataModel.b_recomend_address.length > 0 ? self.dataModel.b_recomend_address:@"未填写";
+        } else if (row == 3) {
+            if (self.dataModel.manner >0 && [zkSignleTool shareTool].mannerArr.count > 0) {
+                cell.TF.text = [zkSignleTool shareTool].mannerArr[self.dataModel.manner];
+            }
         }else if (row == 4) {
-            //            cell.TF.text = self.dataModel.b_recomend_address.length > 0 ? self.dataModel.b_recomend_address:@"未填写";
+           if (self.dataModel.house_model >0 && [zkSignleTool shareTool].houseModelArr.count >= self.dataModel.house_model) {
+                cell.TF.text = [zkSignleTool shareTool].houseModelArr[self.dataModel.house_model];
+            }
         }else if (row == 5) {
-            //            cell.TF.text = self.dataModel.b_recomend_address.length > 0 ? self.dataModel.b_recomend_address:@"未填写";
+            if (self.dataModel.renovation_time >0 && [zkSignleTool shareTool].renvoationTimeArr.count >= self.dataModel.renovation_time) {
+                cell.TF.text = [zkSignleTool shareTool].renvoationTimeArr[self.dataModel.renovation_time];
+            }
         }else if (row == 6) {
-            //            cell.TF.text = self.dataModel.b_recomend_address.length > 0 ? self.dataModel.b_recomend_address:@"未填写";
+            cell.TF.text = self.dataModel.type_name.length > 0 ? self.dataModel.type_name:@"未填写";
         }else if (row == 7) {
             cell.TF.text = self.dataModel.budget > 0 ? [NSString stringWithFormat:@"%0.2f元",self.dataModel.budget]:@"未填写";
         }else if (row == 8) {
-            cell.TF.text = self.dataModel.area.length > 0 ? [NSString stringWithFormat:@"%@m2",self.dataModel.area]:@"未填写";
+            cell.TF.text = self.dataModel.area.length > 0 ? [NSString stringWithFormat:@"%@m²",self.dataModel.area]:@"未填写";
         }else if (row == 9) {
             cell.TF.text = self.dataModel.demand_context.length > 0 ? self.dataModel.demand_context:@"未填写";
         }else if (row == 10) {

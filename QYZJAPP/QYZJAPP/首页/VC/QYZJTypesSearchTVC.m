@@ -48,9 +48,6 @@
     self.headV.clipsToBounds = YES;    
     self.navigaV = [[FindHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 60)];
        self.navigaV.clipsToBounds = YES;
-    
-
-
        self.navigaV.delegateSignal = [RACSubject subject];
        [self.navigaV.delegateSignal subscribeNext:^(id  _Nullable x) {
 

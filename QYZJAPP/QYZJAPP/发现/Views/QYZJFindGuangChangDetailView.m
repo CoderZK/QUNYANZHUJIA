@@ -9,7 +9,7 @@
 #import "QYZJFindGuangChangDetailView.h"
 
 @interface QYZJFindGuangChangDetailView()
-@property(nonatomic,strong)UIButton *headBt,*zanBt;
+@property(nonatomic,strong)UIButton *headBt,*zanBt,*collectBt;
 @property(nonatomic,strong)UILabel *contentLB,*timeLB,*nameLB;
 @property(nonatomic,strong)UIView * ViewOne,*viewTwo,*viewThree,*viewFour,*lineV,*gayV;
 
@@ -101,17 +101,35 @@
     self.gayV.mj_y = CGRectGetMaxY(self.viewFour.frame);
     self.headHeight = CGRectGetMaxY(self.gayV.frame);
     
+    if (model.article.isGood) {
+        [self.zanBt setImage:[UIImage imageNamed:@"17"] forState:UIControlStateNormal];
+    }else {
+        [self.zanBt setImage:[UIImage imageNamed:@"2"] forState:UIControlStateNormal];
+    }
     
+    if (model.article.isCollect) {
+        [self.collectBt setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateNormal];
+    }else {
+        [self.collectBt setImage:[UIImage imageNamed:@"xing2"] forState:UIControlStateNormal];
+    }
 }
 //设置点赞view
 
 - (void)setZanPinViewWithArr:(NSArray<QYZJFindModel *>*)goodarr {
     
     [self.viewFour.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    self.zanBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 45, 15, 30, 30)];
+    self.zanBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 45 - 45, 15, 30, 30)];
     [self.zanBt setImage:[UIImage imageNamed:@"2"] forState:UIControlStateNormal];
     self.zanBt.tag = 11;
     [self.viewFour addSubview:self.zanBt];
+    [self.zanBt addTarget:self action:@selector(zanOrCollAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    self.collectBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW  - 45, 15, 30, 30)];
+    [self.collectBt setImage:[UIImage imageNamed:@"2"] forState:UIControlStateNormal];
+    self.collectBt.tag = 22;
+    [self.viewFour addSubview:self.collectBt];
+    [self.collectBt addTarget:self action:@selector(zanOrCollAction:) forControlEvents:UIControlEventTouchUpInside];
     
     NSArray<QYZJFindModel *> *arr = @[];
     if (goodarr.count > 4) {
@@ -138,6 +156,14 @@
     [self.viewFour addSubview:titleLB];
     
     
+    
+    
+}
+
+- (void)zanOrCollAction:(UIButton *)button {
+    if (self.buttonSubject != nil) {
+        [self.buttonSubject sendNext:@(button.tag)];
+    }
     
     
 }

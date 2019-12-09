@@ -10,6 +10,8 @@
 #import "QYZJMineOrderCell.h"
 #import "QYZJMineOrderHeadView.h"
 #import "QYZJMineOrderInfoTVC.h"
+#import "QYZJZhiFuVC.h"
+#import "QYZJPingJiaTVC.h"
 @interface QYZJMineOrderTVC ()
 @property(nonatomic,assign)NSInteger type; // 0
 @property(nonatomic,assign)NSInteger page;
@@ -20,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
+    
     self.navigationItem.title = @"我的订单";
     self.dataArray = @[].mutableCopy;
     self.type = 0;
@@ -29,7 +31,7 @@
     
     self.tableView.frame = CGRectMake(0, 45, ScreenW, ScreenH  - 45);
     QYZJMineOrderHeadView * headV = [[QYZJMineOrderHeadView alloc] initWithFrame:CGRectMake(0,0, ScreenW, 45)];
-
+    
     [self.view addSubview:headV];
     headV.delegateSignal = [[RACSubject alloc] init];
     [headV.delegateSignal subscribeNext:^(NSNumber*  x) {
@@ -44,11 +46,11 @@
         [self getDataWithType:self.type];
     }];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-         self.page++;
+        self.page++;
         [self getDataWithType:self.type];
     }];
     
-
+    
 }
 
 
@@ -109,8 +111,9 @@
     QYZJMineOrderCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.model = self.dataArray[indexPath.row];
     cell.statusBt.tag = indexPath.row;
-    cell.statusBt.userInteractionEnabled = NO;
-//    [cell.statusBt addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
+    //    cell.statusBt.userInteractionEnabled = NO;
+    cell.tag = indexPath.row;
+    [cell.statusBt addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
     
 }
@@ -120,6 +123,88 @@
     vc.hidesBottomBarWhenPushed = YES;
     vc.dataModel = self.dataArray[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
+    
+    
+}
+
+- (void)clickAction:(UIButton *)button {
+    
+    QYZJFindModel * model = self.dataArray[button.tag];
+    
+    if ([model.status intValue]== 1 || [model.status intValue]== 2) {
+        [self actionWithStatus:[model.status intValue]withModel:model withIndex:button.tag];
+    }else if ([model.status intValue] == 0) {
+        QYZJZhiFuVC* vc =[[QYZJZhiFuVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.osn = model.osn;
+        vc.money = [model.goods_price floatValue];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if ([model.status intValue] ==3) {
+        QYZJPingJiaTVC * vc =[[QYZJPingJiaTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.model = model;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    
+    
+    
+}
+
+
+- (void)actionWithStatus:(NSInteger)status withModel:(QYZJFindModel *)model withIndex:(NSInteger )index{
+    NSString * url = @"";
+    if (status == 1) {
+        url = [QYZJURLDefineTool user_reminderURL];
+        if (model.isSale) {
+            //卖家确认发货
+            url = [QYZJURLDefineTool user_sendGoodsURL];
+        }
+    }else if (status == 2) {
+        if (model.isSale) {
+            return;
+        }
+        //卖家确认收货
+        url = [QYZJURLDefineTool user_submitGoodsURL];
+        
+    }
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"osn"] = model.osn;
+    [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            if (status == 1) {
+                
+                if (model.isSale) {
+                    //卖家确认发货
+                    [SVProgressHUD showSuccessWithStatus:@"发货成功"];
+                    self.dataArray[index].status= @"2";
+              
+                }else {
+                    [SVProgressHUD showSuccessWithStatus:@"提醒发货成功"];
+                }
+            }else if (status == 2) {
+                //买家确认收货
+                [SVProgressHUD showSuccessWithStatus:@"收货成功"];
+                self.dataArray[index].status = @"3";
+                
+            }
+       
+            [self.tableView reloadData];
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
     
     
 }

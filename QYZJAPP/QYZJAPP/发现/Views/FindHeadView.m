@@ -54,8 +54,8 @@
         
         [[self.searchBt rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
             if (self.delegateSignal) {
-                
                 [self.delegateSignal sendNext:@{@"key":@"search",@"text":self.TF.text}];
+                [self.TF resignFirstResponder];
             }
         }];
         
@@ -63,6 +63,7 @@
         self.TF.font = kFont(14);
         self.TF.placeholder = @"搜索";
         [self.rightView addSubview:self.TF];
+        self.TF.returnKeyType = UIReturnKeySend;
         self.TF.delegate = self;
         
         [self.TF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -104,15 +105,33 @@
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    if (self.delegateSignal) {
+    if (self.delegateSignal && self.isPresentVC) {
         
         [self.delegateSignal sendNext:@{@"key":@"search",@"text":self.TF.text}];
+        return NO;
     }
-    return NO;
+    return YES;
+    
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (self.delegateSignal) {
+        [self.delegateSignal sendNext:@{@"key":@"search",@"text":self.TF.text}];
+        [textField resignFirstResponder];
+    }
+    return YES;
+}
+
+- (void)textFieldDidChangeSelection:(UITextField *)textField {
+    if (textField.text.length == 0) {
+        if (self.delegateSignal) {
+            [self.delegateSignal sendNext:@{@"key":@"search",@"text":self.TF.text}];
+        }
+    }
 }
 
 - (void)clickAction:(UIButton *)button {
-    
+    [self.TF resignFirstResponder];
     [UIView animateWithDuration:0.2 animations:^{
         self.orangeV.centerX = button.centerX;
     }];

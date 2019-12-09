@@ -85,17 +85,17 @@
                             <color key="titleColor" red="1" green="0.43137254899999999" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B1u-40-q8l">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B1u-40-q8l">
                         <rect key="frame" x="10" y="10" width="37.5" height="29.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="37.5" id="is9-VO-qJG"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="37.5" id="is9-VO-qJG"/>
                             <constraint firstAttribute="height" constant="29.399999999999999" id="xxF-GT-bsa"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RkF-So-8pn">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RkF-So-8pn">
                         <rect key="frame" x="57.5" y="10" width="569.5" height="29.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
@@ -137,6 +137,7 @@
                 <outlet property="leftLB" destination="B9n-gR-lMx" id="EYL-7e-n4L"/>
                 <outlet property="moneyLB" destination="eDP-qV-OOy" id="xUr-b0-VcD"/>
                 <outlet property="statusBt" destination="nrl-LX-Eju" id="S4J-OH-gH5"/>
+                <outlet property="statusCons" destination="CKc-gC-7q6" id="etQ-8h-fnB"/>
                 <outlet property="timeLB" destination="D6s-FS-8dg" id="KVB-d9-Dlh"/>
                 <outlet property="titleLB" destination="B1u-40-q8l" id="O0E-gP-uY9"/>
                 <outlet property="titleRightLB" destination="RkF-So-8pn" id="vdF-Cf-DB0"/>

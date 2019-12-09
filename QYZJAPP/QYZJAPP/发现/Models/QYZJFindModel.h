@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *pics;
 @property(nonatomic,strong)NSString *picUrl;
 @property(nonatomic,strong)NSString *video;
+@property(nonatomic,strong)NSString *videoUrl;
 @property(nonatomic,strong)NSString *type;
 @property(nonatomic,strong)NSString *content;
 @property(nonatomic,strong)NSString *goodsIds;
@@ -58,6 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *con;
 @property(nonatomic,strong)NSString *constructionStageId;
 @property(nonatomic,strong)NSString *addTime;
+@property(nonatomic,strong)NSString *add_time;
 @property(nonatomic,strong)NSString *q_head_img;
 @property(nonatomic,strong)NSString *q_nick_name;
 @property(nonatomic,strong)NSString *b_recomend_name;
@@ -68,6 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *b_recomend_address;
 @property(nonatomic,strong)NSString *telphone;
 @property(nonatomic,strong)NSString *turnoverTitle;
+@property(nonatomic,strong)NSString *replyContent;
 
 /** 服务方：待发起交付1、待客户确认2、待客户支付3、施工中4、待阶段验收5、待客户支付尾款6、待评价7、交付完成8；
  客户：待服务方发起交付1、待确认2、待支付3、施工中4、待阶段验收5、待支付尾款6、待评价7、交付完成8 */
@@ -100,6 +103,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *answer_list;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *answerList;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *broadcastReply;
+@property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *apponitUsers;
 
 @property(nonatomic,strong)NSMutableArray *videos;
 @property(nonatomic,strong)NSMutableArray *pictures;
@@ -125,6 +129,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL  isSale;
 @property(nonatomic,assign)BOOL  isSelect;
 @property(nonatomic,assign)BOOL  isPlaying;
+@property(nonatomic,assign)BOOL  is_pay;
 
 @property(nonatomic,assign)NSInteger goodsNum;
 @property(nonatomic,assign)NSInteger commentNum;
@@ -138,13 +143,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)NSInteger sign_num;
 @property(nonatomic,assign)NSInteger ok_num;
 @property(nonatomic,assign)NSInteger demand_num;
-
+@property(nonatomic,assign)NSInteger audit_status;// 0 未审核,1审核 2审核失败
 
 @property(nonatomic,assign)CGFloat price;
 @property(nonatomic,assign)CGFloat sitPrice;
 @property(nonatomic,assign)CGFloat appoint_price;
 @property(nonatomic,assign)CGFloat question_price;
 @property(nonatomic,assign)CGFloat allPrice;
+@property(nonatomic,assign)CGFloat sit_price;
 
 
 @property(nonatomic,assign)CGFloat cellHeight;

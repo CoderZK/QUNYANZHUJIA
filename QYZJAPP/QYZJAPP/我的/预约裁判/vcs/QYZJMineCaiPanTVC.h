@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QYZJMineCaiPanTVC : BaseViewController
+@interface QYZJMineCaiPanTVC : BaseTableViewController
 
 @end
 

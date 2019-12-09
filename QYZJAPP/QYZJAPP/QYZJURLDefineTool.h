@@ -126,6 +126,16 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)user_deleteAddressURL;
 /*增加地址*/
 +(NSString *)user_addAddressURL;
+/*关注或者取消关注*/
++(NSString *)user_followURL;
+/*回复帖子*/
++(NSString *)app_articleCommentURL;
+/*头条评论更多*/
++(NSString *)app_headlinenewsDetailsCommentURL;
+/*头条评论*/
++(NSString *)app_headlinenewsCommentURL;
+/*旁听支付*/
++(NSString *)user_sitPayURL;
 
 
 #pragma mark ----- 消息部分 -------
@@ -147,6 +157,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString * )user_systemMessageNewListURL;
 /** 头条详情*/
 + (NSString * )app_headlinenewsDetailsURL;
+/** 帖子评论更多*/
++ (NSString * )app_articleDetailsCommentURL;
 
 
 #pragma mark ----- 我的小店 -------

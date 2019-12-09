@@ -46,15 +46,42 @@
     
     
 }
-
+- (void)setIsQuest:(BOOL)isQuest {
+    _isQuest = isQuest;
+}
 
 - (void)setModel:(QYZJMoneyModel *)model {
     _model = model;
     self.leftTitleLB.text = model.name;
+    if (model.add_time.length >= 10 && model.end_time.length >=10) {
+        self.timeLB.text = [NSString stringWithFormat:@"有效时间 %@~%@",[model.add_time substringToIndex:9 ],[model.end_time substringToIndex:10]];
+    }
+    
+    self.bottomLB.text = [NSString stringWithFormat:@"仅限%@使用",model.telphone];
     if (model.isAble) {
-        
+       if (self.isQuest) {
+                  self.desLB.text = @"免费提问次数";
+                  self.imgV.image = [UIImage imageNamed:@"yhq_2"];
+              }else {
+                  self.desLB.text = @"免费预约次数";
+                  self.imgV.image = [UIImage imageNamed:@"yhq_1"];
+          }
     }else {
         self.imgV.image = [UIImage imageNamed:@"yhq_3"];
+        
+        if (self.isQuest) {
+                self.desLB.text = @"免费提问次数";
+            }else {
+                self.desLB.text = @"免费预约次数";
+              
+        }
+        
+    }
+    
+    if (self.isQuest) {
+        self.numberLB.text = model.free_question_num;
+    }else {
+        self.numberLB.text = [NSString stringWithFormat:@"%@",model.free_appoint_num];
     }
     
     

@@ -32,6 +32,7 @@
 #import "HHYMineFiveCell.h"
 #import "QYZJMineYuHuiQuanTVC.h"
 #import "QYZJXiuGaiFuWuVC.h"
+#import "QYZJMineCaiPanTVC.h"
 @interface QYZJMineVC ()<HHYMineFourCellDelegate,QYZJMIneTwoCellDelegate,HHYMineFiveCellDelegate>
 @property(nonatomic,strong)QYZJMineHeadView *headV;
 @property(nonatomic,strong)NSArray *headTitleArr;
@@ -294,9 +295,12 @@
         }else if (dd == 7) {
             QYZJMineAnLiTVC * vc =[[QYZJMineAnLiTVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
+            vc.user_id = [zkSignleTool shareTool].session_uid;
             [self.navigationController pushViewController:vc animated:YES];
         }else if (dd == 8) {
-            
+            QYZJMineCaiPanTVC * vc =[[QYZJMineCaiPanTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }else if (indexPath.section == 2) {
         if (dd == 0) {
@@ -394,6 +398,7 @@
         vc.hidesBottomBarWhenPushed = YES;
         vc.isMine = YES;
         vc.dataModel = self.dataModel;
+        vc.user_id = [zkSignleTool shareTool].session_uid;;
         [self.navigationController pushViewController:vc animated:YES];
     }
     

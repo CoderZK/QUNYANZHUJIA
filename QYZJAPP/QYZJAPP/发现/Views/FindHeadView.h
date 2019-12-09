@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FindHeadView : UIView
 @property(nonatomic,strong)RACSubject *delegateSignal;
+@property(nonatomic,assign)NSInteger isPresentVC;
 @end
 
 NS_ASSUME_NONNULL_END

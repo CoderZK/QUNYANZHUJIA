@@ -27,7 +27,7 @@
     
     _model = model;
     self.titleLB.text = model.b_recomend_name;
-    self.typeLB1.text = [NSString stringWithFormat:@"%@m2",model.area];
+    self.typeLB1.text = [NSString stringWithFormat:@"%@m²",model.area];
     self.typeLB2.text = model.type_name;
     self.contentLB.text = model.b_recomend_address;
     

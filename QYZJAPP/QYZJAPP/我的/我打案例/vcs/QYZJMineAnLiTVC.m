@@ -38,7 +38,10 @@
         self.page++;
         [self getData];
     }];
-    [self setFootV];
+    
+    if ([self.user_id isEqualToString:[zkSignleTool shareTool].session_uid]) {
+       [self setFootV];
+    }
 }
 
 - (void)setFootV {
@@ -90,6 +93,7 @@
     dict[@"page"] = @(self.page);
     dict[@"pageSize"] = @(10);
     dict[@"token"] = [zkSignleTool shareTool].session_token;
+    dict[@"other_user_id"] = self.user_id;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_caseListURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];

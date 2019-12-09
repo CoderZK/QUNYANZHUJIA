@@ -10,6 +10,7 @@
 #import "QYZJQuestionListDetailTVC.h"
 #import "QYZJQusetionListDetailCell.h"
 #import "QYZJQuestionListDetailView.h"
+#import "QYZJZhiFuVC.h"
 @interface QYZJQuestionListDetailTVC ()
 @property(nonatomic,strong)QYZJQuestionListDetailView *headV;
 @property(nonatomic,strong)QYZJFindModel *dataModel;
@@ -80,11 +81,66 @@
     
     QYZJQusetionListDetailCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.model = self.dataModel.answer_list[indexPath.row];
+    cell.listBt.tag = indexPath.row;
+    [cell.listBt addTarget:self action:@selector(listAction:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
+
+- (void)listAction:(UIButton *)button {
+    QYZJFindModel * model = self.dataModel.answer_list[button.tag];
+    if (model.is_pay) {
+        //未支付
+        [self sitAnswerActionWithModel:model];
+    }else {
+        [[PublicFuntionTool shareTool] palyMp3WithNSSting:model.mediaUrl isLocality:NO];
+        [button setTitle:@"正在播放" forState:UIControlStateNormal];
+        [PublicFuntionTool shareTool].findPlayBlock = ^{
+            [button setTitle:@"点击播放" forState:UIControlStateNormal];
+        };
+        
+    }
+    
+    
+}
+
+- (void)sitAnswerActionWithModel:(QYZJFindModel *)model {
+    
+    
+
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"answer_id"] = model.ID;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_sitAnswerURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            if ([[NSString stringWithFormat:@"%@",responseObject[@"result"][@"is_pay"]] intValue] == 1) {
+                QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
+                vc.money = [[NSString stringWithFormat:@"%@",responseObject[@"result"][@"money"]] floatValue];
+                vc.hidesBottomBarWhenPushed = YES;
+                vc.type = 0;
+                vc.ID = model.ID;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            
+            
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
     
 }
 
