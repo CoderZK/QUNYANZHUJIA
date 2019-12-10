@@ -46,7 +46,7 @@
         leftLB.font = kFont(15);
         leftLB.textColor = CharacterBlackColor;
         leftLB.text = @"验证码";
-        [whiteTwoV addSubview:leftLB];\
+        [whiteTwoV addSubview:leftLB];
         self.whiteTwo = whiteTwoV;
         
         UITextField * TF = [[UITextField alloc] initWithFrame:CGRectMake(100 , 10, ScreenW - 130  - 100 - 20, 30)];
@@ -71,7 +71,7 @@
         [self addSubview:whiteTwoV];
         whiteTwoV.backgroundColor = WhiteColor;
         [whiteTwoV addSubview:buttonTwo];
-
+        
         
     }
     return self;
@@ -106,28 +106,23 @@
 
 - (void)sendCode {
     
-//        if (self.phoneTF.text.length == 0) {
-//            [SVProgressHUD showErrorWithStatus:@"请输入手机号"];
-//            return;
-//        }
-//        if (self.phoneTF.text.length != 11) {
-//            [SVProgressHUD showErrorWithStatus:@"请输入正确手机号"];
-//            return;
-//        }
-//        NSMutableDictionary * dataDict = @{@"phone":self.phoneTF.text,@"type":@"1"}.mutableCopy;
-//        dataDict[@"deviceId"] = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
-//        [zkRequestTool networkingPOST:[HHYURLDefineTool sendValidCodeURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
-//            if ([responseObject[@"code"] intValue]== 0) {
-//                [self timeAction];
-//            }else {
-//                [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
-//            }
-//    
-//        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//    
-//    
-//    
-//        }];
+    
+    NSMutableDictionary * dataDict = @{}.mutableCopy;
+    dataDict[@"phone"] = [zkSignleTool shareTool].telphone;
+    dataDict[@"type"] = @"1";
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_sendmobileURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([responseObject[@"key"] intValue]== 1) {
+            [SVProgressHUD showSuccessWithStatus:@"验证码已发送"];
+            [self timeAction];
+        }else {
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        
+        
+    }];
     
 }
 

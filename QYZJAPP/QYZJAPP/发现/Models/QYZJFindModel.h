@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *userId;
 @property(nonatomic,strong)NSString *shopName;
 @property(nonatomic,strong)NSString *cityId;
+@property(nonatomic,strong)NSString *pro_id;
+@property(nonatomic,strong)NSString *area_id;
+@property(nonatomic,strong)NSString *city_id;
 @property(nonatomic,strong)NSString *pic;
 @property(nonatomic,strong)NSString *pics;
 @property(nonatomic,strong)NSString *picUrl;
@@ -68,7 +71,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *area;
 @property(nonatomic,strong)NSString *commission_type;
 @property(nonatomic,strong)NSString *b_recomend_address;
+@property(nonatomic,strong)NSString *address_pca;
+@property(nonatomic,strong)NSString *role_ids;
+@property(nonatomic,strong)NSString *role_strs;
+
+@property(nonatomic,strong)NSString *demand_context;
 @property(nonatomic,strong)NSString *telphone;
+@property(nonatomic,strong)NSString *community_name;
+@property(nonatomic,strong)NSString *telphonebudget;
 @property(nonatomic,strong)NSString *turnoverTitle;
 @property(nonatomic,strong)NSString *replyContent;
 
@@ -130,6 +140,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL  isSelect;
 @property(nonatomic,assign)BOOL  isPlaying;
 @property(nonatomic,assign)BOOL  is_pay;
+@property(nonatomic,assign)BOOL is_realname;
+@property(nonatomic,assign)BOOL is_notice;
 
 @property(nonatomic,assign)NSInteger goodsNum;
 @property(nonatomic,assign)NSInteger commentNum;
@@ -144,6 +156,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)NSInteger ok_num;
 @property(nonatomic,assign)NSInteger demand_num;
 @property(nonatomic,assign)NSInteger audit_status;// 0 未审核,1审核 2审核失败
+@property(nonatomic,assign)NSInteger type_id;
+@property(nonatomic,assign)NSInteger manner_id;
+@property(nonatomic,assign)NSInteger house_model_id;
+@property(nonatomic,assign)NSInteger renovation_time_id;
 
 @property(nonatomic,assign)CGFloat price;
 @property(nonatomic,assign)CGFloat sitPrice;
@@ -151,6 +167,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)CGFloat question_price;
 @property(nonatomic,assign)CGFloat allPrice;
 @property(nonatomic,assign)CGFloat sit_price;
+@property(nonatomic,assign)CGFloat budget;
 
 
 @property(nonatomic,assign)CGFloat cellHeight;
