@@ -12,7 +12,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *payBt;
 @property (weak, nonatomic) IBOutlet UIImageView *imgV1;
 @property (weak, nonatomic) IBOutlet UIImageView *imgVT2;
+@property (weak, nonatomic) IBOutlet UIImageView *imgV3;
 @property (weak, nonatomic) IBOutlet UIButton *confirmBt;
+@property (weak, nonatomic) IBOutlet UIButton *bt1;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *consTwo;
+@property (weak, nonatomic) IBOutlet UIImageView *payImgVone;
+@property (weak, nonatomic) IBOutlet UILabel *titleOneLB;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *consThree;
 
 @end
 
@@ -21,6 +27,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+//    if (self.is_needWeChat) {
+//        self.consThree.constant = 0;
+//        self.consTwo.constant = 131.2;
+//        self.payImgVone.hidden = self.bt1.hidden = self.imgV1.hidden = self.titleOneLB.hidden = YES;
+//    }
+    
     
     
     
@@ -29,11 +41,17 @@
     if (sender.tag == 100) {
         self.imgV1.image = [UIImage imageNamed:@"xuanze_2"];
         self.imgVT2.image = [UIImage imageNamed:@"xuanze_1"];
+        self.imgV3.image = [UIImage imageNamed:@"xuanze_1"];
     }else if (sender.tag == 101) {
         self.imgV1.image = [UIImage imageNamed:@"xuanze_1"];
         self.imgVT2.image = [UIImage imageNamed:@"xuanze_2"];
-    }else {
+        self.imgV3.image = [UIImage imageNamed:@"xuanze_1"];
+    }else if (sender.tag == 102){
+        self.imgV1.image = [UIImage imageNamed:@"xuanze_1"];
+        self.imgVT2.image = [UIImage imageNamed:@"xuanze_1"];
+        self.imgV3.image = [UIImage imageNamed:@"xuanze_2"];
         
+    }else {
         [LLPassWordAlertView showWithTitle:@"支付密码" desStr:@"请输入支付密码" finish:^(NSString *pwStr) {
             
             [self checkPayPasswordWith:pwStr];
@@ -79,16 +97,20 @@
 }
 
 - (void)payAction {
-    
-    
+
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"pay_type"] = @"2";
     dict[@"pay_money"] = @(self.money);
     dict[@"answer_id"] = self.ID;
+    dict[@"demand_id"] = self.ID;
+    dict[@"media_id"] = self.ID;
+    dict[@"type"] = @0;
     NSString * url = @"";
     if (self.type == 0) {
         url = [QYZJURLDefineTool user_sitPayURL];
+    }else if (self.type == 1) {
+        url = [QYZJURLDefineTool user_payDemandURL];
     }
     [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
       
@@ -108,5 +130,26 @@
     
     
 }
+
+
+//NSMutableDictionary * dict = @{}.mutableCopy;
+//dict[@"demand_id"] = ID;
+//dict[@"pay_money"] = @(money);
+//[zkRequestTool networkingPOST:[QYZJURLDefineTool user_payDemandURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+//
+//    [SVProgressHUD dismiss];
+//    if ([responseObject[@"key"] intValue]== 1) {
+//       
+//       
+//        
+//    }else {
+//        [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+//    }
+//    
+//} failure:^(NSURLSessionDataTask *task, NSError *error) {
+//    
+// 
+//    
+//}];
 
 @end

@@ -39,5 +39,7 @@
 - (void)getUserBaseicInfo;
 //获取系统参数
 - (void)seysTemparam;
+//系统参数获取成功
+- (BOOL)isCanChoose;
 @end
 

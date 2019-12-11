@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    self.navigationItem.title = @"重置支付密码";
 }
 
 
@@ -38,75 +38,108 @@
 }
 
 - (void)sendCode {
-    
-//    if (self.phoneTF.text.length == 0) {
-//        [SVProgressHUD showErrorWithStatus:@"请输入手机号"];
-//        return;
-//    }
-//    if (self.phoneTF.text.length != 11) {
-//        [SVProgressHUD showErrorWithStatus:@"请输入正确手机号"];
-//        return;
-//    }
-//    NSMutableDictionary * dataDict = @{@"phone":self.phoneTF.text,@"type":@"1"}.mutableCopy;
-//    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_sendmobileURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
-//        if ([responseObject[@"key"] intValue]== 1) {
-//            [SVProgressHUD showSuccessWithStatus:@"验证码已发送"];
-//            [self timeAction];
-//        }else {
-//            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
-//        }
-//        
-//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//        
-//        
-//        
-//    }];
+
+    NSMutableDictionary * dataDict = @{@"phone":[zkSignleTool shareTool].telphone,@"type":@"1"}.mutableCopy;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_sendmobileURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([responseObject[@"key"] intValue]== 1) {
+            [SVProgressHUD showSuccessWithStatus:@"验证码已发送"];
+            [self timeAction];
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        
+        
+    }];
     
 }
 
-- (void)registerAction{
-//    if (self.phoneTF.text.length == 0) {
-//        [SVProgressHUD showErrorWithStatus:@"请输入手机号"];
-//        return;
-//    }
-//    if (self.phoneTF.text.length != 11) {
-//        [SVProgressHUD showErrorWithStatus:@"请输入正确手机号"];
-//        return;
-//    }
-//    
-//    if (self.codeTF.text.length == 0) {
-//        [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
-//        return;
-//    }
-//    
-//    if (self.passWordTF.text.length == 0) {
-//        [SVProgressHUD showErrorWithStatus:@"请输入密码"];
-//        return;
-//    }
-//    NSMutableDictionary * dataDict = @{@"phone":self.phoneTF.text}.mutableCopy;
-//    dataDict[@"code"] = self.codeTF.text;
-//    dataDict[@"password"] = [NSString stringToMD5:self.passWordTF.text];
-//    [zkRequestTool networkingPOST:[HHYURLDefineTool validCodeURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
-//        if ([responseObject[@"code"] intValue]== 0) {
-//            if (self.isTherd) {
-//                [self bindOrRegist];
-//            }else {
-//                HHYAddZiLiaoTVC * vc =[[HHYAddZiLiaoTVC alloc] init];
-//                vc.passdWord = self.passWordTF.text;
-//                vc.phoneStr = self.phoneTF.text;
-//                vc.yaoQingStr = self.yaoQingCodeTF.text;
-//                vc.hidesBottomBarWhenPushed = YES;
-//                [self.navigationController pushViewController:vc animated:YES];
-//            }
-//        }else {
-//            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
-//        }
-//
-//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//
-//
-//
-//    }];
+- (void)timeAction {
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerStar) userInfo:nil repeats:YES];
+    self.codeBt.userInteractionEnabled = NO;
+    self.number = 60;
+    
     
 }
+
+- (void)timerStar {
+    _number = _number -1;
+    if (self.number > 0) {
+        [self.codeBt setTitle:[NSString stringWithFormat:@"%lds后重发",_number] forState:UIControlStateNormal];
+    }else {
+        [self.codeBt setTitle:@"重新发送" forState:UIControlStateNormal];
+        [self.timer invalidate];
+        self.timer = nil;
+        self.codeBt.userInteractionEnabled = YES;
+    }
+    
+    
+}
+
+
+
+- (void)registerAction{
+
+    if (self.codeTF.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
+        return;
+    }
+    
+    if (self.oldTF.text.length == 0 || self.oldTF.text.length > 6) {
+        [SVProgressHUD showErrorWithStatus:@"请输入6位支付密码"];
+        return;
+    }
+    
+    if (![self isNumberWithStr:self.oldTF.text]) {
+        [SVProgressHUD showErrorWithStatus:@"请输入6位数字密码"];
+        return;
+    }
+    if (![self.oldTF.text isEqualToString:self.nPhoneTF.text]) {
+        [SVProgressHUD showErrorWithStatus:@"两次密码不一样"];
+        return;
+    }
+   
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"mobile_verify"] = self.codeTF.text;
+    dict[@"pay_pass"] = [self.oldTF.text base64EncodedString];
+    dict[@"pay_pass_new"] = [self.oldTF.text base64EncodedString];
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_setPayPassURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            [SVProgressHUD showSuccessWithStatus:@"设置支付密码成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            });
+
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+   
+        
+    }];
+    
+}
+
+- (BOOL)isNumberWithStr:(NSString *)str {
+    NSArray * arr = @[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9"];
+    for (int i = 0 ; i<str.length; i++) {
+        NSString * ss   = [str substringWithRange:NSMakeRange(i, 1)];
+        if (![arr containsObject:ss]) {
+            return NO;
+        }
+    }
+    return YES;
+    
+}
+
+
 @end

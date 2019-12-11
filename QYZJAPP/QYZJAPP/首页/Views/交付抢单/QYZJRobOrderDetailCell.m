@@ -41,11 +41,14 @@
     
 }
 - (IBAction)playMp3:(UIButton *)button {
-    [button setTitle:@"播放中..." forState:UIControlStateNormal];
+   
     if (self.type == 1) {
+         [button setTitle:@"播放中..." forState:UIControlStateNormal];
         [[PublicFuntionTool shareTool] palyMp3WithNSSting:self.model.demand_voice isLocality:NO];
-    }else {
-        [[PublicFuntionTool shareTool] palyMp3WithNSSting:self.model.mediaUrl isLocality:NO];
+    }else if (self.type == 2){
+        if (self.listBtActionBlock != nil) {
+            self.listBtActionBlock(button);
+        }
     }
     Weak(weakSelf);
     [PublicFuntionTool shareTool].findPlayBlock = ^{

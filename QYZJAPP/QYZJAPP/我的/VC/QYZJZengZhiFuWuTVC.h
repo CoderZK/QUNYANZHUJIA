@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJZengZhiFuWuTVC : BaseTableViewController
 @property(nonatomic,strong)NSString *headImg,*nameStr;
+@property(nonatomic,assign)BOOL is_bond;
 @end
 
 NS_ASSUME_NONNULL_END

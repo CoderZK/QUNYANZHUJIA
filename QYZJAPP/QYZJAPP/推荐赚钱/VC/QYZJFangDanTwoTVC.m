@@ -21,25 +21,31 @@
 
 @implementation QYZJFangDanTwoTVC
 
+- (NSMutableArray<zkPickModel *> *)LeiXingArr {
+    if (_LeiXingArr == nil) {
+        _LeiXingArr = [NSMutableArray array];
+    }
+    return _LeiXingArr;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"放单";
     self.leftArr = @[@"小区名称",@"推荐渠道",@"需求类型",@"风格",@"户型",@"装修时间",@"建筑面积",@"预算",@"描述",@"姓名",@"是否实名推荐",@"是否通知被推荐人"];
-    self.placeholdArr = @[@"请输入小区名称",@"请选择分类(可多选)",@"请选择需求类型",@"请选择风格",@"请选择户型",@"请选择装修时间",@"请输入建筑面积",@"请输入预算",@"请输入描述",@"",@"是否实名推荐",@"是否通知被推荐人"];
+    self.placeholdArr = @[@"请输入小区名称",@"请选择分类(可多选)",@"请选择需求类型",@"请选择风格",@"请选择户型",@"请选择装修时间",@"请输入建筑面积",@"请输入预算",@"请输入描述",@"请输入真实姓名",@"",@""];
     self.quDaoArr = [NSMutableArray mutableCopy];
-    self.LeiXingArr = [NSMutableArray mutableCopy];
     
     [self.tableView registerClass:[TongYongTwoCell class] forCellReuseIdentifier:@"cell"];
     [self.tableView registerClass:[QYZJRecommendTwoCell class] forCellReuseIdentifier:@"QYZJRecommendTwoCell"];
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self getQuDaoArrList];
     [self getLeiXingArrList];
     
-
+    
     [self setFootV];
     [self setTableViewFootView];
     self.moreChooseV = [[QYZJMoreChooseView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH)];
-
+    
 }
 
 - (void)setTableViewFootView {
@@ -52,6 +58,7 @@
             [weakSelf.dataArray addObject:model];
             if (weakSelf.addDemndBlock != nil) {
                 weakSelf.addDemndBlock(weakSelf.dataArray);
+                [weakSelf.navigationController popViewControllerAnimated:YES];
             }
         }
     };
@@ -89,14 +96,14 @@
     if (sstatusHeight > 20) {
         self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34);
     }
-
+    
     KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"完成" andImgaeName:@""];
     Weak(weakSelf);
-     view.footViewClickBlock = ^(UIButton *button) {
-         [weakSelf.tableView endEditing:YES];
-         
-         [weakSelf clickAction:button];
-         
+    view.footViewClickBlock = ^(UIButton *button) {
+        [weakSelf.tableView endEditing:YES];
+        
+        [weakSelf clickAction:button];
+        
     };
     [self.view addSubview:view];
 }
@@ -107,6 +114,7 @@
         
         if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] isEqualToString:@"1"]) {
             self.LeiXingArr = [zkPickModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
+            [self.tableView reloadData];
         }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -157,6 +165,7 @@
         cell.leftLB.text = self.leftArr[indexPath.row];
         cell.TF.delegate = self;
         cell.swith.userInteractionEnabled = NO;
+        cell.TF.hidden = NO;
         cell.TF.placeholder = self.placeholdArr[indexPath.row];
         cell.TF.userInteractionEnabled = NO;
         cell.moreImgV.hidden = NO;
@@ -169,60 +178,66 @@
         }else if (indexPath.row == 11||indexPath.row == 10) {
             cell.swith.hidden = NO;
             cell.leftLB.mj_w = 200;
-            cell.moreImgV.hidden =  cell.TF.hidden = YES;
+            cell.moreImgV.hidden = cell.TF.hidden =  YES;
             
         }
         [self setTitleWithCell:cell WithIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
- 
+    
 }
 
 
 - (void)setTitleWithCell:(TongYongTwoCell *)cell WithIndexPath:(NSIndexPath * )indexPath {
-  
-        NSInteger row = indexPath.row;
-               QYZJFindModel * model = self.dataArray[indexPath.section];
-               if (row == 0) {
-                   cell.TF.text = model.address_pca;
-               }else if (row == 1) {
-                   cell.TF.text = model.role_strs;
-               }else if (row == 2) {
-                   if (model.type_id > 0) {
-                        cell.TF.text = [NSString stringWithFormat:@"%0.2f元",model.budget];
-                   }else {
-                       cell.TF.text = [NSString stringWithFormat:@"%0.2f元",model.budget];
-                   }
-                   
-               } else if (row == 3) {
-                   if (model.manner_id >0 && [zkSignleTool shareTool].mannerArr.count > 0) {
-                       cell.TF.text = [zkSignleTool shareTool].mannerArr[model.manner_id];
-                   }
-               }else if (row == 4) {
-                  if (model.house_model_id>0 && [zkSignleTool shareTool].houseModelArr.count >= model.house_model_id) {
-                       cell.TF.text = [zkSignleTool shareTool].houseModelArr[model.house_model_id];
-                   }
-               }else if (row == 5) {
-                   if (model.renovation_time_id >0 && [zkSignleTool shareTool].renvoationTimeArr.count >= model.renovation_time_id) {
-                       cell.TF.text = [zkSignleTool shareTool].renvoationTimeArr[model.renovation_time_id];
-                   }
-               }else if (row == 6) {
-                   cell.TF.text = [NSString stringWithFormat:@"%@",model.area.length > 0 ? model.area:@""];
-               }else if (row == 7) {
-                   if(model.budget == 0) {
-                       cell.TF.text = @"";
-                   }else {
-                       cell.TF.text = [NSString stringWithFormat:@"%0.2f元",model.budget];
-                   }
-               }else if (row == 8) {
-                   cell.TF.text = model.demand_context;
-               }else if (row == 9) {
-                   cell.TF.text = model.b_recomend_name;
-               }else if (row == 10) {
-                   cell.swith.on = model.is_realname;
-               }else if (row == 11) {
-                   cell.swith.on = model.is_notice;
-               }
+    
+    NSInteger row = indexPath.row;
+    QYZJFindModel * model = self.dataArray[indexPath.section];
+    if (row == 0) {
+        cell.TF.text = model.community_name;
+    }else if (row == 1) {
+        cell.TF.text = model.role_strs;
+    }else if (row == 2) {
+        if (model.type_id > 0 && self.LeiXingArr.count >= model.type_id) {
+            cell.TF.text = self.LeiXingArr[model.type_id -1].name;
+        }else {
+            cell.TF.text = @"";
+        }
+    } else if (row == 3) {
+        if (model.manner_id >0 && [zkSignleTool shareTool].mannerArr.count >= model.manner_id) {
+            cell.TF.text = [zkSignleTool shareTool].mannerArr[model.manner_id-1];
+        }else {
+            cell.TF.text = @"";
+        }
+    }else if (row == 4) {
+        if (model.house_model_id>0 && [zkSignleTool shareTool].houseModelArr.count >= model.house_model_id) {
+            cell.TF.text = [zkSignleTool shareTool].houseModelArr[model.house_model_id-1];
+        }else {
+            cell.TF.text = @"";
+        }
+    }else if (row == 5) {
+        if (model.renovation_time_id >0 && [zkSignleTool shareTool].renvoationTimeArr.count >= model.renovation_time_id) {
+            cell.TF.text = [zkSignleTool shareTool].renvoationTimeArr[model.renovation_time_id-1];
+        }else {
+            cell.TF.text = @"";
+        }
+    }else if (row == 6) {
+        cell.TF.text = [NSString stringWithFormat:@"%@",model.area.length > 0 ? model.area:@""];
+    }else if (row == 7) {
+        if(model.budget == 0) {
+            cell.TF.text = @"";
+        }else {
+            cell.TF.text = [NSString stringWithFormat:@"%0.2f元",model.budget];
+        }
+    }else if (row == 8) {
+        cell.TF.text = model.demand_context;
+    }else if (row == 9) {
+        cell.TF.text = model.b_recomend_name;
+    }else if (row == 10) {
+        cell.swith.on = model.is_realname;
+    }else if (row == 11) {
+        cell.swith.on = model.is_notice;
+    }
     
     
 }
@@ -233,7 +248,7 @@
     self.indexPath = indexPath;
     [self.tableView endEditing:YES];
     if (indexPath.row == 1) {
-
+        
         self.moreChooseV.dataArray = self.quDaoArr;
         Weak(weakSelf);
         self.moreChooseV.chooseViewMoreBlockFinsh = ^{
@@ -252,6 +267,11 @@
         [self.moreChooseV show];
         
     }else if (indexPath.row == 2) {
+        if (self.LeiXingArr.count == 0) {
+            [SVProgressHUD showErrorWithStatus:@"获取类型中,请先填写其它内容"];
+            [self getLeiXingArrList];
+            return;
+        }
         zkPickView * picker = [[zkPickView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         picker.delegate = self;
         picker.arrayType = NormalArray;
@@ -261,33 +281,41 @@
         
         
     }else if (indexPath.row == 3) {
-        zkPickView * picker = [[zkPickView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        picker.delegate = self;
-        picker.arrayType = titleArray;
-        picker.array = @[@"简约",@"中式",@"欧式",@"美式",@"田园",@"地中海",@"其它"].mutableCopy;
-        picker.selectLb.text = @"";
-        [picker show];
-        
+        if ([self isCanChoose]) {
+            zkPickView * picker = [[zkPickView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+            picker.delegate = self;
+            picker.arrayType = titleArray;
+            picker.array = [zkSignleTool shareTool].mannerArr.mutableCopy;
+            picker.selectLb.text = @"";
+            [picker show];
+        }
     }else if (indexPath.row == 4) {
-        zkPickView * picker = [[zkPickView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        picker.delegate = self;
-        picker.arrayType = titleArray;
-        picker.array =[zkSignleTool shareTool].houseModelArr.mutableCopy;
-        picker.selectLb.text = @"";
-        [picker show];
+        if ([self isCanChoose]) {
+            zkPickView * picker = [[zkPickView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+            picker.delegate = self;
+            picker.arrayType = titleArray;
+            picker.array =[zkSignleTool shareTool].houseModelArr.mutableCopy;
+            picker.selectLb.text = @"";
+            [picker show];
+        }
+        
         
     }else if (indexPath.row == 5) {
-        zkPickView * picker = [[zkPickView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        picker.delegate = self;
-        picker.arrayType = titleArray;
-        picker.array =[zkSignleTool shareTool].renvoationTimeArr.mutableCopy;
-        picker.selectLb.text = @"";
-        [picker show];
+        if ([self isCanChoose]) {
+            zkPickView * picker = [[zkPickView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+            picker.delegate = self;
+            picker.arrayType = titleArray;
+            picker.array =[zkSignleTool shareTool].renvoationTimeArr.mutableCopy;
+            picker.selectLb.text = @"";
+            [picker show];
+        }
     }else if (indexPath.row == 10) {
-        self.dataArray[indexPath.row].is_realname = !self.dataArray[indexPath.row].is_realname;
+        self.dataArray[indexPath.section].is_realname = !self.dataArray[indexPath.section].is_realname;
+        [self.tableView reloadData];
         
-    }else if (indexPath.row == 1) {
-        self.dataArray[indexPath.row].is_notice = !self.dataArray[indexPath.row].is_notice;
+    }else if (indexPath.row == 11) {
+        self.dataArray[indexPath.section].is_notice = !self.dataArray[indexPath.section].is_notice;
+        [self.tableView reloadData];
     }
     
     
@@ -310,7 +338,7 @@
             dict[@"area"] = model.area;
             dict[@"demand_context"] = model.demand_context;
             dict[@"role_ids"] = model.role_ids;
-            
+            dict[@"address_pca"] = model.address_pca;
             if (model.is_realname) {
                 dict[@"value1"] = @"ture";
                 dict[@"is_realname"] = @(1);
@@ -321,7 +349,7 @@
             if (model.is_notice) {
                 dict[@"value2"] = @"ture";
                 dict[@"is_notice"] = @(1);
-                }else {
+            }else {
                 dict[@"value2"] = @"false";
                 dict[@"is_notice"] = @(0);
             }
@@ -338,7 +366,7 @@
         NSString * str = [NSString convertToJsonDataWithDict:dataArr];
         
         NSLog(@"list \n\n\n\n ----- %@",str);
-
+        [self addDemandActionWithListStr:str];
         
         
     }else {
@@ -348,6 +376,42 @@
     
     
 }
+
+- (void)addDemandActionWithListStr:(NSString *)listStr {
+    
+    if (self.footV.codeStr.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
+        return;
+    }
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"mobile_code"] = self.footV.codeStr;
+    dict[@"list"] = listStr;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_addDemandURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            [SVProgressHUD showSuccessWithStatus:@"添加单子成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            });
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+    
+}
+
 
 #pragma mark ------- 点击筛选 ------
 - (void)didSelectLeftIndex:(NSInteger)leftIndex centerIndex:(NSInteger)centerIndex rightIndex:(NSInteger )rightIndex{
@@ -365,7 +429,7 @@
         model.renovation_time_id = leftIndex+1;
     }
     
-    
+    [self.tableView reloadData];
     
     
 }

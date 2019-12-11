@@ -48,32 +48,34 @@
     [[nextBt rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
         @strongify(self);
         [self.tableView endEditing:YES];
-//        [self CheckDemandAction];
+        [self CheckDemandAction];
         
-        if (self.dataArray.count == 0) {
-            QYZJFindModel * model = [[QYZJFindModel alloc] init];
-                       model.telphone = self.str1;
-                       model.pro_id = self.proId;
-                       model.city_id = self.cityId;
-                       model.area_id = self.aearId;
-                       model.b_recomend_address = self.str3;
-            [self.dataArray addObject:model];
-        }else {
-            QYZJFindModel * model = [self.dataArray lastObject];
-            model.telphone = self.str1;
-            model.pro_id = self.proId;
-            model.city_id = self.cityId;
-            model.area_id = self.aearId;
-            model.b_recomend_address = self.str3;
-        }
-        QYZJFangDanTwoTVC * vc =[[QYZJFangDanTwoTVC alloc] init];
-                  vc.hidesBottomBarWhenPushed = YES;
-        vc.dataArray = self.dataArray;
-        Weak(weakSelf);
-        vc.addDemndBlock = ^(NSMutableArray<QYZJFindModel *> *arr) {
-            weakSelf.dataArray = arr;
-        };
-        [self.navigationController pushViewController:vc animated:YES];
+//        if (self.dataArray.count == 0) {
+//            QYZJFindModel * model = [[QYZJFindModel alloc] init];
+//                       model.telphone = self.str1;
+//                       model.pro_id = self.proId;
+//                       model.city_id = self.cityId;
+//                       model.area_id = self.aearId;
+//        model.address_pca = self.str2;
+//                       model.b_recomend_address = self.str3;
+//            [self.dataArray addObject:model];
+//        }else {
+//            QYZJFindModel * model = [self.dataArray lastObject];
+//            model.telphone = self.str1;
+//            model.pro_id = self.proId;
+//            model.city_id = self.cityId;
+//            model.area_id = self.aearId;
+//            model.address_pca = self.str2;
+//            model.b_recomend_address = self.str3;
+//        }
+//        QYZJFangDanTwoTVC * vc =[[QYZJFangDanTwoTVC alloc] init];
+//                  vc.hidesBottomBarWhenPushed = YES;
+//        vc.dataArray = self.dataArray;
+//        Weak(weakSelf);
+//        vc.addDemndBlock = ^(NSMutableArray<QYZJFindModel *> *arr) {
+//            weakSelf.dataArray = arr;
+//        };
+//        [self.navigationController pushViewController:vc animated:YES];
         
         
     }];
@@ -108,11 +110,12 @@
             
             if (self.dataArray.count == 0) {
                 QYZJFindModel * model = [[QYZJFindModel alloc] init];
-                           model.telphone = self.str1;
-                           model.pro_id = self.proId;
-                           model.city_id = self.cityId;
-                           model.area_id = self.aearId;
-                           model.b_recomend_address = self.str3;
+                model.telphone = self.str1;
+                model.pro_id = self.proId;
+                model.city_id = self.cityId;
+                model.area_id = self.aearId;
+                model.b_recomend_address = self.str3;
+                model.address_pca = self.str2;
                 [self.dataArray addObject:model];
             }else {
                 QYZJFindModel * model = [self.dataArray lastObject];
@@ -121,10 +124,17 @@
                 model.city_id = self.cityId;
                 model.area_id = self.aearId;
                 model.b_recomend_address = self.str3;
+                model.address_pca = self.str2;
             }
             QYZJFangDanTwoTVC * vc =[[QYZJFangDanTwoTVC alloc] init];
                       vc.hidesBottomBarWhenPushed = YES;
             vc.dataArray = self.dataArray;
+            Weak(weakSelf);
+            vc.addDemndBlock = ^(NSMutableArray<QYZJFindModel *> *arr) {
+                weakSelf.dataArray = arr;
+                weakSelf.str2 = weakSelf.str1 = weakSelf.str3 = @"";
+                [weakSelf.tableView reloadData];
+            };
             [self.navigationController pushViewController:vc animated:YES];
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];

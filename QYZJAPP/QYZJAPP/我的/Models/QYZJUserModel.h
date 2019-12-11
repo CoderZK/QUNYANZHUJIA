@@ -29,7 +29,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *area_name;
 @property(nonatomic,strong)NSString *head_img;
 @property(nonatomic,strong)NSString *role_name;
-@property(nonatomic,strong)NSString *is_bond;
 @property(nonatomic,strong)NSString *label;
 @property(nonatomic,strong)NSString *invitation_code;
 @property(nonatomic,strong)NSString *pic;
@@ -43,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL is_coach;
 @property(nonatomic,assign)BOOL isNews;
 @property(nonatomic,assign)BOOL is_follow;
+@property(nonatomic,assign)BOOL is_bond;
 
 @property(nonatomic,assign)NSInteger follow_num;
 @property(nonatomic,assign)NSInteger fans_num;

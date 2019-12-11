@@ -15,8 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *leftLB;
 @property (weak, nonatomic) IBOutlet UIButton *gouTongBt;
 @property(nonatomic,strong)QYZJWorkModel *model;
-@property(nonatomic,assign)NSInteger type; // 1 推荐赚钱的详情
+@property(nonatomic,assign)NSInteger type; // 1 推荐赚钱的详情 // 2 清单详情
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftCons;
+@property(nonatomic,copy)void(^listBtActionBlock)(UIButton *button);
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *listBtTopCos;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -119,9 +119,13 @@
         [self.tableView.mj_footer endRefreshing];
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
-            if ([[NSString stringWithFormat:@"%@",responseObject[@"result"][@"is_pay"]] intValue] == 1) {
+            
+            QYZJTongYongModel * model = [[QYZJTongYongModel alloc] init];
+            model = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
+            
+            if (model.is_pay) {
                 QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
-                vc.money = [[NSString stringWithFormat:@"%@",responseObject[@"result"][@"money"]] floatValue];
+                vc.money = model.money;
                 vc.hidesBottomBarWhenPushed = YES;
                 vc.type = 0;
                 vc.ID = model.ID;

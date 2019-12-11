@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 @interface QYZJZengZhiFWCell : UITableViewCell
 @property(nonatomic,strong)NSArray<QYZJMoneyModel *> *dataArray;
+@property(nonatomic,assign)BOOL is_bond;
 @end
 
 @interface QYZJZengZhiFuWuNeiView : UIView

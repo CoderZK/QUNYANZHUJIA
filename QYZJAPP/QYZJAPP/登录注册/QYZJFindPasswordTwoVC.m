@@ -17,13 +17,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    self.navigationItem.title = @"忘记密码";
 }
 
 - (IBAction)action:(id)sender {
     
     if (![NSString checkStingContainLetterAndNumberWithString:self.passWordTF.text]) {
         [SVProgressHUD showErrorWithStatus:@"请输入6~15包含数字和字母的密码"];
+    }
+    if (![self.passWordTwoTF.text isEqualToString:self.passWordTF.text]) {
+        [SVProgressHUD showErrorWithStatus:@"两次密码不一样"];
+        return;
     }
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;

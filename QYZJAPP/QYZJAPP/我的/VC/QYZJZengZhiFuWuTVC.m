@@ -228,6 +228,7 @@
         QYZJZengZhiFWCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJZengZhiFWCell" forIndexPath:indexPath];
            if (indexPath.section == 1) {
                cell.dataArray = self.dataArray;
+               cell.is_bond = self.is_bond;
            }else if(indexPath.section == 2) {
                cell.dataArray = self.dataArrayTwo;;
            }
@@ -242,6 +243,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
+
+
 
 
 @end

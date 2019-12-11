@@ -216,7 +216,7 @@
         }
         return 100;
     }else if (indexPath.section == 1) {
-        return 200;
+        return (ScreenW - 30) * 125 / 375;
     }else if (indexPath.section == 2) {
         return 110;
     }
@@ -242,6 +242,8 @@
                 vc.role_id = weakSelf.labelListArr[index].ID;
                 vc.titleStr = weakSelf.labelListArr[index].name;
                 vc.hidesBottomBarWhenPushed = YES;
+                vc.cityID = self.cityID;
+                vc.type = self.type;
                 [weakSelf.navigationController pushViewController:vc animated:YES];
                 
                 

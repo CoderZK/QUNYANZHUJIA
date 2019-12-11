@@ -204,5 +204,17 @@ typedef void (^Nav2)();
 }
 
 
+- (BOOL)isCanChoose {
+    if ([zkSignleTool shareTool].mannerArr.count == 0) {
+        [SVProgressHUD showErrorWithStatus:@"获取中,请先完善其它内容"];
+        [self seysTemparam];
+        return NO;
+    }else {
+        return YES;
+    }
+    
+    
+}
+
 
 @end

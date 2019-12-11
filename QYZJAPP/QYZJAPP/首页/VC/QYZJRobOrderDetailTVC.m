@@ -23,6 +23,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJRobOrderDetailCell" bundle:nil] forCellReuseIdentifier:@"QYZJRobOrderDetailCell"];
     [self.tableView registerClass:[TongYongTwoCell class] forCellReuseIdentifier:@"TongYongTwoCell"];
     [self.tableView registerClass:[QYZJPicShowCell class] forCellReuseIdentifier:@"QYZJPicShowCell"];
+    [self.tableView registerClass:[TongYongFourCell class] forCellReuseIdentifier:@"TongYongFourCell"];
     self.headTitleArr = @[@"",@"",@"合同",@"预算",@"图纸",@"变更相册",@""];
     self.leftTitleArr = @[@"订单号",@"地址",@"小区名称",@"风格",@"户型",@"装修时间",@"需求类型",@"预算",@"建筑面积",@"需求描述",@"联系电话",@"反馈内容",@"客服回复",@"申诉状态",@"申诉内容"];
     
@@ -152,10 +153,17 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section == 0) {
-        return 85;
+        if (indexPath.row ==0) {
+          return 85;
+        }
+        return 35;
+        
     }else if (indexPath.section ==1) {
         return  [self cellHeightWithIndexPath:indexPath];
     } else if (indexPath.section == 6) {
+        if (indexPath.row == 9) {
+            return UITableViewAutomaticDimension;
+        }
         return 50;
     }else if (indexPath.section == 2){
         
@@ -175,12 +183,38 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     if (indexPath.section == 0) {
         QYZJRobOrderDetailCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJRobOrderDetailCell" forIndexPath:indexPath];
         cell.clipsToBounds = YES;
+        cell.titelLB.text = @"小燕子";
+        cell.gouTongBt.tag = indexPath.row;
+        cell.type = 2;
+        if (indexPath.row == 0) {
+            cell.titelLB.hidden = NO;
+            cell.listBtTopCos.constant = 50;
+        }else {
+            cell.titelLB.hidden = YES;
+            cell.listBtTopCos.constant = 0;
+        }
+        Weak(weakSelf);
+        cell.listBtActionBlock = ^(UIButton * _Nonnull button) {
+            [weakSelf sitDemandActionwithButton:button];
+        };
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         return cell;
     }else if (indexPath.section == 1 || indexPath.section == 6) {
+        
+        if (indexPath.section == 6 && indexPath.row == 9) {
+            TongYongFourCell* cell =[tableView dequeueReusableCellWithIdentifier:@"TongYongFourCell" forIndexPath:indexPath];
+            cell.leftLB.text = self.leftTitleArr[indexPath.row];
+            cell.rightLB.text = self.dataModel.demand_context;
+            cell.rightLB.textColor = CharacterColor80;
+            cell.leftLB.textColor = CharacterBlack112;
+            cell.clipsToBounds = YES;
+            return cell;
+        }
+        
         TongYongTwoCell* cell =[tableView dequeueReusableCellWithIdentifier:@"TongYongTwoCell" forIndexPath:indexPath];
         cell.moreImgV.hidden = YES;
         cell.TF.placeholder = @"";
@@ -218,6 +252,49 @@
         return cell;
     }
 }
+//旁听单子可无语音
+- (void)sitDemandActionwithButton:(UIButton *)button {
+    
+    QYZJRobOrderDetailCell * cell = (QYZJRobOrderDetailCell *)button.superview.superview;
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    QYZJWorkModel * model = self.dataModel.media_url[indexPath.row];
+    
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"demand_id"] = self.ID;
+    dict[@"media_id"] = model.ID;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_sitDemandURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+
+        if ([responseObject[@"key"] intValue]== 1) {
+            if ([[NSString stringWithFormat:@"%@",responseObject[@"result"][@"is_pay"]] isEqualToString:@"0"]) {
+                //已经支付
+                [button setTitle:@"播放中..." forState:UIControlStateNormal];
+                [[PublicFuntionTool shareTool] palyMp3WithNSSting:model.mediaUrl isLocality:NO];
+                [PublicFuntionTool shareTool].findPlayBlock = ^{
+                    [button setTitle:@"与客服沟通语音" forState:UIControlStateNormal];
+                };
+            }else {
+                QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
+                vc.hidesBottomBarWhenPushed = YES;
+                vc.type = 0;
+                vc.money = [[NSString stringWithFormat:@"%@",responseObject[@"result"][@"money"]] floatValue];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+}
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -234,15 +311,15 @@
             cell.TF.text = self.dataModel.b_recomend_name.length > 0 ? self.dataModel.b_recomend_name:@"未填写";
         } else if (row == 3) {
             if (self.dataModel.manner >0 && [zkSignleTool shareTool].mannerArr.count > 0) {
-                cell.TF.text = [zkSignleTool shareTool].mannerArr[self.dataModel.manner];
+                cell.TF.text = [zkSignleTool shareTool].mannerArr[self.dataModel.manner-1];
             }
         }else if (row == 4) {
            if (self.dataModel.house_model >0 && [zkSignleTool shareTool].houseModelArr.count >= self.dataModel.house_model) {
-                cell.TF.text = [zkSignleTool shareTool].houseModelArr[self.dataModel.house_model];
+                cell.TF.text = [zkSignleTool shareTool].houseModelArr[self.dataModel.house_model-1];
             }
         }else if (row == 5) {
             if (self.dataModel.renovation_time >0 && [zkSignleTool shareTool].renvoationTimeArr.count >= self.dataModel.renovation_time) {
-                cell.TF.text = [zkSignleTool shareTool].renvoationTimeArr[self.dataModel.renovation_time];
+                cell.TF.text = [zkSignleTool shareTool].renvoationTimeArr[self.dataModel.renovation_time-1];
             }
         }else if (row == 6) {
             cell.TF.text = self.dataModel.type_name.length > 0 ? self.dataModel.type_name:@"未填写";

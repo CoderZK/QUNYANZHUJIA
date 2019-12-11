@@ -17,6 +17,12 @@
 
 @implementation QYZJRecommendVC
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.page = 1;
+    [self getData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setNavigation];
@@ -25,10 +31,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJRecommendOneCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    
-    self.page = 1;
     self.dataArray = @[].mutableCopy;
-    [self getData];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.page = 1;
         [self getData];

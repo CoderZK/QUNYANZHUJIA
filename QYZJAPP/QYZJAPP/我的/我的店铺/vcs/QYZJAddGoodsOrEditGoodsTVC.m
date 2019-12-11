@@ -142,7 +142,7 @@
         dict[@"pic"] = [self.picsArr componentsJoinedByString:@","];
         dict[@"context"] = self.desTV.text;
         dict[@"price"] = self.moneyTF.text;
-        dict[@"type"] = @(self.type);
+        dict[@"type"] = @(self.shopType);
     }
     [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
@@ -152,7 +152,7 @@
             if (isOpen == 2) {
                 [SVProgressHUD showSuccessWithStatus:@"添加商品成功"];
             }else if (isOpen == 1){
-                [SVProgressHUD showSuccessWithStatus:@"商品上架成功"];
+                [SVProgressHUD showSuccessWithStatus:@"商品修改成功"];
             }else {
                [SVProgressHUD showSuccessWithStatus:@"商品下架成功"];
             }

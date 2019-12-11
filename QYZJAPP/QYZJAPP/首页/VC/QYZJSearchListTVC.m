@@ -51,6 +51,9 @@
     dict[@"city_id"] = self.cityID;
     dict[@"search_word"] = self.searchWord;
     dict[@"search_type"] = @(self.type);
+    if (self.type == 2 && self.isCaiPanNei) {
+        dict[@"QYZJSearchListTVC"] = @1;
+    }
     [zkRequestTool networkingPOST:[QYZJURLDefineTool app_searchURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
@@ -94,12 +97,20 @@
       self.searchTF.font = [UIFont systemFontOfSize:14];
       self.searchTF.backgroundColor = UIColor.whiteColor;
       self.searchTF.textColor = CharacterBlack112;
-    self.searchTF.backgroundColor = [UIColor groupTableViewBackgroundColor];
+      self.searchTF.backgroundColor = [UIColor groupTableViewBackgroundColor];
       self.searchTF.leftView = leftview;
       self.searchTF.leftViewMode = UITextFieldViewModeAlways;
       self.searchTF.layer.cornerRadius = 4;
       self.searchTF.layer.masksToBounds = YES;
       self.searchTF.returnKeyType = UIReturnKeySearch;
+    @weakify(self);
+    [[self.searchTF rac_textSignal] subscribeNext:^(NSString * _Nullable x) {
+        @strongify(self);
+        self.searchWord = x;
+        self.page = 1;
+        [self getData];
+        
+    }];
       [self.headView addSubview:self.searchTF];
 
      

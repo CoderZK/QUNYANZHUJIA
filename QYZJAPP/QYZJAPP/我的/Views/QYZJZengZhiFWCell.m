@@ -51,6 +51,10 @@
 }
 
 - (void)click:(UIButton *)button {
+    if (self.is_bond) {
+        [SVProgressHUD showSuccessWithStatus:@"您已经交过保证金"];
+        return;
+    }
     [self selectAction:button.tag];
 }
 
@@ -99,8 +103,6 @@
         [self addSubview:self.bt];
 
 //        [self.bt addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-    
         
         self.tuiJianLB = [[UILabel alloc] initWithFrame:CGRectMake(frame.size.width - 35, 0, 35, 15)];
         self.tuiJianLB.font = kFont(12);

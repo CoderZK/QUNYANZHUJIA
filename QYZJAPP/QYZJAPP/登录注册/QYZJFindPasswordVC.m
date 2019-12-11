@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    self.navigationItem.title = @"找回密码923165";
 }
 - (IBAction)confirm:(UIButton *)button {
     if (button.tag == 100) {

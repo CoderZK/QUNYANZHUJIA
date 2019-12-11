@@ -19,6 +19,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *token;
 @property(nonatomic,strong)NSString *imgPath;
 @property(nonatomic,strong)NSString *videoPath;
+@property(nonatomic,strong)NSString *osn;
+
+@property(nonatomic,assign)BOOL is_need_wechat_pay;
+@property(nonatomic,assign)BOOL is_vip;
+@property(nonatomic,assign)BOOL is_pay;
+
+@property(nonatomic,assign)CGFloat wechat_money;
+@property(nonatomic,assign)CGFloat money;
+
+
+
+
+@property(nonatomic,assign)NSInteger status; // 1   已抢, 2 待支付
 @end
 
 NS_ASSUME_NONNULL_END

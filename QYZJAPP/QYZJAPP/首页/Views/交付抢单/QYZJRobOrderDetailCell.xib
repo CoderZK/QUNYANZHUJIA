@@ -53,7 +53,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="jZ8-BT-YoW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="1Re-RB-9rX"/>
-                    <constraint firstItem="FVC-F4-h70" firstAttribute="top" secondItem="OsF-Ct-geY" secondAttribute="bottom" constant="15" id="Cg4-sY-fjB"/>
+                    <constraint firstItem="FVC-F4-h70" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="50" id="g35-wM-2dV"/>
                     <constraint firstItem="FVC-F4-h70" firstAttribute="leading" secondItem="OsF-Ct-geY" secondAttribute="leading" id="pcL-2R-WC1"/>
                     <constraint firstItem="OsF-Ct-geY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="pxs-Zg-OAN"/>
                     <constraint firstAttribute="trailing" secondItem="OsF-Ct-geY" secondAttribute="trailing" constant="15" id="tEa-BS-h9B"/>
@@ -66,6 +66,7 @@
                 <outlet property="gouTongBt" destination="FVC-F4-h70" id="gtG-ZZ-bFQ"/>
                 <outlet property="leftCons" destination="pxs-Zg-OAN" id="gpT-u6-6n0"/>
                 <outlet property="leftLB" destination="jZ8-BT-YoW" id="CtW-B2-M87"/>
+                <outlet property="listBtTopCos" destination="g35-wM-2dV" id="3I3-hc-HJ5"/>
                 <outlet property="titelLB" destination="OsF-Ct-geY" id="PxF-6Q-naR"/>
             </connections>
             <point key="canvasLocation" x="257" y="102"/>

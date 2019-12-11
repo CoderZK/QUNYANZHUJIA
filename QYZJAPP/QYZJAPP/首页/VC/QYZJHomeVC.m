@@ -48,7 +48,7 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
     //    self.navigationController.navigationBar.hidden = YES;;
-    [self.tableView reloadData];
+    [self getUserBaseicInfoHome];
     
 
     
@@ -125,7 +125,7 @@
     }];
     
     [self seysTemparam];
-    [self getUserBaseicInfoHome];
+
     
 }
 

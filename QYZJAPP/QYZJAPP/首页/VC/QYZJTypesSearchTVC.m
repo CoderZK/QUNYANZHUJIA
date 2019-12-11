@@ -12,6 +12,7 @@
 #import "QYZJSearchLabelView.h"
 #import "QYZJHomeFourCell.h"
 #import "QYZJHomeFiveCell.h"
+#import "QYZJSearchListTVC.h"
 @interface QYZJTypesSearchTVC ()
 @property(nonatomic,strong)FindHeadView *navigaV;
 @property(nonatomic,strong)NSMutableDictionary *dataDict;
@@ -47,13 +48,19 @@
     self.headV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 120)];
     self.headV.clipsToBounds = YES;    
     self.navigaV = [[FindHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 60)];
-       self.navigaV.clipsToBounds = YES;
-       self.navigaV.delegateSignal = [RACSubject subject];
-       [self.navigaV.delegateSignal subscribeNext:^(id  _Nullable x) {
+    self.navigaV.clipsToBounds = YES;
+    self.navigaV.isPresentVC = YES;
+    self.navigaV.delegateSignal = [RACSubject subject];
+    [self.navigaV.delegateSignal subscribeNext:^(id  _Nullable x) {
 
            NSDictionary * dict = x;
            if ([[NSString stringWithFormat:@"%@",dict[@"search"]] isEqualToString:@"city"]) {
                //点击搜索
+               QYZJSearchListTVC * vc =[[QYZJSearchListTVC alloc] init];
+               vc.hidesBottomBarWhenPushed = YES;
+               vc.cityID = self.cityID;
+               vc.type = self.type;
+               [self.navigationController pushViewController:vc animated:YES];
            }
        }];
 

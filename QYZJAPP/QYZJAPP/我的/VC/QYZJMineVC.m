@@ -323,6 +323,7 @@
                     vc.hidesBottomBarWhenPushed = YES;
                     vc.nameStr = self.dataModel.nick_name;
                     vc.headImg = self.dataModel.head_img;
+                    vc.is_bond = self.dataModel.is_bond;
                     [self.navigationController pushViewController:vc animated:YES];
                 }
             }else {

@@ -147,7 +147,7 @@
         return cell;
     }else {
         QYZJQianDanOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJQianDanOneCell" forIndexPath:indexPath];
-        
+        cell.gouTongBt.userInteractionEnabled = NO;
         QYZJFindModel * model = self.dataArray[indexPath.row];
         cell.model = model;
         cell.qianDanBt.hidden = YES;
@@ -159,6 +159,8 @@
             cell.statusLB.hidden = NO;
             cell.qianDanBt.hidden = YES;
         }
+        cell.qianDanBt.tag = indexPath.row;
+        [cell.qianDanBt addTarget:self action:@selector(qianDanAction:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
     
@@ -183,6 +185,66 @@
     
     
 }
+
+//抢单操作
+- (void)qianDanAction:(UIButton *)button {
+    QYZJFindModel * model = self.dataArray[button.tag];
+    
+    if ([model.status intValue]== 0 || [model.status intValue]== 1) {
+        
+        UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"抢单提示" message:@"确定抢单吗?" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction * actionOne = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            [SVProgressHUD show];
+              NSMutableDictionary * dict = @{}.mutableCopy;
+              dict[@"id"] = model.ID;
+              [zkRequestTool networkingPOST:[QYZJURLDefineTool user_grabDemandURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+              
+                  [SVProgressHUD dismiss];
+                  if ([responseObject[@"key"] intValue]== 1) {
+                     
+                      QYZJTongYongModel  * modelNei = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
+                      if (modelNei.is_vip) {
+                          [SVProgressHUD showSuccessWithStatus:@"抢单成功,请在一个小时内进行反馈,否则超时视为反馈有效并扣费"];
+                      }else {
+                          if (modelNei.status == 2) {
+                              QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
+                              vc.hidesBottomBarWhenPushed = YES;
+                              vc.money = modelNei.money;
+                              vc.ID = model.ID;
+                              vc.type = 1;
+                              vc.is_needWeChat = YES; //modelNei.is_need_wechat_pay;
+                              [self.navigationController pushViewController:vc animated:YES];
+                          }
+                         
+                      }
+                  }else {
+                      [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+                  }
+                  
+              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                  
+               
+                  
+              }];
+              
+            
+        }];
+        
+        UIAlertAction * actionTwo = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alertVC addAction:actionTwo];
+        [alertVC addAction:actionOne];
+        [self presentViewController:alertVC animated:YES completion:nil];
+        
+    }
+    
+    
+}
+
+
 
 
 @end
