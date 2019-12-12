@@ -14,6 +14,7 @@
 @property(nonatomic,strong)QYZJWorkModel *dataModel;
 @property(nonatomic,strong)NSArray *headTitleArr;
 @property(nonatomic,strong)NSArray *leftTitleArr;
+@property(nonatomic,strong)NSString *reason;
 @end
 
 @implementation QYZJJingXingZhongRobOrderTVC
@@ -35,6 +36,7 @@
     }];
 }
 
+// 0 抢单 1 反馈 2 签单 3 申诉 4 填写资料
 - (void)setFootVWithStatus:(NSInteger)status {
     self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - 60);
     if (sstatusHeight > 20) {
@@ -46,14 +48,33 @@
         [view2 removeFromSuperview];
     }
     
-    if (status == 0) {
-        KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"抢单" andImgaeName:@""];
-        view.tag == 666;
+    if (status == 0 || status == 3 || status ==4) {
+        NSString * str = @"";
+        if (status == 0) {
+            str = @"抢单";
+        }else if (status == 3) {
+            str = @"申诉";
+        }else if (status == 4) {
+            str = @"填写资料";
+        }
+        KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:str andImgaeName:@""];
+        view.tag = 666;
         Weak(weakSelf);
         view.footViewClickBlock = ^(UIButton *button) {
-            [weakSelf robDemandAction];
+            
         };
         [self.view addSubview:view];
+    }else if (status==1 || status == 2) {
+        NSString * leftStr = @"反馈无效";
+        NSString * rightStr = @"反馈有效";
+        
+        KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvTwoWithLeftTitle:leftStr letfTietelColor:OrangeColor rightTitle:rightStr rightColor:WhiteColor];
+        view.tag = 666;
+        Weak(weakSelf);
+        view.footViewClickBlock = ^(UIButton *button) {
+           
+        };
+        
     }
     
     
@@ -73,11 +94,7 @@
               [SVProgressHUD dismiss];
               if ([responseObject[@"key"] intValue]== 1) {
                  
-                  [SVProgressHUD showSuccessWithStatus:@"抢单成功"];
-                  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                      [self.navigationController popViewControllerAnimated:YES];
-                  });
-                  
+                  [self setFootVWithStatus:1];
               }else {
                   [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
               }
@@ -101,6 +118,36 @@
     
     
   
+}
+
+//操作单子
+- (void)operateDemandActonWithIsOK:(NSInteger)isOk withStatus:(NSInteger)type{
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"demand_id"] = self.ID;
+    dict[@"type"] = @(type);
+    dict[@"is_ok"] = @(isOk);
+    dict[@"reason"] = self.reason;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_operateDemandURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+     
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+    
 }
 
 - (void)getData {

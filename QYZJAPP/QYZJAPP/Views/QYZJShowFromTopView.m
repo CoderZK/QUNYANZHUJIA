@@ -11,7 +11,8 @@
 @interface QYZJShowFromTopView()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UIView *whiteV;
 @property(nonatomic,strong)UITableView *tableView;
-
+@property(nonatomic,strong)NSMutableArray *dataSearchArr;
+@property(nonatomic,assign)BOOL isSearch;
 
 @end
 
@@ -24,6 +25,7 @@
     self =[super initWithFrame:frame];
     if (self) {
         
+        self.dataSearchArr = @[].mutableCopy;
         
         self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
                
@@ -44,6 +46,24 @@
         self.TF = [[UITextField alloc] initWithFrame:CGRectMake(100, 10, ScreenW - 110, 30)];
         self.TF.font = kFont(14);
         self.TF.placeholder = @"请输入施工阶段";
+        @weakify(self);
+        [[self.TF rac_textSignal] subscribeNext:^(NSString * _Nullable x) {
+            @strongify(self);
+            if (x.length == 0) {
+                self.isSearch = NO;
+                [self.tableView reloadData];
+            }else {
+                self.isSearch = YES;
+                for (NSString * str  in self.dataArray) {
+                    if ([str containsString:x]) {
+                        [self.dataSearchArr addObject:str];
+                    }
+                }
+                [self.tableView reloadData];
+                
+            }
+            
+        }];
         [self.whiteV addSubview:self.TF];
         
         self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, ScreenW, 200)];
@@ -70,6 +90,9 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.isSearch) {
+        return self.dataSearchArr.count;
+    }
     return self.dataArray.count;
 }
 
@@ -80,7 +103,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.textLabel.text = self.dataArray[indexPath.row];
+    if (self.isSearch) {
+      cell.textLabel.text = self.dataSearchArr[indexPath.row];
+    }else {
+      cell.textLabel.text = self.dataArray[indexPath.row];
+    }
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
     
@@ -92,7 +120,13 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (self.subject != nil) {
-        [self.subject sendNext:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+        if (self.isSearch) {
+            NSString * str = self.dataSearchArr[indexPath.row];
+            [self.subject sendNext:[NSString stringWithFormat:@"%ld",[self.dataArray indexOfObject:str]]];
+        }else {
+           [self.subject sendNext:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+        }
+        
         [self diss];
     }
     

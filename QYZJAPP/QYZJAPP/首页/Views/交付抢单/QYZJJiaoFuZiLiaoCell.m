@@ -97,7 +97,7 @@
     if (button.tag == self.dataArray.count + 100) {
         //添加图片
 
-        if (self.delegate != nil && [self.delegate respondsToSelector:@selector(didSelectLeftIndex:centerIndex:rightIndex:)]) {
+        if (self.delegate != nil && [self.delegate respondsToSelector:@selector(didClickQYZJJiaoFuZiLiaoCell:withIndex:withIsdelect:)]) {
             [self.delegate didClickQYZJJiaoFuZiLiaoCell:self withIndex:button.tag withIsdelect:NO];
         }
      

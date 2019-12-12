@@ -48,43 +48,43 @@
 
     BOOL isOrangeCoclor = YES;
     
-    if ([model.status intValue] == 0) {
-        self.statusLB.text = @"反馈有效";
-    }else if ([model.status intValue] == 1) {
-        self.statusLB.text = @"抢单中";
+    if ([model.user_status intValue] == 0) {
+        self.statusLB.text = @"失效";
+    }else if ([model.user_status intValue] == 1) {
+        self.statusLB.text = @"未支付";
         
-    }else if ([model.status intValue] == 2) {
-        self.statusLB.text = @"抢单结束";
-        isOrangeCoclor = NO;
-    }else if ([model.status intValue] == 3) {
+    }else if ([model.user_status intValue] == 2) {
+        self.statusLB.text = @"待反馈";
+        isOrangeCoclor = YES;
+    }else if ([model.user_status intValue] == 3) {
         self.statusLB.text = @"反馈有效";
         isOrangeCoclor = NO;
         
-    }else if ([model.status intValue] ==4) {
+    }else if ([model.user_status intValue] ==4) {
         self.statusLB.text = @"反馈无效";
         isOrangeCoclor = NO;
         
-    }else if ([model.status intValue] == 5) {
+    }else if ([model.user_status intValue] == 5) {
         self.statusLB.text = @"已签单";
         isOrangeCoclor = YES;
         
-    }else if ([model.status intValue] == 6) {
+    }else if ([model.user_status intValue] == 6) {
         self.statusLB.text = @"未签单";
         isOrangeCoclor = YES;
         
-    }else if ([model.status intValue] == 7) {
-        self.statusLB.text = @"交付中";
+    }else if ([model.user_status intValue] == 7) {
+        self.statusLB.text = @"佣金支付";
         isOrangeCoclor = YES;
         
-    }else if ([model.status intValue] == 8) {
-        self.statusLB.text = @"创建施工清单";
+    }else if ([model.user_status intValue] == 8) {
+        self.statusLB.text = @"交付中";
         isOrangeCoclor = YES;
-    }else if ([model.status intValue] == 9) {
+    }else if ([model.user_status intValue] == 9) {
         self.statusLB.text = @"施工中";
         isOrangeCoclor = YES;
         
-    }else if ([model.status intValue] == 10) {
-        self.statusLB.text = @"通过验收";
+    }else if ([model.user_status intValue] == 10) {
+        self.statusLB.text = @"交付中";
         isOrangeCoclor = YES;
     }else {
         self.statusLB.text = @"已完成";

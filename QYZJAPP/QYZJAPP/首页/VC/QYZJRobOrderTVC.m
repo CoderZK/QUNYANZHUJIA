@@ -169,19 +169,22 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     QYZJFindModel * model = self.dataArray[indexPath.row];
-    if (self.type == 0 && [model.status intValue]== 0) {
-        QYZJJingXingZhongRobOrderTVC * vc =[[QYZJJingXingZhongRobOrderTVC alloc] init];
-         vc.hidesBottomBarWhenPushed = YES;
-         vc.ID = self.dataArray[indexPath.row].ID;
-         [self.navigationController pushViewController:vc animated:YES];
-    }else {
-        QYZJRobOrderDetailTVC * vc =[[QYZJRobOrderDetailTVC alloc] init];
-         vc.hidesBottomBarWhenPushed = YES;
-         vc.ID = self.dataArray[indexPath.row].ID;
-         [self.navigationController pushViewController:vc animated:YES];
-    }
+//    if (self.type == 0 && [model.status intValue]== 0) {
+//        QYZJJingXingZhongRobOrderTVC * vc =[[QYZJJingXingZhongRobOrderTVC alloc] init];
+//         vc.hidesBottomBarWhenPushed = YES;
+//         vc.ID = self.dataArray[indexPath.row].ID;
+//         [self.navigationController pushViewController:vc animated:YES];
+//    }else {
+//        QYZJRobOrderDetailTVC * vc =[[QYZJRobOrderDetailTVC alloc] init];
+//         vc.hidesBottomBarWhenPushed = YES;
+//         vc.ID = self.dataArray[indexPath.row].ID;
+//         [self.navigationController pushViewController:vc animated:YES];
+//    }
     
- 
+        QYZJRobOrderDetailTVC * vc =[[QYZJRobOrderDetailTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.ID = self.dataArray[indexPath.row].ID;
+        [self.navigationController pushViewController:vc animated:YES];
     
     
 }

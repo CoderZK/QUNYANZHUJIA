@@ -558,6 +558,13 @@
     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_findPassword.do"];
 }
 
+/**创建施工清单*/
++(NSString *)user_createStageURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_createStage.do"];
+}
+
+
+
 
 //图片地址
 +(NSString *)getImgURLWithStr:(NSString * )str{

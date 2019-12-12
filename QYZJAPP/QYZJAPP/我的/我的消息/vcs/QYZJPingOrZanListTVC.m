@@ -194,7 +194,7 @@
 
     if (ID.length == 0) {
         NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyy-mm-dd HH:mm:ss"];
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         NSString * time = [formatter stringFromDate:[NSDate date]];
         dict[@"time"] = time;
     }else {

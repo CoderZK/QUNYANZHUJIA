@@ -1,8 +1,8 @@
 //
-//  QYZJCreateShiGongQingDanTVC.h
+//  QYZJAddZiLiaoTVC.h
 //  QYZJAPP
 //
-//  Created by zk on 2019/11/25.
+//  Created by zk on 2019/12/12.
 //  Copyright © 2019 kunzhang. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QYZJCreateShiGongQingDanTVC : BaseTableViewController
+@interface QYZJAddZiLiaoTVC : BaseTableViewController
 @property(nonatomic,strong)NSString *ID;
 @end
 

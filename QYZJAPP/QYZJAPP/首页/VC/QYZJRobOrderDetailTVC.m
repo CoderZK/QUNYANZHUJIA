@@ -9,13 +9,22 @@
 #import "QYZJRobOrderDetailTVC.h"
 #import "QYZJRobOrderDetailCell.h"
 #import "QYZJPicShowCell.h"
+#import "QYZJAddZiLiaoTVC.h"
+#import "QYZJCreateShiGongQingDanTVC.h"
 @interface QYZJRobOrderDetailTVC ()
 @property(nonatomic,strong)QYZJWorkModel *dataModel;
 @property(nonatomic,strong)NSArray *headTitleArr;
 @property(nonatomic,strong)NSArray *leftTitleArr;
+@property(nonatomic,strong)NSString *reason;
+@property(nonatomic,assign)NSInteger status;
 @end
 
 @implementation QYZJRobOrderDetailTVC
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getData];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,27 +36,12 @@
     self.headTitleArr = @[@"",@"",@"合同",@"预算",@"图纸",@"变更相册",@""];
     self.leftTitleArr = @[@"订单号",@"地址",@"小区名称",@"风格",@"户型",@"装修时间",@"需求类型",@"预算",@"建筑面积",@"需求描述",@"联系电话",@"反馈内容",@"客服回复",@"申诉状态",@"申诉内容"];
     
-    [self setFootV];
-    
-    [self getData];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self getData];
     }];
 }
 
-- (void)setFootV {
-    self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - 60);
-    if (sstatusHeight > 20) {
-        self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34);
-    }
-    
-    KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"查看交付" andImgaeName:@""];
-    Weak(weakSelf);
-    view.footViewClickBlock = ^(UIButton *button) {
-        NSLog(@"\n\n%@",@"完成");
-    };
-    [self.view addSubview:view];
-}
+
 
 - (void)getData {
     [SVProgressHUD show];
@@ -60,6 +54,28 @@
         if ([responseObject[@"key"] intValue]== 1) {
             
             self.dataModel = [QYZJWorkModel mj_objectWithKeyValues:responseObject[@"result"]];
+          
+                if ([self.dataModel.status intValue]== 0 && self.dataModel.user_status.length == 0) {
+                    [self setFootVWithStatus:0];
+                }else if ([self.dataModel.user_status intValue]== 2) {
+                    [self setFootVWithStatus:1];
+                }else if ([self.dataModel.user_status intValue]== 3) {
+                    [self setFootVWithStatus:2];
+                }else if ([self.dataModel.user_status intValue]== 4) {
+                    [self setFootVWithStatus:3];
+                }else if ([self.dataModel.user_status intValue]== 5) {
+                    [self setFootVWithStatus:4];
+                }else if ([self.dataModel.user_status intValue]== 7) {
+                    [self setFootVWithStatus:7];
+                }else if ([self.dataModel.user_status intValue]== 8) {
+                    [self setFootVWithStatus:8];
+                }else if ([self.dataModel.user_status intValue]== 10) {
+                    [self setFootVWithStatus:8];
+                }else if ([self.dataModel.user_status intValue]== 11) {
+                    [self setFootVWithStatus:10];
+                }
+         
+            
             [self.tableView reloadData];
             
         }else {
@@ -74,9 +90,215 @@
     }];
 }
 
+// 0 抢单 1 反馈 2 签单 3 申诉 4 填写资料 7 佣金支付 8 创建施工清单 9 施工中 10 评价
+- (void)setFootVWithStatus:(NSInteger)status {
+    self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - 60 - sstatusHeight - 44);
+    if (sstatusHeight > 20) {
+        self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34 - sstatusHeight - 44);
+    }
+    
+    KKKKFootView * view2 = (KKKKFootView *)[self.view viewWithTag:666];
+    if (view2 != nil) {
+        [view2 removeFromSuperview];
+    }
+    
+    if (status==1 || status == 2) {
+        NSString * leftStr = @"反馈无效";
+        NSString * rightStr = @"反馈有效";
+        if (status == 2) {
+            leftStr = @"签单失败";
+            rightStr = @"签到成功";
+        }
+        KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvTwoWithLeftTitle:leftStr letfTietelColor:OrangeColor rightTitle:rightStr rightColor:WhiteColor];
+        view.tag = 666;
+        Weak(weakSelf);
+        view.footViewClickBlock = ^(UIButton *button) {
+           
+            if (status == 1 && button.tag == 0) {
+                self.status = 1;
+                [self showTFWithStatus:1];
+            }else {
+               [weakSelf operateDemandActonWithIsOK:button.tag withStatus:status];
+            }
+        };
+        [self.view addSubview:view];
+        
+    }else {
+        
+       NSString * str = @"";
+        if (status == 0) {
+            str = @"抢单";
+        }else if (status == 3) {
+            str = @"申诉";
+        }else if (status == 4) {
+            str = @"填写资料";
+        }else if (status == 7){
+           str = @"支付佣金";
+        }else if (status == 8){
+           str = @"交付";
+        }else if (status == 9){
+           str = @"施工中";
+        }else if (status == 10){
+           str = @"评价";
+        }
+        KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:str andImgaeName:@""];
+        view.tag = 666;
+        Weak(weakSelf);
+        view.footViewClickBlock = ^(UIButton *button) {
+            [weakSelf clickActionWithStatus:status];
+        };
+        [self.view addSubview:view];
+        
+    }
+    
+    
+}
+
+//点击操作
+// 0 抢单 1 反馈 2 签单 3 申诉 4 填写资料 7 佣金支付 8 创建施工清单 9 施工中 10 评价
+- (void)clickActionWithStatus:(NSInteger)status {
+    
+        if (status == 0) {
+           [self robDemandAction];
+       }else if (status == 3) {
+           self.status = 3;
+           [self showTFWithStatus:3];
+       }else if (status == 4) {
+           QYZJAddZiLiaoTVC * vc =[[QYZJAddZiLiaoTVC alloc] init];
+           vc.hidesBottomBarWhenPushed = YES;
+           vc.ID = self.ID;
+           [self.navigationController pushViewController:vc animated:YES];
+       }else if (status == 7) {
+           
+       }else if (status == 8) {
+           QYZJCreateShiGongQingDanTVC * vc =[[QYZJCreateShiGongQingDanTVC alloc] init];
+           vc.hidesBottomBarWhenPushed = YES;
+           vc.ID = self.ID;
+           [self.navigationController pushViewController:vc animated:YES];
+       }else if (status == 10) {
+           
+       }
+    
+}
 
 
 
+//抢单
+- (void)robDemandAction {
+    
+     UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"抢单提示" message:@"确定抢单吗?" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction * actionOne = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+        [SVProgressHUD show];
+          NSMutableDictionary * dict = @{}.mutableCopy;
+          dict[@"id"] = self.ID;
+          [zkRequestTool networkingPOST:[QYZJURLDefineTool user_grabDemandURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+          
+              [SVProgressHUD dismiss];
+              if ([responseObject[@"key"] intValue]== 1) {
+                 
+                  [self setFootVWithStatus:1];
+              }else {
+                  [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+              }
+              
+          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+              
+           
+              
+          }];
+          
+        
+    }];
+    
+    UIAlertAction * actionTwo = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alertVC addAction:actionTwo];
+    [alertVC addAction:actionOne];
+    [self presentViewController:alertVC animated:YES completion:nil];
+    
+    
+  
+}
+
+//操作单子
+- (void)operateDemandActonWithIsOK:(NSInteger)isOk withStatus:(NSInteger)type{
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"demand_id"] = self.ID;
+    dict[@"type"] = @(type);
+    dict[@"is_ok"] = @(isOk);
+    dict[@"reason"] = self.reason;
+    dict[@"appeal_reason"] = self.reason;
+    NSString * url = [QYZJURLDefineTool user_operateDemandURL];
+    if (type == 3) {
+        url = [QYZJURLDefineTool user_addAppealURL];
+    }
+    [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+     
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            if (type == 1) {
+                if (isOk == 0) {
+                    [SVProgressHUD showSuccessWithStatus:@"反馈无效成功"];
+                }else {
+                    [SVProgressHUD showSuccessWithStatus:@"反馈有效成功"];
+                }
+            }else {
+                if (isOk == 0) {
+                    [SVProgressHUD showSuccessWithStatus:@"签单失败操作成功"];
+                }else {
+                    [SVProgressHUD showSuccessWithStatus:@"签单操作成功"];
+                }
+            }
+            [self getData];
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+    
+}
+
+// 输入申诉
+- (void)showTFWithStatus:(NSInteger)status {
+    
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"请输入申诉原因" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        UITextField*userNameTF = alertController.textFields.firstObject;
+        
+        self.reason = userNameTF.text;
+        [self operateDemandActonWithIsOK:NO withStatus:self.status];
+        
+
+        
+    }]];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField*_Nonnull textField) {
+        
+        textField.placeholder=@"请输入详细地址";
+        
+        
+    }];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0 || section == 1 || section == 6) {
@@ -124,6 +346,7 @@
         view = [[QYZJTongYongHeadFootView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 40)];
     }
     view.leftLB.text = self.headTitleArr[section];
+    view.lineV.hidden = YES;
     view.backgroundColor = WhiteColor;
     view.contentView.backgroundColor = WhiteColor;
     view.clipsToBounds = YES;
@@ -334,7 +557,7 @@
         }else if (row == 11) {
             cell.TF.text = self.dataModel.reason.length > 0 ? self.dataModel.reason:@"未填写";
         }else if (row == 12) {
-            cell.TF.text = self.dataModel.feedback_reply.length > 0 ? self.dataModel.feedback_reply:@"未填写";
+            cell.TF.text = self.dataModel.feedback_reply.length > 0 ? self.dataModel.feedback_reply:@"未回复";
         }else if (row == 13) {
             if (self.dataModel.appeal_status == 1) {
                 cell.TF.text = @"申诉成功";

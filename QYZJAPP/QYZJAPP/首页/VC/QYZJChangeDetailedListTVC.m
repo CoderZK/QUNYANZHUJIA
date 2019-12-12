@@ -31,6 +31,10 @@
     self.placeHolderArr = @[@"请输入施工阶段",@"请输入金额",@"请输入工期",@"请选择时间段"];
     self.tableView.backgroundColor =[UIColor groupTableViewBackgroundColor];
     
+//    QYZJFindModel * model = [[QYZJFindModel alloc] init];
+//    self.dataArray = @[].mutableCopy;
+//    [self.dataArray addObject:model];
+    
 }
 
 - (void)addFootV {

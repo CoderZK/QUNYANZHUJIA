@@ -313,6 +313,9 @@
 		587611BE2379486500A9DBA5 /* QYZJFindGuangChangDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 587611BD2379486500A9DBA5 /* QYZJFindGuangChangDetailView.m */; };
 		587611C22379684700A9DBA5 /* QYZJPingLunNeiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 587611C02379684700A9DBA5 /* QYZJPingLunNeiCell.m */; };
 		587611C32379684700A9DBA5 /* QYZJPingLunNeiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587611C12379684700A9DBA5 /* QYZJPingLunNeiCell.xib */; };
+		58ADFFED23A1E9F200347801 /* AddpicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ADFFEC23A1E9F200347801 /* AddpicView.m */; };
+		58ADFFF023A1EA7000347801 /* QYZJAddZiLiaoTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ADFFEF23A1EA7000347801 /* QYZJAddZiLiaoTVC.m */; };
+		58ADFFF323A228E300347801 /* SelectTimeV.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ADFFF223A228E300347801 /* SelectTimeV.m */; };
 		58EEC3FF23A0E57000D00012 /* TongYongFourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58EEC3FE23A0E57000D00012 /* TongYongFourCell.m */; };
 		AE1A7CF29DF9D6E7166E507C /* libPods-QYZJAPP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E49E1E01514DB2F4C7786C /* libPods-QYZJAPP.a */; };
 /* End PBXBuildFile section */
@@ -868,6 +871,12 @@
 		587611BF2379684700A9DBA5 /* QYZJPingLunNeiCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJPingLunNeiCell.h; sourceTree = "<group>"; };
 		587611C02379684700A9DBA5 /* QYZJPingLunNeiCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJPingLunNeiCell.m; sourceTree = "<group>"; };
 		587611C12379684700A9DBA5 /* QYZJPingLunNeiCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJPingLunNeiCell.xib; sourceTree = "<group>"; };
+		58ADFFEB23A1E9F200347801 /* AddpicView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddpicView.h; sourceTree = "<group>"; };
+		58ADFFEC23A1E9F200347801 /* AddpicView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddpicView.m; sourceTree = "<group>"; };
+		58ADFFEE23A1EA7000347801 /* QYZJAddZiLiaoTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJAddZiLiaoTVC.h; sourceTree = "<group>"; };
+		58ADFFEF23A1EA7000347801 /* QYZJAddZiLiaoTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJAddZiLiaoTVC.m; sourceTree = "<group>"; };
+		58ADFFF123A228E200347801 /* SelectTimeV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTimeV.h; sourceTree = "<group>"; };
+		58ADFFF223A228E300347801 /* SelectTimeV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectTimeV.m; sourceTree = "<group>"; };
 		58EEC3FD23A0E57000D00012 /* TongYongFourCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TongYongFourCell.h; sourceTree = "<group>"; };
 		58EEC3FE23A0E57000D00012 /* TongYongFourCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TongYongFourCell.m; sourceTree = "<group>"; };
 		93517C6A5478579AE5177242 /* Pods-QYZJAPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QYZJAPP.release.xcconfig"; path = "Pods/Target Support Files/Pods-QYZJAPP/Pods-QYZJAPP.release.xcconfig"; sourceTree = "<group>"; };
@@ -1079,6 +1088,8 @@
 				583A4D79236C077100180E27 /* Base64 */,
 				335010ED20EE05C100F8486B /* NSString+Size.h */,
 				335010EA20EE05C000F8486B /* NSString+Size.m */,
+				58ADFFF123A228E200347801 /* SelectTimeV.h */,
+				58ADFFF223A228E300347801 /* SelectTimeV.m */,
 				335010EC20EE05C100F8486B /* UIButton+Badge.h */,
 				335010EB20EE05C000F8486B /* UIButton+Badge.m */,
 				582F74B62378F0F300F6FCB6 /* cacheClear.h */,
@@ -1318,6 +1329,8 @@
 				5833D9F3238B7073007DE9EC /* QYZJCreateNewJiaoFuTVC.m */,
 				5833D9F8238B8869007DE9EC /* QYZJJiaoFuZiLiaoTVC.h */,
 				5833D9F9238B8869007DE9EC /* QYZJJiaoFuZiLiaoTVC.m */,
+				58ADFFEE23A1EA7000347801 /* QYZJAddZiLiaoTVC.h */,
+				58ADFFEF23A1EA7000347801 /* QYZJAddZiLiaoTVC.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1469,6 +1482,8 @@
 				5833D9EC238B63E1007DE9EC /* QYZJJiaoFuListCell.xib */,
 				5833D9F5238B8574007DE9EC /* QYZJJiaoFuZiLiaoCell.h */,
 				5833D9F6238B8574007DE9EC /* QYZJJiaoFuZiLiaoCell.m */,
+				58ADFFEB23A1E9F200347801 /* AddpicView.h */,
+				58ADFFEC23A1E9F200347801 /* AddpicView.m */,
 			);
 			path = "交付抢单";
 			sourceTree = "<group>";
@@ -2473,6 +2488,7 @@
 				5843319A236FD3BC0046C0BD /* QYZJHomeTwoCell.m in Sources */,
 				5830539E23756376002A1AA5 /* QYZJMIneTwoCell.m in Sources */,
 				583B34E52398D6EB00148350 /* QYZJMineLabelsTVC.m in Sources */,
+				58ADFFED23A1E9F200347801 /* AddpicView.m in Sources */,
 				583B34DA2398D6EB00148350 /* QYZJMineCollectTVC.m in Sources */,
 				582F74D62378F29000F6FCB6 /* MXPhotoPickerController.m in Sources */,
 				584345BE23713F230087A2D9 /* QYZJCityChooseTVC.m in Sources */,
@@ -2511,6 +2527,7 @@
 				583A4D7C236C079D00180E27 /* QYZJBase64.m in Sources */,
 				5828E2BC23853B1C008BF9D7 /* QYZJJingXingZhongRobOrderTVC.m in Sources */,
 				584345C123713F410087A2D9 /* QYZJCityModel.m in Sources */,
+				58ADFFF023A1EA7000347801 /* QYZJAddZiLiaoTVC.m in Sources */,
 				584345842371039E0087A2D9 /* TongYongCell.m in Sources */,
 				5833DA03238BAA57007DE9EC /* QYZJShowFromTopView.m in Sources */,
 				5846916C2372CD8B0056BA4A /* QYZJMinePayDetailVC.m in Sources */,
@@ -2616,6 +2633,7 @@
 				337F3EA920EA014600C5526A /* BaseCollectionViewController.m in Sources */,
 				584331C7237031800046C0BD /* FindHeadView.m in Sources */,
 				583B34FB2398D6EB00148350 /* QYZJMineAnLiTVC.m in Sources */,
+				58ADFFF323A228E300347801 /* SelectTimeV.m in Sources */,
 				583B34E32398D6EB00148350 /* QYZJMineQuestCell.m in Sources */,
 				583A4D64236BE51B00180E27 /* QYZJMineVC.m in Sources */,
 				583B35022398D6EB00148350 /* QYZJMineYaoQingTVC.m in Sources */,

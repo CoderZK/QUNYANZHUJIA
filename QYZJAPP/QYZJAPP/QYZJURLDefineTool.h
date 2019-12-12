@@ -307,7 +307,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)app_articleDelURL;
 /**获取用户的角色*/
 +(NSString *)user_basicInfoURL;
-
+/**创建施工清单*/
++(NSString *)user_createStageURL;
 
 
 

@@ -74,7 +74,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *address_pca;
 @property(nonatomic,strong)NSString *role_ids;
 @property(nonatomic,strong)NSString *role_strs;
-
+@property(nonatomic,strong)NSString *stage_name;
+@property(nonatomic,strong)NSString *time_start;
+@property(nonatomic,strong)NSString *time_end;
 @property(nonatomic,strong)NSString *demand_context;
 @property(nonatomic,strong)NSString *telphone;
 @property(nonatomic,strong)NSString *community_name;
@@ -161,6 +163,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)NSInteger house_model_id;
 @property(nonatomic,assign)NSInteger renovation_time_id;
 
+
+@property(nonatomic,assign)CGFloat all_days;
+@property(nonatomic,assign)CGFloat days;
 @property(nonatomic,assign)CGFloat price;
 @property(nonatomic,assign)CGFloat sitPrice;
 @property(nonatomic,assign)CGFloat appoint_price;
@@ -168,6 +173,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)CGFloat allPrice;
 @property(nonatomic,assign)CGFloat sit_price;
 @property(nonatomic,assign)CGFloat budget;
+@property(nonatomic,assign)CGFloat percent;
 
 
 @property(nonatomic,assign)CGFloat cellHeight;
