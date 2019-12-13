@@ -9,12 +9,15 @@
 #import "QYZJCreateNewJiaoFuTVC.h"
 #import "QYZJRecommendTwoCell.h"
 #import "QYZJJiaoFuZiLiaoTVC.h"
+#import "QYZJAddZiLiaoTVC.h"
 @interface QYZJCreateNewJiaoFuTVC ()<zkPickViewDelelgate,UITextFieldDelegate,UITextViewDelegate,zkPickViewDelelgate>
 @property(nonatomic,strong)QYZJMoreChooseView *moreChooseV;
 @property(nonatomic,strong)NSMutableArray<zkPickModel *> *cityArray;
 @property(nonatomic,strong)NSMutableArray<zkPickModel *> *quDaoArr;
 @property(nonatomic,strong)NSMutableArray<zkPickModel *> *LeiXingArr;
 @property(nonatomic,strong)NSArray *leftArr,*placeholdArr,*chooseArr;
+@property(nonatomic,strong)QYZJFindModel *dataModel;
+@property(nonatomic,strong)NSIndexPath *indexPath;
 @end
 
 @implementation QYZJCreateNewJiaoFuTVC
@@ -23,6 +26,8 @@
     [super viewDidLoad];
     self.navigationItem.title = @"创建交付";
     
+    self.dataModel = [[QYZJFindModel alloc] init];
+    self.dataModel.proStr = self.dataModel.cityStr = self.dataModel.areaStr = @"";
     self.leftArr = @[@"客户姓名",@"客户地址",@"详细地址",@"联系方式",@"需求分类",@"建筑面积"];
     self.placeholdArr = @[@"请输入客户名字",@"请输入客户地址",@"详细地址",@"请输入联系方式",@"请选择需求分类",@"请输入建筑面积"];
     self.quDaoArr = [NSMutableArray mutableCopy];
@@ -34,6 +39,10 @@
     [self.tableView registerClass:[QYZJRecommendTwoCell class] forCellReuseIdentifier:@"QYZJRecommendTwoCell"];
     
     [self setFootV];
+    
+    [self getCityData];
+    [self getLeiXingArrList];
+    
 }
 
 
@@ -47,13 +56,34 @@
     Weak(weakSelf);
      view.footViewClickBlock = ^(UIButton *button) {
               NSLog(@"\n\n%@",@"下一步");
-         QYZJJiaoFuZiLiaoTVC * vc =[[QYZJJiaoFuZiLiaoTVC alloc] init];
+         
+         if (weakSelf.dataModel.nick_name.length == 0 || weakSelf.dataModel.pro_id.length == 0 || weakSelf.dataModel.address_pca.length == 0 || weakSelf.dataModel.telphone.length == 0 || weakSelf.dataModel.type_id == 0 || weakSelf.dataModel.area.length == 0) {
+             [SVProgressHUD showErrorWithStatus:@"信息填写不全"];
+             return ;
+         }
+         
+         QYZJAddZiLiaoTVC * vc =[[QYZJAddZiLiaoTVC alloc] init];
          vc.hidesBottomBarWhenPushed = YES;
-         [self.navigationController pushViewController:vc animated:YES];
+         vc.type = 1;
+         vc.dataModel = self.dataModel;
+         [weakSelf.navigationController pushViewController:vc animated:YES];
          
          
     };
     [self.view addSubview:view];
+}
+
+
+- (void)getLeiXingArrList {
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_demandTypeListURL] parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] isEqualToString:@"1"]) {
+            self.LeiXingArr = [zkPickModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+    }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -65,9 +95,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 2) {
-        return 80;
-    }
+ 
     return 50;
 }
 
@@ -89,20 +117,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == 2) {
-        QYZJRecommendTwoCell * cell = [tableView dequeueReusableCellWithIdentifier:@"QYZJRecommendTwoCell" forIndexPath:indexPath];
-        cell.clipsToBounds = YES;
-        return cell;
-    }else {
         TongYongTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         cell.leftLB.text = self.leftArr[indexPath.row];
         cell.swith.hidden = YES;
         cell.TF.delegate = self;
         cell.TF.placeholder = self.placeholdArr[indexPath.row];
         cell.TF.userInteractionEnabled = NO;
+        cell.TF.delegate = self;
         cell.moreImgV.hidden = NO;
         cell.TF.mj_w = ScreenW - 150;
-        if (indexPath.row == 1||indexPath.row == 4) {
+        if (indexPath.row == 1||indexPath.row == 4 ) {
             cell.moreImgV.hidden = NO;
             cell.leftLB.mj_w = 200;
         } else   {
@@ -114,15 +138,38 @@
                 cell.rightLB.text = @"m²";
             }
         }
+        
+        if (indexPath.row == 0) {
+            cell.TF.text = self.dataModel.nick_name.length > 0 ? self.dataModel.nick_name:@"";
+        }else if (indexPath.row == 1){
+            cell.TF.text = [NSString stringWithFormat:@"%@%@%@",self.dataModel.proStr,self.dataModel.cityStr,self.dataModel.areaStr];
+        }else if (indexPath.row == 2){
+            cell.TF.text = self.dataModel.address_pca;
+        }else if (indexPath.row == 3){
+            cell.TF.text = self.dataModel.telphone;
+        }else if (indexPath.row == 4){
+            if (self.dataModel.type_id > 0) {
+               cell.TF.text = self.LeiXingArr[self.dataModel.type_id-1].name;
+            }else {
+                cell.TF.text = @"";
+            }
+        }else if (indexPath.row == 5){
+            cell.TF.text = self.dataModel.area;
+        }
         return cell;
-    }
-    
+
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if (indexPath.row == 0) {
-        
+    [self.tableView endEditing:YES];
+    self.indexPath = indexPath;
+    if (indexPath.row == 1) {
+        if (self.cityArray.count == 0) {
+            [SVProgressHUD showErrorWithStatus:@"数据获取中..,先去填写其它资料"];
+            [self getCityData];
+            return;
+            
+        }
         zkPickView *picker = [[zkPickView alloc]initWithFrame:[UIScreen mainScreen].bounds];
         picker.delegate = self ;
         picker.arrayType = AreaArray;
@@ -130,43 +177,19 @@
         picker.selectLb.text = @"请选择地址";
         [picker show];
         
-    }else if (indexPath.row == 1) {
-        
-        //        zkPickView *picker = [[zkPickView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-        //        picker.delegate = self ;
-        //        picker.arrayType = AreaArray;
-        //        picker.array = self.quDaoArr;
-        //        picker.selectLb.text = @"";
-        //        [picker show];
-        NSMutableArray<QYZJTongYongModel *> *arr = @[].mutableCopy;
-        for (int i = 0 ; i < 10; i++) {
-            QYZJTongYongModel * model = [[QYZJTongYongModel alloc] init];
-            model.name = [NSString stringWithFormat:@"测试%d",i];
-            [arr addObject:model];
+    }else if (indexPath.row == 4) {
+        if (self.LeiXingArr.count == 0) {
+           [SVProgressHUD showErrorWithStatus:@"数据获取中..,先去填写其它资料"];
+           [self getLeiXingArrList];
+           return;
         }
-        self.moreChooseV.dataArray = arr;
-        [self.moreChooseV show];
-        
-    }else if (indexPath.row == 2) {
         zkPickView *picker = [[zkPickView alloc]initWithFrame:[UIScreen mainScreen].bounds];
         picker.delegate = self ;
-        picker.arrayType = NormalArray
-        ;
+        picker.arrayType = NormalArray;
         picker.array = self.LeiXingArr;
         picker.selectLb.text = @"";
         [picker show];
         
-        
-    }else if (indexPath.row == 3) {
-        
-        zkPickView *picker = [[zkPickView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-        picker.delegate = self ;
-        picker.arrayType = titleArray;
-        picker.array = @[@"简约",@"中式",@"欧式",@"美式",@"田园",@"地中海",@"其它"].mutableCopy;
-        picker.selectLb.text = @"";
-        [picker show];
-        
-    }else if (indexPath.row == 4) {
         
     }
     
@@ -174,26 +197,50 @@
     
 }
 
-#pragma mark ---- 点击完成 ----
-- (void)clickAction:(UIButton *)button {
-    
-}
+
 
 #pragma mark ------- 点击筛选城市或者其它 ------
 - (void)didSelectLeftIndex:(NSInteger)leftIndex centerIndex:(NSInteger)centerIndex rightIndex:(NSInteger )rightIndex{
     
-    NSLog(@"%d---%d----%d",leftIndex,centerIndex,rightIndex);
+    if (self.indexPath.row == 1) {
+     
+        self.dataModel.pro_id= self.cityArray[leftIndex].pid;
+        self.dataModel.proStr = self.cityArray[leftIndex].pname;
+        self.dataModel.city_id = self.cityArray[leftIndex].cityList[centerIndex].cid;
+        self.dataModel.cityStr = self.cityArray[leftIndex].cityList[centerIndex].cname;
+            if (rightIndex == 0) {
+                self.dataModel.area_id = @"0";
+                self.dataModel.areaStr = @"";
+            }else {
+
+                self.dataModel.area_id = self.cityArray[leftIndex].cityList[centerIndex].areaList[rightIndex-1].ID;
+                self.dataModel.areaStr = self.cityArray[leftIndex].cityList[centerIndex].areaList[rightIndex-1].name;
+            }
+    }else {
+      self.dataModel.type_id = leftIndex+1;
+    }
     
+    
+    [self.tableView reloadData];
     
 }
 
-#pragma mark ----- 输入描述结束 -----
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    
-}
 #pragma mark --- 填写内容结束时 ----
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     
+    TongYongTwoCell * cell = (TongYongTwoCell *)textField.superview;
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    if (indexPath.row == 0) {
+        self.dataModel.nick_name = textField.text;
+    }else if (indexPath.row == 2) {
+        self.dataModel.address_pca = textField.text;
+    }else if (indexPath.row == 3) {
+        self.dataModel.telphone = textField.text;
+    }else if (indexPath.row == 5) {
+        self.dataModel.area = textField.text;
+    }
+    
+    [self.tableView reloadData];
 }
 
 

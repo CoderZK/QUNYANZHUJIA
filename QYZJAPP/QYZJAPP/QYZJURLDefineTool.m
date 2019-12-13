@@ -562,8 +562,18 @@
 +(NSString *)user_createStageURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_createStage.do"];
 }
-
-
+/**创建变更清单*/
++(NSString *)user_createChangeStageURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_createChangeStage.do"];
+}
+/**变更清单状态*/
++(NSString *)user_changeTurnoverCheckURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_changeTurnoverCheck.do"];
+}
+/**获取清单支付状态*/
++(NSString *)user_changeTurnoverChecksURL{
+   return [NSString stringWithFormat:@"%@%@",URLOne,@"user_changeTurnoverChecks.do"];
+}
 
 
 //图片地址

@@ -339,8 +339,6 @@
         [self.tableView.mj_footer endRefreshing];
         if ([responseObject[@"key"] intValue]== 1) {
             
-            
-            
             NSArray * arr = [zkPickModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"cityList"]];
             self.cityListArr = arr;
             self.userCityList = [zkPickModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"userCityList"]];

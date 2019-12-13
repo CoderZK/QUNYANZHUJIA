@@ -40,7 +40,7 @@
                         <rect key="frame" x="495" y="52.5" width="70" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="9Jv-Mc-5Ab"/>
-                            <constraint firstAttribute="width" constant="70" id="jlw-7r-dxr"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="jlw-7r-dxr"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.15686274509803921" green="0.66666666666666663" blue="0.37647058823529411" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

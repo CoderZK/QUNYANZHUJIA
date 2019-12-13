@@ -11,6 +11,7 @@
 #import "QYZJPicShowCell.h"
 #import "QYZJAddZiLiaoTVC.h"
 #import "QYZJCreateShiGongQingDanTVC.h"
+#import "QYZJMinePayDetailVC.h"
 @interface QYZJRobOrderDetailTVC ()
 @property(nonatomic,strong)QYZJWorkModel *dataModel;
 @property(nonatomic,strong)NSArray *headTitleArr;
@@ -70,7 +71,7 @@
                 }else if ([self.dataModel.user_status intValue]== 8) {
                     [self setFootVWithStatus:8];
                 }else if ([self.dataModel.user_status intValue]== 10) {
-                    [self setFootVWithStatus:8];
+                    [self setFootVWithStatus:9];
                 }else if ([self.dataModel.user_status intValue]== 11) {
                     [self setFootVWithStatus:10];
                 }
@@ -90,7 +91,7 @@
     }];
 }
 
-// 0 抢单 1 反馈 2 签单 3 申诉 4 填写资料 7 佣金支付 8 创建施工清单 9 施工中 10 评价
+// 0 抢单 1 反馈 2 签单 3 申诉 4 填写资料 7 佣金支付 8 创建施工清单 9 查看交付 10 评价
 - (void)setFootVWithStatus:(NSInteger)status {
     self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - 60 - sstatusHeight - 44);
     if (sstatusHeight > 20) {
@@ -137,7 +138,7 @@
         }else if (status == 8){
            str = @"交付";
         }else if (status == 9){
-           str = @"施工中";
+           str = @"查看交付";
         }else if (status == 10){
            str = @"评价";
         }
@@ -155,7 +156,7 @@
 }
 
 //点击操作
-// 0 抢单 1 反馈 2 签单 3 申诉 4 填写资料 7 佣金支付 8 创建施工清单 9 施工中 10 评价
+// 0 抢单 1 反馈 2 签单 3 申诉 4 填写资料 7 佣金支付 8 创建施工清单 9 查看交付 10 评价
 - (void)clickActionWithStatus:(NSInteger)status {
     
         if (status == 0) {
@@ -175,6 +176,13 @@
            vc.hidesBottomBarWhenPushed = YES;
            vc.ID = self.ID;
            [self.navigationController pushViewController:vc animated:YES];
+       }else if (status == 9) {
+           QYZJMinePayDetailVC * vc =[[QYZJMinePayDetailVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+           vc.ID = self.ID;
+           vc.hidesBottomBarWhenPushed = YES;
+           [self.navigationController pushViewController:vc animated:YES];
+           
+           
        }else if (status == 10) {
            
        }

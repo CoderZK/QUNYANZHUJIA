@@ -30,8 +30,8 @@
     self.navigationItem.title = @"创建施工清单";
     self.leftArrOne = @[@"标题",@"备注",@"总价",@"工期",@"时间段"];
     self.leftArrTwo = @[@"施工阶段",@"付款比例",@"阶段金额",@"工期",@"时间段"];
-    self.placeArrOne =@[@"请输入标题",@"请输入备注",@"元",@"天",@"请选择开始时间"];
-    self.placeArrTwo = @[@"施工阶段",@"%",@"元",@"天",@"时间段"];
+    self.placeArrOne =@[@"请输入标题",@"请输入备注",@"请输入工期总金额",@"请输入工期总天数",@"请选择开始时间"];
+    self.placeArrTwo = @[@"施工阶段",@"请输入阶段占比",@"阶段金额",@"请输入阶段天数",@"请选择时间段"];
     
     
     [self.tableView registerClass:[TongYongTwoCell class] forCellReuseIdentifier:@"cell"];
@@ -54,7 +54,7 @@
     KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"发起交付" andImgaeName:@""];
     Weak(weakSelf);
     view.footViewClickBlock = ^(UIButton * _Nonnull button) {
-        
+        [weakSelf clickAction:button];
     };
     [self.view addSubview:view];
     self.tableView.backgroundColor = [UIColor whiteColor];
@@ -128,19 +128,25 @@
             cell.leftLB.text = self.leftArrOne[indexPath.row];
             cell.TF.placeholder = self.placeArrOne[indexPath.row];
             if (indexPath.row < 4 ) {
+                
                 if (indexPath.row == 2){
+                    cell.rightLB.hidden = NO;
                     if (self.dataModel.price>0) {
-                        cell.TF.text = [NSString stringWithFormat:@"%0.2f元",self.dataModel.price];
+                    
+                        cell.TF.text = [NSString stringWithFormat:@"%0.2f",self.dataModel.price];
                     }else {
                         cell.TF.text = [NSString stringWithFormat:@"%@",@""];
                     }
+                    cell.rightLB.text = @"元";
                     cell.TF.keyboardType =  UIKeyboardTypeDecimalPad;
                 }else  if (indexPath.row == 3) {
+                    cell.rightLB.hidden = NO;
                     if (self.dataModel.all_days>0) {
-                        cell.TF.text = [NSString stringWithFormat:@"%0.0f天",self.dataModel.all_days];
+                        cell.TF.text = [NSString stringWithFormat:@"%0.0f",self.dataModel.all_days];
                     }else {
                         cell.TF.text = @"";
                     }
+                    cell.rightLB.text = @"天";
                     cell.TF.keyboardType =  UIKeyboardTypeNumberPad;
                 }
             }else {
@@ -163,27 +169,33 @@
                     cell.TF.text = model.stage_name;
                     cell.TF.userInteractionEnabled = NO;
                 }else  if (indexPath.row == 1){
+                    cell.rightLB.hidden = NO;
                     if (model.percent>0) {
-                        cell.TF.text = [NSString stringWithFormat:@"%0.2f%%",model.percent];
+                        cell.TF.text = [NSString stringWithFormat:@"%0.2f",model.percent];
                     }else {
                         cell.TF.text = @"";
                     }
                     cell.TF.keyboardType =  UIKeyboardTypeDecimalPad;
-                    cell.TF.userInteractionEnabled = NO;
+                    cell.TF.userInteractionEnabled = YES;
+                    cell.rightLB.text = @"%";
                 }else  if (indexPath.row == 2){
+                    cell.rightLB.hidden = NO;
                     if (model.percent>0) {
-                        cell.TF.text = [NSString stringWithFormat:@"%0.2f元",model.percent * self.dataModel.price];
+                        cell.TF.text = [NSString stringWithFormat:@"%0.2f元",model.percent * self.dataModel.price/100.0];
                     }else {
                         cell.TF.text = @"";
                     }
+                    cell.rightLB.text = @"元";
                     cell.TF.userInteractionEnabled = NO;
                 }else  if (indexPath.row ==3) {
+                    cell.rightLB.hidden = NO;
                     if (model.days>0) {
-                        cell.TF.text = [NSString stringWithFormat:@"%0.0f天",model.days];
+                        cell.TF.text = [NSString stringWithFormat:@"%0.0f",model.days];
                     }else {
                         cell.TF.text = [NSString stringWithFormat:@"%@",@""];
                     }
                     cell.TF.keyboardType =  UIKeyboardTypeNumberPad;
+                    cell.rightLB.text = @"天";
                 }
             }else {
                 cell.moreImgV.hidden = NO;
@@ -216,7 +228,7 @@
         if (indexPath.row == 0) {
             QYZJShowFromTopView * view = [[QYZJShowFromTopView alloc] initWithFrame:CGRectMake(0, 0 , ScreenW, ScreenH)];
             [self.view addSubview:view];
-            view.dataArray = @[@"查改",@"2",@"3",@"a",@"b",@"c"];
+            view.dataArray = @[@"拆改",@"水电",@"木工",@"瓦工",@"油漆",@"安装",@"治理"];
             view.subject = [[RACSubject alloc] init];
             //点击
             @weakify(self);
@@ -239,14 +251,10 @@
                 Weak(weakSelf);
                 selectTimeV.block = ^(NSString *timeStr) {
                     self.dataArray[indexPath.section-1].time_start = timeStr;
-                    
                     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
                     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
                     NSDate * nowDate = [dateFormatter dateFromString:timeStr];
-                    
-                    NSTimeInterval  oneDay = 24 * 60 * 60 * 1;
-                    
-                    NSDate * otherDate = [nowDate initWithTimeIntervalSinceNow: +(oneDay* self.dataArray[indexPath.section-1].days)];
+                    NSDate * otherDate =[NSString getLaterDateFromDate:nowDate withYear:0 month:0 day:self.dataArray[indexPath.section-1].days];
                     self.dataArray[indexPath.section-1].time_end = [dateFormatter stringFromDate:otherDate];
                     [weakSelf.tableView reloadData];
                 };
@@ -277,7 +285,7 @@
                 [dateFormatter setDateFormat:@"yyyy-MM-dd"];
                 NSDate * nowDate = [dateFormatter dateFromString:timeStr];
                 NSTimeInterval  oneDay = 24 * 60 * 60 * 1;
-                NSDate * otherDate = [nowDate initWithTimeIntervalSinceNow: +(oneDay* self.dataModel.all_days)];
+                NSDate * otherDate = [NSString getLaterDateFromDate:nowDate withYear:0 month:0 day:self.dataModel.all_days];
                 self.dataModel.time_end = [dateFormatter stringFromDate:otherDate];
                 [weakSelf.tableView reloadData];
             };
@@ -290,6 +298,9 @@
     
     
 }
+
+
+
 
 #pragma mark ---- 添加新阶段 ----
 - (void)addJieDuan {
@@ -378,8 +389,7 @@
         NSMutableDictionary * dict = @{}.mutableCopy;
         dict[@"stage_name"] = model.stage_name;
         dict[@"percent"] = @(model.percent);
-        dict[@"days"] = model.pro_id;
-        dict[@"city_id"] = @(model.days);
+        dict[@"days"] = @(model.days);
         dict[@"time_start"] = model.time_start;
         dict[@"time_end"] = model.time_end;
         [dataArr addObject:dict];
@@ -437,7 +447,6 @@
         }else if (indexPath.row == 3) {
             self.dataModel.all_days = [textField.text floatValue];
         }
-        
         [self.tableView reloadData];
         
     }

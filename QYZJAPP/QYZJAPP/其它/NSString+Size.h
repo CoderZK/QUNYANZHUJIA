@@ -99,7 +99,7 @@
 
 - (NSString *)getQuanUrl;
 
-
++ (NSDate *)getLaterDateFromDate:(NSDate *)date withYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day;
 
 
 

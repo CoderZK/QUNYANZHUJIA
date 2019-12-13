@@ -94,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)QYZJWorkModel *demand;
 
 @property(nonatomic,strong)NSArray *pics;
-
+@property(nonatomic,strong)NSArray *change_table_urls;
 
 @property(nonatomic,assign)BOOL isDelete;
 @property(nonatomic,assign)BOOL isAppoint;

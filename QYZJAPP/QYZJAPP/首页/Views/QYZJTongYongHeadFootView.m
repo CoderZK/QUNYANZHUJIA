@@ -28,13 +28,12 @@
         self.rightBt = [[UIButton alloc] init];
         [self addSubview:self.rightBt];
         [self.rightBt mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.mas_centerY).offset(5);
-            make.height.equalTo(@35);
-            make.width.equalTo(@120);
+            make.centerY.equalTo(self.mas_centerY).offset(0);
+            make.height.equalTo(@30);
+            make.width.equalTo(@90);
             make.right.equalTo(self).offset(-10);
         }];
-        self.rightBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        self.rightBt.hidden = YES;
+//        self.rightBt.hidden = YES;
         self.rightBt.titleLabel.font = kFont(14);
         
     }

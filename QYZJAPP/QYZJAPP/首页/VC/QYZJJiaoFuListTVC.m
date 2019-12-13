@@ -99,16 +99,18 @@
 
     view.footViewClickBlock = ^(UIButton * _Nonnull button) {
         //去交付
-            QYZJCreateNewJiaoFuTVC * vc =[[QYZJCreateNewJiaoFuTVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [weakSelf.navigationController pushViewController:vc animated:YES];
+//            QYZJCreateNewJiaoFuTVC * vc =[[QYZJCreateNewJiaoFuTVC alloc] init];
+//            vc.hidesBottomBarWhenPushed = YES;
+//            [weakSelf.navigationController pushViewController:vc animated:YES];
     };
     
     viewHead.footViewClickBlock = ^(UIButton * _Nonnull button) {
-        //创建交付
-        QYZJCreateShiGongQingDanTVC * vc =[[QYZJCreateShiGongQingDanTVC alloc] init];
+        //创建新的交付
+        QYZJCreateNewJiaoFuTVC * vc =[[QYZJCreateNewJiaoFuTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
-        [weakSelf.navigationController pushViewController:vc animated:YES];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+       
     };
     
     

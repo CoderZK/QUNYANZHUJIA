@@ -8,6 +8,7 @@
 
 #import "QYZJAddZiLiaoTVC.h"
 #import "QYZJJiaoFuZiLiaoCell.h"
+#import "QYZJCreateShiGongQingDanTVC.h"
 @interface QYZJAddZiLiaoTVC ()<QYZJJiaoFuZiLiaoCellDelegate,UITextFieldDelegate>
 @property(nonatomic,strong)NSArray *leftArr;
 @property(nonatomic,strong)NSMutableArray *contracturlArr,*budgeturlArr,*drawingurlArr,*changetableurlArr;
@@ -43,11 +44,19 @@
     }
     
     KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"完成" andImgaeName:@""];
+    if (self.type == 1) {
+        view.titleStr = @"下一步";
+    }
     Weak(weakSelf);
     view.footViewClickBlock = ^(UIButton *button) {
         [weakSelf.tableView endEditing:YES];
         
-        [weakSelf clickAction:button];
+        if (weakSelf.type == 1) {
+            [weakSelf createNewTurnover];
+        }else {
+            [weakSelf clickAction:button];
+        }
+        
         
     };
     [self.view addSubview:view];
@@ -59,11 +68,57 @@
        }];
 }
 
+//创建新的交付
+- (void)createNewTurnover {
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"nick_name"] = self.dataModel.nick_name;
+    dict[@"pro_id"] = self.dataModel.pro_id;
+    dict[@"city_id"] = self.dataModel.city_id;
+    dict[@"area_id"] = self.dataModel.area_id;
+    dict[@"address"] = self.dataModel.address_pca;
+    dict[@"telphone"] = self.dataModel.telphone;
+    dict[@"type_id"] = @(self.dataModel.type_id);
+    dict[@"area"] = self.dataModel.area;
+    dict[@"contract_url"] = [self.contracturlArr componentsJoinedByString:@","];
+    dict[@"budget_url"] =  [self.contracturlArr componentsJoinedByString:@","];
+    dict[@"drawing_url"] = [self.drawingurlArr componentsJoinedByString:@","];
+    dict[@"change_table_url"] =  [self.changetableurlArr componentsJoinedByString:@","];
+    dict[@"sign_money"] = self.signMoney;
+    dict[@"commission_price"] = self.commissionPrice;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_createNewTurnoverURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            [SVProgressHUD showSuccessWithStatus:@"创建新交付成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                QYZJCreateShiGongQingDanTVC * vc =[[QYZJCreateShiGongQingDanTVC alloc] init];
+                vc.hidesBottomBarWhenPushed = YES;
+                vc.ID = responseObject[@"result"][@"turnover_id"];
+                [self.navigationController pushViewController:vc animated:YES];
+            });
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+ 
+    
+    
+}
 
+
+
+
+//添加资料
 - (void)clickAction:(UIButton *)button {
  
-    [self.tableView endEditing:YES];
-    
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"demand_id"] = self.ID;
@@ -110,6 +165,9 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.type == 1) {
+        return self.leftArr.count - 1;
+    }
     return self.leftArr.count;
 }
 

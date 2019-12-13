@@ -8,6 +8,8 @@
 
 #import "QYZJZhiFuVC.h"
 #import "LLPassWordAlertView.h"
+#import <AlipaySDK/AlipaySDK.h>
+#import "WXApi.h"
 @interface QYZJZhiFuVC ()
 @property (weak, nonatomic) IBOutlet UIButton *payBt;
 @property (weak, nonatomic) IBOutlet UIImageView *imgV1;
@@ -19,10 +21,26 @@
 @property (weak, nonatomic) IBOutlet UIImageView *payImgVone;
 @property (weak, nonatomic) IBOutlet UILabel *titleOneLB;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *consThree;
+@property (nonatomic,strong)NSDictionary *payDic;
 
 @end
 
 @implementation QYZJZhiFuVC
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WWWWX:) name:@"WXPAY" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ZFBPAY:) name:@"ZFBPAY" object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -151,5 +169,90 @@
 // 
 //    
 //}];
+
+
+
+#pragma mark -微信、支付宝支付
+- (void)goWXpay {
+    PayReq * req = [[PayReq alloc]init];
+    req.partnerId = [NSString stringWithFormat:@"%@",self.payDic[@"partnerId"]];
+    req.prepayId =  [NSString stringWithFormat:@"%@",self.payDic[@"prepayId"]];
+    req.nonceStr =  [NSString stringWithFormat:@"%@",self.payDic[@"nonceStr"]];
+    //注意此处是int 类型
+    req.timeStamp = [self.payDic[@"timeStamp"] intValue];
+    req.package =  [NSString stringWithFormat:@"%@",self.payDic[@"package"]];
+    req.sign =  [NSString stringWithFormat:@"%@",self.payDic[@"sign"]];
+    
+    //发起支付
+    [WXApi sendReq:req];
+    
+}
+
+//微信支付结果处理
+- (void)WWWWX:(NSNotification *)no {
+    
+    BaseResp * resp = no.object;
+    if (resp.errCode==WXSuccess)
+    {
+        
+        [SVProgressHUD showSuccessWithStatus:@"帖子置顶成功!"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.navigationController popViewControllerAnimated:YES];
+        });
+    }
+    else if (resp.errCode==WXErrCodeUserCancel)
+    {
+        [SVProgressHUD showErrorWithStatus:@"用户取消支付"];
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:@"支付失败"];
+    }
+    
+}
+
+
+
+//支付宝支付结果处理
+- (void)goZFB{
+
+    
+    [[AlipaySDK defaultService] payOrder:self.payDic[@"prepayId"] fromScheme:@"com.houhuayuan.app" callback:^(NSDictionary *resultDic) {
+        if ([resultDic[@"resultStatus"] isEqualToString:@"6001"]) {
+            //用户取消支付
+            [SVProgressHUD showErrorWithStatus:@"用户取消支付"];
+        } else if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+            
+            [SVProgressHUD showSuccessWithStatus:@"帖子置顶成功!"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        } else {
+            [SVProgressHUD showErrorWithStatus:@"支付失败"];
+        }
+    }];
+}
+
+
+//支付宝支付结果处理,此处是app 被杀死之后用的
+- (void)ZFBPAY:(NSNotification *)notic {
+    NSDictionary *resultDic = notic.object;
+    if ([resultDic[@"resultStatus"] isEqualToString:@"6001"]) {
+        //用户取消支付
+        [SVProgressHUD showErrorWithStatus:@"用户取消支付"];
+        
+    } else if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+        
+        [SVProgressHUD showSuccessWithStatus:@"帖子置顶成功!"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.navigationController popViewControllerAnimated:YES];
+        });
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"支付失败"];
+    }
+
+}
+
+
 
 @end

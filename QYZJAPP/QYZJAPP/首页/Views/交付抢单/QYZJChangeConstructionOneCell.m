@@ -88,15 +88,64 @@
                 leftLB.text = model.stageName;
                 centerLB.text = [NSString stringWithFormat:@"￥%0.0f",model.price];
                 rightLB.text = [NSString stringWithFormat:@"%@ - %@",[NSString stringWithDatemmdd:model.timeStart withIsDian:YES],[NSString stringWithDatemmdd:model.timeEnd withIsDian:YES]];
-                statusBt.layer.cornerRadius = 3;
-                statusBt.layer.borderColor = OrangeColor.CGColor;
-                statusBt.layer.borderWidth = 1;
                 statusBt.mj_w = ww - 18;
                 statusBt.mj_h = 26;
                 statusBt.mj_x = 4*space + 3*ww + 9;
                 statusBt.mj_y = CGRectGetMaxY(Hline.frame) + 7;;
                 [statusBt setTitleColor:OrangeColor forState:UIControlStateNormal];
-                [statusBt setTitle:@"状态" forState:UIControlStateNormal];
+                statusBt.tag = i+99;
+                [statusBt addTarget:self action:@selector(clickStatusAction:) forControlEvents:UIControlEventTouchUpInside];
+                NSInteger status = [model.status integerValue];
+                
+                if (self.is_service) {
+                    //客户
+                    if (status == 1) {
+                        [statusBt setTitle:@"审核" forState:UIControlStateNormal];
+                        [statusBt setTitleColor:OrangeColor forState:UIControlStateNormal];
+                        statusBt.layer.cornerRadius = 3;
+                        statusBt.layer.borderWidth = 1;
+                        statusBt.layer.borderColor = OrangeColor.CGColor;
+                        statusBt.userInteractionEnabled = YES;
+                    }else if (status == 2) {
+                        [statusBt setTitle:@"支付" forState:UIControlStateNormal];
+                        [statusBt setTitleColor:OrangeColor forState:UIControlStateNormal];
+                        statusBt.layer.cornerRadius = 3;
+                        statusBt.layer.borderWidth = 1;
+                        statusBt.layer.borderColor = OrangeColor.CGColor;
+                        statusBt.userInteractionEnabled = YES;
+                    }else if (status == 3) {
+                        [statusBt setTitle:@"已支付" forState:UIControlStateNormal];
+                        [statusBt setTitleColor:CharacterBlack112 forState:UIControlStateNormal];
+//                        statusBt.layer.cornerRadius = 3;
+//                        statusBt.layer.borderWidth = 0.8;
+//                        statusBt.layer.borderColor = OrangeColor.CGColor;
+                        statusBt.userInteractionEnabled = NO;
+                    }else if (status == 4) {
+                          [statusBt setTitle:@"未通过" forState:UIControlStateNormal];
+                          [statusBt setTitleColor:CharacterBlack112 forState:UIControlStateNormal];
+                          statusBt.userInteractionEnabled = NO;
+                    }
+                    
+                    
+                }else {
+                    //服务方
+                    [statusBt setTitleColor:CharacterBlack112 forState:UIControlStateNormal];
+                    statusBt.userInteractionEnabled = NO;
+                    if (status == 1) {
+                          [statusBt setTitle:@"待确认" forState:UIControlStateNormal];
+                         
+                    }else if (status == 2) {
+                          [statusBt setTitle:@"待支付" forState:UIControlStateNormal];
+                         
+                    }else if (status == 3) {
+                          [statusBt setTitle:@"已支付" forState:UIControlStateNormal];
+                         
+                    }else if (status == 4) {
+                          [statusBt setTitle:@"未通过" forState:UIControlStateNormal];
+                         
+                    }
+                    
+                }
             }
         }
         
@@ -109,7 +158,16 @@
     
 }
 
+- (void)clickStatusAction:(UIButton *)button {
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(didClickQYZJChangeConstructionOneCell:withIndex:)]) {
+        [self.delegate didClickQYZJChangeConstructionOneCell:self withIndex:button.tag - 100];
+    }
+}
 
+
+- (void)setIs_service:(BOOL)is_service {
+    _is_service = is_service;
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];

@@ -215,8 +215,8 @@
             self.aearStr =  @"";
             self.aearId = @"0";
         }else {
-            self.aearStr = self.cityArray[leftIndex].cityList[centerIndex-1].areaList[rightIndex].name;
-            self.aearId = self.cityArray[leftIndex].cityList[centerIndex-1].areaList[rightIndex].ID;
+            self.aearStr = self.cityArray[leftIndex].cityList[centerIndex-1].areaList[rightIndex-1].name;
+            self.aearId = self.cityArray[leftIndex].cityList[centerIndex-1].areaList[rightIndex-1].ID;
         }
         
     }

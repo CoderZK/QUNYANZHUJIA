@@ -16,7 +16,8 @@
 #import "QYZJConstructionListCell.h"
 #import "QYZJChangeConstructionOneCell.h"
 #import "QYZJConstructionProgressCell.h"
-@interface QYZJMinePayDetailVC ()
+#import "QYZJChangeDetailedListTVC.h"
+@interface QYZJMinePayDetailVC ()<QYZJChangeConstructionOneCellDelegate>
 @property(nonatomic,strong)NSArray *headTitleArr;
 @property(nonatomic,strong)QYZJWorkModel *dataModel;
 @property(nonatomic,strong)QYZJFindModel *titleModel;
@@ -42,12 +43,15 @@
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self getData];
     }];
+    
+    self.navigationItem.title = @"详情";
+    
 }
 
 - (void)getData {
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
-    dict[@"id"] = @"78";
+    dict[@"id"] = self.ID;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_turnoverDetailsURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
@@ -82,7 +86,7 @@
         return 1;
     }else if (section <= 8) {
         return 1;
-    }else if (section == 9) {
+    } else if (section == 9) {
         return self.dataModel.constructionStage.count;
     }else if (section == 10) {
         return self.dataModel.changeConstructionStage.count;
@@ -119,7 +123,10 @@
     }else if (indexPath.section == 7) {
         return self.dataModel.turnoverList.cellHeight;
     }else if (indexPath.section == 8) {
-        return 20 + self.dataModel.changeConstructionStage.count * 41 + 42;
+        if (self.dataModel.changeTurnoverLists.count == 0) {
+            return 0;
+        }
+        return 20 + self.dataModel.changeTurnoverLists.count * 41 + 42;
     }else if (indexPath.section == 9) {
         return self.dataModel.constructionStage[indexPath.row].cellHeight;
     }else if (indexPath.section == 10) {
@@ -201,8 +208,20 @@
         view = [[QYZJTongYongHeadFootView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 50)];
     }
     view.leftLB.text = self.headTitleArr[section];
+    view.rightBt.hidden  = YES;
     if (section == 7) {
         view.leftLB.text = [NSString stringWithFormat:@"施工(总工期:%@天)",self.dataModel.turnoverList.allDays];
+        if (([self.dataModel.turnover.status intValue] == 2 || [self.dataModel.turnover.status intValue] == 3) && !self.dataModel.demand.is_service){
+            view.rightBt.hidden = NO;
+            [view.rightBt setTitle:@"增加变更单" forState:UIControlStateNormal];
+            [view.rightBt setTitleColor:OrangeColor forState:UIControlStateNormal];
+            view.rightBt.layer.cornerRadius = 4;
+            view.rightBt.layer.borderColor = OrangeColor.CGColor;
+            view.rightBt.layer.borderWidth = 1;
+            view.rightBt.clipsToBounds = YES;
+            [view.rightBt addTarget:self action:@selector(addChangeTurnonerAction:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        
     }
     view.backgroundColor = WhiteColor;
     view.contentView.backgroundColor = WhiteColor;
@@ -215,12 +234,14 @@
         QYZJHomePayCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomePayCell" forIndexPath:indexPath];
         cell.type = 1;
         cell.model = self.titleModel;
+        cell.clipsToBounds = YES;
         return cell;
     }else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             QYZJHomePayDetailOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomePayDetailOneCell" forIndexPath:indexPath];
             cell.clipsToBounds = YES;
             cell.model = self.dataModel.turnoverListOrderFirst;
+            cell.clipsToBounds = YES;
             return cell;
         }else {
             if ( [self.dataModel.turnoverListOrderFinal.status intValue] == 0) {
@@ -228,11 +249,13 @@
                 cellTwo.clipsToBounds = YES;
                 cellTwo.clipsToBounds = YES;
                 cellTwo.moneyLB.text = [NSString stringWithFormat:@"￥%0.2f",self.dataModel.turnoverListOrderFinal.payMoney];
+                cellTwo.clipsToBounds = YES;
                 return cellTwo;
             }else {
                 QYZJHomePayDetailOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomePayDetailOneCell" forIndexPath:indexPath];
                 cell.clipsToBounds = YES;
                 cell.model = self.dataModel.turnoverListOrderFinal;
+                cell.clipsToBounds = YES;
                 return cell;
             }
         }
@@ -253,25 +276,32 @@
     }else if (indexPath.section == 6) {
         QYZJConstructionProgressCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJConstructionProgressCell" forIndexPath:indexPath];
         cell.dataArray = self.dataModel.turnoverLists;
+        cell.clipsToBounds = YES;
         return cell;
     }else if (indexPath.section == 7) {
         QYZJConstructionCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJConstructionCell" forIndexPath:indexPath];
         cell.dataArray = self.dataModel.turnoverLists;
         cell.model = self.dataModel.turnoverList;
+        cell.clipsToBounds = YES;
         return cell;
     }else if (indexPath.section == 8) {
         QYZJChangeConstructionOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJChangeConstructionOneCell" forIndexPath:indexPath];
-        cell.dataArray = self.dataModel.changeConstructionStage;
+        cell.is_service = self.dataModel.demand.is_service;
+        cell.dataArray = self.dataModel.changeTurnoverLists;
+        cell.clipsToBounds = YES;
+        cell.delegate = self;
         return cell;
     }else if (indexPath.section == 9) {
         
         QYZJConstructionListCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJConstructionListCell" forIndexPath:indexPath];
         cell.model = self.dataModel.constructionStage[indexPath.row];
+        cell.clipsToBounds = YES;
         return cell;
         
     }else if (indexPath.section == 10) {
         QYZJConstructionListCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJConstructionListCell" forIndexPath:indexPath];
         cell.model = self.dataModel.changeConstructionStage[indexPath.row];
+        cell.clipsToBounds = YES;
         return cell;
     }
     QYZJHomePayDetailOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomePayDetailOneCell" forIndexPath:indexPath];
@@ -283,5 +313,120 @@
     
 }
 
+
+//添加变更清单
+- (void)addChangeTurnonerAction:(UIButton *)button {
+    
+    QYZJChangeDetailedListTVC * vc =[[QYZJChangeDetailedListTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+    vc.hidesBottomBarWhenPushed = YES;
+    vc.picsArr = self.dataModel.demand.change_table_urls.mutableCopy;
+    vc.ID = self.ID;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
+#pragma mark ---- 点击变更清单的内容 ----
+
+- (void)didClickQYZJChangeConstructionOneCell:(QYZJChangeConstructionOneCell*)cell withIndex:(NSInteger)index {
+    QYZJWorkModel * model = self.dataModel.changeTurnoverLists[index];
+    
+    if ([model.status integerValue] == 1) {
+        
+        UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"变更审核" message:@"请选择审核状态" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            
+            
+        }];
+        
+        UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"不通过" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self changeTurnoverCheckWithStatus:0 withType:1 WithID:model.ID];
+            
+        }];
+        UIAlertAction * action3 = [UIAlertAction actionWithTitle:@"通过" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self changeTurnoverCheckWithStatus:1 withType:1 WithID:model.ID];
+            
+        }];
+        
+        [alertVC addAction:action1];
+        [alertVC addAction:action2];
+        [alertVC addAction:action3];
+        
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
+        
+    }else {
+        
+        UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"支付" message:@"请选择付款方式" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            
+            
+        }];
+        
+        UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"线上" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self changeTurnoverCheckWithStatus:1 withType:2 WithID:model.ID];
+            
+        }];
+        UIAlertAction * action3 = [UIAlertAction actionWithTitle:@"线下" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            
+            UIAlertController  * alertVCTwo = [UIAlertController alertControllerWithTitle:@"提示" message:@"请联系客服,并提供相应付款证明完成支付操作" preferredStyle:(UIAlertControllerStyleAlert)];
+            UIAlertAction * action1Two = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+                
+                
+            }];
+            [alertVCTwo addAction:action1Two];
+            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVCTwo animated:YES completion:nil];
+        }];
+        
+        [alertVC addAction:action1];
+        [alertVC addAction:action2];
+        [alertVC addAction:action3];
+        
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
+        
+    }
+}
+//审核 type 1装填改变 2 支付
+- (void)changeTurnoverCheckWithStatus:(NSInteger)isSure withType:(NSInteger)type WithID:(NSString *)ID{
+    NSString * url = @"";
+    if (type == 1) {
+        url = [QYZJURLDefineTool user_changeTurnoverCheckURL];
+    }else {
+        url = [QYZJURLDefineTool user_changeTurnoverChecksURL];
+    }
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"id"] = ID;
+    dict[@"isSure"] = @(isSure);
+    [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            if (type == 1) {
+                [self getData];
+            }else {
+                QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+}
 
 @end

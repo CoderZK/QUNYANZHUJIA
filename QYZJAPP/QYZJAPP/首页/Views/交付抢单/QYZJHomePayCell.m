@@ -46,12 +46,12 @@
             }
             case 2:
             {
-                str = @"待客户确认";
+                str = @"待确认";
                 break;
             }
             case 3:
             {
-                str = @"待客户支付";
+                str = @"待支付";
                 break;
             }
             case 4:
@@ -66,12 +66,12 @@
             }
             case 6:
             {
-                str = @"待客户支付尾款";
+                str = @"待支付尾款";
                 break;
             }
             case 7:
             {
-                str = @"待客户评价";
+                str = @"待评价";
                 break;
             }
             case 8:
@@ -93,12 +93,12 @@
             }
             case 2:
             {
-                str = @"待确认";
+                str = @"待客户确认";
                 break;
             }
             case 3:
             {
-                str = @"待支付";
+                str = @"待客户支付";
                 break;
             }
             case 4:
@@ -108,7 +108,7 @@
             }
             case 5:
             {
-                str = @"待验收";
+                str = @"待客户验收";
                 break;
             }
             case 6:
@@ -118,7 +118,7 @@
             }
             case 7:
             {
-                str = @"待评价";
+                str = @"待客户评价";
                 break;
             }
             case 8:

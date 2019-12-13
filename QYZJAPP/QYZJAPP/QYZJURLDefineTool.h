@@ -309,8 +309,12 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)user_basicInfoURL;
 /**创建施工清单*/
 +(NSString *)user_createStageURL;
-
-
+/**创建变更清单*/
++(NSString *)user_createChangeStageURL;
+/**变更清单状态*/
++(NSString *)user_changeTurnoverCheckURL;
+/**获取清单支付状态*/
++(NSString *)user_changeTurnoverChecksURL;
 
 
 /** 更新*/

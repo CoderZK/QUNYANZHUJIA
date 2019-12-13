@@ -127,11 +127,17 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    QYZJMinePayDetailVC * vc =[[QYZJMinePayDetailVC alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
-    
+    QYZJFindModel * model = self.dataArray[indexPath.row];
+    if ((model.is_service && [model.user_status intValue] == 1) || (!model.is_service && [model.user_status intValue] == 3)) {
+        QYZJCreateShiGongQingDanTVC * vc =[[QYZJCreateShiGongQingDanTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else {
+        QYZJMinePayDetailVC * vc =[[QYZJMinePayDetailVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+         vc.hidesBottomBarWhenPushed = YES;
+         vc.ID  = model.ID;
+         [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 

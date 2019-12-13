@@ -121,10 +121,9 @@
     
     if (self.subject != nil) {
         if (self.isSearch) {
-            NSString * str = self.dataSearchArr[indexPath.row];
-            [self.subject sendNext:[NSString stringWithFormat:@"%ld",[self.dataArray indexOfObject:str]]];
+            [self.subject sendNext:[NSString stringWithFormat:@"%@",self.dataSearchArr[indexPath.row]]];
         }else {
-           [self.subject sendNext:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+            [self.subject sendNext:[NSString stringWithFormat:@"%@",self.dataArray[indexPath.row]]];
         }
         
         [self diss];

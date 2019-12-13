@@ -18,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *pro_id;
 @property(nonatomic,strong)NSString *area_id;
 @property(nonatomic,strong)NSString *city_id;
+@property(nonatomic,strong)NSString *proStr;
+@property(nonatomic,strong)NSString *areaStr;
+@property(nonatomic,strong)NSString *cityStr;
 @property(nonatomic,strong)NSString *pic;
 @property(nonatomic,strong)NSString *pics;
 @property(nonatomic,strong)NSString *picUrl;
@@ -119,6 +122,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,strong)NSMutableArray *videos;
 @property(nonatomic,strong)NSMutableArray *pictures;
+@property(nonatomic,strong)NSMutableArray *change_table_urls;
 
 @property(nonatomic,assign)BOOL isReturn;
 @property(nonatomic,assign)BOOL isMy;

@@ -184,24 +184,24 @@
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
-            UILabel *label = (UILabel *)[_pickerView viewForRow:yearIndex forComponent:0];
+            UILabel *label = (UILabel *)[self->_pickerView viewForRow:self->yearIndex forComponent:0];
             label.textColor = RGBACOLOR(30, 30, 30, 1.0);
             label.font = regularFontWithSize(16);
             
-            label = (UILabel *)[_pickerView viewForRow:monthIndex forComponent:1];
+            label = (UILabel *)[self->_pickerView viewForRow:self->monthIndex forComponent:1];
             label.textColor = RGBACOLOR(30, 30, 30, 1.0);
             label.font = regularFontWithSize(16);
             
-            label = (UILabel *)[_pickerView viewForRow:dayIndex forComponent:2];
+            label = (UILabel *)[self->_pickerView viewForRow:self->dayIndex forComponent:2];
             label.textColor = RGBACOLOR(30, 30, 30, 1.0);
             label.font = regularFontWithSize(16);
             
             if (self.isBaoHanHHmm) {
-                label = (UILabel *)[_pickerView viewForRow:hourIndex forComponent:3];
+                label = (UILabel *)[self->_pickerView viewForRow:self->hourIndex forComponent:3];
                 label.textColor = RGBACOLOR(30, 30, 30, 1.0);
                 label.font = regularFontWithSize(16);
                 
-                label = (UILabel *)[_pickerView viewForRow:minIndex forComponent:4];
+                label = (UILabel *)[self->_pickerView viewForRow:self->minIndex forComponent:4];
                 label.textColor = RGBACOLOR(30, 30, 30, 1.0);
                 label.font = regularFontWithSize(16);
             }
@@ -211,8 +211,8 @@
         
         [UIView animateWithDuration:0.25 animations:^{
             
-            topV.frame = CGRectMake(0, screenHeight - aspectRatio(247), screenWidth, aspectRatio(40));
-            _pickerView.frame = CGRectMake(0, CGRectGetMaxY(topV.frame), screenWidth, aspectRatio(207));
+            self->topV.frame = CGRectMake(0, screenHeight - aspectRatio(247), screenWidth, aspectRatio(40));
+            self->_pickerView.frame = CGRectMake(0, CGRectGetMaxY(self->topV.frame), screenWidth, aspectRatio(207));
         }];
         
     }
@@ -236,7 +236,7 @@
          //此处是根据FM 的需求添加的
          NSDate * nowDate = [NSDate date];
          NSDateFormatter * formatter =[[NSDateFormatter alloc] init];
-         formatter.dateFormat = @"yyyy-MM-dd";
+         formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
          NSDate * dateTwo = [formatter dateFromString:timeStr];
          NSComparisonResult result = [dateTwo compare:nowDate];
          
@@ -339,8 +339,8 @@
     
     [UIView animateWithDuration:0.25 animations:^{
         
-        topV.frame = CGRectMake(0, screenHeight, screenWidth, aspectRatio(40));
-        _pickerView.frame = CGRectMake(0, CGRectGetMaxY(topV.frame), screenWidth, aspectRatio(207));
+        self->topV.frame = CGRectMake(0, screenHeight, screenWidth, aspectRatio(40));
+        self->_pickerView.frame = CGRectMake(0, CGRectGetMaxY(self->topV.frame), screenWidth, aspectRatio(207));
         
     } completion:^(BOOL finished) {
         
