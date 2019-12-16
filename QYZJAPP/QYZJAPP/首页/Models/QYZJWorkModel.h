@@ -75,7 +75,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *appeal_reason;
 @property(nonatomic,strong)NSString *allDays;
 @property(nonatomic,strong)NSString *appeal_plateReason;
-
+@property(nonatomic,strong)NSString *picUrl;
+@property(nonatomic,strong)NSString *videoUrl;
 
 @property(nonatomic,strong)NSMutableArray<QYZJWorkModel *> *changeTurnoverLists;
 @property(nonatomic,strong)NSMutableArray<QYZJWorkModel *> *turnoverLists;
@@ -95,6 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,strong)NSArray *pics;
 @property(nonatomic,strong)NSArray *change_table_urls;
+@property(nonatomic,strong)NSArray *videos;
 
 @property(nonatomic,assign)BOOL isDelete;
 @property(nonatomic,assign)BOOL isAppoint;

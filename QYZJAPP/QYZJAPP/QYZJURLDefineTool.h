@@ -311,10 +311,32 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)user_createStageURL;
 /**创建变更清单*/
 +(NSString *)user_createChangeStageURL;
-/**变更清单状态*/
+/**变更阶段确认*/
 +(NSString *)user_changeTurnoverCheckURL;
 /**获取清单支付状态*/
 +(NSString *)user_changeTurnoverChecksURL;
+/**阶段验收通过*/
++(NSString *)user_turnoverStagePassURL;
+/**阶段验收不通过*/
++(NSString *)user_turnoverStageNotPassURL;
+/**创建实际施工阶段*/
++(NSString *)user_createConstructionURL;
+/** 提交验收*/
++(NSString *)user_turnoverStageConfirmURL;
+/**修改验收*/
++(NSString *)user_constructionEditURL;
+/**删除实际阶段*/
++(NSString *)user_constructionDelURL;
+/** 创建播报*/
++(NSString *)user_createBroadcastURL;
+/**获取交付单击施工段信息*/
++(NSString *)user_turnoverStageNameURL;
+/**支付尾款*/
++(NSString *)user_turnoverFinalPayURL;
+/** 施工阶段播报内容回复*/
++(NSString *)user_broadcastReplyURL;
+
+
 
 
 /** 更新*/

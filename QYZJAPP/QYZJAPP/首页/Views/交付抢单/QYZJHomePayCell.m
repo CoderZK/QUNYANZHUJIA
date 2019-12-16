@@ -37,36 +37,37 @@
     self.typeLB2.text = model.type_name;
     self.qianDanLB.textColor = OrangeColor;
     NSString * str = @"";
-    if (model.is_service) {
+    if (!model.is_service) {
+        //服务方
         switch ([model.user_status intValue]) {
             case 1:
             {
-                str = @"待交付";
+                str = @"提交阶段验收";
                 break;
             }
             case 2:
             {
-                str = @"待确认";
+                str = @"验收中";
                 break;
             }
             case 3:
             {
-                str = @"待支付";
+                str = @"待整改";
                 break;
             }
             case 4:
             {
-                str = @"施工中";
+                str = @"验收通过";
                 break;
             }
             case 5:
             {
-                str = @"待验收";
+                str = @"整改中";
                 break;
             }
             case 6:
             {
-                str = @"待支付尾款";
+                str = @"整改完成";
                 break;
             }
             case 7:
@@ -88,32 +89,32 @@
        switch ([model.user_status intValue]) {
             case 1:
             {
-                str = @"待交付";
+                str = @"施工中";
                 break;
             }
             case 2:
             {
-                str = @"待客户确认";
+                str = @"阶段验收中";
                 break;
             }
             case 3:
             {
-                str = @"待客户支付";
+                str = @"整改中";
                 break;
             }
             case 4:
             {
-                str = @"施工中";
+                str = @"已验收";
                 break;
             }
             case 5:
             {
-                str = @"待客户验收";
+                str = @"整改中";
                 break;
             }
             case 6:
             {
-                str = @"待客户支付尾款";
+                str = @"整改完成";
                 break;
             }
             case 7:

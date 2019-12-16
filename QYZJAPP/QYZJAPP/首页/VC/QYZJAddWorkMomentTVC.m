@@ -35,7 +35,11 @@
     [self setFootV];
     [self createHeadV];
     self.picsArr = @[].mutableCopy;
-    [self addPicsWithArr:@[].mutableCopy];
+    if (self.type == 4 && self.picsArrTwo.count > 0) {
+        self.picsArr = self.picsArrTwo;
+    }
+   
+    [self addPicsWithArr:self.picsArr];
     self.videoStr = nil;
     self.navigationItem.title = @"创建施工阶段";
     if (self.type == 1) {
@@ -50,6 +54,7 @@
     
     [self getImgDict];
      [self getVideoDict];
+    self.titleTF.text = self.titleStr;
     
     
 }
@@ -100,14 +105,15 @@
 
     [SVProgressHUD show];
     
-    NSString * url = @"";
-    
+    NSString * url = [QYZJURLDefineTool user_createConstructionURL];
     if (self.type == 1) {
         url = [QYZJURLDefineTool user_updateCaseURL];
     }else if (self.type == 2) {
         url = [QYZJURLDefineTool user_createRepairBroadcastURL];
     }else if (self.type == 3) {
         url = [QYZJURLDefineTool user_addCaseURL];
+    }else if (self.type == 4) {
+        url = [QYZJURLDefineTool user_constructionEditURL];
     }
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"constructionStageId"] = self.ID;
@@ -118,7 +124,16 @@
     dict[@"title"] = self.titleTF.text;
     dict[@"content"] = self.desTV.text;
     dict[@"context"] = self.titleTF.text;
+    dict[@"stageName"] = self.titleTF.text;
+    dict[@"description"] = self.desTV.text;
     dict[@"id"] = self.ID;
+    dict[@"turnoverListId"] = self.ID;
+    dict[@"price"] = @(self.price);
+    dict[@"changeType"] = @(self.changeType);
+    dict[@"videoUrl"] = self.videoStr;
+    if (self.type == 4) {
+        dict[@"turnoverListId"] = self.IDTwo;
+    }
     [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
@@ -130,6 +145,8 @@
                 [SVProgressHUD showSuccessWithStatus:@"添加播报成功"];
             }else if (self.type == 3) {
                 [SVProgressHUD showSuccessWithStatus:@"创建案例成功"];
+            }else if (self.type == 4) {
+                [SVProgressHUD showSuccessWithStatus:@"修改阶段成功"];
             }
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -265,6 +282,8 @@
     self.tableView.tableHeaderView = self.headV;
     self.headV.backgroundColor = self.whiteOneV.backgroundColor = self.whiteTwoV.backgroundColor = WhiteColor;
     
+    self.videoStr = self.videoUrl;
+    
 }
 
 
@@ -317,10 +336,10 @@
             [deleteBt addTarget:self action:@selector(deleteHitAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.scrollView addSubview:deleteBt];
              if ([picsArr[i] isKindOfClass:[NSString class]]) {
-                            [anNiuBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:picsArr[i]]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
-                       }else {
-                            [anNiuBt setBackgroundImage:picsArr[i] forState:UIControlStateNormal];
-                       }
+                    [anNiuBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:picsArr[i]]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+                }else {
+                    [anNiuBt setBackgroundImage:picsArr[i] forState:UIControlStateNormal];
+                }
             
         }
         

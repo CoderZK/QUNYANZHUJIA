@@ -9,7 +9,8 @@
 #import "QYZJConstructionListCell.h"
 
 @interface QYZJConstructionListCell()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)UILabel *titleLB,*contentLB,*timeLB,*moneyLB,*statusLB;
+@property(nonatomic,strong)UILabel *titleLB,*contentLB,*timeLB,*moneyLB;
+@property(nonatomic,strong)UIButton *statusBt,*editBt;
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)UIView *whiteV;
 @end
@@ -25,17 +26,23 @@
         self.titleLB.numberOfLines = 0;
         [self addSubview:self.titleLB];
         
+        self.editBt = [[UIButton alloc] initWithFrame:CGRectMake(10, 7.5, 25, 25)];
+        [self.editBt setImage:[UIImage imageNamed:@"36"] forState:UIControlStateNormal];
+        self.editBt.tag = 100;
+        [self.editBt addTarget:self action:@selector(editOrStatusAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:self.editBt];
+        
         self.moneyLB = [[UILabel alloc] initWithFrame:CGRectMake(ScreenW - 150, 10, 140, 20)];
         self.moneyLB.font = [UIFont boldSystemFontOfSize:14];
         self.moneyLB.textAlignment = NSTextAlignmentRight;
         [self addSubview:self.moneyLB];
         
-        self.statusLB = [[UILabel alloc] initWithFrame:CGRectMake(ScreenW - 150, 40, 140, 20)];
-        self.statusLB.textAlignment = NSTextAlignmentRight;
-        self.statusLB.textColor = OrangeColor;
-        self.statusLB.font = kFont(14);
-        self.statusLB.text = @"已验收";
-        [self addSubview:self.statusLB];
+        self.statusBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 150, 40, 140, 20)];
+        self.statusBt.tag = 101;
+        [self.statusBt setTitleColor:OrangeColor forState:UIControlStateNormal];
+        self.statusBt.titleLabel.font = kFont(14);
+        [self addSubview:self.statusBt];
+        [self.statusBt addTarget:self action:@selector(editOrStatusAction:) forControlEvents:UIControlEventTouchUpInside];
         
         self.contentLB = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, ScreenW - 20 - 150, 20)];
         self.contentLB.numberOfLines = 0;
@@ -70,14 +77,34 @@
     return self;
 }
 
+
+//
+- (void)editOrStatusAction:(UIButton *)button {
+    
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(didclickQYZJConstructionListCell:withIndex:isNeiClick:NeiRow:)]) {
+        [self.delegate didclickQYZJConstructionListCell:self  withIndex:button.tag-100 isNeiClick:NO NeiRow:0];
+    }
+}
+
+- (void)setIs_service:(BOOL)is_service {
+    _is_service = is_service;
+}
+
 - (void)setModel:(QYZJWorkModel *)model {
     _model = model;
     
+    CGFloat ww = [model.stageName getWidhtWithFontSize:14];
+    if (ww > ScreenW - 20 - 150 - 30) {
+        ww = ScreenW - 20 - 150 - 30;
+    }
+    
     self.titleLB.attributedText = [model.stageName getMutableAttributeStringWithFont:14 withBlood:YES lineSpace:3 textColor:[UIColor blackColor]];
-    self.titleLB.mj_h = [model.stageName getHeigtWithIsBlodFontSize:14 lineSpace:3 width:ScreenW - 20 - 150];
+    self.titleLB.mj_h = [model.stageName getHeigtWithIsBlodFontSize:14 lineSpace:3 width:ww];
     if (self.timeLB.mj_h < 20) {
         self.timeLB.mj_h = 20;
     }
+    self.titleLB.mj_w = ww;
+    self.editBt.mj_x = ww+15;
     
     self.moneyLB.text = [NSString stringWithFormat:@"￥%0.0f",model.price];
     self.contentLB.attributedText = [model.des getMutableAttributeStringWithFont:14 lineSpace:3 textColor:CharacterBlack112];
@@ -109,6 +136,91 @@
         model.cellHeight = CGRectGetMaxY(self.timeLB.frame) + 10 + tvH;
     }
    
+    if (!self.is_service) {
+        //服务方
+        NSInteger st = [model.status intValue];
+        BOOL isLayer = NO;
+        NSString * str = @"";
+        if (st == 1) {
+            str = @"提交阶段验收";
+            isLayer = YES;
+        }else if (st == 2){
+            str = @"验收中";
+        }else if (st == 3){
+            str = @"待整改";
+        }else if (st == 4){
+            str = @"验收通过";
+        }else if (st == 5){
+            str = @"整改中";
+        }else if (st == 6){
+            str = @"整改完成";
+        }
+        if (isLayer) {
+            CGFloat w = [str getWidhtWithFontSize:14];
+            self.statusBt.mj_w = w +  8;
+            self.statusBt.mj_x = ScreenW - (w+8) - 10;
+            self.statusBt.layer.cornerRadius = 3;
+            self.statusBt.layer.borderColor = OrangeColor.CGColor;
+            self.statusBt.layer.borderWidth = 1.0;
+        }else {
+            CGFloat w = [str getWidhtWithFontSize:14];
+            self.statusBt.mj_w = w;
+            self.statusBt.mj_x = ScreenW - (w) - 10;
+            self.statusBt.layer.borderColor = [UIColor clearColor].CGColor;
+            self.statusBt.layer.borderWidth = 1.0;
+        }
+        self.statusBt.userInteractionEnabled = isLayer;
+        [self.statusBt setTitle:str forState:UIControlStateNormal];
+        self.editBt.hidden = !isLayer;
+        
+    }else {
+        //用户
+        NSInteger st = [model.status intValue];
+        self.editBt.hidden = YES;
+        if (st == 1 || st == 3 || st == 5) {
+            self.editBt.hidden = NO;
+        }else {
+            self.editBt.hidden  = YES;
+        }
+        
+        BOOL isLayer = NO;
+       NSString * str = @"";
+       if (st == 1) {
+           str = @"施工中";
+       }else if (st == 2){
+           str = @"验收此阶段";
+           isLayer = YES;
+       }else if (st == 3){
+           str = @"整改中";
+       }else if (st == 4){
+           str = @"已验收";
+       }else if (st == 5){
+           str = @"整改中";
+       }else if (st == 6){
+           str = @"整改完成";
+       }else if (st == 7){
+           str = @"评价";
+           isLayer = YES;
+       }
+        if (isLayer) {
+            CGFloat w = [str getWidhtWithFontSize:14];
+            self.statusBt.mj_w = w +  8;
+            self.statusBt.mj_x = ScreenW - (w+8) - 10;
+            self.statusBt.layer.cornerRadius = 3;
+            self.statusBt.layer.borderColor = OrangeColor.CGColor;
+            self.statusBt.layer.borderWidth = 1.0;
+        }else {
+            CGFloat w = [str getWidhtWithFontSize:14];
+            self.statusBt.mj_w = w;
+            self.statusBt.mj_x = ScreenW - (w) - 10;
+            self.statusBt.layer.borderColor = [UIColor clearColor].CGColor;
+            self.statusBt.layer.borderWidth = 1.0;
+        }
+        self.statusBt.userInteractionEnabled = isLayer;
+        [self.statusBt setTitle:str forState:UIControlStateNormal];
+        
+    }
+    
     
 }
 
@@ -131,7 +243,15 @@
     
     QYZJConstructionListNeiCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.is_service = self.is_service;
     cell.model = self.model.selfStage[indexPath.row];
+    Weak(weakSelf);
+    cell.clcikNeiCellBlock = ^(QYZJConstructionListNeiCell *cellNei, NSInteger index, BOOL isEdit) {
+        NSIndexPath * indexPathNei = [weakSelf.tableView indexPathForCell:cellNei];
+        if (weakSelf.delegate != nil && [weakSelf.delegate respondsToSelector:@selector(didclickQYZJConstructionListCell:withIndex:isNeiClick:NeiRow:)]) {
+            [weakSelf.delegate didclickQYZJConstructionListCell:weakSelf withIndex:index isNeiClick:YES NeiRow:indexPathNei.row];
+        }
+    };
     cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
     cell.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     return cell;
@@ -158,6 +278,7 @@
 
 @interface QYZJConstructionListNeiCell()
 @property(nonatomic,strong)UILabel *titleLB,*contentLB,*timeLB;
+@property(nonatomic,strong)UIButton *statusBt,*editBt;
 @end
 
 @implementation QYZJConstructionListNeiCell
@@ -178,18 +299,47 @@ if (self) {
           self.timeLB.textColor = CharacterBlack112;
           [self addSubview:self.timeLB];
     
+          self.editBt = [[UIButton alloc] initWithFrame:CGRectMake(10, 7.5, 25, 25)];
+                 [self.editBt setImage:[UIImage imageNamed:@"36"] forState:UIControlStateNormal];
+                 self.editBt.tag = 100;
+                 [self.editBt addTarget:self action:@selector(editOrStatusAction:) forControlEvents:UIControlEventTouchUpInside];
+                 [self addSubview:self.editBt];
+    
+    
+        self.statusBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 150, 40, 140, 20)];
+         self.statusBt.tag = 101;
+         [self.statusBt setTitleColor:OrangeColor forState:UIControlStateNormal];
+         self.statusBt.titleLabel.font = kFont(13);
+         [self addSubview:self.statusBt];
+         [self.statusBt addTarget:self action:@selector(editOrStatusAction:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 return self;
 }
 
+- (void)setIs_service:(BOOL)is_service {
+    _is_service = is_service;
+}
+
 - (void)setModel:(QYZJWorkModel *)model {
     _model = model;
+    
+    CGFloat ww = [model.stageName getWidhtWithFontSize:14];
+    
+    if (ww > ScreenW - 40 - 30) {
+        ww = ScreenW - 40 - 30;
+    }
+    
     self.titleLB.attributedText = [model.stageName getMutableAttributeStringWithFont:14 withBlood:YES lineSpace:3 textColor:[UIColor blackColor]];
-    self.titleLB.mj_h = [model.stageName getHeigtWithIsBlodFontSize:14 lineSpace:3 width:ScreenW - 40];
+    self.titleLB.mj_h = [model.stageName getHeigtWithIsBlodFontSize:14 lineSpace:3 width:ww];
+    
+    self.titleLB.mj_w = ww;
+    self.editBt.mj_x = ww+15;
+    
     if (self.timeLB.mj_h < 20) {
         self.timeLB.mj_h = 20;
     }
-    
+
     self.contentLB.attributedText = [model.des getMutableAttributeStringWithFont:14 lineSpace:3 textColor:CharacterBlack112];
     self.contentLB.mj_h = [model.des getHeigtWithFontSize:14 lineSpace:3 width:ScreenW-40];
     if (self.contentLB.mj_h < 20) {
@@ -201,9 +351,104 @@ return self;
 
     model.cellHeight = CGRectGetMaxY(self.timeLB.frame)+5;
 
+    self.statusBt.mj_y = self.timeLB.mj_y;
     
+    if (!self.is_service) {
+        //服务方
+        NSInteger st = [model.status intValue];
+        BOOL isLayer = NO;
+        NSString * str = @"";
+        if (st == 1) {
+            str = @"提交阶段验收";
+            isLayer = YES;
+        }else if (st == 2){
+            str = @"验收中";
+        }else if (st == 3){
+            str = @"待整改";
+        }else if (st == 4){
+            str = @"验收通过";
+        }else if (st == 5){
+            str = @"整改中";
+        }else if (st == 6){
+            str = @"整改完成";
+        }
+        if (isLayer) {
+            CGFloat w = [str getWidhtWithFontSize:14];
+            self.statusBt.mj_w = w +  8;
+            self.statusBt.mj_x = ScreenW-20 - (w+8) - 10;
+            self.statusBt.layer.cornerRadius = 3;
+            self.statusBt.layer.borderColor = OrangeColor.CGColor;
+            self.statusBt.layer.borderWidth = 1.0;
+        }else {
+            CGFloat w = [str getWidhtWithFontSize:14];
+            self.statusBt.mj_w = w;
+            self.statusBt.mj_x = ScreenW -20- (w) - 10;
+            self.statusBt.layer.borderColor = [UIColor clearColor].CGColor;
+            self.statusBt.layer.borderWidth = 1.0;
+        }
+        self.statusBt.userInteractionEnabled = isLayer;
+        [self.statusBt setTitle:str forState:UIControlStateNormal];
+        self.editBt.hidden = !isLayer;
+        
+    }else {
+        //用户
+        self.editBt.hidden = YES;
+        NSInteger st = [model.status intValue];
+        if (st == 1 || st == 3 || st == 5) {
+            self.editBt.hidden = NO;
+        }else {
+            self.editBt.hidden  = YES;
+        }
+        
+        BOOL isLayer = NO;
+        NSString * str = @"";
+        if (st == 1) {
+            str = @"施工中";
+            isLayer = YES;
+        }else if (st == 2){
+            str = @"验收此阶段";
+        }else if (st == 3){
+            str = @"整改中";
+        }else if (st == 4){
+            str = @"已验收";
+        }else if (st == 5){
+            str = @"整改中";
+        }else if (st == 6){
+            str = @"整改完成";
+        }else if (st == 7){
+            str = @"评价";
+            isLayer = YES;
+        }
+        if (isLayer) {
+            CGFloat w = [str getWidhtWithFontSize:14];
+            self.statusBt.mj_w = w +  8;
+            self.statusBt.mj_x = ScreenW - 20 - (w+8) - 10;
+            self.statusBt.layer.cornerRadius = 3;
+            self.statusBt.layer.borderColor = OrangeColor.CGColor;
+            self.statusBt.layer.borderWidth = 1.0;
+        }else {
+            CGFloat w = [str getWidhtWithFontSize:14];
+            self.statusBt.mj_w = w;
+            self.statusBt.mj_x = ScreenW- 20 - (w) - 10;
+            self.statusBt.layer.borderColor = [UIColor clearColor].CGColor;
+            self.statusBt.layer.borderWidth = 1.0;
+        }
+        self.statusBt.userInteractionEnabled = isLayer;
+        [self.statusBt setTitle:str forState:UIControlStateNormal];
+        
+    }
     
     
 }
+
+- (void)editOrStatusAction:(UIButton *)button {
+    if (self.clcikNeiCellBlock != nil) {
+        self.clcikNeiCellBlock(self, button.tag - 100, NO);
+    }
+    
+    
+}
+
+
 
 @end

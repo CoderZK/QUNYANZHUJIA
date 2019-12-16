@@ -576,6 +576,48 @@
 }
 
 
+/**阶段验收通过*/
++(NSString *)user_turnoverStagePassURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_turnoverStagePass.do"];
+}
+/**阶段验收不通过*/
++(NSString *)user_turnoverStageNotPassURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_turnoverStageNotPass.do"];
+}
+/**创建实际施工阶段*/
++(NSString *)user_createConstructionURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_createConstruction.do"];
+}
+/** 提交验收*/
++(NSString *)user_turnoverStageConfirmURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_turnoverStageConfirm.do"];
+}
+/**修改验收*/
++(NSString *)user_constructionEditURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_constructionEdit.do"];
+}
+/**删除实际阶段*/
++(NSString *)user_constructionDelURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_constructionDel.do"];
+}
+/** 创建播报*/
++(NSString *)user_createBroadcastURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_createBroadcast.do"];
+}
+/**获取交付单击施工段信息*/
++(NSString *)user_turnoverStageNameURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_turnoverStageName.do"];
+}
+/**支付尾款*/
++(NSString *)user_turnoverFinalPayURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_turnoverFinalPay.do"];
+}
+/** 施工阶段播报内容回复*/
++(NSString *)user_broadcastReplyURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_broadcastReply.do"];
+}
+
+
 //图片地址
 +(NSString *)getImgURLWithStr:(NSString * )str{
     
