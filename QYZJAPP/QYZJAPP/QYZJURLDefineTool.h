@@ -336,6 +336,32 @@ NS_ASSUME_NONNULL_BEGIN
 /** 施工阶段播报内容回复*/
 +(NSString *)user_broadcastReplyURL;
 
+/**确认交付*/
++(NSString *)user_turnoverCheckURL;
+/**交付清单详情*/
++(NSString *)user_turnoverListDetailsURL;
+/**删除阶段播报*/
++(NSString *)user_boradcastDelURL;
+/**创建保修*/
++(NSString *)user_createRepairURL;
+/** 评价阶段内容回复*/
++(NSString *)user_turnoverStageEvalURL;
+/** 确认保修*/
++(NSString *)user_sureRepairURL;
+/** 交付播报列表*/
++(NSString *)user_broadcastListURL;
+
+
+/**微信*/
++(NSString *)user_createWxOrderURL;
+/** 支付宝*/
++(NSString *)user_createAlipayOrderURL;
+/** 余额*/
++(NSString *)user_createBalanceOrderURL;
+/** 优惠券*/
++(NSString *)user_createCouponOrderURL;
+/** 余额加微信或者支付宝*/
++(NSString *)user_createPayNewURL;
 
 
 

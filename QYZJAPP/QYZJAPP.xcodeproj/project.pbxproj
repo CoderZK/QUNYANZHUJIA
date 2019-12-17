@@ -232,6 +232,10 @@
 		583B67B82372602600EDE846 /* QYZJLocationTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 583B67B72372602600EDE846 /* QYZJLocationTool.m */; };
 		583B67BA2372755000EDE846 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583B67B92372755000EDE846 /* MapKit.framework */; };
 		583B683F23728D0700EDE846 /* QYZJHomeTwoTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 583B683E23728D0700EDE846 /* QYZJHomeTwoTVC.m */; };
+		583C306823A85F34000AF260 /* QYZJBaoBoOrQingDanOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 583C306723A85F34000AF260 /* QYZJBaoBoOrQingDanOneCell.m */; };
+		583C306C23A87AA2000AF260 /* QYZJQingDanPingJiaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 583C306A23A87AA2000AF260 /* QYZJQingDanPingJiaVC.m */; };
+		583C307123A89EF4000AF260 /* QYZJQIngDanPingJiaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 583C306F23A89EF4000AF260 /* QYZJQIngDanPingJiaCell.m */; };
+		583C307223A89EF4000AF260 /* QYZJQIngDanPingJiaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 583C307023A89EF4000AF260 /* QYZJQIngDanPingJiaCell.xib */; };
 		583ED69923739F6A0070441A /* QYZJTongYongHeadFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 583ED69823739F6A0070441A /* QYZJTongYongHeadFootView.m */; };
 		583ED69C2373B0390070441A /* QYZJPicShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 583ED69B2373B0390070441A /* QYZJPicShowCell.m */; };
 		583ED69F2373BAB10070441A /* QYZJFindCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 583ED69E2373BAB10070441A /* QYZJFindCell.m */; };
@@ -726,6 +730,13 @@
 		583B67B92372755000EDE846 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		583B683D23728D0700EDE846 /* QYZJHomeTwoTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJHomeTwoTVC.h; sourceTree = "<group>"; };
 		583B683E23728D0700EDE846 /* QYZJHomeTwoTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJHomeTwoTVC.m; sourceTree = "<group>"; };
+		583C306623A85F34000AF260 /* QYZJBaoBoOrQingDanOneCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJBaoBoOrQingDanOneCell.h; sourceTree = "<group>"; };
+		583C306723A85F34000AF260 /* QYZJBaoBoOrQingDanOneCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJBaoBoOrQingDanOneCell.m; sourceTree = "<group>"; };
+		583C306923A87AA2000AF260 /* QYZJQingDanPingJiaVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJQingDanPingJiaVC.h; sourceTree = "<group>"; };
+		583C306A23A87AA2000AF260 /* QYZJQingDanPingJiaVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJQingDanPingJiaVC.m; sourceTree = "<group>"; };
+		583C306E23A89EF4000AF260 /* QYZJQIngDanPingJiaCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJQIngDanPingJiaCell.h; sourceTree = "<group>"; };
+		583C306F23A89EF4000AF260 /* QYZJQIngDanPingJiaCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJQIngDanPingJiaCell.m; sourceTree = "<group>"; };
+		583C307023A89EF4000AF260 /* QYZJQIngDanPingJiaCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJQIngDanPingJiaCell.xib; sourceTree = "<group>"; };
 		583ED69723739F6A0070441A /* QYZJTongYongHeadFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJTongYongHeadFootView.h; sourceTree = "<group>"; };
 		583ED69823739F6A0070441A /* QYZJTongYongHeadFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJTongYongHeadFootView.m; sourceTree = "<group>"; };
 		583ED69A2373B0390070441A /* QYZJPicShowCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJPicShowCell.h; sourceTree = "<group>"; };
@@ -1331,6 +1342,8 @@
 				5833D9F9238B8869007DE9EC /* QYZJJiaoFuZiLiaoTVC.m */,
 				58ADFFEE23A1EA7000347801 /* QYZJAddZiLiaoTVC.h */,
 				58ADFFEF23A1EA7000347801 /* QYZJAddZiLiaoTVC.m */,
+				583C306923A87AA2000AF260 /* QYZJQingDanPingJiaVC.h */,
+				583C306A23A87AA2000AF260 /* QYZJQingDanPingJiaVC.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1749,6 +1762,11 @@
 				583B345C2398D6E600148350 /* QYZJMineBaoXiuCellTableViewCell.xib */,
 				583B345F2398D6E600148350 /* QYZJBaoXiuDetailCell.h */,
 				583B34592398D6E600148350 /* QYZJBaoXiuDetailCell.m */,
+				583C306623A85F34000AF260 /* QYZJBaoBoOrQingDanOneCell.h */,
+				583C306723A85F34000AF260 /* QYZJBaoBoOrQingDanOneCell.m */,
+				583C306E23A89EF4000AF260 /* QYZJQIngDanPingJiaCell.h */,
+				583C306F23A89EF4000AF260 /* QYZJQIngDanPingJiaCell.m */,
+				583C307023A89EF4000AF260 /* QYZJQIngDanPingJiaCell.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -2311,6 +2329,7 @@
 				58394F5F237A412B0017505B /* HHYMineFiveCell.xib in Resources */,
 				582F74D12378F29000F6FCB6 /* mx_picker_back_image@2x.png in Resources */,
 				583B34E72398D6EB00148350 /* QYZJAddMineLabelsVC.xib in Resources */,
+				583C307223A89EF4000AF260 /* QYZJQIngDanPingJiaCell.xib in Resources */,
 				582F74CE2378F29000F6FCB6 /* mx_pic_selected_yes@2x.png in Resources */,
 				584345852371039E0087A2D9 /* TongYongCell.xib in Resources */,
 				58309F732387BD2A00CCAEA6 /* QYZJZhuYeYuYinCell.xib in Resources */,
@@ -2519,6 +2538,7 @@
 				58309F63238782B100CCAEA6 /* QYZJYuYueFangDanTVC.m in Sources */,
 				583536852386657100D9BE26 /* QYZJHomePayCell.m in Sources */,
 				5830796D237FBBB800039E12 /* QYZJMineTiXianTVC.m in Sources */,
+				583C306C23A87AA2000AF260 /* QYZJQingDanPingJiaVC.m in Sources */,
 				584331B1236FF88C0046C0BD /* QYZJFindPasswordVC.m in Sources */,
 				58434598237118D10087A2D9 /* TongYongThreeCell.m in Sources */,
 				58EEC3FF23A0E57000D00012 /* TongYongFourCell.m in Sources */,
@@ -2542,6 +2562,7 @@
 				337F3EAD20EA014600C5526A /* BaseTableViewHeaderFooterView.m in Sources */,
 				337F3EAC20EA014600C5526A /* BaseTableViewController.m in Sources */,
 				583B34FE2398D6EB00148350 /* QYZJAnLiDetailHeadView.m in Sources */,
+				583C307123A89EF4000AF260 /* QYZJQIngDanPingJiaCell.m in Sources */,
 				337F3E6920E9FE5300C5526A /* main.m in Sources */,
 				584345C423716A2A0087A2D9 /* QYZJUserModel.m in Sources */,
 				584691522372983D0056BA4A /* QYZJRobOrderTVC.m in Sources */,
@@ -2654,6 +2675,7 @@
 				583B34F22398D6EB00148350 /* QYZJShengQingRuZhuVC.m in Sources */,
 				5831E8122395F25300D68710 /* QYZJAddBankCell.m in Sources */,
 				58307956237F833400039E12 /* QYZJMineTongYongCell.m in Sources */,
+				583C306823A85F34000AF260 /* QYZJBaoBoOrQingDanOneCell.m in Sources */,
 				5830795A237F8A6000039E12 /* QYZJMoneyModel.m in Sources */,
 				583B350B2398D6EB00148350 /* QYZJPingOrZanCell.m in Sources */,
 				337F3EAF20EA014600C5526A /* BaseViewController+PublicMethod.m in Sources */,

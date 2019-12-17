@@ -616,6 +616,59 @@
 +(NSString *)user_broadcastReplyURL{
      return [NSString stringWithFormat:@"%@%@",URLOne,@"user_broadcastReply.do"];
 }
+/**确认交付*/
++(NSString *)user_turnoverCheckURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_turnoverCheck.do"];
+}
+/**交付清单详情*/
++(NSString *)user_turnoverListDetailsURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_turnoverListDetails.do"];
+}
+/**删除阶段播报*/
++(NSString *)user_boradcastDelURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_broadcastDel.do"];
+}
+/**创建保修*/
++(NSString *)user_createRepairURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_createRepair.do"];
+}
+/** 每个阶段内容回复*/
++(NSString *)user_turnoverStageEvalURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_turnoverStageEval.do"];
+}
+/** 确认保修*/
++(NSString *)user_sureRepairURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_sureRepair.do"];
+}
+/** 交付播报列表*/
++(NSString *)user_broadcastListURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_broadcastList.do"];
+}
+
+/**微信*/
++(NSString *)user_createWxOrderURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_createWxOrder.do"];
+}
+/** 支付宝*/
++(NSString *)user_createAlipayOrderURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_createAlipayOrder.do"];
+}
+/** 余额*/
++(NSString *)user_createBalanceOrderURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_createBalanceOrder.do"];
+}
+/** 优惠券*/
++(NSString *)user_createCouponOrderURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_createCouponOrder.do"];
+}
+/** 余额加微信或者支付宝*/
++(NSString *)user_createPayNewURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_createPayNew.do"];
+}
+
+
+
+
 
 
 //图片地址

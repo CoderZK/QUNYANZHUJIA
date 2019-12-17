@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString*ID;
 @property(nonatomic,strong)NSString *typeName;
 @property(nonatomic,strong)NSString*roleId;
-@property(nonatomic,assign)BOOL isSelect;
+
 @property(nonatomic,strong)NSString *token;
 @property(nonatomic,strong)NSString *imgPath;
 @property(nonatomic,strong)NSString *videoPath;
@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL is_need_wechat_pay;
 @property(nonatomic,assign)BOOL is_vip;
 @property(nonatomic,assign)BOOL is_pay;
+@property(nonatomic,assign)BOOL isSelect;
 
 @property(nonatomic,assign)CGFloat wechat_money;
 @property(nonatomic,assign)CGFloat money;

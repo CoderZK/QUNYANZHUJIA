@@ -92,6 +92,7 @@
         return 80;
     }
     return 50;
+
 }
 
 
@@ -350,7 +351,11 @@
 
 - (void)createStageAction {
     
-    
+    [self.tableView endEditing:YES];
+    if ([self cheackPercentWithStr] != 1) {
+        [SVProgressHUD showErrorWithStatus:@"总的百分比要为100%"];
+        return;
+    }
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"title"] = self.dataModel.title;

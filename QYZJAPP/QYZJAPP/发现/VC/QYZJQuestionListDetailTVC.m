@@ -120,15 +120,13 @@
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             
-            QYZJTongYongModel * model = [[QYZJTongYongModel alloc] init];
-            model = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
+            QYZJTongYongModel * mm = [[QYZJTongYongModel alloc] init];
+            mm = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
             
             if (model.is_pay) {
                 QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
-                vc.money = model.money;
-                vc.hidesBottomBarWhenPushed = YES;
-                vc.type = 0;
-                vc.ID = model.ID;
+                vc.type = 4;
+                vc.model = mm;
                 [self.navigationController pushViewController:vc animated:YES];
             }
             

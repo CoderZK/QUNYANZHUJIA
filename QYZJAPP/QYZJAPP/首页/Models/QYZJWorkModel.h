@@ -78,6 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *picUrl;
 @property(nonatomic,strong)NSString *videoUrl;
 
+
 @property(nonatomic,strong)NSMutableArray<QYZJWorkModel *> *changeTurnoverLists;
 @property(nonatomic,strong)NSMutableArray<QYZJWorkModel *> *turnoverLists;
 @property(nonatomic,strong)NSMutableArray<QYZJWorkModel *> *changeConstructionStage;
@@ -109,7 +110,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL isVip;
 @property(nonatomic,assign)BOOL is_self;//是不是自己的单子
 @property(nonatomic,assign)BOOL is_service;//(0：不是客户；1：是客户)
-
+@property(nonatomic,assign)BOOL   isRepair;
+@property(nonatomic,assign)BOOL isOverRepairTime;
 
 @property(nonatomic,assign)CGFloat price;
 @property(nonatomic,assign)CGFloat moneyCharging;
@@ -132,6 +134,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)NSInteger manner; //风格
 @property(nonatomic,assign)NSInteger house_model;//户型
 @property(nonatomic,assign)NSInteger renovation_time;//装修时间
+@property(nonatomic,assign)NSInteger evaluateLevel;
 //@property(nonatomic,assign)NSInteger appeal_status;
 //@property(nonatomic,assign)NSInteger appeal_status;
 @end

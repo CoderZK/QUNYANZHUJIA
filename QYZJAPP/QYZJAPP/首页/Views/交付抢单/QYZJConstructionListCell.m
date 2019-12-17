@@ -139,6 +139,11 @@
     if (!self.is_service) {
         //服务方
         NSInteger st = [model.status intValue];
+        if (st == 1 || st == 3 || st == 5) {
+            self.editBt.hidden = NO;
+        }else {
+            self.editBt.hidden  = YES;
+        }
         BOOL isLayer = NO;
         NSString * str = @"";
         if (st == 1) {
@@ -177,12 +182,6 @@
         //用户
         NSInteger st = [model.status intValue];
         self.editBt.hidden = YES;
-        if (st == 1 || st == 3 || st == 5) {
-            self.editBt.hidden = NO;
-        }else {
-            self.editBt.hidden  = YES;
-        }
-        
         BOOL isLayer = NO;
        NSString * str = @"";
        if (st == 1) {
@@ -404,9 +403,9 @@ return self;
         NSString * str = @"";
         if (st == 1) {
             str = @"施工中";
-            isLayer = YES;
         }else if (st == 2){
             str = @"验收此阶段";
+            isLayer = YES;
         }else if (st == 3){
             str = @"整改中";
         }else if (st == 4){

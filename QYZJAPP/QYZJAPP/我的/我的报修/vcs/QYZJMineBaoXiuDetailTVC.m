@@ -11,6 +11,8 @@
 #import "QYZJBaoXiuDetailCell.h"
 #import "QYZJAddWorkMomentTVC.h"
 #import "QYZJPingLunShowView.h"
+#import "QYZJBaoBoOrQingDanOneCell.h"
+#import "QYZJQIngDanPingJiaCell.h"
 @interface QYZJMineBaoXiuDetailTVC ()
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
 @property(nonatomic,assign)NSInteger page;
@@ -32,7 +34,8 @@
     self.navigationItem.title = @"详情";
     
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJMineBaoXiuCellTableViewCell" bundle:nil] forCellReuseIdentifier:@"QYZJMineBaoXiuCellTableViewCell"];
-    
+    [self.tableView registerClass:[QYZJBaoBoOrQingDanOneCell class] forCellReuseIdentifier:@"QYZJBaoBoOrQingDanOneCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"QYZJQIngDanPingJiaCell" bundle:nil] forCellReuseIdentifier:@"QYZJQIngDanPingJiaCell"];
     [self.tableView registerClass:[QYZJBaoXiuDetailCell class] forCellReuseIdentifier:@"QYZJBaoXiuDetailCell"]; 
      self.page = 1;
      self.dataArray = @[].mutableCopy;
@@ -53,16 +56,52 @@
         [weakSelf delectOrPingAction:message];
     };
     
+//    if(self.type == 1) {
+//       [self getDataDetail];
+//    }
+    
+    
 }
+
+
+//- (void)getDataDetail {
+//    [SVProgressHUD show];
+//    NSMutableDictionary * dict = @{}.mutableCopy;
+//    dict[@"id"] = self.model.ID;
+//    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_turnoverListDetailsURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+//        [self.tableView.mj_header endRefreshing];
+//        [self.tableView.mj_footer endRefreshing];
+//        [SVProgressHUD dismiss];
+//        if ([responseObject[@"key"] intValue]== 1) {
+//            
+//            self.model = [QYZJFindModel mj_objectWithKeyValues:responseObject[@"result"][@"constructionStageList"]];
+//            self.model.content = self.model.des;
+//            [self.tableView reloadData];
+//            
+//        }else {
+//            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+//        }
+//        
+//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        
+//        [self.tableView.mj_header endRefreshing];
+//        [self.tableView.mj_footer endRefreshing];
+//        
+//    }];
+//}
 
 
 - (void)getData {
     [SVProgressHUD show];
+    NSString * url = [QYZJURLDefineTool user_repairBroadcastListURL];
     NSMutableDictionary * dict = @{}.mutableCopy;
        dict[@"page"] = @(self.page);
        dict[@"pageSize"] = @(10);
-    dict[@"id"] = self.model.ID;;
-    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_repairBroadcastListURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+       dict[@"id"] = self.model.ID;
+    if (self.type == 1) {
+        url = [QYZJURLDefineTool user_broadcastListURL];
+    }
+    [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         [SVProgressHUD dismiss];
@@ -73,9 +112,6 @@
                 [self.dataArray removeAllObjects];
             }
             [self.dataArray addObjectsFromArray:arr];
-            if (self.dataArray.count == 0) {
-                [SVProgressHUD showSuccessWithStatus:@"暂无数据"];
-            }
             [self.tableView reloadData];
             
             
@@ -95,16 +131,22 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section == 0) {
         return 10;
-    }else {
+    }else if (section == 1) {
+        if (self.model.evaluateLevel > 0) {
+            return 10;
+        }else {
+            return 0.01;
+        }
+    }  else {
         return 0.01;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
+    if (section == 0 || section == 1) {
         return 0.01;
     }else {
-        return 40;
+       return 40;
     }
 }
 
@@ -130,13 +172,16 @@
 
     }
     view.rightBt.hidden = YES;
-    if (self.model.isService) {
+    if ((self.type == 1 && !self.model.is_service) || self.model.isService) {
         view.rightBt.hidden = NO;
+    }else {
+        view.rightBt.hidden = YES;
     }
+
     [view.rightBt setTitleColor:OrangeColor forState:UIControlStateNormal];
     [view.rightBt addTarget:self action:@selector(addBoBao) forControlEvents:UIControlEventTouchUpInside];
     [view.rightBt setTitle:@"创建播报" forState:UIControlStateNormal];
-    [view.rightBt setImage:[UIImage imageNamed:@"18"] forState:UIControlStateNormal];
+    [view.rightBt setImage:[UIImage imageNamed:@"35"] forState:UIControlStateNormal];
     [view.rightBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     [view.rightBt setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];
     view.leftLB.text = @"播报";
@@ -148,7 +193,7 @@
 
 - (void)addBoBao {
     QYZJAddWorkMomentTVC * vc =[[QYZJAddWorkMomentTVC alloc] init];
-    vc.type = 2;
+    vc.type = 5;
     vc.ID = self.model.ID;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
@@ -156,13 +201,19 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     if (section ==0) {
         return 1;
+    }else if (section == 1) {
+        if (self.model.evaluateLevel >0) {
+            return 1;
+        }else {
+            return 0;
+        }
     }
     return self.dataArray.count;
     
@@ -171,7 +222,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return 120;
+        return self.model.cellHeight;
+    }else if (indexPath.section == 1){
+        return UITableViewAutomaticDimension;
     }
     return self.dataArray[indexPath.row].cellHeight;
 }
@@ -179,15 +232,29 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section == 0) {
-        QYZJMineBaoXiuCellTableViewCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJMineBaoXiuCellTableViewCell" forIndexPath:indexPath];
+        QYZJBaoBoOrQingDanOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJBaoBoOrQingDanOneCell" forIndexPath:indexPath];
+        cell.type = self.type;
+        if (self.type == 0) {
+            self.model.nickName = self.model.turnoverStageName;
+            self.model.content = self.model.con;
+        }
         cell.model = self.model;
-        cell.contentTwoLB.hidden = NO;
+        return cell;
+    }else if (indexPath.section == 1) {
+        
+        QYZJQIngDanPingJiaCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJQIngDanPingJiaCell" forIndexPath:indexPath];
+        cell.model = self.model;
         return cell;
     }
     
     QYZJBaoXiuDetailCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJBaoXiuDetailCell" forIndexPath:indexPath];
+     if (self.type == 1) {
+          cell.isServer = !self.model.is_service;
+       }else {
+           cell.isServer = self.model.isService;
+       }
+    
     cell.waiModel = self.dataArray[indexPath.row];
-    cell.isServer = self.model.isService;
     [cell.fuHuiBt addTarget:self action:@selector(fuhuiAction:) forControlEvents:UIControlEventTouchUpInside];
     [cell.deleteBt addTarget:self action:@selector(delectAction:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
@@ -215,9 +282,21 @@
 - (void)delectOrPingAction:(NSString *)titleStr {
     
     [SVProgressHUD show];
-    NSString * url = [QYZJURLDefineTool user_repairBroadcastReplyURL];
+    NSString * url = @"";
+    
     if (titleStr.length == 0) {
+        //删除
         url = [QYZJURLDefineTool user_repairBoradcastDelURL];
+        if (self.type == 1) {
+            url = [QYZJURLDefineTool user_boradcastDelURL];
+        }
+    }else {
+        //回复
+        url = [QYZJURLDefineTool user_repairBroadcastReplyURL];
+        if(self.type == 1) {
+            url = [QYZJURLDefineTool user_broadcastReplyURL];
+        }
+        
     }
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"id"] = self.dataArray[self.indexPath.row].ID;
@@ -229,7 +308,6 @@
         if ([responseObject[@"key"] intValue]== 1) {
             if (titleStr.length > 0) {
                 //回复播报
-              
                 self.page = 1;
                 [self getData];
                 [self.showView diss];

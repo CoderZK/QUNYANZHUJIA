@@ -16,7 +16,7 @@
     {
         
         self.leftLB = [[UILabel alloc] init];
-        self.leftLB.font = kFont(15);
+        self.leftLB.font = [UIFont boldSystemFontOfSize:15];
         [self addSubview:self.leftLB];
         [self.leftLB mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self).offset(10);
@@ -30,7 +30,7 @@
         [self.rightBt mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.mas_centerY).offset(0);
             make.height.equalTo(@30);
-            make.width.equalTo(@90);
+            make.width.equalTo(@100);
             make.right.equalTo(self).offset(-10);
         }];
 //        self.rightBt.hidden = YES;

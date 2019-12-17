@@ -10,7 +10,7 @@
 
 @implementation QYZJFindModel
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
-    return @{@"ID":@"id"};
+    return @{@"ID":@"id",@"des":@"description"};
 }
 - (void)setCommentList:(NSMutableArray<QYZJFindModel *> *)commentList {
     _commentList =[QYZJFindModel mj_objectArrayWithKeyValuesArray:commentList];

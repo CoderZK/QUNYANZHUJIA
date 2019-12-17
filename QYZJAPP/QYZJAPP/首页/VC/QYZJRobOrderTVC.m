@@ -211,12 +211,11 @@
                           [SVProgressHUD showSuccessWithStatus:@"抢单成功,请在一个小时内进行反馈,否则超时视为反馈有效并扣费"];
                       }else {
                           if (modelNei.status == 2) {
+                              
+                              QYZJTongYongModel * mm = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
                               QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
-                              vc.hidesBottomBarWhenPushed = YES;
-                              vc.money = modelNei.money;
-                              vc.ID = model.ID;
+                              vc.model = mm;
                               vc.type = 1;
-                              vc.is_needWeChat = YES; //modelNei.is_need_wechat_pay;
                               [self.navigationController pushViewController:vc animated:YES];
                           }
                          

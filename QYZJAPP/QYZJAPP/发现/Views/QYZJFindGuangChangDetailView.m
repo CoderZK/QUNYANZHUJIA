@@ -88,7 +88,7 @@
     self.contentLB.mj_h = contentH;
     
     self.timeLB.text = model.article.timeNow;
-    
+    self.timeLB.mj_y = CGRectGetMaxY(self.contentLB.frame) + 10;
     
     [self setPicWithideos:nil andPictArr:model.article.pictures];
     [self setVideosWithArr:model.article.videos];

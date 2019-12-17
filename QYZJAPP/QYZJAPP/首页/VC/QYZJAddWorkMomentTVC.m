@@ -114,6 +114,8 @@
         url = [QYZJURLDefineTool user_addCaseURL];
     }else if (self.type == 4) {
         url = [QYZJURLDefineTool user_constructionEditURL];
+    }else if (self.type == 5) {
+        url = [QYZJURLDefineTool user_createBroadcastURL];
     }
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"constructionStageId"] = self.ID;

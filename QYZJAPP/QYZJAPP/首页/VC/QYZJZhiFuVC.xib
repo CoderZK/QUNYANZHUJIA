@@ -15,7 +15,7 @@
                 <outlet property="consThree" destination="U99-TN-VuT" id="Grw-wa-dJ2"/>
                 <outlet property="consTwo" destination="tEV-0B-4UH" id="HFu-gQ-hAI"/>
                 <outlet property="imgV1" destination="Qow-UX-B8L" id="q0j-FS-Qt4"/>
-                <outlet property="imgV3" destination="taE-br-UAm" id="R6d-ru-TTb"/>
+                <outlet property="imgV3" destination="lEr-1t-839" id="TaR-vr-rMf"/>
                 <outlet property="imgVT2" destination="XGc-g4-pvb" id="jbe-Ep-D6Q"/>
                 <outlet property="payBt" destination="ymm-pS-F2b" id="1IF-LS-049"/>
                 <outlet property="payImgVone" destination="Gvz-nO-i7j" id="NnB-Ju-MsM"/>
@@ -114,7 +114,7 @@
                                 <action selector="clickAction:" destination="-1" eventType="touchUpInside" id="ysD-So-HFE"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcx-Q4-RzC">
+                        <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcx-Q4-RzC">
                             <rect key="frame" x="15" y="80.5" width="389" height="47.5"/>
                             <connections>
                                 <action selector="clickAction:" destination="-1" eventType="touchUpInside" id="dXe-dj-LmB"/>
@@ -136,7 +136,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XqU-ff-cyj">
+                        <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XqU-ff-cyj">
                             <rect key="frame" x="5" y="133.5" width="404" height="45.5"/>
                             <connections>
                                 <action selector="clickAction:" destination="-1" eventType="touchUpInside" id="W9P-dF-nop"/>

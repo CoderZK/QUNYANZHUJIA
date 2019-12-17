@@ -42,32 +42,32 @@
         switch ([model.user_status intValue]) {
             case 1:
             {
-                str = @"提交阶段验收";
+                str = @"待交付";
                 break;
             }
             case 2:
             {
-                str = @"验收中";
+                str = @"带客户确认";
                 break;
             }
             case 3:
             {
-                str = @"待整改";
+                str = @"带客户支付";
                 break;
             }
             case 4:
             {
-                str = @"验收通过";
+                str = @"施工中";
                 break;
             }
             case 5:
             {
-                str = @"整改中";
+                str = @"待验收";
                 break;
             }
             case 6:
             {
-                str = @"整改完成";
+                str = @"贷客户支付尾款";
                 break;
             }
             case 7:
@@ -89,37 +89,37 @@
        switch ([model.user_status intValue]) {
             case 1:
             {
-                str = @"施工中";
+                str = @"待交付";
                 break;
             }
             case 2:
             {
-                str = @"阶段验收中";
+                str = @"待确认";
                 break;
             }
             case 3:
             {
-                str = @"整改中";
+                str = @"待支付";
                 break;
             }
             case 4:
             {
-                str = @"已验收";
+                str = @"施工中";
                 break;
             }
             case 5:
             {
-                str = @"整改中";
+                str = @"待验收";
                 break;
             }
             case 6:
             {
-                str = @"整改完成";
+                str = @"待支付尾款";
                 break;
             }
             case 7:
             {
-                str = @"待客户评价";
+                str = @"待评价";
                 break;
             }
             case 8:

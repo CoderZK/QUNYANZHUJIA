@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleOneLB;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *consThree;
 @property (nonatomic,strong)NSDictionary *payDic;
+@property(nonatomic,assign)NSInteger payType;
 
 @end
 
@@ -33,6 +34,7 @@
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WWWWX:) name:@"WXPAY" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ZFBPAY:) name:@"ZFBPAY" object:nil];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -45,29 +47,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-//    if (self.is_needWeChat) {
-//        self.consThree.constant = 0;
-//        self.consTwo.constant = 131.2;
-//        self.payImgVone.hidden = self.bt1.hidden = self.imgV1.hidden = self.titleOneLB.hidden = YES;
-//    }
+    self.payType = 0;
     
-    
-    
+    if (self.model.is_need_wechat_pay) {
+        self.consThree.constant = 0;
+        self.consTwo.constant = 131.2;
+        self.payImgVone.hidden = self.bt1.hidden = self.imgV1.hidden = self.titleOneLB.hidden = YES;
+    }
     
 }
 - (IBAction)clickAction:(UIButton *)sender {
+    
     if (sender.tag == 100) {
         self.imgV1.image = [UIImage imageNamed:@"xuanze_2"];
         self.imgVT2.image = [UIImage imageNamed:@"xuanze_1"];
         self.imgV3.image = [UIImage imageNamed:@"xuanze_1"];
+        self.payType = sender.tag - 100;
     }else if (sender.tag == 101) {
         self.imgV1.image = [UIImage imageNamed:@"xuanze_1"];
         self.imgVT2.image = [UIImage imageNamed:@"xuanze_2"];
         self.imgV3.image = [UIImage imageNamed:@"xuanze_1"];
+        self.payType = sender.tag - 100;
     }else if (sender.tag == 102){
         self.imgV1.image = [UIImage imageNamed:@"xuanze_1"];
         self.imgVT2.image = [UIImage imageNamed:@"xuanze_1"];
         self.imgV3.image = [UIImage imageNamed:@"xuanze_2"];
+        self.payType = sender.tag - 100;
         
     }else {
         [LLPassWordAlertView showWithTitle:@"支付密码" desStr:@"请输入支付密码" finish:^(NSString *pwStr) {
@@ -119,17 +124,26 @@
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"pay_type"] = @"2";
-    dict[@"pay_money"] = @(self.money);
-    dict[@"answer_id"] = self.ID;
-    dict[@"demand_id"] = self.ID;
-    dict[@"media_id"] = self.ID;
-    dict[@"type"] = @0;
-    NSString * url = @"";
-    if (self.type == 0) {
-        url = [QYZJURLDefineTool user_sitPayURL];
-    }else if (self.type == 1) {
-        url = [QYZJURLDefineTool user_payDemandURL];
+    dict[@"pay_money"] = @(self.model.money);
+    dict[@"answer_id"] = self.model.ID;
+    dict[@"demand_id"] = self.model.ID;
+    dict[@"media_id"] = self.model.ID;
+    dict[@"is_second_pay"] = @0;
+    dict[@"type"] = @(self.type);
+    dict[@"id"] = self.ID;
+    dict[@"turnover_type"] = @(self.type - 6);
+    NSString * url = [QYZJURLDefineTool user_createBalanceOrderURL];
+   
+    if (self.payType == 1) {
+        url = [QYZJURLDefineTool user_createWxOrderURL];
+    }else if (self.payType == 2){
+        url = [QYZJURLDefineTool user_createAlipayOrderURL];
     }
+    
+    if (self.model.is_need_wechat_pay) {
+        url = [QYZJURLDefineTool user_createPayNewURL];
+    }
+    
     [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
       
         [SVProgressHUD dismiss];

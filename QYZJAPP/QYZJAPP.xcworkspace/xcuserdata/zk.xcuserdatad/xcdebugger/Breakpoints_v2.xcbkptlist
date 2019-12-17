@@ -7,7 +7,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
-            uuid = "63897C9B-6F09-4995-9102-EBB21DAAF9B1"
+            uuid = "8F5A14B5-EE35-4F39-B651-22D13459C892"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -18,79 +18,63 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6B58ABF4-75B5-4E4A-88A3-14ADD4881EC8"
+            uuid = "4AD97872-2BEC-412E-80E5-AA9F04DCD626"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJMinePayDetailVC.m"
+            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJCreateShiGongQingDanTVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "512"
-            endingLineNumber = "512"
-            landmarkName = "-addChangeTurnonerAction:"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C3738CB5-988F-4B1A-B9A1-14A551AB8BED"
+            uuid = "36FFD2D5-14D6-4DD2-AAE1-46DAD84D74EC"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJMinePayDetailVC.m"
+            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJZhiFuVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "699"
-            endingLineNumber = "699"
-            landmarkName = "-changeTurnoverCheckWithStatus:withType:WithID:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "204490E8-EA6C-4626-912C-F405B43585E4"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJMinePayDetailVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "702"
-            endingLineNumber = "702"
-            landmarkName = "-changeTurnoverCheckWithStatus:withType:WithID:"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "-payAction"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "204490E8-EA6C-4626-912C-F405B43585E4 - 32821f61bc23d21c"
+                  uuid = "36FFD2D5-14D6-4DD2-AAE1-46DAD84D74EC - f21db84a11454ffd"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[QYZJMinePayDetailVC changeTurnoverCheckWithStatus:withType:WithID:]"
+                  symbolName = "-[QYZJZhiFuVC payAction]"
                   moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E9%A6%96%E9%A1%B5/VC/QYZJMinePayDetailVC.m"
+                  urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E9%A6%96%E9%A1%B5/VC/QYZJZhiFuVC.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "702"
-                  endingLineNumber = "702"
-                  offsetFromSymbolStart = "406">
+                  startingLineNumber = "147"
+                  endingLineNumber = "147"
+                  offsetFromSymbolStart = "1571">
                </Location>
                <Location
-                  uuid = "204490E8-EA6C-4626-912C-F405B43585E4 - 1c2a8d4cba4fa001"
+                  uuid = "36FFD2D5-14D6-4DD2-AAE1-46DAD84D74EC - ed3544d1a257b073"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__69-[QYZJMinePayDetailVC changeTurnoverCheckWithStatus:withType:WithID:]_block_invoke"
+                  symbolName = "__24-[QYZJZhiFuVC payAction]_block_invoke"
                   moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E9%A6%96%E9%A1%B5/VC/QYZJMinePayDetailVC.m"
+                  urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E9%A6%96%E9%A1%B5/VC/QYZJZhiFuVC.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "702"
-                  endingLineNumber = "702"
-                  offsetFromSymbolStart = "15">
+                  startingLineNumber = "149"
+                  endingLineNumber = "149"
+                  offsetFromSymbolStart = "69">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -98,48 +82,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E383B78C-BAD5-44A7-8330-8C22E84F2E9D"
+            uuid = "634CE5CC-C30D-4E57-9A93-49224B1860B2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJMinePayDetailVC.m"
+            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJZhiFuVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "519"
-            endingLineNumber = "519"
-            landmarkName = "-didclickQYZJConstructionListCell:withIndex:isNeiClick:NeiRow:"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "-clickAction:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CF591432-5EC2-4ED0-A8B9-15E2AC3F3288"
+            uuid = "72CA1124-3758-4293-8617-F55DABB3841E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJAddWorkMomentTVC.m"
+            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJZhiFuVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "285"
-            endingLineNumber = "285"
-            landmarkName = "-createHeadV"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "-clickAction:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4DBD280B-680F-4E46-8818-B7D53457F7A8"
+            uuid = "0C04C10E-BE3B-47C0-8FE1-29D6232485EA"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJMinePayDetailVC.m"
+            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJZhiFuVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "551"
-            endingLineNumber = "551"
-            landmarkName = "-didclickQYZJConstructionListCell:withIndex:isNeiClick:NeiRow:"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "-clickAction:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

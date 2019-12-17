@@ -162,10 +162,13 @@
      NSInteger  sta = [[NSString stringWithFormat:@"%@",self.dataDict[@"status"]] intValue];
     // 0是未付款1已付款待发货 2卖家已发货买家待确认 3:待评价 4：交易关闭
     if (sta == 0) {
+        
+        
+        
          QYZJZhiFuVC* vc =[[QYZJZhiFuVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
-        vc.osn = self.dataModel.osn;
-        vc.money = [self.dataModel.goods_price floatValue];
+//        vc.osn = self.dataModel.osn;
+//        vc.money = [self.dataModel.goods_price floatValue];
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (sta == 1) {

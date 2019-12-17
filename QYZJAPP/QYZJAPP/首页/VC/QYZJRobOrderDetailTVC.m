@@ -506,10 +506,11 @@
                     [button setTitle:@"与客服沟通语音" forState:UIControlStateNormal];
                 };
             }else {
+                QYZJTongYongModel * mm = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
                 QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
                 vc.hidesBottomBarWhenPushed = YES;
-                vc.type = 0;
-                vc.money = [[NSString stringWithFormat:@"%@",responseObject[@"result"][@"money"]] floatValue];
+                vc.type = 4;
+                vc.model = mm;
                 [self.navigationController pushViewController:vc animated:YES];
             }
         }else {

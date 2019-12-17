@@ -93,22 +93,20 @@
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             
+            QYZJTongYongModel * model = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
+            
             QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
-            vc.osn = responseObject[@"result"][@"osn"];
-            vc.money = money;
+            vc.model = model;
+            vc.type = 3;
             [self.navigationController pushViewController:vc animated:YES];
             
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
         }
-        
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
-
+    
     }];
-    
-    
 }
 
 

@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJFindModel : NSObject
+
 @property(nonatomic,strong)NSString *ID;
 @property(nonatomic,strong)NSString *userId;
 @property(nonatomic,strong)NSString *shopName;
@@ -22,7 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *areaStr;
 @property(nonatomic,strong)NSString *cityStr;
 @property(nonatomic,strong)NSString *pic;
-@property(nonatomic,strong)NSString *pics;
+@property(nonatomic,strong)NSString *des;
+@property(nonatomic,strong)NSString *evaluateCon;
 @property(nonatomic,strong)NSString *picUrl;
 @property(nonatomic,strong)NSString *video;
 @property(nonatomic,strong)NSString *videoUrl;
@@ -123,6 +125,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray *videos;
 @property(nonatomic,strong)NSMutableArray *pictures;
 @property(nonatomic,strong)NSMutableArray *change_table_urls;
+@property(nonatomic,strong)NSArray *pics;
 
 @property(nonatomic,assign)BOOL isReturn;
 @property(nonatomic,assign)BOOL isMy;
@@ -148,6 +151,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL  is_pay;
 @property(nonatomic,assign)BOOL is_realname;
 @property(nonatomic,assign)BOOL is_notice;
+@property(nonatomic,assign)BOOL   isRepair;
+@property(nonatomic,assign)BOOL isOverRepairTime;
 
 @property(nonatomic,assign)NSInteger goodsNum;
 @property(nonatomic,assign)NSInteger commentNum;
@@ -166,6 +171,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)NSInteger manner_id;
 @property(nonatomic,assign)NSInteger house_model_id;
 @property(nonatomic,assign)NSInteger renovation_time_id;
+@property(nonatomic,assign)NSInteger year;
+@property(nonatomic,assign)NSInteger evaluateLevel;
 
 
 @property(nonatomic,assign)CGFloat all_days;

@@ -292,7 +292,7 @@
     self.tableView.tableHeaderView = self.headV;
     self.headV.backgroundColor = self.whiteOneV.backgroundColor = self.whiteTwoV.backgroundColor = WhiteColor;
     if (self.dataModel != nil) {
-        self.picsArr = [self.dataModel.pics componentsSeparatedByString:@","].mutableCopy;
+        self.picsArr = [self.dataModel.pic componentsSeparatedByString:@","].mutableCopy;
         [self addPicsWithArr:self.picsArr];
     }
    

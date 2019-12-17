@@ -136,8 +136,8 @@
     }else if ([model.status intValue] == 0) {
         QYZJZhiFuVC* vc =[[QYZJZhiFuVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
-        vc.osn = model.osn;
-        vc.money = [model.goods_price floatValue];
+//        vc.osn = model.osn;
+//        vc.money = [model.goods_price floatValue];
         [self.navigationController pushViewController:vc animated:YES];
     }else if ([model.status intValue] ==3) {
         QYZJPingJiaTVC * vc =[[QYZJPingJiaTVC alloc] init];

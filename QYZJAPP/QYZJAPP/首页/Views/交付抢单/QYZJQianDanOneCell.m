@@ -73,16 +73,14 @@
         isOrangeCoclor = YES;
         
     }else if ([model.user_status intValue] == 7) {
-        self.statusLB.text = @"佣金支付";
+        self.statusLB.text = @"支付佣金";
         isOrangeCoclor = YES;
         
     }else if ([model.user_status intValue] == 8) {
-        self.statusLB.text = @"交付中";
+        self.statusLB.text = @"已完善";
         isOrangeCoclor = YES;
     }else if ([model.user_status intValue] == 9) {
-        self.statusLB.text = @"施工中";
-        isOrangeCoclor = YES;
-        
+        self.statusLB.text = @"已关闭";
     }else if ([model.user_status intValue] == 10) {
         self.statusLB.text = @"交付中";
         isOrangeCoclor = YES;
