@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="103" id="KGk-i7-Jjw" customClass="QYZJBaoXiuYearCell">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="103"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="103"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMk-in-6o5">
+                        <rect key="frame" x="10" y="43" width="269" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="6i9-wf-OOz"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入保修时间" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gf1-DE-VaX">
+                        <rect key="frame" x="284" y="42.5" width="100" height="18.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="XYE-Ln-gfZ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                    </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="年" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPq-4N-OBS">
+                        <rect key="frame" x="384" y="43" width="20" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="vny-7D-lLn"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="pPq-4N-OBS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="1Ge-1e-VkJ"/>
+                    <constraint firstItem="pPq-4N-OBS" firstAttribute="leading" secondItem="Gf1-DE-VaX" secondAttribute="trailing" id="5Hv-iU-ca2"/>
+                    <constraint firstAttribute="trailing" secondItem="pPq-4N-OBS" secondAttribute="trailing" constant="10" id="L0y-Yt-of3"/>
+                    <constraint firstItem="Gf1-DE-VaX" firstAttribute="leading" secondItem="YMk-in-6o5" secondAttribute="trailing" constant="5" id="N2W-Gh-kVi"/>
+                    <constraint firstItem="YMk-in-6o5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="e3e-J5-bst"/>
+                    <constraint firstItem="Gf1-DE-VaX" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xME-Fk-12e"/>
+                    <constraint firstItem="YMk-in-6o5" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="y9g-lz-Ah4"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="leftLB" destination="YMk-in-6o5" id="iJc-BY-tuX"/>
+                <outlet property="numberTF" destination="Gf1-DE-VaX" id="DFu-ud-wDI"/>
+            </connections>
+            <point key="canvasLocation" x="109" y="95"/>
+        </tableViewCell>
+    </objects>
+</document>

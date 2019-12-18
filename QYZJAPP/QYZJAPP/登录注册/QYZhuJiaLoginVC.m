@@ -58,13 +58,13 @@
             [SVProgressHUD showErrorWithStatus:@"请输入密码"];
             return;
         }
-        if (self.passWordTF.text.length > 15 || self.passWordTF.text.length < 8) {
-                   [SVProgressHUD showErrorWithStatus:@"请输入8~15位密码"];
-                   return;
-        }
-        if (![NSString checkStingContainLetterAndNumberWithString:self.passWordTF.text]) {
-            [SVProgressHUD showErrorWithStatus:@"密码至少包含一个数字和英文字母的混合"];
-        }
+//        if (self.passWordTF.text.length > 15 || self.passWordTF.text.length < 8) {
+//                   [SVProgressHUD showErrorWithStatus:@"请输入8~15位密码"];
+//                   return;
+//        }
+//        if (![NSString checkStingContainLetterAndNumberWithString:self.passWordTF.text]) {
+//            [SVProgressHUD showErrorWithStatus:@"密码至少包含一个数字和英文字母的混合"];
+//        }
         
         NSMutableDictionary * dict = @{}.mutableCopy;
         dict[@"mobile"] = self.phoneTF.text;

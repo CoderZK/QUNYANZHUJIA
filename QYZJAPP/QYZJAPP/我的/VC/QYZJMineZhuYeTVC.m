@@ -86,15 +86,34 @@
     
     self.leftArr = @[@"案例",@"小店",@"回答的所有语音"];
     
-    KKKKFootView * view =  [[PublicFuntionTool shareTool] createFootvTwoWithLeftTitle:@"1元预约" letfTietelColor:OrangeColor rightTitle:@"1元提问" rightColor:WhiteColor];
-    view.mj_y = ScreenH  - 60;
-    if (sstatusHeight>20){
-        view.mj_y = ScreenH  - 60 - 34;
+ 
+    
+}
+
+- (void)setFootV {
+    
+    KKKKFootView * vv = (KKKKFootView *)[self.view viewWithTag:666];
+    if (vv != nil) {
+        [vv removeFromSuperview];
     }
-     view.footViewClickBlock = ^(UIButton *button) {
-              NSLog(@"\n\n%@",@"完成");
-    };
-    [self.view addSubview:view];
+    KKKKFootView * view =  [[PublicFuntionTool shareTool] createFootvTwoWithLeftTitle:[NSString stringWithFormat:@"%0.2f元预约",self.dataModel.appoint_price] letfTietelColor:OrangeColor rightTitle:[NSString stringWithFormat:@"%0.2f元提问",self.dataModel.question_price] rightColor:WhiteColor];
+     view.mj_y = ScreenH  - 60;
+    view.tag = 666;
+     if (sstatusHeight>20){
+         view.mj_y = ScreenH  - 60 - 34;
+     }
+      view.footViewClickBlock = ^(UIButton *button) {
+               NSLog(@"\n\n%@",@"完成");
+     };
+     [self.view addSubview:view];
+    
+}
+
+
+- (void)appointOrQuestionAction:(NSInteger)index {
+    
+    
+    
     
 }
 
@@ -118,6 +137,9 @@
             
             self.dataModel.is_follow = !self.dataModel.is_follow;
             self.headV.dataModel = self.dataModel;
+            
+            
+            
             
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
@@ -153,6 +175,9 @@
             self.tableView.tableHeaderView = self.headV;
             
             [self.tableView reloadData];
+            
+            [self setFootV];
+            
             
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];

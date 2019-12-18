@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,strong)NSString *ID;
 @property(nonatomic,strong)NSString *userId;
+@property(nonatomic,strong)NSString *turnoverListId;
 @property(nonatomic,strong)NSString *shopName;
 @property(nonatomic,strong)NSString *cityId;
 @property(nonatomic,strong)NSString *pro_id;
@@ -121,7 +122,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *answerList;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *broadcastReply;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *apponitUsers;
-
+@property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *repairSelf;
 @property(nonatomic,strong)NSMutableArray *videos;
 @property(nonatomic,strong)NSMutableArray *pictures;
 @property(nonatomic,strong)NSMutableArray *change_table_urls;

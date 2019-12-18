@@ -24,6 +24,7 @@
 @property (nonatomic,strong)NSDictionary *payDic;
 @property(nonatomic,assign)NSInteger payType;
 
+
 @end
 
 @implementation QYZJZhiFuVC
@@ -75,11 +76,17 @@
         self.payType = sender.tag - 100;
         
     }else {
-        [LLPassWordAlertView showWithTitle:@"支付密码" desStr:@"请输入支付密码" finish:^(NSString *pwStr) {
-            
-            [self checkPayPasswordWith:pwStr];
-            
-        }];
+        
+        if (self.type == 0) {
+            [LLPassWordAlertView showWithTitle:@"支付密码" desStr:@"请输入支付密码" finish:^(NSString *pwStr) {
+                       [self checkPayPasswordWith:pwStr];
+                       
+                   }];
+        }else {
+            [self payAction];
+        }
+        
+       
     }
 }
 
@@ -132,6 +139,7 @@
     dict[@"type"] = @(self.type);
     dict[@"id"] = self.ID;
     dict[@"turnover_type"] = @(self.type - 6);
+    dict[@"ip"] = @"222.188.249.142";
     NSString * url = [QYZJURLDefineTool user_createBalanceOrderURL];
    
     if (self.payType == 1) {
@@ -150,6 +158,15 @@
         if ([responseObject[@"key"] intValue]== 1) {
             
             
+            if (self.payType == 1) {
+                self.payDic = responseObject[@"result"];
+                [self goWXpay];
+            }else {
+                self.payDic = responseObject;
+                [self goZFB];
+            }
+            
+            
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
         }
@@ -164,36 +181,39 @@
 }
 
 
-//NSMutableDictionary * dict = @{}.mutableCopy;
-//dict[@"demand_id"] = ID;
-//dict[@"pay_money"] = @(money);
-//[zkRequestTool networkingPOST:[QYZJURLDefineTool user_payDemandURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-//
-//    [SVProgressHUD dismiss];
-//    if ([responseObject[@"key"] intValue]== 1) {
-//       
-//       
-//        
-//    }else {
-//        [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
-//    }
-//    
-//} failure:^(NSURLSessionDataTask *task, NSError *error) {
-//    
-// 
-//    
-//}];
+//微信支付结果处理
+- (void)WXPAY:(NSNotification *)no {
+    
+    BaseResp * resp = no.object;
+    if (resp.errCode==WXSuccess)
+    {
+        
+        [SVProgressHUD showSuccessWithStatus:@"帖子置顶成功!"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.navigationController popViewControllerAnimated:YES];
+        });
+    }
+    else if (resp.errCode==WXErrCodeUserCancel)
+    {
+        [SVProgressHUD showErrorWithStatus:@"用户取消支付"];
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:@"支付失败"];
+    }
+    
+}
 
 
 
 #pragma mark -微信、支付宝支付
 - (void)goWXpay {
     PayReq * req = [[PayReq alloc]init];
-    req.partnerId = [NSString stringWithFormat:@"%@",self.payDic[@"partnerId"]];
-    req.prepayId =  [NSString stringWithFormat:@"%@",self.payDic[@"prepayId"]];
-    req.nonceStr =  [NSString stringWithFormat:@"%@",self.payDic[@"nonceStr"]];
+    req.partnerId = [NSString stringWithFormat:@"%@",self.payDic[@"partnerid"]];
+    req.prepayId =  [NSString stringWithFormat:@"%@",self.payDic[@"prepayid"]];
+    req.nonceStr =  [NSString stringWithFormat:@"%@",self.payDic[@"noncestr"]];
     //注意此处是int 类型
-    req.timeStamp = [self.payDic[@"timeStamp"] intValue];
+    req.timeStamp = [self.payDic[@"timestamp"] intValue];
     req.package =  [NSString stringWithFormat:@"%@",self.payDic[@"package"]];
     req.sign =  [NSString stringWithFormat:@"%@",self.payDic[@"sign"]];
     
@@ -231,13 +251,13 @@
 - (void)goZFB{
 
     
-    [[AlipaySDK defaultService] payOrder:self.payDic[@"prepayId"] fromScheme:@"com.houhuayuan.app" callback:^(NSDictionary *resultDic) {
+    [[AlipaySDK defaultService] payOrder:self.payDic[@"result"] fromScheme:@"com.qyzj.app" callback:^(NSDictionary *resultDic) {
         if ([resultDic[@"resultStatus"] isEqualToString:@"6001"]) {
             //用户取消支付
             [SVProgressHUD showErrorWithStatus:@"用户取消支付"];
         } else if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
             
-            [SVProgressHUD showSuccessWithStatus:@"帖子置顶成功!"];
+            [SVProgressHUD showSuccessWithStatus:@"支付成功"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });
@@ -257,7 +277,7 @@
         
     } else if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
         
-        [SVProgressHUD showSuccessWithStatus:@"帖子置顶成功!"];
+        [SVProgressHUD showSuccessWithStatus:@"支付成功"];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.navigationController popViewControllerAnimated:YES];
         });

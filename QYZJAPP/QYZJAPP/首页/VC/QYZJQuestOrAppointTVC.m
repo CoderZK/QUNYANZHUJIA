@@ -1,66 +1,39 @@
 //
-//  QYZJAddWorkMomentTVC.m
+//  QYZJQuestOrAppointTVC.m
 //  QYZJAPP
 //
-//  Created by zk on 2019/11/19.
+//  Created by zk on 2019/12/18.
 //  Copyright © 2019 kunzhang. All rights reserved.
 //
 
-#import "QYZJAddWorkMomentTVC.h"
+#import "QYZJQuestOrAppointTVC.h"
 
-@interface QYZJAddWorkMomentTVC ()<TZImagePickerControllerDelegate>
+@interface QYZJQuestOrAppointTVC ()<TZImagePickerControllerDelegate>
 @property(nonatomic,strong)UITextField *titleTF;
 @property(nonatomic,strong)IQTextView * desTV;
-@property(nonatomic,strong)UIView *whiteOneV,*whiteTwoV;
+@property(nonatomic,strong)UIView *whiteOneV,*whiteTwoV,*whiteThreeV,*whiteFourV;
 @property(nonatomic,strong)UIImageView *videoImgV;
-@property(nonatomic,strong)UIButton *addBt;
+@property(nonatomic,strong)UIButton *addBt,*luyinBt,*listBt;
 @property(nonatomic,strong)UIView *headV;
 @property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)NSMutableArray *picsArr;
 @property(nonatomic,strong)NSString *videoStr;
-@property(nonatomic,assign)BOOL   isChooseVideo;
-@property(nonatomic,strong)UIButton *deleteBt;
-//@property(nonatomic,strong)UILabel *lb4;
-
 @property(nonatomic,strong)QYZJTongYongModel *imgModel,*videoModel;
-
-
+@property(nonatomic,strong)UIButton *deleteBt;
+@property(nonatomic,assign)BOOL   isChooseVideo;
 @end
 
-@implementation QYZJAddWorkMomentTVC
+@implementation QYZJQuestOrAppointTVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = @"快捷提问";
     
     [self setFootV];
     [self createHeadV];
     self.picsArr = @[].mutableCopy;
-    if (self.type == 4 && self.picsArrTwo.count > 0) {
-        self.picsArr = self.picsArrTwo;
-    }
-   
-    [self addPicsWithArr:self.picsArr];
-    self.videoStr = nil;
-    self.navigationItem.title = @"创建施工阶段";
-    if (self.type == 1) {
-        self.navigationItem.title = @"修改案例";
-    }else if (self.type == 2) {
-        self.navigationItem.title = @"创建播报";
-    }else if (self.type == 3) {
-        self.navigationItem.title = @"创建案例";
-    }else if (self.type == 4) {
-        self.navigationItem.title = @"创建播报";
-    }else if (self.type == 5) {
-        self.navigationItem.title = @"创建播报";
-    }else if (self.type == 6 || self.type == 7) {
-        self.navigationItem.title = @"创建报修";
-    }    self.tableView.backgroundColor =[UIColor groupTableViewBackgroundColor];
-    
-    
     [self getImgDict];
-     [self getVideoDict];
-    self.titleTF.text = self.titleStr;
-    
+        [self getVideoDict];
     
 }
 
@@ -78,109 +51,10 @@
     
 }
 
-- (void)setFootV {
-    self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - 60);
-    if (sstatusHeight > 20) {
-        self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34);
-    }
-    
-    
-    KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"完成" andImgaeName:@""];
-    
-    if (self.type == 1) {
-        view.titleStr = @"发布";
-    }
-    Weak(weakSelf);
-        view.footViewClickBlock = ^(UIButton *button) {
-            [weakSelf FaBuAction];
-       };
-    [self.view addSubview:view];
-}
-
-- (void)FaBuAction {
-    
-    if (self.titleTF.text.length ==0 && !(self.type == 7 || self.type == 6)) {
-           [SVProgressHUD showErrorWithStatus:@"请输入标题"];
-           return;
-       }
-    if (self.desTV.text.length == 0) {
-        [SVProgressHUD showErrorWithStatus:@"请输入动态内容"];
-        return;
-    }
-
-    [SVProgressHUD show];
-    
-    NSString * url = [QYZJURLDefineTool user_createConstructionURL];
-    if (self.type == 1) {
-        url = [QYZJURLDefineTool user_updateCaseURL];
-    }else if (self.type == 2) {
-        url = [QYZJURLDefineTool user_createRepairBroadcastURL];
-    }else if (self.type == 3) {
-        url = [QYZJURLDefineTool user_addCaseURL];
-    }else if (self.type == 4) {
-        url = [QYZJURLDefineTool user_constructionEditURL];
-    }else if (self.type == 5) {
-        url = [QYZJURLDefineTool user_createBroadcastURL];
-    }else if (self.type == 6 || self.type == 7) {
-        url = [QYZJURLDefineTool user_createRepairURL];
-    }
-    NSMutableDictionary * dict = @{}.mutableCopy;
-    dict[@"constructionStageId"] = self.ID;
-    dict[@"videoUrl"] = self.videoStr;
-    dict[@"video_url"] = self.videoStr;
-    dict[@"picUrl"] = [self.picsArr componentsJoinedByString:@","];
-    dict[@"pic"] = [self.picsArr componentsJoinedByString:@","];
-    dict[@"content"] = self.desTV.text;
-    dict[@"con"] = self.desTV.text;
-    dict[@"description"] = self.desTV.text;
-    dict[@"title"] = self.titleTF.text;
-    dict[@"context"] = self.titleTF.text;
-    dict[@"stageName"] = self.titleTF.text;
-    dict[@"id"] = self.ID;
-    dict[@"turnoverListId"] = self.ID;
-    dict[@"price"] = @(self.price);
-    dict[@"changeType"] = @(self.changeType);
-    dict[@"videoUrl"] = self.videoStr;
-    if (self.type == 4 || self.type == 6 || self.type == 7) {
-        dict[@"turnoverListId"] = self.IDTwo;
-    }
-    [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-        [self.tableView.mj_header endRefreshing];
-        [self.tableView.mj_footer endRefreshing];
-        [SVProgressHUD dismiss];
-        if ([responseObject[@"key"] intValue]== 1) {
-            if (self.type == 1) {
-               [SVProgressHUD showSuccessWithStatus:@"修改例成功"];
-            }else if (self.type == 2 || self.type == 5) {
-                [SVProgressHUD showSuccessWithStatus:@"添加播报成功"];
-            }else if (self.type == 3) {
-                [SVProgressHUD showSuccessWithStatus:@"创建案例成功"];
-            }else if (self.type == 4) {
-                [SVProgressHUD showSuccessWithStatus:@"修改阶段成功"];
-            }
-            
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.navigationController popViewControllerAnimated:YES];
-            });
-            
-        }else {
-            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
-        }
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
-        [self.tableView.mj_header endRefreshing];
-        [self.tableView.mj_footer endRefreshing];
-        
-    }];
-    
-}
-
-
-
 
 - (void)createHeadV {
     
+
     self.headV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 20)];
     self.headV.backgroundColor = WhiteColor;
     UILabel * lb1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 80, 20)];
@@ -192,116 +66,130 @@
     self.titleTF = [[UITextField alloc] initWithFrame:CGRectMake(100, 10, ScreenW - 110, 30)];
     self.titleTF.font = kFont(14);
     self.titleTF.placeholder = @"请输入标题";
-    self.titleTF.text = self.titleStr;
     [self.headV addSubview:self.titleTF];
     
-    UIView * backV1 =[[UIView alloc] initWithFrame:CGRectMake(0, 50, ScreenW, 0.6)];
-    backV1.backgroundColor = lineBackColor;
-    
-    if (self.type == 6 || self.type == 7) {
-        backV1.mj_y = 0;
-        self.titleTF.hidden = lb1.hidden = YES;
-    }
-    
-    [self.headV addSubview:backV1];
+     UIView * backV1 =[[UIView alloc] initWithFrame:CGRectMake(0, 50, ScreenW, 0.6)];
+     backV1.backgroundColor = lineBackColor;
+
+    self.whiteThreeV = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(backV1.frame), ScreenW, 135)];
+    self.whiteThreeV.backgroundColor = WhiteColor;
     
     
-    UILabel * lb2 = [[UILabel alloc] initWithFrame:CGRectMake(10,  CGRectGetMaxY(backV1.frame) + 30, 80, 20)];
-    lb2.textColor = CharacterBlack112;
-    lb2.font = kFont(14);
-    lb2.text = @"阶段描述";
-    if (self.type == 1 || self.type == 3) {
-        lb2.text = @"内容";
-    }else if (self.type == 2) {
-        lb2.text = @"播报描述";
-    }
-    [self.headV addSubview:lb2];
+    UILabel * leftLB = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 80, 20)];
+   leftLB.font = kFont(15);
+   leftLB.textColor = CharacterBlackColor;
+   leftLB.text = @"需求描述";
+   [self.whiteThreeV addSubview:leftLB];
+           
+   self.desTV = [[IQTextView alloc] initWithFrame:CGRectMake(95 , 10, ScreenW - 110, 60)];
+   self.desTV.textAlignment = NSTextAlignmentLeft;
+   self.desTV.placeholder = @"请输入需求描述";
+   self.desTV.textColor = CharacterBlackColor;
+   self.desTV.font = kFont(14);
+   [self.whiteThreeV addSubview:self.desTV];
+               
+   self.luyinBt = [[UIButton alloc] initWithFrame:CGRectMake(100, 80, 45, 45)];
+   [self.luyinBt setBackgroundImage:[UIImage imageNamed:@"luyin"] forState:UIControlStateNormal];
+   [self.whiteThreeV addSubview:self.luyinBt];
+   
+   self.listBt = [[UIButton alloc] initWithFrame:CGRectMake(155, 90, ScreenW - 155 - 20, 25)];
+   [self.listBt setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
+   [self.listBt setImage:[UIImage imageNamed:@"sy"] forState:UIControlStateNormal];
+   [self.listBt setTitle:@"32" forState:UIControlStateNormal];
+   self.listBt.titleLabel.font = kFont(14);
+   self.listBt.layer.cornerRadius = 12.5;
+   self.listBt.clipsToBounds = YES;
+   self.listBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+   [self.listBt setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 15)];
+   [self.listBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 25, 0,  0)];
+   [self.whiteThreeV addSubview:self.listBt];
+   
+   UIView * backV5 =[[UIView alloc] initWithFrame:CGRectMake(0, 134.4, ScreenW, 0.6)];
+   backV5.backgroundColor = [UIColor clearColor];
+   [self.whiteThreeV addSubview:backV5];
     
     
-    self.desTV = [[IQTextView alloc] initWithFrame:CGRectMake(95, CGRectGetMaxY(backV1.frame) + 10, ScreenW - 110, 60)];
-    self.desTV.font = kFont(14);
-    self.desTV.placeholder = @"请输入阶段描述";
-    if (self.type == 1 || self.type == 3) {
-        self.desTV.placeholder = @"请输入内容";
-    }else if (self.type == 2) {
-        self.desTV.placeholder = @"请输入播报描述";
-    }
-    [self.headV addSubview:self.desTV];
-    self.desTV.text = self.contentStr;
-    UIView * backV2 =[[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.desTV.frame) + 10, ScreenW, 0.6)];
-    backV2.backgroundColor = lineBackColor;
-    [self.headV addSubview:backV2];
+     CGFloat ww = 90;
+      self.whiteOneV = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.whiteThreeV.frame), ScreenW, ww+40)];
+      UIView * backV =[[UIView alloc] initWithFrame:CGRectMake(0, self.whiteOneV.mj_h - 0.6, ScreenW, 0.6)];
+      backV.backgroundColor = lineBackColor;
+      [self.whiteOneV addSubview:backV];
+      self.whiteOneV.backgroundColor = WhiteColor;
+      
+      
+      
+      UILabel * lb3 = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 80, self.whiteOneV.frame.size.height-20)];
+      lb3.textColor = CharacterBlack112;
+      lb3.font = kFont(14);
+      lb3.text = @"图片";
+      [self.whiteOneV addSubview:lb3];
+      [self.headV addSubview:self.whiteOneV];
+      
+      self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(100, 10, ScreenW-110, ww+20)];
+      self.scrollView.showsVerticalScrollIndicator = NO;
+      [self.whiteOneV addSubview:self.scrollView];
+      
+      
+      self.whiteTwoV = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.whiteOneV.frame), ScreenW,   ww+20)];
+      self.whiteTwoV.backgroundColor = WhiteColor;
+      
+      UILabel * lb4 = [[UILabel alloc] init];//WithFrame:CGRectMake(10, 10, 80, ww)];
+      lb4.textColor = CharacterBlack112;
+      lb4.font = kFont(14);
+      lb4.text = @"视频";
+      [self.whiteTwoV addSubview:lb4];
+      [lb4 mas_makeConstraints:^(MASConstraintMaker *make) {
+          make.top.bottom.equalTo(self.whiteTwoV);
+          make.left.equalTo(self.whiteTwoV).offset(10);
+          make.width.equalTo(@80);
+      }];
+      self.addBt = [[UIButton alloc] initWithFrame:CGRectMake(100, 10, ww, ww)];
+      [self.addBt setBackgroundImage:[UIImage imageNamed:@"tianjia"] forState:UIControlStateNormal];
+      [self.addBt addTarget:self action:@selector(addVideoaction) forControlEvents:UIControlEventTouchUpInside];
+      [self.whiteTwoV addSubview:self.addBt];
+      
+      UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(100, 10, ScreenW - 110, (ScreenW - 110)*9/16)];
+      imageView.contentMode = UIViewContentModeScaleAspectFill;
+      imageView.clipsToBounds = YES;
+      imageView.userInteractionEnabled = YES;
+      [self.whiteTwoV addSubview:imageView];
+      [self.headV addSubview:self.whiteTwoV];
+      
+      self.videoImgV = imageView;
+      
+      UIButton * button = [[UIButton alloc]init];
+      button.frame = CGRectMake((ScreenW - 110)/2 - 25, ((ScreenW - 110)*9/16)/2-25, 50, 50);
+      [button setBackgroundImage:[UIImage imageNamed:@"6"] forState:UIControlStateNormal];
+      [imageView addSubview:button];
+      button.alpha = 0.8;
+      [button addTarget:self action:@selector(play) forControlEvents:UIControlEventTouchUpInside];
+      button.userInteractionEnabled = NO;
+      imageView.hidden = YES;
+      
+      UIButton * delectVideoBt = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) - 10, 3, 20, 20)];
+      [delectVideoBt setImage:[UIImage imageNamed:@"11"] forState:UIControlStateNormal];
+      [self.whiteTwoV addSubview:delectVideoBt];
+      self.deleteBt = delectVideoBt;
     
-    CGFloat ww = 90;
-    self.whiteOneV = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(backV2.frame), ScreenW, ww+40)];
-    UIView * backV =[[UIView alloc] initWithFrame:CGRectMake(0, self.whiteOneV.mj_h - 0.6, ScreenW, 0.6)];
-    backV.backgroundColor = lineBackColor;
-    [self.whiteOneV addSubview:backV];
-    self.whiteOneV.backgroundColor = WhiteColor;
     
-    
-    
-    UILabel * lb3 = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 80, self.whiteOneV.frame.size.height-20)];
-    lb3.textColor = CharacterBlack112;
-    lb3.font = kFont(14);
-    lb3.text = @"图片";
-    [self.whiteOneV addSubview:lb3];
-    [self.headV addSubview:self.whiteOneV];
-    
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(100, 10, ScreenW-110, ww+20)];
-    self.scrollView.showsVerticalScrollIndicator = NO;
-    [self.whiteOneV addSubview:self.scrollView];
-    
-    
-    self.whiteTwoV = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.whiteOneV.frame), ScreenW,   ww+20)];
-    self.whiteTwoV.backgroundColor = WhiteColor;
-    
-    UILabel * lb4 = [[UILabel alloc] init];//WithFrame:CGRectMake(10, 10, 80, ww)];
-    lb4.textColor = CharacterBlack112;
-    lb4.font = kFont(14);
-    lb4.text = @"视频";
-    [self.whiteTwoV addSubview:lb4];
-    [lb4 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self.whiteTwoV);
-        make.left.equalTo(self.whiteTwoV).offset(10);
-        make.width.equalTo(@80);
-    }];
-    self.addBt = [[UIButton alloc] initWithFrame:CGRectMake(100, 10, ww, ww)];
-    [self.addBt setBackgroundImage:[UIImage imageNamed:@"tianjia"] forState:UIControlStateNormal];
-    [self.addBt addTarget:self action:@selector(addVideoaction) forControlEvents:UIControlEventTouchUpInside];
-    [self.whiteTwoV addSubview:self.addBt];
-    
-    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(100, 10, ScreenW - 110, (ScreenW - 110)*9/16)];
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.clipsToBounds = YES;
-    imageView.userInteractionEnabled = YES;
-    [self.whiteTwoV addSubview:imageView];
-    [self.headV addSubview:self.whiteTwoV];
-    
-    self.videoImgV = imageView;
-    
-    UIButton * button = [[UIButton alloc]init];
-    button.frame = CGRectMake((ScreenW - 110)/2 - 25, ((ScreenW - 110)*9/16)/2-25, 50, 50);
-    [button setBackgroundImage:[UIImage imageNamed:@"6"] forState:UIControlStateNormal];
-    [imageView addSubview:button];
-    button.alpha = 0.8;
-    [button addTarget:self action:@selector(play) forControlEvents:UIControlEventTouchUpInside];
-    button.userInteractionEnabled = NO;
-    imageView.hidden = YES;
-    
-    UIButton * delectVideoBt = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) - 10, 3, 20, 20)];
-    [delectVideoBt setImage:[UIImage imageNamed:@"11"] forState:UIControlStateNormal];
-    [self.whiteTwoV addSubview:delectVideoBt];
-    self.deleteBt = delectVideoBt;
-    
-    self.headV.mj_h = CGRectGetMaxY(self.whiteTwoV.frame);
-    self.tableView.tableHeaderView = self.headV;
-    self.headV.backgroundColor = self.whiteOneV.backgroundColor = self.whiteTwoV.backgroundColor = WhiteColor;
-    
-    self.videoStr = self.videoUrl;
     
 }
 
+- (void)setFootV {
+    self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - 60);
+    if (sstatusHeight > 20) {
+        self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34);
+    }
+    
+    
+    KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"完成" andImgaeName:@""];
+  
+    Weak(weakSelf);
+    view.footViewClickBlock = ^(UIButton *button) {
+           
+    };
+    [self.view addSubview:view];
+}
 
 - (void)setVideoStr:(NSString *)videoStr {
     _videoStr = videoStr;
@@ -312,6 +200,7 @@
         self.videoImgV.hidden =self.deleteBt.hidden = YES;
         self.headV.mj_h = CGRectGetMaxY(self.whiteTwoV.frame);
         self.tableView.tableHeaderView = self.headV;
+        self.whiteFourV.mj_y = CGRectGetMaxY(self.whiteTwoV.frame);
         
     }else {
         self.addBt.hidden = YES;
@@ -320,6 +209,7 @@
         self.videoImgV.image = [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:[QYZJURLDefineTool getVideoURLWithStr:videoStr]] size:CGSizeMake((ScreenW - 110), (ScreenW - 110)*9/16)];
         self.headV.mj_h = CGRectGetMaxY(self.whiteTwoV.frame);
         self.tableView.tableHeaderView = self.headV;
+        self.whiteFourV.mj_y = CGRectGetMaxY(self.whiteTwoV.frame);
         
     }
 }
@@ -455,11 +345,7 @@
         }
     }];
     
-    if (self.isChooseVideo) {
-        
-    }else {
-        
-    }
+  
     
     UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     [ac addAction:action1];
@@ -531,6 +417,8 @@
     }];
 
 }
+
+
 
 
 @end

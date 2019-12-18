@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *passWordTwoTF;
 @property (weak, nonatomic) IBOutlet UIButton *codeBt;
 @property (weak, nonatomic) IBOutlet UIButton *confrimBt;
+@property (weak, nonatomic) IBOutlet UITextField *inviteCeodeTF;
 
 @property(nonatomic,strong)NSTimer *timer;
 /** 注释 */
@@ -109,7 +110,8 @@
         return;
     }
     NSMutableDictionary * dataDict = @{@"phone":self.phoneTF.text}.mutableCopy;
-    dataDict[@"code"] = self.codeTF.text;
+    dataDict[@"code"] = self.inviteCeodeTF.text;
+    dataDict[@"mobile_verify"] = self.codeTF.text;
     dataDict[@"password"] = [NSString stringToMD5:self.passWordTF.text];
     [zkRequestTool networkingPOST:[QYZJURLDefineTool app_sendmobileURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([responseObject[@"key"] intValue]== 1) {

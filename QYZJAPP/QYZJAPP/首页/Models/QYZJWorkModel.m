@@ -57,5 +57,8 @@
     _other = [QYZJWorkModel mj_objectArrayWithKeyValuesArray:other];
 }
 
+- (void)setRepairSelf:(NSMutableArray<QYZJWorkModel *> *)repairSelf {
+    _repairSelf = [QYZJWorkModel mj_objectArrayWithKeyValuesArray:repairSelf];
+}
 
 @end

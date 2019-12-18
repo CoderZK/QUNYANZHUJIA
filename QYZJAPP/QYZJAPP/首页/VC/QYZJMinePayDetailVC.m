@@ -20,6 +20,7 @@
 #import "QYZJMineBaoXiuDetailTVC.h"
 #import "QYZJQingDanPingJiaVC.h"
 #import "QYZJCreateShiGongQingDanTVC.h"
+#import "QYZJSetBaoXiuTVC.h"
 @interface QYZJMinePayDetailVC ()<QYZJChangeConstructionOneCellDelegate,QYZJConstructionListCellDelegate>
 @property(nonatomic,strong)NSArray *headTitleArr;
 @property(nonatomic,strong)QYZJWorkModel *dataModel;
@@ -27,6 +28,11 @@
 @end
 
 @implementation QYZJMinePayDetailVC
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getData];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,7 +48,6 @@
     //分为如下区,如果存在则展示,不存在则隐藏
     self.headTitleArr = @[@"",@"支付",@"合同",@"预算",@"图纸",@"变更相册",@"整体进度",@"施工",@"变更清单",@"实际施工阶段列表",@"变更施工阶段列表"];
     //    self.headTitleArr = @[@"",@"支付",@"合同",@"预算",@"图纸",@"变更相册",@"整体进度",@"施工",@"变更清单",@"实际施工阶段列表",@"变更施工阶段列表"];
-    [self getData];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self getData];
     }];
@@ -51,7 +56,7 @@
     
 }
 
-//0   // 1 创建施工清单 2 //等待客户 确认 3 //待支付 6 //待支付尾款
+//0   // 1 创建施工清单 2 //等待客户 确认 3 //待支付 6 //待支付尾款 7 设置保修时间
 - (void)setFootVWithStatus:(NSInteger)status {
     self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - 60 - sstatusHeight - 44);
     if (sstatusHeight > 20) {
@@ -63,11 +68,11 @@
         [view2 removeFromSuperview];
     }
     
-    if (!(status == 1 && !self.dataModel.demand.is_service) || !(status == 3 || status == 2 || status == 6)) {
+    if (!((!self.dataModel.demand.is_service && (status == 1||status == 7)) ||( self.dataModel.demand.is_service && (status == 2 || status == 3)))){
         self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - sstatusHeight - 44);
         return;
-        
     }
+    
        NSString * str = @"";
          if (status ==1) {
             str = @"创建施工清单";
@@ -77,6 +82,8 @@
              str = @"支付收款";
          }else if (status == 6) {
              str = @"支付尾款";
+         }else if (status == 7) {
+             str = @"设置保修时间";
          }
         KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:str andImgaeName:@""];
         view.tag = 666;
@@ -96,16 +103,25 @@
         vc.hidesBottomBarWhenPushed = YES;
         vc.ID = self.ID;
         [self.navigationController pushViewController:vc animated:YES];
+        return;
     }else if (status == 2) {
         //确认支付
         url = [QYZJURLDefineTool user_turnoverCheckURL];
         
     }else if (status == 3) {
-        //支付收款
-        
+        //支付首款
+         url = [QYZJURLDefineTool user_turnoverCheckURL];
     }else if (status == 6) {
         //支付尾款
          url = [QYZJURLDefineTool user_turnoverFinalPayURL];
+    }else if (status == 7) {
+        //设置保修时间
+        QYZJSetBaoXiuTVC * vc =[[QYZJSetBaoXiuTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.dataArray = self.dataModel.turnoverLists;
+        vc.ID = self.ID;
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
     }
     
     
@@ -178,7 +194,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 1;
-        
     }else if (section == 1) {
         return 2;
     }else if (section<=5) {
@@ -205,8 +220,13 @@
         }else {
             if (self.dataModel.turnoverListOrderFinal == nil) {
                 return 0;
+            }else {
+                if ([self.dataModel.turnoverListOrderFinal.status isEqualToString:@"0"]) {
+                    return 50;
+                }
+                return self.dataModel.turnoverListOrderFinal.cellHeight;
             }
-            return self.dataModel.turnoverListOrderFinal.cellHeight;
+            
         }
         return 110;
     }else if (indexPath.section == 2){
@@ -503,6 +523,7 @@
         QYZJHomePayCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomePayCell" forIndexPath:indexPath];
         cell.type = 1;
         cell.model = self.titleModel;
+        cell.lineV.hidden = YES;
         cell.clipsToBounds = YES;
         return cell;
     }else if (indexPath.section == 1) {
@@ -604,6 +625,7 @@
     modelNei.evaluateLevel = model.evaluateLevel;
     modelNei.evaluateCon = model.evaluateCon;
     modelNei.ID = model.ID;
+    modelNei.turnoverListId = model.turnoverListId;
     QYZJMineBaoXiuDetailTVC * vc =[[QYZJMineBaoXiuDetailTVC alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     vc.type = 1;
@@ -624,84 +646,123 @@
 }
 
 #pragma mark ---- 点击 提交验收 和修改 ---
-- (void)didclickQYZJConstructionListCell:(QYZJConstructionListCell *)cell withIndex:(NSInteger)index isNeiClick:(BOOL)isNei NeiRow:(NSInteger)row{
+- (void)didclickQYZJConstructionListCell:(QYZJConstructionListCell *)cell withIndex:(NSInteger)index isNeiClick:(BOOL)isNei NeiRow:(NSInteger)row isClickNeiCell:(BOOL)isClickNeiCell{
     
     NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
     QYZJWorkModel * model = nil;
-    if (isNei) {
-        
+    
+    if (isClickNeiCell) {
+        //点击的是内容部cell
         if (indexPath.section == 9) {
-            model = self.dataModel.constructionStage[indexPath.row].selfStage[row];
-        }else {
-            model = self.dataModel.changeConstructionStage[indexPath.row].selfStage[row];
-        }
+                model = self.dataModel.constructionStage[indexPath.row].selfStage[row];
+            }else {
+                model = self.dataModel.changeConstructionStage[indexPath.row].selfStage[row];
+            }
+  
+          QYZJFindModel * modelNei = [[QYZJFindModel alloc] init];
+          modelNei.nickName = model.stageName;
+          modelNei.content = model.des;
+          modelNei.time = model.time;
+          modelNei.pictures = model.pics.mutableCopy;
+          modelNei.videos = model.videos.mutableCopy;
+          modelNei.price = model.price;
+          modelNei.isOverRepairTime = model.isOverRepairTime;
+          modelNei.isRepair = model.isRepair;
+          modelNei.is_service = self.dataModel.demand.is_service;
+          modelNei.status = model.status;
+          modelNei.evaluateLevel = model.evaluateLevel;
+          modelNei.evaluateCon = model.evaluateCon;
+          modelNei.ID = model.ID;
+          modelNei.turnoverListId = model.turnoverListId;
+          QYZJMineBaoXiuDetailTVC * vc =[[QYZJMineBaoXiuDetailTVC alloc] init];
+          vc.hidesBottomBarWhenPushed = YES;
+          vc.type = 1;
+          vc.model = modelNei;
+          [self.navigationController pushViewController:vc animated:YES];
+        
+        
     }else {
         
-        if (indexPath.section == 9) {
-            model = self.dataModel.constructionStage[indexPath.row];
+        if (isNei) {
+            
+            if (indexPath.section == 9) {
+                model = self.dataModel.constructionStage[indexPath.row].selfStage[row];
+            }else {
+                model = self.dataModel.changeConstructionStage[indexPath.row].selfStage[row];
+            }
         }else {
-            model = self.dataModel.changeConstructionStage[indexPath.row];
+            
+            if (indexPath.section == 9) {
+                model = self.dataModel.constructionStage[indexPath.row];
+            }else {
+                model = self.dataModel.changeConstructionStage[indexPath.row];
+            }
         }
-    }
-    
-    
-    if (index == 0) {
-        //点击修改
         
-        QYZJAddWorkMomentTVC * vc =[[QYZJAddWorkMomentTVC alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        vc.ID = model.ID;
-        vc.picsArrTwo = model.pics.mutableCopy;
-        vc.videoUrl = model.videos.count > 0 ? [model.videos firstObject] : @"";
-        vc.titleStr = model.stageName;
-        vc.contentStr = model.des;
-        vc.type = 4;
-        vc.changeType = indexPath.section - 8;
-        vc.IDTwo = self.dataModel.turnoverList.ID;
-        [self.navigationController pushViewController:vc animated:YES];
+        
+        if (index == 0) {
+            //点击修改
+            
+            QYZJAddWorkMomentTVC * vc =[[QYZJAddWorkMomentTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.ID = model.ID;
+            vc.picsArrTwo = model.pics.mutableCopy;
+            vc.videoUrl = model.videos.count > 0 ? [model.videos firstObject] : @"";
+            vc.titleStr = model.stageName;
+            vc.contentStr = model.des;
+            vc.type = 4;
+            vc.changeType = indexPath.section - 8;
+            vc.IDTwo = self.dataModel.turnoverList.ID;
+            [self.navigationController pushViewController:vc animated:YES];
 
-    }else {
-          //点击验收或者提交验收
-          if (self.dataModel.demand.is_service) {
-              
-              if ([model.status isEqualToString:@"7"]) {
-                  QYZJQingDanPingJiaVC * vc =[[QYZJQingDanPingJiaVC alloc] init];
-                  vc.hidesBottomBarWhenPushed = YES;
-                  vc.ID = model.ID;
-                  [self.navigationController pushViewController:vc animated:YES];
-                  return;
-              }
-              
-              
-            //验收
-            UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"变更审核" message:@"请选择审核状态" preferredStyle:(UIAlertControllerStyleAlert)];
-            UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                
-            }];
-            UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"不通过" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                
-                [self yanShouOrTiaoJiaoWithUrl:[QYZJURLDefineTool user_turnoverStageNotPassURL] andID:model.ID isYanShou:YES];
-                
-            }];
-            UIAlertAction * action3 = [UIAlertAction actionWithTitle:@"通过" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                
-                [self yanShouOrTiaoJiaoWithUrl:[QYZJURLDefineTool user_turnoverStagePassURL] andID:model.ID isYanShou:YES];
-                
-            }];
-            
-            [alertVC addAction:action1];
-            [alertVC addAction:action2];
-            [alertVC addAction:action3];
-            
-            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
-            
         }else {
-            //提交验收
-            [self yanShouOrTiaoJiaoWithUrl:[QYZJURLDefineTool user_turnoverStageConfirmURL] andID:model.ID isYanShou:NO];
+              //点击验收或者提交验收
+              if (self.dataModel.demand.is_service) {
+                  
+                  if ([model.status isEqualToString:@"7"]) {
+                      QYZJQingDanPingJiaVC * vc =[[QYZJQingDanPingJiaVC alloc] init];
+                      vc.hidesBottomBarWhenPushed = YES;
+                      vc.ID = model.ID;
+                      [self.navigationController pushViewController:vc animated:YES];
+                      return;
+                  }
+                  
+                  
+                //验收
+                UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"变更审核" message:@"请选择审核状态" preferredStyle:(UIAlertControllerStyleAlert)];
+                UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"不通过" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                    
+                    [self yanShouOrTiaoJiaoWithUrl:[QYZJURLDefineTool user_turnoverStageNotPassURL] andID:model.ID isYanShou:YES];
+                    
+                }];
+                UIAlertAction * action3 = [UIAlertAction actionWithTitle:@"通过" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                    
+                    [self yanShouOrTiaoJiaoWithUrl:[QYZJURLDefineTool user_turnoverStagePassURL] andID:model.ID isYanShou:YES];
+                    
+                }];
+                
+               
+                [alertVC addAction:action2];
+                [alertVC addAction:action3];
+                [alertVC addAction:action1];
+                
+                [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
+                
+            }else {
+                //提交验收
+                [self yanShouOrTiaoJiaoWithUrl:[QYZJURLDefineTool user_turnoverStageConfirmURL] andID:model.ID isYanShou:NO];
+            }
+            
+            
         }
         
-        
     }
+    
+    
+    
     
     
 }
@@ -766,9 +827,10 @@
             
         }];
         
-        [alertVC addAction:action1];
+        
         [alertVC addAction:action2];
         [alertVC addAction:action3];
+        [alertVC addAction:action1];
         
         [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
         
@@ -799,9 +861,10 @@
             [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVCTwo animated:YES completion:nil];
         }];
         
-        [alertVC addAction:action1];
+        
         [alertVC addAction:action2];
         [alertVC addAction:action3];
+        [alertVC addAction:action1];
         
         [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
         

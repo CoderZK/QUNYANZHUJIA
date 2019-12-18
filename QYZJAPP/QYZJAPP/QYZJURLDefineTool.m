@@ -645,6 +645,23 @@
      return [NSString stringWithFormat:@"%@%@",URLOne,@"user_broadcastList.do"];
 }
 
+/**提交验收*/
++(NSString *)user_turnoverRepairConfirmURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_turnoverRepairConfirm.do"];
+}
+/** 验收通过*/
++(NSString *)user_turnoverRepairPassURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_turnoverRepairPass.do"];
+}
+/** 验收不通过*/
++(NSString *)user_turnoverRepairNotPassURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_turnoverRepairNotPass.do"];
+}
+/** 保修单详情*/
++(NSString *)user_repairDetailsURL {
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_repairDetails.do"];
+}
+
 /**微信*/
 +(NSString *)user_createWxOrderURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_createWxOrder.do"];

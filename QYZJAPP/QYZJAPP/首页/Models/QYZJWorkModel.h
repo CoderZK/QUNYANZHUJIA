@@ -56,6 +56,10 @@ NS_ASSUME_NONNULL_BEGIN
 客户：待服务方发起交付1、待确认2、待支付3、施工中4、待阶段验收5、待支付尾款6、待评价7、交付完成8 */
 @property(nonatomic,strong)NSString *user_status;
 
+@property(nonatomic,strong)NSString *turnoverStageName;
+@property(nonatomic,strong)NSString *turnoverTitle;
+@property(nonatomic,strong)NSString *con;
+@property(nonatomic,strong)NSString *constructionStageId;
 
 @property(nonatomic,strong)NSString *drawing_url; // 图纸
 @property(nonatomic,strong)NSString *budget_url; //预算图纸
@@ -77,6 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *appeal_plateReason;
 @property(nonatomic,strong)NSString *picUrl;
 @property(nonatomic,strong)NSString *videoUrl;
+@property(nonatomic,strong)NSString *year;
 
 
 @property(nonatomic,strong)NSMutableArray<QYZJWorkModel *> *changeTurnoverLists;
@@ -86,6 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray<QYZJWorkModel *> *media_url;
 @property(nonatomic,strong)NSMutableArray<QYZJWorkModel *> *other;
 @property(nonatomic,strong)NSMutableArray<QYZJWorkModel *> *constructionStage;
+@property(nonatomic,strong)NSMutableArray<QYZJWorkModel *> *repairSelf;
 
 @property(nonatomic,strong)QYZJWorkModel *turnover;
 @property(nonatomic,strong)QYZJWorkModel *turnoverListOrderFirst;
@@ -112,6 +118,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL is_service;//(0：不是客户；1：是客户)
 @property(nonatomic,assign)BOOL   isRepair;
 @property(nonatomic,assign)BOOL isOverRepairTime;
+@property(nonatomic,assign)BOOL isService;
 
 @property(nonatomic,assign)CGFloat price;
 @property(nonatomic,assign)CGFloat moneyCharging;

@@ -81,8 +81,8 @@
 //
 - (void)editOrStatusAction:(UIButton *)button {
     
-    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(didclickQYZJConstructionListCell:withIndex:isNeiClick:NeiRow:)]) {
-        [self.delegate didclickQYZJConstructionListCell:self  withIndex:button.tag-100 isNeiClick:NO NeiRow:0];
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(didclickQYZJConstructionListCell:withIndex:isNeiClick:NeiRow:isClickNeiCell:)]) {
+        [self.delegate didclickQYZJConstructionListCell:self  withIndex:button.tag-100 isNeiClick:NO NeiRow:0 isClickNeiCell:NO];
     }
 }
 
@@ -107,6 +107,13 @@
     self.editBt.mj_x = ww+15;
     
     self.moneyLB.text = [NSString stringWithFormat:@"￥%0.0f",model.price];
+    
+    if (self.type == 1) {
+        self.moneyLB.hidden = YES;
+    }else {
+        self.moneyLB.hidden = NO;
+    }
+    
     self.contentLB.attributedText = [model.des getMutableAttributeStringWithFont:14 lineSpace:3 textColor:CharacterBlack112];
     self.contentLB.mj_h = [model.des getHeigtWithFontSize:14 lineSpace:3 width:ScreenW-20 -150];
     if (self.contentLB.mj_h < 20) {
@@ -128,127 +135,222 @@
         CGFloat tvH = 0;
         for (QYZJWorkModel * modelNei  in model.selfStage) {
             CGFloat titelH = [modelNei.stageName getHeigtWithIsBlodFontSize:14 lineSpace:3 width:ScreenW - 40] <20?20:[modelNei.stageName getHeigtWithIsBlodFontSize:14 lineSpace:3 width:ScreenW - 40];
-            CGFloat contentH = [modelNei.des getHeigtWithFontSize:14 lineSpace:3 width:ScreenW-40] < 20?20:[modelNei.des getHeigtWithFontSize:14 lineSpace:3 width:ScreenW-40];
-            tvH = tvH + (titelH + contentH + 20 + 20);
-//            tvH = tvH + modelNei.cellHeight;
+            CGFloat contentH = 0;
+            if (self.type == 1) {
+                titelH = 0;
+                contentH = [modelNei.con getHeigtWithFontSize:14 lineSpace:3 width:ScreenW-40] < 20?20:[modelNei.con getHeigtWithFontSize:14 lineSpace:3 width:ScreenW-40];
+            }else {
+                contentH = [modelNei.des getHeigtWithFontSize:14 lineSpace:3 width:ScreenW-40] < 20?20:[modelNei.des getHeigtWithFontSize:14 lineSpace:3 width:ScreenW-40];
+            }
+            tvH = tvH + (titelH + contentH + 20 + 20) ;
         }
-        self.tableView.mj_h = tvH;
+        tvH = tvH +  self.model.selfStage.count * 8 ;
+        self.tableView.mj_h = tvH ;
         model.cellHeight = CGRectGetMaxY(self.timeLB.frame) + 10 + tvH;
     }
    
-    if (!self.is_service) {
-        //服务方
-        NSInteger st = [model.status intValue];
-        if (st == 1 || st == 3 || st == 5) {
-            self.editBt.hidden = NO;
-        }else {
-            self.editBt.hidden  = YES;
-        }
-        BOOL isLayer = NO;
-        NSString * str = @"";
-        if (st == 1) {
-            str = @"提交阶段验收";
-            isLayer = YES;
-        }else if (st == 2){
-            str = @"验收中";
-        }else if (st == 3){
-            str = @"待整改";
-        }else if (st == 4){
-            str = @"验收通过";
-        }else if (st == 5){
-            str = @"整改中";
-        }else if (st == 6){
-            str = @"整改完成";
-        }
-        if (isLayer) {
-            CGFloat w = [str getWidhtWithFontSize:14];
-            self.statusBt.mj_w = w +  8;
-            self.statusBt.mj_x = ScreenW - (w+8) - 10;
-            self.statusBt.layer.cornerRadius = 3;
-            self.statusBt.layer.borderColor = OrangeColor.CGColor;
-            self.statusBt.layer.borderWidth = 1.0;
-        }else {
-            CGFloat w = [str getWidhtWithFontSize:14];
-            self.statusBt.mj_w = w;
-            self.statusBt.mj_x = ScreenW - (w) - 10;
-            self.statusBt.layer.borderColor = [UIColor clearColor].CGColor;
-            self.statusBt.layer.borderWidth = 1.0;
-        }
-        self.statusBt.userInteractionEnabled = isLayer;
-        [self.statusBt setTitle:str forState:UIControlStateNormal];
-        self.editBt.hidden = !isLayer;
-        
+    if (self.type == 1) {
+        if (!self.is_service) {
+                   //服务方
+                   NSInteger st = [model.status intValue];
+                   BOOL isLayer = NO;
+                   NSString * str = @"";
+                   if (st == 1) {
+                       str = @"待确认";
+                   }else if (st == 2){
+                       str = @"报修中";
+                   }else if (st == 3){
+                       str = @"待客户验收";
+                   }else if (st == 4){
+                       str = @"验收通过";
+                   }else if (st == 5){
+                       str = @"待整改";
+                   }else if (st == 6){
+                       str = @"整改中";
+                   }else if (st == 7){
+                       str = @"整改完成";
+                   }
+                  
+                   
+                   CGFloat w = [str getWidhtWithFontSize:14];
+                   self.statusBt.mj_w = w;
+                   self.statusBt.mj_x = ScreenW - (w+8) - 10;
+                   self.statusBt.layer.borderColor = [UIColor clearColor].CGColor;
+                   self.statusBt.layer.borderWidth = 1.0;
+                   self.statusBt.userInteractionEnabled = isLayer;
+                   [self.statusBt setTitle:str forState:UIControlStateNormal];
+                   self.editBt.hidden = !isLayer;
+                   
+               }else {
+                   //用户
+                   self.editBt.hidden = YES;
+                   NSInteger st = [model.status intValue];
+                   BOOL isLayer = NO;
+                   NSString * str = @"";
+                   if (st == 1) {
+                       str = @"待服务方确认";
+                   }else if (st == 2){
+                       str = @"报修中";
+                   }else if (st == 3){
+                       str = @"待验收";
+                   }else if (st == 4){
+                       str = @"验收通过";
+                   }else if (st == 5){
+                       str = @"待整改";
+                   }else if (st == 6){
+                       str = @"整改中";
+                   }else if (st == 7){
+                       str = @"整改完成";
+                   }
+                   CGFloat w = [str getWidhtWithFontSize:14];
+                   self.statusBt.mj_w = w;
+                   self.statusBt.mj_x = ScreenW - (w) - 10;
+                   self.statusBt.layer.borderColor = [UIColor clearColor].CGColor;
+                   self.statusBt.layer.borderWidth = 1.0;
+                   self.statusBt.userInteractionEnabled = isLayer;
+                   [self.statusBt setTitle:str forState:UIControlStateNormal];
+                   
+               }
     }else {
-        //用户
-        NSInteger st = [model.status intValue];
-        self.editBt.hidden = YES;
-        BOOL isLayer = NO;
-       NSString * str = @"";
-       if (st == 1) {
-           str = @"施工中";
-       }else if (st == 2){
-           str = @"验收此阶段";
-           isLayer = YES;
-       }else if (st == 3){
-           str = @"整改中";
-       }else if (st == 4){
-           str = @"已验收";
-       }else if (st == 5){
-           str = @"整改中";
-       }else if (st == 6){
-           str = @"整改完成";
-       }else if (st == 7){
-           str = @"评价";
-           isLayer = YES;
-       }
-        if (isLayer) {
-            CGFloat w = [str getWidhtWithFontSize:14];
-            self.statusBt.mj_w = w +  8;
-            self.statusBt.mj_x = ScreenW - (w+8) - 10;
-            self.statusBt.layer.cornerRadius = 3;
-            self.statusBt.layer.borderColor = OrangeColor.CGColor;
-            self.statusBt.layer.borderWidth = 1.0;
+        
+        if (!self.is_service) {
+            //服务方
+            NSInteger st = [model.status intValue];
+            if (st == 1 || st == 3 || st == 5) {
+                self.editBt.hidden = NO;
+            }else {
+                self.editBt.hidden  = YES;
+            }
+            BOOL isLayer = NO;
+            NSString * str = @"";
+            if (st == 1) {
+                str = @"提交阶段验收";
+                isLayer = YES;
+            }else if (st == 2){
+                str = @"验收中";
+            }else if (st == 3){
+                str = @"待整改";
+            }else if (st == 4){
+                str = @"验收通过";
+            }else if (st == 5){
+                str = @"整改中";
+            }else if (st == 6){
+                str = @"整改完成";
+            }
+            if (isLayer) {
+                CGFloat w = [str getWidhtWithFontSize:14];
+                self.statusBt.mj_w = w +  8;
+                self.statusBt.mj_x = ScreenW - (w+8) - 10;
+                self.statusBt.layer.cornerRadius = 3;
+                self.statusBt.layer.borderColor = OrangeColor.CGColor;
+                self.statusBt.layer.borderWidth = 1.0;
+            }else {
+                CGFloat w = [str getWidhtWithFontSize:14];
+                self.statusBt.mj_w = w;
+                self.statusBt.mj_x = ScreenW - (w) - 10;
+                self.statusBt.layer.borderColor = [UIColor clearColor].CGColor;
+                self.statusBt.layer.borderWidth = 1.0;
+            }
+            self.statusBt.userInteractionEnabled = isLayer;
+            [self.statusBt setTitle:str forState:UIControlStateNormal];
+            self.editBt.hidden = !isLayer;
+            
         }else {
-            CGFloat w = [str getWidhtWithFontSize:14];
-            self.statusBt.mj_w = w;
-            self.statusBt.mj_x = ScreenW - (w) - 10;
-            self.statusBt.layer.borderColor = [UIColor clearColor].CGColor;
-            self.statusBt.layer.borderWidth = 1.0;
+            //用户
+            NSInteger st = [model.status intValue];
+            self.editBt.hidden = YES;
+            BOOL isLayer = NO;
+           NSString * str = @"";
+           if (st == 1) {
+               str = @"施工中";
+           }else if (st == 2){
+               str = @"验收此阶段";
+               isLayer = YES;
+           }else if (st == 3){
+               str = @"整改中";
+           }else if (st == 4){
+               str = @"已验收";
+           }else if (st == 5){
+               str = @"整改中";
+           }else if (st == 6){
+               str = @"整改完成";
+           }else if (st == 7){
+               str = @"评价";
+               isLayer = YES;
+           }
+            if (isLayer) {
+                CGFloat w = [str getWidhtWithFontSize:14];
+                self.statusBt.mj_w = w +  8;
+                self.statusBt.mj_x = ScreenW - (w+8) - 10;
+                self.statusBt.layer.cornerRadius = 3;
+                self.statusBt.layer.borderColor = OrangeColor.CGColor;
+                self.statusBt.layer.borderWidth = 1.0;
+            }else {
+                CGFloat w = [str getWidhtWithFontSize:14];
+                self.statusBt.mj_w = w;
+                self.statusBt.mj_x = ScreenW - (w) - 10;
+                self.statusBt.layer.borderColor = [UIColor clearColor].CGColor;
+                self.statusBt.layer.borderWidth = 1.0;
+            }
+            self.statusBt.userInteractionEnabled = isLayer;
+            [self.statusBt setTitle:str forState:UIControlStateNormal];
+            
         }
-        self.statusBt.userInteractionEnabled = isLayer;
-        [self.statusBt setTitle:str forState:UIControlStateNormal];
+        
         
     }
     
     
+    
+    
 }
 
 
 
+
+
+- (void)setType:(NSInteger)type {
+    _type = type;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 8;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView * view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"view"];
+    if (view == nil) {
+        view = [[UIView alloc] initWithFrame:CGRectMake(10, 0, ScreenW - 20, 8)];
+        view.backgroundColor = WhiteColor;
+    }
+    return view;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+     return self.model.selfStage.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.model.selfStage.count;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    return 80;
-    return self.model.selfStage[indexPath.row].cellHeight;
+    return self.model.selfStage[indexPath.section].cellHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     QYZJConstructionListNeiCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.type = self.type;
     cell.is_service = self.is_service;
-    cell.model = self.model.selfStage[indexPath.row];
+    cell.model = self.model.selfStage[indexPath.section];
     Weak(weakSelf);
-    cell.clcikNeiCellBlock = ^(QYZJConstructionListNeiCell *cellNei, NSInteger index, BOOL isEdit) {
+    cell.clcikNeiCellBlock = ^(QYZJConstructionListNeiCell *cellNei, NSInteger index, BOOL isClickCell) {
         NSIndexPath * indexPathNei = [weakSelf.tableView indexPathForCell:cellNei];
-        if (weakSelf.delegate != nil && [weakSelf.delegate respondsToSelector:@selector(didclickQYZJConstructionListCell:withIndex:isNeiClick:NeiRow:)]) {
-            [weakSelf.delegate didclickQYZJConstructionListCell:weakSelf withIndex:index isNeiClick:YES NeiRow:indexPathNei.row];
+        if (weakSelf.delegate != nil && [weakSelf.delegate respondsToSelector:@selector(didclickQYZJConstructionListCell:withIndex:isNeiClick:NeiRow:isClickNeiCell:)]) {
+            [weakSelf.delegate didclickQYZJConstructionListCell:weakSelf withIndex:index isNeiClick:YES NeiRow:indexPathNei.row isClickNeiCell:NO];
         }
     };
     cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -258,6 +360,11 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(didclickQYZJConstructionListCell:withIndex:isNeiClick:NeiRow:isClickNeiCell:)]) {
+        [self.delegate didclickQYZJConstructionListCell:self withIndex:0 isNeiClick:YES NeiRow:indexPath.section isClickNeiCell:YES];
+    }
+    
     
 }
 
@@ -284,7 +391,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
 if (self) {
-    self.titleLB = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, ScreenW-40, 20)];
+          self.titleLB = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, ScreenW-40, 20)];
           self.titleLB.numberOfLines = 0;
           [self addSubview:self.titleLB];
           
@@ -293,7 +400,7 @@ if (self) {
           [self addSubview:self.contentLB];
           
           self.timeLB =[[UILabel alloc] initWithFrame:CGRectMake(10, 60, ScreenW - 40, 20)];
-          
+
           self.timeLB.font = kFont(13);
           self.timeLB.textColor = CharacterBlack112;
           [self addSubview:self.timeLB];
@@ -305,7 +412,7 @@ if (self) {
                  [self addSubview:self.editBt];
     
     
-        self.statusBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 150, 40, 140, 20)];
+         self.statusBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 150, 40, 140, 20)];
          self.statusBt.tag = 101;
          [self.statusBt setTitleColor:OrangeColor forState:UIControlStateNormal];
          self.statusBt.titleLabel.font = kFont(13);
@@ -320,6 +427,10 @@ return self;
     _is_service = is_service;
 }
 
+- (void)setType:(NSInteger)type {
+    _type = type;
+}
+
 - (void)setModel:(QYZJWorkModel *)model {
     _model = model;
     
@@ -332,110 +443,199 @@ return self;
     self.titleLB.attributedText = [model.stageName getMutableAttributeStringWithFont:14 withBlood:YES lineSpace:3 textColor:[UIColor blackColor]];
     self.titleLB.mj_h = [model.stageName getHeigtWithIsBlodFontSize:14 lineSpace:3 width:ww];
     
+    
+    
     self.titleLB.mj_w = ww;
     self.editBt.mj_x = ww+15;
     
+    if (self.type == 1) {
+        self.editBt.hidden = YES;
+        self.contentLB.mj_y = 10;
+    }
+    
     if (self.timeLB.mj_h < 20) {
         self.timeLB.mj_h = 20;
+    }else {
+        self.contentLB.mj_y = CGRectGetMaxY(self.titleLB.frame) + 5;
     }
 
-    self.contentLB.attributedText = [model.des getMutableAttributeStringWithFont:14 lineSpace:3 textColor:CharacterBlack112];
-    self.contentLB.mj_h = [model.des getHeigtWithFontSize:14 lineSpace:3 width:ScreenW-40];
-    if (self.contentLB.mj_h < 20) {
+    if (self.type == 1) {
+        self.contentLB.attributedText = [model.con getMutableAttributeStringWithFont:14 lineSpace:3 textColor:CharacterBlack112];
+        self.contentLB.mj_h = [model.con getHeigtWithFontSize:14 lineSpace:3 width:ScreenW-40];
+        if (self.contentLB.mj_h < 20) {
         self.contentLB.mj_h = 20;
+        }
+    }else {
+        self.contentLB.attributedText = [model.des getMutableAttributeStringWithFont:14 lineSpace:3 textColor:CharacterBlack112];
+        self.contentLB.mj_h = [model.des getHeigtWithFontSize:14 lineSpace:3 width:ScreenW-40];
+        if (self.contentLB.mj_h < 20) {
+            self.contentLB.mj_h = 20;
+        }
     }
+    
+    
     self.timeLB.text = model.time;
-    self.contentLB.mj_y = CGRectGetMaxY(self.titleLB.frame) + 5;
     self.timeLB.mj_y = CGRectGetMaxY(self.contentLB.frame) + 5;
-
     model.cellHeight = CGRectGetMaxY(self.timeLB.frame)+5;
 
     self.statusBt.mj_y = self.timeLB.mj_y;
     
-    if (!self.is_service) {
-        //服务方
-        NSInteger st = [model.status intValue];
-        BOOL isLayer = NO;
-        NSString * str = @"";
-        if (st == 1) {
-            str = @"提交阶段验收";
-            isLayer = YES;
-        }else if (st == 2){
-            str = @"验收中";
-        }else if (st == 3){
-            str = @"待整改";
-        }else if (st == 4){
-            str = @"验收通过";
-        }else if (st == 5){
-            str = @"整改中";
-        }else if (st == 6){
-            str = @"整改完成";
-        }
-        if (isLayer) {
-            CGFloat w = [str getWidhtWithFontSize:14];
-            self.statusBt.mj_w = w +  8;
-            self.statusBt.mj_x = ScreenW-20 - (w+8) - 10;
-            self.statusBt.layer.cornerRadius = 3;
-            self.statusBt.layer.borderColor = OrangeColor.CGColor;
-            self.statusBt.layer.borderWidth = 1.0;
-        }else {
+    if (self.type == 1) {
+        
+        
+        
+        if (!self.is_service) {
+            //服务方
+            NSInteger st = [model.status intValue];
+            BOOL isLayer = NO;
+            NSString * str = @"";
+            if (st == 1) {
+                str = @"待确认";
+            }else if (st == 2){
+                str = @"报修中";
+            }else if (st == 3){
+                str = @"待客户验收";
+            }else if (st == 4){
+                str = @"验收通过";
+            }else if (st == 5){
+                str = @"待整改";
+            }else if (st == 6){
+                str = @"整改中";
+            }else if (st == 7){
+                str = @"整改完成";
+            }
+           
+            
             CGFloat w = [str getWidhtWithFontSize:14];
             self.statusBt.mj_w = w;
-            self.statusBt.mj_x = ScreenW -20- (w) - 10;
+            self.statusBt.mj_x = ScreenW -20- (w) - 5;
             self.statusBt.layer.borderColor = [UIColor clearColor].CGColor;
             self.statusBt.layer.borderWidth = 1.0;
+            self.statusBt.userInteractionEnabled = isLayer;
+            [self.statusBt setTitle:str forState:UIControlStateNormal];
+            self.editBt.hidden = !isLayer;
+            
+        }else {
+            //用户
+            self.editBt.hidden = YES;
+            NSInteger st = [model.status intValue];
+            BOOL isLayer = NO;
+            NSString * str = @"";
+            if (st == 1) {
+                str = @"待服务方确认";
+            }else if (st == 2){
+                str = @"报修中";
+            }else if (st == 3){
+                str = @"待验收";
+            }else if (st == 4){
+                str = @"验收通过";
+            }else if (st == 5){
+                str = @"待整改";
+            }else if (st == 6){
+                str = @"整改中";
+            }else if (st == 7){
+                str = @"整改完成";
+            }
+            CGFloat w = [str getWidhtWithFontSize:14];
+            self.statusBt.mj_w = w;
+            self.statusBt.mj_x = ScreenW- 20 - (w) - 5;
+            self.statusBt.layer.borderColor = [UIColor clearColor].CGColor;
+            self.statusBt.layer.borderWidth = 1.0;
+            self.statusBt.userInteractionEnabled = isLayer;
+            [self.statusBt setTitle:str forState:UIControlStateNormal];
+            
         }
-        self.statusBt.userInteractionEnabled = isLayer;
-        [self.statusBt setTitle:str forState:UIControlStateNormal];
-        self.editBt.hidden = !isLayer;
         
     }else {
-        //用户
-        self.editBt.hidden = YES;
-        NSInteger st = [model.status intValue];
-        if (st == 1 || st == 3 || st == 5) {
-            self.editBt.hidden = NO;
-        }else {
-            self.editBt.hidden  = YES;
-        }
         
-        BOOL isLayer = NO;
-        NSString * str = @"";
-        if (st == 1) {
-            str = @"施工中";
-        }else if (st == 2){
-            str = @"验收此阶段";
-            isLayer = YES;
-        }else if (st == 3){
-            str = @"整改中";
-        }else if (st == 4){
-            str = @"已验收";
-        }else if (st == 5){
-            str = @"整改中";
-        }else if (st == 6){
-            str = @"整改完成";
-        }else if (st == 7){
-            str = @"评价";
-            isLayer = YES;
-        }
-        if (isLayer) {
-            CGFloat w = [str getWidhtWithFontSize:14];
-            self.statusBt.mj_w = w +  8;
-            self.statusBt.mj_x = ScreenW - 20 - (w+8) - 10;
-            self.statusBt.layer.cornerRadius = 3;
-            self.statusBt.layer.borderColor = OrangeColor.CGColor;
-            self.statusBt.layer.borderWidth = 1.0;
-        }else {
-            CGFloat w = [str getWidhtWithFontSize:14];
-            self.statusBt.mj_w = w;
-            self.statusBt.mj_x = ScreenW- 20 - (w) - 10;
-            self.statusBt.layer.borderColor = [UIColor clearColor].CGColor;
-            self.statusBt.layer.borderWidth = 1.0;
-        }
-        self.statusBt.userInteractionEnabled = isLayer;
-        [self.statusBt setTitle:str forState:UIControlStateNormal];
+        if (!self.is_service) {
+               //服务方
+               NSInteger st = [model.status intValue];
+               BOOL isLayer = NO;
+               NSString * str = @"";
+               if (st == 1) {
+                   str = @"提交阶段验收";
+                   isLayer = YES;
+               }else if (st == 2){
+                   str = @"验收中";
+               }else if (st == 3){
+                   str = @"待整改";
+               }else if (st == 4){
+                   str = @"验收通过";
+               }else if (st == 5){
+                   str = @"整改中";
+               }else if (st == 6){
+                   str = @"整改完成";
+               }
+               if (isLayer) {
+                   CGFloat w = [str getWidhtWithFontSize:14];
+                   self.statusBt.mj_w = w +  8;
+                   self.statusBt.mj_x = ScreenW-20 - (w+8) - 5;
+                   self.statusBt.layer.cornerRadius = 3;
+                   self.statusBt.layer.borderColor = OrangeColor.CGColor;
+                   self.statusBt.layer.borderWidth = 1.0;
+               }else {
+                   CGFloat w = [str getWidhtWithFontSize:14];
+                   self.statusBt.mj_w = w;
+                   self.statusBt.mj_x = ScreenW -20- (w) - 5;
+                   self.statusBt.layer.borderColor = [UIColor clearColor].CGColor;
+                   self.statusBt.layer.borderWidth = 1.0;
+               }
+               self.statusBt.userInteractionEnabled = isLayer;
+               [self.statusBt setTitle:str forState:UIControlStateNormal];
+               self.editBt.hidden = !isLayer;
+               
+           }else {
+               //用户
+               self.editBt.hidden = YES;
+               NSInteger st = [model.status intValue];
+               if (st == 1 || st == 3 || st == 5) {
+                   self.editBt.hidden = NO;
+               }else {
+                   self.editBt.hidden  = YES;
+               }
+               
+               BOOL isLayer = NO;
+               NSString * str = @"";
+               if (st == 1) {
+                   str = @"施工中";
+               }else if (st == 2){
+                   str = @"验收此阶段";
+                   isLayer = YES;
+               }else if (st == 3){
+                   str = @"整改中";
+               }else if (st == 4){
+                   str = @"已验收";
+               }else if (st == 5){
+                   str = @"整改中";
+               }else if (st == 6){
+                   str = @"整改完成";
+               }else if (st == 7){
+                   str = @"评价";
+                   isLayer = YES;
+               }
+               if (isLayer) {
+                   CGFloat w = [str getWidhtWithFontSize:14];
+                   self.statusBt.mj_w = w +  8;
+                   self.statusBt.mj_x = ScreenW - 20 - (w+8) - 10;
+                   self.statusBt.layer.cornerRadius = 3;
+                   self.statusBt.layer.borderColor = OrangeColor.CGColor;
+                   self.statusBt.layer.borderWidth = 1.0;
+               }else {
+                   CGFloat w = [str getWidhtWithFontSize:14];
+                   self.statusBt.mj_w = w;
+                   self.statusBt.mj_x = ScreenW- 20 - (w) - 10;
+                   self.statusBt.layer.borderColor = [UIColor clearColor].CGColor;
+                   self.statusBt.layer.borderWidth = 1.0;
+               }
+               self.statusBt.userInteractionEnabled = isLayer;
+               [self.statusBt setTitle:str forState:UIControlStateNormal];
+               
+           }
         
     }
+    
+   
     
     
 }

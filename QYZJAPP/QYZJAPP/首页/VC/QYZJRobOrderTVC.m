@@ -214,8 +214,10 @@
                               
                               QYZJTongYongModel * mm = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
                               QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
+                             
                               vc.model = mm;
                               vc.type = 1;
+                              vc.ID = model.ID;
                               [self.navigationController pushViewController:vc animated:YES];
                           }
                          

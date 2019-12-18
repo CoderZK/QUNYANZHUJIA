@@ -7,7 +7,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
-            uuid = "8F5A14B5-EE35-4F39-B651-22D13459C892"
+            uuid = "7C1C8397-60F9-4BC9-8A19-B7F3982D40B5"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -18,63 +18,63 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4AD97872-2BEC-412E-80E5-AA9F04DCD626"
+            uuid = "0769C3CB-C9C5-4CC6-9DFB-C1EB64B8883B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJCreateShiGongQingDanTVC.m"
+            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJSetBaoXiuTVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "36FFD2D5-14D6-4DD2-AAE1-46DAD84D74EC"
+            uuid = "980FDB3C-CA41-4C84-B65A-4EF1E64D02FC"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJZhiFuVC.m"
+            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJSetBaoXiuTVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "-payAction"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "-clickAction:"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "36FFD2D5-14D6-4DD2-AAE1-46DAD84D74EC - f21db84a11454ffd"
+                  uuid = "980FDB3C-CA41-4C84-B65A-4EF1E64D02FC - 5bd94fa33a5faa66"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[QYZJZhiFuVC payAction]"
+                  symbolName = "-[QYZJSetBaoXiuTVC clickAction:]"
                   moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E9%A6%96%E9%A1%B5/VC/QYZJZhiFuVC.m"
+                  urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E9%A6%96%E9%A1%B5/VC/QYZJSetBaoXiuTVC.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "147"
-                  endingLineNumber = "147"
-                  offsetFromSymbolStart = "1571">
+                  startingLineNumber = "68"
+                  endingLineNumber = "68"
+                  offsetFromSymbolStart = "1224">
                </Location>
                <Location
-                  uuid = "36FFD2D5-14D6-4DD2-AAE1-46DAD84D74EC - ed3544d1a257b073"
+                  uuid = "980FDB3C-CA41-4C84-B65A-4EF1E64D02FC - f8d9f373b4b1a579"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__24-[QYZJZhiFuVC payAction]_block_invoke"
+                  symbolName = "__32-[QYZJSetBaoXiuTVC clickAction:]_block_invoke"
                   moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E9%A6%96%E9%A1%B5/VC/QYZJZhiFuVC.m"
+                  urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E9%A6%96%E9%A1%B5/VC/QYZJSetBaoXiuTVC.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "149"
-                  endingLineNumber = "149"
-                  offsetFromSymbolStart = "69">
+                  startingLineNumber = "68"
+                  endingLineNumber = "68"
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -82,48 +82,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "634CE5CC-C30D-4E57-9A93-49224B1860B2"
+            uuid = "4935BD54-2B36-40B0-9561-1AD3AE26D6F3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJZhiFuVC.m"
+            filePath = "QYZJAPP/&#x6211;&#x7684;/VC/QYZJMineZhuYeTVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "-clickAction:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "72CA1124-3758-4293-8617-F55DABB3841E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJZhiFuVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "-clickAction:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0C04C10E-BE3B-47C0-8FE1-29D6232485EA"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJZhiFuVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "-clickAction:"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "-setFootV"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

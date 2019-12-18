@@ -99,9 +99,11 @@
                    self.timeTwoLB.text = [NSString stringWithFormat:@"保修时间: %@",@"无"];
                }
            }
+        self.moneyLB.hidden = YES;
     }else {
         self.timeTwoLB.textColor = [UIColor blackColor];
         self.timeTwoLB.text = [NSString stringWithFormat:@"交付订单:%@",model.turnoverTitle];
+        self.moneyLB.hidden = NO;
         
     }
     

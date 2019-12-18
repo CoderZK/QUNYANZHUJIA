@@ -183,7 +183,7 @@ static PublicFuntionTool * tool = nil;
     [button1 setTitleColor:leftColor forState:UIControlStateNormal];
     button1.layer.cornerRadius = 3;
     button1.clipsToBounds = YES;
-    button1.tag = 0;;
+    button1.tag = 0;
     [footV addSubview:button1];
     [button1 addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     if ([leftColor isEqual:WhiteColor]) {

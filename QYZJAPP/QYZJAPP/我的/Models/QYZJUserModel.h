@@ -51,8 +51,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)NSInteger answer_num;
 @property(nonatomic,assign)NSInteger appoint_num;
 
-@property(nonatomic,assign)float bond_money;
-@property(nonatomic,assign)float score;
+@property(nonatomic,assign)CGFloat bond_money;
+@property(nonatomic,assign)CGFloat score;
+@property(nonatomic,assign)CGFloat question_price;
+@property(nonatomic,assign)CGFloat appoint_price;
+@property(nonatomic,assign)CGFloat  sit_price;
 
 @end
 

@@ -9,6 +9,8 @@
 #import "QYZJYanShouOrBaoXiuTVC.h"
 #import "QYZJYanShouOrBaoXiuCell.h"
 #import "QYZJMinePayDetailVC.h"
+#import "QYZJMessageYanShouCell.h"
+#import "QYZJMineBaoXiuListTVC.h"
 @interface QYZJYanShouOrBaoXiuTVC ()
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,strong)NSMutableArray<QYZJMoneyModel *> *dataArray;
@@ -24,6 +26,7 @@
         self.navigationItem.title = @"报修列表";
     }
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJYanShouOrBaoXiuCell" bundle:nil] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"QYZJMessageYanShouCell" bundle:nil] forCellReuseIdentifier:@"QYZJMessageYanShouCell"];
     self.page = 1;
     self.dataArray = @[].mutableCopy;
     [self getData];
@@ -36,6 +39,8 @@
         [self getData];
     }];
     
+    
+    self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
 }
 
@@ -86,11 +91,20 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.type == 3) {
+        return 78;
+    }
     return UITableViewAutomaticDimension;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if (self.type == 3) {
+        QYZJMessageYanShouCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJMessageYanShouCell" forIndexPath:indexPath];
+        cell.titleLB.text = self.dataArray[indexPath.row].stage_name;
+        cell.contentLB.text = self.dataArray[indexPath.row].con;
+        return cell;
+    }
     QYZJYanShouOrBaoXiuCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.model = self.dataArray[indexPath.row];
     return cell;
@@ -98,9 +112,19 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    QYZJMinePayDetailVC * vc =[[QYZJMinePayDetailVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    if (self.type == 2) {
+        QYZJMinePayDetailVC * vc =[[QYZJMinePayDetailVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+           vc.hidesBottomBarWhenPushed = YES;
+        vc.ID = self.dataArray[indexPath.row].ID;
+           [self.navigationController pushViewController:vc animated:YES];
+    }else {
+          QYZJMineBaoXiuListTVC * vc =[[QYZJMineBaoXiuListTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+           vc.hidesBottomBarWhenPushed = YES;
+           [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+   
     
 }
 

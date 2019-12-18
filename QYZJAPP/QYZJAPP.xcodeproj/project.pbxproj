@@ -306,6 +306,13 @@
 		5846915C2372B0330056BA4A /* LxmWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5846915A2372B0330056BA4A /* LxmWebViewController.m */; };
 		584691642372B5220056BA4A /* QYZJQianDanNavigaTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 584691632372B5220056BA4A /* QYZJQianDanNavigaTitleView.m */; };
 		5846916C2372CD8B0056BA4A /* QYZJMinePayDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5846916B2372CD8B0056BA4A /* QYZJMinePayDetailVC.m */; };
+		5848AA1723A9BE02009D9E62 /* QYZJMineBaoXiuListTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5848AA1623A9BE02009D9E62 /* QYZJMineBaoXiuListTVC.m */; };
+		5848AA1B23AA0438009D9E62 /* QYZJBaoXiuYearCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5848AA1923AA0438009D9E62 /* QYZJBaoXiuYearCell.m */; };
+		5848AA1C23AA0438009D9E62 /* QYZJBaoXiuYearCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5848AA1A23AA0438009D9E62 /* QYZJBaoXiuYearCell.xib */; };
+		5848AA1F23AA054C009D9E62 /* QYZJSetBaoXiuTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5848AA1E23AA054C009D9E62 /* QYZJSetBaoXiuTVC.m */; };
+		5848AA2323AA1279009D9E62 /* QYZJMessageYanShouCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5848AA2123AA1279009D9E62 /* QYZJMessageYanShouCell.m */; };
+		5848AA2423AA1279009D9E62 /* QYZJMessageYanShouCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5848AA2223AA1279009D9E62 /* QYZJMessageYanShouCell.xib */; };
+		5848AA2723AA2022009D9E62 /* QYZJQuestOrAppointTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5848AA2623AA2022009D9E62 /* QYZJQuestOrAppointTVC.m */; };
 		5849AF4E23973C03008E12F0 /* QYZJXiuGaiFuWuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5849AF4C23973C03008E12F0 /* QYZJXiuGaiFuWuVC.m */; };
 		5849AF4F23973C03008E12F0 /* QYZJXiuGaiFuWuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5849AF4D23973C03008E12F0 /* QYZJXiuGaiFuWuVC.xib */; };
 		584A1CD623838C0C007FDC3D /* QYZJRecommendTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 584A1CD523838C0C007FDC3D /* QYZJRecommendTwoCell.m */; };
@@ -862,6 +869,18 @@
 		584691632372B5220056BA4A /* QYZJQianDanNavigaTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJQianDanNavigaTitleView.m; sourceTree = "<group>"; };
 		5846916A2372CD8B0056BA4A /* QYZJMinePayDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMinePayDetailVC.h; sourceTree = "<group>"; };
 		5846916B2372CD8B0056BA4A /* QYZJMinePayDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMinePayDetailVC.m; sourceTree = "<group>"; };
+		5848AA1523A9BE02009D9E62 /* QYZJMineBaoXiuListTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMineBaoXiuListTVC.h; sourceTree = "<group>"; };
+		5848AA1623A9BE02009D9E62 /* QYZJMineBaoXiuListTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMineBaoXiuListTVC.m; sourceTree = "<group>"; };
+		5848AA1823AA0438009D9E62 /* QYZJBaoXiuYearCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJBaoXiuYearCell.h; sourceTree = "<group>"; };
+		5848AA1923AA0438009D9E62 /* QYZJBaoXiuYearCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJBaoXiuYearCell.m; sourceTree = "<group>"; };
+		5848AA1A23AA0438009D9E62 /* QYZJBaoXiuYearCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJBaoXiuYearCell.xib; sourceTree = "<group>"; };
+		5848AA1D23AA054C009D9E62 /* QYZJSetBaoXiuTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJSetBaoXiuTVC.h; sourceTree = "<group>"; };
+		5848AA1E23AA054C009D9E62 /* QYZJSetBaoXiuTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJSetBaoXiuTVC.m; sourceTree = "<group>"; };
+		5848AA2023AA1279009D9E62 /* QYZJMessageYanShouCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMessageYanShouCell.h; sourceTree = "<group>"; };
+		5848AA2123AA1279009D9E62 /* QYZJMessageYanShouCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMessageYanShouCell.m; sourceTree = "<group>"; };
+		5848AA2223AA1279009D9E62 /* QYZJMessageYanShouCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJMessageYanShouCell.xib; sourceTree = "<group>"; };
+		5848AA2523AA2022009D9E62 /* QYZJQuestOrAppointTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJQuestOrAppointTVC.h; sourceTree = "<group>"; };
+		5848AA2623AA2022009D9E62 /* QYZJQuestOrAppointTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJQuestOrAppointTVC.m; sourceTree = "<group>"; };
 		5849AF4B23973C03008E12F0 /* QYZJXiuGaiFuWuVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJXiuGaiFuWuVC.h; sourceTree = "<group>"; };
 		5849AF4C23973C03008E12F0 /* QYZJXiuGaiFuWuVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJXiuGaiFuWuVC.m; sourceTree = "<group>"; };
 		5849AF4D23973C03008E12F0 /* QYZJXiuGaiFuWuVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJXiuGaiFuWuVC.xib; sourceTree = "<group>"; };
@@ -1095,7 +1114,6 @@
 			children = (
 				582F74B92378F29000F6FCB6 /* MXPhotoPickerController */,
 				583ED6A62373F0660070441A /* zk_picShow */,
-				5843316D236FAB2D0046C0BD /* lunBoV */,
 				583A4D79236C077100180E27 /* Base64 */,
 				335010ED20EE05C100F8486B /* NSString+Size.h */,
 				335010EA20EE05C000F8486B /* NSString+Size.m */,
@@ -1344,6 +1362,10 @@
 				58ADFFEF23A1EA7000347801 /* QYZJAddZiLiaoTVC.m */,
 				583C306923A87AA2000AF260 /* QYZJQingDanPingJiaVC.h */,
 				583C306A23A87AA2000AF260 /* QYZJQingDanPingJiaVC.m */,
+				5848AA1D23AA054C009D9E62 /* QYZJSetBaoXiuTVC.h */,
+				5848AA1E23AA054C009D9E62 /* QYZJSetBaoXiuTVC.m */,
+				5848AA2523AA2022009D9E62 /* QYZJQuestOrAppointTVC.h */,
+				5848AA2623AA2022009D9E62 /* QYZJQuestOrAppointTVC.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1497,6 +1519,9 @@
 				5833D9F6238B8574007DE9EC /* QYZJJiaoFuZiLiaoCell.m */,
 				58ADFFEB23A1E9F200347801 /* AddpicView.h */,
 				58ADFFEC23A1E9F200347801 /* AddpicView.m */,
+				5848AA1823AA0438009D9E62 /* QYZJBaoXiuYearCell.h */,
+				5848AA1923AA0438009D9E62 /* QYZJBaoXiuYearCell.m */,
+				5848AA1A23AA0438009D9E62 /* QYZJBaoXiuYearCell.xib */,
 			);
 			path = "交付抢单";
 			sourceTree = "<group>";
@@ -1747,6 +1772,8 @@
 			children = (
 				583B34562398D6E600148350 /* QYZJMineBaoXiuDetailTVC.h */,
 				583B34572398D6E600148350 /* QYZJMineBaoXiuDetailTVC.m */,
+				5848AA1523A9BE02009D9E62 /* QYZJMineBaoXiuListTVC.h */,
+				5848AA1623A9BE02009D9E62 /* QYZJMineBaoXiuListTVC.m */,
 			);
 			path = vcs;
 			sourceTree = "<group>";
@@ -2065,6 +2092,9 @@
 				583B34C72398D6EA00148350 /* QYZJMessageCell.h */,
 				583B34C42398D6EA00148350 /* QYZJMessageCell.m */,
 				583B34C52398D6EA00148350 /* QYZJMessageCell.xib */,
+				5848AA2023AA1279009D9E62 /* QYZJMessageYanShouCell.h */,
+				5848AA2123AA1279009D9E62 /* QYZJMessageYanShouCell.m */,
+				5848AA2223AA1279009D9E62 /* QYZJMessageYanShouCell.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -2097,6 +2127,7 @@
 		583ED6A62373F0660070441A /* zk_picShow */ = {
 			isa = PBXGroup;
 			children = (
+				5843316D236FAB2D0046C0BD /* lunBoV */,
 				583ED6A72373F0660070441A /* zkPhotoShowVC.m */,
 				583ED6A82373F0660070441A /* zkPhotoShowCell.m */,
 				583ED6A92373F0660070441A /* zkPhotoShowCell.h */,
@@ -2365,11 +2396,13 @@
 				583B34F52398D6EB00148350 /* QYZJShenQingRuZhuTwoVC.xib in Resources */,
 				584331A5236FF3F00046C0BD /* QYZhuJiaLoginVC.xib in Resources */,
 				583B34EB2398D6EB00148350 /* QYZJMineOrderCell.xib in Resources */,
+				5848AA2423AA1279009D9E62 /* QYZJMessageYanShouCell.xib in Resources */,
 				583536812386657100D9BE26 /* QYZJHomePayDetailTwoCell.xib in Resources */,
 				583B35092398D6EB00148350 /* QYZJPingOrZanCell.xib in Resources */,
 				584331B723700BB50046C0BD /* QYZJHomeFourCell.xib in Resources */,
 				337F3E6620E9FE5300C5526A /* LaunchScreen.storyboard in Resources */,
 				582F74DC2378F80A00F6FCB6 /* QYZJChangePhoneVC.xib in Resources */,
+				5848AA1C23AA0438009D9E62 /* QYZJBaoXiuYearCell.xib in Resources */,
 				582F74D52378F29000F6FCB6 /* mx_pic_selected_no@2x.png in Resources */,
 				583B350D2398D6EB00148350 /* QYZJMessageCell.xib in Resources */,
 				5843319B236FD3BC0046C0BD /* QYZJHomeTwoCell.xib in Resources */,
@@ -2493,6 +2526,7 @@
 				58197510237EA22B00FC77EE /* QYZJZengZhiFuWuTVC.m in Sources */,
 				582F74D22378F29000F6FCB6 /* MXImagePreviewController.m in Sources */,
 				5833D9ED238B63E1007DE9EC /* QYZJJiaoFuListCell.m in Sources */,
+				5848AA1B23AA0438009D9E62 /* QYZJBaoXiuYearCell.m in Sources */,
 				583B34EE2398D6EB00148350 /* QYZJMineOrderInfoAddreeCell.m in Sources */,
 				582F74B82378F0F300F6FCB6 /* cacheClear.m in Sources */,
 				5836BCEB2378E5C300F02783 /* QYZJSettingTVC.m in Sources */,
@@ -2561,6 +2595,7 @@
 				583B34D32398D6EB00148350 /* QYZJAppShopTVC.m in Sources */,
 				337F3EAD20EA014600C5526A /* BaseTableViewHeaderFooterView.m in Sources */,
 				337F3EAC20EA014600C5526A /* BaseTableViewController.m in Sources */,
+				5848AA1723A9BE02009D9E62 /* QYZJMineBaoXiuListTVC.m in Sources */,
 				583B34FE2398D6EB00148350 /* QYZJAnLiDetailHeadView.m in Sources */,
 				583C307123A89EF4000AF260 /* QYZJQIngDanPingJiaCell.m in Sources */,
 				337F3E6920E9FE5300C5526A /* main.m in Sources */,
@@ -2594,6 +2629,7 @@
 				5846915823729D160056BA4A /* QYZJTongYongModel.m in Sources */,
 				584345782370FC760087A2D9 /* QYZJFaTieTVC.m in Sources */,
 				335010EE20EE05C100F8486B /* NSString+Size.m in Sources */,
+				5848AA1F23AA054C009D9E62 /* QYZJSetBaoXiuTVC.m in Sources */,
 				582F74CD2378F29000F6FCB6 /* MXImageListController.m in Sources */,
 				584345802371035F0087A2D9 /* QYZJRecommendDetailTVC.m in Sources */,
 				587611C22379684700A9DBA5 /* QYZJPingLunNeiCell.m in Sources */,
@@ -2631,6 +2667,7 @@
 				583B34F42398D6EB00148350 /* QYZJRuZhuThreeVC.m in Sources */,
 				582FDDC3238E721B00A7FB4B /* zkRequestTongYongTool.m in Sources */,
 				58309F6E2387A50B00CCAEA6 /* QYZJMineZhuYeHeadVIew.m in Sources */,
+				5848AA2323AA1279009D9E62 /* QYZJMessageYanShouCell.m in Sources */,
 				583B34F72398D6EB00148350 /* QYZJShenQingRuZhuTwoVC.m in Sources */,
 				583ED6B023741A3D0070441A /* QYZJFindTwoCell.m in Sources */,
 				583B35062398D6EB00148350 /* QYZJPingOrZanListTVC.m in Sources */,
@@ -2677,6 +2714,7 @@
 				58307956237F833400039E12 /* QYZJMineTongYongCell.m in Sources */,
 				583C306823A85F34000AF260 /* QYZJBaoBoOrQingDanOneCell.m in Sources */,
 				5830795A237F8A6000039E12 /* QYZJMoneyModel.m in Sources */,
+				5848AA2723AA2022009D9E62 /* QYZJQuestOrAppointTVC.m in Sources */,
 				583B350B2398D6EB00148350 /* QYZJPingOrZanCell.m in Sources */,
 				337F3EAF20EA014600C5526A /* BaseViewController+PublicMethod.m in Sources */,
 				58394F5E237A412B0017505B /* HHYMineFiveCell.m in Sources */,

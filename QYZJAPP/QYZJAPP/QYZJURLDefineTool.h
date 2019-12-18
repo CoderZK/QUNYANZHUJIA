@@ -352,6 +352,16 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)user_broadcastListURL;
 
 
+/**提交验收*/
++(NSString *)user_turnoverRepairConfirmURL;
+/** 验收通过*/
++(NSString *)user_turnoverRepairPassURL;
+/** 验收不通过*/
++(NSString *)user_turnoverRepairNotPassURL;
+/** 保修单详情*/
++(NSString *)user_repairDetailsURL;
+
+
 /**微信*/
 +(NSString *)user_createWxOrderURL;
 /** 支付宝*/

@@ -33,6 +33,7 @@
 #import "QYZJMineYuHuiQuanTVC.h"
 #import "QYZJXiuGaiFuWuVC.h"
 #import "QYZJMineCaiPanTVC.h"
+#import "QYZJMineBaoXiuListTVC.h"
 @interface QYZJMineVC ()<HHYMineFourCellDelegate,QYZJMIneTwoCellDelegate,HHYMineFiveCellDelegate>
 @property(nonatomic,strong)QYZJMineHeadView *headV;
 @property(nonatomic,strong)NSArray *headTitleArr;
@@ -274,9 +275,8 @@
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }else if (dd == 2) {
-            QYZJMineTongYongTVC * vc =[[QYZJMineTongYongTVC alloc] init];
+            QYZJMineBaoXiuListTVC * vc =[[QYZJMineBaoXiuListTVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
-            vc.type = 1;
             [self.navigationController pushViewController:vc animated:YES];
         }else if (dd == 3) {
             QYZJMineOrderTVC * vc =[[QYZJMineOrderTVC alloc] init];
