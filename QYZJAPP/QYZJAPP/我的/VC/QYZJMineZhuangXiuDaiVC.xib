@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QYZJMineZhuangXiuDaiVC">
             <connections>
                 <outlet property="TV" destination="6ch-ng-9VJ" id="tyR-hS-x2x"/>
+                <outlet property="confirmBt" destination="jGd-dL-H3f" id="Wsl-HJ-ZWT"/>
                 <outlet property="nameTF" destination="izA-zz-Xhy" id="zGP-4F-LPY"/>
                 <outlet property="phoneTF" destination="ljf-JT-Rjg" id="gyB-uZ-VMC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -115,15 +116,32 @@
                         <constraint firstItem="izA-zz-Xhy" firstAttribute="leading" secondItem="hG6-ko-Xlf" secondAttribute="trailing" constant="10" id="zR3-ky-aDQ"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jGd-dL-H3f">
+                    <rect key="frame" x="20" y="394" width="374" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="VBd-nX-l7w"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="确认" backgroundImage="backorange"/>
+                    <connections>
+                        <action selector="action:" destination="-1" eventType="touchUpInside" id="zO6-ew-0mt"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
                 <constraint firstItem="B95-7c-CB1" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="20" id="1Hj-pG-0Qx"/>
+                <constraint firstItem="jGd-dL-H3f" firstAttribute="top" secondItem="B95-7c-CB1" secondAttribute="bottom" constant="30" id="3bg-jr-SH1"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="B95-7c-CB1" secondAttribute="trailing" id="Eab-Aa-J1M"/>
+                <constraint firstItem="jGd-dL-H3f" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="Gau-Ik-Eh9"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="jGd-dL-H3f" secondAttribute="trailing" constant="20" id="KiH-iE-V1A"/>
                 <constraint firstItem="B95-7c-CB1" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="rFA-2i-F5S"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="131.8840579710145" y="116.51785714285714"/>
         </view>
     </objects>
+    <resources>
+        <image name="backorange" width="367" height="85"/>
+    </resources>
 </document>

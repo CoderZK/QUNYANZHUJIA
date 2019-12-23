@@ -54,7 +54,8 @@
         self.navigationItem.title = @"创建播报";
     }else if (self.type == 6 || self.type == 7) {
         self.navigationItem.title = @"创建报修";
-    }    self.tableView.backgroundColor =[UIColor groupTableViewBackgroundColor];
+    }
+    self.tableView.backgroundColor =[UIColor groupTableViewBackgroundColor];
     
     
     [self getImgDict];
@@ -89,6 +90,8 @@
     
     if (self.type == 1) {
         view.titleStr = @"发布";
+    }else if (self.type == 8 || self.type == 9) {
+        view.titleStr = @"选择答人";
     }
     Weak(weakSelf);
         view.footViewClickBlock = ^(UIButton *button) {
@@ -99,6 +102,8 @@
 
 - (void)FaBuAction {
     
+    
+    
     if (self.titleTF.text.length ==0 && !(self.type == 7 || self.type == 6)) {
            [SVProgressHUD showErrorWithStatus:@"请输入标题"];
            return;
@@ -108,8 +113,10 @@
         return;
     }
 
-    [SVProgressHUD show];
+ 
     
+
+    [SVProgressHUD show];
     NSString * url = [QYZJURLDefineTool user_createConstructionURL];
     if (self.type == 1) {
         url = [QYZJURLDefineTool user_updateCaseURL];

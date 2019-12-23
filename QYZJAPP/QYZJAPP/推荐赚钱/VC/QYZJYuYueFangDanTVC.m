@@ -19,6 +19,7 @@
 @property(nonatomic,strong)QYZJFindModel *dataModel;
 @property(nonatomic,strong)NSIndexPath *indexPath;
 @property(nonatomic,strong)QYZJTongYongModel * audioModel;
+@property(nonatomic,strong)NSString *audioStr;
 @end
 
 @implementation QYZJYuYueFangDanTVC
@@ -207,6 +208,13 @@
         QYZJRecommendTwoCell * cell = [tableView dequeueReusableCellWithIdentifier:@"QYZJRecommendTwoCell" forIndexPath:indexPath];
         cell.TV.delegate = self;
         [cell.luyinBt addTarget:self action:@selector(luYinAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.listBt addTarget:self action:@selector(listAction:) forControlEvents:UIControlEventTouchUpInside];
+        if (self.audioStr.length == 0) {
+            cell.listBt.hidden = YES;
+        }else {
+            cell.listBt.hidden = NO;
+            [cell.listBt setTitle:@"语音描述" forState:UIControlStateNormal];
+        }
         return cell;
     }else {
         TongYongTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
@@ -276,6 +284,17 @@
     
 }
 
+//播放
+- (void)listAction:(UIButton *)button {
+    
+       [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:self.audioStr] isLocality:NO];
+       [button setTitle:@"正在播放..." forState:UIControlStateNormal];
+       [PublicFuntionTool shareTool].findPlayBlock = ^{
+           [button setTitle:@"点击播放" forState:UIControlStateNormal];
+       };
+}
+
+
 - (void)luYinAction:(UIButton *)button {
 
     [[QYZJLuYinView LuYinTool] show];
@@ -291,6 +310,7 @@
 //
 //                           NSString * firlpath = [[NSBundle mainBundle] pathForResource:@"8888" ofType:@"mp3"];
 //                           NSData * dd = [NSData dataWithContentsOfFile:firlpath];
+//                           [weakSelf updateLoadMediaWithData:dd];
                            [weakSelf updateLoadMediaWithData:mediaData];
                            [[QYZJLuYinView LuYinTool] diss];
                            
@@ -303,11 +323,18 @@
     
 }
 
+
+
+
+
 - (void)updateLoadMediaWithData:(NSData *)data {
            NSMutableDictionary * dict = @{}.mutableCopy;
            dict[@"token"] = self.audioModel.token;
            [zkRequestTool NetWorkingUpLoadMediaWithfileData:data parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
                [SVProgressHUD showSuccessWithStatus:@"上传音频成功"];
+               
+               self.audioStr = responseObject[@"key"];
+               [self.tableView reloadData];
                
            } failure:^(NSURLSessionDataTask *task, NSError *error) {
                NSLog(@"\n\n------%@",error);

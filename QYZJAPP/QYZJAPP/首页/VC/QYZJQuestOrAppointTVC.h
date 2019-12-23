@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)NSInteger type; // 0 预约.1提问
 @property(nonatomic,strong)NSString *ID;
 @property(nonatomic,assign)CGFloat money;
+@property(nonatomic,strong)NSString *cityID;
+@property(nonatomic,assign)BOOL isMore;
 @end
 
 NS_ASSUME_NONNULL_END

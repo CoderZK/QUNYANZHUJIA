@@ -368,6 +368,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)user_turnoverRepairNotPassURL;
 /** 保修单详情*/
 +(NSString *)user_repairDetailsURL;
+/** 可用优惠券列表 */
++(NSString *)user_payCouponListURL;
 
 
 /**微信*/
@@ -389,7 +391,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)user_appointCaipanURL;
 /** 预约表单*/
 +(NSString *)user_appointDemandURL;
-
+/**装修贷*/
++(NSString *)user_addZhuangxiuURL;
 
 
 

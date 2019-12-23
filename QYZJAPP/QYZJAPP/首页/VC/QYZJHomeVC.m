@@ -233,7 +233,7 @@
     }else if (indexPath.section == 1) {
         return 100;
     }else if (indexPath.section == 2) {
-        return (ScreenW - 30) * 125 / 375;
+        return (ScreenW - 30)  / 3;
     }
     return 110;
 }
@@ -263,6 +263,7 @@
     }else if (indexPath.section == 2) {
         QYZJHomeThreeCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeThreeCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.imgV.image = [UIImage imageNamed:@"bookOrder"];
         return cell;
     }else if (indexPath.section == 3 && indexPath.row == 0) {
         QYZJHomeFourCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeFourCell" forIndexPath:indexPath];
@@ -349,7 +350,7 @@
 
 - (void)pushHomeTwoVCWithIndex:(NSInteger)index {
     if (index<2) {
-        QYZJHomeTwoTVC * vc =[[QYZJHomeTwoTVC alloc] init];
+        QYZJHomeTwoTVC * vc =[[QYZJHomeTwoTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
         vc.type = index+1;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];

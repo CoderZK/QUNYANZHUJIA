@@ -174,7 +174,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)NSInteger renovation_time_id;
 @property(nonatomic,assign)NSInteger year;
 @property(nonatomic,assign)NSInteger evaluateLevel;
-
+@property(nonatomic,assign)NSInteger is_answer;
 
 @property(nonatomic,assign)CGFloat all_days;
 @property(nonatomic,assign)CGFloat days;
@@ -186,6 +186,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)CGFloat sit_price;
 @property(nonatomic,assign)CGFloat budget;
 @property(nonatomic,assign)CGFloat percent;
+@property(nonatomic,assign)CGFloat pay_money;
 
 
 @property(nonatomic,assign)CGFloat cellHeight;

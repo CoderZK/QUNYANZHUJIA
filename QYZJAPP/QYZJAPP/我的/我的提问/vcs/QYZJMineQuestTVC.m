@@ -8,6 +8,7 @@
 
 #import "QYZJMineQuestTVC.h"
 #import "QYZJMineQuestCell.h"
+#import "QYZJMineQuestTwoTVC.h"
 @interface QYZJMineQuestTVC ()
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
 @property(nonatomic,assign)NSInteger page;
@@ -89,17 +90,30 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     QYZJMineQuestCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    if ([zkSignleTool shareTool].role == 1) {
+    
+    QYZJFindModel * model = self.dataArray[indexPath.row];
+    if (model.is_answer == 2) {
         cell.isServer = YES;
     }else {
         cell.isServer = NO;
     }
-    cell.waiModel = self.dataArray[indexPath.row];
+    cell.waiModel = model;
     return cell;
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+     QYZJFindModel * model = self.dataArray[indexPath.row];
+    if ([model.status isEqualToString:@"0"]) {
+        //未付款
+        
+        QYZJMineQuestTwoTVC * vc =[[QYZJMineQuestTwoTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.model = model;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
     
 }
 

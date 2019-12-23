@@ -18,6 +18,7 @@
 @property(nonatomic,strong)NSMutableArray *picsArr;
 @property(nonatomic,strong)NSMutableArray *picsStrArr;
 @property(nonatomic,strong)NSString *videoStr;
+
 @property(nonatomic,assign)BOOL   isChooseVideo;
 @property(nonatomic,assign)BOOL isShowShop;
 @property(nonatomic,strong)UIButton *deleteBt;

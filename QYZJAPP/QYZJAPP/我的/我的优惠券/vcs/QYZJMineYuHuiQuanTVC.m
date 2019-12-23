@@ -78,7 +78,24 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return (ScreenW - 20) * 125/345 + 10;
+    if (self.isChoose == 1) {
+        //提问
+        if (indexPath.row % 2 == 1) {
+            return 0;
+        }else {
+           return (ScreenW - 20) * 125/345 + 10;
+        }
+        
+    }else if (self.isChoose == 2) {
+        if (indexPath.row % 2 == 0) {
+            return 0;
+        }else {
+           return (ScreenW - 20) * 125/345 + 10;
+        }
+    }else {
+         return (ScreenW - 20) * 125/345 + 10;
+    }
+   
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -88,11 +105,17 @@
         cell.isQuest = YES;
     }
     cell.model = self.dataArray[(indexPath.row)/2];
+    cell.clipsToBounds = YES;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (self.youHuiQuanBlock != nil) {
+        self.youHuiQuanBlock(self.dataArray[(indexPath.row)/2].ID);
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 @end

@@ -235,9 +235,9 @@ static QYZJLuYinView * tool = nil;
         self.statusBlock(NO,self.audioData);
     }
     
-    //    NSString *urlStr=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    //    urlStr=[urlStr stringByAppendingPathComponent:@"111.mp3"];
-    //    NSString *mp3FilePath = urlStr;//存储mp3文件的路径
+//        NSString *urlStr=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+//        urlStr=[urlStr stringByAppendingPathComponent:@"111.mp3"];
+//        NSString *mp3FilePath = urlStr;//存储mp3文件的路径
     
     //    @try {
     //        int read, write;

@@ -21,8 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)QYZJTongYongModel *model;
 
 //支付类型（1:抢单、2:签单、3:旁听客服语音、4:旁听订单、5:预约订单、6:提问订单、7:交付 首款订单、8:交付尾款订单、9:交付变更阶段订单、10:购买小店商品订单
-@property(nonatomic,assign)NSInteger type;
+@property(nonatomic,assign)NSInteger type; 
 
+@property(nonatomic,assign)NSInteger numer; //快速回答d时的人数
 
 @end
 

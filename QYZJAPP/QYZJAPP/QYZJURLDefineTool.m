@@ -77,6 +77,10 @@
 + (NSString * )app_cashFreezeMoneyURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_cashFreezeMoney.do"];
 }
+/** 可用优惠券列表 */
++(NSString *)user_payCouponListURL {
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_payCouponList.do"];
+}
 /** 银行列表 */
 + (NSString * )app_bankListURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_bankList.do"];
@@ -715,6 +719,15 @@
 +(NSString *)user_appointDemandURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_appointDemand.do"];
 }
+
+/**装修贷*/
++(NSString *)user_addZhuangxiuURL{
+    
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_addZhuangxiu.do"];
+    
+}
+
+
 
 
 //图片地址

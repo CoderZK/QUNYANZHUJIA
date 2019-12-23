@@ -10,11 +10,13 @@
 #import "LLPassWordAlertView.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
+#import "QYZJMineYuHuiQuanTVC.h"
 @interface QYZJZhiFuVC ()
 @property (weak, nonatomic) IBOutlet UIButton *payBt;
 @property (weak, nonatomic) IBOutlet UIImageView *imgV1;
 @property (weak, nonatomic) IBOutlet UIImageView *imgVT2;
 @property (weak, nonatomic) IBOutlet UIImageView *imgV3;
+@property (weak, nonatomic) IBOutlet UIImageView *img4;
 @property (weak, nonatomic) IBOutlet UIButton *confirmBt;
 @property (weak, nonatomic) IBOutlet UIButton *bt1;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *consTwo;
@@ -23,6 +25,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *consThree;
 @property (nonatomic,strong)NSDictionary *payDic;
 @property(nonatomic,assign)NSInteger payType;
+@property (weak, nonatomic) IBOutlet UIView *youHuiV;
+@property(nonatomic,strong)NSString *youHuiID;
+
 
 
 @end
@@ -61,7 +66,69 @@
         
     }
     
+    self.youHuiV.hidden = YES;
+    
+    if (self.type == 5|| self.type == 6) {
+        [self chackYouHuiJuanAction];
+    }
+    
 }
+
+//检测是否有优惠券
+- (void)chackYouHuiJuanAction {
+    
+   
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_payCouponListURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+   
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            NSArray * arr = responseObject[@"result"];
+            if (arr.count == 0) {
+                self.youHuiV.hidden = YES;
+            }else {
+                
+                
+                NSDictionary * dictData = [arr firstObject];
+                NSInteger numberQ = [[NSString stringWithFormat:@"%@",dictData[@"free_question_num"]] integerValue];
+                NSInteger numberA = [[NSString stringWithFormat:@"%@",dictData[@"free_appoint_num"]] integerValue];
+                if (self.type == 5) {
+                    //预约
+                    if (numberA < self.numer) {
+                        self.youHuiV.hidden = YES;
+                    }else {
+                        self.youHuiV.hidden = NO;
+                    }
+                }else {
+                    //提问
+                    if (numberQ < self.numer) {
+                        self.youHuiV.hidden = YES;
+                    }else {
+                        self.youHuiV.hidden = NO;
+                    }
+                    
+                }
+            }
+            
+            
+            
+            
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+
+        
+    }];
+    
+}
+
+
 - (IBAction)clickAction:(UIButton *)sender {
     
     if (sender.tag == 100) {
@@ -80,13 +147,28 @@
         self.imgV3.image = [UIImage imageNamed:@"xuanze_2"];
         self.payType = sender.tag - 100;
         
-    }else {
+    }else if (sender.tag == 104){
+        self.imgV1.image = [UIImage imageNamed:@"xuanze_1"];
+        self.imgVT2.image = [UIImage imageNamed:@"xuanze_1"];
+        self.imgV3.image = [UIImage imageNamed:@"xuanze_1"];
+
+        QYZJMineYuHuiQuanTVC * vc =[[QYZJMineYuHuiQuanTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        Weak(weakSelf);
+        vc.youHuiQuanBlock = ^(NSString * _Nonnull ID) {
+            weakSelf.img4.image = [UIImage imageNamed:@"xuanze_2"];
+            weakSelf.youHuiID = ID;
+        };
+        vc.isChoose = self.type - 4;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else if (sender.tag == 103){
         
         if (self.payType == 0) {
             [LLPassWordAlertView showWithTitle:@"支付密码" desStr:@"请输入支付密码" finish:^(NSString *pwStr) {
-                       [self checkPayPasswordWith:pwStr];
+                [self checkPayPasswordWith:pwStr];
                        
-                   }];
+            }];
         }else {
             [self payAction];
         }
@@ -155,6 +237,8 @@
         url = [QYZJURLDefineTool user_createAlipayOrderURL];
     }
     
+   
+    
     if (self.model.is_need_wechat_pay) {
         if (self.type != 11) {
             url = [QYZJURLDefineTool user_createPayNewURL];
@@ -165,6 +249,12 @@
             dict[@"is_wechat_pay"] = @"0";
         }
         dict[@"pay_money"] = @(self.model.wechat_money);
+    }
+    
+    if (self.youHuiID.length > 0) {
+           url = [QYZJURLDefineTool user_createCouponOrderURL];
+           dict[@"coupon_id"] = self.youHuiID;
+           dict[@"num"] = @(self.numer);
     }
     
     [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {

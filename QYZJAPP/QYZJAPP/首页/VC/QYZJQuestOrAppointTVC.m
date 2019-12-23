@@ -7,7 +7,7 @@
 //
 
 #import "QYZJQuestOrAppointTVC.h"
-
+#import "QYZJChoosePeopleTVC.h"
 @interface QYZJQuestOrAppointTVC ()<TZImagePickerControllerDelegate>
 @property(nonatomic,strong)UITextField *titleTF;
 @property(nonatomic,strong)IQTextView * desTV;
@@ -17,11 +17,12 @@
 @property(nonatomic,strong)UIView *headV;
 @property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)NSMutableArray *picsArr;
-@property(nonatomic,strong)NSString *videoStr;
+@property(nonatomic,strong)NSString *videoStr,*audioStr;
 @property(nonatomic,strong)QYZJTongYongModel *imgModel,*videoModel;
 @property(nonatomic,strong)UIButton *deleteBt;
 @property(nonatomic,assign)BOOL   isChooseVideo;
 @property(nonatomic,strong)UISwitch *switchOn ;
+@property(nonatomic,strong)QYZJTongYongModel * audioModel;
 @end
 
 @implementation QYZJQuestOrAppointTVC
@@ -40,6 +41,16 @@
     self.picsArr = @[].mutableCopy;
     [self getImgDict];
     [self getVideoDict];
+    
+     [self getAudioDict];
+    
+}
+
+- (void)getAudioDict {
+    
+    [zkRequestTool getUpdateAudioModelWithCompleteModel:^(QYZJTongYongModel *model) {
+        self.audioModel = model;
+    }];
     
 }
 
@@ -104,7 +115,9 @@
     [self.listBt setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
     [self.listBt setImage:[UIImage imageNamed:@"sy"] forState:UIControlStateNormal];
     [self.listBt setTitle:@"32" forState:UIControlStateNormal];
+     [self.listBt setTitle:@"语音描述" forState:UIControlStateNormal];
     self.listBt.titleLabel.font = kFont(14);
+    self.listBt.hidden = YES;
     self.listBt.layer.cornerRadius = 12.5;
     self.listBt.clipsToBounds = YES;
     self.listBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -225,6 +238,61 @@
     
 }
 
+//播放
+- (void)listAction:(UIButton *)button {
+    
+       [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:self.audioStr] isLocality:NO];
+       [button setTitle:@"正在播放..." forState:UIControlStateNormal];
+       [PublicFuntionTool shareTool].findPlayBlock = ^{
+           [button setTitle:@"点击播放" forState:UIControlStateNormal];
+       };
+}
+
+
+- (void)luYinAction:(UIButton *)button {
+
+    [[QYZJLuYinView LuYinTool] show];
+              Weak(weakSelf);
+              [QYZJLuYinView LuYinTool].statusBlock = ^(BOOL isStare,NSData *mediaData) {
+      
+                  dispatch_async(dispatch_get_main_queue() , ^{
+                      if (isStare) {
+                          weakSelf.navigationItem.title = @"正在录音...";
+                      }else {
+                          if (weakSelf.type == 0) {
+                              weakSelf.navigationItem.title = @"快速预约";
+                          }else {
+                              weakSelf.navigationItem.title = @"快速提问";
+                          }
+                          
+                          [weakSelf updateLoadMediaWithData:mediaData];
+                          [[QYZJLuYinView LuYinTool] diss];
+                          
+                      }
+                  });
+              };
+}
+
+
+
+
+
+- (void)updateLoadMediaWithData:(NSData *)data {
+           NSMutableDictionary * dict = @{}.mutableCopy;
+           dict[@"token"] = self.audioModel.token;
+           [zkRequestTool NetWorkingUpLoadMediaWithfileData:data parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+               [SVProgressHUD showSuccessWithStatus:@"上传音频成功"];
+               
+               self.audioStr = responseObject[@"key"];
+               [self.tableView reloadData];
+               
+           } failure:^(NSURLSessionDataTask *task, NSError *error) {
+               NSLog(@"\n\n------%@",error);
+           }];
+}
+
+
+
 - (void)deleteVideo {
     self.videoStr = nil;
 }
@@ -234,30 +302,6 @@
 }
 
 
-- (void)luYinAction:(UIButton *)button {
-    
-            [[QYZJLuYinView LuYinTool] show];
-            Weak(weakSelf);
-            [QYZJLuYinView LuYinTool].statusBlock = ^(BOOL isStare,NSData *mediaData) {
-    
-                dispatch_async(dispatch_get_main_queue() , ^{
-                    if (isStare) {
-                        weakSelf.navigationItem.title = @"正在录音...";
-                    }else {
-                        if (weakSelf.type == 0) {
-                            weakSelf.navigationItem.title = @"快速预约";
-                        }else {
-                            weakSelf.navigationItem.title = @"快速提问";
-                        }
-                        
-                    }
-                });
-    
-    
-            };
-    
-    
-}
 
 - (void)setFootV {
     self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - 60);
@@ -267,10 +311,31 @@
     
     
     KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"完成" andImgaeName:@""];
-    
+    if (self.isMore) {
+        view.titleStr = @"选择答人";
+    }
     Weak(weakSelf);
     view.footViewClickBlock = ^(UIButton *button) {
-        [weakSelf questOrAppiontAction];
+        if (weakSelf.isMore) {
+         QYZJChoosePeopleTVC * vc =[[QYZJChoosePeopleTVC alloc] init];
+         vc.hidesBottomBarWhenPushed = YES;
+         vc.cityID = self.cityID;
+         vc.type = 2 - self.type;
+         vc.titleStr = self.titleTF.text;
+         vc.videoStr = self.videoStr;
+         vc.picArr = self.picsArr;
+         vc.desStr = self.desTV.text;
+         vc.strAudionStr = self.audioStr;
+            if (self.switchOn.on) {
+                vc.isOpen = 1;
+            }else {
+               vc.isOpen = 0;
+            }
+         [self.navigationController pushViewController:vc animated:YES];
+        }else {
+           [weakSelf questOrAppiontAction];
+        }
+        
     };
     [self.view addSubview:view];
 }
@@ -297,6 +362,7 @@
     dict[@"context"] = self.desTV.text;
     dict[@"pic_url"] = [self.picsArr componentsJoinedByString:@","];
     dict[@"video_url"] = self.videoStr;
+    dict[@"media_url"] = self.audioStr;
     if (self.switchOn.on) {
         dict[@"is_open"] = @"1";
     }else {
@@ -309,7 +375,7 @@
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             
-            [self wecharPay];
+            [self wecharPayWithID:responseObject[@"result"][@"id"]];
             
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
@@ -326,12 +392,12 @@
     
 }
 
-- (void)wecharPay {
+- (void)wecharPayWithID:(NSString *)ID {
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"pay_money"]= @(self.money);
     dict[@"type"] = @(2-self.type);
-    dict[@"id"] = self.ID;
+    dict[@"id"] = ID;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_wechatPayURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
 
         [SVProgressHUD dismiss];

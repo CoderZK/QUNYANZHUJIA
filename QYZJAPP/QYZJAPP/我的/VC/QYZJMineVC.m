@@ -35,6 +35,7 @@
 #import "QYZJMineCaiPanTVC.h"
 #import "QYZJMineBaoXiuListTVC.h"
 #import "QYZJMineYuYueDanTVC.h"
+#import "QYZJMineZhiBoTVC.h"
 @interface QYZJMineVC ()<HHYMineFourCellDelegate,QYZJMIneTwoCellDelegate,HHYMineFiveCellDelegate>
 @property(nonatomic,strong)QYZJMineHeadView *headV;
 @property(nonatomic,strong)NSArray *headTitleArr;
@@ -365,7 +366,9 @@
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }else {
-            [SVProgressHUD showSuccessWithStatus:@"该功能暂未开放"];
+            QYZJMineZhiBoTVC * vc =[[QYZJMineZhiBoTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }else if (indexPath.section == 4){
         if (dd == 0) {

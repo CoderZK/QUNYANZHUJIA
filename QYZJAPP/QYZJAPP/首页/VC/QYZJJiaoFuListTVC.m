@@ -98,10 +98,18 @@
      Weak(weakSelf);
 
     view.footViewClickBlock = ^(UIButton * _Nonnull button) {
-        //去交付
-//            QYZJCreateNewJiaoFuTVC * vc =[[QYZJCreateNewJiaoFuTVC alloc] init];
-//            vc.hidesBottomBarWhenPushed = YES;
-//            [weakSelf.navigationController pushViewController:vc animated:YES];
+           QYZJFindModel * model = nil;
+            for (int i = 0 ;i <self.dataArray.count ; i++) {
+                if (self.dataArray[i].isSelect) {
+                    model = self.dataArray[i];
+                    break;
+                }
+            }
+          QYZJCreateShiGongQingDanTVC * vc =[[QYZJCreateShiGongQingDanTVC alloc] init];
+          vc.hidesBottomBarWhenPushed = YES;
+          vc.ID = model.ID;
+          [weakSelf.navigationController pushViewController:vc animated:YES];
+        
     };
     
     viewHead.footViewClickBlock = ^(UIButton * _Nonnull button) {
@@ -142,6 +150,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.dataArray[indexPath.row].isSelect = !self.dataArray[indexPath.row].isSelect;
+    for (int i = 0 ; i < self.dataArray.count; i++) {
+        if (i != indexPath.row) {
+            self.dataArray[indexPath.row].isSelect = NO;
+        }
+    }
     [self.tableView reloadData];
 }
 

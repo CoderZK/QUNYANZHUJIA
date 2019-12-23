@@ -430,7 +430,7 @@
       //    NSString * MD5Str = [NSString stringToMD5:[josnStr stringByAppendingString:@"1375d7ac2b2a8e25"]];
       //    NSDictionary * paraDict = @{@"authCode":MD5Str,@"jsonObj":josnStr};
       
-      [manager POST:QiNiuVideoURL parameters:mDict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+      [manager POST:QiNiuYunUploadURL parameters:mDict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
           
           if (fileData) {
               [formData appendPartWithFileData:fileData name:@"file" fileName:@"369369.mp4" mimeType:@"video/quicktime"];
@@ -480,11 +480,11 @@
       //    NSString * MD5Str = [NSString stringToMD5:[josnStr stringByAppendingString:@"1375d7ac2b2a8e25"]];
       //    NSDictionary * paraDict = @{@"authCode":MD5Str,@"jsonObj":josnStr};
       
-      [manager POST:QiNiuVideoURL parameters:mDict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+      [manager POST:QiNiuYunUploadURL parameters:mDict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
           
           if (fileData) {
 //              [formData appendPartWithFileData:fileData name:@"file" fileName:@"369369.mp4" mimeType:@"video/quicktime"];
-              [formData appendPartWithFileData:fileData name:@"file" fileName:@"369369.mp3" mimeType:@"application/octer-stream"];
+              [formData appendPartWithFileData:fileData name:@"file" fileName:@"369369.mp3" mimeType:@"application/octet-stream"];
           }
           
       } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

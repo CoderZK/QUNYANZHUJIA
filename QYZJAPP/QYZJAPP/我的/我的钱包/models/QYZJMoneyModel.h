@@ -40,7 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *end_time;
 @property(nonatomic,strong)NSString *add_time;
 @property(nonatomic,strong)NSString *telphone;
-
+@property(nonatomic,strong)NSString *time;
+@property(nonatomic,strong)NSString *ysUrl;
 
 @property(nonatomic,assign)CGFloat sr_money;
 @property(nonatomic,assign)CGFloat pay_money;
@@ -51,6 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,assign)BOOL isSelect;
 @property(nonatomic,assign)BOOL isAble;
+@property(nonatomic,assign)BOOL isPlaying;
 
 
 

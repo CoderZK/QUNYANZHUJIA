@@ -15,6 +15,7 @@
 #import "QYZJTypesSearchTVC.h"
 #import "QYZJYuYueFangDanTVC.h"
 #import "QYZJSearchListTVC.h"
+#import "QYZJQuestOrAppointTVC.h"
 @interface QYZJHomeTwoTVC ()
 @property(nonatomic,strong)FindHeadView *navigaV;
 @property(nonatomic,strong)NSMutableArray<QYZJTongYongModel *> *labelListArr;
@@ -56,7 +57,7 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeThreeCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeThreeCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeFourCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeFourCell"];
-       [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeFiveCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeFiveCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeFiveCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeFiveCell"];
     [self.tableView registerClass:[QYZJCoachCell class] forCellReuseIdentifier:@"QYZJCoachCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -85,7 +86,7 @@
     dict[@"pageSize"] = @(10);
     dict[@"type"] = @(3-self.type);
     dict[@"city_id"] = self.cityID;
-    dict[@"sort_type"] = @"0";
+    dict[@"sort_type"] = @"1";
     dict[@"search_type"] = @(self.type);
     [zkRequestTool networkingPOST:[QYZJURLDefineTool app_searchURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
@@ -236,7 +237,7 @@
         }
         return 100;
     }else if (indexPath.section == 1) {
-        return (ScreenW - 30) * 125 / 375;
+         return (ScreenW - 30)  / 3;
     }else if (indexPath.section == 2) {
         return 110;
     }
@@ -274,6 +275,11 @@
         return cell;
     }else if (indexPath.section == 1) {
         QYZJHomeThreeCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeThreeCell" forIndexPath:indexPath];
+        cell.imgV.image = [UIImage imageNamed:@"question"];
+        if (self.type == 2) {
+         cell.imgV.image = [UIImage imageNamed:@"appointment"];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
        return cell;
     }else if (indexPath.section == 2) {
         if (indexPath.row == 0) {
@@ -294,9 +300,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 1) {
-           QYZJYuYueFangDanTVC * vc =[[QYZJYuYueFangDanTVC alloc] init];
-           vc.hidesBottomBarWhenPushed = YES;
-           [self.navigationController pushViewController:vc animated:YES];
+        QYZJQuestOrAppointTVC * vc =[[QYZJQuestOrAppointTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.type = 2 - self.type;
+        vc.cityID = self.cityID;
+        vc.isMore = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
     }else if (indexPath.section == 2) {
         if (indexPath.row == 0) {
             QYZJXiaoYanZiVC * vc =[[QYZJXiaoYanZiVC alloc] init];

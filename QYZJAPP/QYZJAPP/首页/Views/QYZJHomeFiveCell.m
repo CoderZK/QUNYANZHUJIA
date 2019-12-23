@@ -64,7 +64,8 @@
     self.requestLB.textColor = BlueColor;
     self.requestLB.layer.borderColor = BlueColor.CGColor;
 
-    
+    self.imgV.hidden = YES;
+    self.headBtMxCons.constant = 15;
     
 }
 - (void)setType:(NSInteger)type {
