@@ -239,7 +239,7 @@
     UIButton * headBt = (UIButton *)[view viewWithTag:100];
     UILabel *nameLB = (UILabel *)[view viewWithTag:102];
     UILabel * roleLB = (UILabel *)[view viewWithTag:101];
-    [headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.a_head_img]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+    [headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.a_head_img]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"963"] options:SDWebImageRetryFailed];
     if (model.a_role.length > 0) {
         roleLB.text = [[model.a_role componentsSeparatedByString:@","] firstObject];
         CGFloat ww = [roleLB.text getWidhtWithFontSize:13] + 10;

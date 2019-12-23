@@ -84,7 +84,7 @@
 - (UICollectionViewCell *)pagerView:(TYCyclePagerView *)pagerView cellForItemAtIndex:(NSInteger)index {
     zkLunBoTwoCell *cell = [pagerView dequeueReusableCellWithReuseIdentifier:@"cellId" forIndex:index];
    
-    [cell.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:_dataArr[index]]] placeholderImage:[UIImage imageNamed:@"369"]];
+    [cell.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:_dataArr[index]]] placeholderImage:[UIImage imageNamed:@"789"]];
     return cell;
 }
 

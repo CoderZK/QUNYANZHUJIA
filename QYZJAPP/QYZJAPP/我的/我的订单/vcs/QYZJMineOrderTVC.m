@@ -134,11 +134,9 @@
     if ([model.status intValue]== 1 || [model.status intValue]== 2) {
         [self actionWithStatus:[model.status intValue]withModel:model withIndex:button.tag];
     }else if ([model.status intValue] == 0) {
-        QYZJZhiFuVC* vc =[[QYZJZhiFuVC alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-//        vc.osn = model.osn;
-//        vc.money = [model.goods_price floatValue];
-        [self.navigationController pushViewController:vc animated:YES];
+  
+        [self wecharPayWithID:model.ID money:[model.goods_pic floatValue]];
+        
     }else if ([model.status intValue] ==3) {
         QYZJPingJiaTVC * vc =[[QYZJPingJiaTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
@@ -150,6 +148,39 @@
     
     
 }
+
+- (void)wecharPayWithID:(NSString *)ID money:(CGFloat )money{
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"pay_money"]= @(money);
+    dict[@"type"] = @(3);
+    dict[@"id"] = ID;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_wechatPayURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            QYZJTongYongModel * mm = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
+            QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.model = mm;
+            vc.ID = ID;
+            vc.type = 10;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+}
+
+
 
 
 - (void)actionWithStatus:(NSInteger)status withModel:(QYZJFindModel *)model withIndex:(NSInteger )index{

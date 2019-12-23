@@ -26,7 +26,7 @@
 - (void)setModel:(QYZJFindModel *)model  {
     _model = model;
     self.titleLB.text = model.nick_name;
-    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.head_img]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"]];
+    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.head_img]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"963"]];
     self.numberOneLB.text = [NSString stringWithFormat:@"%ld",(long)model.sign_num];
     self.numberTwoLB.text = [NSString stringWithFormat:@"%ld",(long)model.ok_num];
     self.numberThreeLB.text = [NSString stringWithFormat:@"%ld",(long)model.demand_num];

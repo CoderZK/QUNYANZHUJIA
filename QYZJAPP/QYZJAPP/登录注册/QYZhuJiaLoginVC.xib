@@ -103,17 +103,42 @@
                         <action selector="clickAction:" destination="-1" eventType="touchUpInside" id="wLq-L6-yhK"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EpG-CF-bjW">
+                    <rect key="frame" x="182" y="662" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="e6k-gx-Skw"/>
+                        <constraint firstAttribute="height" constant="50" id="y4M-jd-OTZ"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="zf_3"/>
+                    <connections>
+                        <action selector="webChatLogin:" destination="-1" eventType="touchUpInside" id="PdJ-DY-2dJ"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Jz-cX-bQm">
+                    <rect key="frame" x="10" y="722" width="394" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="JGw-4J-vNV"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
+                <constraint firstItem="9Jz-cX-bQm" firstAttribute="top" secondItem="EpG-CF-bjW" secondAttribute="bottom" constant="10" id="2gr-jK-tdD"/>
+                <constraint firstItem="EpG-CF-bjW" firstAttribute="centerX" secondItem="NZs-n3-YUJ" secondAttribute="centerX" id="88c-IP-BF7"/>
                 <constraint firstItem="Tg9-Fk-Bzt" firstAttribute="top" secondItem="OtU-Zi-aPg" secondAttribute="bottom" constant="30" id="89d-36-Tzz"/>
                 <constraint firstItem="4ZS-fl-Gc3" firstAttribute="top" secondItem="Tg9-Fk-Bzt" secondAttribute="bottom" constant="20" id="9FA-QE-Bj3"/>
                 <constraint firstItem="NZs-n3-YUJ" firstAttribute="trailing" secondItem="Tg9-Fk-Bzt" secondAttribute="trailing" constant="20" id="Ewv-Dd-VWj"/>
+                <constraint firstItem="NZs-n3-YUJ" firstAttribute="bottom" secondItem="EpG-CF-bjW" secondAttribute="bottom" constant="150" id="KBc-7f-V6R"/>
                 <constraint firstItem="NZs-n3-YUJ" firstAttribute="trailing" secondItem="4ZS-fl-Gc3" secondAttribute="trailing" constant="10" id="Rtp-g0-g1C"/>
                 <constraint firstItem="NZs-n3-YUJ" firstAttribute="trailing" secondItem="OtU-Zi-aPg" secondAttribute="trailing" id="WGj-WE-9ja"/>
                 <constraint firstItem="Tg9-Fk-Bzt" firstAttribute="leading" secondItem="jIg-4w-gOJ" secondAttribute="leading" constant="20" id="j3D-fo-QRc"/>
                 <constraint firstItem="OtU-Zi-aPg" firstAttribute="top" secondItem="NZs-n3-YUJ" secondAttribute="top" constant="30" id="lHt-C0-YG2"/>
                 <constraint firstItem="OtU-Zi-aPg" firstAttribute="leading" secondItem="NZs-n3-YUJ" secondAttribute="leading" id="rCE-LZ-9q9"/>
+                <constraint firstItem="9Jz-cX-bQm" firstAttribute="leading" secondItem="NZs-n3-YUJ" secondAttribute="leading" constant="10" id="tPi-i3-5g5"/>
+                <constraint firstItem="NZs-n3-YUJ" firstAttribute="trailing" secondItem="9Jz-cX-bQm" secondAttribute="trailing" constant="10" id="vUo-RS-AkO"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="NZs-n3-YUJ"/>
             <point key="canvasLocation" x="130" y="-139"/>
@@ -123,5 +148,6 @@
         <image name="backorange" width="367" height="85"/>
         <image name="ico_10" width="20" height="20"/>
         <image name="icon_mima" width="20" height="20"/>
+        <image name="zf_3" width="19.5" height="19.5"/>
     </resources>
 </document>

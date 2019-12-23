@@ -100,19 +100,25 @@
         return;
     }
     
-    if (self.codeTF.text.length == 0) {
-        [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
-        return;
-    }
-    
     if (self.passWordTF.text.length == 0) {
         [SVProgressHUD showErrorWithStatus:@"请输入密码"];
         return;
     }
+    if (![self.passWordTF.text isEqualToString:self.passWordTwoTF.text]) {
+        [SVProgressHUD showSuccessWithStatus:@"两次密码不一样"];
+        return;
+    }
+    
+    if (self.codeTF.text.length == 0) {
+           [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
+           return;
+       }
+    
     NSMutableDictionary * dataDict = @{@"phone":self.phoneTF.text}.mutableCopy;
     dataDict[@"code"] = self.inviteCeodeTF.text;
     dataDict[@"mobile_verify"] = self.codeTF.text;
     dataDict[@"password"] = [NSString stringToMD5:self.passWordTF.text];
+    dataDict[@"mobile"] = self.phoneTF.text;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool app_sendmobileURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([responseObject[@"key"] intValue]== 1) {
             [SVProgressHUD showSuccessWithStatus:@"注册成功"];

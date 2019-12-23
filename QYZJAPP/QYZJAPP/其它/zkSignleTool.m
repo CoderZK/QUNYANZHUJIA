@@ -31,6 +31,15 @@ static zkSignleTool * tool = nil;
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
 }
 
+- (void)setIsBindWebChat:(BOOL)isBindWebChat {
+    [[NSUserDefaults standardUserDefaults] setBool:isBindWebChat forKey:@"isBindWebChat"];
+     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)isBindWebChat {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"isBindWebChat"];
+}
+
 -(void)setSession_token:(NSString *)session_token
 {
     

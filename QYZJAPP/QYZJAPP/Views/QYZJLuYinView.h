@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)show;
 - (void)diss;
-@property(nonatomic,copy)void(^statusBlock)(BOOL isStare);
+@property(nonatomic,copy)void(^statusBlock)(BOOL isStare ,NSData * mediaData);
 @end
 
 NS_ASSUME_NONNULL_END

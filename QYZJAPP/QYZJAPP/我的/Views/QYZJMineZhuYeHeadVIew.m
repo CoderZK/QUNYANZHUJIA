@@ -23,7 +23,7 @@
         
         
         self.imgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 100+sstatusHeight)];
-        self.imgV.backgroundColor = [UIColor greenColor];
+        self.imgV.image =[UIImage imageNamed:@"39"];
         [self addSubview:self.imgV];
         
         self.backBt = [[UIButton alloc] initWithFrame:CGRectMake(10, sstatusHeight + 2, 40, 40)];
@@ -184,7 +184,7 @@
 
 - (void)setDataModel:(QYZJUserModel *)dataModel {
     _dataModel = dataModel;
-    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:dataModel.head_img]] forState:(UIControlStateNormal) placeholderImage:[UIImage imageNamed:@"369"]];
+    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:dataModel.head_img]] forState:(UIControlStateNormal) placeholderImage:[UIImage imageNamed:@"963"]];
     self.nickNameLB.text = dataModel.nick_name;
     self.nickNameLB.mj_w = [dataModel.nick_name getWidhtWithFontSize:15];
     self.scoreLB.mj_x = CGRectGetMaxX(self.nickNameLB.frame) + 10;

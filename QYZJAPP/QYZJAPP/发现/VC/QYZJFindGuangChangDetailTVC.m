@@ -90,7 +90,6 @@
     
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
-    dict[@"userId"] = [zkSignleTool shareTool].session_uid;
     dict[@"nickName"] = [zkSignleTool shareTool].nick_name;
     if (self.isPeople) {
         dict[@"toUserId"] = self.dataArray[self.indexPath.row].userId;

@@ -108,12 +108,15 @@
     
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"old_phone"] = self.oldTF.text;
+    dict[@"code"] = self.codeTF.text;
+    dict[@"new_phone"] = self.nPhoneTF.text;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_editPhoneURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
 
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             
-            [SVProgressHUD showSuccessWithStatus:@"修改手机号成功"];
+            [SVProgressHUD showSuccessWithStatus:@"换绑手机号成功"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });

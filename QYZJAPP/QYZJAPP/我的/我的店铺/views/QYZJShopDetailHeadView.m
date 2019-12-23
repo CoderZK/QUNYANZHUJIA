@@ -145,7 +145,7 @@
         }else {
             [self.picView addSubview:imageView];
         }
-        [imageView sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:picArr[i]]] placeholderImage:[UIImage imageNamed:@"369"]];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:picArr[i]]] placeholderImage:[UIImage imageNamed:@"789"]];
         
     }
     

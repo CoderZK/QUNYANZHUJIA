@@ -30,7 +30,7 @@
     }else {
         str = model.pic;
     }
-    [self.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:str]] placeholderImage:[UIImage imageNamed:@"369"]];
+    [self.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:str]] placeholderImage:[UIImage imageNamed:@"789"]];
     self.titelLB.text = model.title;
     self.contentLB.text = model.context;
     

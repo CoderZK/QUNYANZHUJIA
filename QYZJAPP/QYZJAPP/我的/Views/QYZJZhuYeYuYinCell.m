@@ -38,7 +38,7 @@
 
 - (void)setModel:(QYZJFindModel *)model {
     _model = model;
-    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.q_head_img]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"]];
+    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.q_head_img]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"963"]];
     self.titleLB.text = model.q_nick_name;
     self.contentLB.text = model.title;
     self.numberLB.text = [NSString stringWithFormat:@"%ld人旁听",model.sit_on_num];

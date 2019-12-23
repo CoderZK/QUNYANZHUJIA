@@ -42,7 +42,7 @@
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"token"] = [zkSignleTool shareTool].session_token;
     dict[@"page"] = @(self.page);
-    dict[@"pageSize"] = @(10);
+    dict[@"pageSize"] = @(20);
     [zkRequestTool networkingPOST:urlStr parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];

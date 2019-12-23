@@ -24,7 +24,7 @@
 
 - (void)setModel:(QYZJFindModel *)model {
     _model = model;
-    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.head_img]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"]];
+    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.head_img]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"963"]];
     self.titelLB.text = model.nick_name;
     self.contentLB.text = model.telphone;
     

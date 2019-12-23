@@ -47,17 +47,29 @@
     
 }
 
+- (void)setIsCanChange:(BOOL)isCanChange {
+    _isCanChange = isCanChange;
+}
+
 - (void)clickAction:(NSInteger)index {
-    for (int i = 0 ; i < self.dataArray.count; i++) {
-        QYZJSeNeiView * vv = [self viewWithTag:100+i];
-        if (i + 100 == index) {
-            vv.isSelect = YES;
-        }else {
-            vv.isSelect = NO;
-        }
+    if (self.isCanChange) {
         
+         QYZJSeNeiView * vv = [self viewWithTag:index];
+         vv.isSelect = !vv.isSelect;
+        self.clickHeadBlock(index-100,vv.isSelect);
+        
+    }else {
+        for (int i = 0 ; i < self.dataArray.count; i++) {
+               QYZJSeNeiView * vv = [self viewWithTag:100+i];
+               if (i + 100 == index) {
+                   vv.isSelect = YES;
+               }else {
+                   vv.isSelect = NO;
+               }
+               
+           }
+           self.clickHeadBlock(index-100,NO);
     }
-    self.clickHeadBlock(index-100);
     
 }
 
@@ -115,7 +127,7 @@
     self.titleLB.text = titleStr;
     CGFloat ww = [titleStr getWidhtWithFontSize:14];
     [self.titleLB mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@(ww));
+        make.width.equalTo(@(ww+3));
     }];
     
     
@@ -135,6 +147,8 @@
         self.imgV.image = [UIImage imageNamed:@"7"];
     }
 }
+
+
 
 @end
 

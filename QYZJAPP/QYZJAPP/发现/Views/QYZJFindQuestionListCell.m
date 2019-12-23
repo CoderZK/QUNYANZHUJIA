@@ -77,7 +77,7 @@
     _model = model;
     self.titleLB.text = model.title;
     self.nameLB.text = model.nickName;
-    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.headImg]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.headImg]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"963"] options:SDWebImageRetryFailed];
     self.nameLB.mj_w = [self.nameLB.text getWidhtWithFontSize:14];
     self.typeLB.text= model.roleName;
     if (model.roleName.length == 0) {

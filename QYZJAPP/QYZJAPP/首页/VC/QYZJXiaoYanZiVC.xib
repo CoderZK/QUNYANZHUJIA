@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QYZJXiaoYanZiVC">
             <connections>
+                <outlet property="contentLB" destination="bCn-5s-zP4" id="RlG-7a-cya"/>
+                <outlet property="logoBt" destination="h8L-1u-Ry2" id="F5z-ex-cCo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,13 +20,14 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bzd-5U-Id7">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backorange" translatesAutoresizingMaskIntoConstraints="NO" id="Bzd-5U-Id7">
                     <rect key="frame" x="0.0" y="44" width="414" height="150"/>
+                    <color key="backgroundColor" red="1" green="0.50196078430000002" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="150" id="AUs-bo-CpR"/>
                     </constraints>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h8L-1u-Ry2">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headPortrait" translatesAutoresizingMaskIntoConstraints="NO" id="h8L-1u-Ry2">
                     <rect key="frame" x="172" y="159" width="70" height="70"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="SSd-TI-fyL"/>
@@ -40,25 +43,24 @@
                     <color key="textColor" red="1" green="0.50196078430000002" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCn-5s-zP4">
-                    <rect key="frame" x="10" y="299" width="394" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCn-5s-zP4">
+                    <rect key="frame" x="30" y="299" width="354" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="0DS-WC-84p"/>
                     </constraints>
-                    <string key="text">小燕子是北京久久安居网路科技有限公司群燕筑家项目官网方客服，工作宗旨是\"服务好平台每位用户\"。\n   1、负责群燕筑家项目介绍，推广;\n   2、负责群燕筑家用户相关使用指导，包括但不限于（注册、入住、抢单、放单等）；\n     3、负责跟进解决用户纠纷投诉等问题。</string>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bdE-zm-WDZ">
-                    <rect key="frame" x="157" y="340" width="100" height="100"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="code" translatesAutoresizingMaskIntoConstraints="NO" id="bdE-zm-WDZ">
+                    <rect key="frame" x="132" y="340" width="150" height="150"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="100" id="YkM-ty-AwN"/>
-                        <constraint firstAttribute="height" constant="100" id="r5i-Qc-Svt"/>
+                        <constraint firstAttribute="width" constant="150" id="YkM-ty-AwN"/>
+                        <constraint firstAttribute="height" constant="150" id="r5i-Qc-Svt"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="扫一扫添加" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTq-bn-k6A">
-                    <rect key="frame" x="10" y="455" width="394" height="21"/>
+                    <rect key="frame" x="10" y="505" width="394" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="gi9-FZ-Lg7"/>
                     </constraints>
@@ -70,7 +72,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Bzd-5U-Id7" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="3Y5-lM-QWv"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="bCn-5s-zP4" secondAttribute="trailing" constant="10" id="5p2-Kn-N29"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="bCn-5s-zP4" secondAttribute="trailing" constant="30" id="5p2-Kn-N29"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="LTq-bn-k6A" secondAttribute="trailing" constant="10" id="6Sr-2g-WTg"/>
                 <constraint firstItem="Bzd-5U-Id7" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Akf-9J-q7m"/>
                 <constraint firstItem="h8L-1u-Ry2" firstAttribute="bottom" secondItem="Bzd-5U-Id7" secondAttribute="bottom" constant="35" id="Hvk-dI-ZDq"/>
@@ -82,7 +84,7 @@
                 <constraint firstItem="LTq-bn-k6A" firstAttribute="top" secondItem="bdE-zm-WDZ" secondAttribute="bottom" constant="15" id="foZ-ZU-k8n"/>
                 <constraint firstItem="bdE-zm-WDZ" firstAttribute="top" secondItem="bCn-5s-zP4" secondAttribute="bottom" constant="20" id="mq7-QB-TPj"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Bzd-5U-Id7" secondAttribute="trailing" id="oPb-cT-w6F"/>
-                <constraint firstItem="bCn-5s-zP4" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="10" id="q8v-pt-YFw"/>
+                <constraint firstItem="bCn-5s-zP4" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="30" id="q8v-pt-YFw"/>
                 <constraint firstItem="8CD-tD-Gyn" firstAttribute="top" secondItem="h8L-1u-Ry2" secondAttribute="bottom" constant="20" id="uwb-7z-Cjh"/>
                 <constraint firstItem="8CD-tD-Gyn" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="10" id="vjn-zc-EHQ"/>
             </constraints>
@@ -90,4 +92,9 @@
             <point key="canvasLocation" x="25" y="58"/>
         </view>
     </objects>
+    <resources>
+        <image name="backorange" width="367" height="85"/>
+        <image name="code" width="430" height="430"/>
+        <image name="headPortrait" width="189" height="187"/>
+    </resources>
 </document>

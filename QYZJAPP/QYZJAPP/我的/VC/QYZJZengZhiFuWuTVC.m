@@ -94,11 +94,11 @@
         if ([responseObject[@"key"] intValue]== 1) {
             
             QYZJTongYongModel * model = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
-            
+            model.is_need_wechat_pay = YES;
             QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             vc.model = model;
-            vc.type = 3;
+            vc.type = 11;
             [self.navigationController pushViewController:vc animated:YES];
             
         }else {
@@ -218,7 +218,7 @@
     
     if (indexPath.section == 0) {
         QYZJZengZhiOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJZengZhiOneCell" forIndexPath:indexPath];
-        [cell.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:self.headImg]] placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+        [cell.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:self.headImg]] placeholderImage:[UIImage imageNamed:@"789"] options:SDWebImageRetryFailed];
         cell.nameLB.text = self.nameStr;
         return cell;
     }else {

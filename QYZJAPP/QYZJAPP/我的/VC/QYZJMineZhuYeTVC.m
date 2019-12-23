@@ -16,6 +16,7 @@
 #import "QYZJAnLiDetailTVC.h"
 #import "QYZJShopDetailTVC.h"
 #import "QYZJAppShopTVC.h"
+#import "QYZJQuestOrAppointTVC.h"
 @interface QYZJMineZhuYeTVC ()<QYZJMineShopCellDelegate>
 @property(nonatomic,strong)QYZJUserModel * dataModel;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
@@ -102,8 +103,12 @@
      if (sstatusHeight>20){
          view.mj_y = ScreenH  - 60 - 34;
      }
+    Weak(weakSelf);
       view.footViewClickBlock = ^(UIButton *button) {
                NSLog(@"\n\n%@",@"完成");
+          [weakSelf appointOrQuestionAction:button.tag];
+          
+          
      };
      [self.view addSubview:view];
     
@@ -113,7 +118,16 @@
 - (void)appointOrQuestionAction:(NSInteger)index {
     
     
-    
+    QYZJQuestOrAppointTVC * vc =[[QYZJQuestOrAppointTVC alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    vc.type = index;
+    vc.ID = self.ID;
+    if (index == 0) {
+        vc.money = self.dataModel.appoint_price;
+    }else {
+        vc.money = self.dataModel.question_price;
+    }
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 

@@ -121,7 +121,7 @@
 
 - (void)setDataModel:(QYZJUserModel *)dataModel {
     _dataModel = dataModel;
-    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:dataModel.head_img]] forState:(UIControlStateNormal) placeholderImage:[UIImage imageNamed:@"369"]];
+    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:dataModel.head_img]] forState:(UIControlStateNormal) placeholderImage:[UIImage imageNamed:@"963"]];
     self.titleLB.text = dataModel.nick_name;
     self.titleLB.width = [dataModel.nick_name getWidhtWithFontSize:16]+5;
     self.mesageBt.mj_x = CGRectGetMaxX(self.titleLB.frame);
@@ -154,7 +154,7 @@
     if (dataModel.role_name.length > 0) {
         _LB3.text = dataModel.role_name;
         _LB3.mj_w = [_LB3.text getWidhtWithFontSize:14] + 10;
-        if (dataModel.is_vip == NO) {
+        if (dataModel.is_vip == YES) {
             
             if (dataModel.is_coach) {
                 _LB3.mj_x = CGRectGetMaxX(self.LB2.frame) + 8;

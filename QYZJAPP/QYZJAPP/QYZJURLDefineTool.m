@@ -17,6 +17,18 @@
 + (NSString * )app_loginURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_login_nocode.do"];
 }
+/** 微信登录 */
++ (NSString * )app_weixin_loginURL{
+      return [NSString stringWithFormat:@"%@%@",URLOne,@"app_weixin_login.do"];
+}
+/** 绑定手机号 */
++ (NSString * )app_bindPhoneURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_bindPhone.do"];
+}
+/** 解除温馨绑定 */
++ (NSString * )user_bindOpenIdURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_bindOpenId.do"];
+}
 ///** 退出登录 */
 + (NSString * )user_app_logoutURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_app_logout.do"];
@@ -515,6 +527,10 @@
 +(NSString *)app_uploadVideoTokenURL{
    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_uploadVideoToken.do"];
 }
+/**上传视频*/
++(NSString *)app_uploadAudioTokenURL{
+   return [NSString stringWithFormat:@"%@%@",URLOne,@"app_uploadAudioToken.do"];
+}
 /**发布动态*/
 +(NSString *)app_insertArticleURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_insertArticle.do"];
@@ -682,10 +698,23 @@
 +(NSString *)user_createPayNewURL{
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_createPayNew.do"];
 }
+/** 付款钱金额判断*/
++(NSString *)user_wechatPayURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_wechatPay.do"];
+}
 
-
-
-
+/** 提问*/
++(NSString *)user_addQuestionURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_addQuestion.do"];
+}
+/** 预约*/
++(NSString *)user_appointCaipanURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_appointCaipan.do"];
+}
+/** 预约表单*/
++(NSString *)user_appointDemandURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_appointDemand.do"];
+}
 
 
 //图片地址

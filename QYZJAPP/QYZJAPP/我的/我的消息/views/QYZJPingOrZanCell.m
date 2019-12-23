@@ -24,7 +24,7 @@
 - (void)setModel:(QYZJFindModel *)model {
     _model = model;
     
-    [self.imgVOne sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.headerPic]] placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+    [self.imgVOne sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.headerPic]] placeholderImage:[UIImage imageNamed:@"789"] options:SDWebImageRetryFailed];
     self.titleLB.text = model.nickName;
     self.contentLB.text = model.commentContent;
     self.rightLB.text = model.articleContent;

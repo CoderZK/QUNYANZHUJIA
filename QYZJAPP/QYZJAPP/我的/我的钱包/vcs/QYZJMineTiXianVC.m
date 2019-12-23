@@ -51,7 +51,7 @@
         Weak(weakSelf);
         vc.sendBankBlock = ^(QYZJMoneyModel * _Nonnull model) {
             
-            [weakSelf.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.logo]]  placeholderImage:[UIImage imageNamed:@"369"]];
+            [weakSelf.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.logo]]  placeholderImage:[UIImage imageNamed:@"789"]];
                 weakSelf.rightLB.hidden = YES;
                 weakSelf.titleLB.text = model.name;
                 weakSelf.numberLB.text = model.bank_account;
@@ -179,7 +179,7 @@
         if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
             NSArray<QYZJMoneyModel *>*arr = [QYZJMoneyModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
             if (arr.count > 0) {
-                [self.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:arr[0].logo]]  placeholderImage:[UIImage imageNamed:@"369"]];
+                [self.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:arr[0].logo]]  placeholderImage:[UIImage imageNamed:@"789"]];
                 self.rightLB.hidden = YES;
                 self.titleLB.text = arr[0].name;
                 self.numberLB.text = arr[0].bank_account;

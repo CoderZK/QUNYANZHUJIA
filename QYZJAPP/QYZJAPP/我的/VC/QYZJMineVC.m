@@ -34,6 +34,7 @@
 #import "QYZJXiuGaiFuWuVC.h"
 #import "QYZJMineCaiPanTVC.h"
 #import "QYZJMineBaoXiuListTVC.h"
+#import "QYZJMineYuYueDanTVC.h"
 @interface QYZJMineVC ()<HHYMineFourCellDelegate,QYZJMIneTwoCellDelegate,HHYMineFiveCellDelegate>
 @property(nonatomic,strong)QYZJMineHeadView *headV;
 @property(nonatomic,strong)NSArray *headTitleArr;
@@ -283,10 +284,13 @@
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }else if (dd == 4) {
-            
+            QYZJMineYuYueDanTVC * vc =[[QYZJMineYuYueDanTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
         }else if (dd == 5) {
             QYZJMineInviteVC * vc =[[QYZJMineInviteVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
+            vc.invitation_code = self.dataModel.invitation_code;
             [self.navigationController pushViewController:vc animated:YES];
         }else if (dd == 6) {
             QYZJMinePublicTVC * vc =[[QYZJMinePublicTVC alloc] init];

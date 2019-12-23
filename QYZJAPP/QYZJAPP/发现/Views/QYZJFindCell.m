@@ -232,7 +232,7 @@
 
 - (void)setModel:(QYZJFindModel *)model {
     _model = model;
-    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.headImg]]  forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"]];
+    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.headImg]]  forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"963"]];
     self.nameLB.text = model.nickName;
     self.contentLB.attributedText = [model.content getMutableAttributeStringWithFont:14 lineSpace:3 textColor:[UIColor blackColor]];
     CGFloat contentH =  [model.content getHeigtWithFontSize:14 lineSpace:3 width:ScreenW - 20];
@@ -363,7 +363,7 @@
         }];
         
         for (int i = 0 ; i < goodArr.count; i++) {
-            UIButton * googBt = [[UIButton alloc] initWithFrame:CGRectMake(0, space+hh*i, ScreenW - 20, hh)];
+            UIButton * googBt = [[UIButton alloc] initWithFrame:CGRectMake(0, space+(hh+space)*i, ScreenW - 20, hh)];
             googBt.layer.cornerRadius = 5;
             googBt.clipsToBounds = YES;
             googBt.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -372,7 +372,7 @@
             UIImageView * imgV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
             imgV.layer.cornerRadius = 5;
             imgV.clipsToBounds = YES;
-            [imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:goodArr[i].pic]] placeholderImage:[UIImage imageNamed:@"369"]];
+            [imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:goodArr[i].pic]] placeholderImage:[UIImage imageNamed:@"789"]];
             [googBt addSubview:imgV];
             
             UILabel * titleLB = [[UILabel alloc] initWithFrame:CGRectMake(70 , 10,  ScreenW - 20 -80, 20)];
@@ -445,7 +445,7 @@
                 button.userInteractionEnabled = NO;
             }else {
                 //无视频
-                [imageView sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:arr[i]]]  placeholderImage:[UIImage imageNamed:@"369"]];
+                [imageView sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:arr[i]]]  placeholderImage:[UIImage imageNamed:@"789"]];
                 
             }
             

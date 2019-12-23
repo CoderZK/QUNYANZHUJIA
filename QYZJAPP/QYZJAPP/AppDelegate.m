@@ -18,8 +18,13 @@
 //友盟安全密钥//r6xbw5gy0zenei6x56xtm9wmkrrz653y
 #define SinaAppKey @"3443149913"
 #define SinaAppSecret @"2d6bac14bc37989170ba9ab6214f06c3"
+
+
 #define WXAppID @"wxd9cbb4de3c914a74"
 #define WXAppSecret @"qwertyuioplkjhgfdsazxcvbnmmnbvcx"
+
+
+
 #define QQAppID @"1104758682"
 #define QQAppKey @"h97lgfazyRUzXJKy"
 

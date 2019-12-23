@@ -9,9 +9,12 @@
 #import "QYZhuJiaLoginVC.h"
 #import "QYZJFindPasswordVC.h"
 #import "QYZJRegistVC.h"
+#import "QYZJBindPhoneVC.h"
 @interface QYZhuJiaLoginVC ()
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
 @property (weak, nonatomic) IBOutlet UITextField *passWordTF;
+@property(nonatomic,strong)UMSocialUserInfoResponse *resp;
+@property(nonatomic,assign)BOOL isBind;
 @end
 
 @implementation QYZhuJiaLoginVC
@@ -79,6 +82,12 @@
                 [zkSignleTool shareTool].nick_name = responseObject[@"result"][@"nick_name"];
                 [zkSignleTool shareTool].telphone = responseObject[@"result"][@"telphone"];
                 [zkSignleTool shareTool].isLogin = YES;
+                if (userModel.openid.length > 0) {
+                    [zkSignleTool shareTool].isBindWebChat = YES;
+                }else {
+                    [zkSignleTool shareTool].isBindWebChat = NO;
+                    [self showWebchatView];
+                }
                 [self dismissViewControllerAnimated:YES completion:nil];
                 
             } else {
@@ -104,6 +113,118 @@
     
     
 }
+- (IBAction)webChatLogin:(id)sender {
+    [self getUserInfoForPlatform:UMSocialPlatformType_WechatSession];
+}
+
+- (void)showWebchatView {
+    
+ 
+    //验收
+                  UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前手机号未绑定微信,请尽快绑定,以确保及时收到推送信息" preferredStyle:(UIAlertControllerStyleAlert)];
+                  UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"以后再说" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                      
+                  }];
+                  UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"立即绑定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                   
+                      self.isBind = YES;
+                      [self getUserInfoForPlatform:UMSocialPlatformType_WechatSession];
+                   
+                  }];
+                  
+                  [alertVC addAction:action1];
+                  [alertVC addAction:action2];
+                  
+                  [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
+    
+    
+}
+
+
+- (void)getUserInfoForPlatform:(UMSocialPlatformType)platformType
+{
+    
+   
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:nil completion:^(id result, NSError *error) {
+
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:@"授权失败"];
+        }else {
+            UMSocialUserInfoResponse *resp = result;
+            self.resp= resp;
+            if (self.isBind) {
+                [self bindWebChatWithOpenid:resp.openid];
+            }else {
+                [self loginWhitWebXin];
+                
+            }
+            
+        }
+        
+        
+    }];
+}
+
+- (void)bindWebChatWithOpenid:(NSString *)openId {
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"openId"] = openId;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_bindOpenIdURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            [SVProgressHUD showSuccessWithStatus:@"微信绑定成功"];
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+  
+    }];
+    
+    
+    
+}
+
+
+- (void)loginWhitWebXin {
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_weixin_loginURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            //绑定
+                        
+        }else if ([responseObject[@"key"] intValue]== 10001){
+         //没有绑定
+            
+            QYZJBindPhoneVC * vc =[[QYZJBindPhoneVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.ID = responseObject[@"result"];
+            Weak(weakSelf);
+            vc.dissBlock = ^(BOOL isShowHome) {
+                if (isShowHome){
+                    [weakSelf dismissViewControllerAnimated:NO completion:nil];
+                }
+            };
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        
+        
+    }];
+}
+    
+    
 
 
 

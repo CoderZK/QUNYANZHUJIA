@@ -21,12 +21,16 @@
 @property(nonatomic,assign)BOOL isMore,isSpread;
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
+@property(nonatomic,strong)NSArray *titelArr,*imgaeArr,*idArr;
 @end
 
 @implementation QYZJHomeTwoTVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     self.dataArray = @[].mutableCopy;
+    self.labelListArr = @[].mutableCopy;
+    
     if (self.type == 0) {
         self.navigationItem.title = @"教练";
     }else {
@@ -34,16 +38,31 @@
     }
     [self addNav];
     
+    self.titelArr = @[@"家装",@"工装",@"家政",@"建材",@"家具",@"软装"];
+    self.idArr = @[@"1",@"2",@"5",@"4",@"3",@"6"];
+
+    if (self.type == 2) {
+        for (int i = 0 ; i < self.titelArr.count; i++) {
+            QYZJTongYongModel * model = [[QYZJTongYongModel alloc] init];
+            model.ID = self.idArr[i];
+            model.name = self.titelArr[i];
+            self.isMore = NO;
+            [self.labelListArr addObject:model];
+        }
+    }else {
+        [self getQuDaoArrList];
+    }
+    
     
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeThreeCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeThreeCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeFourCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeFourCell"];
        [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeFiveCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeFiveCell"];
     [self.tableView registerClass:[QYZJCoachCell class] forCellReuseIdentifier:@"QYZJCoachCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self getQuDaoArrList];
+    
     
     self.page = 1;
-    self.dataArray = @[].mutableCopy;
+   
     [self getData];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.page = 1;
@@ -64,7 +83,7 @@
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"page"] = @(self.page);
     dict[@"pageSize"] = @(10);
-    dict[@"type"] = @"0";
+    dict[@"type"] = @(3-self.type);
     dict[@"city_id"] = self.cityID;
     dict[@"sort_type"] = @"0";
     dict[@"search_type"] = @(self.type);
@@ -100,11 +119,12 @@
         
         if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] isEqualToString:@"1"]) {
             self.labelListArr = [QYZJTongYongModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
-            if (self.labelListArr.count <=6) {
-                self.isMore = NO;
-            }else {
-                self.isMore = YES;
-            }
+//            if (self.labelListArr.count <=6) {
+//                self.isMore = NO;
+//            }else {
+//                self.isMore = YES;
+//            }
+            self.isMore = YES;
             [self.tableView reloadData];
         }
         
@@ -245,8 +265,7 @@
                 vc.cityID = self.cityID;
                 vc.type = self.type;
                 [weakSelf.navigationController pushViewController:vc animated:YES];
-                
-                
+
             }
         };
         cell.isSpread = self.isSpread;

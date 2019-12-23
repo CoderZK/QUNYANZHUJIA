@@ -23,7 +23,7 @@
 
 - (void)setModel:(QYZJMoneyModel *)model {
     _model = model;
-    [self.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr: model.logo]] placeholderImage:[UIImage imageNamed:@"369"]];
+    [self.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr: model.logo]] placeholderImage:[UIImage imageNamed:@"789"]];
     self.titleLB.text = model.name;
     self.numberLB.text = model.bank_account;
 }

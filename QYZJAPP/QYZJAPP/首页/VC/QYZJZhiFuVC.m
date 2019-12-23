@@ -31,8 +31,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WWWWX:) name:@"WXPAY" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ZFBPAY:) name:@"ZFBPAY" object:nil];
     
@@ -40,20 +39,26 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.navigationItem.title = @"支付";
     self.payType = 0;
     
     if (self.model.is_need_wechat_pay) {
         self.consThree.constant = 0;
         self.consTwo.constant = 131.2;
         self.payImgVone.hidden = self.bt1.hidden = self.imgV1.hidden = self.titleOneLB.hidden = YES;
+        
+        self.imgV1.image = [UIImage imageNamed:@"xuanze_1"];
+        self.imgVT2.image = [UIImage imageNamed:@"xuanze_2"];
+        self.imgV3.image = [UIImage imageNamed:@"xuanze_1"];
+        self.payType = 1;
+
+        
     }
     
 }
@@ -77,7 +82,7 @@
         
     }else {
         
-        if (self.type == 0) {
+        if (self.payType == 0) {
             [LLPassWordAlertView showWithTitle:@"支付密码" desStr:@"请输入支付密码" finish:^(NSString *pwStr) {
                        [self checkPayPasswordWith:pwStr];
                        
@@ -140,16 +145,26 @@
     dict[@"id"] = self.ID;
     dict[@"turnover_type"] = @(self.type - 6);
     dict[@"ip"] = @"222.188.249.142";
+    dict[@"osn"] = self.model.osn;
     NSString * url = [QYZJURLDefineTool user_createBalanceOrderURL];
    
     if (self.payType == 1) {
         url = [QYZJURLDefineTool user_createWxOrderURL];
+        
     }else if (self.payType == 2){
         url = [QYZJURLDefineTool user_createAlipayOrderURL];
     }
     
     if (self.model.is_need_wechat_pay) {
-        url = [QYZJURLDefineTool user_createPayNewURL];
+        if (self.type != 11) {
+            url = [QYZJURLDefineTool user_createPayNewURL];
+        }
+        if (self.payType == 1) {
+            dict[@"is_wechat_pay"] = @"1";
+        }else {
+            dict[@"is_wechat_pay"] = @"0";
+        }
+        dict[@"pay_money"] = @(self.model.wechat_money);
     }
     
     [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -161,9 +176,14 @@
             if (self.payType == 1) {
                 self.payDic = responseObject[@"result"];
                 [self goWXpay];
-            }else {
+            }else if (self.payType == 2){
                 self.payDic = responseObject;
                 [self goZFB];
+            }else {
+                [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
             }
             
             

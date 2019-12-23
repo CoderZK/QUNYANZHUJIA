@@ -13,6 +13,7 @@
 + (zkSignleTool *)shareTool;
 
 @property(nonatomic,assign)BOOL isLogin;
+@property(nonatomic,assign)BOOL isBindWebChat;
 @property(nonatomic,strong)NSString * session_token;
 //用户ID
 @property(nonatomic,strong)NSString * session_uid;

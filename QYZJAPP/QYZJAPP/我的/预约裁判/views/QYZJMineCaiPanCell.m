@@ -115,7 +115,7 @@
     }else {
         self.imgVpic.hidden = NO;
         hh = hh+(ScreenW- 120) * 4/3 + 10;
-        [self.imgVpic sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.picUrl]] placeholderImage:[UIImage imageNamed:@"369"]];
+        [self.imgVpic sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.picUrl]] placeholderImage:[UIImage imageNamed:@"789"]];
     }
     self.imgVideo.mj_y = hh;
     if (model.videoUrl.length == 0) {

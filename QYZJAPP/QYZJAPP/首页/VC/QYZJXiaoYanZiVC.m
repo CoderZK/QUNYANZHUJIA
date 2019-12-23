@@ -9,6 +9,8 @@
 #import "QYZJXiaoYanZiVC.h"
 
 @interface QYZJXiaoYanZiVC ()
+@property (weak, nonatomic) IBOutlet UIImageView *logoBt;
+@property (weak, nonatomic) IBOutlet UILabel *contentLB;
 
 @end
 
@@ -17,14 +19,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    UILabel * LB = [[UILabel alloc] initWithFrame:CGRectMake(100, 100, ScreenW - 110, 20)];
-    LB.backgroundColor = [UIColor redColor];
-    LB.numberOfLines = 0;
-    [self.view addSubview:LB];
     
-    LB.attributedText = [@"回复内容: 啊得覅去玩IE覅秦得覅去玩IE覅秦皇岛房地产via是你大V就得覅去玩IE覅秦得覅去玩IE覅秦皇岛房地产via是你大V就得覅去玩IE覅秦皇岛得覅去玩IE覅秦皇岛房地产via是你大V就得覅去玩IE覅秦皇岛得覅去玩IE覅秦皇岛房地产via是你大V就得覅去玩IE覅秦皇岛得覅去玩IE覅秦皇岛房地产via是你大V就得覅去玩IE覅秦皇岛皇岛房地产via是你大V就皇岛房地产via是你大V就" getMutableAttributeStringWithFont:14 lineSpace:3 textColor:CharacterColor80 textColorTwo:[UIColor blackColor] nsrange:NSMakeRange(0, 5)];
-    CGFloat hh  =  [@"回复内容: 啊得覅去玩IE覅秦得覅去玩IE覅秦皇岛房地产via是你大V就得覅去玩IE覅秦得覅去玩IE覅秦皇岛房地产via是你大V就得覅去玩IE覅秦皇岛得覅去玩IE覅秦皇岛房地产via是你大V就得覅去玩IE覅秦皇岛得覅去玩IE覅秦皇岛房地产via是你大V就得覅去玩IE覅秦皇岛得覅去玩IE覅秦皇岛房地产via是你大V就得覅去玩IE覅秦皇岛皇岛房地产via是你大V就皇岛房地产via是你大V就" getHeigtWithFontSize:14 lineSpace:3 width:ScreenW - 110];
-    LB.mj_h = hh;
+    self.contentLB.text = @"    小燕子是北京久久安居网路科技有限公司群燕筑家项目官网方客服，工作宗旨是\"服务好平台每位用户\"。\n     1、负责群燕筑家项目介绍，推广;\n      2、负责群燕筑家用户相关使用指导，包括但不限于（注册、入住、抢单、放单等）；\n        3、负责跟进解决用户纠纷投诉等问题。";
+    
+    self.logoBt.layer.cornerRadius = 35;
+    self.logoBt.clipsToBounds = YES;
     
     
     

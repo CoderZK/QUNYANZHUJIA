@@ -47,13 +47,10 @@
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"page"] = @(self.page);
     dict[@"pageSize"] = @(10);
-    dict[@"type"] = @"0";
-    dict[@"city_id"] = self.cityID;
+    dict[@"type"] = @(self.type);
     dict[@"search_word"] = self.searchWord;
     dict[@"search_type"] = @(self.type);
-    if (self.type == 2 && self.isCaiPanNei) {
-        dict[@"QYZJSearchListTVC"] = @1;
-    }
+    dict[@"search_end_type"] = @(1);
     [zkRequestTool networkingPOST:[QYZJURLDefineTool app_searchURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];

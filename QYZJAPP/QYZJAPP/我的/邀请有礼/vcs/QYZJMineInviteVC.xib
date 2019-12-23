@@ -23,14 +23,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wgd-fo-DrX">
-                    <rect key="frame" x="147" y="74" width="120" height="120"/>
+                    <rect key="frame" x="132" y="74" width="150" height="150"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="120" id="DiF-VC-23X"/>
-                        <constraint firstAttribute="width" constant="120" id="ivg-09-TwP"/>
+                        <constraint firstAttribute="height" constant="150" id="DiF-VC-23X"/>
+                        <constraint firstAttribute="width" constant="150" id="ivg-09-TwP"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的邀请码" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OL7-R3-hAv">
-                    <rect key="frame" x="132" y="209" width="150" height="17"/>
+                    <rect key="frame" x="132" y="239" width="150" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="150" id="1mc-QM-NL7"/>
                     </constraints>
@@ -39,7 +39,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXL-31-Fez">
-                    <rect key="frame" x="158.5" y="241" width="57" height="17"/>
+                    <rect key="frame" x="158.5" y="271" width="57" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="57" id="VcW-Cl-gfS"/>
                     </constraints>
@@ -48,7 +48,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SaK-5n-alB">
-                    <rect key="frame" x="227" y="358" width="167" height="45"/>
+                    <rect key="frame" x="227" y="388" width="167" height="45"/>
                     <state key="normal" title="分享" backgroundImage="backorange">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
@@ -57,7 +57,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ABh-ri-MUv">
-                    <rect key="frame" x="220.5" y="232" width="35" height="35"/>
+                    <rect key="frame" x="220.5" y="262" width="35" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="HI8-mZ-pLI"/>
                         <constraint firstAttribute="width" constant="35" id="M3U-o5-p1R"/>
@@ -68,7 +68,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3x-74-xWg">
-                    <rect key="frame" x="20" y="358" width="167" height="45"/>
+                    <rect key="frame" x="20" y="388" width="167" height="45"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="bVE-ux-wba"/>
                     </constraints>

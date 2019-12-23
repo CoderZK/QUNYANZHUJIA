@@ -65,7 +65,7 @@
     [self.collectBt setTitle:[NSString stringWithFormat:@"%ld",model.collectNum] forState:UIControlStateNormal];
     [self.pingLunBt setTitle:[NSString stringWithFormat:@"%ld",model.commentNum] forState:UIControlStateNormal];
     [self.zanBt setTitle:[NSString stringWithFormat:@"%ld",model.goodNum] forState:UIControlStateNormal];
-    [self.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.showContent]]  placeholderImage:[UIImage imageNamed:@"369"]];
+    [self.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.showContent]]  placeholderImage:[UIImage imageNamed:@"789"]];
 }
 
 @end

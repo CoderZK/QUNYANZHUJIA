@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJMineInviteVC : BaseViewController
-
+@property(nonatomic,strong)NSString *invitation_code;
 @end
 
 NS_ASSUME_NONNULL_END

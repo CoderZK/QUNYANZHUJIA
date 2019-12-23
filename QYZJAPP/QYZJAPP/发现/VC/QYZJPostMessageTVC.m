@@ -373,7 +373,7 @@
             [self.scrollView addSubview:deleteBt];
             
             if ([picsArr[i] isKindOfClass:[NSString class]]) {
-                 [anNiuBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:picsArr[i]]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+                 [anNiuBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:picsArr[i]]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"789"] options:SDWebImageRetryFailed];
             }else {
                  [anNiuBt setBackgroundImage:picsArr[i] forState:UIControlStateNormal];
             }
@@ -538,7 +538,7 @@
         NSMutableDictionary * dict = @{}.mutableCopy;
         dict[@"token"] = self.videoModel.token;
  
-        [zkRequestTool NetWorkingUpLoadmediOrVeidoWithfileData:data parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [zkRequestTool NetWorkingUpLoadVeidoWithfileData:data parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
             [SVProgressHUD showSuccessWithStatus:@"上传视频成功"];
             self.videoStr = [NSString stringWithFormat:@"%@",responseObject[@"key"]];
         } failure:^(NSURLSessionDataTask *task, NSError *error) {

@@ -107,7 +107,7 @@
         cell.timeLB.text = self.dataModel.context;
         cell.leftLB.text = self.dataModel.name;
         cell.moneyLB.text = [NSString stringWithFormat:@"%0.2f",self.dataModel.price];
-        [cell.leftImgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:self.dataModel.pic]] placeholderImage:[UIImage imageNamed:@"369"]];
+        [cell.leftImgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:self.dataModel.pic]] placeholderImage:[UIImage imageNamed:@"789"]];
         cell.clipsToBounds = YES;
         return cell;
     }
@@ -221,10 +221,7 @@
    
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
-            
-            
-            
-            
+           [self wecharPayWithID:responseObject[@"result"][@"id"] money:self.dataModel.price];
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
         }
@@ -239,6 +236,39 @@
     
     
 }
+
+
+- (void)wecharPayWithID:(NSString *)ID money:(CGFloat )money{
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"pay_money"]= @(money);
+    dict[@"type"] = @(3);
+    dict[@"id"] = ID;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_wechatPayURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            QYZJTongYongModel * mm = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
+            QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.model = mm;
+            vc.ID = ID;
+            vc.type = 10;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+}
+
 
 
 

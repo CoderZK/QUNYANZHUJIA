@@ -261,7 +261,7 @@
             [imageView addGestureRecognizer:tap];
             [self.ViewOne addSubview:imageView];
             //无视频
-            [imageView sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:arr[i]]]  placeholderImage:[UIImage imageNamed:@"369"]];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:arr[i]]]  placeholderImage:[UIImage imageNamed:@"789"]];
         }
         
         

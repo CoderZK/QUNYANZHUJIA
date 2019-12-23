@@ -39,7 +39,7 @@
         if (modelRight.pic.length > 0) {
            rightStr = [[modelRight.pic componentsSeparatedByString:@","] firstObject];
         }
-        [self.rightImgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:rightStr]] placeholderImage:[UIImage imageNamed:@"369"]];
+        [self.rightImgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:rightStr]] placeholderImage:[UIImage imageNamed:@"789"]];
         self.rightTitleLB.text = modelRight.name;
         self.rightMoneyLB.text = [NSString stringWithFormat:@"￥%0.2f",modelRight.price];
         self.rightImgV.hidden = self.rightEdibtBt.hidden = self.rightMoneyLB.hidden = self.rightTitleLB.hidden = self.rightBt.hidden = NO;
@@ -56,7 +56,7 @@
     }
     
      self.leftEditBt.hidden = self.isShenHe;
-     [self.leftImgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:leftStr]] placeholderImage:[UIImage imageNamed:@"369"]];
+     [self.leftImgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:leftStr]] placeholderImage:[UIImage imageNamed:@"789"]];
      self.leftTitleLB.text = modelLeft.name;
      self.leftMoneyLB.text = [NSString stringWithFormat:@"￥%0.2f",modelLeft.price];
     

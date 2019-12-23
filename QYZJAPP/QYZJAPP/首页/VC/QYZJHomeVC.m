@@ -79,6 +79,9 @@
 
     [self update];
     
+    self.cityID = @"1004";
+    
+    
     QYZJLocationTool * tool = [[QYZJLocationTool alloc] init];
     [tool locationAction];
     Weak(weakSelf);
@@ -271,8 +274,7 @@
         [cell.headBt addTarget:self action:@selector(gotoZhuYeAction:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
-    QYZJHomeTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeTwoCell" forIndexPath:indexPath];
-    return cell;
+ 
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

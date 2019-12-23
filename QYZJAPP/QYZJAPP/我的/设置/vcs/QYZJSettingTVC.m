@@ -115,6 +115,13 @@
     if (indexPath.row == 0 && indexPath.section == 0) {
         return 80;
     }
+    if (indexPath.row == 1 && indexPath.section == 1) {
+        if ([zkSignleTool shareTool].isBindWebChat) {
+            return 50;
+        }else {
+            return 0;
+        }
+    }
     return 50;
 }
 
@@ -147,7 +154,7 @@
     }
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            [cell.headImg sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:self.dataModel.head_img]] placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+            [cell.headImg sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:self.dataModel.head_img]] placeholderImage:[UIImage imageNamed:@"963"] options:SDWebImageRetryFailed];
             cell.headImg.layer.cornerRadius = 25;
             cell.headImg.clipsToBounds = YES;
         }else if (indexPath.row == 1) {
@@ -178,7 +185,7 @@
 //    }else {
 //       cell.jianTouImgV.hidden = NO;
 //    }
-    
+    cell.clipsToBounds = YES;
     return cell;
     
 }
@@ -252,6 +259,8 @@
             [self.navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row == 1) {
             
+            
+            
         }else if (indexPath.row == 2) {
             QYZJChangePasswordVC * vc =[[QYZJChangePasswordVC alloc] init];
                        vc.hidesBottomBarWhenPushed = YES;
@@ -268,6 +277,35 @@
             
         }];
     }
+    
+}
+
+- (void)noBindWebChat {
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_bindOpenIdURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            [SVProgressHUD showSuccessWithStatus:@"微信解除成功"];
+            [zkSignleTool shareTool].isBindWebChat = NO;
+            [self.tableView reloadData];
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+    
     
 }
 

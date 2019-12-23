@@ -12,6 +12,7 @@ static QYZJLuYinView * tool = nil;
 @interface QYZJLuYinView()<AVAudioRecorderDelegate>
 @property(nonatomic,strong)UIButton *Bt;
 @property (nonatomic,strong) AVAudioRecorder *audioRecorder;//音频录音机
+@property(nonatomic,strong)NSData *audioData;
 @end
 
 
@@ -70,16 +71,14 @@ static QYZJLuYinView * tool = nil;
         if (![self.audioRecorder isRecording]) {
             [self.audioRecorder record];//首次使用应用时如果调用record方法会询问用户是否允许使用麦克风
             if (self.statusBlock != nil) {
-                self.statusBlock(YES);
+                self.statusBlock(YES,[NSData data]);
             }
         }
     }
     else if(phase == UITouchPhaseEnded){
         NSLog(@"\n----%@",@"结束");
         [self.audioRecorder stop];
-        if (self.statusBlock != nil) {
-            self.statusBlock(NO);
-        }
+        
     }
 }
 
@@ -229,6 +228,12 @@ static QYZJLuYinView * tool = nil;
     
     NSString *cafFilePath = recorder.url.path;    //caf文件路径
     NSLog(@"\n录音文件位置%@",cafFilePath);
+    
+    self.audioData = [NSData dataWithContentsOfFile:cafFilePath];
+    
+    if (self.statusBlock != nil) {
+        self.statusBlock(NO,self.audioData);
+    }
     
     //    NSString *urlStr=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     //    urlStr=[urlStr stringByAppendingPathComponent:@"111.mp3"];

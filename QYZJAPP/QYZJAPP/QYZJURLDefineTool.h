@@ -31,6 +31,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 登录 */
 + (NSString * )app_loginURL;
+/** 微信登录 */
++ (NSString * )app_weixin_loginURL;
+/** 绑定手机号 */
++ (NSString * )app_bindPhoneURL;
+/** 解除温馨绑定 */
++ (NSString * )user_bindOpenIdURL;
+/**上传视频*/
++(NSString *)app_uploadAudioTokenURL;
 ///** 退出登录 */
 + (NSString * )user_app_logoutURL;
 /** 获取个人信息 */
@@ -372,6 +380,16 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)user_createCouponOrderURL;
 /** 余额加微信或者支付宝*/
 +(NSString *)user_createPayNewURL;
+/** 付款钱金额判断*/
++(NSString *)user_wechatPayURL;
+
+/** 提问*/
++(NSString *)user_addQuestionURL;
+/** 预约*/
++(NSString *)user_appointCaipanURL;
+/** 预约表单*/
++(NSString *)user_appointDemandURL;
+
 
 
 

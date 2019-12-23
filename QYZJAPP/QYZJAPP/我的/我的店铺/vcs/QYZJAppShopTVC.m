@@ -73,7 +73,7 @@
         [self.tableView.mj_footer endRefreshing];
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
-            [self.headV.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:responseObject[@"result"][@"pic"]]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"369"] options:SDWebImageRetryFailed];
+            [self.headV.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:responseObject[@"result"][@"pic"]]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"963"] options:SDWebImageRetryFailed];
             self.headV.titelLB.text = responseObject[@"result"][@"name"];
             self.dataArray  = [QYZJFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"goods_list"]];
             [self.tableView reloadData];

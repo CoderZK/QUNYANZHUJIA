@@ -30,6 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *city;
 @property(nonatomic,strong)NSString *area;
 
+@property(nonatomic,strong)NSString *type_name;
+@property(nonatomic,strong)NSString *demand_context;
+@property(nonatomic,strong)NSString *b_recomend_name;
 
 @property(nonatomic,strong)NSString *num;
 @property(nonatomic,strong)NSString *free_question_num;
@@ -48,6 +51,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,assign)BOOL isSelect;
 @property(nonatomic,assign)BOOL isAble;
+
+
+
 
 @end
 
