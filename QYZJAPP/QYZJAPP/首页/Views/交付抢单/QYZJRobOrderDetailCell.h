@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftCons;
 @property(nonatomic,copy)void(^listBtActionBlock)(UIButton *button);
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *listBtTopCos;
+@property (weak, nonatomic) IBOutlet UIView *lineV;
 @end
 
 NS_ASSUME_NONNULL_END

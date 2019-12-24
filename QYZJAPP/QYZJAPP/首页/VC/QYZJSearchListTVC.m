@@ -136,7 +136,20 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return 0.01;
+    }
     return 10;
+}
+
+- (UIView * )tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView * view  =[tableView dequeueReusableHeaderFooterViewWithIdentifier:@"view"];
+    if (view == nil ) {
+        view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 10)];
+        view.clipsToBounds = YES;
+        view.backgroundColor = RGB(245, 245, 245);
+    }
+    return view;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

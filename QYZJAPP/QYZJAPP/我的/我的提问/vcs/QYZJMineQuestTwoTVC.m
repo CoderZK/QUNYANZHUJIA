@@ -8,20 +8,64 @@
 
 #import "QYZJMineQuestTwoTVC.h"
 #import "QYZJMineQuestCell.h"
+#import "QYZJMineQuestFiveCell.h"
+#import "QYZJMineQyestFourCell.h"
 @interface QYZJMineQuestTwoTVC ()
-
+@property(nonatomic,strong)QYZJFindModel *dataModel;
 @end
+
+
 
 @implementation QYZJMineQuestTwoTVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"提问详情";
-    [self.tableView registerClass:[QYZJMineQuestCell class] forCellReuseIdentifier:@"cell"];
+    self.navigationItem.title = @"详情";
+
     
-    [self setFootV];
+    [self.tableView registerClass:[QYZJMineQuestFiveCell class] forCellReuseIdentifier:@"QYZJMineQuestFiveCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"QYZJMineQyestFourCell" bundle:nil] forCellReuseIdentifier:@"QYZJMineQyestFourCell"];
+
+    [self getData];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self getData];
+    }];
+    
+    if (!self.isPay) {
+          [self setFootV];
+      }else {
+          
+      }
     
 }
+
+
+
+
+- (void)getData {
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"id"] = self.dataModel.ID;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_questionInfoURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            self.dataModel = [QYZJFindModel mj_objectWithKeyValues:responseObject[@"result"]];
+
+            [self.tableView reloadData];
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+}
+
 
 - (void)setFootV {
     self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - 60);
@@ -72,31 +116,43 @@
 }
 
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    if (section == 0) {
+        return 1;
+    }
+    return self.dataModel.answer_list.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.model.cellHeight;
+    if (indexPath.section == 0) {
+        return UITableViewAutomaticDimension;
+    }
+    return self.dataModel.answer_list[indexPath.row].cellHeight;;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    QYZJMineQuestCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
- 
-    if (self.model.is_answer == 2) {
-        cell.isServer = YES;
+    if (indexPath.section == 0) {
+        QYZJMineQyestFourCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJMineQyestFourCell" forIndexPath:indexPath];
+        cell.titleLB.text = self.dataModel.title;
+        cell.contentLB.text = self.dataModel.context;
+        return cell;
+          
     }else {
-        cell.isServer = NO;
+        QYZJMineQuestFiveCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJMineQuestFiveCell" forIndexPath:indexPath];
+        cell.model = self.dataModel.answer_list[indexPath.row];
+          return cell;
+          
     }
-    cell.waiModel = self.model;
-    return cell;
+
     
 }
 

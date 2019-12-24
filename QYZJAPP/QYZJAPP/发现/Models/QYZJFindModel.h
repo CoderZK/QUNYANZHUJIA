@@ -89,6 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *telphonebudget;
 @property(nonatomic,strong)NSString *turnoverTitle;
 @property(nonatomic,strong)NSString *replyContent;
+@property(nonatomic,strong)NSString *appeal_status;
 
 /** 服务方：待发起交付1、待客户确认2、待客户支付3、施工中4、待阶段验收5、待客户支付尾款6、待评价7、交付完成8；
  客户：待服务方发起交付1、待确认2、待支付3、施工中4、待阶段验收5、待支付尾款6、待评价7、交付完成8 */

@@ -82,6 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *picUrl;
 @property(nonatomic,strong)NSString *videoUrl;
 @property(nonatomic,strong)NSString *year;
+@property(nonatomic,strong)NSString * appeal_status;
 
 
 @property(nonatomic,strong)NSMutableArray<QYZJWorkModel *> *changeTurnoverLists;
@@ -137,7 +138,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)CGFloat cellHeight;
 
 @property(nonatomic,assign)NSInteger audit_status; //单子审核状态 0：未审核 1：审核成功 2：审核失败
-@property(nonatomic,assign)NSInteger appeal_status;
+
 @property(nonatomic,assign)NSInteger manner; //风格
 @property(nonatomic,assign)NSInteger house_model;//户型
 @property(nonatomic,assign)NSInteger renovation_time;//装修时间

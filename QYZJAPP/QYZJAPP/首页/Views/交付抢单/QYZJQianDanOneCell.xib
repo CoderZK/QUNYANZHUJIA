@@ -127,12 +127,22 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHi-39-F1n">
+                        <rect key="frame" x="482" y="105" width="80" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="nIW-lL-zWw"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="vD5-EB-dG0" secondAttribute="trailing" id="0yt-k3-Q1l"/>
                     <constraint firstItem="eCW-5O-z6K" firstAttribute="leading" secondItem="moN-al-d8b" secondAttribute="trailing" constant="12" id="2Sr-36-UPd"/>
                     <constraint firstItem="oFl-x6-xyp" firstAttribute="bottom" secondItem="moN-al-d8b" secondAttribute="bottom" id="BbP-yM-Ywe"/>
                     <constraint firstItem="lYx-yz-YQu" firstAttribute="centerY" secondItem="fyE-C7-uPE" secondAttribute="centerY" id="C1A-if-URB"/>
+                    <constraint firstItem="pHi-39-F1n" firstAttribute="trailing" secondItem="2TP-de-PUL" secondAttribute="trailing" id="FSc-r1-tMu"/>
                     <constraint firstItem="yp6-re-HdY" firstAttribute="leading" secondItem="nYS-8w-yWO" secondAttribute="leading" id="I84-79-cZg"/>
                     <constraint firstAttribute="trailing" secondItem="lYx-yz-YQu" secondAttribute="trailing" constant="15" id="N2C-LD-7wJ"/>
                     <constraint firstItem="YpS-ea-nD7" firstAttribute="leading" secondItem="GfV-us-8md" secondAttribute="trailing" constant="10" id="NDT-qA-jfG"/>
@@ -150,14 +160,17 @@
                     <constraint firstItem="YpS-ea-nD7" firstAttribute="centerY" secondItem="GfV-us-8md" secondAttribute="centerY" id="hes-6X-Vqa"/>
                     <constraint firstAttribute="trailing" secondItem="2TP-de-PUL" secondAttribute="trailing" constant="15" id="kVf-Lc-7D7"/>
                     <constraint firstItem="Rvm-R0-fJ8" firstAttribute="leading" secondItem="nYS-8w-yWO" secondAttribute="leading" id="oq6-bI-Yv0"/>
+                    <constraint firstItem="pHi-39-F1n" firstAttribute="leading" secondItem="2TP-de-PUL" secondAttribute="leading" id="qze-iu-Opd"/>
                     <constraint firstAttribute="bottom" secondItem="vD5-EB-dG0" secondAttribute="bottom" id="rbl-yi-gFX"/>
                     <constraint firstItem="eCW-5O-z6K" firstAttribute="top" secondItem="moN-al-d8b" secondAttribute="top" id="sS5-2K-ZId"/>
+                    <constraint firstItem="pHi-39-F1n" firstAttribute="top" secondItem="2TP-de-PUL" secondAttribute="bottom" constant="2" id="tuq-FF-8XN"/>
                     <constraint firstItem="nYS-8w-yWO" firstAttribute="top" secondItem="fyE-C7-uPE" secondAttribute="top" constant="15" id="yHT-kg-k78"/>
                     <constraint firstItem="2TP-de-PUL" firstAttribute="centerY" secondItem="fyE-C7-uPE" secondAttribute="centerY" id="z68-Rb-dkr"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="8Jw-m9-Omt"/>
             <connections>
+                <outlet property="appealLB" destination="pHi-39-F1n" id="WEC-f3-dOS"/>
                 <outlet property="contentLB" destination="Rvm-R0-fJ8" id="7ia-UT-heN"/>
                 <outlet property="gouTongBt" destination="GfV-us-8md" id="Jlg-9t-FWp"/>
                 <outlet property="moneyLB" destination="YpS-ea-nD7" id="mwu-Ac-fL1"/>

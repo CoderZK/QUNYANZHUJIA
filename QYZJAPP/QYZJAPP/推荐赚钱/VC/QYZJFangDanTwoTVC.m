@@ -17,6 +17,7 @@
 @property(nonatomic,strong)QYZJMoreChooseView *moreChooseV;
 @property(nonatomic,assign)NSInteger needType,styleType,houseType;
 @property(nonatomic,strong)NSIndexPath *indexPath;
+@property(nonatomic,strong)QYZJTongYongModel * audioModel;
 @end
 
 @implementation QYZJFangDanTwoTVC
@@ -45,6 +46,15 @@
     [self setFootV];
     [self setTableViewFootView];
     self.moreChooseV = [[QYZJMoreChooseView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH)];
+    [self getAudioDict];
+    
+}
+
+- (void)getAudioDict {
+    
+    [zkRequestTool getUpdateAudioModelWithCompleteModel:^(QYZJTongYongModel *model) {
+        self.audioModel = model;
+    }];
     
 }
 
@@ -159,6 +169,15 @@
         QYZJRecommendTwoCell * cell = [tableView dequeueReusableCellWithIdentifier:@"QYZJRecommendTwoCell" forIndexPath:indexPath];
         cell.TV.text = self.dataArray[indexPath.section].demand_context;
         cell.TV.delegate = self;
+        [cell.luyinBt addTarget:self action:@selector(luYinAction:) forControlEvents:UIControlEventTouchUpInside];
+               [cell.listBt addTarget:self action:@selector(listAction:) forControlEvents:UIControlEventTouchUpInside];
+               if (self.dataArray[indexPath.section].mediaUrl.length == 0) {
+                   cell.listBt.hidden = YES;
+               }else {
+                   cell.listBt.hidden = NO;
+                   [cell.listBt setTitle:@"语音描述" forState:UIControlStateNormal];
+               }
+               return cell;
         return cell;
     }else {
         TongYongTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
@@ -187,6 +206,72 @@
     }
     
 }
+
+
+//播放
+- (void)listAction:(UIButton *)button {
+    
+       QYZJRecommendTwoCell * cell = (QYZJRecommendTwoCell *)button.superview;
+       NSIndexPath  * indexPath = [self.tableView indexPathForCell:cell];
+       QYZJFindModel * model = self.dataArray[indexPath.section];
+       [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:model.mediaUrl] isLocality:NO];
+       [button setTitle:@"正在播放..." forState:UIControlStateNormal];
+       [PublicFuntionTool shareTool].findPlayBlock = ^{
+           [button setTitle:@"点击播放" forState:UIControlStateNormal];
+       };
+}
+
+
+- (void)luYinAction:(UIButton *)button {
+
+    QYZJRecommendTwoCell * cell = (QYZJRecommendTwoCell *)button.superview;
+    NSIndexPath  * indexPath = [self.tableView indexPathForCell:cell];
+
+    
+    [[QYZJLuYinView LuYinTool] show];
+               Weak(weakSelf);
+               [QYZJLuYinView LuYinTool].statusBlock = ^(BOOL isStare,NSData *mediaData) {
+       
+                   dispatch_async(dispatch_get_main_queue() , ^{
+                       if (isStare) {
+                           weakSelf.navigationItem.title = @"正在录音...";
+                       }else {
+                           
+                            weakSelf.navigationItem.title = @"预约表单";
+//
+//                           NSString * firlpath = [[NSBundle mainBundle] pathForResource:@"8888" ofType:@"mp3"];
+//                           NSData * dd = [NSData dataWithContentsOfFile:firlpath];
+//                           [weakSelf updateLoadMediaWithData:dd];
+                           [weakSelf updateLoadMediaWithData:mediaData WithIndexPath:indexPath];
+                           [[QYZJLuYinView LuYinTool] diss];
+                           
+                       }
+                   });
+       
+       
+               };
+    
+    
+}
+
+
+
+
+
+- (void)updateLoadMediaWithData:(NSData *)data WithIndexPath:(NSIndexPath*)indexPath{
+           NSMutableDictionary * dict = @{}.mutableCopy;
+           dict[@"token"] = self.audioModel.token;
+           [zkRequestTool NetWorkingUpLoadMediaWithfileData:data parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+               [SVProgressHUD showSuccessWithStatus:@"上传音频成功"];
+               self.dataArray[indexPath.section].mediaUrl = responseObject[@"key"];
+               [self.tableView reloadData];
+               
+           } failure:^(NSURLSessionDataTask *task, NSError *error) {
+               NSLog(@"\n\n------%@",error);
+           }];
+}
+
+
 
 
 - (void)setTitleWithCell:(TongYongTwoCell *)cell WithIndexPath:(NSIndexPath * )indexPath {
@@ -360,6 +445,7 @@
             dict[@"budget"] = @(model.budget);
             dict[@"commission_type"] = @(1);
             dict[@"community_name"] = model.community_name;
+            dict[@"demand_voice"] = model.mediaUrl;
             [dataArr addObject:dict];
         }
         

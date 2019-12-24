@@ -60,25 +60,12 @@
 }
 
 
-- (void)update {
-    
-    NSString *token = @"39yV6r_IF9odSp3yygRrCkeUmEg-7wEi5nkEomTL:hW48mH_kJhbuAzXooQOuEkqgbd4=:eyJmc2l6ZUxpbWl0IjoxMDQ4NTc2MCwic2NvcGUiOiJiaXlvdS1zcGFjZSIsInJldHVybkJvZHkiOiJ7XCJrZXlcIjpcIiQoa2V5KVwiLFwiaGFzaFwiOlwiJChldGFnKVwiLFwiYnVja2V0XCI6XCIkKGJ1Y2tldClcIixcImZuYW1lXCI6JChmbmFtZSl9IiwibWltZUxpbWl0IjoiaW1hZ2UvKiIsImRlYWRsaW5lIjoxNTc0ODIzNTk0fQ==";
-    QNUploadManager *upManager = [[QNUploadManager alloc] init];
-    NSData *data = [@"Hello, World!" dataUsingEncoding : NSUTF8StringEncoding];
-    [upManager putData:data key:@"hello" token:token
-    complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
-    NSLog(@"%@", info);
-    NSLog(@"%@", resp);
-    } option:nil];
-    
-}
+
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self update];
-    
     self.cityID = @"1004";
     
     

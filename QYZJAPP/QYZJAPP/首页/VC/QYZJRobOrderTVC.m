@@ -12,6 +12,7 @@
 #import "QYZJQianDanOneCell.h"
 #import "QYZJRobOrderDetailTVC.h"
 #import "QYZJJingXingZhongRobOrderTVC.h"
+#import "QYZJRecommendTwoCell.h"
 @interface QYZJRobOrderTVC ()
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
@@ -26,6 +27,9 @@
     [self addTitleView];
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeFourCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeFourCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJQianDanOneCell" bundle:nil] forCellReuseIdentifier:@"QYZJQianDanOneCell"];
+    
+    [self.tableView registerClass:[QYZJRecommendTwoCell class] forCellReuseIdentifier:@"QYZJRecommendTwoCell"];
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.type = 0;
     
@@ -159,6 +163,9 @@
             cell.statusLB.hidden = NO;
             cell.qianDanBt.hidden = YES;
         }
+        
+       
+        
         cell.qianDanBt.tag = indexPath.row;
         [cell.qianDanBt addTarget:self action:@selector(qianDanAction:) forControlEvents:UIControlEventTouchUpInside];
         return cell;

@@ -393,7 +393,10 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)user_appointDemandURL;
 /**装修贷*/
 +(NSString *)user_addZhuangxiuURL;
-
+/**退保*/
++(NSString *)user_backBondURL;
+/**获取城市是否开通*/
++(NSString *)app_getCityURL;
 
 
 /** 更新*/

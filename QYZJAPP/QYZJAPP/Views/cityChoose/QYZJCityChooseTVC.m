@@ -123,9 +123,16 @@
 
 //点击定位城市
 - (void)clickAction:(UIButton *)button {
-    if (self.clickCityBlock != nil && self.cityID != nil) {
-        self.clickCityBlock(self.cityStr, self.cityID);
+    
+    for (zkPickModel * model in self.cityListArr) {
+        if ([model.name isEqualToString:self.cityStr]) {
+            self.cityID = model.ID;
+            [self getCityIsOpenWithCityID:self.cityID withCityStr:self.cityStr];
+        }
     }
+    
+    
+
 }
 
 
@@ -136,9 +143,10 @@
     if ([CLLocationManager locationServicesEnabled]) {
         // 初始化定位管理器
         self.locationManager=[[CLLocationManager alloc]init];
+        self.locationManager.distanceFilter = 10.0f;
         self.locationManager.delegate=self;
         // 设置定位精确度到千米
-        self.locationManager.desiredAccuracy=kCLLocationAccuracyKilometer;
+        self.locationManager.desiredAccuracy=kCLLocationAccuracyHundredMeters;
         // 设置过滤器为无
         self.locationManager.distanceFilter=kCLDistanceFilterNone;
         //这句话ios8以上版本使用
@@ -278,7 +286,10 @@
 #pragma mark---- 点击切换城市的城市 -------
 - (void)selectAction:(UIButton *)button {
     
-    [self addCityAction:self.userCityList[button.tag - 1000].ID cityStr:self.userCityList[button.tag - 1000].name];
+//    [self addCityAction:self.userCityList[button.tag - 1000].ID cityStr:self.userCityList[button.tag - 1000].name];
+    
+    [self getCityIsOpenWithCityID:self.userCityList[button.tag - 1000].ID withCityStr:self.userCityList[button.tag - 1000].name];
+    
     
 }
 
@@ -313,16 +324,50 @@
       [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
           
            if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] isEqualToString:@"1"]) {
+              
                if (self.clickCityBlock != nil) {
                    self.clickCityBlock(cityStr,cityId);
                    [self.navigationController popViewControllerAnimated:YES];
                }
+              
             }
           
       } failure:^(NSURLSessionDataTask *task, NSError *error) {
           
       }];
     
+    
+}
+
+- (void)getCityIsOpenWithCityID:(NSString *)cityID withCityStr:(NSString *)cityStr{
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"city_id"] = cityID;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_getCityURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            if ([[NSString stringWithFormat:@"%@",responseObject[@"result"][@"is_open"]] isEqualToString:@"1"]) {
+                [self addCityAction:cityID cityStr:cityStr];
+            }else {
+                [SVProgressHUD showErrorWithStatus:@"所选城市未开通,请选择其它城市"];
+            }
+            
+            
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
     
 }
 
@@ -469,10 +514,14 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.isSearch) {
         zkPickModel * model = self.searchList[indexPath.row];
-        [self addCityAction:model.ID cityStr:model.name];
+//        [self addCityAction:model.ID cityStr:model.name];
+        [self getCityIsOpenWithCityID:model.ID withCityStr:model.name];
     }else {
         zkPickModel * model = [self.dataDict[self.rightDataArr[indexPath.section]] objectAtIndex:indexPath.row];
-        [self addCityAction:model.ID cityStr:model.name];
+//        [self addCityAction:model.ID cityStr:model.name];
+        
+        
+        [self getCityIsOpenWithCityID:model.ID withCityStr:model.name];
     }
     
     

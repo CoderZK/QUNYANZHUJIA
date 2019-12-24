@@ -525,6 +525,7 @@
         cell.model = self.titleModel;
         cell.lineV.hidden = YES;
         cell.clipsToBounds = YES;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
@@ -605,12 +606,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     QYZJWorkModel * model = nil;
+    
+    
+    
     if (indexPath.section == 9) {
         model = self.dataModel.constructionStage[indexPath.row];
-    }else {
+    }else if (indexPath.section == 10){
         model = self.dataModel.changeConstructionStage[indexPath.row];
     }
-    
+    if (model == nil) {
+        return;
+    }
     QYZJFindModel * modelNei = [[QYZJFindModel alloc] init];
     modelNei.nickName = model.stageName;
     modelNei.content = model.des;

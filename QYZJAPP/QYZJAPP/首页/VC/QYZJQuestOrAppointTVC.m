@@ -123,6 +123,7 @@
     self.listBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [self.listBt setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 15)];
     [self.listBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 25, 0,  0)];
+    [self.listBt addTarget:self action:@selector(listAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.whiteThreeV addSubview:self.listBt];
     
     UIView * backV5 =[[UIView alloc] initWithFrame:CGRectMake(0, 134.4, ScreenW, 0.6)];
@@ -284,6 +285,8 @@
                [SVProgressHUD showSuccessWithStatus:@"上传音频成功"];
                
                self.audioStr = responseObject[@"key"];
+               self.listBt.hidden = NO;
+               [self.listBt setTitle:@"需求描述" forState:UIControlStateNormal];
                [self.tableView reloadData];
                
            } failure:^(NSURLSessionDataTask *task, NSError *error) {

@@ -39,6 +39,12 @@
             
         }];
         
+        UIView * backV =[[UIView alloc] initWithFrame:CGRectMake(10, 49.4, ScreenW - 10, 0.6)];
+        backV.backgroundColor = lineBackColor;
+        [self addSubview:backV];
+        self.lineV = backV;
+        self.lineV.hidden = YES;
+        
         
     }
     return self;

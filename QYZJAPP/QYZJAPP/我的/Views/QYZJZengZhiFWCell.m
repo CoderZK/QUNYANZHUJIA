@@ -51,10 +51,10 @@
 }
 
 - (void)click:(UIButton *)button {
-    if (self.is_bond) {
-        [SVProgressHUD showSuccessWithStatus:@"您已经交过保证金"];
-        return;
-    }
+//    if (self.is_bond) {
+//        [SVProgressHUD showSuccessWithStatus:@"您已经交过保证金"];
+//        return;
+//    }
     [self selectAction:button.tag];
 }
 

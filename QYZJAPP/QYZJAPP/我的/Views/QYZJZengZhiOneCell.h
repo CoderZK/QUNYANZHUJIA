@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface QYZJZengZhiOneCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imgV;
 @property (weak, nonatomic) IBOutlet UILabel *nameLB;
+@property (weak, nonatomic) IBOutlet UIButton *baoBt;
 
 
 @end

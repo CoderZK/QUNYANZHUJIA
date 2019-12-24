@@ -10,6 +10,7 @@
 #import "QYZJZengZhiFWCell.h"
 #import "QYZJZengZhiOneCell.h"
 #import "QYZJZhiFuVC.h"
+#import "QYZJTuiBaoVC.h"
 @interface QYZJZengZhiFuWuTVC ()
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,strong)NSMutableArray<QYZJMoneyModel *> *dataArray;
@@ -220,6 +221,12 @@
         QYZJZengZhiOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJZengZhiOneCell" forIndexPath:indexPath];
         [cell.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:self.headImg]] placeholderImage:[UIImage imageNamed:@"789"] options:SDWebImageRetryFailed];
         cell.nameLB.text = self.nameStr;
+        [cell.baoBt addTarget:self action:@selector(baoAction:) forControlEvents:UIControlEventTouchUpInside];
+        if (self.is_bond) {
+            cell.baoBt.hidden = NO;
+        }else {
+            cell.baoBt.hidden = YES;
+        }
         return cell;
     }else {
         
@@ -237,6 +244,21 @@
     }
 
 }
+
+- (void)baoAction:(UIButton *)button {
+    
+    QYZJTuiBaoVC * vc =[[QYZJTuiBaoVC alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    vc.bond_money = self.bond_money;
+    Weak(weakSelf);
+    vc.tuiBaoBlock = ^(BOOL is_bood) {
+        weakSelf.is_bond = NO;
+        [weakSelf.tableView reloadData];
+    };
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     

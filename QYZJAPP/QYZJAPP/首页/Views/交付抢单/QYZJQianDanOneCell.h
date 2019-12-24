@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *gouTongBt;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLB;
 @property (weak, nonatomic) IBOutlet UILabel *statusLB;
+@property (weak, nonatomic) IBOutlet UILabel *appealLB;
 @property(nonatomic,strong)QYZJFindModel *model;
 @end
 

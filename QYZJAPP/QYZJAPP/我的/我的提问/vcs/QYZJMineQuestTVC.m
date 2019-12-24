@@ -23,16 +23,16 @@
     self.dataArray = @[].mutableCopy;
     self.navigationItem.title = @"我的提问";
     [self.tableView registerClass:[QYZJMineQuestCell class] forCellReuseIdentifier:@"cell"];
-
+    
     [self getData];
-     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-         self.page = 1;
-         [self getData];
-     }];
-     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-         self.page++;
-         [self getData];
-     }];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.page = 1;
+        [self getData];
+    }];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        self.page++;
+        [self getData];
+    }];
     
 }
 
@@ -83,7 +83,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat aa = self.dataArray[indexPath.row].cellHeight;
     NSLog(@"\n%@=====%f",indexPath,aa);
-
+    
     return self.dataArray[indexPath.row].cellHeight;
 }
 
@@ -104,15 +104,21 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-     QYZJFindModel * model = self.dataArray[indexPath.row];
+    QYZJFindModel * model = self.dataArray[indexPath.row];
+    
+    //未付款
+    
+    QYZJMineQuestTwoTVC * vc =[[QYZJMineQuestTwoTVC alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    vc.model = model;
     if ([model.status isEqualToString:@"0"]) {
-        //未付款
-        
-        QYZJMineQuestTwoTVC * vc =[[QYZJMineQuestTwoTVC alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        vc.model = model;
-        [self.navigationController pushViewController:vc animated:YES];
+        vc.isPay = NO;
+    }else {
+        vc.isPay = YES;
     }
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
     
     
 }

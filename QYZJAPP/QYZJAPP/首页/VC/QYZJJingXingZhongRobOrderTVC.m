@@ -333,9 +333,9 @@
         }else if (row == 12) {
             cell.TF.text = self.dataModel.feedback_reply.length > 0 ? self.dataModel.feedback_reply:@"未填写";
         }else if (row == 13) {
-            if (self.dataModel.appeal_status == 1) {
+            if ([self.dataModel.appeal_status intValue]== 1) {
                 cell.TF.text = @"申诉成功";
-            }else if (self.dataModel.appeal_status == 2){
+            }else if ([self.dataModel.appeal_status intValue]== 2){
                 cell.TF.text = @"申诉失败";
             }
         }else if (row == 14) {

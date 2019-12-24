@@ -109,7 +109,7 @@
                         <constraint firstAttribute="width" constant="50" id="e6k-gx-Skw"/>
                         <constraint firstAttribute="height" constant="50" id="y4M-jd-OTZ"/>
                     </constraints>
-                    <state key="normal" backgroundImage="zf_3"/>
+                    <state key="normal" backgroundImage="wx"/>
                     <connections>
                         <action selector="webChatLogin:" destination="-1" eventType="touchUpInside" id="PdJ-DY-2dJ"/>
                     </connections>
@@ -148,6 +148,6 @@
         <image name="backorange" width="367" height="85"/>
         <image name="ico_10" width="20" height="20"/>
         <image name="icon_mima" width="20" height="20"/>
-        <image name="zf_3" width="19.5" height="19.5"/>
+        <image name="wx" width="60" height="60"/>
     </resources>
 </document>

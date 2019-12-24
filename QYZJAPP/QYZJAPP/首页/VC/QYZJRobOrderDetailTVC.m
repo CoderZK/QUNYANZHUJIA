@@ -12,6 +12,7 @@
 #import "QYZJAddZiLiaoTVC.h"
 #import "QYZJCreateShiGongQingDanTVC.h"
 #import "QYZJMinePayDetailVC.h"
+#import "QYZJOtherCell.h"
 @interface QYZJRobOrderDetailTVC ()
 @property(nonatomic,strong)QYZJWorkModel *dataModel;
 @property(nonatomic,strong)NSArray *headTitleArr;
@@ -31,11 +32,15 @@
     [super viewDidLoad];
     self.navigationItem.title = @"详情";
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJRobOrderDetailCell" bundle:nil] forCellReuseIdentifier:@"QYZJRobOrderDetailCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"QYZJOtherCell" bundle:nil] forCellReuseIdentifier:@"QYZJOtherCell"];
     [self.tableView registerClass:[TongYongTwoCell class] forCellReuseIdentifier:@"TongYongTwoCell"];
     [self.tableView registerClass:[QYZJPicShowCell class] forCellReuseIdentifier:@"QYZJPicShowCell"];
     [self.tableView registerClass:[TongYongFourCell class] forCellReuseIdentifier:@"TongYongFourCell"];
-    self.headTitleArr = @[@"",@"",@"合同",@"预算",@"图纸",@"变更相册",@""];
-    self.leftTitleArr = @[@"订单号",@"地址",@"小区名称",@"风格",@"户型",@"装修时间",@"需求类型",@"预算",@"建筑面积",@"需求描述",@"联系电话",@"反馈内容",@"客服回复",@"申诉状态",@"申诉内容"];
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+   
+    self.headTitleArr = @[@"",@"",@"合同",@"预算",@"图纸",@"变更相册",@"",@""];
+    self.leftTitleArr = @[@"订单号",@"地址",@"小区名称",@"风格",@"户型",@"装修时间",@"需求类型",@"预算",@"建筑面积",@"需求描述",@"联系电话",@"反馈内容",@"客服回复",@"申诉状态",@"申诉内容",@"驳回原因"];
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self getData];
@@ -363,18 +368,41 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 7;
+    return 8;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return self.dataModel.media_url.count;
     }else if (section == 1) {
-        return 15;
+//        if (self.dataModel == nil) {
+//            return 0;
+//        }else {
+//            if ([self.dataModel.status isEqualToString:@"4"]) {
+//
+//                if (self.dataModel.appeal_status.length > 0) {
+//                    if ([self.dataModel.appeal_status isEqualToString:@"2"]) {
+//                        return <#expression#>
+//                    }
+//                    return 13;
+//                }else {
+//                    //反馈无效
+//                    return 11;
+//                }
+//            }else  if ([self.dataModel.status isEqualToString:@"6"]){
+//                return 10;
+//            }else {
+//                return 20;
+//            }
+//        }
+        return self.leftTitleArr.count;
+    
     }else if (section < 6) {
         return 1;
-    }else {
+    }else if (section == 6) {
         return 2;
+    }else {
+        return self.dataModel.other.count;
     }
 }
 
@@ -390,6 +418,7 @@
         return 35;
         
     }else if (indexPath.section ==1) {
+        
         return  [self cellHeightWithIndexPath:indexPath];
     } else if (indexPath.section == 6) {
         if (indexPath.row == 9) {
@@ -408,13 +437,21 @@
     }else if (indexPath.section == 5){
         
         return self.dataModel.change_table_url.length > 0 ? (ScreenW - 60)/3 + 25 : 0;
+    }else if (indexPath.section == 6) {
+        if (self.dataModel.sign_money == 0) {
+            return 0;
+        }else {
+            return 50;
+        }
+    }else if (indexPath.section == 7) {
+        return 120;
     }
     
     return 60;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+
     if (indexPath.section == 0) {
         QYZJRobOrderDetailCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJRobOrderDetailCell" forIndexPath:indexPath];
         cell.clipsToBounds = YES;
@@ -432,7 +469,7 @@
         cell.listBtActionBlock = ^(UIButton * _Nonnull button) {
             [weakSelf sitDemandActionwithButton:button];
         };
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        cell.lineV.hidden = YES;
         return cell;
     }else if (indexPath.section == 1 || indexPath.section == 6) {
         
@@ -443,7 +480,31 @@
             cell.rightLB.textColor = CharacterColor80;
             cell.leftLB.textColor = CharacterBlack112;
             cell.clipsToBounds = YES;
+            cell.lineV.hidden = NO;
             return cell;
+        }else if (indexPath.section == 1 && indexPath.row == 9) {
+            
+            QYZJRobOrderDetailCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJRobOrderDetailCell" forIndexPath:indexPath];
+            cell.clipsToBounds = YES;
+            cell.titelLB.text = self.dataModel.demand_context;
+            cell.titelLB.textColor = CharacterColor80;
+            cell.leftLB.text = @"需求描述";
+            cell.gouTongBt.tag = indexPath.row;
+            cell.type = 1;
+            cell.titelLB.hidden = cell.leftLB.hidden = NO;
+            
+            cell.leftCons.constant = 100;
+            Weak(weakSelf);
+            cell.listBtActionBlock = ^(UIButton * _Nonnull button) {
+               [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:self.dataModel.demand_voice] isLocality:NO];
+               [button setTitle:@"正在播放" forState:UIControlStateNormal];
+               [PublicFuntionTool shareTool].findPlayBlock = ^{
+                   [button setTitle:@"点击播放" forState:UIControlStateNormal];
+               };
+            };
+            cell.lineV.hidden = NO;
+            return cell;
+            
         }
         
         TongYongTwoCell* cell =[tableView dequeueReusableCellWithIdentifier:@"TongYongTwoCell" forIndexPath:indexPath];
@@ -464,10 +525,18 @@
                 cell.leftLB.text = @"佣金额";
                 cell.TF.text = [NSString stringWithFormat:@"￥%0.2f",self.dataModel.commission_price];
             }
+            if (indexPath.row == 10) {
+                cell.moreImgV.hidden = NO;
+                cell.moreImgV.image =[UIImage imageNamed:@"tel"];
+//                cell.moreImgV.frame = CGRectMake(ScreenW - 40, 10, 30, 30);
+            }else {
+                cell.moreImgV.hidden = YES;
+            }
         }
+        cell.lineV.hidden = NO;
         cell.clipsToBounds = YES;
         return cell;
-    }else {
+    }else if (indexPath.section < 7){
         QYZJPicShowCell* cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJPicShowCell" forIndexPath:indexPath];
         if (indexPath.section == 2){
             cell.picsArr = [self.dataModel.contract_url componentsSeparatedByString:@","];
@@ -480,6 +549,10 @@
             
         }
         cell.clipsToBounds = YES;
+        return cell;
+    }else {
+         QYZJOtherCell* cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJOtherCell" forIndexPath:indexPath];
+        cell.content.text = self.dataModel.other[indexPath.row].feedback_reply;
         return cell;
     }
 }
@@ -529,6 +602,25 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 1 && indexPath.row == 10) {
+        
+        UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",self.dataModel.real_tel] preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+         
+           [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",self.dataModel.real_tel]]];
+         
+        }];
+        
+        [alertVC addAction:action1];
+        [alertVC addAction:action2];
+        
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
+        
+        
+    }
     
 }
 
@@ -568,13 +660,17 @@
         }else if (row == 12) {
             cell.TF.text = self.dataModel.feedback_reply.length > 0 ? self.dataModel.feedback_reply:@"未回复";
         }else if (row == 13) {
-            if (self.dataModel.appeal_status == 1) {
+            if ([self.dataModel.appeal_status integerValue] ==1) {
                 cell.TF.text = @"申诉成功";
-            }else if (self.dataModel.appeal_status == 2){
+            }else if ([self.dataModel.appeal_status integerValue] ==2){
                 cell.TF.text = @"申诉失败";
+            }else {
+               cell.TF.text = @"申诉中";
             }
         }else if (row == 14) {
             cell.TF.text = self.dataModel.appeal_reason.length > 0 ? self.dataModel.appeal_reason:@"未填写";
+        }else if (row == 15) {
+            cell.TF.text = self.dataModel.appeal_plateReason.length > 0 ? self.dataModel.appeal_plateReason:@"未填写";
         }
     }
     
@@ -609,14 +705,32 @@
         hh = self.dataModel.area.length > 0 ? 50:0;
     }else if (row == 9) {
         hh = 50;
+        if (self.dataModel.demand_voice.length > 0) {
+            hh = 85;
+        }
     }else if (row == 10) {
         hh = self.dataModel.real_tel.length > 0 ? 50:0;
+        hh = 50;
         
     }else if (row == 11) {
+        //客服回复
         hh = self.dataModel.reason.length > 0 ? 50:0;
         
-    }else  {
-        hh = 50;
+    }else if (row == 12) {
+        //客服回复
+        hh = self.dataModel.feedback_reply.length > 0 ? 50:0;
+        
+    }else if (row == 14 || row == 13 ){
+        //申述状态
+        if (self.dataModel.appeal_status.length == 0) {
+            hh = 0;
+        }else {
+            hh = 50;
+        }
+        
+    }else if (row == 15){
+        
+        hh = self.dataModel.appeal_plateReason.length > 0 ? 50:0;
     }
     return hh;
 }

@@ -198,9 +198,14 @@
 +(NSString *)user_basicInfoURL{
    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_basicInfo.do"];
 }
-
-
-
+/**退保*/
++(NSString *)user_backBondURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_backBond.do"];
+}
+/**获取城市是否开通*/
++(NSString *)app_getCityURL{
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_getCity.do"];
+}
 #pragma mark ----- 我的小店 -------
 /** 我的小店*/
 +(NSString *)user_shopInfoURL{

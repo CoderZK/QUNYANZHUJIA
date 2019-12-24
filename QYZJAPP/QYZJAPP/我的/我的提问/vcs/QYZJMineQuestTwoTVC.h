@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJMineQuestTwoTVC : BaseTableViewController
 @property(nonatomic,strong)QYZJFindModel *model;
+@property(nonatomic,assign)NSInteger isPay;
 @end
 
 NS_ASSUME_NONNULL_END

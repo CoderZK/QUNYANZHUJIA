@@ -106,7 +106,18 @@
         self.gouTongBt.hidden = self.moneyLB.hidden = YES;
     }
     
-    
+    if (model.appeal_status.length == 0) {
+        self.appealLB.hidden = YES;
+    }else {
+        self.appealLB.hidden = NO;
+        if ([model.appeal_status isEqualToString:@"0"]) {
+            self.appealLB.text = @"申诉中";
+        }else if ([model.appeal_status isEqualToString:@"1"]) {
+            self.appealLB.text = @"申诉成功";
+        }else {
+            self.appealLB.text = @"申诉失败";
+        }
+    }
     
     
     

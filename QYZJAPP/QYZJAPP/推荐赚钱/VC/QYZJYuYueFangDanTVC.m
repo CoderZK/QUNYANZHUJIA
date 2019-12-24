@@ -119,7 +119,7 @@
     dict[@"house_model"] = @(self.dataModel.house_model_id);;
     dict[@"renovation_time"] = @(self.dataModel.renovation_time_id);
     dict[@"budget"] = @(self.dataModel.price);
-    
+    dict[@"demand_voice"] = self.audioStr;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_appointDemandURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];

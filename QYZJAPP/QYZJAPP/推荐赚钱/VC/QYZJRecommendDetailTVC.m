@@ -98,14 +98,16 @@
     }else if (row == 2) {
         str = self.dataModel.community_name;
     }else if (row == 3) {
-        
+       if (self.dataModel.manner > 0 && [zkSignleTool shareTool].mannerArr.count >= self.dataModel.manner  ) {
+           str = [zkSignleTool shareTool].mannerArr[self.dataModel.manner-1];
+       }
     }else if (row == 4) {
        if (self.dataModel.house_model > 0 && [zkSignleTool shareTool].houseModelArr.count >= self.dataModel.house_model  ) {
-            str = [zkSignleTool shareTool].houseModelArr[self.dataModel.house_model];
+            str = [zkSignleTool shareTool].houseModelArr[self.dataModel.house_model-1];
         }
     }else if (row == 5) {
         if (self.dataModel.renovation_time >0 && [zkSignleTool shareTool].renvoationTimeArr.count >= self.dataModel.renovation_time) {
-            str = [zkSignleTool shareTool].renvoationTimeArr[self.dataModel.renovation_time];
+            str = [zkSignleTool shareTool].renvoationTimeArr[self.dataModel.renovation_time-1];
         }
     }else if (row == 6) {
         str = self.dataModel.type_name;

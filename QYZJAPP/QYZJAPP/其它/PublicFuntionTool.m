@@ -66,13 +66,18 @@ static PublicFuntionTool * tool = nil;
     }else {
         
         
-//        AVAudioSession * session = [AVAudioSession sharedInstance];
-//          [session setActive:YES error:nil];
-//          [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+       
         
         NSURL * url = [[NSURL alloc] initWithString:meidaStr];
         NSData * data = [[NSData alloc] initWithContentsOfURL:url];
         self.player = [[AVAudioPlayer alloc] initWithData:data error:nil];
+        
+//        AVAudioSession * session = [AVAudioSession sharedInstance];
+//        [session setActive:YES error:nil];
+//        [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+        
+        NSError * error;
+        [[AVAudioSession sharedInstance] overrideOutputAudioPort:(AVAudioSessionPortOverrideSpeaker) error:&error];;
         self.player.numberOfLoops = 0;
         self.player.volume =1;
         [self.player play];

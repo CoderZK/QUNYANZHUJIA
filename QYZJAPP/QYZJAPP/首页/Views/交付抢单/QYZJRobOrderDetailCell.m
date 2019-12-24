@@ -16,6 +16,7 @@
     self.gouTongBt.layer.cornerRadius = 12.5;
     self.gouTongBt.clipsToBounds = YES;
     self.leftLB.hidden = YES;
+    self.lineV.hidden = YES;
     
 }
 
