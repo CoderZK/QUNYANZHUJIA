@@ -32,7 +32,7 @@
 
 
 - (void)addPagerView {
-    TYCyclePagerView *pagerView = [[TYCyclePagerView alloc]initWithFrame:CGRectMake(0, 0, ScreenW, ScreenW /2)];
+    TYCyclePagerView *pagerView = [[TYCyclePagerView alloc]initWithFrame:CGRectMake(0, 0, ScreenW, ScreenW * 8 * 165 / 9 / 385)];
     pagerView.layout.layoutType = 1;
 
 //    pagerView.layout.itemSpacing = 30;

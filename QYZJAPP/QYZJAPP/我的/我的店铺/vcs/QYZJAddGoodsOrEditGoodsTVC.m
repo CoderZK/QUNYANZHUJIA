@@ -300,6 +300,7 @@
 }
 
 - (void)click:(UIButton *)button {
+    
     [self.tableView endEditing:YES];
     zkPickView * pickV = [[zkPickView alloc] init];
     pickV.arrayType = titleArray;

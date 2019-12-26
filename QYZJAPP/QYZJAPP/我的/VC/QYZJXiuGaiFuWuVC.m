@@ -35,7 +35,9 @@
 - (IBAction)clickAction:(UIButton *)sender {
     if (sender.tag == 100) {
         if (self.cityArray.count == 0) {
-            return;
+           [SVProgressHUD showErrorWithStatus:@"数据获取中..,先去填写其它资料"];
+           [self getCityData];
+           return;
         }
         [self.view endEditing:YES];
         zkPickView *picker = [[zkPickView alloc]initWithFrame:[UIScreen mainScreen].bounds];

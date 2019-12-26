@@ -28,9 +28,17 @@
 
 - (IBAction)clickAction:(UIButton *)sender {
     if (sender.tag == 100) {
+        
+        if (self.quDaoArr.count == 0) {
+                   [SVProgressHUD showErrorWithStatus:@"获取中,请先完善其它内容"];
+                   [self getQuDaoArrList];
+                   return;
+        }
         zkPickView *picker = [[zkPickView alloc]initWithFrame:[UIScreen mainScreen].bounds];
         picker.delegate = self ;
-        
+
+       
+
         NSMutableArray * arr = @[].mutableCopy;
         for (zkPickModel  * model  in self.quDaoArr) {
             [arr addObject:model.name];

@@ -150,7 +150,9 @@
     if (indexPath.row == 1) {
         
         if (self.bankArr.count == 0) {
-            return;
+           [SVProgressHUD showErrorWithStatus:@"数据获取中..,先去填写其它资料"];
+           [self getCityData];
+           return;
         }
         zkPickView *picker = [[zkPickView alloc]initWithFrame:[UIScreen mainScreen].bounds];
         picker.delegate = self ;

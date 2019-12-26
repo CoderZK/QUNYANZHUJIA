@@ -85,7 +85,7 @@
     dict[@"title"] = self.searchText;
     dict[@"content"] = self.searchText;
     dict[@"nick_name"] = self.searchText;
-    dict[@"city_id"] = @"1004";
+
 
     [zkRequestTool networkingPOST:urlStr parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [SVProgressHUD dismiss];

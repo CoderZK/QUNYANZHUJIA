@@ -50,7 +50,7 @@
     dict[@"range_type"] = @"1";
     dict[@"type"] = @(1);
     dict[@"status"] = @(8);
-    dict[@"city_id"] = @(1004);
+    dict[@"city_id"] = [zkSignleTool shareTool].cityId;
     dict[@"token"] = [zkSignleTool shareTool].session_token;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_demandListURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];

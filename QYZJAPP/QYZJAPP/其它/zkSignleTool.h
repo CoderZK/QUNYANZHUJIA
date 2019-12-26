@@ -19,6 +19,7 @@
 @property(nonatomic,strong)NSString * session_uid;
 @property(nonatomic,strong)NSString * openid_new;
 @property(nonatomic,strong)NSString * telphone;
+@property(nonatomic,strong)NSString * cityId;
 
 @property(nonatomic,strong)NSString *nick_name;
 @property(nonatomic,strong)NSString *isSame;

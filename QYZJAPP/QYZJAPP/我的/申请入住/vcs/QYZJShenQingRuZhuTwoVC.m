@@ -42,7 +42,9 @@
 }
 - (IBAction)clickAction:(UIButton *)sender {
     if (sender.tag == 0) {
-        if (self.cityArray.count == 0) {
+         if (self.cityArray.count == 0) {
+            [SVProgressHUD showErrorWithStatus:@"获取中,请先完善其它内容"];
+            [self getCityData];
             return;
         }
         [self.view endEditing:YES];

@@ -202,6 +202,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.tableView endEditing:YES];
     if (indexPath.row == 1) {
+        if (self.cityArray.count == 0) {
+            [SVProgressHUD showErrorWithStatus:@"获取中,请先完善其它内容"];
+            [self getCityData];
+            return;
+        }
         zkPickView *picker = [[zkPickView alloc]initWithFrame:[UIScreen mainScreen].bounds];
         picker.delegate = self ;
         picker.arrayType = AreaArray;

@@ -493,8 +493,8 @@
                 imagePickerVc.allowTakeVideo = YES;
                 imagePickerVc.allowTakePicture = NO;
             }else {
-                imagePickerVc.allowTakeVideo = YES;
-                imagePickerVc.allowTakePicture = NO;
+                imagePickerVc.allowTakeVideo = NO;
+                imagePickerVc.allowTakePicture = YES;
             }
             imagePickerVc.showSelectBtn = NO;
             imagePickerVc.allowCrop = YES;

@@ -50,6 +50,19 @@ static zkSignleTool * tool = nil;
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
 }
+- (void)setCityId:(NSString *)cityId {
+    [[NSUserDefaults standardUserDefaults] setObject:cityId forKey:@"cityId"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString *)cityId {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"cityId"] == nil ) {
+        return @"";
+    }else {
+        return [[NSUserDefaults standardUserDefaults] objectForKey:@"cityId"];
+    }
+}
+
 -(void)setSession_uid:(NSString *)session_uid
 {
     [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%@",session_uid] forKey:@"id"];

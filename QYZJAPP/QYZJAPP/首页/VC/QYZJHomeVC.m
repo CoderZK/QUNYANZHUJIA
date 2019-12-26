@@ -49,7 +49,7 @@
     self.navigationController.navigationBar.hidden = YES;
     //    self.navigationController.navigationBar.hidden = YES;;
     [self getUserBaseicInfoHome];
-    
+    [self getBanList];
 
     
 }
@@ -66,8 +66,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.cityID = @"1004";
-    
     
     self.tabBarController.delegate = self;
     
@@ -79,6 +77,7 @@
         weakSelf.cityID = cityID;
         weakSelf.page = 1;
         [weakSelf getData];
+        [weakSelf getBanList];
     };
     
     [self.tableView registerClass:[zkLunBoCell class] forCellReuseIdentifier:@"zkLunBoCell"];
@@ -108,6 +107,7 @@
               weakSelf.cityID = cityID;
               weakSelf.page = 1;
               [weakSelf getData];
+              [zkSignleTool shareTool].cityId = cityID;
           };
         
     }];
@@ -140,6 +140,7 @@
                 weakSelf.navigaV.titleStr = cityStr;
                 weakSelf.cityID = cityId;
                 weakSelf.page = 1;
+                [zkSignleTool shareTool].cityId = cityId;
                 [weakSelf getData];
             };
             vc.hidesBottomBarWhenPushed = YES;
@@ -218,7 +219,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return ScreenW / 2+30;
+//        return ScreenW / 2+30;
+        return ScreenW * 8 * 165 / 9 / 385 + 30;
     }else if (indexPath.section == 1) {
         return 100;
     }else if (indexPath.section == 2) {
@@ -285,7 +287,7 @@
         }else {
             QYZJMineZhuYeTVC * vc =[[QYZJMineZhuYeTVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
-            vc.ID = self.dataArray[indexPath.row].ID;
+            vc.ID = self.dataArray[indexPath.row-1].ID;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else {
@@ -400,14 +402,13 @@
     
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"token"] = [zkSignleTool shareTool].session_token;
-    dict[@"city_id"] = @"1004";
-    dict[@"key"] = @"manner,houseModel";
+    dict[@"city_id"] =self.cityID;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_bannerListURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
             self.bannerDataArr = [zkBannerModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"bannerList"]];
             [self.tableView reloadData];
-        }else {
-            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
+        }else if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 7){
+            [SVProgressHUD showSuccessWithStatus:@"用户未登录"];
             
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {

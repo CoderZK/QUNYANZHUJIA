@@ -216,6 +216,13 @@
             
             [self presentViewController:alertController animated:YES completion:nil];
         }else if (indexPath.row == 2) {
+            
+            if (self.cityArray.count == 0) {
+                [SVProgressHUD showErrorWithStatus:@"获取中,请先完善其它内容"];
+                [self getCityData];
+                return;
+            }
+            
             zkPickView *picker = [[zkPickView alloc]initWithFrame:[UIScreen mainScreen].bounds];
             picker.delegate = self ;
             picker.arrayType = ArerArrayNormal;
@@ -312,26 +319,27 @@
         
         if ([self isCanUsePhotos]) {
             
-            TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
-                       imagePickerVc.showSelectBtn = NO;
-                       imagePickerVc.allowCrop = YES;
-                       imagePickerVc.needCircleCrop = NO;
-                       imagePickerVc.allowPickingImage = NO;
-                       imagePickerVc.cropRectPortrait = CGRectMake(0, (ScreenH - ScreenW)/2, ScreenW, ScreenW);
-                       imagePickerVc.cropRectLandscape = CGRectMake(0, (ScreenW - ScreenH)/2, ScreenH, ScreenH);
-                       imagePickerVc.circleCropRadius = ScreenW/2;
-                       [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
-                           if (photos.count > 0) {
-                               [self updateImgWithImg:photos[0]];
-                           }
-                       }];
-                       [self presentViewController:imagePickerVc animated:YES completion:nil];
+//            TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
+//                       imagePickerVc.showSelectBtn = NO;
+//                       imagePickerVc.allowCrop = YES;
+//                       imagePickerVc.needCircleCrop = NO;
+//                       imagePickerVc.allowPickingImage = NO;
+//                       imagePickerVc.cropRectPortrait = CGRectMake(0, (ScreenH - ScreenW)/2, ScreenW, ScreenW);
+//                       imagePickerVc.cropRectLandscape = CGRectMake(0, (ScreenW - ScreenH)/2, ScreenH, ScreenH);
+//                       imagePickerVc.circleCropRadius = ScreenW/2;
+//                       [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+//                           if (photos.count > 0) {
+//                               [self updateImgWithImg:photos[0]];
+//                           }
+//                       }];
+//                       [self presentViewController:imagePickerVc animated:YES completion:nil];
             
-//            [self showMXPhotoCameraAndNeedToEdit:YES completion:^(UIImage *image, UIImage *originImage, CGRect cutRect) {
-//
-//                self.img = image;
-//                [self.tableView reloadData];
-//            }];
+            [self showMXPhotoCameraAndNeedToEdit:YES completion:^(UIImage *image, UIImage *originImage, CGRect cutRect) {
+
+                self.img = image;
+                [self updateImgWithImg:image];
+                [self.tableView reloadData];
+            }];
         }else{
             UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"无法使用相机" message:@"请在iPhone的""设置-隐私-相机""中允许访问相机" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alert show];
@@ -343,9 +351,12 @@
         if ([self isCanUsePicture]) {
             
             TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
+            
             imagePickerVc.showSelectBtn = NO;
             imagePickerVc.allowCrop = YES;
             imagePickerVc.needCircleCrop = NO;
+            imagePickerVc.allowPickingImage = YES;
+            imagePickerVc.allowPickingVideo = NO;
             imagePickerVc.cropRectPortrait = CGRectMake(0, (ScreenH - ScreenW)/2, ScreenW, ScreenW);
             imagePickerVc.cropRectLandscape = CGRectMake(0, (ScreenW - ScreenH)/2, ScreenH, ScreenH);
             imagePickerVc.circleCropRadius = ScreenW/2;
