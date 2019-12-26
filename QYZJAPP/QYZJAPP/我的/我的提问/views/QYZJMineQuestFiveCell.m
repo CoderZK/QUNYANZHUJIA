@@ -15,6 +15,7 @@
     if (self) {
  
         self.imgV = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 30, 30)];
+        [self addSubview:self.imgV];
         self.nameLB = [[UILabel alloc] initWithFrame:CGRectMake(55, 15, 60, 17)];
         self.nameLB.font = kFont(14);
         [self addSubview:self.nameLB];
@@ -24,12 +25,14 @@
         self.typeLB.layer.borderColor = YellowColor.CGColor;
         self.typeLB.layer.borderWidth = 0.8;
         self.typeLB.font = kFont(12);
+        self.typeLB.textColor = YellowColor;
+        self.typeLB.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.typeLB];
         
         self.listBt = [[UIButton alloc] initWithFrame:CGRectMake(55, 37, 150, 25)];
         [self.listBt setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
         [self.listBt setImage:[UIImage imageNamed:@"sy"] forState:UIControlStateNormal];
-        [self.listBt setTitle:@"32" forState:UIControlStateNormal];
+        [self.listBt setTitle:@"回复语音" forState:UIControlStateNormal];
         self.listBt.titleLabel.font = kFont(14);
         self.listBt.layer.cornerRadius = 12.5;
         self.listBt.clipsToBounds = YES;
@@ -77,7 +80,14 @@
     }
     self.contentLB.mj_h = h;
     self.contentLB.attributedText = [model.contents getMutableAttributeStringWithFont:13 lineSpace:3 textColor:CharacterColor80];
-    model.cellHeight = CGRectGetMaxY(self.contentLB.frame) + 15;
+    CGFloat hhh  = CGRectGetMaxY(self.contentLB.frame) + 15;
+    if (hhh < 70) {
+        hhh = 70;
+    }
+    model.cellHeight = hhh;
+    if (model.contents.length == 0) {
+        model.cellHeight = 75;
+    }
     
     
     
@@ -89,7 +99,7 @@
     [button setTitle:@"正在播放..." forState:UIControlStateNormal];
        [[PublicFuntionTool shareTool] palyMp3WithNSSting:self.model.media_url isLocality:NO];
        [PublicFuntionTool shareTool].findPlayBlock = ^{
-           [button setTitle:@"点击播放" forState:UIControlStateNormal];
+           [button setTitle:@"回复语音" forState:UIControlStateNormal];
        };
     
     

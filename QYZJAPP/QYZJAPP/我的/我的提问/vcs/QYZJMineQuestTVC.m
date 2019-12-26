@@ -98,6 +98,26 @@
         cell.isServer = NO;
     }
     cell.waiModel = model;
+    Weak(weakSelf);
+    cell.cellClickBlock = ^(QYZJMineQuestCell *cell) {
+        NSIndexPath * iPath = [self.tableView indexPathForCell:cell];
+        
+         QYZJFindModel * model = self.dataArray[iPath.row];
+           
+           //未付款
+           
+           QYZJMineQuestTwoTVC * vc =[[QYZJMineQuestTwoTVC alloc] init];
+           vc.hidesBottomBarWhenPushed = YES;
+           vc.model = model;
+           if ([model.status isEqualToString:@"0"]) {
+               vc.isPay = NO;
+           }else {
+               vc.isPay = YES;
+           }
+           
+           [weakSelf.navigationController pushViewController:vc animated:YES];
+        
+    };
     return cell;
     
 }

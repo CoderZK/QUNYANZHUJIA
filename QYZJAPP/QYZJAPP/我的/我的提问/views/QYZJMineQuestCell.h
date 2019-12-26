@@ -13,6 +13,7 @@
 @interface QYZJMineQuestCell : UITableViewCell
 @property(nonatomic,strong)QYZJFindModel *waiModel;
 @property(nonatomic,assign)BOOL isServer;
+@property(nonatomic,copy)void(^cellClickBlock)(QYZJMineQuestCell * cell);
 @end
 
 

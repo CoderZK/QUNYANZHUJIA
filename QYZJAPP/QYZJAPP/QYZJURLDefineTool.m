@@ -18,12 +18,13 @@
     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_login_nocode.do"];
 }
 /** 微信登录 */
-+ (NSString * )app_weixin_loginURL{
-      return [NSString stringWithFormat:@"%@%@",URLOne,@"app_weixin_login.do"];
+
++ (NSString * )app_appweixin_loginURL{
+      return [NSString stringWithFormat:@"%@%@",URLOne,@"app_appweixin_login.do"];
 }
 /** 绑定手机号 */
-+ (NSString * )app_bindPhoneURL{
-     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_bindPhone.do"];
++ (NSString * )app_appBindPhoneURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_appBindPhone.do"];
 }
 /** 解除温馨绑定 */
 + (NSString * )user_bindOpenIdURL{

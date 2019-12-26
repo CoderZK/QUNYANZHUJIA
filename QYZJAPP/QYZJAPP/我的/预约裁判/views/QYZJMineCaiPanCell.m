@@ -64,9 +64,10 @@
         tap.cancelsTouchesInView = YES;//设置成N O表示当前控件响应后会传播到其他控件上，默认为YES
         [self.imgVpic addGestureRecognizer:tap];
         
-        self.imgVideo = [[UIImageView alloc] initWithFrame:CGRectMake(10, 20, ScreenW- 120, (ScreenW- 120) * 3/4)];
+        self.imgVideo = [[UIImageView alloc] initWithFrame:CGRectMake(10, 20, ScreenW- 100, (ScreenW- 120) * 3/4)];
         [self addSubview:self.imgVideo];
         self.imgVideo.userInteractionEnabled = YES;
+        self.imgVideo.backgroundColor = [UIColor groupTableViewBackgroundColor];
         
         UIButton * button = [[UIButton alloc]init];
         button.frame = CGRectMake(self.imgVideo.frame.size.width/2 - 25, self.imgVideo.frame.size.height/2 -25, 50, 50);
@@ -123,7 +124,18 @@
     }else {
         hh = hh+ (ScreenW- 120) * 3/4 + 20;
         self.imgVideo.hidden = NO;
-        self.imgVideo.image = [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:[QYZJURLDefineTool getVideoURLWithStr:model.videoUrl]] size:CGSizeMake((ScreenW- 120) , (ScreenW- 120) * 3/4)];
+//        self.imgVideo.image = [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:[QYZJURLDefineTool getVideoURLWithStr:model.videoUrl]] size:CGSizeMake((ScreenW- 100) , (ScreenW- 120) * 3/4)];
+        if (model.videoImg == nil) {
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            dispatch_async(queue, ^{
+                // 这里放异步执行任务代码
+              model.videoImg =  [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:[QYZJURLDefineTool getVideoURLWithStr:model.videoUrl]] size:CGSizeMake((ScreenW- 100) , (ScreenW- 120) * 3/4)];
+            });
+        }else {
+            self.imgVideo.image = model.videoImg;
+        }
+        
+        
     }
     model.cellHeight = hh;
     

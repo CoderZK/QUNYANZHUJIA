@@ -36,23 +36,23 @@
     }];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     
-    UIButton * button1 =[UIButton buttonWithType:UIButtonTypeCustom];
-    button1.frame = CGRectMake(0, 0, 50, 30);
-    [button1 setImage:[UIImage imageNamed:@"5"] forState:UIControlStateNormal];
-    button1.titleLabel.font = [UIFont systemFontOfSize:14];
-    [button1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    button1.layer.cornerRadius = 0;
-    button1.clipsToBounds = YES;
-    [[button1 rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button1];
+    //    UIButton * button1 =[UIButton buttonWithType:UIButtonTypeCustom];
+    //    button1.frame = CGRectMake(0, 0, 50, 30);
+    //    [button1 setImage:[UIImage imageNamed:@"5"] forState:UIControlStateNormal];
+    //    button1.titleLabel.font = [UIFont systemFontOfSize:14];
+    //    [button1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    //    button1.layer.cornerRadius = 0;
+    //    button1.clipsToBounds = YES;
+    //    [[button1 rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+    //        [self dismissViewControllerAnimated:YES completion:nil];
+    //    }];
+    //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button1];
     
-
+    
 }
 - (IBAction)clickAction:(UIButton *)sender {
     if (sender.tag == 100) {
-     
+        
         if (self.phoneTF.text.length != 11){
             [SVProgressHUD showErrorWithStatus:@"请输入正确手机号"];
             return;
@@ -61,13 +61,13 @@
             [SVProgressHUD showErrorWithStatus:@"请输入密码"];
             return;
         }
-//        if (self.passWordTF.text.length > 15 || self.passWordTF.text.length < 8) {
-//                   [SVProgressHUD showErrorWithStatus:@"请输入8~15位密码"];
-//                   return;
-//        }
-//        if (![NSString checkStingContainLetterAndNumberWithString:self.passWordTF.text]) {
-//            [SVProgressHUD showErrorWithStatus:@"密码至少包含一个数字和英文字母的混合"];
-//        }
+        //        if (self.passWordTF.text.length > 15 || self.passWordTF.text.length < 8) {
+        //                   [SVProgressHUD showErrorWithStatus:@"请输入8~15位密码"];
+        //                   return;
+        //        }
+        //        if (![NSString checkStingContainLetterAndNumberWithString:self.passWordTF.text]) {
+        //            [SVProgressHUD showErrorWithStatus:@"密码至少包含一个数字和英文字母的混合"];
+        //        }
         
         NSMutableDictionary * dict = @{}.mutableCopy;
         dict[@"mobile"] = self.phoneTF.text;
@@ -77,16 +77,13 @@
             
             if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] isEqualToString:@"1"]) {
                 QYZJUserModel * userModel = [QYZJUserModel mj_objectWithKeyValues:responseObject[@"result"]];
-                [zkSignleTool shareTool].session_token = responseObject[@"result"][@"token"];
-                [zkSignleTool shareTool].session_uid = responseObject[@"result"][@"id"];
-                [zkSignleTool shareTool].nick_name = responseObject[@"result"][@"nick_name"];
-                [zkSignleTool shareTool].telphone = responseObject[@"result"][@"telphone"];
+                [zkSignleTool shareTool].session_token = userModel.token;
+                [zkSignleTool shareTool].session_uid = userModel.ID;
+                [zkSignleTool shareTool].nick_name = userModel.nick_name;;
+                [zkSignleTool shareTool].telphone = userModel.telphone;
                 [zkSignleTool shareTool].isLogin = YES;
                 if (userModel.openid.length > 0) {
                     [zkSignleTool shareTool].isBindWebChat = YES;
-                }else {
-                    [zkSignleTool shareTool].isBindWebChat = NO;
-                    [self showWebchatView];
                 }
                 [self dismissViewControllerAnimated:YES completion:nil];
                 
@@ -96,7 +93,7 @@
             
             
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
+            
             
             
         }];
@@ -119,23 +116,23 @@
 
 - (void)showWebchatView {
     
- 
+    
     //验收
-                  UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前手机号未绑定微信,请尽快绑定,以确保及时收到推送信息" preferredStyle:(UIAlertControllerStyleAlert)];
-                  UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"以后再说" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                      
-                  }];
-                  UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"立即绑定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-                   
-                      self.isBind = YES;
-                      [self getUserInfoForPlatform:UMSocialPlatformType_WechatSession];
-                   
-                  }];
-                  
-                  [alertVC addAction:action1];
-                  [alertVC addAction:action2];
-                  
-                  [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
+    UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前手机号未绑定微信,请尽快绑定,以确保及时收到推送信息" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"以后再说" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"立即绑定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+        self.isBind = YES;
+        [self getUserInfoForPlatform:UMSocialPlatformType_WechatSession];
+        
+    }];
+    
+    [alertVC addAction:action1];
+    [alertVC addAction:action2];
+    
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
     
     
 }
@@ -144,18 +141,20 @@
 - (void)getUserInfoForPlatform:(UMSocialPlatformType)platformType
 {
     
-   
+    
     [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:nil completion:^(id result, NSError *error) {
-
+        
         if (error) {
             [SVProgressHUD showErrorWithStatus:@"授权失败"];
         }else {
             UMSocialUserInfoResponse *resp = result;
+            NSLog(@"\n\n%@\n\n%@\n\n%@",resp.openid,resp.accessToken,resp.refreshToken);
+            
             self.resp= resp;
             if (self.isBind) {
                 [self bindWebChatWithOpenid:resp.openid];
             }else {
-                [self loginWhitWebXin];
+                [self loginWhitWebXinwithOpenId:resp.openid];
                 
             }
             
@@ -171,7 +170,7 @@
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"openId"] = openId;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_bindOpenIdURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-
+        
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             [SVProgressHUD showSuccessWithStatus:@"微信绑定成功"];
@@ -181,26 +180,37 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-  
+        
     }];
     
-    
-    
 }
-
-
-- (void)loginWhitWebXin {
+- (void)loginWhitWebXinwithOpenId:(NSString *)opendId{
     
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
-    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_weixin_loginURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-
+    dict[@"appOpenid"] = opendId;
+    
+    NSLog(@"\n\n---%@",dict);
+    
+    
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_appweixin_loginURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [SVProgressHUD dismiss];
+        NSLog(@"\n\n\n\====%@",responseObject);
         if ([responseObject[@"key"] intValue]== 1) {
-            //绑定
-                        
+            //绑定已经绑定
+            
+            QYZJUserModel * userModel = [QYZJUserModel mj_objectWithKeyValues:responseObject[@"result"]];
+            [zkSignleTool shareTool].session_token = userModel.token;
+            [zkSignleTool shareTool].session_uid = userModel.ID;
+            [zkSignleTool shareTool].nick_name = userModel.nick_name;;
+            [zkSignleTool shareTool].telphone = userModel.telphone;
+            [zkSignleTool shareTool].isLogin = YES;
+            [zkSignleTool shareTool].isBindWebChat = YES;
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+            
         }else if ([responseObject[@"key"] intValue]== 10001){
-         //没有绑定
+            //没有绑定
             
             QYZJBindPhoneVC * vc =[[QYZJBindPhoneVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
@@ -223,20 +233,20 @@
         
     }];
 }
-    
-    
+
+
 
 
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

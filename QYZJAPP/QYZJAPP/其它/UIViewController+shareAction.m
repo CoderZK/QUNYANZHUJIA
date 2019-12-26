@@ -13,7 +13,7 @@
 
 static const void *urlKey = &urlKey;
 
-- (void)shareWithSetPreDefinePlatforms:(NSArray *)platforms withUrl:(NSString *)url shareModel:(zkHomelModel *)model{
+- (void)shareWithSetPreDefinePlatforms:(NSArray *)platforms withUrl:(NSString *)url shareModel:(NSString *)imgStr withContentStr:(NSString *)contentStr{
     
 //    if (url == nil) {
 //        [zkRequestTool networkingPOST:[HHYURLDefineTool shareURL] parameters:model.postId success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -55,15 +55,20 @@ static const void *urlKey = &urlKey;
 //            [self shareWebPageToPlatformType:platformType withTitle:@"逅花园" andContent:[NSString stringWithFormat:@"注册邀请码:%@,欢迎下载注册使用",url] thumImage:[UIImage imageNamed:@"logo"]];
 //
 //        }];
-//
+
 //
 //    }
     
-    [UMSocialUIManager setPreDefinePlatforms:platforms];
+           [UMSocialUIManager setPreDefinePlatforms:platforms];
            [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
                // 根据获取的platformType确定所选平台进行下一步操作
                self.url = url;
-               [self shareWebPageToPlatformType:platformType withTitle:@"逅花园" andContent:[NSString stringWithFormat:@"注册邀请码:%@,欢迎下载注册使用",url] thumImage:[UIImage imageNamed:@"logo"]];
+               NSString *urlKey = [[SDWebImageManager sharedManager] cacheKeyForURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[QYZJURLDefineTool getImgURLWithStr: imgStr]]]];
+                  UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:urlKey];
+                  if (!image) {
+                      image = [UIImage imageNamed:@"1024"];
+                  }
+               [self shareWebPageToPlatformType:platformType withTitle:@"群燕筑家" andContent:contentStr thumImage:image];
                
            }];
     
@@ -78,6 +83,7 @@ static const void *urlKey = &urlKey;
 - (NSString *)url {
     return objc_getAssociatedObject(self, urlKey);
 }
+
 
 
 

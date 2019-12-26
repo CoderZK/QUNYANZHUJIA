@@ -24,7 +24,7 @@
 #import "QYZJYuYueFangDanTVC.h"
 #import "QYZJXiaoYanZiVC.h"
 #import "QYZJSearchListTVC.h"
-@interface QYZJHomeVC ()<zkLunBoCellDelegate,QYZJHomeOneCellDelegate,QYZJHomeTwoCellDelegate>
+@interface QYZJHomeVC ()<zkLunBoCellDelegate,QYZJHomeOneCellDelegate,QYZJHomeTwoCellDelegate,UITabBarControllerDelegate>
 @property(nonatomic,strong)NSString *passwordStr;
 @property(nonatomic,strong)NSMutableArray<zkBannerModel *> *bannerDataArr;
 @property(nonatomic,strong)HomeNavigationView *navigaV;
@@ -68,6 +68,8 @@
 
     self.cityID = @"1004";
     
+    
+    self.tabBarController.delegate = self;
     
     QYZJLocationTool * tool = [[QYZJLocationTool alloc] init];
     [tool locationAction];
@@ -430,6 +432,19 @@
                [SVProgressHUD dismiss];
            }
     }];
+}
+
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    
+    if (![zkSignleTool shareTool].isLogin) {
+        
+        [self gotoLoginVC];
+        return NO;
+        
+        
+    }
+    return YES;
 }
 
 

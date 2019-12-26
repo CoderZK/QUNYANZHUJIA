@@ -56,9 +56,12 @@
             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
         }else if (index == 1) {
             //分享
-            
+             [weakSelf shareWithSetPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Sina)] withUrl:[NSString stringWithFormat:@"http://mobile.qunyanzhujia.com/daRenDetail?id=%@&other=true",weakSelf.ID] shareModel:self.dataModel.head_img withContentStr:self.dataModel.nick_name];
         }else if (index == 2) {
             //头像
+            
+            [[zkPhotoShowVC alloc] initWithArray:@[[QYZJURLDefineTool getImgURLWithStr:self.dataModel.head_img]] index:0];
+            
             
         }else if (index == 3) {
             //关注

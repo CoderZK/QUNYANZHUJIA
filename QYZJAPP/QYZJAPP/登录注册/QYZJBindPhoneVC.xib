@@ -16,13 +16,13 @@
                 <outlet property="hCons" destination="8h4-fM-7y8" id="kWR-QT-hXr"/>
                 <outlet property="imgV1" destination="ihb-oB-JRz" id="Tl9-fg-Sfz"/>
                 <outlet property="inviteCeodeTF" destination="CYA-47-9iL" id="L5I-Lp-ikJ"/>
-                <outlet property="lineV" destination="fz4-wP-hp0" id="Laq-YS-HHe"/>
+                <outlet property="lineV" destination="ts7-93-g7p" id="12m-xe-MRz"/>
                 <outlet property="myCons" destination="0IY-g2-xbf" id="hCr-hj-hTG"/>
                 <outlet property="passWordTF" destination="K2y-fr-5wt" id="e4N-6Y-JG7"/>
                 <outlet property="phoneTF" destination="Gx2-DC-laQ" id="K5S-uP-bKP"/>
                 <outlet property="swicthBt" destination="5DV-IE-hHG" id="BUP-MU-vJs"/>
                 <outlet property="switchOn" destination="hXg-wa-22B" id="V7Y-gA-IEW"/>
-                <outlet property="view" destination="bac-Ek-pLn" id="CPW-We-S7j"/>
+                <outlet property="view" destination="bac-Ek-pLn" id="msk-gE-3YA"/>
                 <outlet property="yesOrNoLB" destination="EdY-f1-0zY" id="Xeb-MI-NX7"/>
             </connections>
         </placeholder>
@@ -144,7 +144,7 @@
                             <rect key="frame" x="125" y="9.5" width="51" height="31"/>
                             <color key="onTintColor" red="1" green="0.50196078430000002" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </switch>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EdY-f1-0zY">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="是" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EdY-f1-0zY">
                             <rect key="frame" x="184" y="14.5" width="42" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="42" id="I2v-Z0-blB"/>

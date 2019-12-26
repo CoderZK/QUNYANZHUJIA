@@ -48,6 +48,7 @@
     self.moreChooseV = [[QYZJMoreChooseView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH)];
     [self getAudioDict];
     
+    
 }
 
 - (void)getAudioDict {

@@ -19,12 +19,12 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F9c-Oy-eZq">
-                    <rect key="frame" x="10" y="64" width="394" height="84"/>
+                    <rect key="frame" x="10" y="64" width="394" height="107.5"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="JCc-VZ-Hgc"/>
                     </constraints>
                     <string key="text">       群燕筑家,  是北京久久安居网科技有限公司清理打造, 为毛坯房装修与市场、精装修改造的用户提供问答教练、第三方裁判，为各个创客提供海量客流、信用交付工具、联合办公和材料展厅及样板间等的共享场所。用技术优化行业配置，用规则简化用户决策，用模板式进化生态发展。</string>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>

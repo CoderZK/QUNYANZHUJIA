@@ -16,17 +16,18 @@
 
 #define UMKey @"5dd20ecd570df37fe800001c"
 //友盟安全密钥//r6xbw5gy0zenei6x56xtm9wmkrrz653y
+
+//新浪
 #define SinaAppKey @"3443149913"
 #define SinaAppSecret @"2d6bac14bc37989170ba9ab6214f06c3"
 
-
+//微信
 #define WXAppID @"wxd9cbb4de3c914a74"
-#define WXAppSecret @"qwertyuioplkjhgfdsazxcvbnmmnbvcx"
+#define WXAppSecret @"eec2baba2df1bc7875ee259ca3b04e28"
 
-
-
-#define QQAppID @"1104758682"
-#define QQAppKey @"h97lgfazyRUzXJKy"
+//QQ
+#define QQAppID @"1110158578"
+#define QQAppKey @"6EwJ1flChWzz6zPO"
 
 
 @interface AppDelegate ()
@@ -43,7 +44,7 @@
     self.window.rootViewController = [self instantiateRootVC];
     [self.window makeKeyAndVisible];
     
-    
+    //汉字
     
     /* 设置友盟appkey */
     [[UMSocialManager defaultManager] setUmSocialAppkey:UMKey];
@@ -164,26 +165,23 @@
 - (UIViewController *)instantiateRootVC{
     
     //没有引导页
-    //    zkRootVC *BarVC=[[zkRootVC alloc] init];
-    //    return BarVC;
-    
-    
-    
-    //获取app运行的版本号
-    NSString *currentVersion =[[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
-    //取出本地缓存的版本号
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *localVersion = [defaults objectForKey:@"appversion"];
-    if ([currentVersion isEqualToString:localVersion]) {
-        TabBarController *BarVC=[[TabBarController alloc] init];
-        return BarVC;
-        //        TabBarController * tabVc = [[TabBarController alloc] init];
-        //        return tabVc;
-        
-    }else{
-        LYGuideViewController *guideVc = [[LYGuideViewController alloc] init];
-        return guideVc;
-    }
+    TabBarController * tabVc = [[TabBarController alloc] init];
+    return tabVc;
+//    //获取app运行的版本号
+//    NSString *currentVersion =[[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
+//    //取出本地缓存的版本号
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSString *localVersion = [defaults objectForKey:@"appversion"];
+//    if ([currentVersion isEqualToString:localVersion]) {
+//        TabBarController *BarVC=[[TabBarController alloc] init];
+//        return BarVC;
+//        //        TabBarController * tabVc = [[TabBarController alloc] init];
+//        //        return tabVc;
+//
+//    }else{
+//        LYGuideViewController *guideVc = [[LYGuideViewController alloc] init];
+//        return guideVc;
+//    }
 }
 //跳转主页
 - (void)showHomeVC{

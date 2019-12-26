@@ -52,6 +52,13 @@
 //点击分享
 - (void)clickAction:(UIButton *)button {
     
+    NSString * str = nil;
+    if (self.dataModel.pic.length > 0) {
+        str = [[self.dataModel.pic componentsSeparatedByString:@","] firstObject];
+    }
+    [self shareWithSetPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Sina)] withUrl:[NSString stringWithFormat:@"http://mobile.qunyanzhujia.com/goodsDetail?id=%@&other=true",self.ID] shareModel:str withContentStr:self.dataModel.context];
+    
+    
 }
 
 - (void)getData {

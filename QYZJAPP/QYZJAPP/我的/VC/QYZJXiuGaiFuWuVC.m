@@ -55,6 +55,7 @@
     }else if (sender.tag == 105) {
         [SVProgressHUD show];
         NSMutableDictionary * dict = @{}.mutableCopy;
+        dict[@"type"] = @"2";
         [zkRequestTool networkingPOST:[QYZJURLDefineTool user_cancelApplicationURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
 
             [SVProgressHUD dismiss];

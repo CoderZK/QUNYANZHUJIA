@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,strong)NSString *ID;
 @property(nonatomic,strong)NSString *userId;
+@property(nonatomic,strong)NSString *user_id;
 @property(nonatomic,strong)NSString *turnoverListId;
 @property(nonatomic,strong)NSString *shopName;
 @property(nonatomic,strong)NSString *cityId;
@@ -95,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
  客户：待服务方发起交付1、待确认2、待支付3、施工中4、待阶段验收5、待支付尾款6、待评价7、交付完成8 */
 @property(nonatomic,strong)NSString *user_status;
 
-
+@property(nonatomic,strong)UIImage *videoImg;
 
 @property(nonatomic,strong)NSString *custom_telphone;
 @property(nonatomic,strong)NSString *status;

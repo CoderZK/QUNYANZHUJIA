@@ -52,8 +52,6 @@
         self.contentLB.font = kFont(14);
         [self addSubview:self.contentLB];
         
-
-        
         self.mediaView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.picView.frame), ScreenW, 0)];
         [self addSubview:self.mediaView];
         

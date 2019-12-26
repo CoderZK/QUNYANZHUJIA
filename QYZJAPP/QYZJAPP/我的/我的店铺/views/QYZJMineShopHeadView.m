@@ -23,7 +23,7 @@
 
         
         self.imgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 100+sstatusHeight)];
-        self.imgV.backgroundColor = [UIColor greenColor];
+        self.imgV.image = [UIImage imageNamed:@"39"];
         [self addSubview:self.imgV];
         
         self.backBt = [[UIButton alloc] initWithFrame:CGRectMake(10, sstatusHeight + 2, 40, 40)];

@@ -34,11 +34,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.lineV.hidden = self.imgV1.hidden = self.inviteCeodeTF.hidden = YES;
+    self.imgV1.hidden = self.inviteCeodeTF.hidden = YES;
     self.hCons.constant = 200;
     self.myCons.constant = 20;
     self.swicthBt.selected = self.switchOn.on =YES;
     
+    self.navigationItem.title = @"绑定手机";
     
     
 }
@@ -52,15 +53,20 @@
     }else if (button.tag == 102) {
         button.selected = !button.selected;
         if (button.selected) {
-            self.lineV.hidden = self.imgV1.hidden = self.inviteCeodeTF.hidden = NO;
-            self.hCons.constant = 250;
-            self.myCons.constant = 70;
-            self.yesOrNoLB.text = @"否";
-        }else {
+            
             self.lineV.hidden = self.imgV1.hidden = self.inviteCeodeTF.hidden = YES;
             self.hCons.constant = 200;
             self.myCons.constant = 20;
             self.yesOrNoLB.text = @"是";
+            
+           
+        }else {
+            
+            self.lineV.hidden = self.imgV1.hidden = self.inviteCeodeTF.hidden = NO;
+            self.hCons.constant = 250;
+            self.myCons.constant = 70;
+            self.yesOrNoLB.text = @"否";
+            
         }
         self.switchOn.on = button.selected;
     }
@@ -141,29 +147,30 @@
         return;
     }
     
-    NSMutableDictionary * dataDict = @{@"phone":self.phoneTF.text}.mutableCopy;
+    NSMutableDictionary * dataDict = @{}.mutableCopy;
+    dataDict[@"mobile"] = self.phoneTF.text;
     dataDict[@"code"] = self.inviteCeodeTF.text;
     dataDict[@"mobile_verify"] = self.codeTF.text;
     dataDict[@"password"] = [NSString stringToMD5:self.passWordTF.text];
+    dataDict[@"user_id"] = self.ID;
     if (self.swicthBt.selected == NO) {
         dataDict[@"is_existence"] = @"1";
     }
-    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_bindPhoneURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_appBindPhoneURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([responseObject[@"key"] intValue]== 1) {
             [SVProgressHUD showSuccessWithStatus:@"绑定成功成功"];
             
            QYZJUserModel * userModel = [QYZJUserModel mj_objectWithKeyValues:responseObject[@"result"]];
-            [zkSignleTool shareTool].session_token = responseObject[@"result"][@"token"];
-            [zkSignleTool shareTool].session_uid = responseObject[@"result"][@"id"];
-            [zkSignleTool shareTool].nick_name = responseObject[@"result"][@"nick_name"];
-            [zkSignleTool shareTool].telphone = responseObject[@"result"][@"telphone"];
+            [zkSignleTool shareTool].session_token = userModel.token;
+            [zkSignleTool shareTool].session_uid = userModel.ID;
+            [zkSignleTool shareTool].nick_name = userModel.nick_name;;
+            [zkSignleTool shareTool].telphone = userModel.telphone;
             [zkSignleTool shareTool].isLogin = YES;
             if (userModel.openid.length > 0) {
                 [zkSignleTool shareTool].isBindWebChat = YES;
             }else {
                 [zkSignleTool shareTool].isBindWebChat = NO;
             }
-           
             if (self.dissBlock != nil) {
                 self.dissBlock(YES);
                 [self.navigationController popViewControllerAnimated:YES];

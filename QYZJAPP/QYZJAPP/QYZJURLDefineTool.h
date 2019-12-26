@@ -11,8 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-////测试本地
+//正式
 #define URLOne @"http://mobile.qunyanzhujia.com:8098/qyzj/"
+//测试
+//#define URLOne @"http://192.168.1.116:8086/qyzj/"
+
 
 ////图片地址
 #define QiNiuImgURL @"http://web.qunyanzhujia.com/"
@@ -32,9 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** 登录 */
 + (NSString * )app_loginURL;
 /** 微信登录 */
-+ (NSString * )app_weixin_loginURL;
++ (NSString * )app_appweixin_loginURL;
 /** 绑定手机号 */
-+ (NSString * )app_bindPhoneURL;
++ (NSString * )app_appBindPhoneURL;
 /** 解除温馨绑定 */
 + (NSString * )user_bindOpenIdURL;
 /**上传视频*/

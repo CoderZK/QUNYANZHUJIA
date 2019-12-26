@@ -250,10 +250,7 @@
         
         return cell;
     }
-    
-    HHYMineFourCell * cell =[tableView dequeueReusableCellWithIdentifier:@"HHYMineFourCell" forIndexPath:indexPath];
-    
-    return cell;
+
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -368,10 +365,12 @@
             QYZJMineZhuangXiuDaiVC * vc =[[QYZJMineZhuangXiuDaiVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
-        }else {
+        }else if (dd == 2){
             QYZJMineZhiBoTVC * vc =[[QYZJMineZhiBoTVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
+        }else {
+            [SVProgressHUD showErrorWithStatus:@"暂未开放"];
         }
     }else if (indexPath.section == 4){
         if (dd == 0) {

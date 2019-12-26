@@ -287,6 +287,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (self.cellClickBlock != nil) {
+        self.cellClickBlock(self);
+    }
+    
+    
 }
 
 - (void)listAction:(UIButton *)button {

@@ -62,18 +62,13 @@
 
 //退出登录
 - (void)outLoginActio:(UIButton *)button {
-    
-
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_app_logoutURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
-            
-//            [zkSignleTool shareTool].session_token = nil;
-//            [self.navigationController popToRootViewControllerAnimated:YES];
-            
-            
+            [zkSignleTool shareTool].session_token = nil;
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
         }
