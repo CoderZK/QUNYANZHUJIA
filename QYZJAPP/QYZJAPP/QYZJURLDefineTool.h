@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 //正式
-#define URLOne @"http://mobile.qunyanzhujia.com:8098/qyzj/"
+//#define URLOne @"http://mobile.qunyanzhujia.com:8098/qyzj/"
 //测试
-//#define URLOne @"http://192.168.1.116:8086/qyzj/"
+#define URLOne @"http://192.168.1.116:8086/qyzj/"
 
 
 ////图片地址
@@ -38,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString * )app_appweixin_loginURL;
 /** 绑定手机号 */
 + (NSString * )app_appBindPhoneURL;
+/**  注册 */
++ (NSString * )app_regsiterURL;
 /** 解除温馨绑定 */
 + (NSString * )user_bindOpenIdURL;
 /**上传视频*/

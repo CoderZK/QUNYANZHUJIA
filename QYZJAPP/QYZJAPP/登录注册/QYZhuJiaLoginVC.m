@@ -82,7 +82,7 @@
                 [zkSignleTool shareTool].nick_name = userModel.nick_name;;
                 [zkSignleTool shareTool].telphone = userModel.telphone;
                 [zkSignleTool shareTool].isLogin = YES;
-                if (userModel.openid.length > 0) {
+                if (userModel.app_openid.length > 0) {
                     [zkSignleTool shareTool].isBindWebChat = YES;
                 }
                 [self dismissViewControllerAnimated:YES completion:nil];

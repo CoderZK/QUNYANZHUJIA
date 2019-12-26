@@ -79,7 +79,7 @@
 - (void)timerStar {
     _number = _number -1;
     if (self.number > 0) {
-        [self.codeBt setTitle:[NSString stringWithFormat:@"%lds后重发",_number] forState:UIControlStateNormal];
+        [self.codeBt setTitle:[NSString stringWithFormat:@"%lds后重发",(long)_number] forState:UIControlStateNormal];
     }else {
         [self.codeBt setTitle:@"重新发送" forState:UIControlStateNormal];
         [self.timer invalidate];
@@ -117,9 +117,9 @@
     NSMutableDictionary * dataDict = @{@"phone":self.phoneTF.text}.mutableCopy;
     dataDict[@"code"] = self.inviteCeodeTF.text;
     dataDict[@"mobile_verify"] = self.codeTF.text;
-    dataDict[@"password"] = [NSString stringToMD5:self.passWordTF.text];
+    dataDict[@"password"] = [self.passWordTF.text base64EncodedString];
     dataDict[@"mobile"] = self.phoneTF.text;
-    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_sendmobileURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_regsiterURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([responseObject[@"key"] intValue]== 1) {
             [SVProgressHUD showSuccessWithStatus:@"注册成功"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

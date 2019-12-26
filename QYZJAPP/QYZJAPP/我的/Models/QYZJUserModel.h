@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *token;
 @property(nonatomic,strong)NSString *role;
 @property(nonatomic,strong)NSString *isSetPayPass;
-@property(nonatomic,strong)NSString *openid;
+@property(nonatomic,strong)NSString *app_openid;
 @property(nonatomic,strong)NSString *telphone;
 @property(nonatomic,strong)NSString *pro_name;
 @property(nonatomic,strong)NSString *area_id;

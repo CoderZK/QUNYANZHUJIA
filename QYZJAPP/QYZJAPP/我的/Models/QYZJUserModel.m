@@ -35,8 +35,8 @@
     if (self.isSetPayPass) {
         [aCoder encodeObject:self.isSetPayPass forKey:@"isSetPayPass"];
     }
-    if (self.openid) {
-        [aCoder encodeObject:self.openid forKey:@"openid"];
+    if (self.app_openid) {
+        [aCoder encodeObject:self.app_openid forKey:@"app_openid"];
     }
     if (self.telphone) {
         [aCoder encodeObject:self.telphone forKey:@"telphone"];
@@ -53,7 +53,7 @@
         self.token = [aDecoder decodeObjectForKey:@"token"];
         self.role = [aDecoder decodeObjectForKey:@"role"];
         self.isSetPayPass = [aDecoder decodeObjectForKey:@"isSetPayPass"];
-        self.openid = [aDecoder decodeObjectForKey:@"openid"];
+        self.app_openid = [aDecoder decodeObjectForKey:@"app_openid"];
         self.telphone = [aDecoder decodeObjectForKey:@"telphone"];
     }
     return self;

@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.imgV1.hidden = self.inviteCeodeTF.hidden = YES;
+    self.lineV.hidden =  self.imgV1.hidden = self.inviteCeodeTF.hidden = YES;
     self.hCons.constant = 200;
     self.myCons.constant = 20;
     self.swicthBt.selected = self.switchOn.on =YES;
@@ -116,7 +116,7 @@
 - (void)timerStar {
     _number = _number -1;
     if (self.number > 0) {
-        [self.codeBt setTitle:[NSString stringWithFormat:@"%lds后重发",_number] forState:UIControlStateNormal];
+        [self.codeBt setTitle:[NSString stringWithFormat:@"%lds后重发",(long)_number] forState:UIControlStateNormal];
     }else {
         [self.codeBt setTitle:@"重新发送" forState:UIControlStateNormal];
         [self.timer invalidate];
@@ -151,10 +151,12 @@
     dataDict[@"mobile"] = self.phoneTF.text;
     dataDict[@"code"] = self.inviteCeodeTF.text;
     dataDict[@"mobile_verify"] = self.codeTF.text;
-    dataDict[@"password"] = [NSString stringToMD5:self.passWordTF.text];
+    dataDict[@"password"] = [self.passWordTF.text base64EncodedString];
     dataDict[@"user_id"] = self.ID;
-    if (self.swicthBt.selected == NO) {
-        dataDict[@"is_existence"] = @"1";
+    if (self.switchOn.on == YES) {
+        dataDict[@"is_existence"] = @"0";
+    }else {
+       dataDict[@"is_existence"] = @"1";
     }
     [zkRequestTool networkingPOST:[QYZJURLDefineTool app_appBindPhoneURL] parameters:dataDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([responseObject[@"key"] intValue]== 1) {
@@ -166,11 +168,7 @@
             [zkSignleTool shareTool].nick_name = userModel.nick_name;;
             [zkSignleTool shareTool].telphone = userModel.telphone;
             [zkSignleTool shareTool].isLogin = YES;
-            if (userModel.openid.length > 0) {
-                [zkSignleTool shareTool].isBindWebChat = YES;
-            }else {
-                [zkSignleTool shareTool].isBindWebChat = NO;
-            }
+            [zkSignleTool shareTool].isBindWebChat = YES;
             if (self.dissBlock != nil) {
                 self.dissBlock(YES);
                 [self.navigationController popViewControllerAnimated:YES];

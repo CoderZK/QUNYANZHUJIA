@@ -27,7 +27,7 @@
     self.navigationItem.title = @"设置";
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJSettingCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.leftArr = @[@[@"我的头像",@"昵称",@"省市区",@"详细地址"],@[@"换绑手机",@"绑定微信",@"登录密码修改",@"支付密码修改"],@[@"清除缓存"]];
+    self.leftArr = @[@[@"我的头像",@"昵称",@"省市区",@"详细地址"],@[@"换绑手机",@"解绑微信",@"登录密码修改",@"支付密码修改"],@[@"清除缓存"]];
     self.cityArray = @[].mutableCopy;
     [self getCityData];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 70, 0);
@@ -254,7 +254,7 @@
             [self.navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row == 1) {
             
-            
+            [self noBindWebChat];
             
         }else if (indexPath.row == 2) {
             QYZJChangePasswordVC * vc =[[QYZJChangePasswordVC alloc] init];
@@ -279,7 +279,8 @@
     
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
-    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_bindOpenIdURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+    dict[@"app_openid"] = @"0";
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_editInfoURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         [SVProgressHUD dismiss];

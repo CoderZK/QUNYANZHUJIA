@@ -22,6 +22,15 @@
 + (NSString * )app_appweixin_loginURL{
       return [NSString stringWithFormat:@"%@%@",URLOne,@"app_appweixin_login.do"];
 }
+
+/**  注册 */
+
++ (NSString * )app_regsiterURL{
+      return [NSString stringWithFormat:@"%@%@",URLOne,@"app_regsiter.do"];
+}
+
+
+
 /** 绑定手机号 */
 + (NSString * )app_appBindPhoneURL{
      return [NSString stringWithFormat:@"%@%@",URLOne,@"app_appBindPhone.do"];
