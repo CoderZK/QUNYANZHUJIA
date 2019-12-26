@@ -409,7 +409,7 @@
             QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             vc.model = mm;
-            vc.ID = self.ID;
+            vc.ID = ID;
             vc.type = 5+self.type;
             [self.navigationController pushViewController:vc animated:YES];
             

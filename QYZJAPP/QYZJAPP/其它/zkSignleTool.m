@@ -57,7 +57,7 @@ static zkSignleTool * tool = nil;
 
 - (NSString *)cityId {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"cityId"] == nil ) {
-        return @"";
+        return @"0";
     }else {
         return [[NSUserDefaults standardUserDefaults] objectForKey:@"cityId"];
     }

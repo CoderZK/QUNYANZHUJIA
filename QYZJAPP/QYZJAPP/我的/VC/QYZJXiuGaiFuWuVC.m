@@ -95,7 +95,7 @@
     dict[@"apponit_price"] = self.yuYueMoneyTF.text;
     dict[@"sit_price"] = self.pangTingMoneyTF.text;
     dict[@"pro_id"] = self.proId;
-    dict[@"city_id"] = self.cityId;
+    dict[@"city_id"] = [zkSignleTool shareTool].cityId;
     dict[@"area_id"] = self.aearId;
     dict[@"is_question"] = @(self.quSwitch.on);
     dict[@"is_appoint"] = @(self.yuyueSwitch.on);

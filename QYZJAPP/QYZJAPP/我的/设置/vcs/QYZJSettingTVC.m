@@ -12,6 +12,7 @@
 #import "QYZJChangePhoneVC.h"
 #import "QYZJChangePasswordVC.h"
 #import "QYZJChangePayPasswordOneVC.h"
+#import "TabBarController.h"
 @interface QYZJSettingTVC ()<zkPickViewDelelgate,TZImagePickerControllerDelegate>
 @property(nonatomic,strong)NSArray *leftArr;
 @property(nonatomic,copy)NSString *nickName,*phoneStr,*addressStr;
@@ -68,7 +69,14 @@
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             [zkSignleTool shareTool].session_token = nil;
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+           
+            
+            [self.navigationController popToRootViewControllerAnimated:NO];
+             TabBarController * tab = (TabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            tab.selectedIndex = 0;
+            
+            
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
         }
@@ -265,12 +273,12 @@
             
         }else if (indexPath.row == 2) {
             QYZJChangePasswordVC * vc =[[QYZJChangePasswordVC alloc] init];
-                       vc.hidesBottomBarWhenPushed = YES;
-                       [self.navigationController pushViewController:vc animated:YES];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
         }else {
             QYZJChangePayPasswordOneVC * vc =[[QYZJChangePayPasswordOneVC alloc] init];
-                       vc.hidesBottomBarWhenPushed = YES;
-                       [self.navigationController pushViewController:vc animated:YES];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }else {
         [cacheClear cleanCache:^{
@@ -281,6 +289,9 @@
     }
     
 }
+
+
+
 
 - (void)noBindWebChat {
     

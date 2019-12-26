@@ -220,7 +220,7 @@
     dict[@"page"] = @(self.page);
     dict[@"pageSize"] = @(10);
     dict[@"type"] = @(3-self.type);
-    dict[@"city_id"] = self.cityID;
+    dict[@"city_id"] = [zkSignleTool shareTool].cityId;
     dict[@"end_type"] = @(self.type - 1);
     dict[@"sort_type"] = @"1";
     dict[@"search_type"] = @(self.type);

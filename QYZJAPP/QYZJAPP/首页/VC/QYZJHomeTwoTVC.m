@@ -85,7 +85,7 @@
     dict[@"page"] = @(self.page);
     dict[@"pageSize"] = @(10);
     dict[@"type"] = @(3-self.type);
-    dict[@"city_id"] = self.cityID;
+    dict[@"city_id"] = [zkSignleTool shareTool].cityId;
     dict[@"sort_type"] = @"1";
     dict[@"search_type"] = @(self.type);
     [zkRequestTool networkingPOST:[QYZJURLDefineTool app_searchURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {

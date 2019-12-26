@@ -81,7 +81,7 @@
         dict[@"sort_type"] = @(self.sort_type);
     }
     if (self.isTongChong) {
-        dict[@"city_id"] = self.cityID;
+        dict[@"city_id"] = [zkSignleTool shareTool].cityId;
     }
     if (self.dataDict != nil && self.dataDict.allKeys.count > 0 ) {
          NSArray * arr = self.dataDict[self.titleArr[self.searchIndex]];

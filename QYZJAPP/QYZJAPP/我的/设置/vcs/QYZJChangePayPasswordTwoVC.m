@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"重置支付密码";
+    self.navigationItem.title = @"设置支付密码";
 }
 
 

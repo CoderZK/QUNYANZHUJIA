@@ -79,7 +79,7 @@
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"token"] = [zkSignleTool shareTool].session_token;
-    dict[@"city_id"] = @"0";
+    dict[@"city_id"] = [zkSignleTool shareTool].cityId;
     dict[@"page"] = @(self.page);
     dict[@"pageSize"] = @(10);
     dict[@"title"] = self.searchText;

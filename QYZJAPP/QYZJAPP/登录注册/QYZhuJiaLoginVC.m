@@ -10,6 +10,7 @@
 #import "QYZJFindPasswordVC.h"
 #import "QYZJRegistVC.h"
 #import "QYZJBindPhoneVC.h"
+#import "QYZJSettingTVC.h"
 @interface QYZhuJiaLoginVC ()
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
 @property (weak, nonatomic) IBOutlet UITextField *passWordTF;
@@ -36,17 +37,17 @@
     }];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     
-    //    UIButton * button1 =[UIButton buttonWithType:UIButtonTypeCustom];
-    //    button1.frame = CGRectMake(0, 0, 50, 30);
-    //    [button1 setImage:[UIImage imageNamed:@"5"] forState:UIControlStateNormal];
-    //    button1.titleLabel.font = [UIFont systemFontOfSize:14];
-    //    [button1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    //    button1.layer.cornerRadius = 0;
-    //    button1.clipsToBounds = YES;
-    //    [[button1 rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
-    //        [self dismissViewControllerAnimated:YES completion:nil];
-    //    }];
-    //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button1];
+        UIButton * button1 =[UIButton buttonWithType:UIButtonTypeCustom];
+        button1.frame = CGRectMake(0, 0, 50, 30);
+        [button1 setImage:[UIImage imageNamed:@"5"] forState:UIControlStateNormal];
+        button1.titleLabel.font = [UIFont systemFontOfSize:14];
+        [button1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        button1.layer.cornerRadius = 0;
+        button1.clipsToBounds = YES;
+        [[button1 rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button1];
     
     
 }
@@ -87,6 +88,48 @@
                 }
                 [self dismissViewControllerAnimated:YES completion:nil];
                 
+                if (userModel.nick_name.length == 0) {
+                    
+                    UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",@"为保护您的隐私安全,请您尽快修改昵称"] preferredStyle:(UIAlertControllerStyleAlert)];
+                    UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                        
+                    }];
+                    UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+
+                        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"请输入昵称" preferredStyle:UIAlertControllerStyleAlert];
+                        
+                        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+                        
+                        [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                            
+                            UITextField*userNameTF = alertController.textFields.firstObject;
+                            [self editUserInfoWithDict:@{@"nick_name":userNameTF.text}];
+                            
+                            
+                        }]];
+                        
+                        [alertController addTextFieldWithConfigurationHandler:^(UITextField*_Nonnull textField) {
+                            
+                            textField.placeholder=@"请输入昵称";
+                            
+                            
+                            
+                        }];
+                        
+                        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+
+                    }];
+                    
+                    [alertVC addAction:action1];
+                    [alertVC addAction:action2];
+                    
+                    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
+                    
+                }
+                
+                
+                
+                
             } else {
                 [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
             }
@@ -110,6 +153,31 @@
     
     
 }
+
+- (void)editUserInfoWithDict:(NSDictionary*)dict {
+    
+    [SVProgressHUD show];
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_editInfoURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            [SVProgressHUD showSuccessWithStatus:@"修改昵称成功"];
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        
+        
+    }];
+    
+}
+
+
+
 - (IBAction)webChatLogin:(id)sender {
     [self getUserInfoForPlatform:UMSocialPlatformType_WechatSession];
 }

@@ -272,8 +272,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (![zkSignleTool shareTool].isLogin) {
+        [self gotoLoginVC];
+        return;
+    }
+    
     if (indexPath.section == 2) {
-     
         QYZJYuYueFangDanTVC * vc =[[QYZJYuYueFangDanTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
@@ -368,7 +372,7 @@
     dict[@"page"] = @(self.page);
     dict[@"pageSize"] = @(10);
     dict[@"type"] = @"0";
-    dict[@"city_id"] = self.cityID;
+    dict[@"city_id"] = [zkSignleTool shareTool].cityId;
     dict[@"search_word"] = self.searchWord;
     dict[@"search_type"] = @"0";
     [zkRequestTool networkingPOST:[QYZJURLDefineTool app_searchURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -402,7 +406,7 @@
     
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"token"] = [zkSignleTool shareTool].session_token;
-    dict[@"city_id"] =self.cityID;
+    dict[@"city_id"] =[zkSignleTool shareTool].cityId;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_bannerListURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
             self.bannerDataArr = [zkBannerModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"bannerList"]];

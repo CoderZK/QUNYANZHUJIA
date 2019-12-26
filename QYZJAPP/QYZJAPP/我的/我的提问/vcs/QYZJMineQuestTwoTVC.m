@@ -193,7 +193,7 @@
         self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34);
     }
     
-    KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"完成" andImgaeName:@""];
+    KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"支付" andImgaeName:@""];
     Weak(weakSelf);
     view.footViewClickBlock = ^(UIButton *button) {
         [weakSelf.tableView endEditing:YES];

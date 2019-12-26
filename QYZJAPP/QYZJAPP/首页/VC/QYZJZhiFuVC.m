@@ -11,6 +11,7 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
 #import "QYZJMineYuHuiQuanTVC.h"
+#import "QYZJChangePayPasswordOneVC.h"
 @interface QYZJZhiFuVC ()
 @property (weak, nonatomic) IBOutlet UIButton *payBt;
 @property (weak, nonatomic) IBOutlet UIImageView *imgV1;
@@ -28,7 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIView *youHuiV;
 @property(nonatomic,strong)NSString *youHuiID;
 
-
+@property(nonatomic,assign)BOOL isSetPayPassWord;
 
 @end
 
@@ -62,7 +63,7 @@
         self.imgVT2.image = [UIImage imageNamed:@"xuanze_2"];
         self.imgV3.image = [UIImage imageNamed:@"xuanze_1"];
         self.payType = 1;
-
+        
         
     }
     
@@ -72,16 +73,18 @@
         [self chackYouHuiJuanAction];
     }
     
+    [self checkPayPasswordWith:@"0" withisCheack:YES];
+    
 }
 
 //检测是否有优惠券
 - (void)chackYouHuiJuanAction {
     
-   
+    
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_payCouponListURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-   
+        
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             
@@ -122,7 +125,7 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-
+        
         
     }];
     
@@ -151,7 +154,7 @@
         self.imgV1.image = [UIImage imageNamed:@"xuanze_1"];
         self.imgVT2.image = [UIImage imageNamed:@"xuanze_1"];
         self.imgV3.image = [UIImage imageNamed:@"xuanze_1"];
-
+        
         QYZJMineYuHuiQuanTVC * vc =[[QYZJMineYuHuiQuanTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         Weak(weakSelf);
@@ -165,40 +168,72 @@
     }else if (sender.tag == 103){
         
         if (self.payType == 0) {
-            [LLPassWordAlertView showWithTitle:@"支付密码" desStr:@"请输入支付密码" finish:^(NSString *pwStr) {
-                [self checkPayPasswordWith:pwStr];
-                       
-            }];
+            
+            if (self.isSetPayPassWord) {
+                [LLPassWordAlertView showWithTitle:@"支付密码" desStr:@"请输入支付密码" finish:^(NSString *pwStr) {
+                    [self checkPayPasswordWith:pwStr withisCheack:NO];
+                    
+                }];
+            }else {
+                
+                UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",@"为保护您的隐私安全,请您尽快修改昵称"] preferredStyle:(UIAlertControllerStyleAlert)];
+                UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                    
+                
+                    QYZJChangePayPasswordOneVC * vc =[[QYZJChangePayPasswordOneVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                    
+                }];
+                
+                [alertVC addAction:action1];
+                [alertVC addAction:action2];
+                
+                [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
+                
+                
+            }
+            
+            
         }else {
             [self payAction];
         }
         
-       
+        
     }
 }
 
 //检测密码
-- (void)checkPayPasswordWith:(NSString *)password {
+- (void)checkPayPasswordWith:(NSString *)password withisCheack:(BOOL)isCheack{
     
     
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"pay_pass"] = [password base64EncodedString];
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_checkPayPassURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-
+        
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             
-            NSInteger a  = [[NSString stringWithFormat:@"%@",responseObject[@"result"]] intValue];
-            if (a==0) {
-                [SVProgressHUD showErrorWithStatus:@"支付密码为空"];
-            }else if (a==1) {
-                //加测密码成功
-                [self payAction];
-            }else if (a==2){
-                 [SVProgressHUD showErrorWithStatus:@"支付密码错误"];
+            if (isCheack) {
+                
+            }else {
+                
+                NSInteger a  = [[NSString stringWithFormat:@"%@",responseObject[@"result"]] intValue];
+                if (a==0) {
+                    self.isSetPayPassWord = NO;
+                }else {
+                    self.isSetPayPassWord = YES;
+                }
+                
             }
-           
+            
+            
+            
             
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
@@ -206,7 +241,7 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-
+        
         
     }];
     
@@ -214,7 +249,7 @@
 }
 
 - (void)payAction {
-
+    
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"pay_type"] = @"2";
@@ -229,7 +264,7 @@
     dict[@"ip"] = @"222.188.249.142";
     dict[@"osn"] = self.model.osn;
     NSString * url = [QYZJURLDefineTool user_createBalanceOrderURL];
-   
+    
     if (self.payType == 1) {
         url = [QYZJURLDefineTool user_createWxOrderURL];
         
@@ -237,7 +272,7 @@
         url = [QYZJURLDefineTool user_createAlipayOrderURL];
     }
     
-   
+    
     
     if (self.model.is_need_wechat_pay) {
         if (self.type != 11) {
@@ -252,13 +287,13 @@
     }
     
     if (self.youHuiID.length > 0) {
-           url = [QYZJURLDefineTool user_createCouponOrderURL];
-           dict[@"coupon_id"] = self.youHuiID;
-           dict[@"num"] = @(self.numer);
+        url = [QYZJURLDefineTool user_createCouponOrderURL];
+        dict[@"coupon_id"] = self.youHuiID;
+        dict[@"num"] = @(self.numer);
     }
     
     [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-      
+        
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             
@@ -283,7 +318,7 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-      
+        
         
     }];
     
@@ -359,7 +394,7 @@
 
 //支付宝支付结果处理
 - (void)goZFB{
-
+    
     
     [[AlipaySDK defaultService] payOrder:self.payDic[@"result"] fromScheme:@"com.qyzj.app" callback:^(NSDictionary *resultDic) {
         if ([resultDic[@"resultStatus"] isEqualToString:@"6001"]) {
@@ -394,7 +429,7 @@
     } else {
         [SVProgressHUD showErrorWithStatus:@"支付失败"];
     }
-
+    
 }
 
 
