@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 //@property(nonatomic,strong)NSString *osn;
 //@property(nonatomic,assign)CGFloat money;
 @property(nonatomic,strong)NSString *ID;
+//@property(nonatomic,strong)NSString *media_id;
 //@property(nonatomic,assign)BOOL is_needWeChat;
 
 @property(nonatomic,strong)QYZJTongYongModel *model;
@@ -24,6 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)NSInteger type; 
 
 @property(nonatomic,assign)NSInteger numer; //快速回答d时的人数
+
+
+@property(nonatomic,copy)void(^isBaoBlcok)();
 
 @end
 

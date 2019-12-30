@@ -23,7 +23,6 @@
                             <constraint firstAttribute="height" constant="70" id="CBo-Or-cq9"/>
                             <constraint firstAttribute="width" constant="70" id="Y5d-WZ-SAf"/>
                         </constraints>
-                        <state key="normal" title="Button"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwa-s7-oFR">
                         <rect key="frame" x="95" y="34" width="683" height="20"/>

@@ -8,7 +8,7 @@
 
 #import "QYZJSearchListTVC.h"
 #import "QYZJHomeFiveCell.h"
-@interface QYZJSearchListTVC ()
+@interface QYZJSearchListTVC ()<UITextFieldDelegate>
 @property(nonatomic,strong)UITextField *searchTF;
 @property(nonatomic,strong)UIButton *editBt;
 @property (nonatomic , strong)UIView * headView;
@@ -47,10 +47,13 @@
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"page"] = @(self.page);
     dict[@"pageSize"] = @(10);
+    dict[@"search_type"] = @(self.type);
     dict[@"type"] = @(self.type);
     dict[@"search_word"] = self.searchWord;
-    dict[@"search_type"] = @(self.type);
     dict[@"search_end_type"] = @(1);
+    if (self.searchWord.length > 0) {
+       dict[@"type"] = @(3);
+    }
     [zkRequestTool networkingPOST:[QYZJURLDefineTool app_searchURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
@@ -61,9 +64,7 @@
                 [self.dataArray removeAllObjects];
             }
             [self.dataArray addObjectsFromArray:arr];
-            if (self.dataArray.count == 0) {
-                [SVProgressHUD showSuccessWithStatus:@"暂无数据"];
-            }
+            
             [self.tableView reloadData];
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
@@ -104,10 +105,11 @@
     [[self.searchTF rac_textSignal] subscribeNext:^(NSString * _Nullable x) {
         @strongify(self);
         self.searchWord = x;
-        self.page = 1;
-        [self getData];
+//        self.page = 1;
+//        [self getData];
         
     }];
+    self.searchTF.delegate = self;
       [self.headView addSubview:self.searchTF];
 
      
@@ -155,7 +157,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 110;
+    return 100;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -179,10 +181,16 @@
  
 }
 
-
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self submitBtnClick:nil];
+    return YES;
+}
 
 
 - (void)submitBtnClick:(UIButton *)button {
+    
+    self.page = 1;
+    [self getData];
     
 }
 

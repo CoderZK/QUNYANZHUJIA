@@ -30,8 +30,9 @@
            [self getData];
        }];
     
-    [self setFootV];
-    
+    if (self.isMine) {
+        [self setFootV];
+    }
 }
 
 - (void)setFootV {

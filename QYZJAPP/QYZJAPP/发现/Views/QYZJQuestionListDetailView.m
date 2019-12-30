@@ -102,8 +102,9 @@
     self.mediaView.mj_y = CGRectGetMaxY(self.picView.frame);
     if (dataModel.media_url.length == 0) {
         self.mediaView.mj_h = 0;
+        self.listBt.hidden = YES;
     }else {
-        
+        self.listBt.hidden = NO;
         if (dataModel.is_open) {
             [self.listBt setTitle:@"点击播放" forState:UIControlStateNormal];
             [self.listBt addTarget:self action:@selector(listAction:) forControlEvents:UIControlEventTouchUpInside];

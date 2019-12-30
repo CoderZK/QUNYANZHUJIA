@@ -24,36 +24,36 @@
     [super viewDidLoad];
     self.navigationItem.title = @"我的交付";
     
-    UIButton * button =[UIButton buttonWithType:UIButtonTypeCustom];
-       button.frame = CGRectMake(0, 0, 65, 30);
-       [button setTitle:@"发起交付" forState:UIControlStateNormal];
-       button.titleLabel.font = [UIFont systemFontOfSize:14];
-       [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-       button.layer.cornerRadius = 0;
-       button.clipsToBounds = YES;
-       [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
-           
-           
-//           QYZJCreateShiGongQingDanTVC * vc =[[QYZJCreateShiGongQingDanTVC alloc] init];
+//    UIButton * button =[UIButton buttonWithType:UIButtonTypeCustom];
+//       button.frame = CGRectMake(0, 0, 65, 30);
+//       [button setTitle:@"发起交付" forState:UIControlStateNormal];
+//       button.titleLabel.font = [UIFont systemFontOfSize:14];
+//       [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//       button.layer.cornerRadius = 0;
+//       button.clipsToBounds = YES;
+//       [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+//           
+//           
+////           QYZJCreateShiGongQingDanTVC * vc =[[QYZJCreateShiGongQingDanTVC alloc] init];
+////           vc.hidesBottomBarWhenPushed = YES;
+////           [self.navigationController pushViewController:vc animated:YES];
+//           
+//           QYZJJiaoFuListTVC * vc =[[QYZJJiaoFuListTVC alloc] init];
 //           vc.hidesBottomBarWhenPushed = YES;
 //           [self.navigationController pushViewController:vc animated:YES];
-           
-           QYZJJiaoFuListTVC * vc =[[QYZJJiaoFuListTVC alloc] init];
-           vc.hidesBottomBarWhenPushed = YES;
-           [self.navigationController pushViewController:vc animated:YES];
-           
-//           //更改施工阶段
-//           QYZJChangeDetailedListTVC * vc =[[QYZJChangeDetailedListTVC alloc] init];
-//           vc.hidesBottomBarWhenPushed = YES;
-//           [self.navigationController pushViewController:vc animated:YES];
-//
-//           //创建新的施工阶段
-//           QYZJAddWorkMomentTVC * vc =[[QYZJAddWorkMomentTVC alloc] init];
-//           vc.hidesBottomBarWhenPushed = YES;
-//           [self.navigationController pushViewController:vc animated:YES];
-           
-       }];
-       self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+//           
+////           //更改施工阶段
+////           QYZJChangeDetailedListTVC * vc =[[QYZJChangeDetailedListTVC alloc] init];
+////           vc.hidesBottomBarWhenPushed = YES;
+////           [self.navigationController pushViewController:vc animated:YES];
+////
+////           //创建新的施工阶段
+////           QYZJAddWorkMomentTVC * vc =[[QYZJAddWorkMomentTVC alloc] init];
+////           vc.hidesBottomBarWhenPushed = YES;
+////           [self.navigationController pushViewController:vc animated:YES];
+//           
+//       }];
+//       self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomePayCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -88,9 +88,7 @@
                 [self.dataArray removeAllObjects];
             }
             [self.dataArray addObjectsFromArray:arr];
-            if (self.dataArray.count == 0) {
-                [SVProgressHUD showSuccessWithStatus:@"暂无数据"];
-            }
+            
             [self.tableView reloadData];
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];

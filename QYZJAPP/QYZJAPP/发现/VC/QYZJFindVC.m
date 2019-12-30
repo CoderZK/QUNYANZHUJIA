@@ -53,7 +53,8 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeFiveCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeFiveCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJFindTwoCell" bundle:nil] forCellReuseIdentifier:@"QYZJFindTwoCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.estimatedRowHeight = 1;
+    self.tableView.estimatedRowHeight = 1000;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self addNav];
     [self getDataWithType:self.type];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -98,9 +99,7 @@
                 [self.dataArray removeAllObjects];
             }
             [self.dataArray addObjectsFromArray:arr];
-            if (self.dataArray.count == 0) {
-                [SVProgressHUD showSuccessWithStatus:@"暂无数据"];
-            }
+            
             [self.tableView reloadData];
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
@@ -152,6 +151,9 @@
             [self getDataWithType:self.type];
         }else {
             NSNumber *number = dict[@"text"];
+            if (self.type == [number intValue]) {
+                self.searchText = nil;
+            }
             self.type = [number intValue];
             self.page = 1;
             [self getDataWithType:self.type];
@@ -199,25 +201,31 @@
         cell.type = 0;
         cell.model = self.dataArray[indexPath.row];
         cell.delegate = self;
+        cell.clipsToBounds = YES;
           return cell;
     }else if(self.type == 1){
         QYZJHomeFiveCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeFiveCell" forIndexPath:indexPath];
         cell.type = 1;
         cell.model = self.dataArray[indexPath.row];
+        cell.clipsToBounds = YES;
         return cell;
     }else if (self.type == 2) {
         QYZJFindTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJFindTwoCell" forIndexPath:indexPath];
         cell.delegate = self;
         cell.model = self.dataArray[indexPath.row];
+        cell.clipsToBounds = YES;
         return cell;
     }else if (self.type == 3) {
         QYZJFindQuestionListCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJFindQuestionListCell" forIndexPath:indexPath];
         
-           cell.model = self.dataArray[indexPath.row];
+        cell.model = self.dataArray[indexPath.row];
+        cell.listBt.userInteractionEnabled = NO;
+        cell.clipsToBounds = YES;
            return cell;
     }
     QYZJFindCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJFindCell" forIndexPath:indexPath];
     cell.model = self.dataArray[indexPath.row];
+    cell.clipsToBounds = YES;
     return cell;
     
 }
@@ -227,13 +235,40 @@
         QYZJFindGuangChangDetailTVC * vc =[[QYZJFindGuangChangDetailTVC alloc] init];
         vc.ID = self.dataArray[indexPath.row].ID;
         vc.hidesBottomBarWhenPushed = YES;
+        Weak(weakSelf);
+        vc.sendGuanChangModelBlock = ^(QYZJFindModel * _Nonnull model) {
+            weakSelf.dataArray[indexPath.row].isGood = model.isGood;
+            weakSelf.dataArray[indexPath.row].isCollect = model.isCollect;
+            weakSelf.dataArray[indexPath.row].ok_num = model.ok_num;
+            weakSelf.dataArray[indexPath.row].goodNum = model.goodNum;
+            weakSelf.dataArray[indexPath.row].collectNum = model.collectNum;
+            weakSelf.dataArray[indexPath.row].commentNum = model.commentNum;
+            [weakSelf.tableView reloadData];
+        };
         [self.navigationController pushViewController:vc animated:YES];
     }else if (self.type == 1) {
+        
+        QYZJMineZhuYeTVC * vc =[[QYZJMineZhuYeTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.ID = self.dataArray[indexPath.row].ID;
+        [self.navigationController pushViewController:vc animated:YES];
         
     }else if (self.type == 2) {
         QYZJFindTouTiaoDetailTVC * vc =[[QYZJFindTouTiaoDetailTVC alloc] init];
         vc.ID = self.dataArray[indexPath.row].ID;
         vc.hidesBottomBarWhenPushed = YES;
+        Weak(weakSelf);
+        vc.sendTouTiaoModelBlock = ^(QYZJFindModel * _Nonnull model) {
+            weakSelf.dataArray[indexPath.row].isGood = model.isGood;
+            weakSelf.dataArray[indexPath.row].isCollect = model.isCollect;
+            weakSelf.dataArray[indexPath.row].ok_num = model.ok_num;
+            weakSelf.dataArray[indexPath.row].goodNum = model.goodNum;
+            weakSelf.dataArray[indexPath.row].collectNum = model.collectNum;
+            weakSelf.dataArray[indexPath.row].commentNum = model.commentNum;
+            [weakSelf.tableView reloadData];
+        };
+        
+        
         [self.navigationController pushViewController:vc animated:YES];
     }else {
         QYZJQuestionListDetailTVC * vc =[[QYZJQuestionListDetailTVC alloc] init];

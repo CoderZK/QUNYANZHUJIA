@@ -9,7 +9,7 @@
 #import "QYZJFindQuestionListCell.h"
 
 @interface QYZJFindQuestionListCell()
-@property(nonatomic,strong)UIButton *headBt,*listBt;
+@property(nonatomic,strong)UIButton *headBt;
 @property(nonatomic,strong)UILabel *titleLB,*nameLB,*typeLB,*numberLB;
 
 

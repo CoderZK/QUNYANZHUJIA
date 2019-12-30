@@ -1,8 +1,8 @@
 //
-//  QYZJXiuGaiFuWuVC.h
+//  QYZJRuZhuXieYiVC.h
 //  QYZJAPP
 //
-//  Created by zk on 2019/12/4.
+//  Created by zk on 2019/12/27.
 //  Copyright © 2019 kunzhang. All rights reserved.
 //
 
@@ -10,8 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QYZJXiuGaiFuWuVC : BaseViewController
-
+@interface QYZJRuZhuXieYiVC : BaseViewController
 
 @end
 

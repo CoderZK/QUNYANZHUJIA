@@ -53,6 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL isSelect;
 @property(nonatomic,assign)BOOL isAble;
 @property(nonatomic,assign)BOOL isPlaying;
+@property(nonatomic,assign)BOOL isRecommand;
 
 
 

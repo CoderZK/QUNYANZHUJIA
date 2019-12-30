@@ -129,7 +129,7 @@
                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入公司名称" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NtZ-vd-u0G">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入公司名称(非必填)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NtZ-vd-u0G">
                             <rect key="frame" x="105" y="109" width="299" height="34"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>

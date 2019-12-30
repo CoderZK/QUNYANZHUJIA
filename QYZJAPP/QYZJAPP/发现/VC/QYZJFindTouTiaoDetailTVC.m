@@ -22,6 +22,14 @@
 
 @implementation QYZJFindTouTiaoDetailTVC
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (self.dataModel != nil && self.sendTouTiaoModelBlock != nil) {
+        self.sendTouTiaoModelBlock(self.dataModel.headlinenews);
+    }
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -67,6 +75,17 @@
     self.headV.webLoadFindBlock = ^(CGFloat hh) {
         weakSelf.headV.mj_h = hh;
         weakSelf.tableView.tableHeaderView = weakSelf.headV;
+    };
+    self.headV.TouTiaoClickBlock = ^(NSInteger tag) {
+      
+        if (tag == 0) {
+            [weakSelf zanOrNOCollectOrNOWithisZanOpAction:YES];
+        }else {
+            [weakSelf zanOrNOCollectOrNOWithisZanOpAction:NO];
+        }
+        
+        
+        
     };
     self.navigationItem.title = @"详情";
     
@@ -147,8 +166,8 @@
         dict[@"toUserId"] = self.dataArray[self.indexPath.row].userId;
         dict[@"toNickName"] = self.dataArray[self.indexPath.row].nickName;
         dict[@"commentId"] = self.dataArray[self.indexPath.row].ID;
-        
     }
+    dict[@"userId"] = [zkSignleTool shareTool].session_uid;
     dict[@"headlinenewsId"] = self.ID;
     dict[@"commentContent"] = textField.text;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool app_headlinenewsCommentURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -177,6 +196,53 @@
     
     return  YES;
 }
+
+
+- (void)zanOrNOCollectOrNOWithisZanOpAction:(BOOL)isZanOp{
+
+      [SVProgressHUD show];
+      NSMutableDictionary * dict = @{}.mutableCopy;
+      if (isZanOp) {
+          //点赞取消
+          if (self.dataModel.headlinenews.isGood) {
+              dict[@"is_good"] = @"0";
+          }else {
+              dict[@"is_good"] = @"1";
+          }
+      }else {
+          if (self.dataModel.headlinenews.isCollect) {
+              dict[@"status"] = @"1";
+          }else {
+              dict[@"status"] = @"0";
+          }
+      }
+      dict[@"headlinenews_id"] = self.ID;
+      dict[@"article_id"] = self.ID;
+    
+    NSString * str = [QYZJURLDefineTool app_headlinenewsCollectURL];
+    if (isZanOp) {
+        str = [QYZJURLDefineTool app_headlinenewsGoodURL];
+    }
+    
+      [zkRequestTool networkingPOST:str parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+          [SVProgressHUD dismiss];
+          if ([responseObject[@"key"] intValue]== 1) {
+              
+              [self getData];
+              
+          }else {
+              [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+          }
+      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+          
+          [self.tableView.mj_header endRefreshing];
+          [self.tableView.mj_footer endRefreshing];
+          
+      }];
+    
+    
+}
+
 
 
 

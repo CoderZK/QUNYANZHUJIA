@@ -44,6 +44,15 @@
                         <constraint firstAttribute="height" constant="150" id="Q9x-Ur-t3l"/>
                     </constraints>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLD-5i-bCz">
+                    <rect key="frame" x="0.0" y="807" width="414" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="TZm-jb-XZH"/>
+                    </constraints>
+                    <connections>
+                        <action selector="action:" destination="-1" eventType="touchUpInside" id="9d1-eI-Qsf"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
@@ -52,9 +61,12 @@
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="pLR-Fs-Tih" secondAttribute="bottom" constant="34" id="DQw-B1-ThS"/>
                 <constraint firstItem="pLR-Fs-Tih" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="10" id="EHA-Cd-se9"/>
                 <constraint firstItem="pLR-Fs-Tih" firstAttribute="top" secondItem="b8k-VZ-H1M" secondAttribute="bottom" constant="30" id="JX7-M0-Ege"/>
+                <constraint firstItem="gLD-5i-bCz" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="OhF-Bu-TpN"/>
+                <constraint firstItem="gLD-5i-bCz" firstAttribute="top" secondItem="b8k-VZ-H1M" secondAttribute="bottom" constant="30" id="PO7-d8-HV5"/>
                 <constraint firstItem="F9c-Oy-eZq" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="20" id="cMY-J6-aL9"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="F9c-Oy-eZq" secondAttribute="trailing" constant="10" id="nWK-QD-WeK"/>
                 <constraint firstItem="b8k-VZ-H1M" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="qa1-c1-MBl"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="gLD-5i-bCz" secondAttribute="trailing" id="qe1-I9-qed"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="133" y="117"/>

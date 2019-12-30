@@ -56,8 +56,14 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    [self getUserInfo];
-    [self getUserBaseicInfoTwo];
+    
+    
+    if ([zkSignleTool shareTool].isLogin) {
+        [self getUserBaseicInfoTwo];
+        [self getUserInfo];
+    }else {
+        [self gotoLoginVC];
+    }
 }
 
 - (void)getUserBaseicInfoTwo {
@@ -70,12 +76,12 @@
            if (x !=nil && [x[@"key"] intValue] == 1) {
                [zkSignleTool shareTool].role = [[NSString stringWithFormat:@"%@",x[@"result"][@"role"]] intValue];
                if ([zkSignleTool shareTool].role == 0) {
-                   self.titleArr = @[@[],@[@"我的收藏",@"我的支付",@"我的报修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入住",@"我的优惠",@"增值服务"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
+                   self.titleArr = @[@[],@[@"我的收藏",@"我的交付",@"我的报修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入驻",@"我的优惠",@"增值服务"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
                    
                    self.imgTitleArr = @[@[],@[@"wd_1",@"wd_2",@"wd_3",@"wd_4",@"wd_5",@"wd_6",@"wd_7",@"wd_8",@"wd_9"],@[@"zc_1",@"zc_2",@"zc_3",@"zc_4"],@[@"zxgj_1",@"zxgj_2",@"zxgj_3",@"zxgj_4"],@[@"lxkf_1",@"lxkf_2"]];
                    [self.tableView reloadData];
                }else {
-                   self.titleArr = @[@[],@[@"我的收藏",@"我的支付",@"我的报修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入住",@"服务方修改",@"我的优惠",@"增值服务",@"我的标签"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
+                   self.titleArr = @[@[],@[@"我的收藏",@"我的交付",@"我的报修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入驻",@"服务方修改",@"我的优惠",@"增值服务",@"我的标签"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
                    
                    self.imgTitleArr = @[@[],@[@"wd_1",@"wd_2",@"wd_3",@"wd_4",@"wd_5",@"wd_6",@"wd_7",@"wd_8",@"wd_9"],@[@"zc_1",@"zc_2",@"zc_6",@"zc_3",@"zc_4",@"zc_5"],@[@"zxgj_1",@"zxgj_2",@"zxgj_3",@"zxgj_4"],@[@"lxkf_1",@"lxkf_2"]];
                    [self.tableView reloadData];
@@ -89,7 +95,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.headV = [[QYZJMineHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 160)];
+    self.headV = [[QYZJMineHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 0)];
+    self.headV.clipsToBounds = YES;
     Weak(weakSelf);
     self.headV.clickMineHeadBlock = ^(NSInteger index) {
         if (index == 0) {
@@ -116,7 +123,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.headTitleArr = @[@"",@"我的",@"资产",@"装修工具",@"联系客服"];
     
-    self.titleArr = @[@[],@[@"我的收藏",@"我的支付",@"我的报修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入住",@"服务方修改",@"我的优惠",@"增值服务",@"我的标签"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
+    self.titleArr = @[@[],@[@"我的收藏",@"我的交付",@"我的报修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入驻",@"服务方修改",@"我的优惠",@"增值服务",@"我的标签"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
     
     self.imgTitleArr = @[@[],@[@"wd_1",@"wd_2",@"wd_3",@"wd_4",@"wd_5",@"wd_6",@"wd_7",@"wd_8",@"wd_9"],@[@"zc_1",@"zc_2",@"zc_6",@"zc_3",@"zc_4",@"zc_5"],@[@"zxgj_1",@"zxgj_2",@"zxgj_3",@"zxgj_4"],@[@"lxkf_1",@"lxkf_2"]];
     
@@ -133,13 +140,14 @@
     
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"token"] = [zkSignleTool shareTool].session_token;
-    
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_centerInfoURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [SVProgressHUD dismiss];
         [self.tableView.mj_header endRefreshing];
         if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
             self.dataModel = [QYZJUserModel mj_objectWithKeyValues:responseObject[@"result"]];
             self.headV.dataModel = self.dataModel;
+            self.headV.mj_h = 160;
+            self.tableView.tableHeaderView = self.headV;
             [self.tableView reloadData];
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
@@ -151,6 +159,9 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (self.dataModel == nil) {
+        return 0;
+    }
     return 5;
 }
 
@@ -224,11 +235,13 @@
             HHYMineFiveCell * cell =[tableView dequeueReusableCellWithIdentifier:@"HHYMineFiveCell" forIndexPath:indexPath];
             cell.delegate = self;
             cell.model = self.dataModel;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }else {
             HHYMineFourCell * cell =[tableView dequeueReusableCellWithIdentifier:@"HHYMineFourCell" forIndexPath:indexPath];
             cell.delegate = self;
             cell.model = self.dataModel;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
         
@@ -247,7 +260,7 @@
             
         }
         cell.delegate = self;
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
 
@@ -310,6 +323,13 @@
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }else if (dd == 1) {
+            
+            if (self.dataModel.role_name.length > 0) {
+                [SVProgressHUD showErrorWithStatus:@"该身份证号码已绑定其他账户，如需申诉请联系客服"];
+                return;
+            }
+            
+            
             QYZJShengQingRuZhuVC* vc =[[QYZJShengQingRuZhuVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
@@ -333,12 +353,12 @@
                 if (dd == 2) {
                     QYZJXiuGaiFuWuVC * vc =[[QYZJXiuGaiFuWuVC alloc] init];
                    vc.hidesBottomBarWhenPushed = YES;
-                   vc.proId = self.dataModel.pro_id;
-                   vc.cityId = self.dataModel.city_id;
-                   vc.aearId = self.dataModel.area_id;
-                   vc.proStr = self.dataModel.pro_name;
-                   vc.cityStr = self.dataModel.city_name;
-                   vc.aearStr = self.dataModel.area_name;
+//                   vc.proId = self.dataModel.pro_id;
+//                   vc.cityId = self.dataModel.city_id;
+//                   vc.aearId = self.dataModel.area_id;
+//                   vc.proStr = self.dataModel.pro_name;
+//                   vc.cityStr = self.dataModel.city_name;
+//                   vc.aearStr = self.dataModel.area_name;
                    [self.navigationController pushViewController:vc animated:YES];
                 }else if (dd == 3) {
                     QYZJMineYuHuiQuanTVC * vc =[[QYZJMineYuHuiQuanTVC alloc] init];

@@ -18,10 +18,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ziu-He-nHK">
-                        <rect key="frame" x="15" y="15" width="80" height="80"/>
+                        <rect key="frame" x="15" y="15" width="70" height="70"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="80" id="052-Dq-WkL"/>
-                            <constraint firstAttribute="width" constant="80" id="kTs-U5-GPa"/>
+                            <constraint firstAttribute="height" constant="70" id="052-Dq-WkL"/>
+                            <constraint firstAttribute="width" constant="70" id="kTs-U5-GPa"/>
                         </constraints>
                         <state key="normal" backgroundImage="headPortrait"/>
                         <connections>
@@ -29,7 +29,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小燕子" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD9-hF-CKD">
-                        <rect key="frame" x="110" y="29.5" width="484" height="21"/>
+                        <rect key="frame" x="95" y="24.5" width="519" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="DIW-21-36M"/>
                         </constraints>
@@ -38,22 +38,22 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="北京久久安居网络科技有限公司" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xss-zV-8XD">
-                        <rect key="frame" x="110" y="59.5" width="484" height="21"/>
+                        <rect key="frame" x="95" y="54.5" width="519" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Gki-Dk-J2d"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIt-iq-mYf">
-                        <rect key="frame" x="604" y="35" width="90" height="40"/>
+                        <rect key="frame" x="624" y="35" width="70" height="30"/>
                         <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="7GZ-4h-IOF"/>
-                            <constraint firstAttribute="width" constant="90" id="boi-gJ-xc5"/>
+                            <constraint firstAttribute="height" constant="30" id="7GZ-4h-IOF"/>
+                            <constraint firstAttribute="width" constant="70" id="boi-gJ-xc5"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <state key="normal" title="免费答人"/>
                         <connections>
                             <action selector="clickAciton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xxd-Wy-Q08"/>
@@ -69,7 +69,7 @@
                     <constraint firstItem="QIt-iq-mYf" firstAttribute="leading" secondItem="LD9-hF-CKD" secondAttribute="trailing" constant="10" id="F2q-Ns-7ZP"/>
                     <constraint firstItem="ziu-He-nHK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="HTm-Lr-ShF"/>
                     <constraint firstAttribute="trailing" secondItem="QIt-iq-mYf" secondAttribute="trailing" constant="10" id="Ntg-ZD-BRR"/>
-                    <constraint firstItem="LD9-hF-CKD" firstAttribute="leading" secondItem="ziu-He-nHK" secondAttribute="trailing" constant="15" id="hqp-77-Hgb"/>
+                    <constraint firstItem="LD9-hF-CKD" firstAttribute="leading" secondItem="ziu-He-nHK" secondAttribute="trailing" constant="10" id="hqp-77-Hgb"/>
                     <constraint firstItem="xss-zV-8XD" firstAttribute="trailing" secondItem="LD9-hF-CKD" secondAttribute="trailing" id="ryW-SN-knp"/>
                 </constraints>
             </tableViewCellContentView>

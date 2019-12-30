@@ -126,7 +126,9 @@
 }
 
 - (void)rightAction:(UIButton *)button {
-    
+    if (self.TouTiaoClickBlock != nil) {
+        self.TouTiaoClickBlock(button.tag);
+    }
 }
 
 @end

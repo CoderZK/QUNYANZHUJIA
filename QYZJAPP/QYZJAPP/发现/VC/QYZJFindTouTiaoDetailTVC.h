@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJFindTouTiaoDetailTVC : BaseTableViewController
 @property(nonatomic,strong)NSString *ID;
-
+@property(nonatomic,copy)void(^sendTouTiaoModelBlock)(QYZJFindModel *model);
 @end
 
 NS_ASSUME_NONNULL_END

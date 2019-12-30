@@ -401,8 +401,9 @@
        }else if (self.indexPath.row == 3) {
            picsArr = self.changetableurlArr;
        }
-    [zkRequestTool NetWorkingUpLoad:QiNiuYunUploadURL image:picsArr[index] andName:@"file" parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-        
+    
+    
+    [zkRequestTool NetWorkingUpLoadimage:picsArr[index] parameters:dict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSLog(@"%@",@"京东卡的风控安徽");
         [picsArr removeObjectAtIndex:index];
         [picsArr insertObject:[NSString stringWithFormat:@"%@",responseObject[@"key"]] atIndex:index];
@@ -410,20 +411,14 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
+        
     }];
+    
+
 
 }
 
 
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

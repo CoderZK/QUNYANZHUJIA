@@ -128,7 +128,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray *videos;
 @property(nonatomic,strong)NSMutableArray *pictures;
 @property(nonatomic,strong)NSMutableArray *change_table_urls;
-@property(nonatomic,strong)NSArray *pics;
+@property(nonatomic,strong)NSString *pics;
 
 @property(nonatomic,assign)BOOL isReturn;
 @property(nonatomic,assign)BOOL isMy;

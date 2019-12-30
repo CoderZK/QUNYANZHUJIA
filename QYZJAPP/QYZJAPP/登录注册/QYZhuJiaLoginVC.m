@@ -88,7 +88,7 @@
                 }
                 [self dismissViewControllerAnimated:YES completion:nil];
                 
-                if (userModel.nick_name.length == 0) {
+                if (userModel.nick_name.length == 0 || [userModel.nick_name isEqualToString:userModel.telphone]) {
                     
                     UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",@"为保护您的隐私安全,请您尽快修改昵称"] preferredStyle:(UIAlertControllerStyleAlert)];
                     UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {

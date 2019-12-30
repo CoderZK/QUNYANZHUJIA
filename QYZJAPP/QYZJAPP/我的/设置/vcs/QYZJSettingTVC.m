@@ -13,12 +13,14 @@
 #import "QYZJChangePasswordVC.h"
 #import "QYZJChangePayPasswordOneVC.h"
 #import "TabBarController.h"
+#import "QYZJChangePayPasswordTwoVC.h"
 @interface QYZJSettingTVC ()<zkPickViewDelelgate,TZImagePickerControllerDelegate>
 @property(nonatomic,strong)NSArray *leftArr;
 @property(nonatomic,copy)NSString *nickName,*phoneStr,*addressStr;
 @property(nonatomic,strong)NSMutableArray<zkPickModel *> *cityArray;
 @property(nonatomic,strong)UIImage *img;
 @property(nonatomic,strong)QYZJTongYongModel *imgModel;
+@property(nonatomic,assign)BOOL isSetPayPassWord;
 @end
 
 @implementation QYZJSettingTVC
@@ -34,6 +36,8 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 70, 0);
     [self setFootV];
     [self getImgDict];
+    
+    [self checkPayPasswordWith:@"0" withisCheack:YES];
 }
 
 - (void)getImgDict {
@@ -61,6 +65,44 @@
     
 }
 
+//检测密码
+- (void)checkPayPasswordWith:(NSString *)password withisCheack:(BOOL)isCheack{
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"pay_pass"] = [password base64EncodedString];
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_checkPayPassURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            if (isCheack) {
+                NSInteger a  = [[NSString stringWithFormat:@"%@",responseObject[@"result"]] intValue];
+                if (a==0) {
+                    self.isSetPayPassWord = NO;
+                    self.leftArr = @[@[@"我的头像",@"昵称",@"省市区",@"详细地址"],@[@"换绑手机",@"解绑微信",@"登录密码修改",@"设置支付密码"],@[@"清除缓存"]];
+                    [self.tableView reloadData];
+                }else {
+                    self.isSetPayPassWord = YES;
+                    
+                }
+            }
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        
+        
+    }];
+    
+    
+}
+
+
+
 //退出登录
 - (void)outLoginActio:(UIButton *)button {
     [SVProgressHUD show];
@@ -69,14 +111,10 @@
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             [zkSignleTool shareTool].session_token = nil;
-            
-           
-            
+            [zkSignleTool shareTool].isLogin = NO;
             [self.navigationController popToRootViewControllerAnimated:NO];
              TabBarController * tab = (TabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
             tab.selectedIndex = 0;
-            
-            
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
         }
@@ -275,10 +313,17 @@
             QYZJChangePasswordVC * vc =[[QYZJChangePasswordVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
-        }else {
-            QYZJChangePayPasswordOneVC * vc =[[QYZJChangePayPasswordOneVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
+        }else if (indexPath.row == 3)  {
+            if (self.isSetPayPassWord) {
+                QYZJChangePayPasswordOneVC * vc =[[QYZJChangePayPasswordOneVC alloc] init];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }else {
+                QYZJChangePayPasswordTwoVC * vc =[[QYZJChangePayPasswordTwoVC alloc] init];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            
         }
     }else {
         [cacheClear cleanCache:^{
@@ -429,18 +474,15 @@
     
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"token"] = self.imgModel.token;
-    [zkRequestTool NetWorkingUpLoad:QiNiuYunUploadURL image:image andName:@"file" parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+    
+    [zkRequestTool NetWorkingUpLoadimage:image parameters:dict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         self.dataModel.head_img = responseObject[@"key"];
         [self.tableView reloadData];
         [self editUserInfoWithDict:@{@"head_img":responseObject[@"key"]}];
-        
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
     }];
-    
-    
 }
-
 - (void)editUserInfoWithDict:(NSDictionary*)dict {
     
     [SVProgressHUD show];

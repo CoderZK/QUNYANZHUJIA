@@ -9,7 +9,9 @@
 #import "QYZJMineCollectTVC.h"
 #import "QYZJFindCell.h"
 #import "QYZJFindTwoCell.h"
-@interface QYZJMineCollectTVC ()<QYZJFindTwoCellDelegate>
+#import "QYZJFindGuangChangDetailTVC.h"
+#import "QYZJFindTouTiaoDetailTVC.h"
+@interface QYZJMineCollectTVC ()<QYZJFindTwoCellDelegate,QYZJFindCellDelegate>
 @property(nonatomic,strong)UIButton *leftBt,*rightBt;
 @property(nonatomic,strong)UIView *headV;
 @property(nonatomic,assign)NSInteger type;//1头条 2 动态
@@ -118,9 +120,7 @@
                 [self.dataArray removeAllObjects];
             }
             [self.dataArray addObjectsFromArray:arr];
-            if (self.dataArray.count == 0) {
-                [SVProgressHUD showSuccessWithStatus:@"暂无数据"];
-            }
+            
             [self.tableView reloadData];
             
         }else {
@@ -153,6 +153,7 @@
     if (self.type ==2) {
         QYZJFindCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJFindCell" forIndexPath:indexPath];
         cell.type = 1;
+        cell.delegate = self;
         cell.model = self.dataArray[indexPath.row];
         return cell;
     }else {
@@ -166,6 +167,23 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (self.type == 2) {
+        
+        QYZJFindGuangChangDetailTVC * vc =[[QYZJFindGuangChangDetailTVC alloc] init];
+        vc.ID = self.dataArray[indexPath.row].ID;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else {
+        
+        QYZJFindTouTiaoDetailTVC * vc =[[QYZJFindTouTiaoDetailTVC alloc] init];
+        vc.ID = self.dataArray[indexPath.row].ID;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
+    
     
 }
 
@@ -197,6 +215,35 @@
     }];
     
 
+    
+}
+
+- (void)didClickFindCell:(QYZJFindCell *)cell index:(NSInteger)index {
+    
+    
+     NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+     QYZJFindModel * model = self.dataArray[indexPath.row];
+    
+         [SVProgressHUD show];
+         NSMutableDictionary * dict = @{}.mutableCopy;
+         dict[@"status"] = @"1";
+         dict[@"article_id"] = model.ID;
+         [zkRequestTool networkingPOST:[QYZJURLDefineTool app_articleCollectURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+             [SVProgressHUD dismiss];
+             if ([responseObject[@"key"] intValue]== 1) {
+                 
+                 [self.dataArray removeObjectAtIndex:indexPath.row];
+                 [self.tableView reloadData];
+             }else {
+                 [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+             }
+         } failure:^(NSURLSessionDataTask *task, NSError *error) {
+             
+             [self.tableView.mj_header endRefreshing];
+             [self.tableView.mj_footer endRefreshing];
+             
+         }];
+    
     
 }
 

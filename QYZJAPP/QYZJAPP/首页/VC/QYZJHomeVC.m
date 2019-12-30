@@ -48,7 +48,9 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
     //    self.navigationController.navigationBar.hidden = YES;;
-    [self getUserBaseicInfoHome];
+    if ([zkSignleTool shareTool].isLogin) {
+       [self getUserBaseicInfoHome];
+    }
     [self getBanList];
 
     
@@ -122,13 +124,17 @@
 }
 
 
-
 - (void)addNav {
     
     self.navigaV = [[HomeNavigationView alloc] initWithFrame:CGRectMake(0, sstatusHeight, ScreenW, 44)];
     [self.view addSubview:self.navigaV];
     self.navigaV.delegateSignal = [RACSubject subject];
     [self.navigaV.delegateSignal subscribeNext:^(id  _Nullable x) {
+        
+         if (![zkSignleTool shareTool].isLogin) {
+               [self gotoLoginVC];
+               return;
+           }
         
         NSDictionary * dict = x;
         if ([[NSString stringWithFormat:@"%@",dict[@"key"]] isEqualToString:@"city"]) {
@@ -226,7 +232,7 @@
     }else if (indexPath.section == 2) {
         return (ScreenW - 30)  / 3;
     }
-    return 110;
+    return 100;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -272,10 +278,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (![zkSignleTool shareTool].isLogin) {
-        [self gotoLoginVC];
-        return;
-    }
+     if (![zkSignleTool shareTool].isLogin) {
+           [self gotoLoginVC];
+           return;
+       }
     
     if (indexPath.section == 2) {
         QYZJYuYueFangDanTVC * vc =[[QYZJYuYueFangDanTVC alloc] init];
@@ -304,6 +310,11 @@
 #pragma mark ------- 取他人的主页 ------
 - (void)gotoZhuYeAction:(UIButton *)button {
     
+    if (![zkSignleTool shareTool].isLogin) {
+           [self gotoLoginVC];
+           return;
+       }
+    
     QYZJMineZhuYeTVC * vc =[[QYZJMineZhuYeTVC alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     vc.ID = self.dataArray[button.tag].ID;
@@ -315,6 +326,8 @@
 - (void)didSelectLunBoPic:(NSInteger )index {
     
     NSLog(@"%d",index);
+    
+    
     
     zkBannerModel  * model = self.bannerDataArr[index];
     LxmWebViewController *vc = [[LxmWebViewController alloc] init];
@@ -336,10 +349,22 @@
 
 #pragma mark ---- 点击首页的教练,裁判等 -----
 - (void)didClickHomeCellIndex:(NSInteger)index {
+    
+    if (![zkSignleTool shareTool].isLogin) {
+        [self gotoLoginVC];
+        return;
+    }
+    
     [self pushHomeTwoVCWithIndex:index];
 }
 
 - (void)didClickHomeTwoCellIndex:(NSInteger)index {
+    
+    if (![zkSignleTool shareTool].isLogin) {
+           [self gotoLoginVC];
+           return;
+       }
+    
     [self pushHomeTwoVCWithIndex:index];
 }
 
@@ -385,9 +410,7 @@
                 [self.dataArray removeAllObjects];
             }
             [self.dataArray addObjectsFromArray:arr];
-            if (self.dataArray.count == 0) {
-                [SVProgressHUD showSuccessWithStatus:@"暂无数据"];
-            }
+            
             [self.tableView reloadData];
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];

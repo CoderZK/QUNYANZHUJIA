@@ -53,7 +53,7 @@
     Weak(weakSelf);
     self.headV.clickZhuYeHeadBlock = ^(NSInteger index ,UIButton *button) {
        if (index == 0) {
-            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
         }else if (index == 1) {
             //分享
              [weakSelf shareWithSetPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Sina)] withUrl:[NSString stringWithFormat:@"http://mobile.qunyanzhujia.com/daRenDetail?id=%@&other=true",weakSelf.ID] shareModel:self.dataModel.head_img withContentStr:self.dataModel.nick_name];
@@ -293,6 +293,9 @@
     if (indexPath.section == 0) {
         QYZJAnLiDetailTVC * vc =[[QYZJAnLiDetailTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
+        if ([self.ID isEqualToString:[zkSignleTool shareTool].session_uid]) {
+            vc.isMine = YES;
+        }
         vc.ID = self.dataModel.case_list[indexPath.row].ID;
         [self.navigationController pushViewController:vc animated:YES];
     }

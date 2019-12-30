@@ -134,6 +134,7 @@
     
     if (dataModel.is_vip) {
         _LB1.text = @"VIP会员";
+        _LB1.hidden = NO;
         _LB1.mj_w = [_LB1.text getWidhtWithFontSize:14] + 10;
     }else {
         _LB1.hidden = YES;
@@ -141,6 +142,7 @@
     
     if (dataModel.is_coach) {
         _LB2.text = @"教练";
+        _LB2.hidden = NO;
         _LB2.mj_w = [_LB2.text getWidhtWithFontSize:14] + 10;
         if (dataModel.is_vip == NO) {
             _LB2.mj_x = CGRectGetMaxX(self.headBt.frame) + 10;
@@ -153,6 +155,7 @@
     
     if (dataModel.role_name.length > 0) {
         _LB3.text = dataModel.role_name;
+        _LB3.hidden = NO;
         _LB3.mj_w = [_LB3.text getWidhtWithFontSize:14] + 10;
         if (dataModel.is_vip == YES) {
             

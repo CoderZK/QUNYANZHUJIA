@@ -145,7 +145,9 @@
 
 - (void)setTitleStr:(NSString *)titleStr {
     _titleStr = titleStr;
-    self.titlLB.text = titleStr;
+    dispatch_async(dispatch_get_main_queue(), ^{
+         self.titlLB.text = titleStr;
+    });
 }
 
 ///// 添加单边阴影效果

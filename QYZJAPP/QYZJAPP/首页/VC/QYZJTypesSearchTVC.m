@@ -72,11 +72,11 @@
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"page"] = @(self.page);
     dict[@"pageSize"] = @(10);
-    dict[@"type"] = @(self.type);
     dict[@"sort_type"] = @"1";
-    dict[@"search_type"] = @(self.type);
     dict[@"roleId"] = self.role_id;
-    if (self.type == 2) {
+    dict[@"search_type"] = @(self.type);
+    dict[@"type"] = @(self.type);
+   if (self.type == 2) {
         dict[@"search_end_type"] = @1;
         dict[@"sort_type"] = @(self.sort_type);
     }
@@ -102,9 +102,7 @@
                 [self.dataArray removeAllObjects];
             }
             [self.dataArray addObjectsFromArray:arr];
-            if (self.dataArray.count == 0) {
-                [SVProgressHUD showSuccessWithStatus:@"暂无数据"];
-            }
+            
             [self.tableView reloadData];
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];

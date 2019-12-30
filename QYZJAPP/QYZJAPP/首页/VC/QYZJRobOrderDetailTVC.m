@@ -604,7 +604,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 1 && indexPath.row == 10) {
         
-        UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",self.dataModel.real_tel] preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否拨打%@",self.dataModel.real_tel] preferredStyle:(UIAlertControllerStyleAlert)];
         UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             
         }];

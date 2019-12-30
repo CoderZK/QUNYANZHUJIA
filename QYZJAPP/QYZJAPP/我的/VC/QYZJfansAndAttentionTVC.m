@@ -43,7 +43,7 @@
 }
 
 - (void)getData {
-
+    
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"page"] = @(self.page);
@@ -59,9 +59,7 @@
                 [self.dataArray removeAllObjects];
             }
             [self.dataArray addObjectsFromArray:arr];
-            if (self.dataArray.count == 0) {
-                [SVProgressHUD showSuccessWithStatus:@"暂无数据"];
-            }
+            
             [self.tableView reloadData];
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
@@ -112,9 +110,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
-     QYZJMineZhuYeTVC * vc =[[QYZJMineZhuYeTVC alloc] init];
-     vc.hidesBottomBarWhenPushed = YES;
-     vc.ID = self.dataArray[indexPath.row].ID;
+    QYZJMineZhuYeTVC * vc =[[QYZJMineZhuYeTVC alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    vc.ID = self.dataArray[indexPath.row].ID;
+    [self.navigationController pushViewController:vc animated:YES];
     
     
 }

@@ -113,21 +113,33 @@
 
 - (void)setPictWIthArr:(NSArray *)picArr isTwoPic:(BOOL)isTwoPic {
     
-    CGFloat space = 15;
+       CGFloat space = 15;
        CGFloat ww = (ScreenW - 2*space);
        CGFloat hh = ww * 9 / 16;
+    
+    
+     NSInteger  number = picArr.count;
     
     if (isTwoPic) {
         [self.picViewTwo.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
           self.picViewTwo.clipsToBounds = YES;
+    
           self.picViewTwo.mj_h = (picArr.count) * (space + hh) + space;
     }else {
         [self.picView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
           self.picView.clipsToBounds = YES;
-          self.picView.mj_h = (picArr.count) * (space + hh) + space;
+          self.picView.mj_h = (1) * (space + hh) + space;
+        number = 1;
     }
-  
-    for (int i = 0 ; i< picArr.count; i++) {
+    
+    if (picArr.count == 0) {
+        self.picView.mj_h = 0;
+        return;
+    }
+    
+   
+    
+    for (int i = 0 ; i< number; i++) {
         
         UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(space , space +( hh + space) * (i), ww, hh)];
         imageView.contentMode = UIViewContentModeScaleAspectFill;

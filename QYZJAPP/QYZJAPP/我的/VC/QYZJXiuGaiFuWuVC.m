@@ -8,7 +8,7 @@
 
 #import "QYZJXiuGaiFuWuVC.h"
 
-@interface QYZJXiuGaiFuWuVC ()<zkPickViewDelelgate>
+@interface QYZJXiuGaiFuWuVC ()<zkPickViewDelelgate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *addressTF;
 @property (weak, nonatomic) IBOutlet UITextField *questMoneyTF;
 @property (weak, nonatomic) IBOutlet UITextField *yuYueMoneyTF;
@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *quSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *yuyueSwitch;
 @property(nonatomic,strong)NSMutableArray<zkPickModel *> *cityArray;
+@property(nonatomic,strong)NSString *proStr,*proId,*cityStr,*cityId,*aearStr,*aearId;
 
 @end
 
@@ -29,7 +30,13 @@
     self.navigationItem.title = @"服务方修改";
     [self getCityData];
     [self getData];
-    self.addressTF.text =  [NSString stringWithFormat:@"%@%@%@",self.proStr,self.cityStr,self.aearStr];
+    self.addressTF.text = @"";
+    
+    self.questMoneyTF.delegate = self;
+    self.yuYueMoneyTF.delegate = self;
+    self.pangTingMoneyTF.delegate = self;
+    [self getUserInfo];
+    
 }
 
 - (IBAction)clickAction:(UIButton *)sender {
@@ -183,5 +190,65 @@
     self.addressTF.text = [NSString stringWithFormat:@"%@%@%@",self.proStr,self.cityStr,self.aearStr];
     
 }
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    
+    
+    
+}
+
+- (void)getUserInfo {
+   
+    
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"token"] = [zkSignleTool shareTool].session_token;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_centerInfoURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+    
+
+        if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
+            QYZJUserModel * model = [QYZJUserModel mj_objectWithKeyValues:responseObject[@"result"]];
+            self.quSwitch.on = model.is_question;
+            self.yuyueSwitch.on = model.is_appoint;
+            
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+      
+    }];
+    
+}
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    
+    NSMutableString *futureString = [NSMutableString stringWithString:textField.text];
+    [futureString insertString:string atIndex:range.location];
+    
+    NSInteger flag = 0;
+    // 这个可以自定义,保留到小数点后两位,后几位都可以
+    const NSInteger limited = 2;
+    
+    for (NSInteger i = futureString.length - 1; i >= 0; i--) {
+        
+        if ([futureString characterAtIndex:i] == '.') {
+            // 如果大于了限制的就提示
+            if (flag > limited) {
+                
+                [SVProgressHUD showErrorWithStatus:@"输入金额请控制在小数点后两位"];
+                return NO;
+            }
+            
+            break;
+        }
+        
+        flag++;
+    }
+    
+    return YES;
+}
+
 
 @end

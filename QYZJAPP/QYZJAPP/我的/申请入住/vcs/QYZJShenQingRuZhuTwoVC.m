@@ -34,7 +34,7 @@
     [self getCityData];
     [self getLeiXingData];
     self.moreChooseV = [[QYZJMoreChooseView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH)];
-    self.navigationItem.title = @"申请入住";
+    self.navigationItem.title = @"申请入驻";
     self.confirmBt.layer.cornerRadius = 5;
     self.confirmBt.clipsToBounds = YES;
     
@@ -86,23 +86,23 @@
     }
     
     
-    NSMutableDictionary * dict = @{}.mutableCopy;
-    dict[@"role_id"] = self.typeID;
-    dict[@"user_name"] = self.nameTF.text;
-    dict[@"id_card"] = self.numberTF.text;
-    dict[@"company_name"] = self.cNameTF.text;
-    dict[@"license_code"] = self.codeTF.text;
-    dict[@"pro_id"] = self.proId;
-    dict[@"city_id"] = self.cityId;
-    dict[@"area_id"] = self.aearId;
-    dict[@"label"] = self.labelsID;
+//    NSMutableDictionary * dict = @{}.mutableCopy;
+//    dict[@"role_id"] = self.typeID;
+//    dict[@"user_name"] = self.nameTF.text;
+//    dict[@"id_card"] = self.numberTF.text;
+//    dict[@"company_name"] = self.cNameTF.text;
+//    dict[@"license_code"] = self.codeTF.text;
+//    dict[@"pro_id"] = self.proId;
+//    dict[@"city_id"] = self.cityId;
+//    dict[@"area_id"] = self.aearId;
+//    dict[@"label"] = self.labelsID;
+//
+//    QYZJRuZhuThreeVC * vc =[[QYZJRuZhuThreeVC alloc] init];
+//    vc.dataDict = dict;
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
     
-    QYZJRuZhuThreeVC * vc =[[QYZJRuZhuThreeVC alloc] init];
-    vc.dataDict = dict;
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
-    
-    //    [self CardCheck];
+        [self CardCheck];
     
     
 }
@@ -118,21 +118,40 @@
         
         if ([responseObject[@"key"] intValue]== 1) {
             
-            NSMutableDictionary * dict = @{}.mutableCopy;
-            dict[@"role_id"] = self.typeID;
-            dict[@"user_name"] = self.nameTF.text;
-            dict[@"id_card"] = self.numberTF.text;
-            dict[@"company_name"] = self.cNameTF.text;
-            dict[@"license_code"] = self.codeTF.text;
-            dict[@"pro_id"] = self.proId;
-            dict[@"city_id"] = self.cityId;
-            dict[@"area_id"] = self.aearId;
-            dict[@"label"] = self.proId;
+//            NSMutableDictionary * dict = @{}.mutableCopy;
+//            dict[@"role_id"] = self.typeID;
+//            dict[@"user_name"] = self.nameTF.text;
+//            dict[@"id_card"] = self.numberTF.text;
+//            dict[@"company_name"] = self.cNameTF.text;
+//            dict[@"license_code"] = self.codeTF.text;
+//            dict[@"pro_id"] = self.proId;
+//            dict[@"city_id"] = self.cityId;
+//            dict[@"area_id"] = self.aearId;
+//            dict[@"label"] = self.proId;
+//            
+//            QYZJRuZhuThreeVC * vc =[[QYZJRuZhuThreeVC alloc] init];
+//            vc.dataDict = dict;
+//            vc.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:vc animated:YES];
             
-            QYZJRuZhuThreeVC * vc =[[QYZJRuZhuThreeVC alloc] init];
-            vc.dataDict = dict;
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
+            
+                NSMutableDictionary * dict = @{}.mutableCopy;
+                dict[@"role_id"] = self.typeID;
+                dict[@"user_name"] = self.nameTF.text;
+                dict[@"id_card"] = self.numberTF.text;
+                dict[@"company_name"] = self.cNameTF.text;
+                dict[@"license_code"] = self.codeTF.text;
+                dict[@"pro_id"] = self.proId;
+                dict[@"city_id"] = self.cityId;
+                dict[@"area_id"] = self.aearId;
+                dict[@"label"] = self.labelsID;
+            
+                QYZJRuZhuThreeVC * vc =[[QYZJRuZhuThreeVC alloc] init];
+                vc.dataDict = dict;
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            
+            
             
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];

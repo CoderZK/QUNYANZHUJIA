@@ -7,60 +7,12 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
-            uuid = "E4688049-0BE4-4794-B199-94512414B7EB"
+            uuid = "44C29475-A85A-416A-A33F-16ACF4D170A8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             scope = "1"
             stopOnStyle = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C5E76B50-92D8-477E-94C3-751AD49FCDC5"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x6211;&#x7684;/&#x8bbe;&#x7f6e;/vcs/QYZJSettingTVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
-            landmarkName = "-addPict"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C5E76B50-92D8-477E-94C3-751AD49FCDC5 - b240e4ef66ec7d56"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__25-[QYZJSettingTVC addPict]_block_invoke.346"
-                  moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E6%88%91%E7%9A%84/%E8%AE%BE%E7%BD%AE/vcs/QYZJSettingTVC.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "360"
-                  endingLineNumber = "360"
-                  offsetFromSymbolStart = "2009">
-               </Location>
-               <Location
-                  uuid = "C5E76B50-92D8-477E-94C3-751AD49FCDC5 - dc38dbff3035fac1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__25-[QYZJSettingTVC addPict]_block_invoke_2.364"
-                  moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E6%88%91%E7%9A%84/%E8%AE%BE%E7%BD%AE/vcs/QYZJSettingTVC.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "361"
-                  endingLineNumber = "361"
-                  offsetFromSymbolStart = "85">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

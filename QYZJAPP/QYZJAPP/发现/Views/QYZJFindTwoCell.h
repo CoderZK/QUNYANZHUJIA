@@ -10,6 +10,8 @@
 
 @class QYZJFindTwoCell;
 
+@class QYZJFindTwoCell;
+
 @protocol QYZJFindTwoCellDelegate <NSObject>
 
 - (void)didClickFindTwoCell:(QYZJFindTwoCell *)cell withIndex:(NSInteger)index;

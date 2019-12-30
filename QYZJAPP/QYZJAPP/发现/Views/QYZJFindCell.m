@@ -138,7 +138,7 @@
         [self.deleteCollectBt setTitle:@"取消收藏" forState:UIControlStateNormal];
         self.deleteCollectBt.titleLabel.font = kFont(14);
         [self.viewThree addSubview:self.deleteCollectBt];
-        [self.deleteCollectBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+//        [self.deleteCollectBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
         [self.deleteCollectBt mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.viewThree);
             make.height.equalTo(@25);
@@ -177,6 +177,7 @@
             make.right.equalTo(self.pingLunBt.mas_left).offset(-20);
             make.height.equalTo(@35);
             make.width.equalTo(@80);
+            make.centerY.equalTo(self.viewThree.mas_centerY);
         }];
         self.zanBt.tag = 4;
         [self.zanBt addTarget:self action:@selector(goodBtAction:) forControlEvents:UIControlEventTouchUpInside];

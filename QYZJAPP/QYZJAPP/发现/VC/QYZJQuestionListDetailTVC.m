@@ -20,6 +20,12 @@
 
 @implementation QYZJQuestionListDetailTVC
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"详情";
@@ -27,8 +33,7 @@
     [self setheadV];
     [self.tableView registerClass:[QYZJQusetionListDetailCell class] forCellReuseIdentifier:@"cell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    [self getData];
+
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self getData];
     }];
@@ -97,7 +102,7 @@
         //未支付
         [self sitAnswerActionWithModel:model];
     }else {
-        [[PublicFuntionTool shareTool] palyMp3WithNSSting:model.mediaUrl isLocality:NO];
+        [[PublicFuntionTool shareTool] palyMp3WithNSSting:model.media_url isLocality:NO];
         [button setTitle:@"正在播放" forState:UIControlStateNormal];
         [PublicFuntionTool shareTool].findPlayBlock = ^{
             [button setTitle:@"点击播放" forState:UIControlStateNormal];
@@ -122,11 +127,13 @@
             
             QYZJTongYongModel * mm = [[QYZJTongYongModel alloc] init];
             mm = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
-            
+            mm.ID = model.ID;
             if (model.is_pay) {
                 QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
                 vc.type = 4;
                 vc.model = mm;
+                vc.ID = model.ID;
+            
                 [self.navigationController pushViewController:vc animated:YES];
             }
             

@@ -68,16 +68,22 @@
     
     NSMutableArray * arr = @[].mutableCopy;
     CGFloat money = 0;
+    CGFloat moneyTwo = 0;
+    BOOL isBao = NO;
     for (QYZJMoneyModel * model  in self.dataArray) {
         if (model.isSelect) {
             [arr addObject:model.ID];
             money = money + model.realMoney;
+            isBao = YES;
+            moneyTwo = money;
         }
+        
     }
     for (QYZJMoneyModel * model  in self.dataArrayTwo) {
            if (model.isSelect) {
                [arr addObject:model.ID];
                money = money + model.realMoney;
+               isBao = NO;
            }
        }
     
@@ -95,8 +101,17 @@
         if ([responseObject[@"key"] intValue]== 1) {
             
             QYZJTongYongModel * model = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
-            model.is_need_wechat_pay = YES;
+        
+            model.is_need_wechat_pay = !isBao;
             QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
+            model.money = moneyTwo;
+            Weak(weakSelf);
+            vc.isBaoBlcok = ^{
+                if (isBao) {
+                    weakSelf.is_bond = YES;
+                    [weakSelf.tableView reloadData];
+                }
+            };
             vc.hidesBottomBarWhenPushed = YES;
             vc.model = model;
             vc.type = 11;

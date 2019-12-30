@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"申请入住";
+    self.navigationItem.title = @"申请入驻";
     self.confirmBt.layer.cornerRadius = 5;
     self.confirmBt.clipsToBounds = YES;
     self.type = -1;
@@ -85,7 +85,7 @@
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             
-            [SVProgressHUD showSuccessWithStatus:@"申请入住申请提交成功"];
+            [SVProgressHUD showSuccessWithStatus:@"申请入驻申请提交成功"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popToRootViewControllerAnimated:YES];
             });

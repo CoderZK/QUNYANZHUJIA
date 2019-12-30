@@ -30,7 +30,7 @@
     self.numberOneLB.text = [NSString stringWithFormat:@"%ld",(long)model.sign_num];
     self.numberTwoLB.text = [NSString stringWithFormat:@"%ld",(long)model.ok_num];
     self.numberThreeLB.text = [NSString stringWithFormat:@"%ld",(long)model.demand_num];
-    self.timeLB.text = @"注册时间暂无";
+    self.timeLB.text = model.add_time;
 }
 
 @end

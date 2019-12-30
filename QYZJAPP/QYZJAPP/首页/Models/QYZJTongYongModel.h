@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,assign)CGFloat wechat_money;
 @property(nonatomic,assign)CGFloat money;
+@property(nonatomic,assign)CGFloat allMoney;
 
 
 

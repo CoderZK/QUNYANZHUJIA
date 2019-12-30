@@ -22,6 +22,7 @@
 @property(nonatomic,strong)QYZJFindModel *model;
 @property(nonatomic,assign)id<QYZJFindQuestionListCellDelegate>delegate;
 
+@property(nonatomic,strong)UIButton *listBt;
 @end
 
 

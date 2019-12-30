@@ -20,6 +20,24 @@
     
     self.view.backgroundColor =[UIColor groupTableViewBackgroundColor];
 }
+- (IBAction)action:(id)sender {
+    
+    UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否拨打%@",@"18406564080"] preferredStyle:(UIAlertControllerStyleAlert)];
+           UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+               
+           }];
+           UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+              [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",@"18406564080"]]];
+            
+           }];
+           
+           [alertVC addAction:action1];
+           [alertVC addAction:action2];
+           
+           [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
+    
+}
 
 /*
 #pragma mark - Navigation

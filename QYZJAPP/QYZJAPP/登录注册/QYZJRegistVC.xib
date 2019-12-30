@@ -102,7 +102,7 @@
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="pXF-Gk-g5H"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                            <textInputTraits key="textInputTraits" textContentType="password"/>
                         </textField>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_yaoqing" translatesAutoresizingMaskIntoConstraints="NO" id="yOu-eX-g6W">
                             <rect key="frame" x="10" y="160" width="30" height="30"/>

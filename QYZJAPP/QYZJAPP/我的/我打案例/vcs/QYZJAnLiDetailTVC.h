@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJAnLiDetailTVC : BaseTableViewController
 @property(nonatomic,strong)NSString *ID;
+@property(nonatomic,assign)BOOL isMine;
 @end
 
 NS_ASSUME_NONNULL_END

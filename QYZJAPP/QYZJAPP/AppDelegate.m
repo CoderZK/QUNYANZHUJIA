@@ -44,6 +44,8 @@
     self.window.rootViewController = [self instantiateRootVC];
     [self.window makeKeyAndVisible];
     
+    self.window.backgroundColor = WhiteColor;
+    
     //汉字
     
     /* 设置友盟appkey */

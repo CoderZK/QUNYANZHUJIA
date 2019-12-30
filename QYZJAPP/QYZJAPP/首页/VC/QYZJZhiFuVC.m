@@ -11,7 +11,7 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
 #import "QYZJMineYuHuiQuanTVC.h"
-#import "QYZJChangePayPasswordOneVC.h"
+#import "QYZJChangePayPasswordTwoVC.h"
 @interface QYZJZhiFuVC ()
 @property (weak, nonatomic) IBOutlet UIButton *payBt;
 @property (weak, nonatomic) IBOutlet UIImageView *imgV1;
@@ -170,20 +170,20 @@
         if (self.payType == 0) {
             
             if (self.isSetPayPassWord) {
-                [LLPassWordAlertView showWithTitle:@"支付密码" desStr:@"请输入支付密码" finish:^(NSString *pwStr) {
+                [LLPassWordAlertView showWithTitle:@"支付密码" desStr:[NSString stringWithFormat:@"支付金额:%0.2f元",self.model.money] finish:^(NSString *pwStr) {
                     [self checkPayPasswordWith:pwStr withisCheack:NO];
                     
                 }];
             }else {
                 
-                UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",@"为保护您的隐私安全,请您尽快修改昵称"] preferredStyle:(UIAlertControllerStyleAlert)];
+                UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",@"您还没有设置支付密码, 请去设置"] preferredStyle:(UIAlertControllerStyleAlert)];
                 UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
                     
                 }];
                 UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
                     
                 
-                    QYZJChangePayPasswordOneVC * vc =[[QYZJChangePayPasswordOneVC alloc] init];
+                    QYZJChangePayPasswordTwoVC * vc =[[QYZJChangePayPasswordTwoVC alloc] init];
                     vc.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:vc animated:YES];
                     
@@ -219,16 +219,26 @@
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             
+            NSInteger a  = [[NSString stringWithFormat:@"%@",responseObject[@"result"]] intValue];
+            
             if (isCheack) {
+                  if (a==0) {
+                      self.isSetPayPassWord = NO;
+                  }else {
+                      self.isSetPayPassWord = YES;
+                  }
                 
             }else {
                 
-                NSInteger a  = [[NSString stringWithFormat:@"%@",responseObject[@"result"]] intValue];
-                if (a==0) {
-                    self.isSetPayPassWord = NO;
-                }else {
-                    self.isSetPayPassWord = YES;
+                if (a == 1) {
+                    
+                    [self payAction];
+                    
+                }else if (a == 2) {
+                    [SVProgressHUD showErrorWithStatus:@"支付密码错误"];
+                    
                 }
+              
                 
             }
             

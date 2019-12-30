@@ -114,12 +114,13 @@
         
         self.tuiJianLB.layer.mask = [self getBezierWithFrome:self.tuiJianLB andRadi:7.5];
         
-        self.titleLB = [[UILabel alloc] initWithFrame:CGRectMake(0, (frame.size.height - 8) / 2 - 25, frame.size.width,   20)];
+        self.titleLB = [[UILabel alloc] initWithFrame:CGRectMake(0, (frame.size.height - 8) / 2 - 30, frame.size.width,   35)];
         self.titleLB.textAlignment = NSTextAlignmentCenter;
         self.titleLB.font = kFont(13);
+        self.titleLB.numberOfLines = 2;
         [self addSubview:self.titleLB];
         
-        self.moneyLB = [[UILabel alloc] initWithFrame:CGRectMake(0, (frame.size.height - 8) / 2 + 10 , frame.size.width, 30)];
+        self.moneyLB = [[UILabel alloc] initWithFrame:CGRectMake(0, (frame.size.height - 8) / 2 + 13 , frame.size.width, 30)];
         self.moneyLB.textAlignment = NSTextAlignmentCenter;
         self.moneyLB.font = kFont(15);
         self.moneyLB.textColor= OrangeColor;
@@ -143,6 +144,13 @@
     self.titleLB.text = model.name;
     self.moneyLB.text = [NSString stringWithFormat:@"￥%0.2f",model.money];
     self.bt.selected = model.isSelect;
+    if (model.isRecommand) {
+        self.tuiJianLB.hidden = NO;
+    }else {
+        self.tuiJianLB.hidden = YES;
+    }
+    
+    
 }
 
 

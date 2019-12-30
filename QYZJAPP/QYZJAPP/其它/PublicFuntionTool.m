@@ -8,10 +8,12 @@
 
 #import "PublicFuntionTool.h"
 #import <AVKit/AVKit.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 static PublicFuntionTool * tool = nil;
-@interface PublicFuntionTool()<AVAudioPlayerDelegate>
+@interface PublicFuntionTool()<AVAudioPlayerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property(nonatomic,strong)AVAudioPlayer *player;
 @property(nonatomic,strong)UIView *footV;
+
 @end
 
 @implementation PublicFuntionTool
@@ -66,15 +68,15 @@ static PublicFuntionTool * tool = nil;
     }else {
         
         
-       
+        
         
         NSURL * url = [[NSURL alloc] initWithString:meidaStr];
         NSData * data = [[NSData alloc] initWithContentsOfURL:url];
         self.player = [[AVAudioPlayer alloc] initWithData:data error:nil];
         
-//        AVAudioSession * session = [AVAudioSession sharedInstance];
-//        [session setActive:YES error:nil];
-//        [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+        //        AVAudioSession * session = [AVAudioSession sharedInstance];
+        //        [session setActive:YES error:nil];
+        //        [session setCategory:AVAudioSessionCategoryPlayback error:nil];
         
         NSError * error;
         [[AVAudioSession sharedInstance] overrideOutputAudioPort:(AVAudioSessionPortOverrideSpeaker) error:&error];;
@@ -298,6 +300,124 @@ static PublicFuntionTool * tool = nil;
     
     
 }
+
++ (void)showCameraVideoWithViewController:(UIViewController *)vc{
+    //检查相机模式是否可用
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        
+        NSLog(@"sorry, no camera or camera is unavailable!!!");
+        
+        return;
+        
+    }
+    //获得相机模式下支持的媒体类型
+    NSArray* availableMediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
+    
+    BOOL canTakeVideo = NO;
+    
+    for (NSString* mediaType in availableMediaTypes) {
+        
+        if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+            
+            //支持摄像
+            canTakeVideo = YES;
+            break;
+        }
+    }
+    //检查是否支持摄像
+    
+    if (!canTakeVideo) {
+        
+        NSLog(@"sorry, capturing video is not supported.!!!");
+        
+        return;
+        
+    }
+    
+    //创建图像选取控制器
+    
+    UIImagePickerController* imagePickerController = [[UIImagePickerController alloc] init];
+    
+    //设置图像选取控制器的来源模式为相机模式
+    
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    //设置图像选取控制器的类型为动态图像
+    
+    imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString*)kUTTypeMovie, nil];
+    
+    //设置摄像图像品质
+    
+    imagePickerController.videoQuality = UIImagePickerControllerQualityTypeHigh;
+    
+    //设置最长摄像时间
+    
+    imagePickerController.videoMaximumDuration = 600;
+    
+    //允许用户进行编辑
+    
+    imagePickerController.allowsEditing = YES;
+    
+    //设置委托对象
+    
+    imagePickerController.delegate = [PublicFuntionTool shareTool];
+    
+    //以模式视图控制器的形式显示
+    
+    [vc presentViewController:imagePickerController animated:YES completion:nil];
+    
+    
+    
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    
+    //打印出字典中的内容
+    
+    NSLog(@"get the media info: %@", info);
+    
+    //获取媒体类型
+    
+    NSString* mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
+        
+    {
+        
+        //获取视频文件的url
+        
+        NSURL* mediaURL = [info objectForKey:UIImagePickerControllerMediaURL];
+        
+        if (self.videoBlock != nil) {
+            self.videoBlock([NSData dataWithContentsOfFile:mediaURL]);
+        }
+        //创建ALAssetsLibrary对象并将视频保存到媒体库
+        
+        ALAssetsLibrary* assetsLibrary = [[ALAssetsLibrary alloc] init];
+        
+        [assetsLibrary writeVideoAtPathToSavedPhotosAlbum:mediaURL completionBlock:^(NSURL *assetURL, NSError *error) {
+            
+            if (!error) {
+                
+                NSLog(@"captured video saved with no error.");
+                
+            }else
+                
+            {
+                
+                NSLog(@"error occured while saving the video:%@", error);
+                
+            }
+            
+        }];
+        
+    }
+    
+    [picker dismissModalViewControllerAnimated:YES];
+    
+}
+
+
+
 
 @end
 

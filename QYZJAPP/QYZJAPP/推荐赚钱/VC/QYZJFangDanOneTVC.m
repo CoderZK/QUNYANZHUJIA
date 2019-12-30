@@ -187,12 +187,15 @@
     cell.TF.delegate = self;
     if (indexPath.row == 0) {
         cell.TF.text = self.str1;
+        cell.TF.placeholder = @"请输入联系方式";
     }else if (indexPath.row == 1) {
         cell.TF.text = self.str2;
         cell.moreImgV.hidden = NO;
         cell.TF.userInteractionEnabled = NO;
+         cell.TF.placeholder = @"选择省市区";
     }else {
         cell.TF.text = self.str3;
+         cell.TF.placeholder = @"请填写详细地址";
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

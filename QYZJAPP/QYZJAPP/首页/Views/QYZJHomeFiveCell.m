@@ -42,7 +42,8 @@
     self.vipLB.text = @"VIP";
     self.requestLB.text = @"可提问";
     
-    self.headBt.layer.cornerRadius = 40;
+    self.headBt.layer.cornerRadius = 35
+    ;
     self.headBt.clipsToBounds = YES;
     
     CGFloat space = 10;
@@ -138,7 +139,7 @@
         self.moneyLB.text = [NSString stringWithFormat:@"预约:￥%0.2f",model.appoint_price];
     }
     
-    
+//    [self layoutIfNeeded];
     
 }
 

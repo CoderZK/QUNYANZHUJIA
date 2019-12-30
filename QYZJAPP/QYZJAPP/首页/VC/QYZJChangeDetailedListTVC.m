@@ -444,25 +444,37 @@
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
        //全部上传成功
         [SVProgressHUD showSuccessWithStatus:@"上传图片成功"];
-        [self addPicsWithArr:self.picsArr];
+//        [self addPicsWithArr:self.picsArr];
     });
 }
 //上传图片操作
 - (void)upimgWithindex:(NSInteger)index withgrop:(dispatch_group_t)group{
-    dispatch_group_enter(group);
-    NSMutableDictionary * dict = @{}.mutableCopy;
-    dict[@"token"] = self.imgModel.token;
-    [zkRequestTool NetWorkingUpLoad:QiNiuYunUploadURL image:self.picsArr[index] andName:@"file" parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-        NSLog(@"%@",@"京东卡的风控安徽");
-        [self.picsArr removeObjectAtIndex:index];
-        [self.picsArr insertObject:[NSString stringWithFormat:@"%@",responseObject[@"key"]] atIndex:index];
-        dispatch_group_leave(group);
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
-    }];
 
+    dispatch_group_enter(group);
+       NSMutableDictionary * dict = @{}.mutableCopy;
+       dict[@"token"] = self.imgModel.token;
+      __block showProgress * showOb =  [[showProgress alloc] init];
+       dispatch_async(dispatch_get_main_queue(), ^{
+         UIButton *  button  = [self.scrollView viewWithTag:index + 100];
+         [showOb showViewOnView:button];
+       });
+       [zkRequestTool NetWorkingUpLoadimage:self.picsArr[index] parameters:dict progress:^(CGFloat progress) {
+           
+           showOb.progress = progress;
+           
+       } success:^(NSURLSessionDataTask *task, id responseObject) {
+           NSLog(@"%@",@"京东卡的风控安徽");
+           [self.picsArr removeObjectAtIndex:index];
+           [self.picsArr insertObject:[NSString stringWithFormat:@"%@",responseObject[@"key"]] atIndex:index];
+           dispatch_group_leave(group);
+       } failure:^(NSURLSessionDataTask *task, NSError *error) {
+           [showOb diss];
+       }];
+    
+
+    
+    
+    
 }
 
 

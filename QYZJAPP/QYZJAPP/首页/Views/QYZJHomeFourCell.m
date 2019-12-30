@@ -20,7 +20,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.headBt.layer.cornerRadius = 40;
+    self.headBt.layer.cornerRadius = 35;
     self.headBt.clipsToBounds = YES;
 }
 

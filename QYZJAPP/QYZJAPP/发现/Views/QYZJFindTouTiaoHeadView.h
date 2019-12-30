@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)CGFloat headheight;
 @property(nonatomic,strong)QYZJFindModel *model;
 @property(nonatomic,copy)void(^webLoadFindBlock)(CGFloat hh);
+@property(nonatomic,copy)void(^TouTiaoClickBlock)(NSInteger tag);
 @end
 
 NS_ASSUME_NONNULL_END

@@ -17,13 +17,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"忘记密码";
+    self.navigationItem.title = @"找回密码";
 }
 
 - (IBAction)action:(id)sender {
     
+    if (self.passWordTF.text.length < 8 || self.passWordTF.text.length > 16) {
+        [SVProgressHUD showErrorWithStatus:@"请输入8~16的包含字符和数字新密码"];
+        return;
+    }
+    
     if (![NSString checkStingContainLetterAndNumberWithString:self.passWordTF.text]) {
-        [SVProgressHUD showErrorWithStatus:@"请输入6~15包含数字和字母的密码"];
+        [SVProgressHUD showErrorWithStatus:@"请输入8~16的包含字符和数字新密码"];
+        return;
     }
     if (![self.passWordTwoTF.text isEqualToString:self.passWordTF.text]) {
         [SVProgressHUD showErrorWithStatus:@"两次密码不一样"];

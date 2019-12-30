@@ -516,36 +516,49 @@
 
 - (void)addVideoaction {
     self.isChooseVideo = YES;
-    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
-    imagePickerVc.showSelectBtn = NO;
-    imagePickerVc.allowCrop = YES;
-    imagePickerVc.needCircleCrop = NO;
-    imagePickerVc.allowPickingImage = NO;
-    imagePickerVc.cropRectPortrait = CGRectMake(0, (ScreenH - ScreenW)/2, ScreenW, ScreenW);
-    imagePickerVc.cropRectLandscape = CGRectMake(0, (ScreenW - ScreenH)/2, ScreenH, ScreenH);
-    imagePickerVc.circleCropRadius = ScreenW/2;
-    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+    [self addPict];
+}
+
+
+- (void)captureVideoButtonClick{
+    [PublicFuntionTool showCameraVideoWithViewController:self];
+    Weak(weakSelf);
+    [PublicFuntionTool shareTool].videoBlock = ^(NSData *data) {
+        NSMutableDictionary * dict = @{}.mutableCopy;
+        dict[@"token"] = weakSelf.videoModel.token;
+        showProgress * showOb =  [[showProgress alloc] init];
+        [showOb showViewOnView:weakSelf.addBt];
+        [zkRequestTool NetWorkingUpLoadVeidoWithfileData:data parameters:dict progress:^(CGFloat progress) {
+            NSLog(@"====\n%lf",progress);
+            showOb.progress = progress;
+        } success:^(NSURLSessionDataTask *task, id responseObject) {
+            [SVProgressHUD showSuccessWithStatus:@"上传视频成功"];
+            weakSelf.videoStr = [NSString stringWithFormat:@"%@",responseObject[@"key"]];
+                
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            [showOb diss];
+        }];
         
-        NSLog(@"\nnnn%@",assets);
-        
-        
-    }];
-    [self presentViewController:imagePickerVc animated:YES completion:nil];
+    };
+     
 }
 
 - (void)addPict {
     [self.tableView endEditing:YES];
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if ([self isCanUsePhotos]) {
-            [self showMXPhotoCameraAndNeedToEdit:YES completion:^(UIImage *image, UIImage *originImage, CGRect cutRect) {
-                
-                [self.picsArr addObject:image];
-                [self updateImgsToQiNiuYun];
-                
-                
-            }];
+            
+            if (self.isChooseVideo) {
+                //视频
+                [self captureVideoButtonClick];
+            }else {
+                [self showMXPhotoCameraAndNeedToEdit:YES completion:^(UIImage *image, UIImage *originImage, CGRect cutRect) {
+                    [self.picsArr addObject:image];
+                    [self addPicsWithArr:self.picsArr];
+                    [self updateImgsToQiNiuYun];
+                }];
+            }
         }else{
             UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"无法使用相机" message:@"请在iPhone的""设置-隐私-相机""中允许访问相机" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alert show];
@@ -559,10 +572,14 @@
             TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:MAXFLOAT columnNumber:4 delegate:self pushPhotoPickerVc:YES];
             if (self.isChooseVideo) {
                 imagePickerVc.allowTakeVideo = YES;
+                imagePickerVc.allowPickingVideo = YES;
+                imagePickerVc.allowPickingImage = NO;
                 imagePickerVc.allowTakePicture = NO;
             }else {
-                imagePickerVc.allowTakeVideo = YES;
-                imagePickerVc.allowTakePicture = NO;
+                imagePickerVc.allowTakeVideo = NO;
+                imagePickerVc.allowPickingVideo = NO;
+                imagePickerVc.allowPickingImage = YES;
+                imagePickerVc.allowTakePicture = YES;
             }
             imagePickerVc.showSelectBtn = NO;
             imagePickerVc.allowCrop = YES;
@@ -571,10 +588,9 @@
             imagePickerVc.cropRectLandscape = CGRectMake(0, (ScreenW - ScreenH)/2, ScreenH, ScreenH);
             imagePickerVc.circleCropRadius = ScreenW/2;
             [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
-                
                 [self.picsArr addObjectsFromArray:photos];
+                [self addPicsWithArr:self.picsArr];
                 [self updateImgsToQiNiuYun];
-                
             }];
             [self presentViewController:imagePickerVc animated:YES completion:nil];
         }else{
@@ -582,8 +598,6 @@
             [alert show];
         }
     }];
-    
-    
     
     UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     [ac addAction:action1];
@@ -609,12 +623,17 @@
     [PublicFuntionTool getImageFromPHAsset:asset Complete:^(NSData * _Nonnull data, NSString * _Nonnull str) {
         NSMutableDictionary * dict = @{}.mutableCopy;
         dict[@"token"] = self.videoModel.token;
-        
-        [zkRequestTool NetWorkingUpLoadVeidoWithfileData:data parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        showProgress * showOb =  [[showProgress alloc] init];
+        [showOb showViewOnView:self.addBt];
+        [zkRequestTool NetWorkingUpLoadVeidoWithfileData:data parameters:dict progress:^(CGFloat progress) {
+            NSLog(@"====\n%lf",progress);
+            showOb.progress = progress;
+        } success:^(NSURLSessionDataTask *task, id responseObject) {
             [SVProgressHUD showSuccessWithStatus:@"上传视频成功"];
             self.videoStr = [NSString stringWithFormat:@"%@",responseObject[@"key"]];
+                
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            NSLog(@"\n\n------%@",error);
+            [showOb diss];
         }];
     }];
 }
@@ -635,24 +654,32 @@
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         //全部上传成功
         [SVProgressHUD showSuccessWithStatus:@"上传图片成功"];
-        [self addPicsWithArr:self.picsArr];
+//        [self addPicsWithArr:self.picsArr];
     });
 }
 //上传图片操作
 - (void)upimgWithindex:(NSInteger)index withgrop:(dispatch_group_t)group{
-    dispatch_group_enter(group);
-    NSMutableDictionary * dict = @{}.mutableCopy;
-    dict[@"token"] = self.imgModel.token;
-    [zkRequestTool NetWorkingUpLoad:QiNiuYunUploadURL image:self.picsArr[index] andName:@"file" parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-        NSLog(@"%@",@"京东卡的风控安徽");
-        [self.picsArr removeObjectAtIndex:index];
-        [self.picsArr insertObject:[NSString stringWithFormat:@"%@",responseObject[@"key"]] atIndex:index];
-        dispatch_group_leave(group);
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
-    }];
+    
+     dispatch_group_enter(group);
+       NSMutableDictionary * dict = @{}.mutableCopy;
+       dict[@"token"] = self.imgModel.token;
+      __block showProgress * showOb =  [[showProgress alloc] init];
+       dispatch_async(dispatch_get_main_queue(), ^{
+         UIButton *  button  = [self.scrollView viewWithTag:index + 100];
+         [showOb showViewOnView:button];
+       });
+       [zkRequestTool NetWorkingUpLoadimage:self.picsArr[index] parameters:dict progress:^(CGFloat progress) {
+           
+           showOb.progress = progress;
+           
+       } success:^(NSURLSessionDataTask *task, id responseObject) {
+           NSLog(@"%@",@"京东卡的风控安徽");
+           [self.picsArr removeObjectAtIndex:index];
+           [self.picsArr insertObject:[NSString stringWithFormat:@"%@",responseObject[@"key"]] atIndex:index];
+           dispatch_group_leave(group);
+       } failure:^(NSURLSessionDataTask *task, NSError *error) {
+           [showOb diss];
+       }];
     
 }
 

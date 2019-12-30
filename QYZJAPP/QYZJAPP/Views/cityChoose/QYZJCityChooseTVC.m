@@ -390,9 +390,6 @@
             [self setBiaoQianWithArr:self.userCityList];
             [self.dataArray removeAllObjects];
             [self.dataArray addObjectsFromArray:arr];
-            if (self.dataArray.count == 0) {
-                [SVProgressHUD showSuccessWithStatus:@"暂无数据"];
-            }
             self.dataDict = nil;
             [self paiXunAction];
         }else {
