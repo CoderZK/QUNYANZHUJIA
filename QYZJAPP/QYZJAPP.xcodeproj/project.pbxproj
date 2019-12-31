@@ -344,6 +344,7 @@
 		587611BE2379486500A9DBA5 /* QYZJFindGuangChangDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 587611BD2379486500A9DBA5 /* QYZJFindGuangChangDetailView.m */; };
 		587611C22379684700A9DBA5 /* QYZJPingLunNeiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 587611C02379684700A9DBA5 /* QYZJPingLunNeiCell.m */; };
 		587611C32379684700A9DBA5 /* QYZJPingLunNeiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 587611C12379684700A9DBA5 /* QYZJPingLunNeiCell.xib */; };
+		5892AA4423BB40A00031DF8A /* xieyi.html in Resources */ = {isa = PBXBuildFile; fileRef = 5892AA4323BB40A00031DF8A /* xieyi.html */; };
 		58ADFFED23A1E9F200347801 /* AddpicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ADFFEC23A1E9F200347801 /* AddpicView.m */; };
 		58ADFFF023A1EA7000347801 /* QYZJAddZiLiaoTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ADFFEF23A1EA7000347801 /* QYZJAddZiLiaoTVC.m */; };
 		58ADFFF323A228E300347801 /* SelectTimeV.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ADFFF223A228E300347801 /* SelectTimeV.m */; };
@@ -958,6 +959,7 @@
 		587611BF2379684700A9DBA5 /* QYZJPingLunNeiCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJPingLunNeiCell.h; sourceTree = "<group>"; };
 		587611C02379684700A9DBA5 /* QYZJPingLunNeiCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJPingLunNeiCell.m; sourceTree = "<group>"; };
 		587611C12379684700A9DBA5 /* QYZJPingLunNeiCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJPingLunNeiCell.xib; sourceTree = "<group>"; };
+		5892AA4323BB40A00031DF8A /* xieyi.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = xieyi.html; sourceTree = "<group>"; };
 		58ADFFEB23A1E9F200347801 /* AddpicView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddpicView.h; sourceTree = "<group>"; };
 		58ADFFEC23A1E9F200347801 /* AddpicView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddpicView.m; sourceTree = "<group>"; };
 		58ADFFEE23A1EA7000347801 /* QYZJAddZiLiaoTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJAddZiLiaoTVC.h; sourceTree = "<group>"; };
@@ -2046,6 +2048,7 @@
 		583B348C2398D6E800148350 /* vcs */ = {
 			isa = PBXGroup;
 			children = (
+				5892AA4323BB40A00031DF8A /* xieyi.html */,
 				583B348F2398D6E800148350 /* QYZJShenQingRuZhuTwoVC.h */,
 				583B34952398D6E800148350 /* QYZJShenQingRuZhuTwoVC.m */,
 				583B34922398D6E800148350 /* QYZJShenQingRuZhuTwoVC.xib */,
@@ -2530,6 +2533,7 @@
 				583B34E02398D6EB00148350 /* QYZJYanShouOrBaoXiuCell.xib in Resources */,
 				584331BF2370107D0046C0BD /* QYZJHomeFiveCell.xib in Resources */,
 				582F74EB2378F8F700F6FCB6 /* QYZJChangePayPasswordTwoVC.xib in Resources */,
+				5892AA4423BB40A00031DF8A /* xieyi.html in Resources */,
 				582F74E62378F8DE00F6FCB6 /* QYZJChangePayPasswordOneVC.xib in Resources */,
 				5819750D237E996D00FC77EE /* QYZJMineServicePeopleVC.xib in Resources */,
 				586D1BB323B1F383007268BC /* QYZJOtherCell.xib in Resources */,

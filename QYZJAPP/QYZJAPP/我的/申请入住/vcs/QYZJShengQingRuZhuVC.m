@@ -8,6 +8,7 @@
 
 #import "QYZJShengQingRuZhuVC.h"
 #import "QYZJShenQingRuZhuTwoVC.h"
+#import "QYZJRuZhuXieYiVC.h"
 @interface QYZJShengQingRuZhuVC ()<zkPickViewDelelgate>
 @property (weak, nonatomic) IBOutlet UITextField *titleTF;
 @property (weak, nonatomic) IBOutlet UIButton *selectBt;
@@ -53,7 +54,9 @@
         
     }else if (sender.tag == 102) {
         
-        
+        QYZJRuZhuXieYiVC * vc =[[QYZJRuZhuXieYiVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
         
     }else {
         

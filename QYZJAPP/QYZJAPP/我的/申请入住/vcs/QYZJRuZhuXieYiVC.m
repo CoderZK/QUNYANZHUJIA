@@ -8,7 +8,8 @@
 
 #import "QYZJRuZhuXieYiVC.h"
 
-@interface QYZJRuZhuXieYiVC ()
+@interface QYZJRuZhuXieYiVC ()<UIWebViewDelegate>
+@property (weak, nonatomic) IBOutlet UIWebView *web;
 
 @end
 
@@ -16,11 +17,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [SVProgressHUD show];
     
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"xieyi" ofType:@".html"];
+    
+    [self.web loadHTMLString:[NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil] baseURL:nil];
+    
+    self.web.delegate = self;
     
     
 }
 
-
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [SVProgressHUD dismiss];
+}
 
 @end

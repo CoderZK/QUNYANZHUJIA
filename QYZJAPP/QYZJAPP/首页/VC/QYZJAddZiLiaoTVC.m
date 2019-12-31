@@ -314,8 +314,10 @@
         if ([self isCanUsePicture]) {
             
             TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:MAXFLOAT columnNumber:4 delegate:self pushPhotoPickerVc:YES];
-            imagePickerVc.allowTakeVideo = YES;
-            imagePickerVc.allowTakePicture = NO;
+             imagePickerVc.allowTakeVideo = NO;
+            imagePickerVc.allowPickingVideo = NO;
+            imagePickerVc.allowPickingImage = YES;
+            imagePickerVc.allowTakePicture = YES;
             imagePickerVc.showSelectBtn = NO;
             imagePickerVc.allowCrop = YES;
             imagePickerVc.needCircleCrop = NO;

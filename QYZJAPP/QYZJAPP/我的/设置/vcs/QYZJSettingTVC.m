@@ -411,8 +411,10 @@
             imagePickerVc.showSelectBtn = NO;
             imagePickerVc.allowCrop = YES;
             imagePickerVc.needCircleCrop = NO;
-            imagePickerVc.allowPickingImage = YES;
+            imagePickerVc.allowTakeVideo = NO;
             imagePickerVc.allowPickingVideo = NO;
+            imagePickerVc.allowPickingImage = YES;
+            imagePickerVc.allowTakePicture = YES;
             imagePickerVc.cropRectPortrait = CGRectMake(0, (ScreenH - ScreenW)/2, ScreenW, ScreenW);
             imagePickerVc.cropRectLandscape = CGRectMake(0, (ScreenW - ScreenH)/2, ScreenH, ScreenH);
             imagePickerVc.circleCropRadius = ScreenW/2;

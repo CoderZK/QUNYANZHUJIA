@@ -448,7 +448,9 @@
             TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:MAXFLOAT columnNumber:4 delegate:self pushPhotoPickerVc:YES];
             
             imagePickerVc.allowTakeVideo = NO;
-            imagePickerVc.showSelectBtn = NO;
+            imagePickerVc.allowPickingVideo = NO;
+            imagePickerVc.allowPickingImage = YES;
+            imagePickerVc.allowTakePicture = YES;
             imagePickerVc.allowCrop = YES;
             imagePickerVc.needCircleCrop = NO;
             imagePickerVc.cropRectPortrait = CGRectMake(0, (ScreenH - ScreenW)/2, ScreenW, ScreenW);
