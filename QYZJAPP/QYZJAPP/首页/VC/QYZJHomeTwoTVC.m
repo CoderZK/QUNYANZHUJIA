@@ -32,7 +32,7 @@
      self.dataArray = @[].mutableCopy;
     self.labelListArr = @[].mutableCopy;
     
-    if (self.type == 0) {
+    if (self.type ==2) {
         self.navigationItem.title = @"教练";
     }else {
         self.navigationItem.title = @"裁判";
@@ -42,7 +42,7 @@
     self.titelArr = @[@"家装",@"工装",@"家政",@"建材",@"家具",@"软装"];
     self.idArr = @[@"1",@"2",@"5",@"4",@"3",@"6"];
 
-    if (self.type == 2) {
+    if (self.type == 1) {
         for (int i = 0 ; i < self.titelArr.count; i++) {
             QYZJTongYongModel * model = [[QYZJTongYongModel alloc] init];
             model.ID = self.idArr[i];
@@ -84,7 +84,7 @@
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"page"] = @(self.page);
     dict[@"pageSize"] = @(10);
-    dict[@"type"] = @(3-self.type);
+    dict[@"type"] = @(self.type);
     dict[@"city_id"] = [zkSignleTool shareTool].cityId;
     dict[@"sort_type"] = @"1";
     dict[@"search_type"] = @(self.type);
@@ -274,7 +274,7 @@
     }else if (indexPath.section == 1) {
         QYZJHomeThreeCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeThreeCell" forIndexPath:indexPath];
         cell.imgV.image = [UIImage imageNamed:@"question"];
-        if (self.type == 2) {
+        if (self.type == 1) {
          cell.imgV.image = [UIImage imageNamed:@"appointment"];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -285,8 +285,9 @@
             return cell;
         }else {
             QYZJHomeFiveCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeFiveCell" forIndexPath:indexPath];
-            cell.model = self.dataArray[indexPath.row - 1];
-                   return cell;
+            cell.headBt.userInteractionEnabled = NO;
+            cell.model = self.dataArray[indexPath.row-1];
+            return cell;
         }
         
     }else {
@@ -300,7 +301,7 @@
     if (indexPath.section == 1) {
         QYZJQuestOrAppointTVC * vc =[[QYZJQuestOrAppointTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
-        vc.type = 2 - self.type;
+        vc.type = self.type;
         vc.cityID = self.cityID;
         vc.isMore = YES;
         [self.navigationController pushViewController:vc animated:YES];
@@ -314,7 +315,7 @@
         }else {
             QYZJMineZhuYeTVC * vc =[[QYZJMineZhuYeTVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
-            vc.ID = self.dataArray[indexPath.row].ID;
+            vc.ID = self.dataArray[indexPath.row-1].ID;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else {

@@ -12,6 +12,8 @@
 #import "WXApi.h"
 #import "QYZJMineYuHuiQuanTVC.h"
 #import "QYZJChangePayPasswordTwoVC.h"
+#import "QYZJHomeTwoTVC.h"
+#import "QYZJMineZhuYeTVC.h"
 @interface QYZJZhiFuVC ()
 @property (weak, nonatomic) IBOutlet UIButton *payBt;
 @property (weak, nonatomic) IBOutlet UIImageView *imgV1;
@@ -40,6 +42,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WWWWX:) name:@"WXPAY" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ZFBPAY:) name:@"ZFBPAY" object:nil];
+    
+    [self checkPayPasswordWith:@"0" withisCheack:YES];
+    
     
 }
 
@@ -73,7 +78,7 @@
         [self chackYouHuiJuanAction];
     }
     
-    [self checkPayPasswordWith:@"0" withisCheack:YES];
+    
     
 }
 
@@ -138,28 +143,32 @@
         self.imgV1.image = [UIImage imageNamed:@"xuanze_2"];
         self.imgVT2.image = [UIImage imageNamed:@"xuanze_1"];
         self.imgV3.image = [UIImage imageNamed:@"xuanze_1"];
+        self.img4.image = [UIImage imageNamed:@"xuanze_1"];
         self.payType = sender.tag - 100;
     }else if (sender.tag == 101) {
         self.imgV1.image = [UIImage imageNamed:@"xuanze_1"];
         self.imgVT2.image = [UIImage imageNamed:@"xuanze_2"];
         self.imgV3.image = [UIImage imageNamed:@"xuanze_1"];
+        self.img4.image = [UIImage imageNamed:@"xuanze_1"];
         self.payType = sender.tag - 100;
     }else if (sender.tag == 102){
         self.imgV1.image = [UIImage imageNamed:@"xuanze_1"];
         self.imgVT2.image = [UIImage imageNamed:@"xuanze_1"];
         self.imgV3.image = [UIImage imageNamed:@"xuanze_2"];
+        self.img4.image = [UIImage imageNamed:@"xuanze_1"];
         self.payType = sender.tag - 100;
         
     }else if (sender.tag == 104){
-        self.imgV1.image = [UIImage imageNamed:@"xuanze_1"];
-        self.imgVT2.image = [UIImage imageNamed:@"xuanze_1"];
-        self.imgV3.image = [UIImage imageNamed:@"xuanze_1"];
-        
+       
+        self.payType = sender.tag - 100;
         QYZJMineYuHuiQuanTVC * vc =[[QYZJMineYuHuiQuanTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         Weak(weakSelf);
         vc.youHuiQuanBlock = ^(NSString * _Nonnull ID) {
             weakSelf.img4.image = [UIImage imageNamed:@"xuanze_2"];
+            weakSelf.imgV1.image = [UIImage imageNamed:@"xuanze_1"];
+            weakSelf.imgVT2.image = [UIImage imageNamed:@"xuanze_1"];
+            weakSelf.imgV3.image = [UIImage imageNamed:@"xuanze_1"];
             weakSelf.youHuiID = ID;
         };
         vc.isChoose = self.type - 4;
@@ -167,13 +176,20 @@
         
     }else if (sender.tag == 103){
         
-        if (self.payType == 0) {
+        if (self.payType == 0 || self.payType == 4) {
             
             if (self.isSetPayPassWord) {
-                [LLPassWordAlertView showWithTitle:@"支付密码" desStr:[NSString stringWithFormat:@"支付金额:%0.2f元",self.model.money] finish:^(NSString *pwStr) {
-                    [self checkPayPasswordWith:pwStr withisCheack:NO];
-                    
-                }];
+                if (self.payType == 4) {
+                    [LLPassWordAlertView showWithTitle:@"支付密码" desStr:@"优惠券支付" finish:^(NSString *pwStr) {
+                        [self checkPayPasswordWith:pwStr withisCheack:NO];
+                    }];
+                }else {
+                    [LLPassWordAlertView showWithTitle:@"支付密码" desStr:[NSString stringWithFormat:@"支付金额:%0.2f元",self.model.money] finish:^(NSString *pwStr) {
+                        [self checkPayPasswordWith:pwStr withisCheack:NO];
+                        
+                    }];
+                }
+                
             }else {
                 
                 UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",@"您还没有设置支付密码, 请去设置"] preferredStyle:(UIAlertControllerStyleAlert)];
@@ -182,7 +198,7 @@
                 }];
                 UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
                     
-                
+                    
                     QYZJChangePayPasswordTwoVC * vc =[[QYZJChangePayPasswordTwoVC alloc] init];
                     vc.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:vc animated:YES];
@@ -222,11 +238,11 @@
             NSInteger a  = [[NSString stringWithFormat:@"%@",responseObject[@"result"]] intValue];
             
             if (isCheack) {
-                  if (a==0) {
-                      self.isSetPayPassWord = NO;
-                  }else {
-                      self.isSetPayPassWord = YES;
-                  }
+                if (a==0) {
+                    self.isSetPayPassWord = NO;
+                }else {
+                    self.isSetPayPassWord = YES;
+                }
                 
             }else {
                 
@@ -238,7 +254,7 @@
                     [SVProgressHUD showErrorWithStatus:@"支付密码错误"];
                     
                 }
-              
+                
                 
             }
             
@@ -315,10 +331,7 @@
                 self.payDic = responseObject;
                 [self goZFB];
             }else {
-                [SVProgressHUD showSuccessWithStatus:@"支付成功"];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self.navigationController popViewControllerAnimated:YES];
-                });
+                [self showPaySucess];
             }
             
             
@@ -343,10 +356,7 @@
     if (resp.errCode==WXSuccess)
     {
         
-        [SVProgressHUD showSuccessWithStatus:@"帖子置顶成功!"];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.navigationController popViewControllerAnimated:YES];
-        });
+        [self showPaySucess];
     }
     else if (resp.errCode==WXErrCodeUserCancel)
     {
@@ -384,10 +394,7 @@
     if (resp.errCode==WXSuccess)
     {
         
-        [SVProgressHUD showSuccessWithStatus:@"帖子置顶成功!"];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.navigationController popViewControllerAnimated:YES];
-        });
+        [self showPaySucess];
     }
     else if (resp.errCode==WXErrCodeUserCancel)
     {
@@ -404,22 +411,45 @@
 
 //支付宝支付结果处理
 - (void)goZFB{
-    
-    
-    [[AlipaySDK defaultService] payOrder:self.payDic[@"result"] fromScheme:@"com.qyzj.app" callback:^(NSDictionary *resultDic) {
+    [[AlipaySDK defaultService] payOrder:self.payDic[@"result"] fromScheme:@"com.QYZJAPP.app" callback:^(NSDictionary *resultDic) {
         if ([resultDic[@"resultStatus"] isEqualToString:@"6001"]) {
             //用户取消支付
             [SVProgressHUD showErrorWithStatus:@"用户取消支付"];
         } else if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
-            
-            [SVProgressHUD showSuccessWithStatus:@"支付成功"];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.navigationController popViewControllerAnimated:YES];
-            });
+            [self showPaySucess];
         } else {
             [SVProgressHUD showErrorWithStatus:@"支付失败"];
         }
     }];
+}
+
+- (void)showPaySucess {
+    
+    [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (self.type == 5 || self.type == 6) {
+            if (self.navigationController.childViewControllers.count >= 5) {
+                UIViewController * vc = self.navigationController.childViewControllers[self.navigationController.childViewControllers.count - 5];
+                UIViewController * vcTwo = self.navigationController.childViewControllers[self.navigationController.childViewControllers.count - 3];
+                if ([vc isKindOfClass:[QYZJHomeTwoTVC class]]) {
+                    [self.navigationController popToViewController:vc animated:YES];
+                }
+                if ([vcTwo isKindOfClass:[QYZJMineZhuYeTVC class]]) {
+                    [self.navigationController popToViewController:vcTwo animated:YES];
+                }
+            }else if (self.navigationController.childViewControllers.count >= 3) {
+                
+                UIViewController * vcTwo = self.navigationController.childViewControllers[self.navigationController.childViewControllers.count - 3];
+                if ([vcTwo isKindOfClass:[QYZJMineZhuYeTVC class]]) {
+                    [self.navigationController popToViewController:vcTwo animated:YES];
+                }
+            }
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    });
+    
+    
 }
 
 
@@ -432,10 +462,7 @@
         
     } else if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
         
-        [SVProgressHUD showSuccessWithStatus:@"支付成功"];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.navigationController popViewControllerAnimated:YES];
-        });
+        [self showPaySucess];
     } else {
         [SVProgressHUD showErrorWithStatus:@"支付失败"];
     }

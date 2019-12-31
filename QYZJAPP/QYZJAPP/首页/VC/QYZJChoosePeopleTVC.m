@@ -136,7 +136,7 @@
    
     
     NSString * url = [QYZJURLDefineTool user_addQuestionURL];
-    if (self.type == 2) {
+    if (self.type == 1) {
         url = [QYZJURLDefineTool user_appointCaipanURL];
     }
 
@@ -184,7 +184,7 @@
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"pay_money"]= @(self.money);
-    dict[@"type"] = @(self.type);
+    dict[@"type"] = @(3-self.type);
     dict[@"id"] = ID;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_wechatPayURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
 
@@ -196,7 +196,7 @@
             vc.model = mm;
             vc.ID = ID;
             vc.numer = self.number;
-            vc.type = 7 - self.type;
+            vc.type = 4 + self.type;
             [self.navigationController pushViewController:vc animated:YES];
 
 
@@ -219,12 +219,15 @@
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"page"] = @(self.page);
     dict[@"pageSize"] = @(10);
-    dict[@"type"] = @(3-self.type);
+    dict[@"type"] = @(self.type);
     dict[@"city_id"] = [zkSignleTool shareTool].cityId;
-    dict[@"end_type"] = @(self.type - 1);
+    dict[@"end_type"] = @(2-self.type);
     dict[@"sort_type"] = @"1";
     dict[@"search_type"] = @(self.type);
     dict[@"search_word"] = self.search_word;
+    if (self.search_word.length > 0) {
+        dict[@"type"] = @"3";
+    }
     [zkRequestTool networkingPOST:[QYZJURLDefineTool app_searchURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
@@ -323,7 +326,7 @@
         NSInteger number = 0;
         for (QYZJFindModel * model  in self.selctArr) {
             if (model.isSelect) {
-                if (self.type == 1) {
+                if (self.type == 2) {
                     money = money + model.question_price;
                }else {
                     money = money + model.appoint_price;

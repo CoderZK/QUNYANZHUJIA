@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface QYZJAddMineLabelsVC : BaseViewController
 @property(nonatomic,copy)void(^sendLabelsBlock)(NSString *labelsID,NSString * labelsStr);
 @property(nonatomic,strong)NSMutableArray<QYZJTongYongModel *> *leiXingArr;
+@property(nonatomic,strong)NSString *role_id;
 @end
 
 NS_ASSUME_NONNULL_END

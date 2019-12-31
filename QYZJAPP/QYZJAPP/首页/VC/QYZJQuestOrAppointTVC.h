@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJQuestOrAppointTVC : BaseTableViewController
-@property(nonatomic,assign)NSInteger type; // 0 预约.1提问
+@property(nonatomic,assign)NSInteger type; // 1 预约.2提问 // 1 裁判  2 教练
 @property(nonatomic,strong)NSString *ID;
 @property(nonatomic,assign)CGFloat money;
 @property(nonatomic,strong)NSString *cityID;

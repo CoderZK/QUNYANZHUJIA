@@ -371,7 +371,7 @@
 - (void)pushHomeTwoVCWithIndex:(NSInteger)index {
     if (index<2) {
         QYZJHomeTwoTVC * vc =[[QYZJHomeTwoTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
-        vc.type = index+1;
+        vc.type = 2-index;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (index == 2){

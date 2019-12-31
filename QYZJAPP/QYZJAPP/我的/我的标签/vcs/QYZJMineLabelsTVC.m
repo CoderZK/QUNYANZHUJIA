@@ -23,23 +23,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleArr = @[].mutableCopy;
-    self.idsArr = @[].mutableCopy;
+    self.titleArr = [self.labelsStr componentsSeparatedByString:@","].mutableCopy;
+    self.idsArr = [self.labelsId componentsSeparatedByString:@","].mutableCopy;
+    
+    self.headV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 0.01)];
+
+    
     [self setLabels];
     
     self.editBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 75, 10, 60, 20)];
-    self.editBt.layer.cornerRadius = 3;
-    self.editBt.layer.borderColor = OrangeColor.CGColor;
-    self.editBt.layer.borderWidth = 1.0f;
+//    self.editBt.layer.cornerRadius = 3;
+//    self.editBt.layer.borderColor = OrangeColor.CGColor;
+//    self.editBt.layer.borderWidth = 1.0f;
     [self.editBt setTitle:@"编辑" forState:UIControlStateNormal];
     [self.editBt setTitle:@"编辑" forState:UIControlStateSelected];
-    [self.editBt setTitleColor:OrangeColor forState:UIControlStateNormal];
+    [self.editBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.editBt.titleLabel.font = kFont(14);
     self.editBt.tag = 3;
     [self.editBt addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.editBt];
     
-    self.headV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 10)];
+    
+
+    
     
     self.footV = [[PublicFuntionTool shareTool] createFootvWithTitle:@"完成" andImgaeName:@""];
     Weak(weakSelf);
@@ -100,10 +106,8 @@
 - (void)setLabels {
     
     [self.headV.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
-    
     CGFloat space = 25;
-    CGFloat ww = (ScreenW - 6* space);
+    CGFloat ww = (ScreenW - 6* space)/4;
     CGFloat hh = 35;
     
     for (int i = 0 ; i < self.titleArr.count + 1; i++) {
@@ -135,7 +139,9 @@
             [button setTitleColor:OrangeColor forState:UIControlStateNormal];
             button.layer.borderWidth = 1;
             [button addTarget:self action:@selector(add) forControlEvents:UIControlEventTouchUpInside];
-            self.headV.mj_h = CGRectGetMaxY(button.frame) + 30;
+            CGFloat headH  = CGRectGetMaxY(button.frame) + 30;
+            self.headV.mj_h = headH;
+            self.tableView.tableHeaderView = self.headV;
         }
         
           
@@ -146,8 +152,9 @@
 
 - (void)clickAction:(UIButton *)button {
     
-    button.selected = YES;
+    button.selected = !button.selected;
     [self setfootV];
+    [self setLabels];
     
 }
 
@@ -170,6 +177,7 @@
         weakSelf.titleArr = [labelsStr componentsSeparatedByString:@","].mutableCopy;
         [weakSelf setLabels];
     };
+    vc.role_id = self.role_id;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -184,9 +192,8 @@
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             [SVProgressHUD showSuccessWithStatus:@"标签修改成功"];
-            
-         
-            
+            self.editBt.selected = YES;
+            [self setfootV];
             
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];

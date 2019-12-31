@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJChoosePeopleTVC : BaseTableViewController
-@property(nonatomic,assign)NSInteger type; // 1 教练 2 裁判 1 提问 2 预约
+@property(nonatomic,assign)NSInteger type; // 1 裁判  2 教练  1 预约 2 提问 
 @property(nonatomic,strong)NSString *cityID;
 @property(nonatomic,assign)BOOL isSelectOK;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *selctArr;

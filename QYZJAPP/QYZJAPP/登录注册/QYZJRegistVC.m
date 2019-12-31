@@ -104,6 +104,13 @@
         [SVProgressHUD showErrorWithStatus:@"请输入密码"];
         return;
     }
+    
+    if (self.passWordTF.text.length < 8 || self.passWordTF.text.length > 16) {
+        [SVProgressHUD showErrorWithStatus:@"请输入8~16的包含字符和数字新密码"];
+        return;
+    }
+    
+    
     if (![self.passWordTF.text isEqualToString:self.passWordTwoTF.text]) {
         [SVProgressHUD showSuccessWithStatus:@"两次密码不一样"];
         return;

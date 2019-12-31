@@ -30,7 +30,7 @@
 #define QQAppKey @"6EwJ1flChWzz6zPO"
 
 
-@interface AppDelegate ()
+@interface AppDelegate ()<WXApiDelegate,UNUserNotificationCenterDelegate>
 
 @end
 
@@ -212,7 +212,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"ZFBPAY" object:resultDic];
             NSLog(@"result ======================== %@",resultDic);
         }];
-    } else if ([url.absoluteString hasPrefix:@"wx013aad9217dedd99://pay"] ) {
+    } else if ([url.absoluteString hasPrefix:@"wxd9cbb4de3c914a74://pay"] ) {
         //微信
         [WXApi handleOpenURL:url delegate:self];
         
@@ -231,7 +231,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"ZFBPAY" object:resultDic];
             NSLog(@"result ======================== %@",resultDic);
         }];
-    } else if ([url.absoluteString hasPrefix:@"wx013aad9217dedd99://pay"] ) {
+    } else if ([url.absoluteString hasPrefix:@"wxd9cbb4de3c914a74://pay"] ) {
         
         [WXApi handleOpenURL:url delegate:self];
         
@@ -252,7 +252,7 @@
             
             NSLog(@"result ======================== %@",resultDic);
         }];
-    } else if ([url.absoluteString hasPrefix:@"wx013aad9217dedd99://pay"] ) {
+    } else if ([url.absoluteString hasPrefix:@"wxd9cbb4de3c914a74://pay"] ) {
         [WXApi handleOpenURL:url delegate:self];
         
     }else {

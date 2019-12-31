@@ -36,6 +36,7 @@
 #import "QYZJMineBaoXiuListTVC.h"
 #import "QYZJMineYuYueDanTVC.h"
 #import "QYZJMineZhiBoTVC.h"
+#import "QYZJMineLabelsTVC.h"
 @interface QYZJMineVC ()<HHYMineFourCellDelegate,QYZJMIneTwoCellDelegate,HHYMineFiveCellDelegate>
 @property(nonatomic,strong)QYZJMineHeadView *headV;
 @property(nonatomic,strong)NSArray *headTitleArr;
@@ -324,12 +325,10 @@
             [self.navigationController pushViewController:vc animated:YES];
         }else if (dd == 1) {
             
-            if (self.dataModel.role_name.length > 0) {
+            if (self.dataModel.is_coach || self.dataModel.is_referee) {
                 [SVProgressHUD showErrorWithStatus:@"该身份证号码已绑定其他账户，如需申诉请联系客服"];
                 return;
             }
-            
-            
             QYZJShengQingRuZhuVC* vc =[[QYZJShengQingRuZhuVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
@@ -373,7 +372,10 @@
                     vc.bond_money = self.dataModel.bond_money;
                     [self.navigationController pushViewController:vc animated:YES];
                 }else if (dd == 5){
-                    
+                    QYZJMineLabelsTVC * vc =[[QYZJMineLabelsTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    vc.labelsStr = self.dataModel.label;
+                    [self.navigationController pushViewController:vc animated:YES];
                     
                 }
                

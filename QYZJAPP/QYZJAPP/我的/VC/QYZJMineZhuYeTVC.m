@@ -109,6 +109,12 @@
     Weak(weakSelf);
       view.footViewClickBlock = ^(UIButton *button) {
                NSLog(@"\n\n%@",@"完成");
+          if([zkSignleTool shareTool].role == 1) {
+              [SVProgressHUD showErrorWithStatus:@"您已经是服务方,不能预约和提问"];
+              return ;
+          }
+          
+          
           [weakSelf appointOrQuestionAction:button.tag];
           
           

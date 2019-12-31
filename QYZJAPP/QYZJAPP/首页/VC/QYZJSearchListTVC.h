@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJSearchListTVC : BaseTableViewController
 @property(nonatomic,strong)NSString *cityID,*roledId;
-@property(nonatomic,assign)NSInteger type; //0 首页, 1 教练 2 裁判
+@property(nonatomic,assign)NSInteger type; //0 首页, 2 教练 1 裁判
 @property(nonatomic,assign)BOOL isCaiPanNei;
 @end
 

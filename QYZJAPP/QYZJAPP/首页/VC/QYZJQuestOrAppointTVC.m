@@ -32,7 +32,7 @@
     
    
     self.navigationItem.title = @"快捷提问";
-    if (self.type == 0) {
+    if (self.type == 1) {
            self.navigationItem.title = @"快速预约";
        }
     
@@ -225,7 +225,7 @@
     
     
     
-    if (self.type == 0) {
+    if (self.type == 1) {
         self.whiteFourV.hidden = YES;
         self.headV.mj_h = CGRectGetMaxY(self.whiteTwoV.frame);
     }else {
@@ -260,7 +260,7 @@
                       if (isStare) {
                           weakSelf.navigationItem.title = @"正在录音...";
                       }else {
-                          if (weakSelf.type == 0) {
+                          if (weakSelf.type == 1) {
                               weakSelf.navigationItem.title = @"快速预约";
                           }else {
                               weakSelf.navigationItem.title = @"快速提问";
@@ -323,7 +323,7 @@
          QYZJChoosePeopleTVC * vc =[[QYZJChoosePeopleTVC alloc] init];
          vc.hidesBottomBarWhenPushed = YES;
          vc.cityID = self.cityID;
-         vc.type = 2 - self.type;
+         vc.type = self.type;
          vc.titleStr = self.titleTF.text;
          vc.videoStr = self.videoStr;
          vc.picArr = self.picsArr;
@@ -355,7 +355,7 @@
     }
     
     NSString * url = [QYZJURLDefineTool user_addQuestionURL];
-    if (self.type == 0) {
+    if (self.type == 1) {
         url = [QYZJURLDefineTool user_appointCaipanURL];
     }
 
@@ -399,7 +399,7 @@
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"pay_money"]= @(self.money);
-    dict[@"type"] = @(2-self.type);
+    dict[@"type"] = @(3-self.type);
     dict[@"id"] = ID;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_wechatPayURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
 
@@ -410,7 +410,7 @@
             vc.hidesBottomBarWhenPushed = YES;
             vc.model = mm;
             vc.ID = ID;
-            vc.type = 5+self.type;
+            vc.type = 4+self.type;
             [self.navigationController pushViewController:vc animated:YES];
             
             

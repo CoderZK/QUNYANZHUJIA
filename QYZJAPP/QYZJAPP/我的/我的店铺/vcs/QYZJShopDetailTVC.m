@@ -32,6 +32,12 @@
         KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"购买" andImgaeName:@""];
         Weak(weakSelf);
         view.footViewClickBlock = ^(UIButton *button) {
+            
+             if([zkSignleTool shareTool].role == 1) {
+                [SVProgressHUD showErrorWithStatus:@"您已经是服务方,不能购买其他服务方商品"];
+                return ;
+            }
+            
             QYZJBuyOrderDetailTVC * vc =[[QYZJBuyOrderDetailTVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             self.dataModel.ID = self.ID;

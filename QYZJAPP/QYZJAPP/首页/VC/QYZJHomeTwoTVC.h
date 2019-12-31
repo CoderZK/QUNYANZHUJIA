@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJHomeTwoTVC : BaseTableViewController
-@property(nonatomic,assign)NSInteger type; // 1教练 // 2 裁判
+@property(nonatomic,assign)NSInteger type; // 2教练 // 1 裁判
 @property(nonatomic,strong)NSString *cityID;
 @end
 

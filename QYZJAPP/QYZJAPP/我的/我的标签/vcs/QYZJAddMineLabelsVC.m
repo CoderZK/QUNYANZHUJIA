@@ -59,12 +59,32 @@
         [SVProgressHUD showErrorWithStatus:@"至少选择一个标签"];
         return;
     }
+
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"label_ids"] = self.labelsID;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_editInfoURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+   
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            if (self.sendLabelsBlock != nil) {
+                self.sendLabelsBlock(self.labelsID,self.labelsStr);
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+       
+        
+    }];
     
     
-    if (self.sendLabelsBlock != nil) {
-        self.sendLabelsBlock(self.labelsID,self.labelsStr);
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+   
     
 
     
@@ -74,26 +94,24 @@
 
 
 
-//- (void)getLeiXingData {
-//
-//    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_findLabelByTypeListURL] parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-//        if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
-//
-//            self.leiXingArr = [QYZJTongYongModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
-//            for (QYZJTongYongModel * model in self.leiXingArr) {
-//                if ([self.titleArray containsObject:model.name]) {
-//                    model.isSelect = YES;
-//                }
-//            }
-//
-//        }else {
-//            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
-//        }
-//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//
-//    }];
-//
-//}
+- (void)getLeiXingData {
+    
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"role_id"] = self.role_id;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_findLabelByTypeListURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
+            
+            self.leiXingArr = [QYZJTongYongModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
+            
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+    }];
+    
+}
 
 
 @end

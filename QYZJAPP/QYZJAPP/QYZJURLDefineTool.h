@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 //正式
-#define URLOne @"http://mobile.qunyanzhujia.com:8098/qyzj/"
+//#define URLOne @"http://mobile.qunyanzhujia.com:8098/qyzj/"
 //测试
-//#define URLOne @"http://192.168.1.116:8086/qyzj/"
+#define URLOne @"http://192.168.1.116:8086/qyzj/"
 
 
 ////图片地址

@@ -41,7 +41,7 @@
     self.titleArr = @[].mutableCopy;
     self.dataDict = @{}.mutableCopy;
     [self setheadV];
-    if (self.type == 1) {
+    if (self.type == 2) {
         [self getLeiXingData];
     }else {
         self.serachV.dataArray = @[@"同城",@"评分从高到低",@"筛选"].mutableCopy;
@@ -53,6 +53,7 @@
 
     self.dataArray = @[].mutableCopy;
     self.page = 1;
+    [self getData];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.page = 1;
         [self getData];
@@ -145,16 +146,16 @@
 
     self.serachV = [[QYZJSearchView alloc] initWithFrame:CGRectMake(0, 70, ScreenW, 49.4)];
     [self.headV addSubview:self.serachV];
-    self.serachV.isCanChange = self.type -1;
+    self.serachV.isCanChange = 2-self.type;
     Weak(weakSelf);
     self.serachV.clickHeadBlock = ^(NSInteger index,BOOL isYou) {
         //点击了标题
         weakSelf.lableIndex = 0;
-        if (self.type == 1) {
+        if (weakSelf.type == 2) {
             weakSelf.LabelV.dataArray = weakSelf.dataDict[weakSelf.titleArr[index]];;
             weakSelf.headV.mj_h = CGRectGetMaxY(weakSelf.LabelV.frame);
             weakSelf.tableView.tableHeaderView = weakSelf.headV;
-        }else if (weakSelf.type == 2) {
+        }else if (weakSelf.type == 1) {
             if (index == 0) {
                 weakSelf.isTongChong = isYou;
             }else if (index == 1) {
@@ -265,7 +266,7 @@
         return cell;
     }else {
         QYZJHomeFiveCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeFiveCell" forIndexPath:indexPath];
-        cell.model = self.dataArray[indexPath.row - 1];
+        cell.model = self.dataArray[indexPath.row-1];
         cell.headBt.tag = indexPath.row - 1;
         [cell.headBt addTarget:self action:@selector(gotoZhuYeAction:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
@@ -286,7 +287,7 @@
     }else {
         QYZJMineZhuYeTVC * vc =[[QYZJMineZhuYeTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
-        vc.ID = self.dataArray[indexPath.row].ID;
+        vc.ID = self.dataArray[indexPath.row-1].ID;
         [self.navigationController pushViewController:vc animated:YES];
     }
     
@@ -295,7 +296,7 @@
 
 #pragma mark ------- 取他人的主页 ------
 - (void)gotoZhuYeAction:(UIButton *)button {
-    
+
     QYZJMineZhuYeTVC * vc =[[QYZJMineZhuYeTVC alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     vc.ID = self.dataArray[button.tag].ID;
