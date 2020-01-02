@@ -18,6 +18,8 @@
 @property(nonatomic,strong)QYZJTongYongModel * audioModel;
 @property(nonatomic,strong)NSString *audioStr;
 @property(nonatomic,assign)NSInteger row;
+@property(nonatomic,strong)UIView *yuYinV;
+@property(nonatomic,strong)UIButton *listBt,*closeBt;
 @end
 
 
@@ -27,8 +29,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"详情";
-    
-    
+    self.row = -1;
+    self.tableView.backgroundColor = self.view.backgroundColor = WhiteColor;
     [self.tableView registerClass:[QYZJMineQuestFiveCell class] forCellReuseIdentifier:@"QYZJMineQuestFiveCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJMineQyestFourCell" bundle:nil] forCellReuseIdentifier:@"QYZJMineQyestFourCell"];
     
@@ -39,10 +41,12 @@
     
     if (!self.isPay) {
         [self setFootV];
+        [self diss];
     }else {
+        [self setHead];
         
     }
-    [self setHead];
+    
     [self getAudioDict];
 }
 
@@ -62,8 +66,43 @@
     self.whiteView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.whiteView.mj_w = ScreenW ;
     self.whiteView.mj_h = 60;
-    self.whiteView.mj_x = 0;
+    
+    self.whiteView.mj_x = 0 ;
     [self.view addSubview:self.whiteView];
+    
+    self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60);
+    self.whiteView.mj_y = ScreenH - sstatusHeight - 44 - 60 ;
+    self.yuYinV = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenH - sstatusHeight - 44 - 60-30, ScreenW, 30)];
+    
+    if (sstatusHeight > 20) {
+         self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 34 - 60);
+        self.whiteView.mj_y = ScreenH - sstatusHeight - 44 - 34 - 60 ;
+        self.yuYinV.frame = CGRectMake(0, ScreenH - sstatusHeight - 44 - 34- 60-30, ScreenW, 30);
+    }
+    self.yuYinV.backgroundColor = [UIColor clearColor];
+    
+    self.listBt = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 200, 25)];
+    [self.listBt setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
+    [self.listBt setImage:[UIImage imageNamed:@"sy"] forState:UIControlStateNormal];
+    [self.listBt setTitle:@"点击播放" forState:UIControlStateNormal];
+    self.listBt.titleLabel.font = kFont(14);
+    self.listBt.layer.cornerRadius = 12.5;
+    self.listBt.clipsToBounds = YES;
+    self.listBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [self.listBt setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 15)];
+    [self.listBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 25, 0,  0)];
+    [self.yuYinV addSubview:self.listBt];
+    [self.listBt addTarget:self action:@selector(yuYinAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.listBt.tag = 10;
+    self.yuYinV.hidden = YES;
+    
+    self.closeBt = [[UIButton alloc] initWithFrame:CGRectMake(210, 0, 25, 25)];
+    [self.closeBt setImage:[UIImage imageNamed:@"4"] forState:UIControlStateNormal];
+    [self.yuYinV addSubview:self.closeBt];
+    [self.closeBt addTarget:self action:@selector(yuYinAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.closeBt.tag = 11;
+    
+    [self.view addSubview:self.yuYinV];
     
     
     UIView * backV =[[UIView alloc] initWithFrame:CGRectMake(15, 10, ScreenW - 30 - 100 , 40)];
@@ -84,7 +123,7 @@
     [self.whiteView addSubview:luYinBt];
     [luYinBt addTarget:self action:@selector(luYinAction:) forControlEvents:UIControlEventTouchUpInside];
     [luYinBt setImage:[UIImage imageNamed:@"audioBg"] forState:UIControlStateNormal];
-    self.whiteView.hidden = YES;
+//    self.whiteView.hidden = YES;
     
     UIButton * sendBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW -70, 15, 60, 30)];
     [sendBt setTitle:@"发送" forState:UIControlStateNormal];
@@ -95,23 +134,42 @@
     sendBt.layer.cornerRadius = 4;
     sendBt.clipsToBounds = YES;
     [sendBt addTarget:self action:@selector(sendAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+   
+    
 
     
 }
 
-
-
-- (void)show {
+- (void)yuYinAction:(UIButton *)button {
     
-    if (sstatusHeight > 20) {
-          self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - sstatusHeight -44 - 34 - 60);
-          self.whiteView.mj_y = ScreenH - sstatusHeight -44 - 34  - 60;
-      }else {
-          self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH -44 -60);
-          self.whiteView.mj_y = ScreenH - sstatusHeight  - 44-60;
-      }
-    self.whiteView.hidden = NO;
+    if (button.tag == 10) {
+        [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:self.audioStr] isLocality:NO];
+        [self.listBt setTitle:@"正在播放..." forState:UIControlStateNormal];
+        [PublicFuntionTool shareTool].findPlayBlock = ^{
+            [button setTitle:@"点击播放" forState:UIControlStateNormal];
+        };
+        
+    }else {
+        self.audioStr = nil;
+        self.yuYinV.hidden = YES;
+    }
+    
+    
 }
+
+
+//- (void)show {
+//
+//    if (sstatusHeight > 20) {
+//          self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - sstatusHeight -44 - 34 - 60);
+//          self.whiteView.mj_y = ScreenH - sstatusHeight -44 - 34  - 60;
+//      }else {
+//          self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH -44 - sstatusHeight-60);
+//          self.whiteView.mj_y = ScreenH - sstatusHeight  - 44-60;
+//      }
+//    self.whiteView.hidden = NO;
+//}
 
 - (void)diss {
     self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH );
@@ -134,6 +192,11 @@
                 weakSelf.navigationItem.title = @"正在录音...";
             }else {
                 weakSelf.navigationItem.title = @"详情";
+                
+                if (mediaData.length == 4096) {
+                  return ;
+                }
+                
                 [weakSelf updateLoadMediaWithData:mediaData ];
                 [[QYZJLuYinView LuYinTool] diss];
                 
@@ -150,10 +213,9 @@
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"token"] = self.audioModel.token;
     [zkRequestTool NetWorkingUpLoadMediaWithfileData:data parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-        [SVProgressHUD showSuccessWithStatus:@"上传音频成功"];
         self.audioStr = responseObject[@"key"];
         [self.tableView reloadData];
-        
+        self.yuYinV.hidden = NO;
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"\n\n------%@",error);
     }];
@@ -172,7 +234,7 @@
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             self.dataModel = [QYZJFindModel mj_objectWithKeyValues:responseObject[@"result"]];
-            
+
             [self.tableView reloadData];
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
@@ -277,7 +339,7 @@
         QYZJMineQyestFourCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJMineQyestFourCell" forIndexPath:indexPath];
         cell.titleLB.text = self.dataModel.title;
         cell.contentLB.text = self.dataModel.context;
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
     }else {
@@ -285,6 +347,9 @@
         cell.model = self.dataModel.answer_list[indexPath.row];
         [cell.replyBt addTarget:self  action:@selector(replyAction:) forControlEvents:UIControlEventTouchUpInside];
         cell.replyBt.tag = indexPath.row;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell.listBt addTarget:self  action:@selector(replyAction:) forControlEvents:UIControlEventTouchUpInside];
+        cell.listBt.tag = indexPath.row;
         return cell;
         
     }
@@ -292,36 +357,70 @@
     
 }
 
+
+- (void)listAction:(UIButton *)button {
+    
+    for (QYZJFindModel * model  in self.dataModel.answer_list) {
+        if (model == self.dataModel.answer_list[button.tag]) {
+            model.isPlaying = YES;
+        }else {
+            model.isPlaying = NO;
+        }
+    }
+    [self.tableView reloadData];
+       [button setTitle:@"正在播放..." forState:UIControlStateNormal];
+       [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:self.dataModel.answer_list[button.tag].media_url] isLocality:NO];
+       [PublicFuntionTool shareTool].findPlayBlock = ^{
+           [button setTitle:@"回复语音" forState:UIControlStateNormal];
+       };
+}
+
 //点击回复
 - (void)replyAction:(UIButton *)button {
     self.row = button.tag;
-    [self show];
+//    [self show];
     
-    
+    self.TF.placeholder = [NSString stringWithFormat:@"回复:%@",self.dataModel.answer_list[button.tag].a_nick_name];
+    [self.TF becomeFirstResponder];
 }
 
 //回复
 - (void)sendAction:(UIButton *)button {
     
-    
-    
     if (self.audioStr.length == 0 || self.TF.text.length == 0) {
-        [SVProgressHUD showErrorWithStatus:@""];
-        
+        [SVProgressHUD showErrorWithStatus:@"语音和文字回复必须有一个"];
+        return;
     }
-    
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
-    dict[@"question_id"] = self.dataModel.answer_list[self.row].ID;
+    dict[@"question_id"] = self.model.ID;
     dict[@"media_url"] = self.audioStr;
     dict[@"contents"] = self.TF.text;
-    dict[@"to_id"] = self.dataModel.answer_list[self.row].user_id;
+    
+    if (self.row == -1) {
+        dict[@"type"] = @"0";
+    }else {
+       dict[@"to_id"] = self.dataModel.answer_list[self.row].ID;
+        if (self.model.is_answer == 2) {
+           dict[@"type"] = @"1";
+        }else {
+           dict[@"type"] = @"2";
+        }
+    }
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_replyQuestionURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
-            [self diss];
+            
+            if (self.model.is_answer == 1) {
+                [self wecharPayWithID:responseObject[@"result"][@"id"]];
+            }else {
+                [SVProgressHUD showSuccessWithStatus:@"回复成功"];
+                self.row = -1;
+                self.TF.placeholder = @"回复提问";
+                [self.tableView endEditing:YES];
+            }
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
         }
@@ -334,6 +433,48 @@
     }];
     
     
+    
+}
+
+
+- (void)wecharPayWithID:(NSString *)ID {
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+//    dict[@"pay_money"]= @(self.money);
+    dict[@"type"] = @(1);
+    dict[@"id"] = ID;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_wechatPayURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            QYZJTongYongModel * mm = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
+            QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.model = mm;
+            vc.ID = ID;
+            vc.type = 4;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 0 && self.model.is_answer == 2) {
+        self.row = -1;
+        self.TF.placeholder = @"回复提问";
+    }
     
 }
 

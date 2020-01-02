@@ -306,7 +306,7 @@
             imageView.image = arr[i];
             UIButton * button = [[UIButton alloc]init];
             button.frame = CGRectMake(ww/2 - 25, hh/2-25, 50, 50);
-            [button setBackgroundImage:[UIImage imageNamed:@"6"] forState:UIControlStateNormal];
+            [button setBackgroundImage:[UIImage imageNamed:@"29"] forState:UIControlStateNormal];
             [imageView addSubview:button];
             button.alpha = 0.8;
             button.userInteractionEnabled = NO;

@@ -104,7 +104,7 @@
            
            //未付款
            
-           QYZJMineQuestTwoTVC * vc =[[QYZJMineQuestTwoTVC alloc] init];
+           QYZJMineQuestTwoTVC * vc =[[QYZJMineQuestTwoTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
            vc.hidesBottomBarWhenPushed = YES;
            vc.model = model;
            if ([model.status isEqualToString:@"0"]) {
@@ -126,7 +126,7 @@
     
     //未付款
     
-    QYZJMineQuestTwoTVC * vc =[[QYZJMineQuestTwoTVC alloc] init];
+    QYZJMineQuestTwoTVC * vc =[[QYZJMineQuestTwoTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
     vc.hidesBottomBarWhenPushed = YES;
     vc.model = model;
     if ([model.status isEqualToString:@"0"]) {

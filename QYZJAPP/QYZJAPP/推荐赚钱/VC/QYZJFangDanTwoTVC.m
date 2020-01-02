@@ -183,6 +183,7 @@
     }else {
         TongYongTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         cell.leftLB.text = self.leftArr[indexPath.row];
+        cell.TF.keyboardType= UIKeyboardTypeDefault;
         cell.TF.delegate = self;
         cell.swith.userInteractionEnabled = NO;
         cell.TF.hidden = NO;
@@ -192,6 +193,9 @@
         cell.TF.mj_w = ScreenW - 150;
         cell.swith.hidden = YES;
         if (indexPath.row == 0 || indexPath.row == 6 || indexPath.row == 7 || indexPath.row == 9) {
+            if  (indexPath.row == 6 || indexPath.row == 9) {
+                cell.TF.keyboardType =  UIKeyboardTypeDecimalPad;
+            }
             cell.moreImgV.hidden = YES;
             cell.TF.mj_w = ScreenW - 120;
             cell.TF.userInteractionEnabled = YES;
@@ -199,7 +203,6 @@
             cell.swith.hidden = NO;
             cell.leftLB.mj_w = 200;
             cell.moreImgV.hidden = cell.TF.hidden =  YES;
-            
         }
         [self setTitleWithCell:cell WithIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -243,8 +246,16 @@
 //                           NSString * firlpath = [[NSBundle mainBundle] pathForResource:@"8888" ofType:@"mp3"];
 //                           NSData * dd = [NSData dataWithContentsOfFile:firlpath];
 //                           [weakSelf updateLoadMediaWithData:dd];
-                           [weakSelf updateLoadMediaWithData:mediaData WithIndexPath:indexPath];
-                           [[QYZJLuYinView LuYinTool] diss];
+                           if (mediaData.length == 4096) {
+                                return ;
+                            }
+                           
+                          
+                               [weakSelf updateLoadMediaWithData:mediaData WithIndexPath:indexPath];
+                               [[QYZJLuYinView LuYinTool] diss];
+                           
+                           
+                          
                            
                        }
                    });
@@ -333,8 +344,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.indexPath = indexPath;
     [self.tableView endEditing:YES];
+    
+    
     if (indexPath.row == 1) {
-        
         self.moreChooseV.dataArray = self.quDaoArr;
         Weak(weakSelf);
         self.moreChooseV.chooseViewMoreBlockFinsh = ^{
@@ -351,7 +363,6 @@
             [weakSelf.tableView reloadData];
         };
         [self.moreChooseV show];
-        
     }else if (indexPath.row == 2) {
         if (self.LeiXingArr.count == 0) {
             [SVProgressHUD showErrorWithStatus:@"获取类型中,请先填写其它内容"];
@@ -547,5 +558,47 @@
     
     
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+
+    TongYongTwoCell  * cell = (TongYongTwoCell *)textField.superview;
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    
+    if (indexPath.row == 6 || indexPath.row == 7) {
+        NSMutableString *futureString = [NSMutableString stringWithString:textField.text];
+           [futureString insertString:string atIndex:range.location];
+           
+        if ([futureString containsString:@"-"]) {
+            return NO;
+        }
+           NSInteger flag = 0;
+           // 这个可以自定义,保留到小数点后两位,后几位都可以
+           const NSInteger limited = 2;
+           
+           for (NSInteger i = futureString.length - 1; i >= 0; i--) {
+               
+               if ([futureString characterAtIndex:i] == '.') {
+                   // 如果大于了限制的就提示
+                   if (flag > limited) {
+                       
+                       [SVProgressHUD showErrorWithStatus:@"请输入最多两位小数的数值"];
+                       return NO;
+                   }
+                   
+                   break;
+               }
+               
+               flag++;
+           }
+    }
+    
+    
+    
+    
+   
+    
+    return YES;
+}
+
 
 @end

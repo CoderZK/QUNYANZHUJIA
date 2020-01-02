@@ -125,6 +125,7 @@
         cell.swith.hidden = YES;
         cell.TF.userInteractionEnabled = YES;
         cell.moreImgV.hidden = YES;
+        cell.TF.keyboardType= UIKeyboardTypeDefault;
         if (indexPath.section ==0) {
             cell.leftLB.text = self.leftArrOne[indexPath.row];
             cell.TF.placeholder = self.placeArrOne[indexPath.row];

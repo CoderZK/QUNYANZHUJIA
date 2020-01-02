@@ -129,6 +129,7 @@
     cell.rightImgV.hidden = YES;
     cell.TF.delegate = self;
     cell.leftImgV.image = [UIImage imageNamed:[NSString stringWithFormat:@"ico_%ld",indexPath.row+10]];
+     cell.TF.keyboardType = UIKeyboardTypeDefault;
     if (indexPath.row == 0) {
         cell.TF.text = self.str1;
         cell.TF.placeholder = @"请输入姓名";
@@ -140,6 +141,7 @@
     }else {
         cell.TF.text = self.str3;
         cell.TF.placeholder = @"请输入银行卡号";
+        cell.TF.keyboardType = UIKeyboardTypeNumberPad;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

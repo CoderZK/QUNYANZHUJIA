@@ -35,12 +35,15 @@
     [self setFootV];
     [self createHeadV];
     self.picsArr = @[].mutableCopy;
-    if (self.type == 4 && self.picsArrTwo.count > 0) {
+    if ((self.type == 4 || self.type == 1) && self.picsArrTwo.count > 0) {
         self.picsArr = self.picsArrTwo;
     }
    
+//    if (self.videoUrl.length > 0) {
+//        self.videoStr = self.videoUrl;
+//    }
+    
     [self addPicsWithArr:self.picsArr];
-    self.videoStr = nil;
     self.navigationItem.title = @"创建施工阶段";
     if (self.type == 1) {
         self.navigationItem.title = @"修改案例";
@@ -289,12 +292,13 @@
     
     UIButton * button = [[UIButton alloc]init];
     button.frame = CGRectMake((ScreenW - 110)/2 - 25, ((ScreenW - 110)*9/16)/2-25, 50, 50);
-    [button setBackgroundImage:[UIImage imageNamed:@"6"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"29"] forState:UIControlStateNormal];
     [imageView addSubview:button];
     button.alpha = 0.8;
     [button addTarget:self action:@selector(play) forControlEvents:UIControlEventTouchUpInside];
-    button.userInteractionEnabled = NO;
-    imageView.hidden = YES;
+    button.userInteractionEnabled = YES;
+    [imageView addSubview:button];
+    
     
     UIButton * delectVideoBt = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) - 10, 3, 20, 20)];
     [delectVideoBt setImage:[UIImage imageNamed:@"11"] forState:UIControlStateNormal];
@@ -304,8 +308,13 @@
     self.headV.mj_h = CGRectGetMaxY(self.whiteTwoV.frame);
     self.tableView.tableHeaderView = self.headV;
     self.headV.backgroundColor = self.whiteOneV.backgroundColor = self.whiteTwoV.backgroundColor = WhiteColor;
+    imageView.hidden = self.deleteBt.hidden =  YES;
     
-    self.videoStr = self.videoUrl;
+    
+    if (self.type == 1) {
+       self.videoStr = self.videoUrl;
+    }
+    
     
 }
 
@@ -324,6 +333,7 @@
         self.addBt.hidden = YES;
         self.videoImgV.hidden =self.deleteBt.hidden = NO;
         self.whiteTwoV.mj_h = (ScreenW - 110)*9/16 + 20;
+        
         self.videoImgV.image = [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:[QYZJURLDefineTool getVideoURLWithStr:videoStr]] size:CGSizeMake((ScreenW - 110), (ScreenW - 110)*9/16)];
         self.headV.mj_h = CGRectGetMaxY(self.whiteTwoV.frame);
         self.tableView.tableHeaderView = self.headV;

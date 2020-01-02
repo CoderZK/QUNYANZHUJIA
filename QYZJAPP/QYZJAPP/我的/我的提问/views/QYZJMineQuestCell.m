@@ -41,6 +41,7 @@
         _tableView.scrollEnabled = NO;
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.showsHorizontalScrollIndicator = NO;
+        _tableView.userInteractionEnabled = NO;
         [self addSubview:_tableView];
         [self.tableView registerClass:[QYZJMineQuestNeiCell class] forCellReuseIdentifier:@"cell"];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

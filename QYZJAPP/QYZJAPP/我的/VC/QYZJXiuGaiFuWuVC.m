@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *quSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *yuyueSwitch;
 @property(nonatomic,strong)NSMutableArray<zkPickModel *> *cityArray;
-@property(nonatomic,strong)NSString *proStr,*proId,*cityStr,*cityId,*aearStr,*aearId;
+
 
 @end
 
@@ -237,7 +237,7 @@
             // 如果大于了限制的就提示
             if (flag > limited) {
                 
-                [SVProgressHUD showErrorWithStatus:@"输入金额请控制在小数点后两位"];
+                [SVProgressHUD showErrorWithStatus:@"请输入最多两位小数的数值"];
                 return NO;
             }
             

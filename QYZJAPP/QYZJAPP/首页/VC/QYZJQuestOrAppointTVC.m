@@ -183,7 +183,7 @@
     
     UIButton * button = [[UIButton alloc]init];
     button.frame = CGRectMake((ScreenW - 110)/2 - 25, ((ScreenW - 110)*9/16)/2-25, 50, 50);
-    [button setBackgroundImage:[UIImage imageNamed:@"6"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"29"] forState:UIControlStateNormal];
     [imageView addSubview:button];
     button.alpha = 0.8;
     [button addTarget:self action:@selector(play) forControlEvents:UIControlEventTouchUpInside];
@@ -264,6 +264,10 @@
                               weakSelf.navigationItem.title = @"快速预约";
                           }else {
                               weakSelf.navigationItem.title = @"快速提问";
+                          }
+                          
+                          if (mediaData.length == 4096) {
+                            return ;
                           }
                           
                           [weakSelf updateLoadMediaWithData:mediaData];

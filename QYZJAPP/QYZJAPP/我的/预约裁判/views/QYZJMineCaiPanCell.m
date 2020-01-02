@@ -71,7 +71,7 @@
         
         UIButton * button = [[UIButton alloc]init];
         button.frame = CGRectMake(self.imgVideo.frame.size.width/2 - 25, self.imgVideo.frame.size.height/2 -25, 50, 50);
-        [button setBackgroundImage:[UIImage imageNamed:@"6"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"29"] forState:UIControlStateNormal];
         [self.imgVideo addSubview:button];
         button.alpha = 0.8;
         [button addTarget:self action:@selector(playAction:) forControlEvents:UIControlEventTouchUpInside];

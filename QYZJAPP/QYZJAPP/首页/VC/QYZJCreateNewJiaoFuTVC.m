@@ -126,6 +126,7 @@
         cell.TF.delegate = self;
         cell.moreImgV.hidden = NO;
         cell.TF.mj_w = ScreenW - 150;
+        cell.TF.keyboardType= UIKeyboardTypeDefault;
         if (indexPath.row == 1||indexPath.row == 4 ) {
             cell.moreImgV.hidden = NO;
             cell.leftLB.mj_w = 200;
@@ -147,6 +148,7 @@
             cell.TF.text = self.dataModel.address_pca;
         }else if (indexPath.row == 3){
             cell.TF.text = self.dataModel.telphone;
+             cell.TF.keyboardType = UIKeyboardTypePhonePad;
         }else if (indexPath.row == 4){
             if (self.dataModel.type_id > 0) {
                cell.TF.text = self.LeiXingArr[self.dataModel.type_id-1].name;
@@ -155,6 +157,7 @@
             }
         }else if (indexPath.row == 5){
             cell.TF.text = self.dataModel.area;
+            cell.TF.keyboardType =  UIKeyboardTypeDecimalPad;
         }
         return cell;
 
@@ -241,6 +244,47 @@
     }
     
     [self.tableView reloadData];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+
+    TongYongTwoCell  * cell = (TongYongTwoCell *)textField.superview;
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    
+    if (indexPath.row == 5) {
+        NSMutableString *futureString = [NSMutableString stringWithString:textField.text];
+           [futureString insertString:string atIndex:range.location];
+           
+        if ([futureString containsString:@"-"]) {
+            return NO;
+        }
+           NSInteger flag = 0;
+           // 这个可以自定义,保留到小数点后两位,后几位都可以
+           const NSInteger limited = 2;
+           
+           for (NSInteger i = futureString.length - 1; i >= 0; i--) {
+               
+               if ([futureString characterAtIndex:i] == '.') {
+                   // 如果大于了限制的就提示
+                   if (flag > limited) {
+                       
+                       [SVProgressHUD showErrorWithStatus:@"请输入最多两位小数的数值"];
+                       return NO;
+                   }
+                   
+                   break;
+               }
+               
+               flag++;
+           }
+    }
+    
+    
+    
+    
+   
+    
+    return YES;
 }
 
 

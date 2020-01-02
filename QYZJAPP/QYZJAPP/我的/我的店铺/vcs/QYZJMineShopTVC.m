@@ -150,7 +150,7 @@
     dict[@"page"] = @(self.page);
     dict[@"pageSize"] = @(10);
     dict[@"type"] = @(self.type);
-    dict[@"other_user_id"] = self.user_id;
+//    dict[@"other_user_id"] = self.user_id;
     dict[@"token"] = [zkSignleTool shareTool].session_token;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_goodsListURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];

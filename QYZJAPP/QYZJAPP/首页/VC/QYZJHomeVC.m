@@ -32,6 +32,7 @@
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
 @property(nonatomic,strong)NSString *cityID;
 @property(nonatomic,strong)NSString *searchWord;
+@property(nonatomic,strong)QYZJLocationTool *tool;
 
 @end
 
@@ -71,15 +72,15 @@
     
     self.tabBarController.delegate = self;
     
-    QYZJLocationTool * tool = [[QYZJLocationTool alloc] init];
-    [tool locationAction];
+    self.tool = [[QYZJLocationTool alloc] init];
+    [self.tool locationAction];
     Weak(weakSelf);
-    tool.locationBlock = ^(NSString * _Nonnull cityStr, NSString * _Nonnull cityID) {
+    self.tool.locationBlock = ^(NSString * _Nonnull cityStr, NSString * _Nonnull cityID) {
         weakSelf.navigaV.titleStr = cityStr;
         weakSelf.cityID = cityID;
         weakSelf.page = 1;
         [weakSelf getData];
-        [weakSelf getBanList];
+        [zkSignleTool shareTool].cityId = cityID;
     };
     
     [self.tableView registerClass:[zkLunBoCell class] forCellReuseIdentifier:@"zkLunBoCell"];
@@ -100,18 +101,6 @@
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.page = 1;
         [self getData];
-        
-          QYZJLocationTool * tool = [[QYZJLocationTool alloc] init];
-          [tool locationAction];
-          Weak(weakSelf);
-          tool.locationBlock = ^(NSString * _Nonnull cityStr, NSString * _Nonnull cityID) {
-              weakSelf.navigaV.titleStr = cityStr;
-              weakSelf.cityID = cityID;
-              weakSelf.page = 1;
-              [weakSelf getData];
-              [zkSignleTool shareTool].cityId = cityID;
-          };
-        
     }];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         self.page++;
@@ -250,11 +239,13 @@
         if ([zkSignleTool shareTool].role == 0) {
             QYZJHomeOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeOneCell" forIndexPath:indexPath];
             cell.delegate = self;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }else {
             QYZJHomeTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeTwoCell" forIndexPath:indexPath];
-                   cell.delegate = self;
-                   return cell;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.delegate = self;
+            return cell;
         }
        
     }else if (indexPath.section == 2) {
@@ -284,6 +275,12 @@
        }
     
     if (indexPath.section == 2) {
+        
+        if([zkSignleTool shareTool].role == 1) {
+            [SVProgressHUD showErrorWithStatus:@"您已经是服务方,不能购买其他服务方商品"];
+            return ;
+        }
+        
         QYZJYuYueFangDanTVC * vc =[[QYZJYuYueFangDanTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
@@ -400,6 +397,7 @@
     dict[@"city_id"] = [zkSignleTool shareTool].cityId;
     dict[@"search_word"] = self.searchWord;
     dict[@"search_type"] = @"0";
+    dict[@"roleId"] = @"0";
     [zkRequestTool networkingPOST:[QYZJURLDefineTool app_searchURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];

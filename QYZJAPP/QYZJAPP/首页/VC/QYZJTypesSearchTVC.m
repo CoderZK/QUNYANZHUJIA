@@ -74,7 +74,11 @@
     dict[@"page"] = @(self.page);
     dict[@"pageSize"] = @(10);
     dict[@"sort_type"] = @"1";
-    dict[@"roleId"] = self.role_id;
+     if (self.role_id.length > 0) {
+           dict[@"roleId"] = self.role_id;
+       }else {
+           dict[@"roleId"] = @"0";
+       }
     dict[@"search_type"] = @(self.type);
     dict[@"type"] = @(self.type);
    if (self.type == 2) {

@@ -182,6 +182,7 @@
     cell.TF.userInteractionEnabled = NO;
     cell.TF.delegate = self;
     QYZJFindModel * model = self.dataArray[indexPath.section];
+    cell.TF.keyboardType= UIKeyboardTypeDefault;
     if (indexPath.row == 0){
         cell.TF.text = model.stage_name;
     }else  if (indexPath.row == 1){
@@ -275,6 +276,47 @@
           model.days = [textField.text floatValue];
         }
        [self.tableView reloadData];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+
+    TongYongTwoCell  * cell = (TongYongTwoCell *)textField.superview;
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    
+    if (indexPath.row == 1 ) {
+        NSMutableString *futureString = [NSMutableString stringWithString:textField.text];
+           [futureString insertString:string atIndex:range.location];
+           
+        if ([futureString containsString:@"-"]) {
+            return NO;
+        }
+           NSInteger flag = 0;
+           // 这个可以自定义,保留到小数点后两位,后几位都可以
+           const NSInteger limited = 3 - indexPath.row;
+           
+           for (NSInteger i = futureString.length - 1; i >= 0; i--) {
+               
+               if ([futureString characterAtIndex:i] == '.') {
+                   // 如果大于了限制的就提示
+                   if (flag > limited) {
+                       
+                       [SVProgressHUD showErrorWithStatus:@"请输入最多两位小数的数值"];
+                       return NO;
+                   }
+                   
+                   break;
+               }
+               
+               flag++;
+           }
+    }
+    
+    
+    
+    
+   
+    
+    return YES;
 }
 
 #pragma mark ---- 添加阶段 ----

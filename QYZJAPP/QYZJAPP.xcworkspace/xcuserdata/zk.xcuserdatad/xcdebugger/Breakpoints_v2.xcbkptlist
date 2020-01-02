@@ -7,7 +7,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
-            uuid = "44C29475-A85A-416A-A33F-16ACF4D170A8"
+            uuid = "1F4C26E9-1476-47BB-8076-7358F486BD7A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -18,144 +18,80 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "998447F1-805C-45CC-BEB1-2360DB604A01"
+            uuid = "3586EB25-D587-4763-AD05-123AFF89F767"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJZhiFuVC.m"
+            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJAddWorkMomentTVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "429"
-            endingLineNumber = "429"
-            landmarkName = "-showPaySucess"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "998447F1-805C-45CC-BEB1-2360DB604A01 - b9cbef389bd36020"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[QYZJZhiFuVC showPaySucess]"
-                  moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E9%A6%96%E9%A1%B5/VC/QYZJZhiFuVC.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "429"
-                  endingLineNumber = "429"
-                  offsetFromSymbolStart = "61">
-               </Location>
-               <Location
-                  uuid = "998447F1-805C-45CC-BEB1-2360DB604A01 - 48d6da5637b67db2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__28-[QYZJZhiFuVC showPaySucess]_block_invoke"
-                  moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E9%A6%96%E9%A1%B5/VC/QYZJZhiFuVC.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "429"
-                  endingLineNumber = "429"
-                  offsetFromSymbolStart = "15">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D90DDB93-63A8-4EAB-AE01-4ADA843F89C8"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJZhiFuVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "431"
-            endingLineNumber = "431"
-            landmarkName = "-showPaySucess"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "47481120-6375-46CA-BFD5-B66B68D19098"
+            uuid = "EDF61935-56B9-4C92-AC1D-EAC31F0402A0"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJZhiFuVC.m"
+            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJAddWorkMomentTVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "397"
-            endingLineNumber = "397"
-            landmarkName = "-WWWWX:"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
+            landmarkName = "-setVideoStr:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FD2A0778-3943-478F-B9BB-245FA7395540"
+            uuid = "E14EFC22-DB49-4D26-8F10-90F2D575DEA4"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJZhiFuVC.m"
+            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJAddWorkMomentTVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "359"
-            endingLineNumber = "359"
-            landmarkName = "-WXPAY:"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
+            landmarkName = "-setVideoStr:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D0CCBE8A-8100-4A05-86A1-E0356E072CC6"
+            uuid = "E64DDC31-81FF-4C7E-AEE4-A735996D9284"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJZhiFuVC.m"
+            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJAddWorkMomentTVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "465"
-            endingLineNumber = "465"
-            landmarkName = "-ZFBPAY:"
+            startingLineNumber = "339"
+            endingLineNumber = "339"
+            landmarkName = "-setVideoStr:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "91A5739A-3E70-4B9B-A087-062165089500"
+            uuid = "76EBF348-F28D-44B5-A7E9-FD9DE70042B3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x6211;&#x7684;/VC/QYZJMineVC.m"
+            filePath = "QYZJAPP/&#x63a8;&#x8350;&#x8d5a;&#x94b1;/VC/QYZJYuYueFangDanTVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "331"
-            endingLineNumber = "331"
-            landmarkName = "-didlMineTwoCell:index:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5834BEF6-264B-4549-88C2-770A6A7DB1B5"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x6211;&#x7684;/&#x6211;&#x7684;&#x6807;&#x7b7e;/vcs/QYZJMineLabelsTVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "-setLabels"
+            startingLineNumber = "313"
+            endingLineNumber = "313"
+            landmarkName = "-luYinAction:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

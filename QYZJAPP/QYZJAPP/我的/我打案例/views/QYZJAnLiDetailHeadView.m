@@ -113,7 +113,7 @@
         imgV.image = [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:dataModel.video_url] size:CGSizeMake((ScreenW - 20), (ScreenW - 20) * 9 / 16)];
         UIButton * button = [[UIButton alloc]init];
         button.frame = CGRectMake((ScreenW - 20)/2 - 25, ((ScreenW - 20) * 9 / 16)/2-25, 50, 50);
-        [button setBackgroundImage:[UIImage imageNamed:@"6"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"29"] forState:UIControlStateNormal];
         [imgV addSubview:button];
         
         [button addTarget:self action:@selector(videoPlayAction:) forControlEvents:UIControlEventTouchUpInside];

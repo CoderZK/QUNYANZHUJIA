@@ -54,6 +54,11 @@
     if (self.searchWord.length > 0) {
        dict[@"type"] = @(3);
     }
+    if (self.roledId.length > 0) {
+        dict[@"roleId"] = self.roledId;
+    }else {
+        dict[@"roleId"] = @"0";
+    }
     [zkRequestTool networkingPOST:[QYZJURLDefineTool app_searchURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];

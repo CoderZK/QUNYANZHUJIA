@@ -352,12 +352,12 @@
                 if (dd == 2) {
                     QYZJXiuGaiFuWuVC * vc =[[QYZJXiuGaiFuWuVC alloc] init];
                    vc.hidesBottomBarWhenPushed = YES;
-//                   vc.proId = self.dataModel.pro_id;
-//                   vc.cityId = self.dataModel.city_id;
-//                   vc.aearId = self.dataModel.area_id;
-//                   vc.proStr = self.dataModel.pro_name;
-//                   vc.cityStr = self.dataModel.city_name;
-//                   vc.aearStr = self.dataModel.area_name;
+                   vc.proId = self.dataModel.pro_id;
+                   vc.cityId = self.dataModel.city_id;
+                   vc.aearId = self.dataModel.area_id;
+                   vc.proStr = self.dataModel.pro_name;
+                   vc.cityStr = self.dataModel.city_name;
+                   vc.aearStr = self.dataModel.area_name;
                    [self.navigationController pushViewController:vc animated:YES];
                 }else if (dd == 3) {
                     QYZJMineYuHuiQuanTVC * vc =[[QYZJMineYuHuiQuanTVC alloc] init];

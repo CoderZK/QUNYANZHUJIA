@@ -94,7 +94,7 @@
     NSInteger number = 0;
     for (QYZJFindModel * model  in self.selctArr) {
         if (model.isSelect) {
-            if (self.type == 1) {
+            if (self.type == 2) {
                 money = money + model.question_price;
             }else {
                  money = money + model.appoint_price;
@@ -225,6 +225,7 @@
     dict[@"sort_type"] = @"1";
     dict[@"search_type"] = @(self.type);
     dict[@"search_word"] = self.search_word;
+    dict[@"roleId"] = @"0";
     if (self.search_word.length > 0) {
         dict[@"type"] = @"3";
     }

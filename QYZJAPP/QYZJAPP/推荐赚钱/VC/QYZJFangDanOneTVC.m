@@ -185,9 +185,11 @@
     cell.moreImgV.hidden = YES;
     cell.TF.userInteractionEnabled = YES;
     cell.TF.delegate = self;
+    cell.TF.keyboardType= UIKeyboardTypeDefault;
     if (indexPath.row == 0) {
         cell.TF.text = self.str1;
         cell.TF.placeholder = @"请输入联系方式";
+        cell.TF.keyboardType = UIKeyboardTypePhonePad;
     }else if (indexPath.row == 1) {
         cell.TF.text = self.str2;
         cell.moreImgV.hidden = NO;

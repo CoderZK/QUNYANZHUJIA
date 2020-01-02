@@ -262,6 +262,47 @@
     
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+
+    TongYongTwoCell  * cell = (TongYongTwoCell *)textField.superview;
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    
+    if (indexPath.row == 5 || indexPath.row == 4) {
+        NSMutableString *futureString = [NSMutableString stringWithString:textField.text];
+           [futureString insertString:string atIndex:range.location];
+           
+        if ([futureString containsString:@"-"]) {
+            return NO;
+        }
+           NSInteger flag = 0;
+           // 这个可以自定义,保留到小数点后两位,后几位都可以
+           const NSInteger limited = 2;
+           
+           for (NSInteger i = futureString.length - 1; i >= 0; i--) {
+               
+               if ([futureString characterAtIndex:i] == '.') {
+                   // 如果大于了限制的就提示
+                   if (flag > limited) {
+                       
+                       [SVProgressHUD showErrorWithStatus:@"请输入最多两位小数的数值"];
+                       return NO;
+                   }
+                   
+                   break;
+               }
+               
+               flag++;
+           }
+    }
+    
+    
+    
+    
+   
+    
+    return YES;
+}
+
 
 #pragma mark ---- 点击图片添加或者删除 ----
 - (void)didClickQYZJJiaoFuZiLiaoCell:(QYZJJiaoFuZiLiaoCell *)cell withIndex:(NSInteger)index withIsdelect:(BOOL)isDelect {

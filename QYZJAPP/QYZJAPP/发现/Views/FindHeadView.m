@@ -103,6 +103,11 @@
     
     
 }
+- (void)setTitleStr:(NSString *)titleStr {
+    _titleStr = titleStr;
+    self.TF.text = titleStr;
+}
+
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if (self.delegateSignal && self.isPresentVC) {

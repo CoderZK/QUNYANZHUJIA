@@ -114,7 +114,7 @@
     dict[@"type_id"] = @(self.dataModel.type_id);
     dict[@"demand_context"] =  self.dataModel.des;
     dict[@"role_id"] = self.dataModel.role_ids;
-    dict[@"maner"] = @(self.dataModel.manner_id);
+    dict[@"manner"] = @(self.dataModel.manner_id);
     dict[@"mobile_code"] = self.footV.codeStr;
     dict[@"house_model"] = @(self.dataModel.house_model_id);;
     dict[@"renovation_time"] = @(self.dataModel.renovation_time_id);
@@ -227,10 +227,14 @@
         cell.TF.mj_w = ScreenW - 150;
         cell.rightLB.hidden = YES;
         cell.swith.hidden = YES;
+        cell.TF.keyboardType = UIKeyboardTypeDefault;
         if (indexPath.row == 1 || indexPath.row == 3 || indexPath.row == 8 ) {
             cell.moreImgV.hidden = YES;
             cell.TF.mj_w = ScreenW - 120;
             cell.TF.userInteractionEnabled = YES;
+            if (indexPath.row == 3 || indexPath.row == 8) {
+                cell.TF.keyboardType = UIKeyboardTypeDecimalPad;
+            }
         }else if (indexPath.row == 11||indexPath.row == 10) {
             cell.swith.hidden = NO;
             cell.leftLB.mj_w = 200;
@@ -307,6 +311,11 @@
                        }else {
                            
                             weakSelf.navigationItem.title = @"预约表单";
+                           
+                           if (mediaData.length == 4096) {
+                               return ;
+                           }
+                           
 //
 //                           NSString * firlpath = [[NSBundle mainBundle] pathForResource:@"8888" ofType:@"mp3"];
 //                           NSData * dd = [NSData dataWithContentsOfFile:firlpath];
@@ -343,6 +352,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.tableView endEditing:YES];
     self.indexPath = indexPath;
     if (indexPath.row == 0) {
      if (self.cityArray.count == 0) {
@@ -484,6 +494,48 @@
         self.dataModel.price = [textField.text floatValue];
     }
     
+}
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+
+    TongYongTwoCell  * cell = (TongYongTwoCell *)textField.superview;
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    
+    if (indexPath.row == 8 || indexPath.row == 3) {
+        NSMutableString *futureString = [NSMutableString stringWithString:textField.text];
+           [futureString insertString:string atIndex:range.location];
+           
+        if ([futureString containsString:@"-"]) {
+            return NO;
+        }
+           NSInteger flag = 0;
+           // 这个可以自定义,保留到小数点后两位,后几位都可以
+           const NSInteger limited = 2;
+           
+           for (NSInteger i = futureString.length - 1; i >= 0; i--) {
+               
+               if ([futureString characterAtIndex:i] == '.') {
+                   // 如果大于了限制的就提示
+                   if (flag > limited) {
+                       
+                       [SVProgressHUD showErrorWithStatus:@"请输入最多两位小数的数值"];
+                       return NO;
+                   }
+                   
+                   break;
+               }
+               
+               flag++;
+           }
+    }
+    
+    
+    
+    
+   
+    
+    return YES;
 }
 
 

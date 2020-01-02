@@ -40,6 +40,8 @@
     NSArray *barTitleArr=@[@"首页",@"发现",@"推荐赚钱",@"我的"];
     NSArray *className=@[@"QYZJHomeVC",@"QYZJFindVC",@"QYZJRecommendVC",@"QYZJMineVC"];
     NSMutableArray *arr=[[NSMutableArray alloc] init];
+    
+    
     for (int i=0; i<className.count; i++)
     {
         NSString *str=[className objectAtIndex:i];

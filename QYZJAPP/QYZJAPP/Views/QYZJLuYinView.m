@@ -10,9 +10,10 @@
 #define kRecordAudioFile @"myRecord.caf"
 static QYZJLuYinView * tool = nil;
 @interface QYZJLuYinView()<AVAudioRecorderDelegate>
-@property(nonatomic,strong)UIButton *Bt;
+@property(nonatomic,strong)UIButton *Bt,*closeBt;
 @property (nonatomic,strong) AVAudioRecorder *audioRecorder;//音频录音机
 @property(nonatomic,strong)NSData *audioData;
+
 @end
 
 
@@ -35,7 +36,7 @@ static QYZJLuYinView * tool = nil;
         UIButton * bb = [[UIButton alloc] initWithFrame:self.bounds];
         [self addSubview:bb];
         [bb addTarget:self action:@selector(diss) forControlEvents:UIControlEventTouchUpInside];
-        
+        self.closeBt = bb;
         
         self.Bt = [[UIButton alloc] initWithFrame:CGRectMake((ScreenW - 100)/2, (ScreenH - 100)/2-30, 100, 100)];
         self.Bt.backgroundColor = WhiteColor;
@@ -67,6 +68,7 @@ static QYZJLuYinView * tool = nil;
     
     UITouchPhase phase =event.allTouches.anyObject.phase;
     if (phase == UITouchPhaseBegan) {
+        self.closeBt.userInteractionEnabled = NO;
         NSLog(@"\n----%@",@"开始");
         if (![self.audioRecorder isRecording]) {
             [self.audioRecorder record];//首次使用应用时如果调用record方法会询问用户是否允许使用麦克风
@@ -78,6 +80,7 @@ static QYZJLuYinView * tool = nil;
     else if(phase == UITouchPhaseEnded){
         NSLog(@"\n----%@",@"结束");
         [self.audioRecorder stop];
+        self.closeBt.userInteractionEnabled = YES;
         
     }
 }
@@ -110,7 +113,7 @@ static QYZJLuYinView * tool = nil;
     AVAudioSession *audioSession=[AVAudioSession sharedInstance];
    
 //    设置为播放和录音状态，以便可以在录制完之后播放录音
-    [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
     [audioSession setActive:YES error:nil];
 }
 
@@ -225,7 +228,7 @@ static QYZJLuYinView * tool = nil;
     [recordSetting setValue :[NSNumber numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];//
     [recordSetting setValue:[NSNumber numberWithFloat:8000.0] forKey:AVSampleRateKey];//采样率
     [recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];//声音通道，这里必须为双通道
-    [recordSetting setValue:[NSNumber numberWithInt:AVAudioQualityMax] forKey:AVEncoderAudioQualityKey];//音频质量
+    [recordSetting setValue:[NSNumber numberWithInt:AVAudioQualityMedium] forKey:AVEncoderAudioQualityKey];//音频质量
     
     NSString *cafFilePath = recorder.url.path;    //caf文件路径
     NSLog(@"\n录音文件位置%@",cafFilePath);

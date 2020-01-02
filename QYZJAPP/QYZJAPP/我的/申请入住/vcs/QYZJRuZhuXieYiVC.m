@@ -9,7 +9,7 @@
 #import "QYZJRuZhuXieYiVC.h"
 
 @interface QYZJRuZhuXieYiVC ()<UIWebViewDelegate>
-@property (weak, nonatomic) IBOutlet UIWebView *web;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
 
@@ -22,15 +22,23 @@
     
     NSString * path = [[NSBundle mainBundle] pathForResource:@"xieyi" ofType:@".html"];
     
-    [self.web loadHTMLString:[NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil] baseURL:nil];
+    [self.webView loadHTMLString:[NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil] baseURL:nil];
     
-    self.web.delegate = self;
+    self.webView.delegate = self;
+    self.webView.userInteractionEnabled = YES;
+    self.view.backgroundColor = WhiteColor;
     
     
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [SVProgressHUD dismiss];
+    
+    // 禁止用户复制粘贴
+    [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect=’none’;"];
+    // 禁止用户拨打电话
+    [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout=’none’;"];
+    
 }
 
 @end

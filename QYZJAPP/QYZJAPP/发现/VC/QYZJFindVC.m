@@ -87,11 +87,13 @@
     dict[@"content"] = self.searchText;
     dict[@"nick_name"] = self.searchText;
 
+    self.tableView.userInteractionEnabled = NO;
 
     [zkRequestTool networkingPOST:urlStr parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [SVProgressHUD dismiss];
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
+        self.tableView.userInteractionEnabled = YES;
         if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
             
             NSArray<QYZJFindModel *>*arr = [QYZJFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
@@ -105,7 +107,7 @@
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
+        self.tableView.userInteractionEnabled = YES;
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         
@@ -151,8 +153,9 @@
             [self getDataWithType:self.type];
         }else {
             NSNumber *number = dict[@"text"];
-            if (self.type == [number intValue]) {
-                self.searchText = nil;
+            if (self.type != [number intValue]) {
+                self.searchText = @"";
+                self.navigaV.titleStr = @"";
             }
             self.type = [number intValue];
             self.page = 1;

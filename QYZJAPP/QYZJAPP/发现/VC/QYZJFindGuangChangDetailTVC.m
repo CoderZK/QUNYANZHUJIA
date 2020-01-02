@@ -45,7 +45,7 @@
      [self.view addSubview:self.whiteView];
 
      
-     UIView * backV =[[UIView alloc] initWithFrame:CGRectMake(15, 10, ScreenW - 30, 40)];
+     UIView * backV =[[UIView alloc] initWithFrame:CGRectMake(15, 10, ScreenW - 30-70, 40)];
      backV.backgroundColor = [UIColor whiteColor];
      [self.view addSubview:backV];
      backV.layer.cornerRadius = 3;
@@ -54,7 +54,7 @@
      
 
      
-     self.TF = [[UITextField alloc] initWithFrame:CGRectMake(10, 5, ScreenW - 50, 30)];
+     self.TF = [[UITextField alloc] initWithFrame:CGRectMake(10, 5, ScreenW - 50-70, 30)];
      self.TF.font = kFont(14);
      self.TF.returnKeyType =  UIReturnKeySend;
      self.TF.placeholder = @"请输入评论";
@@ -62,6 +62,17 @@
      self.TF.returnKeyType = UIReturnKeySend;
      [backV addSubview:self.TF];
      
+    
+    UIButton * sendBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW -70, 15, 60, 30)];
+    [sendBt setTitle:@"发送" forState:UIControlStateNormal];
+    sendBt.titleLabel.font = kFont(14);
+    [sendBt setTitleColor:WhiteColor forState:UIControlStateNormal];
+    [self.whiteView addSubview:sendBt];
+    [sendBt setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
+    sendBt.layer.cornerRadius = 4;
+    sendBt.clipsToBounds = YES;
+    [sendBt addTarget:self action:@selector(sendAction:) forControlEvents:UIControlEventTouchUpInside];
+    
      
      if (sstatusHeight > 20) {
          self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 34 - 60);
@@ -86,6 +97,16 @@
     }];
     
     
+    
+}
+
+- (void)sendAction:(UIButton *)button {
+    if (self.TF.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请输入内容"];
+        return;
+    }
+    
+    [self textFieldShouldReturn:self.TF];
     
 }
 

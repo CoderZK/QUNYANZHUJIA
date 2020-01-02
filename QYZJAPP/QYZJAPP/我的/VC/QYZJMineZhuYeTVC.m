@@ -129,7 +129,7 @@
     
     QYZJQuestOrAppointTVC * vc =[[QYZJQuestOrAppointTVC alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
-    vc.type = index;
+    vc.type = index+1;
     vc.ID = self.ID;
     if (index == 0) {
         vc.money = self.dataModel.appoint_price;
@@ -248,6 +248,9 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (self.dataModel == nil) {
+        return 0;
+    }
     return 3;
 }
 

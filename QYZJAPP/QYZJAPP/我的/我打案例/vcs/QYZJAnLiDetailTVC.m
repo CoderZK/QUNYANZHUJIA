@@ -12,6 +12,7 @@
 @interface QYZJAnLiDetailTVC ()
 @property(nonatomic,strong)QYZJAnLiDetailHeadView *headV;
 @property(nonatomic,strong)QYZJFindModel *dataModel;
+@property(nonatomic,strong)NSString *viedeoStr;
 @end
 
 @implementation QYZJAnLiDetailTVC
@@ -50,7 +51,9 @@
              vc.type = 1;
              vc.titleStr = self.dataModel.title;
              vc.contentStr = self.dataModel.context;
+             vc.videoUrl = self.viedeoStr.length < 5 ? @"":self.viedeoStr;;
              vc.ID = self.ID;
+             vc.picsArrTwo = self.dataModel.pics.length > 0 ? [self.dataModel.pics componentsSeparatedByString:@","]:@[];
              vc.hidesBottomBarWhenPushed = YES;
              [self.navigationController pushViewController:vc animated:YES];
          }else {
@@ -103,6 +106,7 @@
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             self.dataModel = [QYZJFindModel mj_objectWithKeyValues:responseObject[@"result"]];
+            self.viedeoStr = responseObject[@"result"][@"videos"];
             self.headV.dataModel = self.dataModel;
             self.headV.mj_h = self.headV.headHeight;
             self.tableView.tableHeaderView = self.headV;

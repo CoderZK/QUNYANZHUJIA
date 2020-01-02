@@ -50,7 +50,7 @@
         [self.replyBt setTitleColor:CharacterBlack112 forState:UIControlStateNormal];
         self.replyBt.titleLabel.font = kFont(13);
         [self addSubview:self.replyBt];
-        [self.listBt addTarget:self action:@selector(listAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [self.listBt addTarget:self action:@selector(listAction:) forControlEvents:UIControlEventTouchUpInside];
         
         
     }
@@ -64,6 +64,11 @@
     self.nameLB.mj_w = [model.a_nick_name getWidhtWithFontSize:14];
     self.typeLB.mj_w = [model.a_role_name getWidhtWithFontSize:12] + 10;
     self.typeLB.text = model.a_role_name;
+    if (model.role_name.length == 0) {
+        self.typeLB.hidden = YES;
+    }else {
+        self.typeLB.hidden = NO;
+    }
     
     self.typeLB.mj_x = CGRectGetMaxX(self.nameLB.frame) + 10;
     
@@ -89,21 +94,16 @@
         model.cellHeight = 75;
     }
     
+    if (model.isPlaying) {
+        [self.listBt setTitle:@"正在播放..." forState:UIControlStateNormal];
+    }else {
+        [self.listBt setTitle:@"点击播放" forState:UIControlStateNormal];
+    }
     
     
 }
 
-- (void)listAction:(UIButton *)button {
-    
-    [[PublicFuntionTool shareTool] palyMp3WithNSSting:self.model.media_url isLocality:NO];;
-    [button setTitle:@"正在播放..." forState:UIControlStateNormal];
-       [[PublicFuntionTool shareTool] palyMp3WithNSSting:self.model.media_url isLocality:NO];
-       [PublicFuntionTool shareTool].findPlayBlock = ^{
-           [button setTitle:@"回复语音" forState:UIControlStateNormal];
-       };
-    
-    
-}
+
 
 
 - (void)awakeFromNib {

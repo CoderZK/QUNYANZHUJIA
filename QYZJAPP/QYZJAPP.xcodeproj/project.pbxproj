@@ -942,6 +942,7 @@
 		584A1CDE2383BDA3007FDC3D /* QYZJAddWorkMomentTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJAddWorkMomentTVC.m; sourceTree = "<group>"; };
 		584A1CE02383BDF4007FDC3D /* QYZJChangeDetailedListTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJChangeDetailedListTVC.h; sourceTree = "<group>"; };
 		584A1CE12383BDF4007FDC3D /* QYZJChangeDetailedListTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJChangeDetailedListTVC.m; sourceTree = "<group>"; };
+		5851931723BD8FEC0060F076 /* 群燕筑家.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "群燕筑家.entitlements"; sourceTree = "<group>"; };
 		586D1BAF23B1F383007268BC /* QYZJOtherCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJOtherCell.h; sourceTree = "<group>"; };
 		586D1BB023B1F383007268BC /* QYZJOtherCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJOtherCell.m; sourceTree = "<group>"; };
 		586D1BB123B1F383007268BC /* QYZJOtherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJOtherCell.xib; sourceTree = "<group>"; };
@@ -1047,6 +1048,7 @@
 		337F3E5820E9FE3B00C5526A /* QYZJAPP */ = {
 			isa = PBXGroup;
 			children = (
+				5851931723BD8FEC0060F076 /* 群燕筑家.entitlements */,
 				582DDA6D23B044060007B76C /* 8888.mp3 */,
 				583A4D58236BDF1E00180E27 /* Views */,
 				337F3EBF20EA13CA00C5526A /* 3rd */,
@@ -3024,8 +3026,10 @@
 			baseConfigurationReference = C0333005ECB5A67F63F21483 /* Pods-QYZJAPP.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "QYZJAPP/群燕筑家.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = N6ZU25A67U;
+				DEVELOPMENT_TEAM = 73D5T6D5VH;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3044,10 +3048,10 @@
 					"$(PROJECT_DIR)/QYZJAPP/3rd",
 					"$(PROJECT_DIR)/QYZJAPP/3rd/UMessage_Sdk_1.3.0",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.QYZJAPP.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.QYZJAPP.app123456;
 				PRODUCT_NAME = "群燕筑家";
 				PROVISIONING_PROFILE = "3bdcf4b3-e396-4d7a-ab2b-739f2269ddaa";
-				PROVISIONING_PROFILE_SPECIFIER = xuxuecom;
+				PROVISIONING_PROFILE_SPECIFIER = qyzjdev;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -3057,8 +3061,10 @@
 			baseConfigurationReference = 93517C6A5478579AE5177242 /* Pods-QYZJAPP.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "QYZJAPP/群燕筑家.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 73D5T6D5VH;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3077,9 +3083,9 @@
 					"$(PROJECT_DIR)/QYZJAPP/3rd",
 					"$(PROJECT_DIR)/QYZJAPP/3rd/UMessage_Sdk_1.3.0",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.QYZJAPP.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.QYZJAPP.app123456;
 				PRODUCT_NAME = "群燕筑家";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = QYZJAHD;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

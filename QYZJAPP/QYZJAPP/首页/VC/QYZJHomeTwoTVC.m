@@ -88,6 +88,7 @@
     dict[@"city_id"] = [zkSignleTool shareTool].cityId;
     dict[@"sort_type"] = @"1";
     dict[@"search_type"] = @(self.type);
+    dict[@"roleId"] = @"0";
     [zkRequestTool networkingPOST:[QYZJURLDefineTool app_searchURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
@@ -299,6 +300,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 1) {
+        
+        if([zkSignleTool shareTool].role == 1) {
+            [SVProgressHUD showErrorWithStatus:@"您已经是服务方,不能购买其他服务方商品"];
+            return ;
+        }
+        
         QYZJQuestOrAppointTVC * vc =[[QYZJQuestOrAppointTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         vc.type = self.type;
