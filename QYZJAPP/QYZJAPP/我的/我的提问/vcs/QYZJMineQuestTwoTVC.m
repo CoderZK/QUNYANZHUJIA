@@ -20,11 +20,17 @@
 @property(nonatomic,assign)NSInteger row;
 @property(nonatomic,strong)UIView *yuYinV;
 @property(nonatomic,strong)UIButton *listBt,*closeBt;
+@property(nonatomic,strong)KKKKFootView *viewView;
 @end
 
 
 
 @implementation QYZJMineQuestTwoTVC
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getData];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,20 +40,30 @@
     [self.tableView registerClass:[QYZJMineQuestFiveCell class] forCellReuseIdentifier:@"QYZJMineQuestFiveCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJMineQyestFourCell" bundle:nil] forCellReuseIdentifier:@"QYZJMineQyestFourCell"];
     
-    [self getData];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self getData];
     }];
     
+
+    [self setFH];
+    
+    [self getAudioDict];
+}
+
+- (void)setFH {
+    
     if (!self.isPay) {
+        self.whiteView.hidden = YES;
         [self setFootV];
         [self diss];
+        
     }else {
+        self.viewView.hidden = YES;
         [self setHead];
+        
         
     }
     
-    [self getAudioDict];
 }
 
 
@@ -256,6 +272,7 @@
     }
     
     KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"支付" andImgaeName:@""];
+    self.viewView = view;
     Weak(weakSelf);
     view.footViewClickBlock = ^(UIButton *button) {
         [weakSelf.tableView endEditing:YES];
@@ -282,6 +299,11 @@
             vc.model = mm;
             vc.ID = self.model.ID;
             vc.type = 6;
+            Weak(weakSelf);
+            vc.isBaoBlcok = ^{
+                weakSelf.isPay = YES;
+                [weakSelf setFH];
+            };
             [self.navigationController pushViewController:vc animated:YES];
             
             
@@ -344,11 +366,12 @@
         
     }else {
         QYZJMineQuestFiveCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJMineQuestFiveCell" forIndexPath:indexPath];
+        self.dataModel.answer_list[indexPath.row].is_pay = NO;
         cell.model = self.dataModel.answer_list[indexPath.row];
         [cell.replyBt addTarget:self  action:@selector(replyAction:) forControlEvents:UIControlEventTouchUpInside];
         cell.replyBt.tag = indexPath.row;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell.listBt addTarget:self  action:@selector(replyAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.listBt addTarget:self action:@selector(listAction:) forControlEvents:UIControlEventTouchUpInside];
         cell.listBt.tag = indexPath.row;
         return cell;
         
@@ -387,7 +410,7 @@
 //回复
 - (void)sendAction:(UIButton *)button {
     
-    if (self.audioStr.length == 0 || self.TF.text.length == 0) {
+    if (self.audioStr.length == 0 && self.TF.text.length == 0) {
         [SVProgressHUD showErrorWithStatus:@"语音和文字回复必须有一个"];
         return;
     }
@@ -421,6 +444,8 @@
                 self.TF.placeholder = @"回复提问";
                 [self.tableView endEditing:YES];
             }
+            [self getData];
+            
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
         }

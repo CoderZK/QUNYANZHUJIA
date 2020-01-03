@@ -34,6 +34,7 @@
     _model = model;
     self.titelLB.text = @"小燕子";
     if (self.type == 1) {
+        [self.gouTongBt setTitle:@"语音描述" forState:UIControlStateNormal];
         self.titelLB.text = model.demand_context;
       
     }
@@ -44,22 +45,23 @@
 - (IBAction)playMp3:(UIButton *)button {
    
     if (self.type == 1) {
-         [button setTitle:@"播放中..." forState:UIControlStateNormal];
-        [[PublicFuntionTool shareTool] palyMp3WithNSSting:self.model.demand_voice isLocality:NO];
+        [button setTitle:@"播放中..." forState:UIControlStateNormal];
+        [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:self.model.demand_voice] isLocality:NO];
+        Weak(weakSelf);
+        [PublicFuntionTool shareTool].findPlayBlock = ^{
+            if (weakSelf.type == 1) {
+                [button setTitle:@"语音描述" forState:UIControlStateNormal];
+            }else {
+                [button setTitle:@"语音描述" forState:UIControlStateNormal];
+            }
+            
+        };
     }else if (self.type == 2){
         if (self.listBtActionBlock != nil) {
             self.listBtActionBlock(button);
         }
     }
-    Weak(weakSelf);
-    [PublicFuntionTool shareTool].findPlayBlock = ^{
-        if (weakSelf.type == 1) {
-            [button setTitle:@"语音描述" forState:UIControlStateNormal];
-        }else {
-            [button setTitle:@"语音描述" forState:UIControlStateNormal];
-        }
-        
-    };
+    
 }
 
 

@@ -150,6 +150,9 @@ NS_ASSUME_NONNULL_BEGIN
 /*旁听支付*/
 +(NSString *)user_sitPayURL;
 
+/*现有单子交付*/
++(NSString *)user_createTurnoverURL;
+
 
 #pragma mark ----- 消息部分 -------
 /** 用户的通知消息*/

@@ -110,7 +110,7 @@
             //服务方
             if(status == 1) {
                 isLayer = YES;
-                str= @"确认保修";
+                str= @"确认报修";
             }else if (status == 2) {
                 isLayer = YES;
                 str= @"提交验收";
@@ -227,10 +227,10 @@
     
 }
 
-//服务方确认保修
+//服务方确认报修
 - (void)confirmAction {
     
-    UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"保修确认" message:@"请选择报修状态" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"报修确认" message:@"请选择报修状态" preferredStyle:(UIAlertControllerStyleAlert)];
     UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
         
     }];

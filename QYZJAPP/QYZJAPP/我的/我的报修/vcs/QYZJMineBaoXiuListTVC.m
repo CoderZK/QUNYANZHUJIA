@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"我的保修";
+    self.navigationItem.title = @"我的报修";
     
     [self.tableView registerClass:[QYZJConstructionListCell class] forCellReuseIdentifier:@"cell"];
     

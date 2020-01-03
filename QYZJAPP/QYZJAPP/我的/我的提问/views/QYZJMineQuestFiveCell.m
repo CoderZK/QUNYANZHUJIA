@@ -100,6 +100,12 @@
         [self.listBt setTitle:@"点击播放" forState:UIControlStateNormal];
     }
     
+    if (model.is_pay) {
+      [self.listBt setTitle:[NSString stringWithFormat:@"￥%0.2f元旁听",model.sit_price] forState:UIControlStateNormal];
+    }else {
+      [self.listBt setTitle:@"点击播放" forState:UIControlStateNormal];
+    }
+    
     
 }
 

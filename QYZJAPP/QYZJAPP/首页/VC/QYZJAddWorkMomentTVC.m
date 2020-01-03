@@ -144,7 +144,7 @@
     dict[@"con"] = self.desTV.text;
     dict[@"description"] = self.desTV.text;
     dict[@"title"] = self.titleTF.text;
-    dict[@"context"] = self.titleTF.text;
+    dict[@"context"] = self.desTV.text;
     dict[@"stageName"] = self.titleTF.text;
     dict[@"id"] = self.ID;
     dict[@"turnoverListId"] = self.ID;
@@ -305,6 +305,8 @@
     [self.whiteTwoV addSubview:delectVideoBt];
     self.deleteBt = delectVideoBt;
     
+    [self.deleteBt addTarget:self action:@selector(delectVideo) forControlEvents:UIControlEventTouchUpInside];
+    
     self.headV.mj_h = CGRectGetMaxY(self.whiteTwoV.frame);
     self.tableView.tableHeaderView = self.headV;
     self.headV.backgroundColor = self.whiteOneV.backgroundColor = self.whiteTwoV.backgroundColor = WhiteColor;
@@ -318,6 +320,12 @@
     
 }
 
+
+- (void)delectVideo {
+    
+    self.videoStr = nil;
+    
+}
 
 - (void)setVideoStr:(NSString *)videoStr {
     _videoStr = videoStr;

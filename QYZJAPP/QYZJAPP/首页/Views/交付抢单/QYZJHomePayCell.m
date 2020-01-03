@@ -47,12 +47,12 @@
             }
             case 2:
             {
-                str = @"带客户确认";
+                str = @"待客户确认";
                 break;
             }
             case 3:
             {
-                str = @"带客户支付";
+                str = @"待客户支付";
                 break;
             }
             case 4:

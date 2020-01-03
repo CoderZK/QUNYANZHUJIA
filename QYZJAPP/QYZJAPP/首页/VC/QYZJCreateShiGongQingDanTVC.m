@@ -9,6 +9,7 @@
 #import "QYZJCreateShiGongQingDanTVC.h"
 #import "QYZJRecommendTwoCell.h"
 #import "QYZJShowFromTopView.h"
+#import "QYZJMinePayDetailVC.h"
 @interface QYZJCreateShiGongQingDanTVC ()<zkPickViewDelelgate,UITextFieldDelegate,UITextViewDelegate>
 @property(nonatomic,strong)NSArray *leftArrOne;
 @property(nonatomic,strong)NSArray *leftArrTwo;
@@ -205,7 +206,12 @@
                 if (model.time_start.length == 0) {
                     cell.TF.text = @"";
                 }else {
-                    cell.TF.text = [NSString stringWithFormat:@"%@到%@",model.time_start,model.time_end];
+                    if (model.time_start.length > 0) {
+                       cell.TF.text = [NSString stringWithFormat:@"%@到%@",model.time_start,model.time_end];
+                    }else {
+                        cell.TF.text = @"";
+                    }
+                    
                 }
                 
             }
@@ -372,9 +378,15 @@
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             
-            
-            
-            
+            if (self.isRob) {
+                QYZJMinePayDetailVC * vc =[[QYZJMinePayDetailVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+                vc.ID = self.ID;
+                vc.isRob = self.isRob;
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }else {
+               [self.navigationController popViewControllerAnimated:YES];
+            }
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
         }

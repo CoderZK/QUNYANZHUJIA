@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *quSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *yuyueSwitch;
 @property(nonatomic,strong)NSMutableArray<zkPickModel *> *cityArray;
-
+@property(nonatomic,strong)NSString *proStr,*proId,*cityStr,*cityId,*aearStr,*aearId;
 
 @end
 
@@ -103,7 +103,7 @@
     dict[@"sit_price"] = self.pangTingMoneyTF.text;
     dict[@"pro_id"] = self.proId;
     dict[@"city_id"] = [zkSignleTool shareTool].cityId;
-    dict[@"area_id"] = self.aearId;
+    dict[@"area_id"] = self.aearId.length > 0 ? self.aearId:@"0";
     dict[@"is_question"] = @(self.quSwitch.on);
     dict[@"is_appoint"] = @(self.yuyueSwitch.on);
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_editAppointAndQuestionURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -139,6 +139,18 @@
             self.questMoneyTF.text = [NSString stringWithFormat:@"%0.2f",[[NSString stringWithFormat:@"%@",responseObject[@"result"][@"question_price"]] floatValue]];
             self.yuYueMoneyTF.text = [NSString stringWithFormat:@"%0.2f",[[NSString stringWithFormat:@"%@",responseObject[@"result"][@"appoint_price"]] floatValue]];
             self.pangTingMoneyTF.text = [NSString stringWithFormat:@"%0.2f",[[NSString stringWithFormat:@"%@",responseObject[@"result"][@"sit_price"]] floatValue]];
+            
+        
+            QYZJUserModel * model = [QYZJUserModel mj_objectWithKeyValues:responseObject[@"result"]];
+            self.proId = model.pro_id_server;
+            self.proStr = model.pro_name_server;
+            self.cityId = model.city_id_server;
+            self.aearId = model.area_id_server;
+            self.cityStr = model.city_name_server;
+            self.aearStr = model.area_name_server;
+            
+            self.addressTF.text = [NSString stringWithFormat:@"%@%@%@",self.proStr,self.cityStr,self.aearStr];
+            
             
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];

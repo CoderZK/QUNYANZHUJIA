@@ -32,6 +32,15 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self getData];
+    
+//    [self.navigationItem setHidesBackButton:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+//   [self.navigationItem setHidesBackButton:NO];
+
 }
 
 - (void)viewDidLoad {
@@ -52,9 +61,36 @@
         [self getData];
     }];
     
+   UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+   [button setImage:[UIImage imageNamed:@"ico_back"] forState:(UIControlStateNormal)];
+   [button setImage:[UIImage imageNamed:@"ico_back"] forState:(UIControlStateHighlighted)];
+
+   CGRect frame = CGRectMake(0, 0, 25, 25);
+   button.frame = frame;
+   button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+   button.contentEdgeInsets = UIEdgeInsetsMake(0,0, 0, 0);
+   
+   [button setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+   [button setTitleColor:[UIColor redColor] forState:(UIControlStateHighlighted)];
+   [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.navigationItem.leftBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:button]];;
+    
+    
     self.navigationItem.title = @"详情";
     
 }
+
+- (void)back {
+    
+    if (self.navigationController.childViewControllers.count >= 4 && self.isRob) {
+        [self.navigationController popToViewController:self.navigationController.childViewControllers[self.navigationController.childViewControllers.count - 4] animated:NO];
+    }else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+}
+
 
 //0   // 1 创建施工清单 2 //等待客户 确认 3 //待支付 6 //待支付尾款 7 设置保修时间
 - (void)setFootVWithStatus:(NSInteger)status {
@@ -68,7 +104,7 @@
         [view2 removeFromSuperview];
     }
     
-    if (!((!self.dataModel.demand.is_service && (status == 1||status == 7)) ||( self.dataModel.demand.is_service && (status == 2 || status == 3)))){
+    if (!((!self.dataModel.demand.is_service && (status == 1||status == 7)) ||( self.dataModel.demand.is_service && (status == 2 || status == 3))) || [self.dataModel.status intValue] == 6){
         self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - sstatusHeight - 44);
         return;
     }

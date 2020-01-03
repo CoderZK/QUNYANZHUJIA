@@ -286,7 +286,7 @@
            NSMutableDictionary * dict = @{}.mutableCopy;
            dict[@"token"] = self.audioModel.token;
            [zkRequestTool NetWorkingUpLoadMediaWithfileData:data parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-               [SVProgressHUD showSuccessWithStatus:@"上传音频成功"];
+//               [SVProgressHUD showSuccessWithStatus:@"上传音频成功"];
                
                self.audioStr = responseObject[@"key"];
                self.listBt.hidden = NO;

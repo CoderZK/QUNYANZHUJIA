@@ -210,7 +210,10 @@
 //点击支付生成订单
 - (void)payAction:(UIButton *)button {
     
-    
+    if (self.dataArray.count == 0){
+        [SVProgressHUD showErrorWithStatus:@"请选择地址"];
+        return;
+    };
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"goods_id"]= self.dataModel.ID;

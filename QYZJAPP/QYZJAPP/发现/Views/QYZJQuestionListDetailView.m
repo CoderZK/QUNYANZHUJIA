@@ -144,9 +144,9 @@
 
 - (void)listAction:(UIButton *)button {
     
-    [[PublicFuntionTool shareTool] palyMp3WithNSSting:self.dataModel.media_url isLocality:NO];;
+    [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr: self.dataModel.media_url] isLocality:NO];;
     [button setTitle:@"正在播放..." forState:UIControlStateNormal];
-       [[PublicFuntionTool shareTool] palyMp3WithNSSting:self.dataModel.media_url isLocality:NO];
+       [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:self.dataModel.media_url] isLocality:NO];
        [PublicFuntionTool shareTool].findPlayBlock = ^{
            [button setTitle:@"点击播放" forState:UIControlStateNormal];
        };

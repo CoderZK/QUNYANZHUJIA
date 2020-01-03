@@ -21,6 +21,14 @@
 
 @implementation QYZJRobOrderTVC
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.page = 1;
+    [self getData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -33,9 +41,9 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.type = 0;
     
-    self.page = 1;
+    
     self.dataArray = @[].mutableCopy;
-    [self getData];
+    self.page = 1;
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.page = 1;
         [self getData];
@@ -173,19 +181,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    QYZJFindModel * model = self.dataArray[indexPath.row];
-//    if (self.type == 0 && [model.status intValue]== 0) {
-//        QYZJJingXingZhongRobOrderTVC * vc =[[QYZJJingXingZhongRobOrderTVC alloc] init];
-//         vc.hidesBottomBarWhenPushed = YES;
-//         vc.ID = self.dataArray[indexPath.row].ID;
-//         [self.navigationController pushViewController:vc animated:YES];
-//    }else {
-//        QYZJRobOrderDetailTVC * vc =[[QYZJRobOrderDetailTVC alloc] init];
-//         vc.hidesBottomBarWhenPushed = YES;
-//         vc.ID = self.dataArray[indexPath.row].ID;
-//         [self.navigationController pushViewController:vc animated:YES];
-//    }
-    
+   
         QYZJRobOrderDetailTVC * vc =[[QYZJRobOrderDetailTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
         vc.hidesBottomBarWhenPushed = YES;
         vc.ID = self.dataArray[indexPath.row].ID;
@@ -211,9 +207,14 @@
                   [SVProgressHUD dismiss];
                   if ([responseObject[@"key"] intValue]== 1) {
                      
+                      
+                      [self.dataArray removeObjectAtIndex:button.tag];
+                      [self.tableView reloadData];
+                      
                       QYZJTongYongModel  * modelNei = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
                       if (modelNei.is_vip) {
                           [SVProgressHUD showSuccessWithStatus:@"抢单成功,请在一个小时内进行反馈,否则超时视为反馈有效并扣费"];
+
                       }else {
                           if (modelNei.status == 2) {
                               

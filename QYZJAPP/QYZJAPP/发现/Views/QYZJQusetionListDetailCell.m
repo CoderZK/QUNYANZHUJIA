@@ -75,6 +75,13 @@
     self.typeLB.text= model.a_role_name;
     self.typeLB.mj_w = [self.typeLB.text getWidhtWithFontSize:14] + 15;
     self.typeLB.mj_x = CGRectGetMaxX(self.nameLB.frame) + 10;
+    
+    if (model.a_role_name.length == 0) {
+        self.typeLB.hidden = YES;
+    }else {
+        self.typeLB.hidden = NO;
+    }
+    
     if (model.is_pay) {
       [self.listBt setTitle:[NSString stringWithFormat:@"￥%0.2f元旁听",model.sit_price] forState:UIControlStateNormal];
     }else {

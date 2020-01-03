@@ -364,6 +364,11 @@
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_sitPay.do"];
 }
 
+/*现有单子交付*/
++(NSString *)user_createTurnoverURL {
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"user_createTurnover.do"];
+}
+
 #pragma mark ----- 需求单 -------
 /** 推荐赚钱单子列表*/
 +(NSString *)user_myDemandListURL{

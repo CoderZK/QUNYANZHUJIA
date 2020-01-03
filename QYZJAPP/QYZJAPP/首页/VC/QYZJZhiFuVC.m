@@ -437,6 +437,9 @@
                 if ([vcTwo isKindOfClass:[QYZJMineZhuYeTVC class]]) {
                     [self.navigationController popToViewController:vcTwo animated:YES];
                 }
+                if ((self.type == 6 ||self.type == 11) && self.isBaoBlcok != nil) {
+                    self.isBaoBlcok();
+                }
             }else if (self.navigationController.childViewControllers.count >= 3) {
                 
                 UIViewController * vcTwo = self.navigationController.childViewControllers[self.navigationController.childViewControllers.count - 3];

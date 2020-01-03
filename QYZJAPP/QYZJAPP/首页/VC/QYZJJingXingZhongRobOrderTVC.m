@@ -403,7 +403,7 @@
             if ([[NSString stringWithFormat:@"%@",responseObject[@"result"][@"is_pay"]] isEqualToString:@"0"]) {
                 //已经支付
                 [button setTitle:@"播放中..." forState:UIControlStateNormal];
-                [[PublicFuntionTool shareTool] palyMp3WithNSSting:model.mediaUrl isLocality:NO];
+                [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:model.mediaUrl] isLocality:NO];
                 [PublicFuntionTool shareTool].findPlayBlock = ^{
                     [button setTitle:@"与客服沟通语音" forState:UIControlStateNormal];
                 };

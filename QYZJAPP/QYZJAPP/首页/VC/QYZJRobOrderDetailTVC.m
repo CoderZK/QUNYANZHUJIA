@@ -13,12 +13,14 @@
 #import "QYZJCreateShiGongQingDanTVC.h"
 #import "QYZJMinePayDetailVC.h"
 #import "QYZJOtherCell.h"
+#import "QYZJQingDanPingJiaVC.h"
 @interface QYZJRobOrderDetailTVC ()
 @property(nonatomic,strong)QYZJWorkModel *dataModel;
 @property(nonatomic,strong)NSArray *headTitleArr;
 @property(nonatomic,strong)NSArray *leftTitleArr;
 @property(nonatomic,strong)NSString *reason;
 @property(nonatomic,assign)NSInteger status;
+@property(nonatomic,assign)BOOL isRel;
 @end
 
 @implementation QYZJRobOrderDetailTVC
@@ -38,7 +40,7 @@
     [self.tableView registerClass:[TongYongFourCell class] forCellReuseIdentifier:@"TongYongFourCell"];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-   
+    
     self.headTitleArr = @[@"",@"",@"合同",@"预算",@"图纸",@"变更相册",@"",@""];
     self.leftTitleArr = @[@"订单号",@"地址",@"小区名称",@"风格",@"户型",@"装修时间",@"需求类型",@"预算",@"建筑面积",@"需求描述",@"联系电话",@"反馈内容",@"客服回复",@"申诉状态",@"申诉内容",@"驳回原因"];
     
@@ -60,27 +62,35 @@
         if ([responseObject[@"key"] intValue]== 1) {
             
             self.dataModel = [QYZJWorkModel mj_objectWithKeyValues:responseObject[@"result"]];
-          
-                if ([self.dataModel.status intValue]== 0 && self.dataModel.user_status.length == 0) {
-                    [self setFootVWithStatus:0];
-                }else if ([self.dataModel.user_status intValue]== 2) {
-                    [self setFootVWithStatus:1];
-                }else if ([self.dataModel.user_status intValue]== 3) {
-                    [self setFootVWithStatus:2];
-                }else if ([self.dataModel.user_status intValue]== 4) {
-                    [self setFootVWithStatus:3];
-                }else if ([self.dataModel.user_status intValue]== 5) {
-                    [self setFootVWithStatus:4];
-                }else if ([self.dataModel.user_status intValue]== 7) {
-                    [self setFootVWithStatus:7];
-                }else if ([self.dataModel.user_status intValue]== 8) {
-                    [self setFootVWithStatus:8];
-                }else if ([self.dataModel.user_status intValue]== 10) {
-                    [self setFootVWithStatus:9];
-                }else if ([self.dataModel.user_status intValue]== 11) {
-                    [self setFootVWithStatus:10];
-                }
-         
+            if (self.dataModel.real_tel.length > 0) {
+                self.isRel = YES;
+            }
+            if (self.dataModel.link_tel.length > 0) {
+                self.dataModel.real_tel = self.dataModel.link_tel;
+            }
+            if ([self.dataModel.status intValue]== 0 && self.dataModel.user_status.length == 0) {
+                [self setFootVWithStatus:0];
+            }else if ([self.dataModel.user_status intValue]== 2) {
+                [self setFootVWithStatus:1];
+            }else if ([self.dataModel.user_status intValue]== 3) {
+                [self setFootVWithStatus:2];
+            }else if ([self.dataModel.user_status intValue]== 4) {
+                [self setFootVWithStatus:3];
+            }else if ([self.dataModel.user_status intValue]== 5) {
+                [self setFootVWithStatus:4];
+            }else if ([self.dataModel.user_status intValue]== 6) {
+                [self setFootVWithStatus:6];
+            }else if ([self.dataModel.user_status intValue]== 7) {
+                [self setFootVWithStatus:7];
+            }else if ([self.dataModel.user_status intValue]== 8) {
+                [self setFootVWithStatus:8];
+            }else if ([self.dataModel.user_status intValue]== 10) {
+                [self setFootVWithStatus:9];
+            }
+//            else if ([self.dataModel.user_status intValue]== 11) {
+//                [self setFootVWithStatus:10];
+//            }
+            
             
             [self.tableView reloadData];
             
@@ -96,18 +106,26 @@
     }];
 }
 
-// 0 抢单 1 反馈 2 签单 3 申诉 4 填写资料 7 佣金支付 8 创建施工清单 9 查看交付 10 评价
+// 0 抢单 1 反馈 2 签单 3 申诉 4 填写资料 6 签单失败 7 佣金支付 8 创建施工清单 9 查看交付 10 评价
 - (void)setFootVWithStatus:(NSInteger)status {
     self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - 60 - sstatusHeight - 44);
     if (sstatusHeight > 20) {
         self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34 - sstatusHeight - 44);
     }
     
+    
+    
+    
     KKKKFootView * view2 = (KKKKFootView *)[self.view viewWithTag:666];
     if (view2 != nil) {
         [view2 removeFromSuperview];
     }
     
+    if (status == 6){
+          self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - sstatusHeight - 44);
+          return;
+      }
+
     if (status==1 || status == 2) {
         NSString * leftStr = @"反馈无效";
         NSString * rightStr = @"反馈有效";
@@ -119,19 +137,19 @@
         view.tag = 666;
         Weak(weakSelf);
         view.footViewClickBlock = ^(UIButton *button) {
-           
+            
             if (status == 1 && button.tag == 0) {
                 self.status = 1;
                 [self showTFWithStatus:1];
             }else {
-               [weakSelf operateDemandActonWithIsOK:button.tag withStatus:status];
+                [weakSelf operateDemandActonWithIsOK:button.tag withStatus:status];
             }
         };
         [self.view addSubview:view];
         
     }else {
         
-       NSString * str = @"";
+        NSString * str = @"";
         if (status == 0) {
             str = @"抢单";
         }else if (status == 3) {
@@ -139,13 +157,13 @@
         }else if (status == 4) {
             str = @"填写资料";
         }else if (status == 7){
-           str = @"支付佣金";
+            str = @"支付佣金";
         }else if (status == 8){
-           str = @"交付";
+            str = @"交付";
         }else if (status == 9){
-           str = @"查看交付";
+            str = @"查看交付";
         }else if (status == 10){
-           str = @"评价";
+            str = @"评价";
         }
         KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:str andImgaeName:@""];
         view.tag = 666;
@@ -164,34 +182,109 @@
 // 0 抢单 1 反馈 2 签单 3 申诉 4 填写资料 7 佣金支付 8 创建施工清单 9 查看交付 10 评价
 - (void)clickActionWithStatus:(NSInteger)status {
     
-        if (status == 0) {
-           [self robDemandAction];
-       }else if (status == 3) {
-           self.status = 3;
-           [self showTFWithStatus:3];
-       }else if (status == 4) {
-           QYZJAddZiLiaoTVC * vc =[[QYZJAddZiLiaoTVC alloc] init];
-           vc.hidesBottomBarWhenPushed = YES;
-           vc.ID = self.ID;
-           [self.navigationController pushViewController:vc animated:YES];
-       }else if (status == 7) {
-           
-       }else if (status == 8) {
-           QYZJCreateShiGongQingDanTVC * vc =[[QYZJCreateShiGongQingDanTVC alloc] init];
-           vc.hidesBottomBarWhenPushed = YES;
-           vc.ID = self.ID;
-           [self.navigationController pushViewController:vc animated:YES];
-       }else if (status == 9) {
-           QYZJMinePayDetailVC * vc =[[QYZJMinePayDetailVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
-           vc.ID = self.ID;
-           vc.hidesBottomBarWhenPushed = YES;
-           [self.navigationController pushViewController:vc animated:YES];
-           
-           
-       }else if (status == 10) {
-           
-       }
+    if (status == 0) {
+        [self robDemandAction];
+    }else if (status == 3) {
+        self.status = 3;
+        [self showTFWithStatus:3];
+    }else if (status == 4) {
+        QYZJAddZiLiaoTVC * vc =[[QYZJAddZiLiaoTVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.ID = self.ID;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (status == 7) {
+        
+         [self wecharPayWithID:self.ID money:self.dataModel.commission_price];
+        
+        
+        
+    }else if (status == 8) {
+        
+        [self jiaoFuAction];
+        
+        
+    }else if (status == 9) {
+        QYZJMinePayDetailVC * vc =[[QYZJMinePayDetailVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+        vc.ID = self.dataModel.turnoverId;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+    }else if (status == 10) {
+        
+        QYZJQingDanPingJiaVC * vc =[[QYZJQingDanPingJiaVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.ID = self.ID;
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+        
+    }
     
+}
+
+//交付中
+
+- (void)jiaoFuAction {
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"demand_grab_sheet_id"] = self.dataModel.demand_grab_sheet_id;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_createTurnoverURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            QYZJCreateShiGongQingDanTVC * vc =[[QYZJCreateShiGongQingDanTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.ID = responseObject[@"result"][@"turnover_id"];
+            vc.isRob = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+}
+
+
+- (void)wecharPayWithID:(NSString *)ID money:(CGFloat )money{
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"pay_money"]= @(money);
+    dict[@"type"] = @(4);
+    dict[@"id"] = ID;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_wechatPayURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            QYZJTongYongModel * mm = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
+            QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.model = mm;
+            vc.ID = ID;
+            vc.type = 2;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
 }
 
 
@@ -199,28 +292,46 @@
 //抢单
 - (void)robDemandAction {
     
-     UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"抢单提示" message:@"确定抢单吗?" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"抢单提示" message:@"确定抢单吗?" preferredStyle:(UIAlertControllerStyleAlert)];
     UIAlertAction * actionOne = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
         
         [SVProgressHUD show];
-          NSMutableDictionary * dict = @{}.mutableCopy;
-          dict[@"id"] = self.ID;
-          [zkRequestTool networkingPOST:[QYZJURLDefineTool user_grabDemandURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-          
-              [SVProgressHUD dismiss];
-              if ([responseObject[@"key"] intValue]== 1) {
-                 
-                  [self setFootVWithStatus:1];
-              }else {
-                  [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
-              }
-              
-          } failure:^(NSURLSessionDataTask *task, NSError *error) {
-              
-           
-              
-          }];
-          
+        NSMutableDictionary * dict = @{}.mutableCopy;
+        dict[@"id"] = self.ID;
+        [zkRequestTool networkingPOST:[QYZJURLDefineTool user_grabDemandURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+            
+            [SVProgressHUD dismiss];
+            if ([responseObject[@"key"] intValue]== 1) {
+                
+                
+               QYZJTongYongModel  * modelNei = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
+                if (modelNei.is_vip) {
+                    [SVProgressHUD showSuccessWithStatus:@"抢单成功,请在一个小时内进行反馈,否则超时视为反馈有效并扣费"];
+                    [self setFootVWithStatus:1];
+                }else {
+                    if (modelNei.status == 2) {
+                        
+                        QYZJTongYongModel * mm = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
+                        QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
+                       
+                        vc.model = mm;
+                        vc.type = 1;
+                        vc.ID = self.ID;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                   
+                }
+               
+            }else {
+                [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+            }
+            
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            
+            
+            
+        }];
+        
         
     }];
     
@@ -233,7 +344,7 @@
     [self presentViewController:alertVC animated:YES completion:nil];
     
     
-  
+    
 }
 
 //操作单子
@@ -252,14 +363,14 @@
         url = [QYZJURLDefineTool user_addAppealURL];
     }
     [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-     
+        
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             if (type == 1) {
                 if (isOk == 0) {
                     [SVProgressHUD showSuccessWithStatus:@"反馈无效成功"];
                 }else {
-                    [SVProgressHUD showSuccessWithStatus:@"反馈有效成功"];
+                    [SVProgressHUD showSuccessWithStatus:@"反馈成功!反馈金额已从余额中支付!"];
                 }
             }else {
                 if (isOk == 0) {
@@ -268,7 +379,11 @@
                     [SVProgressHUD showSuccessWithStatus:@"签单操作成功"];
                 }
             }
-            [self getData];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self getData];
+                });
+           
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
         }
@@ -298,7 +413,7 @@
         self.reason = userNameTF.text;
         [self operateDemandActonWithIsOK:NO withStatus:self.status];
         
-
+        
         
     }]];
     
@@ -375,28 +490,9 @@
     if (section == 0) {
         return self.dataModel.media_url.count;
     }else if (section == 1) {
-//        if (self.dataModel == nil) {
-//            return 0;
-//        }else {
-//            if ([self.dataModel.status isEqualToString:@"4"]) {
-//
-//                if (self.dataModel.appeal_status.length > 0) {
-//                    if ([self.dataModel.appeal_status isEqualToString:@"2"]) {
-//                        return <#expression#>
-//                    }
-//                    return 13;
-//                }else {
-//                    //反馈无效
-//                    return 11;
-//                }
-//            }else  if ([self.dataModel.status isEqualToString:@"6"]){
-//                return 10;
-//            }else {
-//                return 20;
-//            }
-//        }
+        
         return self.leftTitleArr.count;
-    
+        
     }else if (section < 6) {
         return 1;
     }else if (section == 6) {
@@ -413,19 +509,25 @@
     
     if (indexPath.section == 0) {
         if (indexPath.row ==0) {
-          return 85;
+            return 85;
         }
         return 35;
         
     }else if (indexPath.section ==1) {
-        
-        return  [self cellHeightWithIndexPath:indexPath];
-    } else if (indexPath.section == 6) {
-        if (indexPath.row == 9) {
-            return UITableViewAutomaticDimension;
+        if (indexPath.row == 10 && ([self.dataModel.status intValue] == 0 ||  self.dataModel.real_tel.length == 0)) {
+            return 0;
         }
-        return 50;
-    }else if (indexPath.section == 2){
+        return  [self cellHeightWithIndexPath:indexPath];
+    }
+    
+    //    else if (indexPath.section == 6) {
+    //        if (indexPath.row == 9) {
+    //            return UITableViewAutomaticDimension;
+    //        }
+    //        return 50;
+    //    }
+    
+    else if (indexPath.section == 2){
         
         return self.dataModel.contract_url.length > 0 ? (ScreenW - 60)/3 + 25 : 0;
     }else if (indexPath.section == 3){
@@ -451,7 +553,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     if (indexPath.section == 0) {
         QYZJRobOrderDetailCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJRobOrderDetailCell" forIndexPath:indexPath];
         cell.clipsToBounds = YES;
@@ -473,16 +575,18 @@
         return cell;
     }else if (indexPath.section == 1 || indexPath.section == 6) {
         
-        if (indexPath.section == 6 && indexPath.row == 9) {
-            TongYongFourCell* cell =[tableView dequeueReusableCellWithIdentifier:@"TongYongFourCell" forIndexPath:indexPath];
-            cell.leftLB.text = self.leftTitleArr[indexPath.row];
-            cell.rightLB.text = self.dataModel.demand_context;
-            cell.rightLB.textColor = CharacterColor80;
-            cell.leftLB.textColor = CharacterBlack112;
-            cell.clipsToBounds = YES;
-            cell.lineV.hidden = NO;
-            return cell;
-        }else if (indexPath.section == 1 && indexPath.row == 9) {
+        //        if (indexPath.section == 6 && indexPath.row == 9) {
+        //            TongYongFourCell* cell =[tableView dequeueReusableCellWithIdentifier:@"TongYongFourCell" forIndexPath:indexPath];
+        //            cell.leftLB.text = self.leftTitleArr[indexPath.row];
+        //            cell.rightLB.text = self.dataModel.demand_context;
+        //            cell.rightLB.textColor = CharacterColor80;
+        //            cell.leftLB.textColor = CharacterBlack112;
+        //            cell.clipsToBounds = YES;
+        //            cell.lineV.hidden = NO;
+        //            return cell;
+        //        }else
+        
+        if (indexPath.section == 1 && indexPath.row == 9) {
             
             QYZJRobOrderDetailCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJRobOrderDetailCell" forIndexPath:indexPath];
             cell.clipsToBounds = YES;
@@ -494,14 +598,15 @@
             cell.titelLB.hidden = cell.leftLB.hidden = NO;
             
             cell.leftCons.constant = 100;
-            Weak(weakSelf);
-            cell.listBtActionBlock = ^(UIButton * _Nonnull button) {
-               [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:self.dataModel.demand_voice] isLocality:NO];
-               [button setTitle:@"正在播放" forState:UIControlStateNormal];
-               [PublicFuntionTool shareTool].findPlayBlock = ^{
-                   [button setTitle:@"点击播放" forState:UIControlStateNormal];
-               };
-            };
+//            Weak(weakSelf);
+//            cell.listBtActionBlock = ^(UIButton * _Nonnull button) {
+//                [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:self.dataModel.demand_voice] isLocality:NO];
+//                [button setTitle:@"正在播放" forState:UIControlStateNormal];
+//                [PublicFuntionTool shareTool].findPlayBlock = ^{
+//                    [button setTitle:@"点击播放" forState:UIControlStateNormal];
+//                };
+//            };
+            cell.model = self.dataModel;
             cell.lineV.hidden = NO;
             return cell;
             
@@ -517,6 +622,16 @@
         if (indexPath.section == 1) {
             cell.leftLB.text = self.leftTitleArr[indexPath.row];
             [self setTitleWithCell:cell WithIndexPath:indexPath];
+            if (indexPath.row == 10 ) {
+                if (self.dataModel.virtual_num_expire == NO  || self.isRel) {
+                    cell.moreImgV.hidden = NO;
+                    cell.moreImgV.image =[UIImage imageNamed:@"tel"];
+                }else {
+                     cell.moreImgV.hidden = YES;
+                    NSString * str = [NSString stringWithFormat:@"%@%@",self.dataModel.real_tel,@"号码已过期,点击重新获取"];
+                    cell.TF.attributedText = [str getMutableAttributeStringWithFont:13 lineSpace:0 textColor:CharacterColor80 textColorTwo:[UIColor greenColor] nsrange:NSMakeRange(str.length - 12, 12)];
+                }
+            }
         }else {
             if (indexPath.row == 0) {
                 cell.leftLB.text = @"签单金额";
@@ -525,13 +640,7 @@
                 cell.leftLB.text = @"佣金额";
                 cell.TF.text = [NSString stringWithFormat:@"￥%0.2f",self.dataModel.commission_price];
             }
-            if (indexPath.row == 10) {
-                cell.moreImgV.hidden = NO;
-                cell.moreImgV.image =[UIImage imageNamed:@"tel"];
-//                cell.moreImgV.frame = CGRectMake(ScreenW - 40, 10, 30, 30);
-            }else {
-                cell.moreImgV.hidden = YES;
-            }
+            
         }
         cell.lineV.hidden = NO;
         cell.clipsToBounds = YES;
@@ -551,7 +660,7 @@
         cell.clipsToBounds = YES;
         return cell;
     }else {
-         QYZJOtherCell* cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJOtherCell" forIndexPath:indexPath];
+        QYZJOtherCell* cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJOtherCell" forIndexPath:indexPath];
         cell.content.text = self.dataModel.other[indexPath.row].feedback_reply;
         return cell;
     }
@@ -569,12 +678,12 @@
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_sitDemandURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
-
+        
         if ([responseObject[@"key"] intValue]== 1) {
             if ([[NSString stringWithFormat:@"%@",responseObject[@"result"][@"is_pay"]] isEqualToString:@"0"]) {
                 //已经支付
                 [button setTitle:@"播放中..." forState:UIControlStateNormal];
-                [[PublicFuntionTool shareTool] palyMp3WithNSSting:model.mediaUrl isLocality:NO];
+                [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:model.mediaUrl] isLocality:NO];
                 [PublicFuntionTool shareTool].findPlayBlock = ^{
                     [button setTitle:@"与客服沟通语音" forState:UIControlStateNormal];
                 };
@@ -604,23 +713,107 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 1 && indexPath.row == 10) {
         
-        UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否拨打%@",self.dataModel.real_tel] preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        if (self.dataModel.virtual_num_expire == NO || self.isRel) {
             
-        }];
-        UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-         
-           [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",self.dataModel.real_tel]]];
-         
-        }];
+            
+            [self callPhone];
+            
+        }else {
+            
+            
+            [SVProgressHUD show];
+            NSMutableDictionary * dict = @{}.mutableCopy;
+            dict[@"id"] = self.ID;
+            [zkRequestTool networkingPOST:[QYZJURLDefineTool app_bindVirtualPhoneURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+ 
+                [SVProgressHUD dismiss];
+                if ([responseObject[@"key"] intValue]== 1) {
+                    
+                    self.dataModel.real_tel = responseObject[@"result"][@"virtual_num"];
+                    self.dataModel.virtual_num_expire = NO;
+                    [self.tableView reloadData];
+                    
+                }else {
+                    [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+                }
+                
+            } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                
+                [self.tableView.mj_header endRefreshing];
+                [self.tableView.mj_footer endRefreshing];
+                
+            }];
+            
+        }
         
-        [alertVC addAction:action1];
-        [alertVC addAction:action2];
         
-        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
+        
+        
+        
+        
         
         
     }
+    
+}
+
+
+- (void)callPhone {
+    
+    if (self.isRel) {
+        
+        
+        UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否拨打%@",self.dataModel.real_tel] preferredStyle:(UIAlertControllerStyleAlert)];
+                      UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                          
+                      }];
+                      UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                          
+                          [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",self.dataModel.real_tel]]];
+                          
+                      }];
+                      
+                      [alertVC addAction:action1];
+                      [alertVC addAction:action2];
+                      
+                      [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
+        
+    }else {
+       
+        UIAlertController  * alertVC11 = [UIAlertController alertControllerWithTitle:@"提示" message:@"为保护用户隐私安全,您正在拨打的号码为虚拟号码,将于30分钟后失效" preferredStyle:(UIAlertControllerStyleAlert)];
+           UIAlertAction * action22 = [UIAlertAction actionWithTitle:@"继续拨打" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+               
+               UIAlertController  * alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否拨打%@",self.dataModel.real_tel] preferredStyle:(UIAlertControllerStyleAlert)];
+               UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                   
+               }];
+               UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                   
+                   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",self.dataModel.real_tel]]];
+                   
+               }];
+               
+               [alertVC addAction:action1];
+               [alertVC addAction:action2];
+               
+               [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC animated:YES completion:nil];
+               
+               
+           }];
+           
+           
+           UIAlertAction * action11 = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+               
+           }];
+           
+           [alertVC11 addAction:action11];
+           [alertVC11 addAction:action22];
+           
+           [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVC11 animated:YES completion:nil];
+        
+    }
+    
+   
     
 }
 
@@ -638,7 +831,7 @@
                 cell.TF.text = [zkSignleTool shareTool].mannerArr[self.dataModel.manner-1];
             }
         }else if (row == 4) {
-           if (self.dataModel.house_model >0 && [zkSignleTool shareTool].houseModelArr.count >= self.dataModel.house_model) {
+            if (self.dataModel.house_model >0 && [zkSignleTool shareTool].houseModelArr.count >= self.dataModel.house_model) {
                 cell.TF.text = [zkSignleTool shareTool].houseModelArr[self.dataModel.house_model-1];
             }
         }else if (row == 5) {
@@ -665,7 +858,7 @@
             }else if ([self.dataModel.appeal_status integerValue] ==2){
                 cell.TF.text = @"申诉失败";
             }else {
-               cell.TF.text = @"申诉中";
+                cell.TF.text = @"申诉中";
             }
         }else if (row == 14) {
             cell.TF.text = self.dataModel.appeal_reason.length > 0 ? self.dataModel.appeal_reason:@"未填写";

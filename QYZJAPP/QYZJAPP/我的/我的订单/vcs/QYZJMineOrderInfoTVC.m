@@ -106,6 +106,11 @@
         }
         if ([self.dataDict.allKeys containsObject:@"link_tel"]) {
             cell.phoneLB.text = self.dataDict[@"link_tel"];
+            if ([NSString stringWithFormat:@"%@",self.dataDict[@"link_tel"]].length == 0 && [self.dataDict.allKeys containsObject:@"real_tel"]) {
+                
+                cell.phoneLB.text = self.dataDict[@"real_tel"];
+                
+            }
         }
         cell.addBt.hidden = YES;
         return cell;

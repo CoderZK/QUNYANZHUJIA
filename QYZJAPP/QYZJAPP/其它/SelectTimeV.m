@@ -237,8 +237,11 @@
          NSDate * nowDate = [NSDate date];
          NSDateFormatter * formatter =[[NSDateFormatter alloc] init];
          formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-         NSDate * dateTwo = [formatter dateFromString:timeStr];
-         NSComparisonResult result = [dateTwo compare:nowDate];
+         [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
+         NSDate * dateTwo = [formatter dateFromString:[NSString stringWithFormat:@"%@ 08:00:00",timeStr]];
+//         NSComparisonResult result = [dateTwo compare:nowDate];
+         
+         NSComparisonResult result =  [self compareOneDay:dateTwo withAnotherDay:nowDate];
          
          if (self.isCanSelectOld) {
              if (result==NSOrderedDescending || result==NSOrderedSame) {
@@ -253,6 +256,7 @@
              
              if (result==NSOrderedDescending ) {
                  //选中的比当前日期大
+                
                
              }else if ( result==NSOrderedSame ){
                  if (!self.isCanSelectToday) {
@@ -284,6 +288,27 @@
      }
 }
 
+
+
+-(NSComparisonResult)compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+ 
+    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+ 
+    NSString *oneDayStr = [dateFormatter stringFromDate:oneDay];
+ 
+    NSString *anotherDayStr = [dateFormatter stringFromDate:anotherDay];
+ 
+    NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
+ 
+    NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
+ 
+    NSComparisonResult result = [dateA compare:dateB];
+ 
+    return result;
+
+}
 
 #pragma mark -UIPickerView
 #pragma mark UIPickerView的数据源

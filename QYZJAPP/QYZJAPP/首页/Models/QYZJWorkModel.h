@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *type;//阶段类型（1为正常阶段，2为变更阶段） 支付类型（1为首款支付、2为尾款支付、3为变更阶段支付）
 @property(nonatomic,strong)NSString *changeType;//阶段类型（1为正常阶段，2为变更阶段）
 @property(nonatomic,strong)NSString *demandGrabSheetId;
+@property(nonatomic,strong)NSString *demand_grab_sheet_id;
 @property(nonatomic,strong)NSString *evaluate;
 @property(nonatomic,strong)NSString *userId;
 @property(nonatomic,strong)NSString *addTime;
@@ -52,6 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *community_name;
 @property(nonatomic,strong)NSString *title;
 @property(nonatomic,strong)NSString *content;
+@property(nonatomic,strong)NSString *turnoverId;
 /** 服务方：待发起交付1、待客户确认2、待客户支付3、施工中4、待阶段验收5、待客户支付尾款6、待评价7、交付完成8；
 客户：待服务方发起交付1、待确认2、待支付3、施工中4、待阶段验收5、待支付尾款6、待评价7、交付完成8 */
 @property(nonatomic,strong)NSString *user_status;
@@ -74,6 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *demand_context;
 @property(nonatomic,strong)NSString * demand_voice;
 @property(nonatomic,strong)NSString *real_tel;
+@property(nonatomic,strong)NSString *link_tel;
 @property(nonatomic,strong)NSString *reason;
 @property(nonatomic,strong)NSString *feedback_reply;
 @property(nonatomic,strong)NSString *appeal_reason;
@@ -120,6 +123,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL   isRepair;
 @property(nonatomic,assign)BOOL isOverRepairTime;
 @property(nonatomic,assign)BOOL isService;
+@property(nonatomic,assign)BOOL virtual_num_expire;
 
 @property(nonatomic,assign)CGFloat price;
 @property(nonatomic,assign)CGFloat moneyCharging;

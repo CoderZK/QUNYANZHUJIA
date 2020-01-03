@@ -193,7 +193,7 @@
         cell.TF.mj_w = ScreenW - 150;
         cell.swith.hidden = YES;
         if (indexPath.row == 0 || indexPath.row == 6 || indexPath.row == 7 || indexPath.row == 9) {
-            if  (indexPath.row == 6 || indexPath.row == 9) {
+            if  (indexPath.row == 6 || indexPath.row == 7) {
                 cell.TF.keyboardType =  UIKeyboardTypeDecimalPad;
             }
             cell.moreImgV.hidden = YES;
@@ -274,7 +274,7 @@
            NSMutableDictionary * dict = @{}.mutableCopy;
            dict[@"token"] = self.audioModel.token;
            [zkRequestTool NetWorkingUpLoadMediaWithfileData:data parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-               [SVProgressHUD showSuccessWithStatus:@"上传音频成功"];
+//               [SVProgressHUD showSuccessWithStatus:@"上传音频成功"];
                self.dataArray[indexPath.section].mediaUrl = responseObject[@"key"];
                [self.tableView reloadData];
                

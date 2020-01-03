@@ -9,7 +9,7 @@
 #import "HomeNavigationView.h"
 
 @interface HomeNavigationView()<UITextFieldDelegate>
-@property(nonatomic,strong)UILabel *titlLB;
+@property(nonatomic,strong)UIButton *titlLB;
 @property(nonatomic,strong)UIButton *buttonLeft;
 @property(nonatomic,strong)UIView *rightView;
 @property(nonatomic,strong)UITextField *TF;
@@ -24,15 +24,22 @@
     if (self) {
         
         
-        self.titlLB = [[UILabel alloc] init];
+        self.titlLB = [[UIButton alloc] init];
         [self addSubview:self.titlLB];
-        self.titlLB.font = kFont(15);;
+        self.titlLB.titleLabel.font = kFont(15);;
         [self.titlLB mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self).offset(15);
             make.height.equalTo(@30);
             make.centerY.equalTo(self.mas_centerY);;
         }];
-        self.titlLB.text = @"定位中";
+        [self.titlLB setTitle: @"定位中" forState:UIControlStateNormal];
+        [self.titlLB setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        
+        [[self.titlLB rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+                   if (self.delegateSignal) {
+                       [self.delegateSignal sendNext:@{@"key":@"city"}];
+                   }
+               }];
         
         self.buttonLeft = [[UIButton alloc] init];
         [self.buttonLeft setImage:[UIImage imageNamed:@"xia"] forState:UIControlStateNormal];
@@ -146,7 +153,7 @@
 - (void)setTitleStr:(NSString *)titleStr {
     _titleStr = titleStr;
     dispatch_async(dispatch_get_main_queue(), ^{
-         self.titlLB.text = titleStr;
+        [self.titlLB setTitle:titleStr forState:UIControlStateNormal];
     });
 }
 

@@ -11,6 +11,7 @@
 #import "QYZJQusetionListDetailCell.h"
 #import "QYZJQuestionListDetailView.h"
 #import "QYZJZhiFuVC.h"
+#import "QYZJMineQuestFiveCell.h"
 @interface QYZJQuestionListDetailTVC ()
 @property(nonatomic,strong)QYZJQuestionListDetailView *headV;
 @property(nonatomic,strong)QYZJFindModel *dataModel;
@@ -31,8 +32,10 @@
     self.navigationItem.title = @"详情";
     
     [self setheadV];
-    [self.tableView registerClass:[QYZJQusetionListDetailCell class] forCellReuseIdentifier:@"cell"];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+
+    [self.tableView registerClass:[QYZJMineQuestFiveCell class] forCellReuseIdentifier:@"cell"];
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self getData];
@@ -79,14 +82,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    return self.dataModel.answer_list[indexPath.row].cellHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    QYZJQusetionListDetailCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    QYZJMineQuestFiveCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.model = self.dataModel.answer_list[indexPath.row];
     cell.listBt.tag = indexPath.row;
+    cell.replyBt.hidden = YES;
     [cell.listBt addTarget:self action:@selector(listAction:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
     
@@ -102,11 +106,19 @@
         //未支付
         [self sitAnswerActionWithModel:model];
     }else {
-        [[PublicFuntionTool shareTool] palyMp3WithNSSting:model.media_url isLocality:NO];
-        [button setTitle:@"正在播放" forState:UIControlStateNormal];
-        [PublicFuntionTool shareTool].findPlayBlock = ^{
-            [button setTitle:@"点击播放" forState:UIControlStateNormal];
-        };
+        for (QYZJFindModel * model  in self.dataModel.answer_list) {
+               if (model == self.dataModel.answer_list[button.tag]) {
+                   model.isPlaying = YES;
+               }else {
+                   model.isPlaying = NO;
+               }
+           }
+           [self.tableView reloadData];
+              [button setTitle:@"正在播放..." forState:UIControlStateNormal];
+              [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:self.dataModel.answer_list[button.tag].media_url] isLocality:NO];
+              [PublicFuntionTool shareTool].findPlayBlock = ^{
+                  [button setTitle:@"回复语音" forState:UIControlStateNormal];
+              };
         
     }
     

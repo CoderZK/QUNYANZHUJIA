@@ -69,7 +69,7 @@
 
 - (void)getUserBaseicInfoTwo {
     zkRequestTongYongTool * tool = [[zkRequestTongYongTool alloc] init];
-    [tool requestWithUrl:[QYZJURLDefineTool user_basicInfoURL] andDict:@{}];
+    [tool requestWithUrl:[QYZJURLDefineTool user_basicInfoURL] andDict:@{}.mutableCopy];
     tool.subject = [[RACSubject alloc] init];
     @weakify(self);
     [tool.subject subscribeNext:^(id  _Nullable x) {
@@ -141,6 +141,7 @@
     
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"token"] = [zkSignleTool shareTool].session_token;
+    [SVProgressHUD show];
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_centerInfoURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [SVProgressHUD dismiss];
         [self.tableView.mj_header endRefreshing];
@@ -352,12 +353,12 @@
                 if (dd == 2) {
                     QYZJXiuGaiFuWuVC * vc =[[QYZJXiuGaiFuWuVC alloc] init];
                    vc.hidesBottomBarWhenPushed = YES;
-                   vc.proId = self.dataModel.pro_id;
-                   vc.cityId = self.dataModel.city_id;
-                   vc.aearId = self.dataModel.area_id;
-                   vc.proStr = self.dataModel.pro_name;
-                   vc.cityStr = self.dataModel.city_name;
-                   vc.aearStr = self.dataModel.area_name;
+//                   vc.proId = self.dataModel.pro_id;
+//                   vc.cityId = self.dataModel.city_id;
+//                   vc.aearId = self.dataModel.area_id;
+//                   vc.proStr = self.dataModel.pro_name;
+//                   vc.cityStr = self.dataModel.city_name;
+//                   vc.aearStr = self.dataModel.area_name;
                    [self.navigationController pushViewController:vc animated:YES];
                 }else if (dd == 3) {
                     QYZJMineYuHuiQuanTVC * vc =[[QYZJMineYuHuiQuanTVC alloc] init];
@@ -375,6 +376,7 @@
                     QYZJMineLabelsTVC * vc =[[QYZJMineLabelsTVC alloc] init];
                     vc.hidesBottomBarWhenPushed = YES;
                     vc.labelsStr = self.dataModel.label;
+                    vc.labelsId = self.dataModel.label_ids;
                     [self.navigationController pushViewController:vc animated:YES];
                     
                 }

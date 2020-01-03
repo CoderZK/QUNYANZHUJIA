@@ -302,7 +302,7 @@
     if (self.isServer) {
         QYZJFindModel * model = self.waiModel.mediaList[button.tag];
         if (model.media_url.length > 0) {
-            [[PublicFuntionTool shareTool] palyMp3WithNSSting:model.media_url isLocality:NO];
+            [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:model.media_url] isLocality:NO];
             model.isPlaying = YES;
             [self.tableView reloadData];
             Weak(weakSelf);
@@ -315,7 +315,7 @@
         
         QYZJFindModel * model = self.waiModel.answerList[indexPath.section].mediaList[indexPath.row];
         if (model.media_url.length > 0) {
-            [[PublicFuntionTool shareTool] palyMp3WithNSSting:model.media_url isLocality:NO];
+            [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:model.media_url] isLocality:NO];
             model.isPlaying = YES;
             [self.tableView reloadData];
             Weak(weakSelf);
