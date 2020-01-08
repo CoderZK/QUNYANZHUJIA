@@ -81,7 +81,7 @@
     dict[@"type_id"] = @(self.dataModel.type_id);
     dict[@"area"] = self.dataModel.area;
     dict[@"contract_url"] = [self.contracturlArr componentsJoinedByString:@","];
-    dict[@"budget_url"] =  [self.contracturlArr componentsJoinedByString:@","];
+    dict[@"budget_url"] =  [self.budgeturlArr componentsJoinedByString:@","];
     dict[@"drawing_url"] = [self.drawingurlArr componentsJoinedByString:@","];
     dict[@"change_table_url"] =  [self.changetableurlArr componentsJoinedByString:@","];
     dict[@"sign_money"] = self.signMoney;
@@ -119,11 +119,17 @@
 //添加资料
 - (void)clickAction:(UIButton *)button {
  
+    
+    if(self.signMoney.length == 0 || self.commissionPrice.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请输入签单金额和获取佣金金额"];
+        return;
+    }
+    
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"demand_id"] = self.ID;
     dict[@"contract_url"] = [self.contracturlArr componentsJoinedByString:@","];
-    dict[@"budget_url"] =  [self.contracturlArr componentsJoinedByString:@","];
+    dict[@"budget_url"] =  [self.budgeturlArr componentsJoinedByString:@","];
     dict[@"drawing_url"] = [self.drawingurlArr componentsJoinedByString:@","];
     dict[@"change_table_url"] =  [self.changetableurlArr componentsJoinedByString:@","];
     dict[@"sign_money"] = self.signMoney;

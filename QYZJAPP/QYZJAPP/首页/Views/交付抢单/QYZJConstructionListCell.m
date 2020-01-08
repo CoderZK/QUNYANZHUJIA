@@ -60,6 +60,7 @@
         self.tableView.delegate = self;
         [self.tableView registerClass:[QYZJConstructionListNeiCell class] forCellReuseIdentifier:@"cell"];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.tableView.scrollEnabled = NO;
         [self addSubview:self.tableView];
 
         
@@ -93,7 +94,7 @@
 - (void)setModel:(QYZJWorkModel *)model {
     _model = model;
     
-    CGFloat ww = [model.stageName getWidhtWithFontSize:14];
+    CGFloat ww = [model.stageName getWidhtWithFontSize:14 withBlood:YES];
     if (ww > ScreenW - 20 - 150 - 30) {
         ww = ScreenW - 20 - 150 - 30;
     }
@@ -155,21 +156,24 @@
                    NSInteger st = [model.status intValue];
                    BOOL isLayer = NO;
                    NSString * str = @"";
-                   if (st == 1) {
-                       str = @"待确认";
-                   }else if (st == 2){
-                       str = @"报修中";
-                   }else if (st == 3){
-                       str = @"待客户验收";
-                   }else if (st == 4){
-                       str = @"验收通过";
-                   }else if (st == 5){
-                       str = @"待整改";
-                   }else if (st == 6){
-                       str = @"整改中";
-                   }else if (st == 7){
-                       str = @"整改完成";
-                   }
+                    if (st == 1) {
+                      str = @"待确认";
+                      isLayer = YES;
+                  }else if (st == 2){
+                      str = @"报修中";
+                  }else if (st == 3){
+                      str = @"待客户验收";
+                  }else if (st == 4){
+                      str = @"验收通过";
+                  }else if (st == 5){
+                      str = @"待整改";
+                  }else if (st == 6){
+                      str = @"整改中";
+                  }else if (st == 7) {
+                      str = @"整改完成";
+                  }else if (st ==8) {
+                      str = @"审核未通过";
+                  }
                   
                    
                    CGFloat w = [str getWidhtWithFontSize:14];
@@ -196,11 +200,13 @@
                    }else if (st == 4){
                        str = @"验收通过";
                    }else if (st == 5){
-                       str = @"待整改";
+                       str = @"待服务方整改";
                    }else if (st == 6){
                        str = @"整改中";
                    }else if (st == 7){
                        str = @"整改完成";
+                   }else if (st == 8) {
+                       str = @"审核未通过";
                    }
                    CGFloat w = [str getWidhtWithFontSize:14];
                    self.statusBt.mj_w = w;
@@ -305,10 +311,6 @@
     
 }
 
-
-
-
-
 - (void)setType:(NSInteger)type {
     _type = type;
 }
@@ -350,7 +352,7 @@
     cell.clcikNeiCellBlock = ^(QYZJConstructionListNeiCell *cellNei, NSInteger index, BOOL isClickCell) {
         NSIndexPath * indexPathNei = [weakSelf.tableView indexPathForCell:cellNei];
         if (weakSelf.delegate != nil && [weakSelf.delegate respondsToSelector:@selector(didclickQYZJConstructionListCell:withIndex:isNeiClick:NeiRow:isClickNeiCell:)]) {
-            [weakSelf.delegate didclickQYZJConstructionListCell:weakSelf withIndex:index isNeiClick:YES NeiRow:indexPathNei.row isClickNeiCell:NO];
+            [weakSelf.delegate didclickQYZJConstructionListCell:weakSelf withIndex:index isNeiClick:YES NeiRow:indexPathNei.section isClickNeiCell:NO];
         }
     };
     cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -406,10 +408,10 @@ if (self) {
           [self addSubview:self.timeLB];
     
           self.editBt = [[UIButton alloc] initWithFrame:CGRectMake(10, 7.5, 25, 25)];
-                 [self.editBt setImage:[UIImage imageNamed:@"36"] forState:UIControlStateNormal];
-                 self.editBt.tag = 100;
-                 [self.editBt addTarget:self action:@selector(editOrStatusAction:) forControlEvents:UIControlEventTouchUpInside];
-                 [self addSubview:self.editBt];
+         [self.editBt setImage:[UIImage imageNamed:@"36"] forState:UIControlStateNormal];
+         self.editBt.tag = 100;
+         [self.editBt addTarget:self action:@selector(editOrStatusAction:) forControlEvents:UIControlEventTouchUpInside];
+         [self addSubview:self.editBt];
     
     
          self.statusBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 150, 40, 140, 20)];
@@ -434,11 +436,12 @@ return self;
 - (void)setModel:(QYZJWorkModel *)model {
     _model = model;
     
-    CGFloat ww = [model.stageName getWidhtWithFontSize:14];
-    
+    CGFloat ww = [model.stageName getWidhtWithFontSize:14 withBlood:YES];
+
     if (ww > ScreenW - 40 - 30) {
         ww = ScreenW - 40 - 30;
     }
+    
     
     self.titleLB.attributedText = [model.stageName getMutableAttributeStringWithFont:14 withBlood:YES lineSpace:3 textColor:[UIColor blackColor]];
     self.titleLB.mj_h = [model.stageName getHeigtWithIsBlodFontSize:14 lineSpace:3 width:ww];
@@ -481,29 +484,29 @@ return self;
     self.statusBt.mj_y = self.timeLB.mj_y;
     
     if (self.type == 1) {
-        
-        
-        
         if (!self.is_service) {
             //服务方
             NSInteger st = [model.status intValue];
             BOOL isLayer = NO;
             NSString * str = @"";
-            if (st == 1) {
-                str = @"待确认";
-            }else if (st == 2){
-                str = @"报修中";
-            }else if (st == 3){
-                str = @"待客户验收";
-            }else if (st == 4){
-                str = @"验收通过";
-            }else if (st == 5){
-                str = @"待整改";
-            }else if (st == 6){
-                str = @"整改中";
-            }else if (st == 7){
-                str = @"整改完成";
-            }
+             if (st == 1) {
+                  str = @"待确认";
+                  isLayer = YES;
+              }else if (st == 2){
+                  str = @"报修中";
+              }else if (st == 3){
+                  str = @"待客户验收";
+              }else if (st == 4){
+                  str = @"验收通过";
+              }else if (st == 5){
+                  str = @"待整改";
+              }else if (st == 6){
+                  str = @"整改中";
+              }else if (st == 7) {
+                  str = @"整改完成";
+              }else if (st ==8) {
+                  str = @"审核未通过";
+              }
            
             
             CGFloat w = [str getWidhtWithFontSize:14];
@@ -530,11 +533,13 @@ return self;
             }else if (st == 4){
                 str = @"验收通过";
             }else if (st == 5){
-                str = @"待整改";
+                str = @"待服务方整改";
             }else if (st == 6){
                 str = @"整改中";
             }else if (st == 7){
                 str = @"整改完成";
+            }else if (st == 8) {
+                str = @"审核未通过";
             }
             CGFloat w = [str getWidhtWithFontSize:14];
             self.statusBt.mj_w = w;

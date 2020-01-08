@@ -324,6 +324,12 @@
     Weak(weakSelf);
     view.footViewClickBlock = ^(UIButton *button) {
         if (weakSelf.isMore) {
+            
+            if (weakSelf.titleTF.text.length == 0 || weakSelf.desTV.text.length == 0) {
+                [SVProgressHUD showErrorWithStatus:@"标题和描述为必填项"];
+                return ;
+            }
+            
          QYZJChoosePeopleTVC * vc =[[QYZJChoosePeopleTVC alloc] init];
          vc.hidesBottomBarWhenPushed = YES;
          vc.cityID = self.cityID;
@@ -414,6 +420,7 @@
             vc.hidesBottomBarWhenPushed = YES;
             vc.model = mm;
             vc.ID = ID;
+            vc.numer = 1;
             vc.type = 4+self.type;
             [self.navigationController pushViewController:vc animated:YES];
             

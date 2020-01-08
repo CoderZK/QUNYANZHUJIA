@@ -494,7 +494,7 @@
                 //视频
                 [self captureVideoButtonClick];
             }else {
-                [self showMXPhotoCameraAndNeedToEdit:YES completion:^(UIImage *image, UIImage *originImage, CGRect cutRect) {
+                    [self showMXPhotoCameraAndNeedToEdit:YES completion:^(UIImage *image, UIImage *originImage, CGRect cutRect) {
                     [self.picsArr addObject:image];
                     [self addPicsWithArr:self.picsArr];
                     [self updateImgsToQiNiuYun];

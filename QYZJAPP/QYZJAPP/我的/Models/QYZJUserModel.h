@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *role_name;
 @property(nonatomic,strong)NSString *label;
 @property(nonatomic,strong)NSString *label_ids;
+@property(nonatomic,strong)NSString *role_id;
 @property(nonatomic,strong)NSString *invitation_code;
 @property(nonatomic,strong)NSString *pic;
 @property(nonatomic,strong)NSString *name;

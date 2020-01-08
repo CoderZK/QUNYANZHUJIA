@@ -117,7 +117,7 @@
               [button setTitle:@"正在播放..." forState:UIControlStateNormal];
               [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:self.dataModel.answer_list[button.tag].media_url] isLocality:NO];
               [PublicFuntionTool shareTool].findPlayBlock = ^{
-                  [button setTitle:@"回复语音" forState:UIControlStateNormal];
+                  [button setTitle:@"点击播放" forState:UIControlStateNormal];
               };
         
     }

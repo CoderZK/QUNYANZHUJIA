@@ -137,9 +137,9 @@
             [self.scrollView addSubview:deleteBt];
              if ([picsArr[i] isKindOfClass:[NSString class]]) {
                             [anNiuBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:picsArr[i]]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"789"] options:SDWebImageRetryFailed];
-                       }else {
-                            [anNiuBt setBackgroundImage:picsArr[i] forState:UIControlStateNormal];
-                       }
+            }else {
+                [anNiuBt setBackgroundImage:picsArr[i] forState:UIControlStateNormal];
+            }
             
         }
         
@@ -206,7 +206,7 @@
         cell.rightLB.text = @"天";
         cell.TF.userInteractionEnabled = YES;
     }else if (indexPath.row == 3) {
-        if (model.time_start.length == 0) {
+        if (model.time_start.length == 0 || model.time_end.length == 0) {
             cell.TF.text = @"";
         }else {
           cell.TF.text = [NSString stringWithFormat:@"%@到%@",model.time_start,model.time_end];
@@ -400,6 +400,7 @@
 
 - (void)deleteHitAction:(UIButton *)button {
     [self.picsArr removeObjectAtIndex:button.tag - 100];
+    [self addPicsWithArr: self.picsArr];
 }
 
 - (void)hitAction:(UIButton *)button {
@@ -422,6 +423,7 @@
             [self showMXPhotoCameraAndNeedToEdit:YES completion:^(UIImage *image, UIImage *originImage, CGRect cutRect) {
                 
                 [self.picsArr addObject:image];
+                [self addPicsWithArr: self.picsArr];
                 [self updateImgsToQiNiuYun];
 
             }];
@@ -449,6 +451,7 @@
             [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
                 
                 [self.picsArr addObjectsFromArray:photos];
+                [self addPicsWithArr: self.picsArr];
                 [self updateImgsToQiNiuYun];
                 
                 

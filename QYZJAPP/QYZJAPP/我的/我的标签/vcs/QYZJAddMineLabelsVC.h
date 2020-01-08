@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)void(^sendLabelsBlock)(NSString *labelsID,NSString * labelsStr);
 @property(nonatomic,strong)NSMutableArray<QYZJTongYongModel *> *leiXingArr;
 @property(nonatomic,strong)NSString *role_id;
+@property(nonatomic,strong)NSString *labelsStr;
+@property(nonatomic,strong)NSString *labelsID;
 @end
 
 NS_ASSUME_NONNULL_END

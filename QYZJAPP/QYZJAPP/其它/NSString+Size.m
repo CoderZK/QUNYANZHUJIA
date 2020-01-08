@@ -172,6 +172,27 @@
     return height;
 }
 
+-(CGFloat)getWidhtWithFontSize:(int)fontSize withBlood:(BOOL )isBlood{
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self];
+    
+    if (isBlood) {
+          [attributedString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:fontSize] range:NSMakeRange(0, self.length)];
+       }else {
+         [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:fontSize] range:NSMakeRange(0, self.length)];
+       }
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    
+//    [paragraphStyle setLineSpacing:lineSpace];//调整行间距
+    
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, self.length)];
+    
+    CGFloat width = [attributedString boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading  context:nil].size.width;
+    
+    return width;
+    
+}
+
 - (NSMutableAttributedString *)getMutableAttributeStringWithFont:(int)fontSize lineSpace:(int)lineSpace textColor:(UIColor *)color{
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self];

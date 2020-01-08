@@ -250,6 +250,7 @@ static PublicFuntionTool * tool = nil;
 
 //转化图片和视频
 + (void)getImageFromPHAsset:(PHAsset *)asset Complete:(void(^)(NSData * data,NSString * str))result {
+    
     __block NSData *data;
     PHAssetResource *resource = [[PHAssetResource assetResourcesForAsset:asset] firstObject];
     //    if (asset.mediaType == PHAssetMediaTypeImage) {
@@ -284,7 +285,7 @@ static PublicFuntionTool * tool = nil;
             
             NSURL *url = urlAsset.URL;
             
-            NSData *data = [NSData dataWithContentsOfURL:url];
+            data = [NSData dataWithContentsOfURL:url];
             
             if (result) {
                 if (data.length <= 0) {
@@ -388,35 +389,48 @@ static PublicFuntionTool * tool = nil;
         NSURL* mediaURL = [info objectForKey:UIImagePickerControllerMediaURL];
         
         if (self.videoBlock != nil) {
-            self.videoBlock([NSData dataWithContentsOfFile:mediaURL]);
+            self.videoBlock([NSData dataWithContentsOfURL:mediaURL]);
         }
         //创建ALAssetsLibrary对象并将视频保存到媒体库
         
-        ALAssetsLibrary* assetsLibrary = [[ALAssetsLibrary alloc] init];
-        
-        [assetsLibrary writeVideoAtPathToSavedPhotosAlbum:mediaURL completionBlock:^(NSURL *assetURL, NSError *error) {
+    
+        if ([self isCanUsePicture]) {
             
-            if (!error) {
+                ALAssetsLibrary* assetsLibrary = [[ALAssetsLibrary alloc] init];
                 
-                NSLog(@"captured video saved with no error.");
-                
-            }else
-                
-            {
-                
-                NSLog(@"error occured while saving the video:%@", error);
+                [assetsLibrary writeVideoAtPathToSavedPhotosAlbum:mediaURL completionBlock:^(NSURL *assetURL, NSError *error) {
+                    
+                    if (!error) {
+                        
+                        NSLog(@"captured video saved with no error.");
+                        
+                    }else
+                        
+                    {
+                        
+                        NSLog(@"error occured while saving the video:%@", error);
+                        
+                    }
+                    
+                }];
                 
             }
-            
-        }];
+        }
         
-    }
-    
-    [picker dismissModalViewControllerAnimated:YES];
+        
+    [picker dismissViewControllerAnimated:YES completion:nil];
     
 }
 
-
+- (BOOL)isCanUsePicture{
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    if (status == PHAuthorizationStatusRestricted ||
+        status == PHAuthorizationStatusDenied) {
+        //无权限
+        return NO;
+    }
+    return YES;
+}
 
 
 @end

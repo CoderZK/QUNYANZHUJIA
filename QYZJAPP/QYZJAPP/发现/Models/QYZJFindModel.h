@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *turnoverListId;
 @property(nonatomic,strong)NSString *shopName;
 @property(nonatomic,strong)NSString *cityId;
+@property(nonatomic,strong)NSString *selfId;
 @property(nonatomic,strong)NSString *pro_id;
 @property(nonatomic,strong)NSString *area_id;
 @property(nonatomic,strong)NSString *city_id;

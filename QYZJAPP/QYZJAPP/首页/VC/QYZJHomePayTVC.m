@@ -120,6 +120,7 @@
     QYZJHomePayCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.moneyLB.hidden = YES;
     cell.model = self.dataArray[indexPath.row];
+    cell.titleLB.text = self.dataArray[indexPath.row].b_recomend_name;
     return cell;
     
 }
@@ -129,6 +130,7 @@
     if ((model.is_service && [model.user_status intValue] == 1) || (!model.is_service && [model.user_status intValue] == 3)) {
         QYZJCreateShiGongQingDanTVC * vc =[[QYZJCreateShiGongQingDanTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
+        vc.ID = model.ID;
         [self.navigationController pushViewController:vc animated:YES];
     }else {
         QYZJMinePayDetailVC * vc =[[QYZJMinePayDetailVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];

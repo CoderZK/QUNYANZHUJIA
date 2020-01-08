@@ -63,7 +63,7 @@
         self.TF.font = kFont(14);
         self.TF.placeholder = @"搜索";
         [self.rightView addSubview:self.TF];
-        self.TF.returnKeyType = UIReturnKeySend;
+        self.TF.returnKeyType = UIReturnKeySearch;
         self.TF.delegate = self;
         
         [self.TF mas_makeConstraints:^(MASConstraintMaker *make) {

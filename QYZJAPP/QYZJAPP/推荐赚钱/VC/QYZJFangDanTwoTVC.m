@@ -15,9 +15,10 @@
 @property(nonatomic,strong)NSArray *leftArr,*placeholdArr,*chooseArr;
 @property(nonatomic,strong)QYZJRecommendFootV *footV;
 @property(nonatomic,strong)QYZJMoreChooseView *moreChooseV;
-@property(nonatomic,assign)NSInteger needType,styleType,houseType;
+@property(nonatomic,assign)NSInteger needType,styleType,houseType,typeSelectIndex;
 @property(nonatomic,strong)NSIndexPath *indexPath;
 @property(nonatomic,strong)QYZJTongYongModel * audioModel;
+
 @end
 
 @implementation QYZJFangDanTwoTVC
@@ -295,11 +296,7 @@
     }else if (row == 1) {
         cell.TF.text = model.role_strs;
     }else if (row == 2) {
-        if (model.type_id > 0 && self.LeiXingArr.count >= model.type_id) {
-            cell.TF.text = self.LeiXingArr[model.type_id -1].name;
-        }else {
-            cell.TF.text = @"";
-        }
+        cell.TF.text = model.type_name;
     } else if (row == 3) {
         if (model.manner_id >0 && [zkSignleTool shareTool].mannerArr.count >= model.manner_id) {
             cell.TF.text = [zkSignleTool shareTool].mannerArr[model.manner_id-1];
@@ -518,7 +515,8 @@
     
     QYZJFindModel  * model = self.dataArray[self.indexPath.section];
     if (self.indexPath.row == 2) {
-        model.type_id = leftIndex+1;
+        model.type_id = [self.LeiXingArr[leftIndex].ID intValue];
+        model.type_name = self.LeiXingArr[leftIndex].name;
     }else if (self.indexPath.row == 3) {
         model.manner_id = leftIndex+1;
     }else if (self.indexPath.row == 4) {

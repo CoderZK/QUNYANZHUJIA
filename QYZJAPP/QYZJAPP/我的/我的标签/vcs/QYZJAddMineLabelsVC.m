@@ -13,7 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *TF;
 
 @property(nonatomic,strong)QYZJMoreChooseView *moreChooseV;
-@property(nonatomic,strong)NSString *labelsID,*labelsStr;
+
 @end
 
 @implementation QYZJAddMineLabelsVC
@@ -22,7 +22,8 @@
     [super viewDidLoad];
     self.navigationItem.title = @"新增标签";
     self.moreChooseV = [[QYZJMoreChooseView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH)];
-   
+    [self getLeiXingData];
+    self.TF.text = self.labelsStr;
 }
 
 - (IBAction)chooseAction:(UIButton *)sender {
@@ -102,7 +103,12 @@
         if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
             
             self.leiXingArr = [QYZJTongYongModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
-            
+            NSArray * arr = [self.labelsID componentsSeparatedByString:@","];
+            for (QYZJTongYongModel * mm  in self.leiXingArr) {
+                if ([arr containsObject:mm.ID]) {
+                    mm.isSelect = YES;
+                }
+            }
             
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];

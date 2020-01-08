@@ -279,7 +279,7 @@
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"pay_type"] = @"2";
-    dict[@"pay_money"] = @(self.model.money);
+    dict[@"pay_money"] = [NSString stringWithFormat:@"%0.2f",self.model.money];
     dict[@"answer_id"] = self.model.ID;
     dict[@"demand_id"] = self.model.ID;
     dict[@"media_id"] = self.model.ID;
@@ -316,6 +316,9 @@
         url = [QYZJURLDefineTool user_createCouponOrderURL];
         dict[@"coupon_id"] = self.youHuiID;
         dict[@"num"] = @(self.numer);
+        if (self.numer ==0) {
+            dict[@"num"] = @"1";
+        }
     }
     
     [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -427,7 +430,14 @@
     
     [SVProgressHUD showSuccessWithStatus:@"支付成功"];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        if ((self.type == 6 ||self.type == 11) && self.isBaoBlcok != nil) {
+            self.isBaoBlcok();
+        }
         if (self.type == 5 || self.type == 6) {
+            
+            
+            
             if (self.navigationController.childViewControllers.count >= 5) {
                 UIViewController * vc = self.navigationController.childViewControllers[self.navigationController.childViewControllers.count - 5];
                 UIViewController * vcTwo = self.navigationController.childViewControllers[self.navigationController.childViewControllers.count - 3];
@@ -437,9 +447,7 @@
                 if ([vcTwo isKindOfClass:[QYZJMineZhuYeTVC class]]) {
                     [self.navigationController popToViewController:vcTwo animated:YES];
                 }
-                if ((self.type == 6 ||self.type == 11) && self.isBaoBlcok != nil) {
-                    self.isBaoBlcok();
-                }
+               
             }else if (self.navigationController.childViewControllers.count >= 3) {
                 
                 UIViewController * vcTwo = self.navigationController.childViewControllers[self.navigationController.childViewControllers.count - 3];

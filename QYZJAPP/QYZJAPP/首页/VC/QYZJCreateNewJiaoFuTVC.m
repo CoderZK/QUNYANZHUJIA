@@ -150,11 +150,7 @@
             cell.TF.text = self.dataModel.telphone;
              cell.TF.keyboardType = UIKeyboardTypePhonePad;
         }else if (indexPath.row == 4){
-            if (self.dataModel.type_id > 0) {
-               cell.TF.text = self.LeiXingArr[self.dataModel.type_id-1].name;
-            }else {
-                cell.TF.text = @"";
-            }
+            cell.TF.text = self.dataModel.type_name;
         }else if (indexPath.row == 5){
             cell.TF.text = self.dataModel.area;
             cell.TF.keyboardType =  UIKeyboardTypeDecimalPad;
@@ -220,7 +216,8 @@
                 self.dataModel.areaStr = self.cityArray[leftIndex].cityList[centerIndex].areaList[rightIndex-1].name;
             }
     }else {
-      self.dataModel.type_id = leftIndex+1;
+      self.dataModel.type_id = [self.LeiXingArr[leftIndex].ID intValue];
+      self.dataModel.type_name = self.LeiXingArr[leftIndex].name;
     }
     
     

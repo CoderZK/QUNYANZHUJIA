@@ -94,6 +94,10 @@
     cell.is_service = !model.isService;
     cell.model = model;
     cell.delegate = self;
+    
+    
+    
+    
     return cell;
     
 }
@@ -115,6 +119,7 @@
         modelNei.ID = model.ID;
         modelNei.turnoverListId = model.turnoverListId;
         modelNei.turnoverTitle = model.turnoverTitle;
+        modelNei.isService = model.isService;
         QYZJMineBaoXiuDetailTVC * vc =[[QYZJMineBaoXiuDetailTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         vc.model = modelNei;

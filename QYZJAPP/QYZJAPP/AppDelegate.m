@@ -141,24 +141,15 @@
 //在用户接受推送通知后系统会调用
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-//    self.pushToken = deviceToken;
-//    if (![LxmTool ShareTool].isClosePush)
-//    {
-//        [UMessage registerDeviceToken:deviceToken];
-//        //2.获取到deviceToken
-//        NSString *token = [[[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]] stringByReplacingOccurrencesOfString:@" " withString:@""];
-//        //将deviceToken给后台
-//        NSLog(@"send_token:%@",token);
-//        [LxmTool ShareTool].deviceToken = token;
-//        //[[LxmTool ShareTool] uploadDeviceToken];
-//    }
-//    else
-//    {
-//        [UMessage registerDeviceToken:nil];
-//        [LxmTool ShareTool].deviceToken = @"";
-//        //[[LxmTool ShareTool] uploadDeviceToken];
-//    }
-    
+
+        [UMessage registerDeviceToken:deviceToken];
+        //2.获取到deviceToken
+        NSString *token = [[[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]] stringByReplacingOccurrencesOfString:@" " withString:@""];
+        //将deviceToken给后台
+        NSLog(@"send_token:%@",token);
+        [zkSignleTool shareTool].deviceToken = token;
+        [[zkSignleTool shareTool] uploadDeviceToken];
+   
     
 }
 

@@ -31,6 +31,8 @@
 
 -(CGFloat)getWidhtWithFontSize:(int)fontSize;
 
+-(CGFloat)getWidhtWithFontSize:(int)fontSize withBlood:(BOOL )isBlood;
+
 //根据行间距 和 行的宽 字的大小计算行的高度
 
 - (CGFloat)getHeigtWithFontSize:(int)fontSize lineSpace:(int )lineSpace width:(CGFloat )widht;

@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJConstructionProgressCell : UITableViewCell
+@property(nonatomic,assign)NSInteger number;
 @property(nonatomic,strong)NSMutableArray<QYZJWorkModel *> *dataArray;
 @end
 

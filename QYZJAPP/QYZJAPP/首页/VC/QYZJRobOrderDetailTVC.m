@@ -131,7 +131,7 @@
         NSString * rightStr = @"反馈有效";
         if (status == 2) {
             leftStr = @"签单失败";
-            rightStr = @"签到成功";
+            rightStr = @"签单成功";
         }
         KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvTwoWithLeftTitle:leftStr letfTietelColor:OrangeColor rightTitle:rightStr rightColor:WhiteColor];
         view.tag = 666;
@@ -239,6 +239,7 @@
             QYZJCreateShiGongQingDanTVC * vc =[[QYZJCreateShiGongQingDanTVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             vc.ID = responseObject[@"result"][@"turnover_id"];
+            vc.IDTwo = self.ID;
             vc.isRob = YES;
             [self.navigationController pushViewController:vc animated:YES];
         

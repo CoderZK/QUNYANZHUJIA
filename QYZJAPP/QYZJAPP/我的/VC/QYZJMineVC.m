@@ -377,6 +377,7 @@
                     vc.hidesBottomBarWhenPushed = YES;
                     vc.labelsStr = self.dataModel.label;
                     vc.labelsId = self.dataModel.label_ids;
+                    vc.role_id = self.dataModel.role_id;
                     [self.navigationController pushViewController:vc animated:YES];
                     
                 }

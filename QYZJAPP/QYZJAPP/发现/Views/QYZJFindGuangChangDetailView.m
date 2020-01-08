@@ -329,7 +329,7 @@
     NSArray * arr = self.model.article.pictures;
     NSMutableArray * picArr = @[].mutableCopy;
     for (NSString * str  in arr) {
-        [picArr addObject:[NSString stringWithFormat:@"%@",str]];
+        [picArr addObject:[NSString stringWithFormat:@"%@",[QYZJURLDefineTool getImgURLWithStr:str]]];
     }
     [[zkPhotoShowVC alloc] initWithArray:picArr index:tag];
 }

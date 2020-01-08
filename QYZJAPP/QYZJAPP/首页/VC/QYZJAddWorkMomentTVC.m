@@ -7,8 +7,8 @@
 //
 
 #import "QYZJAddWorkMomentTVC.h"
-
-@interface QYZJAddWorkMomentTVC ()<TZImagePickerControllerDelegate>
+#import "QYZJMineBaoXiuListTVC.h"
+@interface QYZJAddWorkMomentTVC ()<TZImagePickerControllerDelegate,UIImagePickerControllerDelegate>
 @property(nonatomic,strong)UITextField *titleTF;
 @property(nonatomic,strong)IQTextView * desTV;
 @property(nonatomic,strong)UIView *whiteOneV,*whiteTwoV;
@@ -20,6 +20,7 @@
 @property(nonatomic,strong)NSString *videoStr;
 @property(nonatomic,assign)BOOL   isChooseVideo;
 @property(nonatomic,strong)UIButton *deleteBt;
+
 //@property(nonatomic,strong)UILabel *lb4;
 
 @property(nonatomic,strong)QYZJTongYongModel *imgModel,*videoModel;
@@ -36,7 +37,7 @@
     [self createHeadV];
     self.picsArr = @[].mutableCopy;
     if ((self.type == 4 || self.type == 1) && self.picsArrTwo.count > 0) {
-        self.picsArr = self.picsArrTwo;
+        self.picsArr = self.picsArrTwo.mutableCopy;
     }
    
 //    if (self.videoUrl.length > 0) {
@@ -55,7 +56,7 @@
         self.navigationItem.title = @"创建播报";
     }else if (self.type == 5) {
         self.navigationItem.title = @"创建播报";
-    }else if (self.type == 6 || self.type == 7) {
+    }else if (self.type == 6) {
         self.navigationItem.title = @"创建报修";
     }
     self.tableView.backgroundColor =[UIColor groupTableViewBackgroundColor];
@@ -107,12 +108,12 @@
     
     
     
-    if (self.titleTF.text.length ==0 && !(self.type == 7 || self.type == 6)) {
+    if (self.titleTF.text.length ==0 && !( self.type == 6)) {
            [SVProgressHUD showErrorWithStatus:@"请输入标题"];
            return;
        }
     if (self.desTV.text.length == 0) {
-        [SVProgressHUD showErrorWithStatus:@"请输入动态内容"];
+        [SVProgressHUD showErrorWithStatus:@"请输入描述"];
         return;
     }
 
@@ -131,7 +132,7 @@
         url = [QYZJURLDefineTool user_constructionEditURL];
     }else if (self.type == 5) {
         url = [QYZJURLDefineTool user_createBroadcastURL];
-    }else if (self.type == 6 || self.type == 7) {
+    }else if (self.type == 6 ) {
         url = [QYZJURLDefineTool user_createRepairURL];
     }
     NSMutableDictionary * dict = @{}.mutableCopy;
@@ -150,6 +151,7 @@
     dict[@"turnoverListId"] = self.ID;
     dict[@"price"] = @(self.price);
     dict[@"changeType"] = @(self.changeType);
+    dict[@"selfId"] = self.IDThree;
     dict[@"videoUrl"] = self.videoStr;
     if (self.type == 4 || self.type == 6 || self.type == 7) {
         dict[@"turnoverListId"] = self.IDTwo;
@@ -167,11 +169,23 @@
                 [SVProgressHUD showSuccessWithStatus:@"创建案例成功"];
             }else if (self.type == 4) {
                 [SVProgressHUD showSuccessWithStatus:@"修改阶段成功"];
+            }else if (self.type == 7) {
+                [SVProgressHUD showSuccessWithStatus:@"整改成功"];
             }
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.navigationController popViewControllerAnimated:YES];
-            });
+            if (self.type ==6) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    QYZJMineBaoXiuListTVC * vc =[[QYZJMineBaoXiuListTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                });
+            }else {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+            }
+            
+            
             
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
@@ -208,7 +222,7 @@
     UIView * backV1 =[[UIView alloc] initWithFrame:CGRectMake(0, 50, ScreenW, 0.6)];
     backV1.backgroundColor = lineBackColor;
     
-    if (self.type == 6 || self.type == 7) {
+    if (self.type == 6 ) {
         backV1.mj_y = 0;
         self.titleTF.hidden = lb1.hidden = YES;
     }

@@ -368,7 +368,10 @@
 +(NSString *)user_createTurnoverURL {
     return [NSString stringWithFormat:@"%@%@",URLOne,@"user_createTurnover.do"];
 }
-
+/**长传推送token*/
++(NSString *)app_bindPushTokenURL{
+   return [NSString stringWithFormat:@"%@%@",URLOne,@"app_bindPushToken.do"];
+}
 #pragma mark ----- 需求单 -------
 /** 推荐赚钱单子列表*/
 +(NSString *)user_myDemandListURL{
@@ -754,6 +757,11 @@
 +(NSString *)getImgURLWithStr:(NSString * )str{
     
     NSString * picStr = @"";
+
+    if ([[NSString stringWithFormat:@"%@",str] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",str] isEqualToString:@"null"]) {
+        return @"";
+    }
+    
     if (str) {
         if ([str hasPrefix:@"http:"] || [str hasPrefix:@"https:"]) {
             picStr = str;
@@ -766,6 +774,10 @@
 }
 
 +(NSString *)getVideoURLWithStr:(NSString * )str {
+   
+    if ([[NSString stringWithFormat:@"%@",str] isEqualToString:@"<null>"] || [[NSString stringWithFormat:@"%@",str] isEqualToString:@"null"]) {
+          return @"";
+      }
     
    NSString * picStr = @"";
     if (str) {

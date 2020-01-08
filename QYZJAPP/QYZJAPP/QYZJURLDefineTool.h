@@ -88,6 +88,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)app_vipPackageListURL;
 /** 充值套餐 */
 +(NSString *)user_setVipURL;
+/**长传推送token*/
++(NSString *)app_bindPushTokenURL;
 
 /** 充值套餐支付*/
 + (NSString * )user_payVipURL;

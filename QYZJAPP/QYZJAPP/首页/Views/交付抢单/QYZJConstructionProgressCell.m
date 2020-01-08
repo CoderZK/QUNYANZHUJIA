@@ -28,6 +28,10 @@
     return self;
 }
 
+- (void)setNumber:(NSInteger)number {
+    _number = number;
+}
+
 - (void)setDataArray:(NSMutableArray<QYZJWorkModel *> *)dataArray {
     _dataArray = dataArray;
     
@@ -53,13 +57,13 @@
         if (i+1 == dataArray.count ) {
             view.hidden = YES;
         }
-        if([model.status intValue]== 4|| [model.status intValue] == 6) {
+        if(i<self.number ) {
             [button setImage:[UIImage imageNamed:@"32"] forState:UIControlStateNormal];
         
         }else {
            [button setImage:[UIImage imageNamed:@"33"] forState:UIControlStateNormal];
         }
-        if (modelTwo != nil && ([modelTwo.status intValue] == 4 || [modelTwo.status intValue] == 6)) {
+        if (i+1<self.number) {
             view.backgroundColor = OrangeColor;
         }else {
             view.backgroundColor = CharacterColor180;

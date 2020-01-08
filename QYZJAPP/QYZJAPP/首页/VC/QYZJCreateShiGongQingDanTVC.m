@@ -155,7 +155,7 @@
             }else {
                 cell.moreImgV.hidden = NO;
                 cell.TF.userInteractionEnabled = NO;
-                if (self.dataModel.time_start.length == 0) {
+                if (self.dataModel.time_start.length == 0 || self.dataModel.time_end.length == 0) {
                     cell.TF.text = @"";
                 }else {
                     cell.TF.text = [NSString stringWithFormat:@"%@到%@",self.dataModel.time_start,self.dataModel.time_end];
@@ -203,10 +203,10 @@
             }else {
                 cell.moreImgV.hidden = NO;
                 cell.TF.userInteractionEnabled = NO;
-                if (model.time_start.length == 0) {
+                if (model.time_start.length == 0 && model.time_end.length > 0) {
                     cell.TF.text = @"";
                 }else {
-                    if (model.time_start.length > 0) {
+                    if (model.time_start.length > 0 && model.time_end.length > 0) {
                        cell.TF.text = [NSString stringWithFormat:@"%@到%@",model.time_start,model.time_end];
                     }else {
                         cell.TF.text = @"";
@@ -292,7 +292,6 @@
                 NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
                 [dateFormatter setDateFormat:@"yyyy-MM-dd"];
                 NSDate * nowDate = [dateFormatter dateFromString:timeStr];
-                NSTimeInterval  oneDay = 24 * 60 * 60 * 1;
                 NSDate * otherDate = [NSString getLaterDateFromDate:nowDate withYear:0 month:0 day:self.dataModel.all_days];
                 self.dataModel.time_end = [dateFormatter stringFromDate:otherDate];
                 [weakSelf.tableView reloadData];
@@ -337,6 +336,8 @@
         return ;
     }
     
+
+    
     if ([self cheackFullMessage]) {
         [self createStageAction];
     }
@@ -363,7 +364,7 @@
         [SVProgressHUD showErrorWithStatus:@"总的百分比要为100%"];
         return;
     }
-    [SVProgressHUD show];
+
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"title"] = self.dataModel.title;
     dict[@"content"] = self.dataModel.context;
@@ -372,7 +373,21 @@
     dict[@"all_time_start"] = self.dataModel.time_start;
     dict[@"all_time_end"] = self.dataModel.time_end;
     dict[@"turnover_id"] = self.ID;
+
+    if (self.dataArray.count > 0 && [self listStr].length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"信息填写不完整"];
+        return;
+    }
+    if ([[self listStr] isEqualToString:@"1"]) {
+        [SVProgressHUD showErrorWithStatus:@"至少添加一个阶段"];
+        return;
+    }
+    
     dict[@"list"] = [self listStr];
+    
+    
+    [SVProgressHUD show];
+    
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_createStageURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         
         [SVProgressHUD dismiss];
@@ -403,7 +418,15 @@
 
 - (NSString *)listStr {
     NSMutableArray * dataArr = @[].mutableCopy;
+    if (self.dataArray.count == 0) {
+        return @"1";
+    }
     for (QYZJFindModel * model  in self.dataArray) {
+        
+        if (model.stage_name.length == 0 || model.percent == 0 || model.days == 0 || model.time_start.length == 0 || model.time_end.length == 0) {
+            [SVProgressHUD showErrorWithStatus:@"信息填写不完整"];
+            return @"";
+        }
         NSMutableDictionary * dict = @{}.mutableCopy;
         dict[@"stage_name"] = model.stage_name;
         dict[@"percent"] = @(model.percent);

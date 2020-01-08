@@ -160,8 +160,8 @@
 
 
 - (void)delectAction:(UIButton *)button {
-    QYZJTongYongModel * model = self.leiXingArr[button.tag - 100];
-    model.isSelect = NO;
+//    QYZJTongYongModel * model = self.leiXingArr[button.tag - 100];
+//    model.isSelect = NO;
     [self.titleArr removeObjectAtIndex:button.tag -100];
     [self.idsArr removeObjectAtIndex:button.tag-100];
     [self setLabels];
@@ -179,6 +179,8 @@
     };
     vc.role_id = self.role_id;
     vc.hidesBottomBarWhenPushed = YES;
+    vc.labelsStr = [self.titleArr componentsJoinedByString:@","];
+    vc.labelsID = [self.idsArr componentsJoinedByString:@","];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

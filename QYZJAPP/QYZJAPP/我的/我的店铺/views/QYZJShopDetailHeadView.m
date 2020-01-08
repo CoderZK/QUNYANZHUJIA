@@ -171,7 +171,7 @@
     NSArray * arr = [self.dataModel.pic componentsSeparatedByString:@","];
     NSMutableArray * picArr = @[].mutableCopy;
     for (NSString * str  in arr) {
-        [picArr addObject:[NSString stringWithFormat:@"%@",str]];
+        [picArr addObject:[NSString stringWithFormat:@"%@",[QYZJURLDefineTool getImgURLWithStr:str]]];
     }
     [[zkPhotoShowVC alloc] initWithArray:picArr index:tag];
     

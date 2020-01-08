@@ -122,18 +122,23 @@ static zkSignleTool * tool = nil;
 {
     if (self.isLogin&&self.session_token&&self.deviceToken)
     {
+        
+        if (self.session_token == nil || self.session_token.length == 0) {
+            return;
+        }
+        
         NSDictionary * dic = @{
                                @"token":self.session_token,
                                @"type":@1,
-                               @"deviceToken":self.deviceToken
+                               @"pushToken":self.deviceToken
                                };
-//        [zkRequestTool networkingPOST:[zkFMURL GETapi_user_upTokenURL] parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
-//            
-//            NSLog(@"上传友盟推送成功\n%@",responseObject);
-//            
-//        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//            NSLog(@"%@",error);
-//        }];
+        [zkRequestTool networkingPOST:[QYZJURLDefineTool app_bindPushTokenURL] parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
+            
+            NSLog(@"上传友盟推送成功\n%@",responseObject);
+            
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            NSLog(@"%@",error);
+        }];
     }
     
 }

@@ -137,6 +137,8 @@
         vc.money = self.dataModel.question_price;
     }
     [self.navigationController pushViewController:vc animated:YES];
+
+    
     
 }
 

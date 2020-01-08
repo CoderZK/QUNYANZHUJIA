@@ -26,7 +26,7 @@
     
     self.navigationItem.title = @"选择答人";
     
-    
+    self.page = 1;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeFiveCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeFiveCell"];
      self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -268,7 +268,7 @@
             //点击搜索
        
             self.search_word = x[@"text"];
-            self.page = 0;
+            self.page = 1;
             [self getData];
 
         }

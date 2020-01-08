@@ -46,6 +46,8 @@
         [self.qianDanBt setBackgroundColor:RGB(180, 180, 180)];
      }
 
+    self.timeLB.text = model.add_time;
+    
     BOOL isOrangeCoclor = YES;
     
     if ([model.user_status intValue] == 0) {

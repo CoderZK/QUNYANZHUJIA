@@ -214,7 +214,7 @@
     self.timeLB.mj_y = CGRectGetMaxY(self.contentLB.frame) + 5;
     self.statusLB.mj_y = CGRectGetMaxY(self.contentLB.frame) + 5;
     self.timeTwoLB.mj_y = CGRectGetMaxY(self.timeLB.frame) +5;
-    [self setPicWithideos:nil andPictArr:model.pics];
+    [self setPicWithideos:nil andPictArr:model.pictures];
     [self setVideosWithArr:model.videos];
     model.cellHeight = CGRectGetMaxY(self.viewTwo.frame) + 10;
 }
@@ -329,10 +329,10 @@
     UIImageView * imgV = (UIImageView *)tap.view;
     NSInteger tag = imgV.tag - 100;
     //无视频
-    NSArray * arr = self.model.article.pictures;
+    NSArray * arr = self.model.pictures;
     NSMutableArray * picArr = @[].mutableCopy;
     for (NSString * str  in arr) {
-        [picArr addObject:[NSString stringWithFormat:@"%@",str]];
+        [picArr addObject:[NSString stringWithFormat:@"%@",[QYZJURLDefineTool getImgURLWithStr:str]]];
     }
     [[zkPhotoShowVC alloc] initWithArray:picArr index:tag];
 }

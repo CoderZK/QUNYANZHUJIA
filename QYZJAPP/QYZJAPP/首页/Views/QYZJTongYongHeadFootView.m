@@ -20,7 +20,7 @@
         [self addSubview:self.leftLB];
         [self.leftLB mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self).offset(10);
-            make.centerY.equalTo(self.mas_centerY).offset(5);
+            make.centerY.equalTo(self.mas_centerY).offset(0);
             make.height.equalTo(@20);
             make.width.equalTo(@150);
         }];

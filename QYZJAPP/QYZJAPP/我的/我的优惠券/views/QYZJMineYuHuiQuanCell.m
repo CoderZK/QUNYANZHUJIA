@@ -54,7 +54,7 @@
     _model = model;
     self.leftTitleLB.text = model.name;
     if (model.add_time.length >= 10 && model.end_time.length >=10) {
-        self.timeLB.text = [NSString stringWithFormat:@"有效时间 %@~%@",[model.add_time substringToIndex:9 ],[model.end_time substringToIndex:10]];
+        self.timeLB.text = [NSString stringWithFormat:@"有效时间 %@~%@",[model.add_time substringToIndex:10  ],[model.end_time substringToIndex:10]];
     }
     
     self.bottomLB.text = [NSString stringWithFormat:@"仅限%@使用",model.telphone];

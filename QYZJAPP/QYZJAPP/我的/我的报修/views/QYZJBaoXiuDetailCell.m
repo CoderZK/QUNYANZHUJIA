@@ -68,12 +68,13 @@
          self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, ScreenW, 150)];
          self.tableView.dataSource = self;
          self.tableView.delegate = self;
+         self.tableView.scrollEnabled = NO;
          [self.tableView registerClass:[QYZJBaoXiuDetailNeiCell class] forCellReuseIdentifier:@"cell"];
          self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
          [self addSubview:self.tableView];
         
         
-    }
+    }    
     return self;
 }
 
@@ -245,7 +246,7 @@
         NSArray * arr = [self.waiModel.picUrl componentsSeparatedByString:@","];
         NSMutableArray * picArr = @[].mutableCopy;
         for (NSString * str  in arr) {
-            [picArr addObject:[NSString stringWithFormat:@"%@",str]];
+            [picArr addObject:[NSString stringWithFormat:@"%@",[QYZJURLDefineTool getImgURLWithStr:str]]];
         }
         [[zkPhotoShowVC alloc] initWithArray:picArr index:tag];
     }

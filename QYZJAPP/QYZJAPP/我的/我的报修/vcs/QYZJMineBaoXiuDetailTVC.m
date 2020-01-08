@@ -29,6 +29,7 @@
     [super viewWillAppear:animated];
     self.page = 1;
     [self getData];
+    [self getDataDetail];
 }
 
 - (void)viewDidLoad {
@@ -45,10 +46,12 @@
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.page = 1;
         [self getData];
+        
     }];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         self.page++;
         [self getData];
+        
     }];
     
     
@@ -56,11 +59,12 @@
     Weak(weakSelf);
     self.showView.sendPingLunBlock = ^(NSString * _Nonnull message) {
         [weakSelf delectOrPingAction:message];
+        
+        
+        
     };
     
-    //    if(self.type == 1) {
-    //       [self getDataDetail];
-    //    }
+        
     
     [self setFootVWithStatus:[self.model.status intValue]];
     
@@ -103,6 +107,9 @@
             if (status == 1) {
                 str = @"提交阶段验收";
                 isLayer = YES;
+            }else if (status == 3) {
+                isLayer = YES;
+                str= @"立即整改";
             }
         }
     }else {
@@ -172,6 +179,7 @@
                     vc.type = 6;
                     vc.ID = self.model.ID;
                     vc.IDTwo = self.model.turnoverListId;
+                    vc.changeType =  [self.model.type intValue];
                     [self.navigationController pushViewController:vc animated:YES];
                     return;
                 }
@@ -179,6 +187,7 @@
                 QYZJQingDanPingJiaVC * vc =[[QYZJQingDanPingJiaVC alloc] init];
                 vc.hidesBottomBarWhenPushed = YES;
                 vc.ID = self.model.ID;
+                
                 [self.navigationController pushViewController:vc animated:YES];
                 return;
             }
@@ -188,21 +197,28 @@
             //服务方
             if (status == 1) {
                 [self yanShouOrTiaoJiaoWithUrl:[QYZJURLDefineTool user_turnoverStageConfirmURL] andID:self.model.ID isYanShou:NO];
+            }else if (status == 3) {
+                QYZJAddWorkMomentTVC * vc =[[QYZJAddWorkMomentTVC alloc] init];
+                vc.hidesBottomBarWhenPushed = YES;
+                vc.type = 7;
+                vc.ID = self.model.ID;
+                vc.IDThree = self.model.selfId;
+                vc.IDTwo = self.model.turnoverListId;
+                vc.changeType = [self.model.type intValue];
+                [self.navigationController pushViewController:vc animated:YES];
+                return;
             }
             
             
         }
-        
-        
-        
-        
-        
+
     }else {
         //报修过来
         if (self.model.isService) {
             //服务方
             if(status == 1) {
                 //"确认保修";
+                  [self baoXiuConfirmAction:1];
             }else if (status == 2) {
                 // @"提交验收";
                 [self yanShouOrTiaoJiaoWithUrl:[QYZJURLDefineTool user_turnoverRepairConfirmURL] andID:self.model.ID isYanShou:NO];
@@ -212,7 +228,9 @@
                 vc.hidesBottomBarWhenPushed = YES;
                 vc.type = 7;
                 vc.ID = self.model.ID;
+                vc.IDThree = self.model.selfId;
                 vc.IDTwo = self.model.turnoverListId;
+                vc.changeType = [self.model.type intValue];
                 [self.navigationController pushViewController:vc animated:YES];
                 return;
             }
@@ -373,6 +391,9 @@
         if ([responseObject[@"key"] intValue]== 1) {
             
             QYZJFindModel * mdoel = [QYZJFindModel mj_objectWithKeyValues:responseObject[@"result"][@"constructionStageList"]];
+            if (self.type != 1) {
+                mdoel =[QYZJFindModel mj_objectWithKeyValues:responseObject[@"result"][@"repair"]];
+            }
             self.model.status = mdoel.status;
             [self setFootVWithStatus:[self.model.status intValue]];
             [self.tableView reloadData];

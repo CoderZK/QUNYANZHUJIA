@@ -260,7 +260,7 @@
     }else if (indexPath.row == 1) {
         cell.TF.text = self.dataModel.name;
     }else if (indexPath.row == 2) {
-        cell.TF.text = self.dataModel.type_id > 0 ? self.LeiXingArr[self.dataModel.type_id - 1].name : @"";
+        cell.TF.text = self.dataModel.type_name;
     }else if (indexPath.row == 3) {
         cell.rightLB.hidden = NO;
         cell.rightLB.text =@"m²";
@@ -463,7 +463,8 @@
         
         
     }else if (self.indexPath.row == 2) {
-        self.dataModel.type_id = leftIndex+1;
+        self.dataModel.type_id = [self.LeiXingArr[leftIndex].ID intValue];
+        self.dataModel.type_name = self.LeiXingArr[leftIndex].name;
     }else if (self.indexPath.row == 5) {
         self.dataModel.manner_id = leftIndex+1;
     }else if (self.indexPath.row == 6) {

@@ -104,7 +104,7 @@
         
             model.is_need_wechat_pay = !isBao;
             QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
-            model.money = moneyTwo;
+            model.money = model.allMoney;
             Weak(weakSelf);
             vc.isBaoBlcok = ^{
                 if (isBao) {

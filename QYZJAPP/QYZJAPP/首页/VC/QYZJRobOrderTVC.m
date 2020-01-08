@@ -182,10 +182,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
    
+    if (indexPath.section == 0) {
+        QYZJXiaoYanZiVC * vc =[[QYZJXiaoYanZiVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else {
         QYZJRobOrderDetailTVC * vc =[[QYZJRobOrderDetailTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
         vc.hidesBottomBarWhenPushed = YES;
         vc.ID = self.dataArray[indexPath.row].ID;
         [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+        
     
     
 }

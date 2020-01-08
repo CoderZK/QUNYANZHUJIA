@@ -37,7 +37,7 @@
     
     if (sender.tag == 100) {
         //点击城市
-        
+        [self.view endEditing:YES];
         if (self.cityArray.count == 0) {
             [SVProgressHUD showErrorWithStatus:@"获取地址失败,请返回在重新进入"];
             return;

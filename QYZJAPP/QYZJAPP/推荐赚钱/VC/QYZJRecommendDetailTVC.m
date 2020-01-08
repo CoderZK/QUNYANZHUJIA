@@ -8,12 +8,19 @@
 
 #import "QYZJRecommendDetailTVC.h"
 #import "QYZJRobOrderDetailCell.h"
+#import "QYZJMinePayDetailVC.h"
 @interface QYZJRecommendDetailTVC ()
 @property(nonatomic,strong)QYZJWorkModel *dataModel;
 @property(nonatomic,strong)NSArray *leftTitleArr;
+
 @end
 
 @implementation QYZJRecommendDetailTVC
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getData];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -21,14 +28,53 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"TongYongCell" bundle:nil] forCellReuseIdentifier:@"cell"];
      [self.tableView registerNib:[UINib nibWithNibName:@"QYZJRobOrderDetailCell" bundle:nil] forCellReuseIdentifier:@"QYZJRobOrderDetailCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+ 
     
-    [self getData];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self getData];
     }];
 
         self.leftTitleArr = @[@"订单号",@"地址",@"小区名称",@"风格",@"户型",@"装修时间",@"需求类型",@"预算",@"建筑面积",@"需求描述",@"订单状态"];
     
+    
+}
+
+- (void)setFootVWithStatus:(NSInteger)status {
+    self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - 60 - sstatusHeight - 44);
+    if (sstatusHeight > 20) {
+        self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH  - 60 - 34 - sstatusHeight - 44);
+    }
+    
+    
+    
+    
+    KKKKFootView * view2 = (KKKKFootView *)[self.view viewWithTag:666];
+    if (view2 != nil) {
+        [view2 removeFromSuperview];
+    }
+    if (status != 7) {
+        return;
+    }
+        KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"查看交付" andImgaeName:@""];
+        view.tag = 666;
+        Weak(weakSelf);
+        view.footViewClickBlock = ^(UIButton *button) {
+            [weakSelf clickActionWithStatus];
+        };
+        [self.view addSubview:view];
+        
+
+    
+    
+}
+
+- (void)clickActionWithStatus {
+    
+    QYZJMinePayDetailVC * vc =[[QYZJMinePayDetailVC alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    vc.ID = self.dataModel.turnoverId;
+    
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 
@@ -43,6 +89,7 @@
         if ([responseObject[@"key"] intValue]== 1) {
             
             self.dataModel = [QYZJWorkModel mj_objectWithKeyValues:responseObject[@"result"]];
+            [self setFootVWithStatus:[self.dataModel.status intValue]];
             [self.tableView reloadData];
             
         }else {
@@ -89,6 +136,7 @@
     
     TongYongCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.leftLB.text = self.leftTitleArr[indexPath.row];
+    cell.rightLB.textColor = CharacterColor80;
     NSInteger row = indexPath.row;
     NSString * str = @"";
     if (row == 0) {
@@ -117,7 +165,40 @@
         
         str = [NSString stringWithFormat:@"%@m²",self.dataModel.area];
     }else if (row == 10) {
-        str  = @"抢单结束";
+           cell.rightLB.textColor = OrangeColor;
+           if (self.dataModel.audit_status == 0) {
+               str = @"未审核";
+           }else if (self.dataModel.audit_status == 1) {
+               if ([self.dataModel.status intValue]== 0) {
+                     str = @"审核成功";
+                 }else if ([self.dataModel.status intValue]== 1){
+                     str = @"抢单中";
+                 }else if ([self.dataModel.status intValue]== 2){
+                     str = @"抢单结束";
+                 }else if ([self.dataModel.status intValue]== 3 ){
+                     str = @"有效信息";
+                 }else if ([self.dataModel.status intValue]== 4){
+                     str = @"无效信息";
+                 }else if ([self.dataModel.status intValue]== 5){
+                     str = @"已签单";
+                 }else if ([self.dataModel.status intValue]== 6){
+                     str = @" 未签单";
+                 }else if ([self.dataModel.status intValue]== 7){
+                     str = @"交付中";
+                 }else if ([self.dataModel.status intValue]== 8 ){
+                     str = @"交付完成";
+                 }else if ([self.dataModel.status intValue]== 9){
+                     str = @"";
+                 }else if ([self.dataModel.status intValue]== 10){
+                     str = @"";
+                 }else if ([self.dataModel.status intValue]== 11){
+                     
+                 }
+               
+           }else {
+               
+              str = @"审核失败";
+           }
     }
     cell.rightLB.text = str;
     return cell;
