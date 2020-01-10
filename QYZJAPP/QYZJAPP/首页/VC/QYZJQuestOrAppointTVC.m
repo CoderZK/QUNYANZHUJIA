@@ -102,7 +102,7 @@
     self.desTV = [[IQTextView alloc] initWithFrame:CGRectMake(95 , 10, ScreenW - 110, 60)];
     self.desTV.textAlignment = NSTextAlignmentLeft;
     self.desTV.placeholder = @"请输入需求描述";
-    self.desTV.textColor = CharacterBlackColor;
+    self.desTV.textColor = CharacterBlack112;
     self.desTV.font = kFont(14);
     [self.whiteThreeV addSubview:self.desTV];
     

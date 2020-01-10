@@ -33,7 +33,8 @@
         self.nameLB.font = kFont(15);
         
         [self addSubview:self.nameLB];
-        self.nameLB.frame = CGRectMake(75, 30, 120, 20);
+        self.nameLB.frame = CGRectMake(75, 30, 140, 20);
+
         
         self.timeLB = [[UILabel alloc] initWithFrame:CGRectMake(ScreenW - 135, 30, 125, 20)];
         self.timeLB.font = kFont(14);
@@ -81,14 +82,14 @@
 - (void)setModel:(QYZJFindModel *)model {
     _model = model;
     
-    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.headImg]]  forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"963"]];
-    self.nameLB.text = model.nickName;
+    [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.article.headImg]]  forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"963"]];
+    self.nameLB.text = model.article.nickName;
     self.contentLB.attributedText = [model.article.content getMutableAttributeStringWithFont:14 lineSpace:3 textColor:[UIColor blackColor]];
     CGFloat contentH =  [model.article.content getHeigtWithFontSize:14 lineSpace:3 width:ScreenW - 20];
     self.contentLB.mj_h = contentH;
     
     self.timeLB.text = model.article.timeNow;
-    self.timeLB.mj_y = CGRectGetMaxY(self.contentLB.frame) + 10;
+
     
     [self setPicWithideos:nil andPictArr:model.article.pictures];
     [self setVideosWithArr:model.article.videos];

@@ -114,6 +114,15 @@
               return ;
           }
           
+          if (button.tag == 0 && !self.dataModel.is_appoint) {
+              [SVProgressHUD showErrorWithStatus:@"用户设置了不可以预约"];
+              return;
+          }
+          
+          if (button.tag == 1 && !self.dataModel.is_question) {
+                [SVProgressHUD showErrorWithStatus:@"用户设置了不可以预约"];
+                return;
+            }
           
           [weakSelf appointOrQuestionAction:button.tag];
           
@@ -296,9 +305,71 @@
     }else {
         QYZJZhuYeYuYinCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJZhuYeYuYinCell" forIndexPath:indexPath];
         cell.model = self.dataArray[indexPath.row];
+        cell.syBt.tag = indexPath.row;
+        [cell.syBt addTarget:self action:@selector(listAction:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
 }
+
+- (void)listAction:(UIButton *)button {
+    
+    for (QYZJFindModel * model  in self.dataArray) {
+        if (model == self.dataArray[button.tag]) {
+            model.isPlaying = YES;
+        }else {
+            model.isPlaying = NO;
+        }
+    }
+    [self.tableView reloadData];
+      
+       [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:self.dataArray[button.tag].media_url] isLocality:NO];
+       Weak(weakSelf);
+       [PublicFuntionTool shareTool].findPlayBlock = ^{
+           weakSelf.dataArray[button.tag].isPlaying = NO;
+           [weakSelf.tableView reloadData];
+       };
+    
+    
+}
+
+- (void)sitAnswerActionWithModel:(QYZJFindModel *)model {
+
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"answer_id"] = model.ID;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_sitAnswerURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            QYZJTongYongModel * mm = [[QYZJTongYongModel alloc] init];
+            mm = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
+            mm.ID = model.ID;
+            if (model.is_pay) {
+                QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
+                vc.type = 4;
+                vc.model = mm;
+                vc.ID = model.ID;
+            
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            
+            
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+    
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {

@@ -46,20 +46,20 @@
     
     
     [self.tableView endEditing:YES];
-    
+    BOOL isRutern = NO;
     NSMutableArray * arr = @[].mutableCopy;
     for (QYZJWorkModel * model  in self.dataArray) {
         NSMutableDictionary  * dict = @{}.mutableCopy;
         dict[@"id"] = model.ID;
-        if (model.year.length == 0) {
-            dict[@"year"] = @"0";
+        if (model.year.length == 0 || [model.year isEqualToString:@"0"]) {
+            [SVProgressHUD showErrorWithStatus:@"信息填写不全"];
+            return;
         }else {
             dict[@"year"] = model.year;
         }
         [arr addObject:dict];
     }
     NSString * str = [NSString convertToJsonDataWithDict:arr];
-    
     
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
@@ -105,7 +105,7 @@
     
     QYZJBaoXiuYearCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.numberTF.delegate = self;
-    cell.numberTF.text = self.dataArray[indexPath.row].year;
+    cell.numberTF.text = (self.dataArray[indexPath.row].year.length > 0 &&([self.dataArray[indexPath.row].year intValue] > 0))? self.dataArray[indexPath.row].year:@"";
     cell.leftLB.text = self.dataArray[indexPath.row].stageName;
     return cell;
     
@@ -121,6 +121,45 @@
     NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
     self.dataArray[indexPath.row].year = textField.text;
     
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+
+    TongYongTwoCell  * cell = (TongYongTwoCell *)textField.superview;
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+        NSMutableString *futureString = [NSMutableString stringWithString:textField.text];
+           [futureString insertString:string atIndex:range.location];
+           
+        if ([futureString containsString:@"-"]) {
+            return NO;
+        }
+           NSInteger flag = 0;
+           // 这个可以自定义,保留到小数点后两位,后几位都可以
+           const NSInteger limited = 2;
+           
+           for (NSInteger i = futureString.length - 1; i >= 0; i--) {
+               
+               if ([futureString characterAtIndex:i] == '.') {
+                   // 如果大于了限制的就提示
+                   if (flag > limited) {
+                       
+                       [SVProgressHUD showErrorWithStatus:@"请输入最多两位小数的数值"];
+                       return NO;
+                   }
+                   
+                   break;
+               }
+               
+               flag++;
+           }
+    
+    
+    
+    
+    
+   
+    
+    return YES;
 }
 
 

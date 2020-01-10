@@ -65,7 +65,7 @@
     [footV addSubview:bt];
     [bt setImage:[UIImage imageNamed:@"18"] forState:UIControlStateNormal];
     bt.titleLabel.font = kFont(14);
-    [bt setTitle:@"添加新的施工工期,付款比例,工期,时间段" forState:UIControlStateNormal];
+    [bt setTitle:@"添加新的施工工期,付款金额,工期,时间段" forState:UIControlStateNormal];
     [bt setTitleColor:OrangeColor forState:UIControlStateNormal];
     [bt setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [bt setTitleEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 0)];

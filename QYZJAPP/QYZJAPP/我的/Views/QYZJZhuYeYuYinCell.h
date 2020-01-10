@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJZhuYeYuYinCell : UITableViewCell
 @property(nonatomic,strong)QYZJFindModel *model;
+@property (weak, nonatomic) IBOutlet UIButton *syBt;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -155,7 +155,9 @@
         //设置保修时间
         QYZJSetBaoXiuTVC * vc =[[QYZJSetBaoXiuTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
-        vc.dataArray = self.dataModel.turnoverLists;
+        NSMutableArray<QYZJWorkModel * > * arr = self.dataModel.constructionStage.mutableCopy;
+        [arr addObjectsFromArray:self.dataModel.changeConstructionStage];
+        vc.dataArray =arr;
         vc.ID = self.ID;
         [self.navigationController pushViewController:vc animated:YES];
         return;
@@ -226,6 +228,9 @@
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // 1区订单, 2区 首款和尾款的问题 3-6区 相册部分 7区 整体施工进度  8 正常施工 9去变更清单 10区 施工阶段 11 区变更施工阶段
+    if (self.dataModel == nil) {
+        return 0;
+    }
     return self.headTitleArr.count;
 }
 
@@ -467,7 +472,7 @@
         if (!self.dataModel.demand.is_service) {
             //服务方
             
-            if ([self.dataModel.turnover.status intValue] <= 3) {
+            if ([self.dataModel.turnover.status intValue] <= 3 || [self.dataModel.turnover.status intValue]  >=8 || (self.dataModel.turnoverLists.count == self.dataModel.constructionStage.count && section == 9)) {
                   bt.hidden = YES;
               }else {
                   bt.hidden = NO;
@@ -550,8 +555,12 @@
             view.rightBt.clipsToBounds = YES;
             [view.rightBt addTarget:self action:@selector(addChangeTurnonerAction:) forControlEvents:UIControlEventTouchUpInside];
         }
-        
+        if ([self.dataModel.turnover.status intValue] == 8) {
+            view.rightBt.hidden = YES;
+        }
+
     }
+    
     view.backgroundColor = WhiteColor;
     view.contentView.backgroundColor = WhiteColor;
     view.clipsToBounds = YES;
@@ -676,6 +685,7 @@
     modelNei.evaluateCon = model.evaluateCon;
     modelNei.ID = model.ID;
     modelNei.turnoverListId = model.turnoverListId;
+    modelNei.constructionStageId = model.ID;
     modelNei.selfId = model.ID;
     
     if (model.picUrl.length > 0) {
@@ -686,6 +696,10 @@
     QYZJMineBaoXiuDetailTVC * vc =[[QYZJMineBaoXiuDetailTVC alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     vc.type = 1;
+    if ([self.dataModel.turnover.status intValue] == 8) {
+        modelNei.selfId = @"0";
+    }
+    vc.staus = [self.dataModel.turnover.status intValue];
     vc.model = modelNei;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -708,13 +722,16 @@
     
     NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
     QYZJWorkModel * model = nil;
+    QYZJWorkModel * modelTwo = nil;
     
     if (isClickNeiCell) {
         //点击的是内容部cell
         if (indexPath.section == 9) {
                 model = self.dataModel.constructionStage[indexPath.row].selfStage[row];
+                modelTwo = self.dataModel.constructionStage[indexPath.row];
             }else {
                 model = self.dataModel.changeConstructionStage[indexPath.row].selfStage[row];
+                modelTwo = self.dataModel.changeConstructionStage[indexPath.row];
             }
   
           QYZJFindModel * modelNei = [[QYZJFindModel alloc] init];
@@ -734,12 +751,23 @@
           modelNei.evaluateCon = model.evaluateCon;
           modelNei.ID = model.ID;
           modelNei.turnoverListId = model.turnoverListId;
-          modelNei.selfId = model.selfId;
+          modelNei.constructionStageId = model.ID;
+          modelNei.selfId = modelTwo.ID;
           modelNei.type = [NSString stringWithFormat:@"%d",indexPath.section - 8];
           QYZJMineBaoXiuDetailTVC * vc =[[QYZJMineBaoXiuDetailTVC alloc] init];
+          vc.staus = [self.dataModel.turnover.status intValue];
           vc.hidesBottomBarWhenPushed = YES;
           vc.type = 1;
+          vc.isNoShow = YES;
+        
+             if ([self.dataModel.turnover.status intValue] == 8) {
+                 modelNei.selfId = @"0";
+             }
+        
           vc.model = modelNei;
+        
+          
+        
           [self.navigationController pushViewController:vc animated:YES];
         
         
@@ -749,15 +777,19 @@
             
             if (indexPath.section == 9) {
                 model = self.dataModel.constructionStage[indexPath.row].selfStage[row];
+                modelTwo = self.dataModel.constructionStage[indexPath.row];
             }else {
                 model = self.dataModel.changeConstructionStage[indexPath.row].selfStage[row];
+                modelTwo = self.dataModel.changeConstructionStage[indexPath.row];
             }
         }else {
             
             if (indexPath.section == 9) {
                 model = self.dataModel.constructionStage[indexPath.row];
+                modelTwo = self.dataModel.constructionStage[indexPath.row];
             }else {
                 model = self.dataModel.changeConstructionStage[indexPath.row];
+                modelTwo = self.dataModel.changeConstructionStage[indexPath.row];
             }
         }
         
@@ -774,6 +806,7 @@
             vc.type = 4;
             vc.changeType = indexPath.section - 8;
             vc.IDTwo = self.dataModel.turnoverList.ID;
+            vc.constructionStageId = model.constructionStageId;
             [self.navigationController pushViewController:vc animated:YES];
         }else {
               //点击验收或者提交验收
@@ -782,7 +815,7 @@
                   if ([model.status isEqualToString:@"7"]) {
                       QYZJQingDanPingJiaVC * vc =[[QYZJQingDanPingJiaVC alloc] init];
                       vc.hidesBottomBarWhenPushed = YES;
-                      vc.ID = model.ID;
+                      vc.ID = modelTwo.ID;
                       [self.navigationController pushViewController:vc animated:YES];
                       return;
                   }
@@ -881,12 +914,12 @@
         
         UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"不通过" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             
-            [self changeTurnoverCheckWithStatus:0 withType:1 WithID:model.ID];
+            [self changeTurnoverCheckWithStatus:0 withType:1 WithID:model.ID withIsNOPush:NO];
             
         }];
         UIAlertAction * action3 = [UIAlertAction actionWithTitle:@"通过" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             
-            [self changeTurnoverCheckWithStatus:1 withType:1 WithID:model.ID];
+            [self changeTurnoverCheckWithStatus:1 withType:1 WithID:model.ID withIsNOPush:NO];
             
         }];
         
@@ -908,12 +941,12 @@
         
         UIAlertAction * action2 = [UIAlertAction actionWithTitle:@"线上" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             
-            [self changeTurnoverCheckWithStatus:1 withType:2 WithID:model.ID];
+            [self changeTurnoverCheckWithStatus:1 withType:2 WithID:model.ID withIsNOPush:NO];
             
         }];
         UIAlertAction * action3 = [UIAlertAction actionWithTitle:@"线下" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
 
-             [self changeTurnoverCheckWithStatus:1 withType:2 WithID:model.ID];
+             [self changeTurnoverCheckWithStatus:1 withType:2 WithID:model.ID withIsNOPush:YES];
             UIAlertController  * alertVCTwo = [UIAlertController alertControllerWithTitle:@"提示" message:@"请联系客服,并提供相应付款证明完成支付操作" preferredStyle:(UIAlertControllerStyleAlert)];
             UIAlertAction * action1Two = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
                 
@@ -934,7 +967,7 @@
     }
 }
 //审核 type 1  2 支付
-- (void)changeTurnoverCheckWithStatus:(NSInteger)isSure withType:(NSInteger)type WithID:(NSString *)ID{
+- (void)changeTurnoverCheckWithStatus:(NSInteger)isSure withType:(NSInteger)type WithID:(NSString *)ID withIsNOPush:(BOOL)isNOPush{
     NSString * url = @"";
     if (type == 1) {
         url = [QYZJURLDefineTool user_changeTurnoverCheckURL];
@@ -953,13 +986,18 @@
             if (type == 1) {
                 [self getData];
             }else {
-                QYZJTongYongModel *mm = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
-                QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
-                vc.hidesBottomBarWhenPushed = YES;
-                vc.type = 9;
-                vc.ID = ID;
-                vc.model = mm;
-                [self.navigationController pushViewController:vc animated:YES];
+                
+                if (isNOPush) {
+                   
+                }else {
+                    QYZJTongYongModel *mm = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
+                    QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    vc.type = 9;
+                    vc.ID = ID;
+                    vc.model = mm;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
             }
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];

@@ -72,7 +72,7 @@
             }
             case 7:
             {
-                str = @"待评价";
+                str = @"待完善";
                 break;
             }
             case 8:
@@ -119,7 +119,7 @@
             }
             case 7:
             {
-                str = @"待评价";
+                str = @"待完善";
                 break;
             }
             case 8:

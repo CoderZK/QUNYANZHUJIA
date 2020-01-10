@@ -23,6 +23,7 @@ static QYZJLuYinView * tool = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         tool = [[QYZJLuYinView alloc] initWithFrame:CGRectMake(0, sstatusHeight + 44, ScreenW, ScreenH)];
+      
     });
     return tool;
 }

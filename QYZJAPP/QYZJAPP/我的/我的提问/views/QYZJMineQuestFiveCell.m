@@ -59,7 +59,7 @@
 
 - (void)setModel:(QYZJFindModel *)model {
     _model = model;
-    [self.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.a_head_img]] placeholderImage:[UIImage imageNamed:@"987"]];
+    [self.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.a_head_img]] placeholderImage:[UIImage imageNamed:@"963"]];
     self.nameLB.text = model.a_nick_name;
     self.nameLB.mj_w = [model.a_nick_name getWidhtWithFontSize:14];
     self.typeLB.mj_w = [model.a_role_name getWidhtWithFontSize:12] + 10;
@@ -94,16 +94,16 @@
         model.cellHeight = 75;
     }
     
-    if (model.isPlaying) {
-        [self.listBt setTitle:@"正在播放..." forState:UIControlStateNormal];
-    }else {
-        [self.listBt setTitle:@"点击播放" forState:UIControlStateNormal];
-    }
+   
     
     if (model.is_pay) {
-      [self.listBt setTitle:[NSString stringWithFormat:@"￥%0.2f元旁听",model.sit_price] forState:UIControlStateNormal];
+        [self.listBt setTitle:[NSString stringWithFormat:@"￥%0.2f元旁听",model.sit_price] forState:UIControlStateNormal];
     }else {
-      [self.listBt setTitle:@"点击播放" forState:UIControlStateNormal];
+       if (model.isPlaying) {
+               [self.listBt setTitle:@"正在播放..." forState:UIControlStateNormal];
+           }else {
+               [self.listBt setTitle:@"点击播放" forState:UIControlStateNormal];
+           }
     }
     
     

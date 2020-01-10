@@ -22,6 +22,7 @@ static PublicFuntionTool * tool = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         tool = [[PublicFuntionTool alloc] init];
+       
     });
     return tool;
 }
@@ -68,7 +69,7 @@ static PublicFuntionTool * tool = nil;
     }else {
         
         
-        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noplay) name:@"NoPlay" object:nil];
         
         NSURL * url = [[NSURL alloc] initWithString:meidaStr];
         NSData * data = [[NSData alloc] initWithContentsOfURL:url];
@@ -87,6 +88,15 @@ static PublicFuntionTool * tool = nil;
         
     }
     
+    
+}
+
+- (void)noplay {
+    
+    if (self.player != nil) {
+        [self.player stop];
+    }
+   
     
 }
 

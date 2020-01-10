@@ -18,7 +18,7 @@
 //友盟安全密钥//r6xbw5gy0zenei6x56xtm9wmkrrz653y
 
 //新浪
-#define SinaAppKey @"3443149913"
+#define SinaAppKey @"1494437384"
 #define SinaAppSecret @"2d6bac14bc37989170ba9ab6214f06c3"
 
 //微信

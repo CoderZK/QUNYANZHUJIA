@@ -43,7 +43,6 @@ static QYZJNoDataView * signleV = nil;
         self.titleLB = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.imgV.frame)+15, frame.size.width, 20)];
         self.titleLB.textAlignment = NSTextAlignmentCenter;
         self.titleLB.font = kFont(15);
-        self.titleLB.text = @"x测试四";
         [self addSubview:self.titleLB];
         
         self.titleLB.textColor= CharacterBlackColor;

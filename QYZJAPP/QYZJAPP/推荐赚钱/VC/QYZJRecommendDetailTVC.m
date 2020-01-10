@@ -52,7 +52,7 @@
     if (view2 != nil) {
         [view2 removeFromSuperview];
     }
-    if (status != 7) {
+    if (status != 7 || self.dataModel.turnoverId.length == 0) {
         return;
     }
         KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:@"查看交付" andImgaeName:@""];

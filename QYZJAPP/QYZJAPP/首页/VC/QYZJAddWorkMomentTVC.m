@@ -18,7 +18,7 @@
 @property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)NSMutableArray *picsArr;
 @property(nonatomic,strong)NSString *videoStr;
-@property(nonatomic,assign)BOOL   isChooseVideo;
+@property(nonatomic,assign)BOOL   isChooseVideo,isCanOp;
 @property(nonatomic,strong)UIButton *deleteBt;
 
 //@property(nonatomic,strong)UILabel *lb4;
@@ -39,11 +39,8 @@
     if ((self.type == 4 || self.type == 1) && self.picsArrTwo.count > 0) {
         self.picsArr = self.picsArrTwo.mutableCopy;
     }
-   
-//    if (self.videoUrl.length > 0) {
-//        self.videoStr = self.videoUrl;
-//    }
-    
+    self.isCanOp = YES;
+
     [self addPicsWithArr:self.picsArr];
     self.navigationItem.title = @"创建施工阶段";
     if (self.type == 1) {
@@ -58,6 +55,8 @@
         self.navigationItem.title = @"创建播报";
     }else if (self.type == 6) {
         self.navigationItem.title = @"创建报修";
+    }else if (self.type == 7 || self.type == 10) {
+        self.navigationItem.title = @"立即整改";
     }
     self.tableView.backgroundColor =[UIColor groupTableViewBackgroundColor];
     
@@ -99,6 +98,7 @@
     }
     Weak(weakSelf);
         view.footViewClickBlock = ^(UIButton *button) {
+         
             [weakSelf FaBuAction];
        };
     [self.view addSubview:view];
@@ -106,18 +106,21 @@
 
 - (void)FaBuAction {
     
+    if (!self.isCanOp) {
+        return;
+    }
     
-    
-    if (self.titleTF.text.length ==0 && !( self.type == 6)) {
+    if (self.titleTF.text.length ==0 && !( self.type == 6 || self.type == 10)) {
            [SVProgressHUD showErrorWithStatus:@"请输入标题"];
            return;
        }
-    if (self.desTV.text.length == 0) {
+    
+    if (self.desTV.text.length == 0 ) {
         [SVProgressHUD showErrorWithStatus:@"请输入描述"];
         return;
     }
 
- 
+    self.isCanOp = NO;
     
 
     [SVProgressHUD show];
@@ -132,7 +135,7 @@
         url = [QYZJURLDefineTool user_constructionEditURL];
     }else if (self.type == 5) {
         url = [QYZJURLDefineTool user_createBroadcastURL];
-    }else if (self.type == 6 ) {
+    }else if (self.type == 10 || self.type == 6) {
         url = [QYZJURLDefineTool user_createRepairURL];
     }
     NSMutableDictionary * dict = @{}.mutableCopy;
@@ -153,12 +156,16 @@
     dict[@"changeType"] = @(self.changeType);
     dict[@"selfId"] = self.IDThree;
     dict[@"videoUrl"] = self.videoStr;
-    if (self.type == 4 || self.type == 6 || self.type == 7) {
+    if (self.type == 4 || self.type == 7 || self.type == 6 || self.type == 10) {
         dict[@"turnoverListId"] = self.IDTwo;
+        dict[@"constructionStageId"] = self.constructionStageId;
     }
+
+    
     [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
+        self.isCanOp = YES;
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             if (self.type == 1) {
@@ -169,7 +176,7 @@
                 [SVProgressHUD showSuccessWithStatus:@"创建案例成功"];
             }else if (self.type == 4) {
                 [SVProgressHUD showSuccessWithStatus:@"修改阶段成功"];
-            }else if (self.type == 7) {
+            }else if (self.type == 7 || self.type == 10) {
                 [SVProgressHUD showSuccessWithStatus:@"整改成功"];
             }
             
@@ -192,7 +199,7 @@
         }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
+        self.isCanOp = YES;
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         
@@ -222,7 +229,7 @@
     UIView * backV1 =[[UIView alloc] initWithFrame:CGRectMake(0, 50, ScreenW, 0.6)];
     backV1.backgroundColor = lineBackColor;
     
-    if (self.type == 6 ) {
+    if (self.type == 6  || self.type == 10) {
         backV1.mj_y = 0;
         self.titleTF.hidden = lb1.hidden = YES;
     }
@@ -233,28 +240,20 @@
     UILabel * lb2 = [[UILabel alloc] initWithFrame:CGRectMake(10,  CGRectGetMaxY(backV1.frame) + 30, 80, 20)];
     lb2.textColor = CharacterBlack112;
     lb2.font = kFont(14);
-    lb2.text = @"阶段描述";
-    if (self.type == 1 || self.type == 3) {
-        lb2.text = @"内容";
-    }else if (self.type == 2) {
-        lb2.text = @"播报描述";
-    }
+    lb2.text = @"描述";
     [self.headV addSubview:lb2];
     
     
     self.desTV = [[IQTextView alloc] initWithFrame:CGRectMake(95, CGRectGetMaxY(backV1.frame) + 10, ScreenW - 110, 60)];
     self.desTV.font = kFont(14);
-    self.desTV.placeholder = @"请输入阶段描述";
-    if (self.type == 1 || self.type == 3) {
-        self.desTV.placeholder = @"请输入内容";
-    }else if (self.type == 2) {
-        self.desTV.placeholder = @"请输入播报描述";
-    }
+    self.desTV.placeholder = @"请输入描述";
     [self.headV addSubview:self.desTV];
     self.desTV.text = self.contentStr;
     UIView * backV2 =[[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.desTV.frame) + 10, ScreenW, 0.6)];
     backV2.backgroundColor = lineBackColor;
     [self.headV addSubview:backV2];
+    
+   
     
     CGFloat ww = 90;
     self.whiteOneV = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(backV2.frame), ScreenW, ww+40)];

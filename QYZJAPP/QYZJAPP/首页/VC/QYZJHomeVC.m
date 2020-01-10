@@ -297,10 +297,12 @@
             vc.ID = self.dataArray[indexPath.row-1].ID;
             [self.navigationController pushViewController:vc animated:YES];
         }
-    }else {
-        BaseNavigationController * navc = [[BaseNavigationController alloc] initWithRootViewController:[[QYZhuJiaLoginVC alloc] init]];
-        [self presentViewController:navc animated:YES completion:nil];
     }
+    
+//    else {
+//        BaseNavigationController * navc = [[BaseNavigationController alloc] initWithRootViewController:[[QYZhuJiaLoginVC alloc] init]];
+//        [self presentViewController:navc animated:YES completion:nil];
+//    }
     
  
 }

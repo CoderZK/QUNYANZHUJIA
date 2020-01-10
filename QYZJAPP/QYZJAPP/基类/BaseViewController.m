@@ -35,6 +35,14 @@ typedef void (^Nav2)();
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"NoPlay" object:nil];
+    
+    
+}
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];

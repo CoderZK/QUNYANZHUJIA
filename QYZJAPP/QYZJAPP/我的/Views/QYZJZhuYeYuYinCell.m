@@ -12,7 +12,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *headBt;
 @property (weak, nonatomic) IBOutlet UILabel *titleLB;
 @property (weak, nonatomic) IBOutlet UILabel *contentLB;
-@property (weak, nonatomic) IBOutlet UIButton *syBt;
+
 @property (weak, nonatomic) IBOutlet UILabel *numberLB;
 
 @end
@@ -42,8 +42,23 @@
     self.titleLB.text = model.q_nick_name;
     self.contentLB.text = model.title;
     self.numberLB.text = [NSString stringWithFormat:@"%ld人旁听",model.sit_on_num];
+    
+    if (model.is_pay) {
+          [self.syBt setTitle:[NSString stringWithFormat:@"￥%0.2f元旁听",model.sit_price] forState:UIControlStateNormal];
+      }else {
+         if (model.isPlaying) {
+                 [self.syBt setTitle:@"正在播放..." forState:UIControlStateNormal];
+             }else {
+                 [self.syBt setTitle:@"点击播放" forState:UIControlStateNormal];
+             }
+      }
+    
+    
 
 }
+
+
+
 
 
 @end

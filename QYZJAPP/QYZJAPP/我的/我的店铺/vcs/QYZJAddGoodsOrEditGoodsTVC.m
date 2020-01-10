@@ -251,14 +251,14 @@
     UILabel * lb2 = [[UILabel alloc] initWithFrame:CGRectMake(10,  CGRectGetMaxY(backV6.frame) + 30, 80, 20)];
     lb2.textColor = CharacterBlack112;
     lb2.font = kFont(14);
-    lb2.text = @"阶段描述";
+    lb2.text = @"描述";
     //    if (self.type == 1) {
     //        lb2.text = @"内容";
     //    }
     [self.headV addSubview:lb2];
     self.desTV = [[IQTextView alloc] initWithFrame:CGRectMake(95, CGRectGetMaxY(backV6.frame) + 10, ScreenW - 110, 60)];
     self.desTV.font = kFont(14);
-    self.desTV.placeholder = @"请输入商品描述";
+    self.desTV.placeholder = @"请输入描述";
     //    if (self.type == 1) {
     //        self.desTV.placeholder = @"请输入内容";
     //    }

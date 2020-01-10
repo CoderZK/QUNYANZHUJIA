@@ -261,6 +261,9 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0 || section == 1) {
+        return 1;
+    }
     return self.dataArray.count / 2 + self.dataArray.count % 2;
 }
 

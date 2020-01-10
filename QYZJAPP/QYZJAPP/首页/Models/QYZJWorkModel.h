@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJWorkModel : NSObject
 @property(nonatomic,strong)NSString *ID;
+@property(nonatomic,strong)NSString *selfId;
 @property(nonatomic,strong)NSString *days;
 @property(nonatomic,strong)NSString *serviceName;
 @property(nonatomic,strong)NSString *percent;
@@ -34,7 +35,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *moneyOverTime;
 @property(nonatomic,strong)NSString *no;
 @property(nonatomic,strong)NSString *openId;
-@property(nonatomic,strong)NSString *selfId;
 @property(nonatomic,strong)NSString *payType;
 @property(nonatomic,strong)NSString *wechatCharging;
 @property(nonatomic,strong)NSString *invitationCode;

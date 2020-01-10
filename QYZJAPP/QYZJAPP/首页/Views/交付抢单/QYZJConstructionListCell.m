@@ -112,7 +112,18 @@
     if (self.type == 1) {
         self.moneyLB.hidden = YES;
     }else {
-        self.moneyLB.hidden = NO;
+        //清单
+        if (self.is_service ) {
+            //客户
+            self.editBt.hidden = YES;
+            
+        }else {
+            if ([model.status intValue] == 4 && [model.status intValue] == 6) {
+                self.editBt.hidden = YES;
+            }else {
+                self.editBt.hidden = NO;
+            }
+        }
     }
     
     self.contentLB.attributedText = [model.des getMutableAttributeStringWithFont:14 lineSpace:3 textColor:CharacterBlack112];
@@ -451,11 +462,27 @@ return self;
     self.titleLB.mj_w = ww;
     self.editBt.mj_x = ww+15;
     
-    if (self.type == 1) {
+    if (self.type == 1 ) {
+        //保修
         self.editBt.hidden = YES;
         self.contentLB.mj_y = 10;
+    }else {
+        //清单
+        if (self.is_service ) {
+            //客户
+            self.editBt.hidden = YES;
+            
+        }else {
+            if ([model.status intValue] == 4 && [model.status intValue] == 6) {
+                self.editBt.hidden = YES;
+            }else {
+                self.editBt.hidden = NO;
+            }
+        }
+        
+        
     }
-    
+    self.editBt.hidden = self.is_service;
     if (self.timeLB.mj_h < 20) {
         self.timeLB.mj_h = 20;
     }else {

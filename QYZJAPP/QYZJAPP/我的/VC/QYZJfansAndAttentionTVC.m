@@ -96,7 +96,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 125;
+    return 100;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -109,8 +109,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
+    if (![self.dataArray[indexPath.row].role isEqualToString:@"1"]) {
+        [SVProgressHUD showErrorWithStatus:@"对方不是服务方,不可以看对方主页"];
+        return;
+    }
     QYZJMineZhuYeTVC * vc =[[QYZJMineZhuYeTVC alloc] init];
+    
     vc.hidesBottomBarWhenPushed = YES;
     vc.ID = self.dataArray[indexPath.row].ID;
     [self.navigationController pushViewController:vc animated:YES];

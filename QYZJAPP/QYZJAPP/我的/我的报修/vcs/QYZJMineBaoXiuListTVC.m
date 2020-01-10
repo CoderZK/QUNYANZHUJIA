@@ -117,6 +117,8 @@
         modelNei.evaluateLevel = model.evaluateLevel;
         modelNei.evaluateCon = model.evaluateCon;
         modelNei.ID = model.ID;
+        modelNei.selfId = model.selfId;
+        modelNei.constructionStageId = model.ID;
         modelNei.turnoverListId = model.turnoverListId;
         modelNei.turnoverTitle = model.turnoverTitle;
         modelNei.isService = model.isService;
@@ -131,6 +133,7 @@
 -(void)didclickQYZJConstructionListCell:(QYZJConstructionListCell *)cell withIndex:(NSInteger)index isNeiClick:(BOOL )isNei NeiRow:(NSInteger )row isClickNeiCell:(BOOL)isClickNeiCell{
     
     NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    QYZJWorkModel * mmmm = self.dataArray[indexPath.row];
     QYZJWorkModel * model = nil;
     
     if (isClickNeiCell) {
@@ -143,16 +146,19 @@
              modelNei.pictures = model.pics.mutableCopy;
              modelNei.videos = model.videos.mutableCopy;
              modelNei.price = model.price;
-             modelNei.isService = model.isService;
+             modelNei.isService = mmmm.isService;
              modelNei.status = model.status;
              modelNei.evaluateLevel = model.evaluateLevel;
              modelNei.evaluateCon = model.evaluateCon;
              modelNei.ID = model.ID;
+             modelNei.selfId = model.selfId;
              modelNei.turnoverListId = model.turnoverListId;
+             modelNei.constructionStageId = model.ID;
              modelNei.turnoverTitle = self.dataArray[indexPath.row].turnoverTitle;
              QYZJMineBaoXiuDetailTVC * vc =[[QYZJMineBaoXiuDetailTVC alloc] init];
              vc.hidesBottomBarWhenPushed = YES;
              vc.model = modelNei;
+             vc.isNoShow = YES;
              [self.navigationController pushViewController:vc animated:YES];
            
            

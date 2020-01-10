@@ -20,7 +20,7 @@
 }
 
 - (void)clickaction:(UIButton *)button {
-    NSLog(@"%@",@"点击了阿里");
+
 
 }
 

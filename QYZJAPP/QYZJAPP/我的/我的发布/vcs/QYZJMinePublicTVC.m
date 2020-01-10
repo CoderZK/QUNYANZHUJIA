@@ -8,6 +8,7 @@
 
 #import "QYZJMinePublicTVC.h"
 #import "QYZJFindCell.h"
+#import "QYZJFindGuangChangDetailTVC.h"
 @interface QYZJMinePublicTVC ()<QYZJFindCellDelegate>
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
 @property(nonatomic,assign)NSInteger type;
@@ -94,6 +95,22 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    QYZJFindGuangChangDetailTVC * vc =[[QYZJFindGuangChangDetailTVC alloc] init];
+    vc.ID = self.dataArray[indexPath.row].ID;
+    vc.hidesBottomBarWhenPushed = YES;
+    Weak(weakSelf);
+    vc.sendGuanChangModelBlock = ^(QYZJFindModel * _Nonnull model) {
+        weakSelf.dataArray[indexPath.row].isGood = model.isGood;
+        weakSelf.dataArray[indexPath.row].isCollect = model.isCollect;
+        weakSelf.dataArray[indexPath.row].ok_num = model.ok_num;
+        weakSelf.dataArray[indexPath.row].goodNum = model.goodNum;
+        weakSelf.dataArray[indexPath.row].collectNum = model.collectNum;
+        weakSelf.dataArray[indexPath.row].commentNum = model.commentNum;
+        [weakSelf.tableView reloadData];
+    };
+    [self.navigationController pushViewController:vc animated:YES];
+    
     
 }
 

@@ -200,7 +200,12 @@
             cell.leftLB.text = @"佣金额";
             cell.TF.placeholder = @"点击获取佣金金额";
             cell.TF.userInteractionEnabled = NO;
-            cell.TF.text = self.commissionPrice;
+            if ([self.commissionPrice floatValue] == 0 ) {
+                cell.TF.text = @"";
+            }else {
+                cell.TF.text = [NSString stringWithFormat:@"%0.2f",[self.commissionPrice floatValue]];
+            }
+            
         }
         cell.TF.keyboardType = UIKeyboardTypeDecimalPad;
         cell.TF.delegate = self;

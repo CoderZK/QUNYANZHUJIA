@@ -15,49 +15,7 @@ static const void *urlKey = &urlKey;
 
 - (void)shareWithSetPreDefinePlatforms:(NSArray *)platforms withUrl:(NSString *)url shareModel:(NSString *)imgStr withContentStr:(NSString *)contentStr{
     
-//    if (url == nil) {
-//        [zkRequestTool networkingPOST:[HHYURLDefineTool shareURL] parameters:model.postId success:^(NSURLSessionDataTask *task, id responseObject) {
-//            if ([responseObject[@"code"] integerValue] == 0) {
-//
-//                self.url = [NSString stringWithFormat:@"%@",responseObject[@"object"][@"data"]];;
-//                [UMSocialUIManager setPreDefinePlatforms:platforms];
-//                [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-//                    // 根据获取的platformType确定所选平台进行下一步操作
-//
-//                    NSString* thumbURL = @"";
-//                    if (model.pic.length > 0) {
-//                        thumbURL = [HHYURLDefineTool getImgURLWithStr:[[model.pic componentsSeparatedByString:@","] firstObject]];
-//                    }
-//
-//                    // @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
-//                    NSString * title = model.content;
-//                    if (model.content.length > 20) {
-//                        title = [model.content substringFromIndex:20];
-//                    }
-//
-//                    [self shareWebPageToPlatformType:platformType withTitle:title andContent:model.content thumImage:thumbURL];
-//
-//                }];
-//
-//            }else {
-//                [SVProgressHUD showErrorWithStatus:@"获取分享信息失败"];
-//            }
-//        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//            [SVProgressHUD showErrorWithStatus:@"获取分享信息失败!"];
-//        }];
-//    }else {
-//
-//
-//        [UMSocialUIManager setPreDefinePlatforms:platforms];
-//        [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-//            // 根据获取的platformType确定所选平台进行下一步操作
-//            self.url = [HHYSignleTool shareTool].downUrl;
-//            [self shareWebPageToPlatformType:platformType withTitle:@"逅花园" andContent:[NSString stringWithFormat:@"注册邀请码:%@,欢迎下载注册使用",url] thumImage:[UIImage imageNamed:@"logo"]];
-//
-//        }];
 
-//
-//    }
     
            [UMSocialUIManager setPreDefinePlatforms:platforms];
            [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {

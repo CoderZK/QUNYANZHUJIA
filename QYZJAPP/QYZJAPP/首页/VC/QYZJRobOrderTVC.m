@@ -91,7 +91,7 @@
 
 - (void)addTitleView {
     
-    QYZJQianDanNavigaTitleView * view = [[QYZJQianDanNavigaTitleView alloc] initWithFrame:CGRectMake(0, 200, ScreenW - 160, 40)];
+    QYZJQianDanNavigaTitleView * view = [[QYZJQianDanNavigaTitleView alloc] initWithFrame:CGRectMake(0, 200, ScreenW - 160, 35)];
     Weak(weakSelf);
     view.navigaBlock = ^(NSInteger index) {
         weakSelf.type = index;

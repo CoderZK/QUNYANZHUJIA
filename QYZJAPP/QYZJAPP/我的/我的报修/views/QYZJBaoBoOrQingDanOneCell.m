@@ -94,9 +94,12 @@
                self.timeTwoLB.text = [NSString stringWithFormat:@"保修时间: %@",@"正在保修中"];
            }else {
                if (model.isOverRepairTime) {
-                   self.timeTwoLB.text = [NSString stringWithFormat:@"保修时间: %@",@"无"];
+                   self.timeTwoLB.text = [NSString stringWithFormat:@"保修时间: %0.1f年",model.year];
                }else {
-                   self.timeTwoLB.text = [NSString stringWithFormat:@"保修时间: %@",@"无"];
+                   self.timeTwoLB.text = [NSString stringWithFormat:@"保修时间: %0.1f年",model.year];
+               }
+               if (model.year == 0 ) {
+                   self.timeTwoLB.text = @"保修时间: 无";
                }
            }
         self.moneyLB.hidden = YES;

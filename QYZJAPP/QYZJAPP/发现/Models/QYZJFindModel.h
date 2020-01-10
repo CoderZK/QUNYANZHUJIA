@@ -13,12 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface QYZJFindModel : NSObject
 
 @property(nonatomic,strong)NSString *ID;
+@property(nonatomic,strong)NSString *selfId;
+@property(nonatomic,strong)NSString *role;
 @property(nonatomic,strong)NSString *userId;
 @property(nonatomic,strong)NSString *user_id;
 @property(nonatomic,strong)NSString *turnoverListId;
 @property(nonatomic,strong)NSString *shopName;
 @property(nonatomic,strong)NSString *cityId;
-@property(nonatomic,strong)NSString *selfId;
 @property(nonatomic,strong)NSString *pro_id;
 @property(nonatomic,strong)NSString *area_id;
 @property(nonatomic,strong)NSString *city_id;
@@ -175,7 +176,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)NSInteger manner_id;
 @property(nonatomic,assign)NSInteger house_model_id;
 @property(nonatomic,assign)NSInteger renovation_time_id;
-@property(nonatomic,assign)NSInteger year;
+@property(nonatomic,assign)CGFloat year;
 @property(nonatomic,assign)NSInteger evaluateLevel;
 @property(nonatomic,assign)NSInteger is_answer;
 

@@ -38,12 +38,14 @@
     self.typeLB2.text = model.type_name;
     self.contentLB.text = model.b_recomend_address;
 
-    if ( [model.status intValue] == 0) {
+    if ( [model.status intValue] == 0 ||  [model.status intValue] == 1) {
          [self.qianDanBt setTitle:@"抢单" forState:UIControlStateNormal];
          [self.qianDanBt setBackgroundColor:OrangeColor];
+         self.qianDanBt.userInteractionEnabled = YES;
      }else {
         [self.qianDanBt setTitle:@"已结束" forState:UIControlStateNormal];
         [self.qianDanBt setBackgroundColor:RGB(180, 180, 180)];
+        self.qianDanBt.userInteractionEnabled = NO;
      }
 
     self.timeLB.text = model.add_time;

@@ -86,22 +86,29 @@
     if (self.type == 1) {
         if (self.model.is_service) {
             //用户
-            if (status == 2){
-                str = @"验收此阶段";
-                isLayer = YES;
-            }else if (status == 4){
+            if (self.staus == 8) {
                 if (self.model.isRepair) {
                     str = @"查看报修";
                     isLayer = YES;
                 }else {
+                    
                     str = @"报修";
                     isLayer = YES;
+                    if (self.isNoShow) {
+                        isLayer = NO;
+                    }
                 }
-                
-            }else if (status == 7){
-                str = @"评价";
-                isLayer = YES;
+            }else {
+                if (status == 2){
+                    str = @"验收此阶段";
+                    isLayer = YES;
+                }else if (status == 7){
+                    str = @"评价";
+                    isLayer = YES;
+                }
             }
+            
+            
         }else {
             //服务方
             if (status == 1) {
@@ -135,9 +142,6 @@
         
         
     }
-    
-    
-    
     if (!isLayer) {
         self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - sstatusHeight - 44);
         return;
@@ -168,7 +172,7 @@
                 
                 [self showYanshouView];
                 
-            }else if (status == 4) {
+            }else if (status == 4 || status == 6) {
                 if (self.model.isRepair ) {
                     QYZJMineBaoXiuListTVC * vc =[[QYZJMineBaoXiuListTVC alloc] init];
                     vc.hidesBottomBarWhenPushed = YES;
@@ -178,7 +182,9 @@
                     vc.hidesBottomBarWhenPushed = YES;
                     vc.type = 6;
                     vc.ID = self.model.ID;
+                    vc.constructionStageId = self.model.constructionStageId;
                     vc.IDTwo = self.model.turnoverListId;
+                    vc.IDThree = self.model.selfId;
                     vc.changeType =  [self.model.type intValue];
                     [self.navigationController pushViewController:vc animated:YES];
                     return;
@@ -204,6 +210,7 @@
                 vc.ID = self.model.ID;
                 vc.IDThree = self.model.selfId;
                 vc.IDTwo = self.model.turnoverListId;
+                vc.constructionStageId = self.model.constructionStageId;
                 vc.changeType = [self.model.type intValue];
                 [self.navigationController pushViewController:vc animated:YES];
                 return;
@@ -226,10 +233,11 @@
                 // @"立即整改";
                 QYZJAddWorkMomentTVC * vc =[[QYZJAddWorkMomentTVC alloc] init];
                 vc.hidesBottomBarWhenPushed = YES;
-                vc.type = 7;
+                vc.type = 6;
                 vc.ID = self.model.ID;
                 vc.IDThree = self.model.selfId;
                 vc.IDTwo = self.model.turnoverListId;
+                vc.constructionStageId = self.model.constructionStageId;
                 vc.changeType = [self.model.type intValue];
                 [self.navigationController pushViewController:vc animated:YES];
                 return;
@@ -391,10 +399,12 @@
         if ([responseObject[@"key"] intValue]== 1) {
             
             QYZJFindModel * mdoel = [QYZJFindModel mj_objectWithKeyValues:responseObject[@"result"][@"constructionStageList"]];
+            self.model.year = mdoel.year;
             if (self.type != 1) {
                 mdoel =[QYZJFindModel mj_objectWithKeyValues:responseObject[@"result"][@"repair"]];
             }
             self.model.status = mdoel.status;
+//            self.model.constructionStageId = mdoel.constructionStageId;
             [self setFootVWithStatus:[self.model.status intValue]];
             [self.tableView reloadData];
         }else {
@@ -427,6 +437,7 @@
         if ([responseObject[@"key"] intValue]== 1) {
             
             NSArray<QYZJFindModel *>*arr = [QYZJFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
+            
             if (self.page == 1) {
                 [self.dataArray removeAllObjects];
             }

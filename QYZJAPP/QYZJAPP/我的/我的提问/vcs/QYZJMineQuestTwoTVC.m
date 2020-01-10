@@ -391,11 +391,15 @@
         }
     }
     [self.tableView reloadData];
-       [button setTitle:@"正在播放..." forState:UIControlStateNormal];
+      
        [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:self.dataModel.answer_list[button.tag].media_url] isLocality:NO];
+       Weak(weakSelf);
        [PublicFuntionTool shareTool].findPlayBlock = ^{
-           [button setTitle:@"点击播放" forState:UIControlStateNormal];
+           weakSelf.dataModel.answer_list[button.tag].isPlaying = NO;
+           [weakSelf.tableView reloadData];
        };
+    
+    
 }
 
 //点击回复
@@ -479,17 +483,12 @@
             vc.ID = ID;
             vc.type = 4;
             [self.navigationController pushViewController:vc animated:YES];
-            
-            
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
         }
-        
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
-        
     }];
 }
 
