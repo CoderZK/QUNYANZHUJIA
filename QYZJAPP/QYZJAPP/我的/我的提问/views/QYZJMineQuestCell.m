@@ -70,6 +70,8 @@
 - (void)setWaiModel:(QYZJFindModel *)waiModel {
     _waiModel = waiModel;
     
+    
+    
     CGFloat ww = ScreenW - 110;
     if (self.isServer) {
         ScreenW - 20;
@@ -158,6 +160,8 @@
     
     NSLog(@"\n ---titleLBHeight ---%@",NSStringFromCGRect(self.tieltLB.frame));
     NSLog(@"\n--=-=-%f",waiModel.cellHeight);
+    
+    self.rightLB.hidden = isUPUPUP;
     
     
 }

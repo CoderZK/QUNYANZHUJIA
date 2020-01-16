@@ -9,10 +9,7 @@
 #import "QYZJConstructionListCell.h"
 
 @interface QYZJConstructionListCell()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)UILabel *titleLB,*contentLB,*timeLB,*moneyLB;
-@property(nonatomic,strong)UIButton *statusBt,*editBt;
-@property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)UIView *whiteV;
+
 @end
 
 

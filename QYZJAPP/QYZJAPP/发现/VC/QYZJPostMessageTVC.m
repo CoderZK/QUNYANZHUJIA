@@ -414,14 +414,18 @@
             [goodsA addObject:model.ID];
         }
     }
-    dict[@"gooddIds"] = [goodsA componentsJoinedByString:@","];
+    if (goodsA.count > 0) {
+        dict[@"type"] = @"3";
+        dict[@"refShopId"] = [self.dataArray firstObject].shopId;
+    }
+    dict[@"goodsIds"] = [goodsA componentsJoinedByString:@","];
     dict[@"content"] = self.desTV.text;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool app_insertArticleURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
-            [SVProgressHUD showSuccessWithStatus:@"发帖成功"];
+            [SVProgressHUD showSuccessWithStatus:@"发帖成功,已进入后台人工审核"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });

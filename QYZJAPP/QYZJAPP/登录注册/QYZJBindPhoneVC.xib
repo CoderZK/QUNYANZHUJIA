@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,9 +15,11 @@
                 <outlet property="confrimBt" destination="Ftl-SX-2tD" id="3Df-cR-HMb"/>
                 <outlet property="hCons" destination="8h4-fM-7y8" id="kWR-QT-hXr"/>
                 <outlet property="imgV1" destination="ihb-oB-JRz" id="Tl9-fg-Sfz"/>
+                <outlet property="imgV2" destination="nPC-iY-k1j" id="Pad-qp-cJh"/>
                 <outlet property="inviteCeodeTF" destination="CYA-47-9iL" id="L5I-Lp-ikJ"/>
                 <outlet property="lineV" destination="ts7-93-g7p" id="12m-xe-MRz"/>
-                <outlet property="myCons" destination="0IY-g2-xbf" id="hCr-hj-hTG"/>
+                <outlet property="lineV2" destination="QC8-ZL-GbX" id="Ebh-Ip-w32"/>
+                <outlet property="myCons" destination="Dhh-fB-hf7" id="1bk-hs-ZMS"/>
                 <outlet property="passWordTF" destination="K2y-fr-5wt" id="e4N-6Y-JG7"/>
                 <outlet property="phoneTF" destination="Gx2-DC-laQ" id="K5S-uP-bKP"/>
                 <outlet property="swicthBt" destination="gnB-0l-1aP" id="JDW-OT-Aij"/>
@@ -177,7 +179,6 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="CYA-47-9iL" firstAttribute="leading" secondItem="ihb-oB-JRz" secondAttribute="trailing" constant="15" id="02I-FE-WAI"/>
-                        <constraint firstItem="l5F-s8-gcY" firstAttribute="top" secondItem="nPC-iY-k1j" secondAttribute="bottom" constant="70" id="0IY-g2-xbf"/>
                         <constraint firstAttribute="trailing" secondItem="CYA-47-9iL" secondAttribute="trailing" constant="15" id="1eQ-eW-uD1"/>
                         <constraint firstItem="8Oe-8f-wrV" firstAttribute="top" secondItem="fz4-wP-hp0" secondAttribute="top" constant="15" id="1fZ-oM-DGn"/>
                         <constraint firstItem="CYA-47-9iL" firstAttribute="leading" secondItem="ihb-oB-JRz" secondAttribute="trailing" constant="15" id="38g-7L-HTE"/>
@@ -190,6 +191,7 @@
                         <constraint firstItem="ihb-oB-JRz" firstAttribute="top" secondItem="nPC-iY-k1j" secondAttribute="bottom" constant="20" id="9nS-1d-CfN"/>
                         <constraint firstItem="Uk5-y0-EMA" firstAttribute="leading" secondItem="fz4-wP-hp0" secondAttribute="leading" constant="10" id="Cpa-SD-G6T"/>
                         <constraint firstItem="l5F-s8-gcY" firstAttribute="leading" secondItem="fz4-wP-hp0" secondAttribute="leading" constant="10" id="D89-yq-0wi"/>
+                        <constraint firstItem="l5F-s8-gcY" firstAttribute="top" secondItem="Uk5-y0-EMA" secondAttribute="bottom" constant="120" id="Dhh-fB-hf7"/>
                         <constraint firstItem="pRU-q9-WIw" firstAttribute="leading" secondItem="fz4-wP-hp0" secondAttribute="leading" constant="50" id="GKO-AY-7uT"/>
                         <constraint firstItem="K2y-fr-5wt" firstAttribute="leading" secondItem="nPC-iY-k1j" secondAttribute="trailing" constant="15" id="IA5-lF-p7a"/>
                         <constraint firstItem="6Ph-Pt-1rj" firstAttribute="centerY" secondItem="ANi-5N-WNj" secondAttribute="centerY" id="L99-YW-jix"/>

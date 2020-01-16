@@ -36,6 +36,8 @@
 @interface KKKKFootView : UIView
 @property(nonatomic,copy)void(^footViewClickBlock)(UIButton *button);
 @property(nonatomic,strong)NSString *titleStr;
+@property(nonatomic,assign)BOOL leftCanOp,rightCanOp;
 
+@property(nonatomic,strong)UIButton *leftBt,*rightBt;
 @end
 

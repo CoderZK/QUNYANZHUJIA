@@ -59,6 +59,11 @@
     self.navigationItem.title = @"支付";
     self.payType = 0;
     
+    if (isUPUPUP) {
+        self.model.is_need_wechat_pay = YES;
+    }
+    
+    
     if (self.model.is_need_wechat_pay) {
         self.consThree.constant = 0;
         self.consTwo.constant = 131.2;
@@ -431,7 +436,7 @@
     [SVProgressHUD showSuccessWithStatus:@"支付成功"];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        if ((self.type == 6 ||self.type == 11) && self.isBaoBlcok != nil) {
+        if ((self.type == 6 ||self.type == 11 ||  self.type == 1) && self.isBaoBlcok != nil) {
             self.isBaoBlcok();
         }
         if (self.type == 5 || self.type == 6) {

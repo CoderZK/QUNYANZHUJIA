@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *pic;
 @property(nonatomic,strong)NSString *name;
 @property(nonatomic,strong)NSString *address;
-
+@property(nonatomic,strong)NSString *level;
 @property(nonatomic,strong)NSString *city_id_server;
 @property(nonatomic,strong)NSString *city_name_server;
 @property(nonatomic,strong)NSString *pro_id_server;

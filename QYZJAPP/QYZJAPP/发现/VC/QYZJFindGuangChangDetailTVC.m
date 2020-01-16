@@ -117,11 +117,14 @@
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"nickName"] = [zkSignleTool shareTool].nick_name;
+    dict[@"toUserId"] = self.dataModel.article.userId;
+    dict[@"userId"] = [zkSignleTool shareTool].session_uid;
+    dict[@"toNickName"] = self.dataModel.article.nickName;
+    dict[@"commentId"] = @"0";
     if (self.isPeople) {
         dict[@"toUserId"] = self.dataArray[self.indexPath.row].userId;
         dict[@"toNickName"] = self.dataArray[self.indexPath.row].nickName;
         dict[@"commentId"] = self.dataArray[self.indexPath.row].ID;
-        
     }
     dict[@"articleId"] = self.ID;
     dict[@"commentContent"] = textField.text;

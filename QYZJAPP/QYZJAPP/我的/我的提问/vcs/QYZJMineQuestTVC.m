@@ -95,6 +95,8 @@
     }else {
         cell.isServer = NO;
     }
+    
+    
     cell.waiModel = model;
     Weak(weakSelf);
     cell.cellClickBlock = ^(QYZJMineQuestCell *cell) {
@@ -122,10 +124,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (isUPUPUP) {
+        return;
+    }
     QYZJFindModel * model = self.dataArray[indexPath.row];
-    
     //未付款
-    
     QYZJMineQuestTwoTVC * vc =[[QYZJMineQuestTwoTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
     vc.hidesBottomBarWhenPushed = YES;
     vc.model = model;

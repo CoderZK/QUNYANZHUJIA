@@ -12,7 +12,8 @@
 @interface QYZJSearchView : UIView
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,copy)void(^clickHeadBlock)(NSInteger index,BOOL isYou);
-@property(nonatomic,assign)BOOL isCanChange;
+@property(nonatomic,assign)BOOL isCanChange,isShowSv,leftBtSelect;
+
 @end
 
 

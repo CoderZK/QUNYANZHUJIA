@@ -52,17 +52,50 @@
 
 - (void)setFH {
     
-    if (!self.isPay) {
-        self.whiteView.hidden = YES;
-        [self setFootV];
-        [self diss];
-        
+    
+    if (self.model.is_answer == 1) {
+        //普通用户
+        if (!self.isPay) {
+            self.whiteView.hidden = YES;
+            [self setFootV];
+            [self diss];
+            
+        }else {
+            if (self.model.is_answer == 1 && self.dataModel.answer_list.count == 0) {
+                
+                self.viewView.hidden = YES;
+                self.whiteView.hidden = YES;
+               self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH );
+                
+            }else {
+                
+                [self setHead];
+                self.whiteView.hidden = NO;
+                self.viewView.hidden = YES;
+                
+            }
+            
+            
+        }
     }else {
-        self.viewView.hidden = YES;
         [self setHead];
+        self.whiteView.hidden = NO;
         self.viewView.hidden = YES;
-        
     }
+    
+    
+    
+//    if (!self.isPay || (self.isPay && self.model.is_answer == 1 && self.dataModel.answer_list.count == 0)) {
+//        self.whiteView.hidden = YES;
+//        [self setFootV];
+//        [self diss];
+//
+//    }else {
+//        self.viewView.hidden = YES;
+//        [self setHead];
+//        self.viewView.hidden = YES;
+//
+//    }
     
 }
 
@@ -175,6 +208,7 @@
 }
 
 
+
 //- (void)show {
 //
 //    if (sstatusHeight > 20) {
@@ -250,7 +284,7 @@
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             self.dataModel = [QYZJFindModel mj_objectWithKeyValues:responseObject[@"result"]];
-
+            [self setFH];
             [self.tableView reloadData];
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
@@ -320,6 +354,76 @@
 }
 
 
+- (void)questOrAppiontActionWithuserId:(NSString *)userID andSelf_id:(NSString *)selfID {
+    
+ 
+    
+    NSString * url = [QYZJURLDefineTool user_addQuestionURL];
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"title"] = self.TF.text;
+    dict[@"media_url"] = self.audioStr;
+    dict[@"b_user_ids"] = userID;
+    dict[@"self_id"] = selfID;
+    dict[@"is_open"] = @"0";
+    [zkRequestTool networkingPOST:url parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            [self wecharPayWithID:responseObject[@"result"][@"id"]];
+            [self.TF resignFirstResponder];
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+    
+    
+}
+
+- (void)wecharPayWithID:(NSString *)ID {
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"pay_money"]= @(self.dataModel.answer_list[self.row].question_price);
+    dict[@"type"] = @(1);
+    dict[@"id"] = ID;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_wechatPayURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            QYZJTongYongModel * mm = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
+            QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.model = mm;
+            vc.ID = ID;
+            vc.numer = 1;
+            vc.type = 6;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+}
+
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         return 0.01;
@@ -367,12 +471,49 @@
     }else {
         QYZJMineQuestFiveCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJMineQuestFiveCell" forIndexPath:indexPath];
         self.dataModel.answer_list[indexPath.row].is_pay = NO;
+        
+         QYZJFindModel * model = self.dataModel.answer_list[indexPath.row];
+       
+        cell.type = 1;
         cell.model = self.dataModel.answer_list[indexPath.row];
         [cell.replyBt addTarget:self  action:@selector(replyAction:) forControlEvents:UIControlEventTouchUpInside];
         cell.replyBt.tag = indexPath.row;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.listBt addTarget:self action:@selector(listAction:) forControlEvents:UIControlEventTouchUpInside];
         cell.listBt.tag = indexPath.row;
+        
+       
+        if (self.model.is_answer == 1) {
+            //普通用户
+            if ([model.type integerValue] == 3 ) {
+                
+                if ([model.status integerValue] == 0) {
+                    //未付款
+                     cell.replyBt.hidden = NO;
+                    [cell.replyBt setTitle:@"去支付" forState:UIControlStateNormal];
+                    [cell.replyBt setTitleColor:OrangeColor forState:UIControlStateNormal];
+                }else {
+                     cell.replyBt.hidden = YES;
+                }
+            }else {
+                cell.replyBt.hidden = NO;
+                 [cell.replyBt setTitle:@"追问" forState:UIControlStateNormal];
+                 [cell.replyBt setTitleColor:CharacterColor80 forState:UIControlStateNormal];
+            }
+        }else {
+            //服务方
+            if ([model.type integerValue] == 3 ) {
+                if ([model.user_id isEqualToString:[zkSignleTool shareTool].session_uid]) {
+                    //是对我的追问
+                    cell.replyBt.hidden = NO;
+                    [cell.replyBt setTitle:@"回复" forState:UIControlStateNormal];
+                    [cell.replyBt setTitleColor:CharacterColor80 forState:UIControlStateNormal];
+                }else {
+                   cell.replyBt.hidden = YES;
+                    
+                }
+            }
+        }
         return cell;
         
     }
@@ -405,10 +546,26 @@
 //点击回复
 - (void)replyAction:(UIButton *)button {
     self.row = button.tag;
-//    [self show];
     
-    self.TF.placeholder = [NSString stringWithFormat:@"回复:%@",self.dataModel.answer_list[button.tag].a_nick_name];
-    [self.TF becomeFirstResponder];
+    QYZJFindModel * model = self.dataModel.answer_list[button.tag];
+    if ([model.status integerValue] == 0 && [model.type integerValue] == 3) {
+        
+        [self wecharPayWithID:model.ID];
+        
+        
+    }else {
+        if (self.model.is_answer == 1) {
+             self.TF.placeholder = [NSString stringWithFormat:@"追问:%@",self.dataModel.answer_list[button.tag].a_nick_name];
+         }else {
+            self.TF.placeholder = [NSString stringWithFormat:@"回复提问者: %@",@""];
+         }
+         
+         [self.TF becomeFirstResponder];
+    }
+    
+    
+//    [self show];
+ 
 }
 
 //回复
@@ -418,80 +575,52 @@
         [SVProgressHUD showErrorWithStatus:@"语音和文字回复必须有一个"];
         return;
     }
+    
+    if (self.model.is_answer == 1) {
+        if (self.row != -1) {
+           [self questOrAppiontActionWithuserId:self.dataModel.answer_list[self.row].user_id andSelf_id:self.dataModel.answer_list[self.row].ID];
+            return;
+        }else {
+            [SVProgressHUD showErrorWithStatus:@"自己不能回复自己,请去追问答人"];
+            return;
+        }
+         
+    }
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"question_id"] = self.model.ID;
     dict[@"media_url"] = self.audioStr;
     dict[@"contents"] = self.TF.text;
-    
+//    dict[@"to_id"] =
     if (self.row == -1) {
         dict[@"type"] = @"0";
     }else {
-       dict[@"to_id"] = self.dataModel.answer_list[self.row].ID;
-        if (self.model.is_answer == 2) {
-           dict[@"type"] = @"1";
-        }else {
-           dict[@"type"] = @"2";
-        }
+        dict[@"type"] = @"1";
     }
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_replyQuestionURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
-            
-            if (self.model.is_answer == 1) {
-                [self wecharPayWithID:responseObject[@"result"][@"id"]];
-            }else {
-                [SVProgressHUD showSuccessWithStatus:@"回复成功"];
-                self.row = -1;
-                self.TF.placeholder = @"回复提问";
-                [self.tableView endEditing:YES];
-            }
+            [SVProgressHUD showSuccessWithStatus:@"回复成功"];
+            self.row = -1;
+            self.TF.placeholder = @"回复提问";
+            [self.tableView endEditing:YES];
             [self getData];
-            
+            [self.TF resignFirstResponder];
+
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
         }
-        
+
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
+
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
-        
+
     }];
     
-    
-    
 }
-
-
-- (void)wecharPayWithID:(NSString *)ID {
-    [SVProgressHUD show];
-    NSMutableDictionary * dict = @{}.mutableCopy;
-//    dict[@"pay_money"]= @(self.money);
-    dict[@"type"] = @(1);
-    dict[@"id"] = ID;
-    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_wechatPayURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-
-        [SVProgressHUD dismiss];
-        if ([responseObject[@"key"] intValue]== 1) {
-            QYZJTongYongModel * mm = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
-            QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            vc.model = mm;
-            vc.ID = ID;
-            vc.type = 4;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else {
-            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        [self.tableView.mj_header endRefreshing];
-        [self.tableView.mj_footer endRefreshing];
-    }];
-}
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

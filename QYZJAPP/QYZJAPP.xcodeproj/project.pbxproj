@@ -59,7 +59,6 @@
 		5828E2BC23853B1C008BF9D7 /* QYZJJingXingZhongRobOrderTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5828E2BB23853B1C008BF9D7 /* QYZJJingXingZhongRobOrderTVC.m */; };
 		5829CEC8238F9EB000A4CFF0 /* QYZJYanShouOrBaoXiuTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5829CEC7238F9EB000A4CFF0 /* QYZJYanShouOrBaoXiuTVC.m */; };
 		582D2F842384C4D400CA70BF /* QYZJWorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 582D2F832384C4D400CA70BF /* QYZJWorkModel.m */; };
-		582DDA6E23B044060007B76C /* 8888.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 582DDA6D23B044060007B76C /* 8888.mp3 */; };
 		582DDA7123B054030007B76C /* QYZJMineQuestTwoTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 582DDA7023B054030007B76C /* QYZJMineQuestTwoTVC.m */; };
 		582DDA7423B069070007B76C /* QYZJMineZhiBoTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 582DDA7323B069070007B76C /* QYZJMineZhiBoTVC.m */; };
 		582DDA7823B069AC0007B76C /* QYZJZhiBoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 582DDA7623B069AC0007B76C /* QYZJZhiBoCell.m */; };
@@ -313,6 +312,7 @@
 		584345C423716A2A0087A2D9 /* QYZJUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 584345C323716A2A0087A2D9 /* QYZJUserModel.m */; };
 		584345C823716FD90087A2D9 /* QYZJFindPasswordTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 584345C623716FD90087A2D9 /* QYZJFindPasswordTwoVC.m */; };
 		584345C923716FD90087A2D9 /* QYZJFindPasswordTwoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 584345C723716FD90087A2D9 /* QYZJFindPasswordTwoVC.xib */; };
+		5845DA3E23CEAD5D00E550A3 /* QYZJShaiXuanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5845DA3D23CEAD5D00E550A3 /* QYZJShaiXuanView.m */; };
 		5846914F237298140056BA4A /* QYZJHomePayTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5846914E237298140056BA4A /* QYZJHomePayTVC.m */; };
 		584691522372983D0056BA4A /* QYZJRobOrderTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 584691512372983D0056BA4A /* QYZJRobOrderTVC.m */; };
 		5846915523729AC30056BA4A /* QYZJCoachCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5846915423729AC30056BA4A /* QYZJCoachCell.m */; };
@@ -466,7 +466,6 @@
 		5829CEC7238F9EB000A4CFF0 /* QYZJYanShouOrBaoXiuTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJYanShouOrBaoXiuTVC.m; sourceTree = "<group>"; };
 		582D2F822384C4D400CA70BF /* QYZJWorkModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJWorkModel.h; sourceTree = "<group>"; };
 		582D2F832384C4D400CA70BF /* QYZJWorkModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJWorkModel.m; sourceTree = "<group>"; };
-		582DDA6D23B044060007B76C /* 8888.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 8888.mp3; sourceTree = "<group>"; };
 		582DDA6F23B054030007B76C /* QYZJMineQuestTwoTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMineQuestTwoTVC.h; sourceTree = "<group>"; };
 		582DDA7023B054030007B76C /* QYZJMineQuestTwoTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJMineQuestTwoTVC.m; sourceTree = "<group>"; };
 		582DDA7223B069070007B76C /* QYZJMineZhiBoTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJMineZhiBoTVC.h; sourceTree = "<group>"; };
@@ -903,6 +902,8 @@
 		584345C523716FD90087A2D9 /* QYZJFindPasswordTwoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJFindPasswordTwoVC.h; sourceTree = "<group>"; };
 		584345C623716FD90087A2D9 /* QYZJFindPasswordTwoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJFindPasswordTwoVC.m; sourceTree = "<group>"; };
 		584345C723716FD90087A2D9 /* QYZJFindPasswordTwoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYZJFindPasswordTwoVC.xib; sourceTree = "<group>"; };
+		5845DA3C23CEAD5D00E550A3 /* QYZJShaiXuanView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJShaiXuanView.h; sourceTree = "<group>"; };
+		5845DA3D23CEAD5D00E550A3 /* QYZJShaiXuanView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJShaiXuanView.m; sourceTree = "<group>"; };
 		5846914D237298140056BA4A /* QYZJHomePayTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJHomePayTVC.h; sourceTree = "<group>"; };
 		5846914E237298140056BA4A /* QYZJHomePayTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYZJHomePayTVC.m; sourceTree = "<group>"; };
 		584691502372983D0056BA4A /* QYZJRobOrderTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYZJRobOrderTVC.h; sourceTree = "<group>"; };
@@ -1049,7 +1050,6 @@
 			isa = PBXGroup;
 			children = (
 				5851931723BD8FEC0060F076 /* 群燕筑家.entitlements */,
-				582DDA6D23B044060007B76C /* 8888.mp3 */,
 				583A4D58236BDF1E00180E27 /* Views */,
 				337F3EBF20EA13CA00C5526A /* 3rd */,
 				337F3EB120EA040400C5526A /* 其它 */,
@@ -1700,6 +1700,8 @@
 				5833DA02238BAA57007DE9EC /* QYZJShowFromTopView.m */,
 				583B35102398DB8B00148350 /* QYZJPingLunShowView.h */,
 				583B35112398DB8B00148350 /* QYZJPingLunShowView.m */,
+				5845DA3C23CEAD5D00E550A3 /* QYZJShaiXuanView.h */,
+				5845DA3D23CEAD5D00E550A3 /* QYZJShaiXuanView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2544,7 +2546,6 @@
 				583536892386657100D9BE26 /* QYZJQianDanOneCell.xib in Resources */,
 				584331CE23703FA80046C0BD /* Assets.xcassets in Resources */,
 				337F3E6120E9FE3C00C5526A /* Main.storyboard in Resources */,
-				582DDA6E23B044060007B76C /* 8888.mp3 in Resources */,
 				5833D9EE238B63E1007DE9EC /* QYZJJiaoFuListCell.xib in Resources */,
 				5831E8132395F25300D68710 /* QYZJAddBankCell.xib in Resources */,
 				583536872386657100D9BE26 /* QYZJHomePayCell.xib in Resources */,
@@ -2699,6 +2700,7 @@
 				5830796D237FBBB800039E12 /* QYZJMineTiXianTVC.m in Sources */,
 				583C306C23A87AA2000AF260 /* QYZJQingDanPingJiaVC.m in Sources */,
 				584331B1236FF88C0046C0BD /* QYZJFindPasswordVC.m in Sources */,
+				5845DA3E23CEAD5D00E550A3 /* QYZJShaiXuanView.m in Sources */,
 				58434598237118D10087A2D9 /* TongYongThreeCell.m in Sources */,
 				582DDA7123B054030007B76C /* QYZJMineQuestTwoTVC.m in Sources */,
 				58EEC3FF23A0E57000D00012 /* TongYongFourCell.m in Sources */,
@@ -3029,41 +3031,7 @@
 				CODE_SIGN_ENTITLEMENTS = "QYZJAPP/群燕筑家.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 73D5T6D5VH;
-				ENABLE_BITCODE = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/QYZJAPP/3rd",
-				);
-				GCC_PREFIX_HEADER = QYZJAPP/Header.pch;
-				INFOPLIST_FILE = QYZJAPP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/QYZJAPP/3rd/BaiduNavi_iOSSDK_v2.0.7_Lib",
-					"$(PROJECT_DIR)/QYZJAPP/3rd",
-					"$(PROJECT_DIR)/QYZJAPP/3rd/UMessage_Sdk_1.3.0",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.QYZJAPP.app123456;
-				PRODUCT_NAME = "群燕筑家";
-				PROVISIONING_PROFILE = "3bdcf4b3-e396-4d7a-ab2b-739f2269ddaa";
-				PROVISIONING_PROFILE_SPECIFIER = qyzjdev;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		337F3E8420E9FE5400C5526A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 93517C6A5478579AE5177242 /* Pods-QYZJAPP.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "QYZJAPP/群燕筑家.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 4744VSH78G;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3083,10 +3051,46 @@
 					"$(PROJECT_DIR)/QYZJAPP/3rd",
 					"$(PROJECT_DIR)/QYZJAPP/3rd/UMessage_Sdk_1.3.0",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.QYZJAPP.app123;
+				PRODUCT_BUNDLE_IDENTIFIER = com.QYZJAPP.app.app;
 				PRODUCT_NAME = "群燕筑家";
-				PROVISIONING_PROFILE_SPECIFIER = qunyandis;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE = "3bdcf4b3-e396-4d7a-ab2b-739f2269ddaa";
+				PROVISIONING_PROFILE_SPECIFIER = yyqqdev;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		337F3E8420E9FE5400C5526A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 93517C6A5478579AE5177242 /* Pods-QYZJAPP.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "QYZJAPP/群燕筑家.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 9;
+				DEVELOPMENT_TEAM = 4744VSH78G;
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/QYZJAPP/3rd",
+				);
+				GCC_PREFIX_HEADER = QYZJAPP/Header.pch;
+				INFOPLIST_FILE = QYZJAPP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/QYZJAPP/3rd/BaiduNavi_iOSSDK_v2.0.7_Lib",
+					"$(PROJECT_DIR)/QYZJAPP/3rd",
+					"$(PROJECT_DIR)/QYZJAPP/3rd/UMessage_Sdk_1.3.0",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.QYZJAPP.app.app;
+				PRODUCT_NAME = "群燕筑家";
+				PROVISIONING_PROFILE_SPECIFIER = qqyydis;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

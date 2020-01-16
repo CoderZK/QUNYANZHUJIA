@@ -117,7 +117,7 @@
         imgV.layer.borderWidth = 3;
         imgV.clipsToBounds = YES;
         [self.whiteV addSubview:imgV];
-        [imgV sd_setImageWithURL: [NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:arr[i].headerPic]] placeholderImage:[UIImage imageNamed:@"3690"]];
+        [imgV sd_setImageWithURL: [NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:arr[i].headerPic]] placeholderImage:[UIImage imageNamed:@"963"]];
         
     }
     

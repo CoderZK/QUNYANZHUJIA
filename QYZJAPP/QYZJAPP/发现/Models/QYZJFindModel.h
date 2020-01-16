@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSString *ID;
 @property(nonatomic,strong)NSString *selfId;
 @property(nonatomic,strong)NSString *role;
+@property(nonatomic,strong)NSString *answer_id;
 @property(nonatomic,strong)NSString *userId;
 @property(nonatomic,strong)NSString *user_id;
 @property(nonatomic,strong)NSString *turnoverListId;

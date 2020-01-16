@@ -150,7 +150,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 1) {
-        
+        [self.tableView endEditing:YES];
         if (self.bankArr.count == 0) {
            [SVProgressHUD showErrorWithStatus:@"数据获取中..,先去填写其它资料"];
            [self getCityData];

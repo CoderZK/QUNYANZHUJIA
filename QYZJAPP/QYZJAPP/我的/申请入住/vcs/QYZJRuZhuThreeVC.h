@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QYZJRuZhuThreeVC : BaseViewController
 @property(nonatomic,strong)NSMutableDictionary *dataDict;
+@property(nonatomic,assign)BOOL isCocach,isReferee,isTwoApprove;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -13,6 +13,7 @@
 #import "QYZJHomeFourCell.h"
 #import "QYZJHomeFiveCell.h"
 #import "QYZJSearchListTVC.h"
+#import "QYZJShaiXuanView.h"
 @interface QYZJTypesSearchTVC ()
 @property(nonatomic,strong)FindHeadView *navigaV;
 @property(nonatomic,strong)NSMutableDictionary *dataDict;
@@ -22,8 +23,9 @@
 @property(nonatomic,strong)QYZJSearchLabelView *LabelV;
 @property(nonatomic,assign)NSInteger typeIndex;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
-@property(nonatomic,assign)NSInteger page;
-@property(nonatomic,assign)BOOL isTongChong;
+@property(nonatomic,assign)NSInteger page,end_type;
+@property(nonatomic,assign)BOOL isTongChong,isShwoSv;
+@property(nonatomic,strong)QYZJShaiXuanView *sv;
 //裁判时用
 @property(nonatomic,assign)NSInteger sort_type;
 @property(nonatomic,assign)NSInteger searchIndex,lableIndex;
@@ -35,7 +37,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.sort_type = 2;
+    self.sort_type = 0;
     self.isTongChong = NO;
     self.navigationItem.title = self.titleStr;
     self.titleArr = @[].mutableCopy;
@@ -45,6 +47,7 @@
         [self getLeiXingData];
     }else {
         self.serachV.dataArray = @[@"同城",@"评分从高到低",@"筛选"].mutableCopy;
+        self.serachV.leftBtSelect = NO;
     }
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeFourCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeFourCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJHomeFiveCell" bundle:nil] forCellReuseIdentifier:@"QYZJHomeFiveCell"];
@@ -73,7 +76,8 @@
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"page"] = @(self.page);
     dict[@"pageSize"] = @(10);
-    dict[@"sort_type"] = @"1";
+    dict[@"sort_type"] = @(self.sort_type);
+    dict[@"range_type"] = @"0";
      if (self.role_id.length > 0) {
            dict[@"roleId"] = self.role_id;
        }else {
@@ -83,10 +87,15 @@
     dict[@"type"] = @(self.type);
    if (self.type == 2) {
         dict[@"search_end_type"] = @1;
-        dict[@"sort_type"] = @(self.sort_type);
-    }
+   }else {
+       if (self.end_type != 4) {
+           dict[@"end_type"] = @(self.end_type);
+       }
+       dict[@"search_end_type"] = @"1";
+   }
     if (self.isTongChong) {
         dict[@"city_id"] = [zkSignleTool shareTool].cityId;
+        dict[@"range_type"] = @"1";
     }
     if (self.dataDict != nil && self.dataDict.allKeys.count > 0 ) {
          NSArray * arr = self.dataDict[self.titleArr[self.searchIndex]];
@@ -148,7 +157,7 @@
     backV.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.headV addSubview:backV];
 
-    self.serachV = [[QYZJSearchView alloc] initWithFrame:CGRectMake(0, 70, ScreenW, 49.4)];
+    self.serachV = [[QYZJSearchView alloc] initWithFrame:CGRectMake(0, 70, ScreenW, 50)];
     [self.headV addSubview:self.serachV];
     self.serachV.isCanChange = 2-self.type;
     Weak(weakSelf);
@@ -162,17 +171,51 @@
         }else if (weakSelf.type == 1) {
             if (index == 0) {
                 weakSelf.isTongChong = isYou;
+                weakSelf.searchIndex = index;
+                weakSelf.page = 1;
+                [weakSelf getData];
             }else if (index == 1) {
                 if (isYou) {
                     weakSelf.sort_type = 1;
                 }else {
-                    weakSelf.sort_type = 2;
+                    weakSelf.sort_type = 0;
                 }
+                weakSelf.searchIndex = index;
+                weakSelf.page = 1;
+                [weakSelf getData];
+            }else if (index == 2) {
+                // 点击筛选
+                if (weakSelf.isShwoSv) {
+//                    [weakSelf.sv diss];
+//                    weakSelf.end_type = 4;
+//                    weakSelf.searchIndex = index;
+//                    weakSelf.page = 1;
+//                    [weakSelf getData];
+//                    weakSelf.isShwoSv = NO;
+                }else {
+                    weakSelf.sv = [[QYZJShaiXuanView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH)];
+                    [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:weakSelf.sv];
+                    weakSelf.sv.selectIndex = weakSelf.end_type;
+                    weakSelf.sv.clickShaiXuanBlock = ^(NSInteger index1, BOOL isDiss) {
+                      
+                        if (isDiss) {
+                            weakSelf.serachV.isShowSv = NO;
+                        }
+                        if (index1 >= 0)  {
+                            weakSelf.end_type = index1;
+                            weakSelf.searchIndex = index;
+                            weakSelf.page = 1;
+                            [weakSelf getData];
+                        }
+                        
+                    };
+                   
+                }
+                
+                
             }
         }
-        weakSelf.searchIndex = index;
-        weakSelf.page = 1;
-        [weakSelf getData];
+       
         
         
     };
@@ -271,6 +314,7 @@
     }else {
         QYZJHomeFiveCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeFiveCell" forIndexPath:indexPath];
         cell.model = self.dataArray[indexPath.row-1];
+        cell.moneyTtype = self.type;
         cell.headBt.tag = indexPath.row - 1;
         [cell.headBt addTarget:self action:@selector(gotoZhuYeAction:) forControlEvents:UIControlEventTouchUpInside];
         return cell;

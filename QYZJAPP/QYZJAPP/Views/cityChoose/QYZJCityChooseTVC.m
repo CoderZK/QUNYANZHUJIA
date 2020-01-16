@@ -452,27 +452,7 @@
 
 /** 右侧索引列表*/
 -(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
-{
-    /*
-     索引数组中的"内容"，跟分组无关
-     索引数组中的下标，对应的是分组的下标
-     return @[@"哇哈哈", @"hello", @"哇哈哈", @"hello", @"哇哈哈", @"hello", @"哇哈哈", @"hello"];
-     返回self.carGroup中title的数组
-     NSMutableArray *arrayM = [NSMutableArray array];
-     for (HMCarGroup *group in self.carGroups) {
-     [arrayM addObject:group.title];
-     }
-     return arrayM;
-     KVC是cocoa的大招
-     用来间接获取或者修改对象属性的方式
-     使用KVC在获取数值时，如果指定对象不包含keyPath的"键名"，会自动进入对象的内部查找
-     如果取值的对象是一个数组，同样返回一个数组
-     */
-    /*例如：
-     NSArray *array = [self.carGroups valueForKeyPath:@"cars.name"];
-     NSLog(@"%@", array);
-     */
-    
+{    
     if (self.isSearch) {
         return @[];
     }

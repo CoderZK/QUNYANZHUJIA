@@ -37,6 +37,7 @@
 #import "QYZJMineYuYueDanTVC.h"
 #import "QYZJMineZhiBoTVC.h"
 #import "QYZJMineLabelsTVC.h"
+#import "QYZJRuZhuThreeVC.h"
 @interface QYZJMineVC ()<HHYMineFourCellDelegate,QYZJMIneTwoCellDelegate,HHYMineFiveCellDelegate>
 @property(nonatomic,strong)QYZJMineHeadView *headV;
 @property(nonatomic,strong)NSArray *headTitleArr;
@@ -80,11 +81,30 @@
                    self.titleArr = @[@[],@[@"我的收藏",@"我的交付",@"我的报修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入驻",@"我的优惠",@"增值服务"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
                    
                    self.imgTitleArr = @[@[],@[@"wd_1",@"wd_2",@"wd_3",@"wd_4",@"wd_5",@"wd_6",@"wd_7",@"wd_8",@"wd_9"],@[@"zc_1",@"zc_2",@"zc_3",@"zc_4"],@[@"zxgj_1",@"zxgj_2",@"zxgj_3",@"zxgj_4"],@[@"lxkf_1",@"lxkf_2"]];
+                   
+                   if (isUPUPUP) {
+                       
+                       
+                       self.titleArr = @[@[],@[@"我的收藏",@"我的交付",@"我的报修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入驻"],@[@"记账",@"3D设计",@"装修直播"],@[@"联系客服",@"关于我们"]];
+                                         
+                     self.imgTitleArr = @[@[],@[@"wd_1",@"wd_2",@"wd_3",@"wd_4",@"wd_5",@"wd_6",@"wd_7",@"wd_8",@"wd_9"],@[@"zc_1",@"zc_2"],@[@"zxgj_1",@"zxgj_2",@"zxgj_3"],@[@"lxkf_1",@"lxkf_2"]];
+                       
+                   }
+                   
                    [self.tableView reloadData];
                }else {
                    self.titleArr = @[@[],@[@"我的收藏",@"我的交付",@"我的报修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入驻",@"服务方修改",@"我的优惠",@"增值服务",@"我的标签"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
                    
                    self.imgTitleArr = @[@[],@[@"wd_1",@"wd_2",@"wd_3",@"wd_4",@"wd_5",@"wd_6",@"wd_7",@"wd_8",@"wd_9"],@[@"zc_1",@"zc_2",@"zc_6",@"zc_3",@"zc_4",@"zc_5"],@[@"zxgj_1",@"zxgj_2",@"zxgj_3",@"zxgj_4"],@[@"lxkf_1",@"lxkf_2"]];
+                   
+                   if (isUPUPUP) {
+                       
+                       self.titleArr = @[@[],@[@"我的收藏",@"我的交付",@"我的报修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入驻",@"服务方修改"],@[@"记账",@"3D设计",@"装修直播"],@[@"联系客服",@"关于我们"]];
+                       
+                       self.imgTitleArr = @[@[],@[@"wd_1",@"wd_2",@"wd_3",@"wd_4",@"wd_5",@"wd_6",@"wd_7",@"wd_8",@"wd_9"],@[@"zc_1",@"zc_2",@"zc_6"],@[@"zxgj_1",@"zxgj_2",@"zxgj_3"],@[@"lxkf_1",@"lxkf_2"]];
+                       
+                   }
+                   
                    [self.tableView reloadData];
                }
            }else {
@@ -124,9 +144,9 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.headTitleArr = @[@"",@"我的",@"资产",@"装修工具",@"联系客服"];
     
-    self.titleArr = @[@[],@[@"我的收藏",@"我的交付",@"我的报修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入驻",@"服务方修改",@"我的优惠",@"增值服务",@"我的标签"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
-    
-    self.imgTitleArr = @[@[],@[@"wd_1",@"wd_2",@"wd_3",@"wd_4",@"wd_5",@"wd_6",@"wd_7",@"wd_8",@"wd_9"],@[@"zc_1",@"zc_2",@"zc_6",@"zc_3",@"zc_4",@"zc_5"],@[@"zxgj_1",@"zxgj_2",@"zxgj_3",@"zxgj_4"],@[@"lxkf_1",@"lxkf_2"]];
+//    self.titleArr = @[@[],@[@"我的收藏",@"我的交付",@"我的报修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入驻",@"服务方修改",@"我的优惠",@"增值服务",@"我的标签"],@[@"记账",@"3D设计",@"装修直播",@"装修贷"],@[@"联系客服",@"关于我们"]];
+//
+//    self.imgTitleArr = @[@[],@[@"wd_1",@"wd_2",@"wd_3",@"wd_4",@"wd_5",@"wd_6",@"wd_7",@"wd_8",@"wd_9"],@[@"zc_1",@"zc_2",@"zc_6",@"zc_3",@"zc_4",@"zc_5"],@[@"zxgj_1",@"zxgj_2",@"zxgj_3",@"zxgj_4"],@[@"lxkf_1",@"lxkf_2"]];
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self getUserInfo];
@@ -326,13 +346,31 @@
             [self.navigationController pushViewController:vc animated:YES];
         }else if (dd == 1) {
             
-            if (self.dataModel.is_coach || self.dataModel.is_referee) {
-                [SVProgressHUD showErrorWithStatus:@"该身份证号码已绑定其他账户，如需申诉请联系客服"];
-                return;
+            
+            
+            if([zkSignleTool shareTool].role == 0) {
+                QYZJShengQingRuZhuVC* vc =[[QYZJShengQingRuZhuVC alloc] init];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }else {
+                
+                if (self.dataModel.is_referee && self.dataModel.is_coach) {
+                    [SVProgressHUD showErrorWithStatus:@"您已经是教练和裁判身份"];
+                    return;
+                }
+                QYZJRuZhuThreeVC * vc =[[QYZJRuZhuThreeVC alloc] init];
+                vc.hidesBottomBarWhenPushed = YES;
+                vc.isCocach = self.dataModel.is_coach;
+                vc.isReferee = self.dataModel.is_referee;
+                vc.isTwoApprove = YES;
+                vc.dataDict = @{}.mutableCopy;
+                [self.navigationController pushViewController:vc animated:YES];
+                
+                
+                
             }
-            QYZJShengQingRuZhuVC* vc =[[QYZJShengQingRuZhuVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
+            
+            
         }else {
             
             if ([zkSignleTool shareTool].role == 0) {

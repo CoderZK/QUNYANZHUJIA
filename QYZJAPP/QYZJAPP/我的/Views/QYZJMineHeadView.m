@@ -13,7 +13,7 @@
 @property(nonatomic,strong)UILabel *titleLB;
 @property(nonatomic,strong)UIButton *mesageBt;
 @property(nonatomic,strong)UIView *redV;
-@property(nonatomic,strong)UILabel *LB1,*LB2,*LB3;
+@property(nonatomic,strong)UILabel *LB1,*LB2,*LB3,*LB4,*LB5;
 
 @end
 
@@ -92,6 +92,9 @@
         _LB2.clipsToBounds = YES;
         [self addSubview:_LB2];
         
+       
+             
+        
         _LB3 = [[UILabel alloc] init];
         _LB3.textColor = WhiteColor;
         _LB3.font = kFont(14);
@@ -105,7 +108,35 @@
         _LB3.clipsToBounds = YES;
         [self addSubview:_LB3];
         
-        _LB1.textAlignment = _LB2.textAlignment = _LB3.textAlignment = NSTextAlignmentCenter;
+        _LB4 = [[UILabel alloc] init];
+       _LB4.textColor = WhiteColor;
+       _LB4.font = kFont(14);
+       _LB4.mj_x = CGRectGetMaxX(self.headBt.frame) + 10;
+       _LB4.height = 20;
+       _LB4.width = 50;
+       _LB4.mj_y = CGRectGetMaxY(self.headBt.frame) - 20;
+       _LB4.layer.borderColor = WhiteColor.CGColor;
+       _LB4.layer.borderWidth = 1;
+       _LB4.layer.cornerRadius = 2;
+       _LB4.clipsToBounds = YES;
+       [self addSubview:_LB4];
+               
+               
+        _LB5 = [[UILabel alloc] init];
+         _LB5.textColor = WhiteColor;
+         _LB5.font = kFont(14);
+         _LB5.mj_x = CGRectGetMaxX(self.headBt.frame) + 10;
+         _LB5.height = 20;
+         _LB5.width = 50;
+         _LB5.mj_y = CGRectGetMaxY(self.headBt.frame) - 20;
+         _LB5.layer.borderColor = WhiteColor.CGColor;
+         _LB5.layer.borderWidth = 1;
+         _LB5.layer.cornerRadius = 2;
+         _LB5.clipsToBounds = YES;
+         [self addSubview:_LB5];
+        
+        
+        _LB1.textAlignment = _LB2.textAlignment = _LB3.textAlignment =_LB4.textAlignment = _LB5.textAlignment = NSTextAlignmentCenter;
         
     }
     return self;
@@ -131,50 +162,76 @@
         self.redV.hidden = YES;
     }
     
-    
-    if (dataModel.is_vip) {
-        _LB1.text = @"VIP会员";
-        _LB1.hidden = NO;
-        _LB1.mj_w = [_LB1.text getWidhtWithFontSize:14] + 10;
-    }else {
+    if (dataModel.level.length == 0) {
+        _LB1.mj_w = 0;
         _LB1.hidden = YES;
+    }else {
+        _LB1.text = dataModel.level;
+        _LB1.mj_w = [_LB1.text getWidhtWithFontSize:14] + 10;
+        _LB1.hidden = NO;
     }
     
-    if (dataModel.is_coach) {
-        _LB2.text = @"教练";
+    
+    
+    if (dataModel.is_vip) {
+        _LB2.text = @"VIP会员";
         _LB2.hidden = NO;
         _LB2.mj_w = [_LB2.text getWidhtWithFontSize:14] + 10;
-        if (dataModel.is_vip == NO) {
-            _LB2.mj_x = CGRectGetMaxX(self.headBt.frame) + 10;
+        if (dataModel.level.length > 0) {
+            _LB2.mj_x = CGRectGetMaxX(_LB1.frame) + 5;
         }else {
-            _LB2.mj_x = CGRectGetMaxX(self.LB1.frame) + 8;
+            _LB2.mj_x =  CGRectGetMaxX(self.headBt.frame) + 10;
         }
     }else {
         _LB2.hidden = YES;
+        _LB2.mj_w = 0;
+        _LB2.mj_x = CGRectGetMaxX(_LB1.frame);
+        
+        
     }
     
-    if (dataModel.role_name.length > 0) {
-        _LB3.text = dataModel.role_name;
+    if (dataModel.is_coach) {
+        _LB3.text = @"教练";
         _LB3.hidden = NO;
         _LB3.mj_w = [_LB3.text getWidhtWithFontSize:14] + 10;
-        if (dataModel.is_vip == YES) {
-            
-            if (dataModel.is_coach) {
-                _LB3.mj_x = CGRectGetMaxX(self.LB2.frame) + 8;
-            }else {
-                _LB3.mj_x = CGRectGetMaxX(self.LB1.frame) + 8;
-            }
-        }  else {
-            if (dataModel.is_coach) {
-                _LB3.mj_x = CGRectGetMaxX(self.LB2.frame) + 8;
-            }else {
-                _LB3.mj_x = CGRectGetMaxX(self.headBt.frame) + 10;
-            }
+        if (dataModel.is_vip == NO && dataModel.level.length == 0) {
+            _LB3.mj_x = CGRectGetMaxX(self.headBt.frame) + 10;
+        }else {
+            _LB3.mj_x = CGRectGetMaxX(self.LB2.frame) + 5;
         }
-        
-        
     }else {
         _LB3.hidden = YES;
+        _LB3.mj_w = 0;
+        _LB3.mj_x = CGRectGetMaxX(self.LB2.frame);
+    }
+    
+    if (dataModel.is_referee) {
+        _LB4.text = @"裁判";
+        _LB4.hidden = NO;
+        _LB4.mj_w = [_LB4.text getWidhtWithFontSize:14] + 10;
+        if (dataModel.is_coach == NO && dataModel.is_vip == NO && dataModel.level.length == 0) {
+            _LB4.mj_x = CGRectGetMaxX(self.headBt.frame) + 10;
+        }else {
+            _LB4.mj_x = CGRectGetMaxX(self.LB3.frame) + 5;
+        }
+    }else {
+        _LB4.hidden = YES;
+        _LB4.mj_w = 0;
+        _LB4.mj_x = CGRectGetMaxX(self.LB3.frame);
+    }
+    
+    
+    if (dataModel.role_name.length > 0) {
+        _LB5.text = dataModel.role_name;
+        _LB5.hidden = NO;
+        _LB5.mj_w = [_LB5.text getWidhtWithFontSize:14] + 10;
+       if (dataModel.is_coach == NO && dataModel.is_vip == NO && dataModel.is_referee &&dataModel.level.length == 0) {
+           _LB5.mj_x = CGRectGetMaxX(self.headBt.frame) + 10;
+       }else {
+           _LB5.mj_x = CGRectGetMaxX(self.LB4.frame) + 5;
+       }
+    }else {
+        _LB5.hidden = YES;
     }
     
     

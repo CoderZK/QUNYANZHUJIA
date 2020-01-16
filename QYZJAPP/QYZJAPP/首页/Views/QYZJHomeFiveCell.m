@@ -74,6 +74,12 @@
     
 }
 
+
+
+- (void)setMoneyTtype:(NSInteger)moneyTtype {
+    _moneyTtype = moneyTtype;
+}
+
 - (void)setModel:(QYZJFindModel *)model {
     _model = model;
     [self.headBt sd_setBackgroundImageWithURL: [NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.head_img]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"963"] options:SDWebImageRetryFailed];
@@ -96,14 +102,89 @@
         self.vipCons.constant = 0;
         self.vpLeftCons.constant = 0;
     }
-    if (model.is_question) {
-        self.answerCons.constant = [@"可提问" getWidhtWithFontSize:14] + space;
-        self.answerLeftCons.constant = 10;
+    
+    if (self.moneyTtype == 2) {
+        //教练
+        if (model.is_question) {
+            
+            self.moneyLB.text = [NSString stringWithFormat:@"提问:￥%0.2f",model.question_price];
+            self.answerCons.constant = [@"可提问" getWidhtWithFontSize:14] + space;
+            self.requestLB.text = @"可提问";
+               self.answerLeftCons.constant = 10;
+        }else {
+            
+            
+            if (model.is_appoint) {
+                self.moneyLB.text = [NSString stringWithFormat:@"预约:￥%0.2f",model.appoint_price];
+            }else {
+                self.moneyLB.text = @"";
+            }
+            
+            
+            
+            if (model.is_appoint) {
+                self.answerCons.constant = [@"可预约" getWidhtWithFontSize:14] + space;
+                self.requestLB.text = @"可预约";
+                self.answerLeftCons.constant = 10;
+            }else {
+                self.answerCons.constant = 0;
+                self.answerLeftCons.constant = 0;
+            }
+            
+              
+        }
+        
+
+    }else if (self.moneyTtype == 1){
+        //裁判
+        if (model.is_appoint) {
+            
+            self.moneyLB.text = [NSString stringWithFormat:@"预约:￥%0.2f",model.appoint_price];
+            
+            self.answerCons.constant = [@"可预约" getWidhtWithFontSize:14] + space;
+            self.requestLB.text = @"可预约";
+            self.answerLeftCons.constant = 10;
+        }else {
+            if (model.is_coach) {
+                self.answerCons.constant = [@"可提问" getWidhtWithFontSize:14] + space;
+                self.requestLB.text = @"可提问";
+                 self.moneyLB.text = [NSString stringWithFormat:@"提问:￥%0.2f",model.question_price];
+                self.answerLeftCons.constant = 10;
+            }else {
+                self.answerCons.constant = 0;
+                self.answerLeftCons.constant = 0;
+                self.moneyLB.text = @"";
+            }
+        }
+        
+        
+
     }else {
-       self.answerCons.constant = 0;
-       self.answerLeftCons.constant = 0;
+        
+        if (model.is_coach) {
+            self.answerCons.constant = [@"可提问" getWidhtWithFontSize:14] + space;
+            self.requestLB.text = @"可提问";
+             self.moneyLB.text = [NSString stringWithFormat:@"提问:￥%0.2f",model.question_price];
+            self.answerLeftCons.constant = 10;
+        }else {
+            self.answerCons.constant = 0;
+            self.answerLeftCons.constant = 0;
+            self.moneyLB.text = @"";
+        }
+         self.moneyLB.text = [NSString stringWithFormat:@"提问:￥%0.2f  预约:￥%0.2f",model.question_price,model.appoint_price];
+        
     }
     
+
+//    if (model.question_price>0 && model.appoint_price > 0) {
+//         self.moneyLB.text = [NSString stringWithFormat:@"提问:￥%0.2f  预约:￥%0.2f",model.question_price,model.appoint_price];
+//    }else if (model.question_price > 0 && model.appoint_price == 0) {
+//          self.moneyLB.text = [NSString stringWithFormat:@"提问:￥%0.2f",model.question_price];
+//    }else if (model.question_price == 0 && model.appoint_price > 0) {
+//        self.moneyLB.text = [NSString stringWithFormat:@"预约:￥%0.2f",model.appoint_price];
+//    }
+
+    self.moneyLB.hidden = isUPUPUP;
     self.fansLB.text = [NSString stringWithFormat:@"%ld",model.fans_num]; ;
     self.answerLB.text = [NSString stringWithFormat:@"%ld",model.answer_num];
     
@@ -121,25 +202,14 @@
             self.typeLB1.hidden = NO;
             
         }
-//        if (arr.count > 1) {
-//            self.typeLB1.text = arr[0];
-//            self.typeOneCons.constant = [arr[0] getWidhtWithFontSize:14]+10;
-//
-//            self.tyepLB2.text = arr[0];
-//            self.typeTwoCons.constant = [arr[1] getWidhtWithFontSize:14]+10;
-//            self.tyepLB2.hidden = self.typeLB1.hidden = NO;
-//        }
-    }
 
-    if (model.question_price>0 && model.appoint_price > 0) {
-        self.moneyLB.text = [NSString stringWithFormat:@"提问:￥%0.2f  预约:￥%0.2f",model.question_price,model.appoint_price];
-    }else if (model.question_price > 0 && model.appoint_price == 0) {
-          self.moneyLB.text = [NSString stringWithFormat:@"提问:￥%0.2f",model.question_price];
-    }else if (model.question_price == 0 && model.appoint_price > 0) {
-        self.moneyLB.text = [NSString stringWithFormat:@"预约:￥%0.2f",model.appoint_price];
     }
     
-//    [self layoutIfNeeded];
+   
+    
+
+  
+    
     
 }
 

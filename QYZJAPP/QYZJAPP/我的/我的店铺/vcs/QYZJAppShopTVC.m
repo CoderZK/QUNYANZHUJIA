@@ -13,6 +13,7 @@
 @interface QYZJAppShopTVC ()<QYZJMineShopCellDelegate>
 @property(nonatomic,strong)QYZJMineShopHeadView *headV;
 @property(nonatomic,strong)NSMutableArray<QYZJFindModel *> *dataArray;
+@property(nonatomic,strong)NSString *nameStr,*head_img_Str;
 @end
 
 @implementation QYZJAppShopTVC
@@ -45,6 +46,14 @@
         }else if (index == 1) {
             //分享
             
+//            if (weakSelf.dataArray.count > 0) {
+//                QYZJFindModel * mm = [weakSelf.dataArray firstObject];
+//                 [weakSelf shareWithSetPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Sina)] withUrl:[NSString stringWithFormat:@"http://mobile.qunyanzhujia.com/daRenDetail?id=%@&other=true",] shareModel:weakSelf.dataModel.head_img withContentStr:self.dataModel.nick_name];
+//            }
+            
+           
+            
+            
         }else if (index == 2) {
             //头像
             
@@ -74,7 +83,9 @@
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             [self.headV.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:responseObject[@"result"][@"pic"]]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"963"] options:SDWebImageRetryFailed];
+            self.head_img_Str = responseObject[@"result"][@"pic"];
             self.headV.titelLB.text = responseObject[@"result"][@"name"];
+            self.nameStr = responseObject[@"result"][@"name"];
             self.dataArray  = [QYZJFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"][@"goods_list"]];
             [self.tableView reloadData];
         }else {

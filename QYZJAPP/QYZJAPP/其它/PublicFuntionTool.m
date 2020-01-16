@@ -206,6 +206,7 @@ static PublicFuntionTool * tool = nil;
     button1.layer.cornerRadius = 3;
     button1.clipsToBounds = YES;
     button1.tag = 0;
+    footV.leftBt = button1;
     [footV addSubview:button1];
     [button1 addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     if ([leftColor isEqual:WhiteColor]) {
@@ -225,6 +226,7 @@ static PublicFuntionTool * tool = nil;
     button2.clipsToBounds = YES;
     button2.tag = 1;;
     [footV addSubview:button2];
+    footV.rightBt = button2;
     [button2 addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     if ([rightColor isEqual:WhiteColor]) {
         [button2 setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
@@ -404,27 +406,27 @@ static PublicFuntionTool * tool = nil;
         //创建ALAssetsLibrary对象并将视频保存到媒体库
         
     
-        if ([self isCanUsePicture]) {
-            
-                ALAssetsLibrary* assetsLibrary = [[ALAssetsLibrary alloc] init];
-                
-                [assetsLibrary writeVideoAtPathToSavedPhotosAlbum:mediaURL completionBlock:^(NSURL *assetURL, NSError *error) {
-                    
-                    if (!error) {
-                        
-                        NSLog(@"captured video saved with no error.");
-                        
-                    }else
-                        
-                    {
-                        
-                        NSLog(@"error occured while saving the video:%@", error);
-                        
-                    }
-                    
-                }];
-                
-            }
+//        if ([self isCanUsePicture]) {
+//
+//                ALAssetsLibrary* assetsLibrary = [[ALAssetsLibrary alloc] init];
+//
+//                [assetsLibrary writeVideoAtPathToSavedPhotosAlbum:mediaURL completionBlock:^(NSURL *assetURL, NSError *error) {
+//
+//                    if (!error) {
+//
+//                        NSLog(@"captured video saved with no error.");
+//
+//                    }else
+//
+//                    {
+//
+//                        NSLog(@"error occured while saving the video:%@", error);
+//
+//                    }
+//
+//                }];
+//
+//            }
         }
         
         
@@ -446,7 +448,11 @@ static PublicFuntionTool * tool = nil;
 @end
 
 
+
+
 @implementation KKKKFootView
+
+
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self =[super initWithFrame:frame];
@@ -470,6 +476,35 @@ static PublicFuntionTool * tool = nil;
 }
 
 
+- (void)setLeftCanOp:(BOOL)leftCanOp {
+    _leftCanOp = leftCanOp;
+    
+    
+    self.leftBt.userInteractionEnabled = leftCanOp;
+    
+    if (leftCanOp==NO) {
+        self.leftBt.layer.borderWidth = 0;
+        [self.leftBt setBackgroundImage:[UIImage imageNamed:@"backgg"] forState:UIControlStateNormal];
+        [self.leftBt setTitleColor:WhiteColor forState:UIControlStateNormal];
+    }
+    
+    
+     
+}
+
+- (void)setRightCanOp:(BOOL)rightCanOp {
+    _rightCanOp = rightCanOp;
+    
+   self.rightBt.userInteractionEnabled = rightCanOp;
+    
+    if (rightCanOp==NO) {
+        self.rightBt.layer.borderWidth = 0;
+        [self.rightBt setBackgroundImage:[UIImage imageNamed:@"backgg"] forState:UIControlStateNormal];
+    }
+
+    
+    
+}
 
 
 

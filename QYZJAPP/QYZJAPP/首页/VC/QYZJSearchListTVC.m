@@ -50,7 +50,7 @@
     dict[@"search_type"] = @(self.type);
     dict[@"type"] = @(self.type);
     dict[@"search_word"] = self.searchWord;
-    dict[@"search_end_type"] = @(1);
+//    dict[@"search_end_type"] = @(1);
     if (self.searchWord.length > 0) {
        dict[@"type"] = @(3);
     }
@@ -168,6 +168,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
         QYZJHomeFiveCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeFiveCell" forIndexPath:indexPath];
+        cell.moneyTtype = self.type;
         cell.model = self.dataArray[indexPath.row];
         cell.headBt.tag = indexPath.row;
         return cell;
@@ -178,9 +179,15 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
    
+   if (![zkSignleTool shareTool].isLogin) {
+       [self gotoLoginVC];
+        return;
+    }
     QYZJMineZhuYeTVC * vc =[[QYZJMineZhuYeTVC alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     vc.ID = self.dataArray[indexPath.row].ID;
+    [self.navigationController pushViewController:vc animated:YES];
+
     
 
  

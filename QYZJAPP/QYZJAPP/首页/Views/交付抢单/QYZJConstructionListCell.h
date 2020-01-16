@@ -20,6 +20,12 @@
 @property(nonatomic,assign)BOOL is_service; // 0 是服务方, 1 不是
 @property(nonatomic,assign)NSInteger type; //0 清单 1 保修
 @property(nonatomic,assign)id<QYZJConstructionListCellDelegate>delegate;
+
+@property(nonatomic,strong)UILabel *titleLB,*contentLB,*timeLB,*moneyLB;
+@property(nonatomic,strong)UIButton *statusBt,*editBt;
+@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)UIView *whiteV;
+
 @end
 
 

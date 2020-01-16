@@ -18,8 +18,8 @@
 //友盟安全密钥//r6xbw5gy0zenei6x56xtm9wmkrrz653y
 
 //新浪
-#define SinaAppKey @"1494437384"
-#define SinaAppSecret @"2d6bac14bc37989170ba9ab6214f06c3"
+#define SinaAppKey @"3386016286"
+#define SinaAppSecret @"081a4efee947710f9082ab3f0a7b8de8"
 
 //微信
 #define WXAppID @"wxd9cbb4de3c914a74"
@@ -28,6 +28,7 @@
 //QQ
 #define QQAppID @"1110158578"
 #define QQAppKey @"6EwJ1flChWzz6zPO"
+
 
 
 @interface AppDelegate ()<WXApiDelegate,UNUserNotificationCenterDelegate>
@@ -45,6 +46,8 @@
     [self.window makeKeyAndVisible];
     
     self.window.backgroundColor = WhiteColor;
+    
+     [zkSignleTool shareTool].isUp = YES;
     
     //汉字
     

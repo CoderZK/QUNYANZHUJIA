@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
 @property (weak, nonatomic) IBOutlet UITextField *passWordTF;
 @property(nonatomic,strong)UMSocialUserInfoResponse *resp;
+@property (weak, nonatomic) IBOutlet UIButton *wechatBt;
+@property (weak, nonatomic) IBOutlet UILabel *wechatLb;
 @property(nonatomic,assign)BOOL isBind;
 @end
 
@@ -22,6 +24,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.wechatBt.hidden = self.wechatLb.hidden = isUPUPUP;
     
     UIButton * button =[UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, 0, 50, 30);

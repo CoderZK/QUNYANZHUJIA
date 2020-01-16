@@ -57,6 +57,12 @@
     return self;
 }
 
+- (void)setType:(NSInteger)type {
+    _type = type;
+}
+- (void)setIs_answer:(NSInteger)is_answer {
+    _is_answer = is_answer;
+}
 - (void)setModel:(QYZJFindModel *)model {
     _model = model;
     [self.imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.a_head_img]] placeholderImage:[UIImage imageNamed:@"963"]];
@@ -79,12 +85,25 @@
         self.listBt.hidden = NO;
         self.contentLB.mj_y = 72;
     }
-    CGFloat  h = [model.contents getHeigtWithFontSize:13 lineSpace:3 width:ScreenW - 65];
+    
+    NSString * str = model.contents;
+    if (self.type == 1) {
+        if ([model.type integerValue] == 3 ) {
+            if (self.is_answer == 1) {
+                //普通用户
+                str = [NSString stringWithFormat:@"追问 %@ : %@",model.nick_name,model.contents];
+            }else {
+                str = [NSString stringWithFormat:@"追问 : %@",model.contents];
+            }
+        }
+    }
+    
+    CGFloat  h = [str getHeigtWithFontSize:13 lineSpace:3 width:ScreenW - 65];
     if (h<20) {
         h=20;
     }
     self.contentLB.mj_h = h;
-    self.contentLB.attributedText = [model.contents getMutableAttributeStringWithFont:13 lineSpace:3 textColor:CharacterColor80];
+    self.contentLB.attributedText = [str getMutableAttributeStringWithFont:13 lineSpace:3 textColor:CharacterColor80];
     CGFloat hhh  = CGRectGetMaxY(self.contentLB.frame) + 15;
     if (hhh < 70) {
         hhh = 70;
@@ -92,10 +111,10 @@
     model.cellHeight = hhh;
     if (model.contents.length == 0) {
         model.cellHeight = 75;
+        self.contentLB.hidden = YES;
+    }else {
+        self.contentLB.hidden = NO;
     }
-    
-   
-    
     if (model.is_pay) {
         [self.listBt setTitle:[NSString stringWithFormat:@"￥%0.2f元旁听",model.sit_price] forState:UIControlStateNormal];
     }else {

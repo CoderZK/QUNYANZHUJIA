@@ -274,7 +274,7 @@
         QYZJHomeThreeCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeThreeCell" forIndexPath:indexPath];
         cell.imgV.image = [UIImage imageNamed:@"question"];
         if (self.type == 1) {
-         cell.imgV.image = [UIImage imageNamed:@"appointment"];
+          cell.imgV.image = [UIImage imageNamed:@"appointment"];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
        return cell;
@@ -285,6 +285,7 @@
         }else {
             QYZJHomeFiveCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeFiveCell" forIndexPath:indexPath];
             cell.headBt.userInteractionEnabled = NO;
+            cell.moneyTtype = self.type;
             cell.model = self.dataArray[indexPath.row-1];
             return cell;
         }
@@ -300,7 +301,7 @@
     if (indexPath.section == 1) {
         
         if([zkSignleTool shareTool].role == 1) {
-            [SVProgressHUD showErrorWithStatus:@"您已经是服务方,不能购买其他服务方商品"];
+            [SVProgressHUD showErrorWithStatus:@"您已经是服务方,不能提问和预约"];
             return ;
         }
         

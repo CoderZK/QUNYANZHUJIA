@@ -41,7 +41,7 @@
     [self.headBt sd_setBackgroundImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.q_head_img]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"963"]];
     self.titleLB.text = model.q_nick_name;
     self.contentLB.text = model.title;
-    self.numberLB.text = [NSString stringWithFormat:@"%ld人旁听",model.sit_on_num];
+    self.numberLB.text = [NSString stringWithFormat:@"%ld人旁听",(long)model.sit_on_num];
     
     if (model.is_pay) {
           [self.syBt setTitle:[NSString stringWithFormat:@"￥%0.2f元旁听",model.sit_price] forState:UIControlStateNormal];

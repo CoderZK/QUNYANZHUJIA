@@ -47,6 +47,20 @@
     
 }
 
+- (void)setIsShowSv:(BOOL)isShowSv {
+    _isShowSv = isShowSv;
+    QYZJSeNeiView * v = [self viewWithTag:102];
+    v.isSelect = isShowSv;
+    
+    
+}
+
+- (void)setLeftBtSelect:(BOOL)leftBtSelect {
+    _leftBtSelect = leftBtSelect;
+    QYZJSeNeiView * v = [self viewWithTag:100];
+    v.isSelect = leftBtSelect;
+}
+
 - (void)setIsCanChange:(BOOL)isCanChange {
     _isCanChange = isCanChange;
 }

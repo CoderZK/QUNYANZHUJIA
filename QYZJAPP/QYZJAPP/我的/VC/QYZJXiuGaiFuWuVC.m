@@ -149,6 +149,9 @@
             self.cityStr = model.city_name_server;
             self.aearStr = model.area_name_server;
             
+            self.quSwitch.on = model.is_question;
+            self.yuyueSwitch.on = model.is_appoint;
+            
             self.addressTF.text = [NSString stringWithFormat:@"%@%@%@",self.proStr,self.cityStr,self.aearStr];
             
             
@@ -219,8 +222,7 @@
 
         if ([[NSString stringWithFormat:@"%@",responseObject[@"key"]] integerValue] == 1) {
             QYZJUserModel * model = [QYZJUserModel mj_objectWithKeyValues:responseObject[@"result"]];
-            self.quSwitch.on = model.is_question;
-            self.yuyueSwitch.on = model.is_appoint;
+            
             
             
         }else {

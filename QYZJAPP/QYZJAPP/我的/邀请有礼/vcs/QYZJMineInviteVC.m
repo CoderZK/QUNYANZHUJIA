@@ -71,7 +71,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else {
         
-        [self shareWithSetPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Sina)] withUrl:[NSString stringWithFormat:@"http://mobile.qunyanzhujia.com/invite?code=%@",self.invitation_code] shareModel:nil withContentStr:@"欢饮注册使用群燕筑家"];
+        [self shareWithSetPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Sina)] withUrl:[NSString stringWithFormat:@"http://mobile.qunyanzhujia.com/invite?code=%@",self.invitation_code] shareModel:nil withContentStr:@"欢饮注册使用群燕筑家" andTitle:@""];
     }
     
 }

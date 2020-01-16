@@ -228,7 +228,9 @@
                               
                               QYZJTongYongModel * mm = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
                               QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
-                             
+                              vc.isBaoBlcok = ^{
+                                  [SVProgressHUD showSuccessWithStatus:@"抢单成功,请在一个小时内进行反馈"];
+                              };
                               vc.model = mm;
                               vc.type = 1;
                               vc.ID = model.ID;

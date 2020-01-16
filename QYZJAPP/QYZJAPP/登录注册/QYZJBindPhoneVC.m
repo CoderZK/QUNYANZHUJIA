@@ -26,6 +26,8 @@
 /** 注释 */
 @property(nonatomic,assign)NSInteger number;
 @property (weak, nonatomic) IBOutlet UISwitch *switchOn;
+@property (weak, nonatomic) IBOutlet UIImageView *imgV2;
+@property (weak, nonatomic) IBOutlet UIView *lineV2;
 
 @end
 
@@ -34,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.lineV.hidden =  self.imgV1.hidden = self.inviteCeodeTF.hidden = YES;
+    self.lineV.hidden =  self.imgV1.hidden = self.inviteCeodeTF.hidden = self.lineV2.hidden = self.passWordTF.hidden = self.imgV2.hidden =YES;
     self.hCons.constant = 200;
     self.myCons.constant = 20;
     self.swicthBt.selected = self.switchOn.on =YES;
@@ -54,17 +56,17 @@
         button.selected = !button.selected;
         if (button.selected) {
             
-            self.lineV.hidden = self.imgV1.hidden = self.inviteCeodeTF.hidden = YES;
-            self.hCons.constant = 200;
+            self.lineV.hidden = self.imgV1.hidden = self.inviteCeodeTF.hidden = self.lineV2.hidden = self.passWordTF.hidden = self.imgV2.hidden =YES;
+            self.hCons.constant = 150;
             self.myCons.constant = 20;
             self.yesOrNoLB.text = @"是";
             
            
         }else {
             
-            self.lineV.hidden = self.imgV1.hidden = self.inviteCeodeTF.hidden = NO;
+            self.lineV.hidden = self.imgV1.hidden = self.inviteCeodeTF.hidden = self.lineV2.hidden = self.passWordTF.hidden = self.imgV2.hidden =NO;
             self.hCons.constant = 250;
-            self.myCons.constant = 70;
+            self.myCons.constant = 120;
             self.yesOrNoLB.text = @"否";
             
         }
@@ -142,7 +144,7 @@
         return;
     }
     
-    if (self.passWordTF.text.length == 0) {
+    if (self.passWordTF.text.length == 0 && !self.switchOn.isOn) {
         [SVProgressHUD showErrorWithStatus:@"请输入密码"];
         return;
     }

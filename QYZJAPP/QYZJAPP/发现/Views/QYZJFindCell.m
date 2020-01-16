@@ -250,13 +250,13 @@
     }
     
     self.timeLB.text = model.timeNow;
-    [self.zanBt setTitle:[NSString stringWithFormat:@"%ld",model.goodsNum] forState:UIControlStateNormal];
+    [self.zanBt setTitle:[NSString stringWithFormat:@"%ld",(long)model.goodsNum] forState:UIControlStateNormal];
     if (model.isGood) {
         [self.zanBt setImage:[UIImage imageNamed:@"17"] forState:UIControlStateNormal];
     }else {
         [self.zanBt setImage:[UIImage imageNamed:@"2"] forState:UIControlStateNormal];
     }
-    [self.pingLunBt setTitle:[NSString stringWithFormat:@"%ld",model.commentNum] forState:UIControlStateNormal];
+    [self.pingLunBt setTitle:[NSString stringWithFormat:@"%ld",(long)model.commentNum] forState:UIControlStateNormal];
     if (model.isCollect) {
         [self.collectBt setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateNormal];
     }else {
@@ -373,8 +373,14 @@
             UIImageView * imgV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
             imgV.layer.cornerRadius = 5;
             imgV.clipsToBounds = YES;
-            [imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:goodArr[i].pic]] placeholderImage:[UIImage imageNamed:@"789"]];
-            [googBt addSubview:imgV];
+            if (goodArr[i].pic.length > 0) {
+                [imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:[[goodArr[i].pic componentsSeparatedByString:@","] firstObject]]] placeholderImage:[UIImage imageNamed:@"789"]];
+                           [googBt addSubview:imgV];
+            }else {
+                [imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:goodArr[i].pic]] placeholderImage:[UIImage imageNamed:@"789"]];
+                           [googBt addSubview:imgV];
+            }
+           
             
             UILabel * titleLB = [[UILabel alloc] initWithFrame:CGRectMake(70 , 10,  ScreenW - 20 -80, 20)];
             titleLB.font = kFont(13);

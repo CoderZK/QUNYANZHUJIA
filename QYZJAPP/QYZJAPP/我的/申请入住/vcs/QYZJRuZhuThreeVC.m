@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *pangTingMoneyTF;
 @property (weak, nonatomic) IBOutlet UIButton *confirmBt;
 @property(nonatomic,assign)NSInteger type;
+@property (weak, nonatomic) IBOutlet UIView *whiteV;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewCons;
 @end
 
 @implementation QYZJRuZhuThreeVC
@@ -25,6 +27,12 @@
     self.confirmBt.layer.cornerRadius = 5;
     self.confirmBt.clipsToBounds = YES;
     self.type = -1;
+    
+    if (self.isTwoApprove) {
+        self.viewCons.constant = 50;
+        self.whiteV.clipsToBounds = YES;
+    }
+    
 }
 
 
@@ -33,9 +41,19 @@
           zkPickView *picker = [[zkPickView alloc]initWithFrame:[UIScreen mainScreen].bounds];
               picker.delegate = self ;
               picker.arrayType = titleArray;
-              picker.array = @[@"教练",@"裁判"].mutableCopy;
-              picker.selectLb.text = @"";
-              [picker show];
+        if (self.isTwoApprove) {
+            if (self.isCocach) {
+                picker.array = @[@"裁判"].mutableCopy;
+            }
+            if (self.isReferee) {
+                picker.array = @[@"教练"].mutableCopy;
+            }
+        }else {
+           picker.array = @[@"教练",@"裁判"].mutableCopy;
+        }
+        picker.selectLb.text = @"";
+        [picker show];
+        
     }else if (sender.tag == 101) {
         [SVProgressHUD showSuccessWithStatus:@"用户向您提问时需要支付的费用"];
     }else if (sender.tag == 102) {
@@ -48,20 +66,23 @@
             [SVProgressHUD showErrorWithStatus:@"请选择身份"];
             return;
         }
-        if (self.questMoneyTF.text.length == 0 || [self.questMoneyTF.text floatValue] <=0) {
-            [SVProgressHUD showInfoWithStatus:@"请输入大于0的提问价格"];
-            return;
+        if (!self.isTwoApprove) {
+            if (self.questMoneyTF.text.length == 0 || [self.questMoneyTF.text floatValue] <=0) {
+                [SVProgressHUD showInfoWithStatus:@"请输入大于0的提问价格"];
+                return;
+            }
+            if (self.yuYueMoneyTF.text.length == 0 || [self.yuYueMoneyTF.text floatValue] <=0) {
+                [SVProgressHUD showErrorWithStatus:@"请输入大于0的预约价格"];
+               
+                return;
+            }
+            if (self.pangTingMoneyTF.text.length == 0 || [self.yuYueMoneyTF.text floatValue] <=0) {
+                [SVProgressHUD showErrorWithStatus:@"请输入大于0的旁听价格"];
+               
+                return;
+            }
         }
-        if (self.yuYueMoneyTF.text.length == 0 || [self.yuYueMoneyTF.text floatValue] <=0) {
-            [SVProgressHUD showErrorWithStatus:@"请输入大于0的预约价格"];
-           
-            return;
-        }
-        if (self.pangTingMoneyTF.text.length == 0 || [self.yuYueMoneyTF.text floatValue] <=0) {
-            [SVProgressHUD showErrorWithStatus:@"请输入大于0的旁听价格"];
-           
-            return;
-        }
+        
         
         [self ruZHu];
         
@@ -77,6 +98,13 @@
     [SVProgressHUD show];
     
     self.dataDict[@"type"] = @(self.type);
+    if (self.isTwoApprove) {
+        if (self.isReferee) {
+            self.dataDict[@"type"] = @"0";
+        }else {
+            self.dataDict[@"type"] = @"1";
+        }
+    }
     self.dataDict[@"question_price"] = self.questMoneyTF.text;
     self.dataDict[@"appoint_price"] = self.yuYueMoneyTF.text;
     self.dataDict[@"sit_price"] = self.pangTingMoneyTF.text;

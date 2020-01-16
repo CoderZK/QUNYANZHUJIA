@@ -13,7 +13,7 @@
 
 static const void *urlKey = &urlKey;
 
-- (void)shareWithSetPreDefinePlatforms:(NSArray *)platforms withUrl:(NSString *)url shareModel:(NSString *)imgStr withContentStr:(NSString *)contentStr{
+- (void)shareWithSetPreDefinePlatforms:(NSArray *)platforms withUrl:(NSString *)url shareModel:(NSString *)imgStr withContentStr:(NSString *)contentStr andTitle:(NSString * )titleStr{
     
 
     
@@ -26,7 +26,12 @@ static const void *urlKey = &urlKey;
                   if (!image) {
                       image = [UIImage imageNamed:@"1024"];
                   }
-               [self shareWebPageToPlatformType:platformType withTitle:@"群燕筑家" andContent:contentStr thumImage:image];
+               if (titleStr.length == 0) {
+                   [self shareWebPageToPlatformType:platformType withTitle:@"群燕筑家" andContent:contentStr thumImage:image];
+               }else {
+                   [self shareWebPageToPlatformType:platformType withTitle:titleStr andContent:contentStr thumImage:image];
+               }
+              
                
            }];
     

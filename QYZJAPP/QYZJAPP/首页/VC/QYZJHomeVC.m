@@ -53,6 +53,8 @@
        [self getUserBaseicInfoHome];
     }
     [self getBanList];
+    
+    [self getConfig];
 
     
 }
@@ -151,6 +153,27 @@
     }];
     
 }
+
+- (void)getConfig {
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_iosURL] parameters:@{} success:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            //1为展示购物
+            if ([[NSString stringWithFormat:@"%@",responseObject[@"result"][@"value"]] isEqualToString:@"1"]) {
+                [zkSignleTool shareTool].isUp = YES;
+            }else {
+                [zkSignleTool shareTool].isUp = NO;
+            }
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        
+        
+    }];
+    
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 4;
@@ -277,7 +300,7 @@
     if (indexPath.section == 2) {
         
         if([zkSignleTool shareTool].role == 1) {
-            [SVProgressHUD showErrorWithStatus:@"您已经是服务方,不能购买其他服务方商品"];
+            [SVProgressHUD showErrorWithStatus:@"您已经是服务方,不能预约订单"];
             return ;
         }
         

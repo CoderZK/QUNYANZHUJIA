@@ -371,7 +371,12 @@
                 if (isOk == 0) {
                     [SVProgressHUD showSuccessWithStatus:@"反馈无效成功"];
                 }else {
-                    [SVProgressHUD showSuccessWithStatus:@"反馈成功!反馈金额已从余额中支付!"];
+                    
+                    if ([[NSString stringWithFormat:@"%@",responseObject[@"result"][@"is_vip"]] integerValue] == 1) {
+                         [SVProgressHUD showSuccessWithStatus:@"反馈有效成功!反馈金额已从余额中支付!"];
+                    }else {
+                         [SVProgressHUD showSuccessWithStatus:@"反馈有效成功!"];
+                    }
                 }
             }else {
                 if (isOk == 0) {
@@ -599,14 +604,7 @@
             cell.titelLB.hidden = cell.leftLB.hidden = NO;
             
             cell.leftCons.constant = 100;
-//            Weak(weakSelf);
-//            cell.listBtActionBlock = ^(UIButton * _Nonnull button) {
-//                [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:self.dataModel.demand_voice] isLocality:NO];
-//                [button setTitle:@"正在播放" forState:UIControlStateNormal];
-//                [PublicFuntionTool shareTool].findPlayBlock = ^{
-//                    [button setTitle:@"点击播放" forState:UIControlStateNormal];
-//                };
-//            };
+
             cell.model = self.dataModel;
             cell.lineV.hidden = NO;
             return cell;

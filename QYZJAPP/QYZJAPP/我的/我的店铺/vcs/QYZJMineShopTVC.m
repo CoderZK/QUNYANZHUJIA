@@ -56,6 +56,10 @@
         }else if (index == 1) {
             //分享
             
+        
+             [weakSelf shareWithSetPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Sina)] withUrl:[NSString stringWithFormat:@"http://mobile.qunyanzhujia.com/daRenDetail?id=%@&other=true",[zkSignleTool shareTool].session_uid] shareModel:weakSelf.dataModel.pic withContentStr:self.dataModel.name andTitle:@"快来光顾我的小店吧"];
+            
+            
         }else if (index == 2) {
             //头像
             

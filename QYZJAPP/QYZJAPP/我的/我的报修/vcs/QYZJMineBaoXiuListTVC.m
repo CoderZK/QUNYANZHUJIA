@@ -91,6 +91,7 @@
     model.stageName = model.turnoverStageName;
     model.des = model.con;
     cell.type = 1;
+    cell.editBt.hidden = YES;
     cell.is_service = !model.isService;
     cell.model = model;
     cell.delegate = self;
@@ -117,7 +118,7 @@
         modelNei.evaluateLevel = model.evaluateLevel;
         modelNei.evaluateCon = model.evaluateCon;
         modelNei.ID = model.ID;
-        modelNei.selfId = model.selfId;
+        modelNei.selfId = model.ID;
         modelNei.constructionStageId = model.ID;
         modelNei.turnoverListId = model.turnoverListId;
         modelNei.turnoverTitle = model.turnoverTitle;

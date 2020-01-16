@@ -750,7 +750,10 @@
     
 }
 
-
+/*配置*/
++(NSString *)app_iosURL{
+     return [NSString stringWithFormat:@"%@%@",URLOne,@"app_ios.do"];
+}
 
 
 //图片地址

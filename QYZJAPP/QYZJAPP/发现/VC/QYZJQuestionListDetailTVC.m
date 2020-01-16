@@ -126,9 +126,6 @@
 }
 
 - (void)sitAnswerActionWithModel:(QYZJFindModel *)model {
-    
-    
-
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"answer_id"] = model.ID;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_sitAnswerURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {

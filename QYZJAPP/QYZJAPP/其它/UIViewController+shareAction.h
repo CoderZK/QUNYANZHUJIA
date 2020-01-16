@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class zkHomelModel;
 @interface UIViewController (shareAction)
-- (void)shareWithSetPreDefinePlatforms:(NSArray *)platforms withUrl:(NSString *)url shareModel:(NSString *)imgStr withContentStr:(NSString *)contentStr;
+- (void)shareWithSetPreDefinePlatforms:(NSArray *)platforms withUrl:(NSString *)url shareModel:(NSString *)imgStr withContentStr:(NSString *)contentStr andTitle:(NSString * )titleStr;
 
 
 

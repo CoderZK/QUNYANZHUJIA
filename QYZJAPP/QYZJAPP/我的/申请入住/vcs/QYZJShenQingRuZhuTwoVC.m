@@ -111,6 +111,25 @@
 - (void)CardCheck {
     
     
+//    NSMutableDictionary * dict = @{}.mutableCopy;
+//                   dict[@"role_id"] = self.typeID;
+//                   dict[@"user_name"] = self.nameTF.text;
+//                   dict[@"id_card"] = self.numberTF.text;
+//                   dict[@"company_name"] = self.cNameTF.text;
+//                   dict[@"license_code"] = self.codeTF.text;
+//    dict[@"pro_id"] = self.proId;
+//    dict[@"city_id"] = self.cityId;
+//    dict[@"area_id"] = self.aearId;
+//    dict[@"label"] = self.labelsID;
+//               
+//    QYZJRuZhuThreeVC * vc =[[QYZJRuZhuThreeVC alloc] init];
+//    vc.dataDict = dict;
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
+//    
+//    return;
+    
+    
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"cardNo"] = self.numberTF.text;
     dict[@"name"] = self.nameTF.text;

@@ -226,6 +226,7 @@
     dict[@"search_type"] = @(self.type);
     dict[@"search_word"] = self.search_word;
     dict[@"roleId"] = @"0";
+    dict[@"search_end_type"] = @"1";
     if (self.search_word.length > 0) {
         dict[@"type"] = @"3";
     }

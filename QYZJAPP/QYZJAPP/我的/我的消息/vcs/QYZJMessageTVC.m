@@ -97,9 +97,9 @@
 
     
     QYZJMessageCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJMessageCell" forIndexPath:indexPath];
-    cell.imgV.image = [UIImage imageNamed:[NSString stringWithFormat:@"xx_%ld",indexPath.row + 1]];
+    cell.imgV.image = [UIImage imageNamed:[NSString stringWithFormat:@"xx_%d",indexPath.row + 1]];
     cell.titleLB.text = self.titleArr[indexPath.row];
-    cell.numberStr = [NSString stringWithFormat:@"%ld",indexPath.row * 3];
+    cell.numberStr = [NSString stringWithFormat:@"%d",indexPath.row * 3];
     
     if (self.dataDict != nil) {
         if (indexPath.row == 0) {

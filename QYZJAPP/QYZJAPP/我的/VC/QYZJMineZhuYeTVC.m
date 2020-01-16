@@ -56,7 +56,7 @@
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }else if (index == 1) {
             //分享
-             [weakSelf shareWithSetPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Sina)] withUrl:[NSString stringWithFormat:@"http://mobile.qunyanzhujia.com/daRenDetail?id=%@&other=true",weakSelf.ID] shareModel:self.dataModel.head_img withContentStr:self.dataModel.nick_name];
+             [weakSelf shareWithSetPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Sina)] withUrl:[NSString stringWithFormat:@"http://mobile.qunyanzhujia.com/daRenDetail?id=%@&other=true",weakSelf.ID] shareModel:weakSelf.dataModel.head_img withContentStr:self.dataModel.nick_name andTitle:@""];
         }else if (index == 2) {
             //头像
             
@@ -100,12 +100,22 @@
     if (vv != nil) {
         [vv removeFromSuperview];
     }
-    KKKKFootView * view =  [[PublicFuntionTool shareTool] createFootvTwoWithLeftTitle:[NSString stringWithFormat:@"%0.2f元预约",self.dataModel.appoint_price] letfTietelColor:OrangeColor rightTitle:[NSString stringWithFormat:@"%0.2f元提问",self.dataModel.question_price] rightColor:WhiteColor];
+    KKKKFootView * view = nil;
+    
+    if (isUPUPUP){
+      view =   [[PublicFuntionTool shareTool] createFootvTwoWithLeftTitle:[NSString stringWithFormat:@"预约",self.dataModel.appoint_price] letfTietelColor:OrangeColor rightTitle:[NSString stringWithFormat:@"提问",self.dataModel.question_price] rightColor:WhiteColor];
+    }else {
+     view =    [[PublicFuntionTool shareTool] createFootvTwoWithLeftTitle:[NSString stringWithFormat:@"￥%0.2f元预约",self.dataModel.appoint_price] letfTietelColor:OrangeColor rightTitle:[NSString stringWithFormat:@"￥%0.2f元提问",self.dataModel.question_price] rightColor:WhiteColor];
+    }
      view.mj_y = ScreenH  - 60;
-    view.tag = 666;
+     view.tag = 666;
      if (sstatusHeight>20){
          view.mj_y = ScreenH  - 60 - 34;
      }
+    
+    view.leftCanOp = self.dataModel.is_appoint;
+    view.rightCanOp = self.dataModel.is_question;
+    
     Weak(weakSelf);
       view.footViewClickBlock = ^(UIButton *button) {
                NSLog(@"\n\n%@",@"完成");
@@ -306,36 +316,56 @@
         QYZJZhuYeYuYinCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJZhuYeYuYinCell" forIndexPath:indexPath];
         cell.model = self.dataArray[indexPath.row];
         cell.syBt.tag = indexPath.row;
+        if (isUPUPUP) {
+            
+        }else {
+            if (self.dataArray[indexPath.row].isPlaying) {
+                [cell.syBt setTitle:@"正在播放..." forState:UIControlStateNormal];
+            }else {
+                [cell.syBt setTitle:[NSString stringWithFormat:@"￥%0.2f元旁听",self.dataModel.sit_price] forState:UIControlStateNormal];
+            }
+            
+        }
         [cell.syBt addTarget:self action:@selector(listAction:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
 }
 
+
+
+
 - (void)listAction:(UIButton *)button {
     
-    for (QYZJFindModel * model  in self.dataArray) {
-        if (model == self.dataArray[button.tag]) {
-            model.isPlaying = YES;
-        }else {
-            model.isPlaying = NO;
+    
+    if (isUPUPUP) {
+        
+        QYZJFindModel * model = self.dataArray[button.tag];
+        
+        for (QYZJFindModel * modelNei  in self.dataArray) {
+            if (modelNei == model) {
+                modelNei.isPlaying = YES;
+            }else {
+                modelNei.isPlaying = NO;
+            }
         }
+        [self.tableView reloadData];
+        [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:model.media_url] isLocality:NO];
+           Weak(weakSelf);
+           [PublicFuntionTool shareTool].findPlayBlock = ^{
+               model.isPlaying = NO;
+               [weakSelf.tableView reloadData];
+           };
+        
+    }else {
+        [self sitAnswerActionWithModel:self.dataArray[button.tag]];
     }
-    [self.tableView reloadData];
-      
-       [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:self.dataArray[button.tag].media_url] isLocality:NO];
-       Weak(weakSelf);
-       [PublicFuntionTool shareTool].findPlayBlock = ^{
-           weakSelf.dataArray[button.tag].isPlaying = NO;
-           [weakSelf.tableView reloadData];
-       };
-    
-    
+
 }
 
 - (void)sitAnswerActionWithModel:(QYZJFindModel *)model {
 
     NSMutableDictionary * dict = @{}.mutableCopy;
-    dict[@"answer_id"] = model.ID;
+    dict[@"answer_id"] = model.answer_id;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_sitAnswerURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
@@ -344,15 +374,37 @@
             
             QYZJTongYongModel * mm = [[QYZJTongYongModel alloc] init];
             mm = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
-            mm.ID = model.ID;
-            if (model.is_pay) {
-                QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
-                vc.type = 4;
-                vc.model = mm;
-                vc.ID = model.ID;
             
-                [self.navigationController pushViewController:vc animated:YES];
+            if (model.is_pay) {
+                mm.ID = model.ID;
+                if (model.is_pay) {
+                    QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
+                    vc.type = 4;
+                    vc.model = mm;
+                    vc.ID = model.ID;
+                
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+            }else {
+                
+                for (QYZJFindModel * modelNei  in self.dataArray) {
+                       if (modelNei == model) {
+                           modelNei.isPlaying = YES;
+                       }else {
+                           modelNei.isPlaying = NO;
+                       }
+                   }
+                   [self.tableView reloadData];
+                      [[PublicFuntionTool shareTool] palyMp3WithNSSting:[QYZJURLDefineTool getVideoURLWithStr:model.media_url] isLocality:NO];
+                      Weak(weakSelf);
+                      [PublicFuntionTool shareTool].findPlayBlock = ^{
+                          model.isPlaying = NO;
+                          [weakSelf.tableView reloadData];
+                      };
+                
+                
             }
+ 
             
             
             

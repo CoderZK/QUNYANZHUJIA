@@ -95,7 +95,7 @@
     
     UILabel * leftLB = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 80, 20)];
     leftLB.font = kFont(15);
-    leftLB.textColor = CharacterBlackColor;
+    leftLB.textColor = CharacterBlack112;
     leftLB.text = @"需求描述";
     [self.whiteThreeV addSubview:leftLB];
     
@@ -423,9 +423,10 @@
             vc.numer = 1;
             vc.type = 4+self.type;
             [self.navigationController pushViewController:vc animated:YES];
-            
-            
-        }else {
+        }else if ([responseObject[@"key"] intValue]== 0) {
+            [SVProgressHUD showSuccessWithStatus:@"提问预约成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
         }
         

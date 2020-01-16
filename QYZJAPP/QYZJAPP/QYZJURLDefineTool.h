@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 //正式
-//#define URLOne @"http://mobile.qunyanzhujia.com:8098/qyzj/"
+#define URLOne @"http://mobile.qunyanzhujia.com:8098/qyzj/"
 //测试
-#define URLOne @"http://192.168.1.112:8086/qyzj/"
+//#define URLOne @"http://192.168.1.112:8086/qyzj/"
 
 
 ////图片地址
@@ -154,6 +154,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*现有单子交付*/
 +(NSString *)user_createTurnoverURL;
+
+/*配置*/
++(NSString *)app_iosURL;
 
 
 #pragma mark ----- 消息部分 -------

@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UILabel *nameLB,*typeLB,*contentLB;
 @property(nonatomic,strong)UIButton *listBt,*replyBt;
 @property(nonatomic,strong)QYZJFindModel *model;
+@property(nonatomic,assign)NSInteger type , is_answer; // 1 问答详情使用  answer 为1时,提问者
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -110,6 +110,8 @@
         self.gouTongBt.hidden = self.moneyLB.hidden = YES;
     }
     
+    self.moneyLB.hidden = isUPUPUP;
+    
     if (model.appeal_status.length == 0) {
         self.appealLB.hidden = YES;
     }else {
