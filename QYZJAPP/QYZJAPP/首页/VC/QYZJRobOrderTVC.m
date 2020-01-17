@@ -163,6 +163,9 @@
         cell.qianDanBt.hidden = YES;
         cell.statusLB.hidden = NO;
         if (self.type == 0) {
+            if (isUPUPUP) {
+                cell.moneyLB.hidden = YES;
+            }
             cell.qianDanBt.hidden = NO;
             cell.statusLB.hidden = YES;
         }else {

@@ -11,6 +11,8 @@
 @interface QYZJXiaoYanZiVC ()
 @property (weak, nonatomic) IBOutlet UIImageView *logoBt;
 @property (weak, nonatomic) IBOutlet UILabel *contentLB;
+@property (weak, nonatomic) IBOutlet UIImageView *imgV;
+@property (weak, nonatomic) IBOutlet UILabel *nameLB;
 
 @end
 
@@ -25,7 +27,7 @@
     self.logoBt.layer.cornerRadius = 35;
     self.logoBt.clipsToBounds = YES;
     
-    
+    self.nameLB.hidden = self.imgV.hidden = YES;
     
     
     

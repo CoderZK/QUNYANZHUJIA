@@ -688,9 +688,11 @@
                 };
             }else {
                 QYZJTongYongModel * mm = [QYZJTongYongModel mj_objectWithKeyValues:responseObject[@"result"]];
+                mm.ID = model.ID;
                 QYZJZhiFuVC * vc =[[QYZJZhiFuVC alloc] init];
                 vc.hidesBottomBarWhenPushed = YES;
-                vc.type = 4;
+                vc.type = 3;
+                vc.ID = model.demandId;
                 vc.model = mm;
                 [self.navigationController pushViewController:vc animated:YES];
             }

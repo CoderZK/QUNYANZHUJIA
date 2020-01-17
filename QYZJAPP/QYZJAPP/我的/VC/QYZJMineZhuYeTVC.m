@@ -243,6 +243,7 @@
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"page"] = @(self.page);
     dict[@"pageSize"] = @(10);
+    dict[@"other_user_id"] = self.ID;
     dict[@"token"] = [zkSignleTool shareTool].session_token;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_mediaListURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [self.tableView.mj_header endRefreshing];
