@@ -85,9 +85,9 @@
                    if (isUPUPUP) {
                        
                        
-                       self.titleArr = @[@[],@[@"我的收藏",@"我的交付",@"我的报修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入驻"],@[@"记账",@"3D设计",@"装修直播"],@[@"联系客服",@"关于我们"]];
+                       self.titleArr = @[@[],@[@"我的收藏",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布"],@[@"我的钱包",@"申请入驻"],@[],@[@"联系客服",@"关于我们"]];
                                          
-                     self.imgTitleArr = @[@[],@[@"wd_1",@"wd_2",@"wd_3",@"wd_4",@"wd_5",@"wd_6",@"wd_7",@"wd_8",@"wd_9"],@[@"zc_1",@"zc_2"],@[@"zxgj_1",@"zxgj_2",@"zxgj_3"],@[@"lxkf_1",@"lxkf_2"]];
+                     self.imgTitleArr = @[@[],@[@"wd_1",@"wd_4",@"wd_5",@"wd_6",@"wd_7"],@[@"zc_1",@"zc_2"],@[],@[@"lxkf_1",@"lxkf_2"]];
                        
                    }
                    
@@ -99,9 +99,10 @@
                    
                    if (isUPUPUP) {
                        
-                       self.titleArr = @[@[],@[@"我的收藏",@"我的交付",@"我的报修",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布",@"我的案例",@"预约裁判"],@[@"我的钱包",@"申请入驻",@"服务方修改"],@[@"记账",@"3D设计",@"装修直播"],@[@"联系客服",@"关于我们"]];
+                        self.titleArr = @[@[],@[@"我的收藏",@"我的订单",@"我的预约",@"邀请有礼",@"我的发布"],@[@"我的钱包",@"申请入驻"],@[],@[@"联系客服",@"关于我们"]];
+                                                               
+                        self.imgTitleArr = @[@[],@[@"wd_1",@"wd_4",@"wd_5",@"wd_6",@"wd_7"],@[@"zc_1",@"zc_2"],@[],@[@"lxkf_1",@"lxkf_2"]];
                        
-                       self.imgTitleArr = @[@[],@[@"wd_1",@"wd_2",@"wd_3",@"wd_4",@"wd_5",@"wd_6",@"wd_7",@"wd_8",@"wd_9"],@[@"zc_1",@"zc_2",@"zc_6"],@[@"zxgj_1",@"zxgj_2",@"zxgj_3"],@[@"lxkf_1",@"lxkf_2"]];
                        
                    }
                    
@@ -201,13 +202,18 @@
     if (indexPath.section == 0) {
         return 80;
     }else {
+        if (isUPUPUP && indexPath.section == 3) {
+            return 0;
+        }
         return 100;
     }
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    
+    if (isUPUPUP && section == 3) {
+        return 0.01;
+    }
     return 10;
 }
 
@@ -215,6 +221,9 @@
     if (section == 0) {
         return 0.01;
     }else {
+        if (isUPUPUP && section == 3) {
+            return 0.01;
+        }
         return 50;
         
     }
@@ -298,154 +307,298 @@
     
     NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
     NSInteger dd = index + indexPath.row * 4;
-    if (indexPath.section == 1) {
+    
+    if (isUPUPUP) {
         
-        if (dd == 0) {
-            QYZJMineCollectTVC * vc =[[QYZJMineCollectTVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (dd == 1) {
-            QYZJHomePayTVC * vc =[[QYZJHomePayTVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (dd == 2) {
-            QYZJMineBaoXiuListTVC * vc =[[QYZJMineBaoXiuListTVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (dd == 3) {
-            QYZJMineOrderTVC * vc =[[QYZJMineOrderTVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (dd == 4) {
-            QYZJMineYuYueDanTVC * vc =[[QYZJMineYuYueDanTVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (dd == 5) {
-            QYZJMineInviteVC * vc =[[QYZJMineInviteVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            vc.invitation_code = self.dataModel.invitation_code;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (dd == 6) {
-            QYZJMinePublicTVC * vc =[[QYZJMinePublicTVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (dd == 7) {
-            QYZJMineAnLiTVC * vc =[[QYZJMineAnLiTVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            vc.user_id = [zkSignleTool shareTool].session_uid;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (dd == 8) {
-            QYZJMineCaiPanTVC * vc =[[QYZJMineCaiPanTVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-    }else if (indexPath.section == 2) {
-        if (dd == 0) {
-            QYZJMineWalletTVC * vc =[[QYZJMineWalletTVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (dd == 1) {
-            
-            
-            
-            if([zkSignleTool shareTool].role == 0) {
-                QYZJShengQingRuZhuVC* vc =[[QYZJShengQingRuZhuVC alloc] init];
-                vc.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:vc animated:YES];
-            }else {
+        if (indexPath.section == 1) {
                 
-                if (self.dataModel.is_referee && self.dataModel.is_coach) {
-                    [SVProgressHUD showErrorWithStatus:@"您已经是教练和裁判身份"];
-                    return;
+                if (dd == 0) {
+                    QYZJMineCollectTVC * vc =[[QYZJMineCollectTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else if (dd == 1) {
+                    QYZJMineOrderTVC * vc =[[QYZJMineOrderTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else if (dd == 2) {
+                    QYZJMineYuYueDanTVC * vc =[[QYZJMineYuYueDanTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else if (dd == 3) {
+                    QYZJMineInviteVC * vc =[[QYZJMineInviteVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    vc.invitation_code = self.dataModel.invitation_code;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else if (dd == 4) {
+                    QYZJMinePublicTVC * vc =[[QYZJMinePublicTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
                 }
-                QYZJRuZhuThreeVC * vc =[[QYZJRuZhuThreeVC alloc] init];
-                vc.hidesBottomBarWhenPushed = YES;
-                vc.isCocach = self.dataModel.is_coach;
-                vc.isReferee = self.dataModel.is_referee;
-                vc.isTwoApprove = YES;
-                vc.dataDict = @{}.mutableCopy;
-                [self.navigationController pushViewController:vc animated:YES];
-                
-                
-                
+            }else if (indexPath.section == 2) {
+                if (dd == 0) {
+                    QYZJMineWalletTVC * vc =[[QYZJMineWalletTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else if (dd == 1) {
+                    if([zkSignleTool shareTool].role == 0) {
+                        QYZJShengQingRuZhuVC* vc =[[QYZJShengQingRuZhuVC alloc] init];
+                        vc.hidesBottomBarWhenPushed = YES;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }else {
+                        
+                        if (self.dataModel.is_referee && self.dataModel.is_coach) {
+                            [SVProgressHUD showErrorWithStatus:@"您已经是教练和裁判身份"];
+                            return;
+                        }
+                        QYZJRuZhuThreeVC * vc =[[QYZJRuZhuThreeVC alloc] init];
+                        vc.hidesBottomBarWhenPushed = YES;
+                        vc.isCocach = self.dataModel.is_coach;
+                        vc.isReferee = self.dataModel.is_referee;
+                        vc.isTwoApprove = YES;
+                        vc.dataDict = @{}.mutableCopy;
+                        [self.navigationController pushViewController:vc animated:YES];
+                        
+                        
+                        
+                    }
+                    
+                    
+                }else {
+                    
+                    if ([zkSignleTool shareTool].role == 0) {
+                        if (dd == 2) {
+                            QYZJMineYuHuiQuanTVC * vc =[[QYZJMineYuHuiQuanTVC alloc] init];
+                            vc.hidesBottomBarWhenPushed = YES;
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }else if (dd == 3) {
+                            QYZJZengZhiFuWuTVC * vc =[[QYZJZengZhiFuWuTVC alloc] init];
+                            vc.hidesBottomBarWhenPushed = YES;
+                            vc.nameStr = self.dataModel.nick_name;
+                            vc.headImg = self.dataModel.head_img;
+                            vc.is_bond = self.dataModel.is_bond;
+                            vc.bond_money = self.dataModel.bond_money;
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }
+                    }else {
+                        if (dd == 2) {
+                            QYZJXiuGaiFuWuVC * vc =[[QYZJXiuGaiFuWuVC alloc] init];
+                           vc.hidesBottomBarWhenPushed = YES;
+        //                   vc.proId = self.dataModel.pro_id;
+        //                   vc.cityId = self.dataModel.city_id;
+        //                   vc.aearId = self.dataModel.area_id;
+        //                   vc.proStr = self.dataModel.pro_name;
+        //                   vc.cityStr = self.dataModel.city_name;
+        //                   vc.aearStr = self.dataModel.area_name;
+                           [self.navigationController pushViewController:vc animated:YES];
+                        }else if (dd == 3) {
+                            QYZJMineYuHuiQuanTVC * vc =[[QYZJMineYuHuiQuanTVC alloc] init];
+                            vc.hidesBottomBarWhenPushed = YES;
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }else if (dd == 4) {
+                            QYZJZengZhiFuWuTVC * vc =[[QYZJZengZhiFuWuTVC alloc] init];
+                            vc.hidesBottomBarWhenPushed = YES;
+                            vc.nameStr = self.dataModel.nick_name;
+                            vc.headImg = self.dataModel.head_img;
+                            vc.is_bond = self.dataModel.is_bond;
+                            vc.bond_money = self.dataModel.bond_money;
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }else if (dd == 5){
+                            QYZJMineLabelsTVC * vc =[[QYZJMineLabelsTVC alloc] init];
+                            vc.hidesBottomBarWhenPushed = YES;
+                            vc.labelsStr = self.dataModel.label;
+                            vc.labelsId = self.dataModel.label_ids;
+                            vc.role_id = self.dataModel.role_id;
+                            [self.navigationController pushViewController:vc animated:YES];
+                            
+                        }
+                       
+                    }
+                }
+
+            }else if (indexPath.section == 3) {
+                if (dd == 3) {
+                    QYZJMineZhuangXiuDaiVC * vc =[[QYZJMineZhuangXiuDaiVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else if (dd == 2){
+                    QYZJMineZhiBoTVC * vc =[[QYZJMineZhiBoTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else {
+                    [SVProgressHUD showErrorWithStatus:@"暂未开放"];
+                }
+            }else if (indexPath.section == 4){
+                if (dd == 0) {
+                    QYZJMineServicePeopleVC * vc =[[QYZJMineServicePeopleVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else if (dd == 1) {
+                    QYZJAboutUsVC * vc =[[QYZJAboutUsVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
             }
-            
-            
-        }else {
-            
-            if ([zkSignleTool shareTool].role == 0) {
-                if (dd == 2) {
-                    QYZJMineYuHuiQuanTVC * vc =[[QYZJMineYuHuiQuanTVC alloc] init];
+        
+        
+    }else {
+       
+        
+        if (indexPath.section == 1) {
+                
+                if (dd == 0) {
+                    QYZJMineCollectTVC * vc =[[QYZJMineCollectTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else if (dd == 1) {
+                    QYZJHomePayTVC * vc =[[QYZJHomePayTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else if (dd == 2) {
+                    QYZJMineBaoXiuListTVC * vc =[[QYZJMineBaoXiuListTVC alloc] init];
                     vc.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:vc animated:YES];
                 }else if (dd == 3) {
-                    QYZJZengZhiFuWuTVC * vc =[[QYZJZengZhiFuWuTVC alloc] init];
-                    vc.hidesBottomBarWhenPushed = YES;
-                    vc.nameStr = self.dataModel.nick_name;
-                    vc.headImg = self.dataModel.head_img;
-                    vc.is_bond = self.dataModel.is_bond;
-                    vc.bond_money = self.dataModel.bond_money;
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-            }else {
-                if (dd == 2) {
-                    QYZJXiuGaiFuWuVC * vc =[[QYZJXiuGaiFuWuVC alloc] init];
-                   vc.hidesBottomBarWhenPushed = YES;
-//                   vc.proId = self.dataModel.pro_id;
-//                   vc.cityId = self.dataModel.city_id;
-//                   vc.aearId = self.dataModel.area_id;
-//                   vc.proStr = self.dataModel.pro_name;
-//                   vc.cityStr = self.dataModel.city_name;
-//                   vc.aearStr = self.dataModel.area_name;
-                   [self.navigationController pushViewController:vc animated:YES];
-                }else if (dd == 3) {
-                    QYZJMineYuHuiQuanTVC * vc =[[QYZJMineYuHuiQuanTVC alloc] init];
+                    QYZJMineOrderTVC * vc =[[QYZJMineOrderTVC alloc] init];
                     vc.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:vc animated:YES];
                 }else if (dd == 4) {
-                    QYZJZengZhiFuWuTVC * vc =[[QYZJZengZhiFuWuTVC alloc] init];
+                    QYZJMineYuYueDanTVC * vc =[[QYZJMineYuYueDanTVC alloc] init];
                     vc.hidesBottomBarWhenPushed = YES;
-                    vc.nameStr = self.dataModel.nick_name;
-                    vc.headImg = self.dataModel.head_img;
-                    vc.is_bond = self.dataModel.is_bond;
-                    vc.bond_money = self.dataModel.bond_money;
                     [self.navigationController pushViewController:vc animated:YES];
-                }else if (dd == 5){
-                    QYZJMineLabelsTVC * vc =[[QYZJMineLabelsTVC alloc] init];
+                }else if (dd == 5) {
+                    QYZJMineInviteVC * vc =[[QYZJMineInviteVC alloc] init];
                     vc.hidesBottomBarWhenPushed = YES;
-                    vc.labelsStr = self.dataModel.label;
-                    vc.labelsId = self.dataModel.label_ids;
-                    vc.role_id = self.dataModel.role_id;
+                    vc.invitation_code = self.dataModel.invitation_code;
                     [self.navigationController pushViewController:vc animated:YES];
-                    
+                }else if (dd == 6) {
+                    QYZJMinePublicTVC * vc =[[QYZJMinePublicTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else if (dd == 7) {
+                    QYZJMineAnLiTVC * vc =[[QYZJMineAnLiTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    vc.user_id = [zkSignleTool shareTool].session_uid;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else if (dd == 8) {
+                    QYZJMineCaiPanTVC * vc =[[QYZJMineCaiPanTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
                 }
-               
-            }
-        }
+            }else if (indexPath.section == 2) {
+                if (dd == 0) {
+                    QYZJMineWalletTVC * vc =[[QYZJMineWalletTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else if (dd == 1) {
+                    
+                    
+                    
+                    if([zkSignleTool shareTool].role == 0) {
+                        QYZJShengQingRuZhuVC* vc =[[QYZJShengQingRuZhuVC alloc] init];
+                        vc.hidesBottomBarWhenPushed = YES;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }else {
+                        
+                        if (self.dataModel.is_referee && self.dataModel.is_coach) {
+                            [SVProgressHUD showErrorWithStatus:@"您已经是教练和裁判身份"];
+                            return;
+                        }
+                        QYZJRuZhuThreeVC * vc =[[QYZJRuZhuThreeVC alloc] init];
+                        vc.hidesBottomBarWhenPushed = YES;
+                        vc.isCocach = self.dataModel.is_coach;
+                        vc.isReferee = self.dataModel.is_referee;
+                        vc.isTwoApprove = YES;
+                        vc.dataDict = @{}.mutableCopy;
+                        [self.navigationController pushViewController:vc animated:YES];
+                        
+                        
+                        
+                    }
+                    
+                    
+                }else {
+                    
+                    if ([zkSignleTool shareTool].role == 0) {
+                        if (dd == 2) {
+                            QYZJMineYuHuiQuanTVC * vc =[[QYZJMineYuHuiQuanTVC alloc] init];
+                            vc.hidesBottomBarWhenPushed = YES;
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }else if (dd == 3) {
+                            QYZJZengZhiFuWuTVC * vc =[[QYZJZengZhiFuWuTVC alloc] init];
+                            vc.hidesBottomBarWhenPushed = YES;
+                            vc.nameStr = self.dataModel.nick_name;
+                            vc.headImg = self.dataModel.head_img;
+                            vc.is_bond = self.dataModel.is_bond;
+                            vc.bond_money = self.dataModel.bond_money;
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }
+                    }else {
+                        if (dd == 2) {
+                            QYZJXiuGaiFuWuVC * vc =[[QYZJXiuGaiFuWuVC alloc] init];
+                           vc.hidesBottomBarWhenPushed = YES;
+        //                   vc.proId = self.dataModel.pro_id;
+        //                   vc.cityId = self.dataModel.city_id;
+        //                   vc.aearId = self.dataModel.area_id;
+        //                   vc.proStr = self.dataModel.pro_name;
+        //                   vc.cityStr = self.dataModel.city_name;
+        //                   vc.aearStr = self.dataModel.area_name;
+                           [self.navigationController pushViewController:vc animated:YES];
+                        }else if (dd == 3) {
+                            QYZJMineYuHuiQuanTVC * vc =[[QYZJMineYuHuiQuanTVC alloc] init];
+                            vc.hidesBottomBarWhenPushed = YES;
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }else if (dd == 4) {
+                            QYZJZengZhiFuWuTVC * vc =[[QYZJZengZhiFuWuTVC alloc] init];
+                            vc.hidesBottomBarWhenPushed = YES;
+                            vc.nameStr = self.dataModel.nick_name;
+                            vc.headImg = self.dataModel.head_img;
+                            vc.is_bond = self.dataModel.is_bond;
+                            vc.bond_money = self.dataModel.bond_money;
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }else if (dd == 5){
+                            QYZJMineLabelsTVC * vc =[[QYZJMineLabelsTVC alloc] init];
+                            vc.hidesBottomBarWhenPushed = YES;
+                            vc.labelsStr = self.dataModel.label;
+                            vc.labelsId = self.dataModel.label_ids;
+                            vc.role_id = self.dataModel.role_id;
+                            [self.navigationController pushViewController:vc animated:YES];
+                            
+                        }
+                       
+                    }
+                }
 
-    }else if (indexPath.section == 3) {
-        if (dd == 3) {
-            QYZJMineZhuangXiuDaiVC * vc =[[QYZJMineZhuangXiuDaiVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (dd == 2){
-            QYZJMineZhiBoTVC * vc =[[QYZJMineZhiBoTVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else {
-            [SVProgressHUD showErrorWithStatus:@"暂未开放"];
-        }
-    }else if (indexPath.section == 4){
-        if (dd == 0) {
-            QYZJMineServicePeopleVC * vc =[[QYZJMineServicePeopleVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (dd == 1) {
-            QYZJAboutUsVC * vc =[[QYZJAboutUsVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
+            }else if (indexPath.section == 3) {
+                if (dd == 3) {
+                    QYZJMineZhuangXiuDaiVC * vc =[[QYZJMineZhuangXiuDaiVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else if (dd == 2){
+                    QYZJMineZhiBoTVC * vc =[[QYZJMineZhiBoTVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else {
+                    [SVProgressHUD showErrorWithStatus:@"暂未开放"];
+                }
+            }else if (indexPath.section == 4){
+                if (dd == 0) {
+                    QYZJMineServicePeopleVC * vc =[[QYZJMineServicePeopleVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else if (dd == 1) {
+                    QYZJAboutUsVC * vc =[[QYZJAboutUsVC alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+            }
+        
+        
     }
+    
+    
+    
+    
+    
     
     
     

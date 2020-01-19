@@ -163,6 +163,9 @@
             return 0;
         }
     }
+    if (indexPath.section == 1 && indexPath.row == 3 && isUPUPUP) {
+        return 0;
+    }
     return 50;
 }
 

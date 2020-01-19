@@ -35,10 +35,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSArray *imgArr=@[@"ico_shouye_2-1",@"ico+faxian",@"ico_tuijian",@"ico_wde"];
-    NSArray *selectedImgArr=@[@"ico_shouye",@"ico_faxian_2",@"ico_tuijian_2",@"ico_wde_2"];
-    NSArray *barTitleArr=@[@"首页",@"发现",@"推荐赚钱",@"我的"];
-    NSArray *className=@[@"QYZJHomeVC",@"QYZJFindVC",@"QYZJRecommendVC",@"QYZJMineVC"];
+    NSArray *imgArr=@[@"ico_shouye_2-1",@"ico+faxian",@"ico_wde"];
+    NSArray *selectedImgArr=@[@"ico_shouye",@"ico_faxian_2",@"ico_wde_2"];
+    NSArray *barTitleArr=@[@"首页",@"发现",@"我的"];
+    NSArray *className=@[@"QYZJHomeVC",@"QYZJFindVC",@"QYZJMineVC"];
     NSMutableArray *arr=[[NSMutableArray alloc] init];
     
     
@@ -60,7 +60,6 @@
         
 
         NSString *str1=[imgArr objectAtIndex:i];
-        
         NSMutableDictionary *attrs = [NSMutableDictionary dictionary];
         attrs[NSFontAttributeName] = [UIFont systemFontOfSize:12];
         attrs[NSForegroundColorAttributeName] = CharacterColor80;

@@ -24,6 +24,9 @@
 #import "QYZJYuYueFangDanTVC.h"
 #import "QYZJXiaoYanZiVC.h"
 #import "QYZJSearchListTVC.h"
+#import "TabBarController.h"
+#import "QYZJRecommendVC.h"
+#import "QYZJMineOrderTVC.h"
 @interface QYZJHomeVC ()<zkLunBoCellDelegate,QYZJHomeOneCellDelegate,QYZJHomeTwoCellDelegate,UITabBarControllerDelegate>
 @property(nonatomic,strong)NSString *passwordStr;
 @property(nonatomic,strong)NSMutableArray<zkBannerModel *> *bannerDataArr;
@@ -161,7 +164,44 @@
             //1为展示购物
             if ([[NSString stringWithFormat:@"%@",responseObject[@"result"][@"value"]] isEqualToString:@"1"]) {
                 [zkSignleTool shareTool].isUp = YES;
+
             }else {
+                
+                TabBarController * tvc = (TabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+                NSMutableArray * arr = tvc.viewControllers.mutableCopy;
+                
+                if ( arr.count == 3) {
+                    
+                    QYZJRecommendVC * rvc = [[QYZJRecommendVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
+                    
+                    NSString *str1= @"ico_tuijian";
+                    NSMutableDictionary *attrs = [NSMutableDictionary dictionary];
+                    attrs[NSFontAttributeName] = [UIFont systemFontOfSize:12];
+                    attrs[NSForegroundColorAttributeName] = CharacterColor80;
+                    NSMutableDictionary *selectedAttrs = [NSMutableDictionary dictionary];
+                    selectedAttrs[NSFontAttributeName] = attrs[NSFontAttributeName];
+                    selectedAttrs[NSForegroundColorAttributeName] = TabberGreen;
+                    UITabBarItem *item = [UITabBarItem appearance];
+                    [item setTitleTextAttributes:attrs forState:UIControlStateNormal];
+                    [item setTitleTextAttributes:selectedAttrs forState:UIControlStateSelected];
+                      //让图片保持原来的模样，未选中的图片
+                    rvc.tabBarItem.image=[[UIImage imageNamed:str1] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                          
+                          //图片选中时的图片
+                    NSString *str2=@"ico_tuijian_2";
+                    rvc.tabBarItem.selectedImage=[[UIImage imageNamed:str2] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                    
+                    NSString *str3=@"推荐赚钱";
+                    rvc.tabBarItem.title=str3;
+                    
+                    BaseNavigationController * navc = [[BaseNavigationController alloc] initWithRootViewController:rvc];
+                    
+                    [arr insertObject:navc atIndex:2];
+                    tvc.viewControllers = arr;
+                    
+                    
+                }
+                
                 [zkSignleTool shareTool].isUp = NO;
             }
         }
@@ -304,6 +344,10 @@
             return ;
         }
         
+        if (isUPUPUP) {
+            return;
+        }
+        
         QYZJYuYueFangDanTVC * vc =[[QYZJYuYueFangDanTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
@@ -397,6 +441,14 @@
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (index == 2){
+        if (isUPUPUP) {
+            
+            QYZJMineOrderTVC * vc =[[QYZJMineOrderTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            return;
+            
+        }
         
         QYZJHomePayTVC * vc =[[QYZJHomePayTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;

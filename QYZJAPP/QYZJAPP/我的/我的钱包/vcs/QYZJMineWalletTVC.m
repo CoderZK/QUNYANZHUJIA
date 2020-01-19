@@ -117,6 +117,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (isUPUPUP && indexPath.row == 3) {
+        return 0;
+    }
     return 50;
 }
 
@@ -136,6 +139,7 @@
     }else if (indexPath.row == 5) {
         cell.rightLB.text = [NSString stringWithFormat:@"%0.2f元",self.dataModel.yq_money];
     }
+    cell.clipsToBounds = YES;
     return cell;
     
 }

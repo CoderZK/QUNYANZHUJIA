@@ -202,7 +202,7 @@
     [SVProgressHUD show];
     NSMutableDictionary * dict = @{}.mutableCopy;
     dict[@"pay_money"]= @(money);
-    dict[@"type"] = @(4);
+    dict[@"type"] = @(3);
     dict[@"id"] = ID;
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_wechatPayURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         

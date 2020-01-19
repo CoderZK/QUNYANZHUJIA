@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,7 +23,7 @@
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="JCc-VZ-Hgc"/>
                     </constraints>
-                    <string key="text">       群燕筑家,  是北京久久安居网科技有限公司清理打造, 为毛坯房装修与市场、精装修改造的用户提供问答教练、第三方裁判，为各个创客提供海量客流、信用交付工具、联合办公和材料展厅及样板间等的共享场所。用技术优化行业配置，用规则简化用户决策，用模板式进化生态发展。</string>
+                    <string key="text">       群燕筑家,  是北京久久安居网科技有限公司倾力打造, 为毛坯房装修与市场、精装修改造的用户提供问答教练、第三方裁判，为各个创客提供海量客流、信用交付工具、联合办公和材料展厅及样板间等的共享场所。用技术优化行业配置，用规则简化用户决策，用模板式进化生态发展。</string>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
