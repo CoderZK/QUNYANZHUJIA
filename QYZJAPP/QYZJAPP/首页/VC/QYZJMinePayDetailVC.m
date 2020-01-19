@@ -235,9 +235,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (isUPUPUP && !(section>=2 && section <=6)) {
-        return 0;
-    }
+    
     if (section == 0) {
         return 1;
     }else if (section == 1) {
@@ -301,11 +299,6 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    
-    if (isUPUPUP && !(section>=2 && section <=6)) {
-        return 0.01;
-    }
-    
     if (section == 0) {
         return 10;
     }else if (section == 1) {
@@ -344,11 +337,6 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
-    if (isUPUPUP && !(section>=2 && section <=6)) {
-        return 0.01;
-    }
-    
     if (section == 0) {
         return 0.01;
     }else if (section==1) {
