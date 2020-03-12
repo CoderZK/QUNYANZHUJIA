@@ -410,7 +410,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)user_backBondURL;
 /**获取城市是否开通*/
 +(NSString *)app_getCityURL;
-
+/**是否短息通知*/
++(NSString *)app_openCloseSmURL;
 
 /** 更新*/
 +(NSString *)getIosConfigURL;

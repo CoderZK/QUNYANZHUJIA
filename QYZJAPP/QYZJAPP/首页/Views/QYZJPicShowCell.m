@@ -49,7 +49,7 @@
 //           UIButton * deleteBt = [[UIButton alloc] initWithFrame:CGRectMake((ScreenW - 60) /3 - 25 , 0, 25, 25)];
 //           [deleteBt setImage:[UIImage imageNamed:@"48"] forState:UIControlStateNormal];
 //           deleteBt.tag = 200+i;
-//           deleteBt.backgroundColor = RGB(245, 245, 245);
+//           deleteBt.backgroundColor = [UIColor groupTableViewBackgroundColor];
 //           [deleteBt setBackgroundImage:picsArr[i] forState:UIControlStateNormal];
 //           [deleteBt addTarget:self action:@selector(hitAction:) forControlEvents:UIControlEventTouchUpInside];
 //           [anNiuBt addSubview:deleteBt];
@@ -61,7 +61,7 @@
 //           anNiuBt.layer.cornerRadius = 3;
 //           anNiuBt.tag = 100+picsArr.count;
 //           anNiuBt.clipsToBounds = YES;
-//           anNiuBt.backgroundColor = RGB(245, 245, 245);
+//           anNiuBt.backgroundColor = [UIColor groupTableViewBackgroundColor];
 //           [anNiuBt setImage:[UIImage imageNamed:@"11"] forState:UIControlStateNormal];
 //           [anNiuBt addTarget:self action:@selector(hitAction:) forControlEvents:UIControlEventTouchUpInside];
 //           [self.scrollview addSubview:anNiuBt];

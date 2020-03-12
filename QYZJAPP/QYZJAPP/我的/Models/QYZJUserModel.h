@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL is_bond;
 @property(nonatomic,assign)BOOL is_question;
 @property(nonatomic,assign)BOOL is_appoint;
-
+@property(nonatomic,assign)BOOL isOpenSm;
 
 
 @property(nonatomic,assign)NSInteger follow_num;

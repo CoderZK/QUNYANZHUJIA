@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -58,9 +58,13 @@
                             <constraint firstAttribute="height" constant="50" id="xSl-gO-Nca"/>
                         </constraints>
                     </imageView>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QFZ-1b-uFr">
+                        <rect key="frame" x="501" y="81" width="51" height="31"/>
+                    </switch>
                 </subviews>
                 <constraints>
                     <constraint firstItem="yc2-fr-ePE" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="2PC-T5-c7b"/>
+                    <constraint firstItem="QFZ-1b-uFr" firstAttribute="centerY" secondItem="yc2-fr-ePE" secondAttribute="centerY" id="2YZ-GA-Jpg"/>
                     <constraint firstItem="uHg-QV-Ka4" firstAttribute="leading" secondItem="YfV-fp-7ID" secondAttribute="trailing" constant="10" id="FNE-kg-kmi"/>
                     <constraint firstItem="vM0-eK-sCX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ML0-wz-KHt"/>
                     <constraint firstItem="uHg-QV-Ka4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="NfL-ll-rYe"/>
@@ -70,6 +74,7 @@
                     <constraint firstItem="dxd-kj-3ql" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ezi-oM-ipL"/>
                     <constraint firstItem="yc2-fr-ePE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="h52-6w-nbJ"/>
                     <constraint firstItem="uHg-QV-Ka4" firstAttribute="leading" secondItem="dxd-kj-3ql" secondAttribute="trailing" constant="10" id="pfc-cz-v4j"/>
+                    <constraint firstAttribute="trailing" secondItem="QFZ-1b-uFr" secondAttribute="trailing" constant="15" id="uP4-tu-Qkh"/>
                     <constraint firstItem="YfV-fp-7ID" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="zhH-Ej-f3K"/>
                 </constraints>
             </tableViewCellContentView>
@@ -80,6 +85,7 @@
                 <outlet property="leftLB" destination="yc2-fr-ePE" id="5Sg-T6-fD5"/>
                 <outlet property="lineV" destination="vM0-eK-sCX" id="Z7S-63-Svs"/>
                 <outlet property="rightLB" destination="YfV-fp-7ID" id="K4K-jB-i64"/>
+                <outlet property="switchBt" destination="QFZ-1b-uFr" id="E3O-cW-os0"/>
             </connections>
             <point key="canvasLocation" x="13.768115942028986" y="84.040178571428569"/>
         </tableViewCell>

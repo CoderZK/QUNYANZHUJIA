@@ -30,7 +30,7 @@
     self.navigationItem.title = @"设置";
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJSettingCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.leftArr = @[@[@"我的头像",@"昵称",@"省市区",@"详细地址"],@[@"换绑手机",@"解绑微信",@"登录密码修改",@"支付密码修改"],@[@"清除缓存"]];
+    self.leftArr = @[@[@"我的头像",@"昵称",@"省市区",@"详细地址"],@[@"换绑手机",@"解绑微信",@"登录密码修改",@"支付密码修改"],@[@"接收短信通知"],@[@"隐私政策"],@[@"清除缓存"]];
     self.cityArray = @[].mutableCopy;
     [self getCityData];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 70, 0);
@@ -42,8 +42,8 @@
 
 - (void)getImgDict {
     [zkRequestTool getUpdateImgeModelWithCompleteModel:^(QYZJTongYongModel *model) {
-           self.imgModel = model;
-       }];
+        self.imgModel = model;
+    }];
 }
 
 - (void)setFootV {
@@ -113,7 +113,7 @@
             [zkSignleTool shareTool].session_token = nil;
             [zkSignleTool shareTool].isLogin = NO;
             [self.navigationController popToRootViewControllerAnimated:NO];
-             TabBarController * tab = (TabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            TabBarController * tab = (TabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
             tab.selectedIndex = 0;
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
@@ -144,7 +144,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return self.leftArr.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -180,7 +180,7 @@
     if (view == nil ) {
         view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 10)];
         view.clipsToBounds = YES;
-        view.backgroundColor = RGB(245, 245, 245);
+        view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     }
     return view;
 }
@@ -193,6 +193,8 @@
     cell.leftLB.text  = self.leftArr[indexPath.section][indexPath.row];
     cell.lineV.hidden = NO;
     cell.rightLB.text = @"";
+    cell.switchBt.hidden = YES;
+    cell.jianTouImgV.hidden = NO;
     if (indexPath.row + 1 == [self.leftArr[indexPath.section] count]) {
         cell.lineV.hidden = YES;
     }
@@ -205,7 +207,7 @@
             cell.rightLB.text = self.dataModel.nick_name;
             
         }else if (indexPath.row == 2) {
-           cell.rightLB.text = [NSString stringWithFormat:@"%@%@%@",self.dataModel.pro_name,self.dataModel.city_name,self.dataModel.area_name];
+            cell.rightLB.text = [NSString stringWithFormat:@"%@%@%@",self.dataModel.pro_name,self.dataModel.city_name,self.dataModel.area_name];
         }else {
             cell.rightLB.text = self.dataModel.address;
         }
@@ -220,15 +222,21 @@
         }else {
             
         }
+    }else if (indexPath.section == 2) {
+        cell.jianTouImgV.hidden = YES;
+        cell.switchBt.hidden = NO;
+        cell.switchBt.on =  [zkSignleTool shareTool].isOpenSm;
+    }else if (indexPath.section == 3) {
+        cell.rightLB.text = @"";
     }else {
         cell.rightLB.text = [NSString stringWithFormat:@"%0.1fM",[cacheClear folderSizeAtPath]];
     }
     
-//    if (((indexPath.row == 3 ||indexPath.row == 1) && indexPath.section == 0) || indexPath.section == 2) {
-//        cell.jianTouImgV.hidden = YES;
-//    }else {
-//       cell.jianTouImgV.hidden = NO;
-//    }
+    //    if (((indexPath.row == 3 ||indexPath.row == 1) && indexPath.section == 0) || indexPath.section == 2) {
+    //        cell.jianTouImgV.hidden = YES;
+    //    }else {
+    //       cell.jianTouImgV.hidden = NO;
+    //    }
     cell.clipsToBounds = YES;
     return cell;
     
@@ -238,7 +246,7 @@
     
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-             [self addPict];
+            [self addPict];
         }else if (indexPath.row == 1) {
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"请输入昵称" preferredStyle:UIAlertControllerStyleAlert];
             
@@ -248,10 +256,10 @@
                 
                 UITextField*userNameTF = alertController.textFields.firstObject;
                 
-                 self.dataModel.nick_name = userNameTF.text;
-                 [self.tableView reloadData];
+                self.dataModel.nick_name = userNameTF.text;
+                [self.tableView reloadData];
                 [self editUserInfoWithDict:@{@"nick_name":userNameTF.text}];
-
+                
                 
             }]];
             
@@ -287,8 +295,8 @@
                 
                 UITextField*userNameTF = alertController.textFields.firstObject;
                 
-                  self.dataModel.address = userNameTF.text;
-                  [self editUserInfoWithDict:@{@"address":userNameTF.text}];
+                self.dataModel.address = userNameTF.text;
+                [self editUserInfoWithDict:@{@"address":userNameTF.text}];
                 [self.tableView reloadData];
                 
             }]];
@@ -328,6 +336,21 @@
             }
             
         }
+    }else if (indexPath.section == 2) {
+        
+        [self openOrCloseSm];
+        
+    }else if (indexPath.section == 3) {
+        if(@available(iOS 10.0, *)) {
+
+        //ios10及以后
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://mobile.qunyanzhujia.com/agreement.html"] options:@{} completionHandler:nil];
+                }else{
+        //ios10之前
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://mobile.qunyanzhujia.com/agreement.html"]];
+            }
+
+        
     }else {
         [cacheClear cleanCache:^{
             
@@ -338,7 +361,40 @@
     
 }
 
-
+//短信通知
+- (void)openOrCloseSm {
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    if ([zkSignleTool shareTool].isOpenSm) {
+        dict[@"is_open_sm"]= @"0";
+    }else {
+        dict[@"is_open_sm"]= @"1";
+    }
+    
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool app_openCloseSmURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            [zkSignleTool shareTool].isOpenSm = ![zkSignleTool shareTool].isOpenSm;
+            [self.tableView reloadData];
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+    
+    
+    
+}
 
 
 - (void)noBindWebChat {
@@ -378,23 +434,23 @@
         
         if ([self isCanUsePhotos]) {
             
-//            TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
-//                       imagePickerVc.showSelectBtn = NO;
-//                       imagePickerVc.allowCrop = YES;
-//                       imagePickerVc.needCircleCrop = NO;
-//                       imagePickerVc.allowPickingImage = NO;
-//                       imagePickerVc.cropRectPortrait = CGRectMake(0, (ScreenH - ScreenW)/2, ScreenW, ScreenW);
-//                       imagePickerVc.cropRectLandscape = CGRectMake(0, (ScreenW - ScreenH)/2, ScreenH, ScreenH);
-//                       imagePickerVc.circleCropRadius = ScreenW/2;
-//                       [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
-//                           if (photos.count > 0) {
-//                               [self updateImgWithImg:photos[0]];
-//                           }
-//                       }];
-//                       [self presentViewController:imagePickerVc animated:YES completion:nil];
+            //            TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
+            //                       imagePickerVc.showSelectBtn = NO;
+            //                       imagePickerVc.allowCrop = YES;
+            //                       imagePickerVc.needCircleCrop = NO;
+            //                       imagePickerVc.allowPickingImage = NO;
+            //                       imagePickerVc.cropRectPortrait = CGRectMake(0, (ScreenH - ScreenW)/2, ScreenW, ScreenW);
+            //                       imagePickerVc.cropRectLandscape = CGRectMake(0, (ScreenW - ScreenH)/2, ScreenH, ScreenH);
+            //                       imagePickerVc.circleCropRadius = ScreenW/2;
+            //                       [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+            //                           if (photos.count > 0) {
+            //                               [self updateImgWithImg:photos[0]];
+            //                           }
+            //                       }];
+            //                       [self presentViewController:imagePickerVc animated:YES completion:nil];
             
             [self showMXPhotoCameraAndNeedToEdit:YES completion:^(UIImage *image, UIImage *originImage, CGRect cutRect) {
-
+                
                 self.img = image;
                 [self updateImgWithImg:image];
                 [self.tableView reloadData];
@@ -445,12 +501,12 @@
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingVideo:(UIImage *)coverImage sourceAssets:(PHAsset *)asset {
     
     NSLog(@"%@",asset);
-
-//    [PublicFuntionTool getImageFromPHAsset:asset Complete:^(NSData * _Nonnull data, NSString * _Nonnull str) {
-//
-//
-//
-//    }];
+    
+    //    [PublicFuntionTool getImageFromPHAsset:asset Complete:^(NSData * _Nonnull data, NSString * _Nonnull str) {
+    //
+    //
+    //
+    //    }];
 }
 
 #pragma mark ------- 点击筛选 ------
@@ -492,7 +548,7 @@
     
     [SVProgressHUD show];
     [zkRequestTool networkingPOST:[QYZJURLDefineTool user_editInfoURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-
+        
         [SVProgressHUD dismiss];
         if ([responseObject[@"key"] intValue]== 1) {
             
@@ -504,7 +560,7 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-   
+        
         
     }];
     

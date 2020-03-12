@@ -24,7 +24,7 @@
         
         
         
-        self.backgroundColor = RGB(245, 245, 245);
+        self.backgroundColor = [UIColor groupTableViewBackgroundColor];
         UIView * whiteV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 50)];
         UIButton * buttonOne = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, ScreenW - 20, 50)];
         [buttonOne setImage:[UIImage imageNamed:@"18"] forState:UIControlStateNormal];

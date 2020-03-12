@@ -13,6 +13,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.switchBt.hidden = YES;
+    self.switchBt.userInteractionEnabled = NO;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

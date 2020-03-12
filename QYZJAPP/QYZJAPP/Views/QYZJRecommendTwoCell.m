@@ -32,7 +32,7 @@
         [self.luyinBt setBackgroundImage:[UIImage imageNamed:@"luyin"] forState:UIControlStateNormal];
         [self addSubview:self.luyinBt];
         
-        self.listBt = [[UIButton alloc] initWithFrame:CGRectMake(155, 90, ScreenW - 155 - 20, 25)];
+        self.listBt = [[UIButton alloc] initWithFrame:CGRectMake(155, 90, ScreenW - 155 - 40, 25)];
         [self.listBt setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
         [self.listBt setImage:[UIImage imageNamed:@"sy"] forState:UIControlStateNormal];
         [self.listBt setTitle:@"32" forState:UIControlStateNormal];
@@ -43,6 +43,12 @@
         [self.listBt setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 15)];
         [self.listBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 25, 0,  0)];
         [self addSubview:self.listBt];
+        
+        self.closeBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 35, 90, 20, 20)];
+        [self.closeBt setImage:[UIImage imageNamed:@"4"] forState:UIControlStateNormal];
+        [self addSubview:self.closeBt];
+        self.closeBt.hidden = YES;
+
         
         UIView * backV =[[UIView alloc] init];
         backV.backgroundColor = [UIColor clearColor];
@@ -61,6 +67,7 @@
     }
     return self;
 }
+
 
 
 - (void)awakeFromNib {

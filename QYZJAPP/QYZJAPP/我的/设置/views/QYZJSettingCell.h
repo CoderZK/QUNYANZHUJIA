@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIImageView *headImg;
 @property (weak, nonatomic) IBOutlet UIView *lineV;
 @property (weak, nonatomic) IBOutlet UIImageView *jianTouImgV;
+@property (weak, nonatomic) IBOutlet UISwitch *switchBt;
 
 @end
 

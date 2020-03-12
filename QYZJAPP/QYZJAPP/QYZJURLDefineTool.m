@@ -750,6 +750,14 @@
     
 }
 
+/**是否短息通知*/
++(NSString *)app_openCloseSmURL{
+    
+    return [NSString stringWithFormat:@"%@%@",URLOne,@"app_openCloseSm.do"];
+    
+}
+
+
 /*配置*/
 +(NSString *)app_iosURL{
      return [NSString stringWithFormat:@"%@%@",URLOne,@"app_ios.do"];

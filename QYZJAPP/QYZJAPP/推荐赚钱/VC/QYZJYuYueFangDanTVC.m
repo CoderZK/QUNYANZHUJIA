@@ -196,7 +196,7 @@
     if (view == nil ) {
         view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 10)];
         view.clipsToBounds = YES;
-        view.backgroundColor = RGB(245, 245, 245);
+        view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     }
     return view;
 }
@@ -209,10 +209,11 @@
         cell.TV.delegate = self;
         [cell.luyinBt addTarget:self action:@selector(luYinAction:) forControlEvents:UIControlEventTouchUpInside];
         [cell.listBt addTarget:self action:@selector(listAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.closeBt addTarget:self action:@selector(closeAcc:) forControlEvents:UIControlEventTouchUpInside];
         if (self.audioStr.length == 0) {
-            cell.listBt.hidden = YES;
+            cell.listBt.hidden = cell.closeBt.hidden = YES;
         }else {
-            cell.listBt.hidden = NO;
+            cell.closeBt.hidden = cell.listBt.hidden = NO;
             [cell.listBt setTitle:@"语音描述" forState:UIControlStateNormal];
         }
         return cell;
@@ -299,8 +300,11 @@
 }
 
 
+
 - (void)luYinAction:(UIButton *)button {
 
+    [self.tableView endEditing:YES];
+    
     [[QYZJLuYinView LuYinTool] show];
                Weak(weakSelf);
                [QYZJLuYinView LuYinTool].statusBlock = ^(BOOL isStare,NSData *mediaData) {
@@ -348,6 +352,11 @@
            } failure:^(NSURLSessionDataTask *task, NSError *error) {
                NSLog(@"\n\n------%@",error);
            }];
+}
+
+-(void)closeAcc:(UIButton *)button {
+    self.audioStr = nil;
+    [self.tableView reloadData];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

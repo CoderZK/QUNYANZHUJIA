@@ -258,6 +258,8 @@
 
 - (void)luYinAction:(UIButton *)button {
 
+    [self.tableView endEditing:YES];
+    
     [[QYZJLuYinView LuYinTool] show];
               Weak(weakSelf);
               [QYZJLuYinView LuYinTool].statusBlock = ^(BOOL isStare,NSData *mediaData) {

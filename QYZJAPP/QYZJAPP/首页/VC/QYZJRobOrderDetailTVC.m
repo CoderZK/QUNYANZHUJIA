@@ -91,6 +91,10 @@
 //                [self setFootVWithStatus:10];
 //            }
             
+            if (self.type== 0) {
+                self.dataModel.contract_url = self.dataModel.budget_url = self.dataModel.drawing_url = self.dataModel.change_table_url = @"";
+                self.dataModel.sign_money = 0;
+            }
             
             [self.tableView reloadData];
             
@@ -467,7 +471,7 @@
     if (view == nil ) {
         view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 10)];
         view.clipsToBounds = YES;
-        view.backgroundColor = RGB(245, 245, 245);
+        view.backgroundColor = [UIColor groupTableViewBackgroundColor]; //[UIColor groupTableViewBackgroundColor];
     }
     view.clipsToBounds = YES;
     return view;

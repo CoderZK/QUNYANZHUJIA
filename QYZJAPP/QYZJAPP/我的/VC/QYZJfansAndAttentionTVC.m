@@ -82,7 +82,7 @@
     UIView * view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"view"];
     if (view == nil) {
         view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 50)];
-        view.backgroundColor = RGB(245, 245, 245);
+        view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     }
     return view;
 }

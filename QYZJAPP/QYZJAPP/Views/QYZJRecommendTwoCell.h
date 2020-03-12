@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UILabel *leftLB;
 @property(nonatomic,strong)IQTextView *TV;
 @property(nonatomic,strong)UIView *lineV;
-@property(nonatomic,strong)UIButton *luyinBt,*listBt;
+@property(nonatomic,strong)UIButton *luyinBt,*listBt,*closeBt;
 @end
 
 NS_ASSUME_NONNULL_END

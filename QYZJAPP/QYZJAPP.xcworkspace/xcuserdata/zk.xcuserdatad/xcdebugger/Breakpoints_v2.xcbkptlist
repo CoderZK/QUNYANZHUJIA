@@ -89,8 +89,8 @@
             filePath = "QYZJAPP/&#x6211;&#x7684;/&#x6211;&#x7684;&#x63d0;&#x95ee;/vcs/QYZJMineQuestTwoTVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "578"
-            endingLineNumber = "578"
+            startingLineNumber = "579"
+            endingLineNumber = "579"
             landmarkName = "-sendAction:"
             landmarkType = "7">
          </BreakpointContent>
@@ -105,8 +105,8 @@
             filePath = "QYZJAPP/&#x6211;&#x7684;/&#x6211;&#x7684;&#x63d0;&#x95ee;/vcs/QYZJMineQuestTwoTVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "550"
-            endingLineNumber = "550"
+            startingLineNumber = "551"
+            endingLineNumber = "551"
             landmarkName = "-replyAction:"
             landmarkType = "7">
          </BreakpointContent>

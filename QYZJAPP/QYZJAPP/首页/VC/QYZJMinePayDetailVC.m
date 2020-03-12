@@ -370,7 +370,7 @@
     if (view == nil ) {
         view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 10)];
         view.clipsToBounds = YES;
-        view.backgroundColor = RGB(245, 245, 245);
+        view.backgroundColor = [UIColor groupTableViewBackgroundColor];
         UIView * whiteV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 270)];
         whiteV.backgroundColor = [UIColor whiteColor];
         whiteV.tag = 100;

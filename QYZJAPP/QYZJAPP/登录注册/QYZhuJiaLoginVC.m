@@ -87,6 +87,7 @@
                 [zkSignleTool shareTool].nick_name = userModel.nick_name;;
                 [zkSignleTool shareTool].telphone = userModel.telphone;
                 [zkSignleTool shareTool].isLogin = YES;
+                [zkSignleTool shareTool].isOpenSm = userModel.isOpenSm;
                 if (userModel.app_openid.length > 0) {
                     [zkSignleTool shareTool].isBindWebChat = YES;
                 }
@@ -276,6 +277,7 @@
             [zkSignleTool shareTool].session_uid = userModel.ID;
             [zkSignleTool shareTool].nick_name = userModel.nick_name;;
             [zkSignleTool shareTool].telphone = userModel.telphone;
+            [zkSignleTool shareTool].isOpenSm = userModel.isOpenSm;
             [zkSignleTool shareTool].isLogin = YES;
             [zkSignleTool shareTool].isBindWebChat = YES;
             [self dismissViewControllerAnimated:YES completion:nil];

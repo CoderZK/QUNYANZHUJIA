@@ -127,7 +127,7 @@
     if (view == nil ) {
         view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 10)];
         view.clipsToBounds = YES;
-        view.backgroundColor = RGB(245, 245, 245);
+        view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     }
     return view;
 }
@@ -192,6 +192,7 @@
     }else {
         QYZJRobOrderDetailTVC * vc =[[QYZJRobOrderDetailTVC alloc] initWithTableViewStyle:(UITableViewStyleGrouped)];
         vc.hidesBottomBarWhenPushed = YES;
+        vc.type = self.type;
         vc.ID = self.dataArray[indexPath.row].ID;
         [self.navigationController pushViewController:vc animated:YES];
     }

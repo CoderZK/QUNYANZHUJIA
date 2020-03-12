@@ -417,7 +417,7 @@
           }
           
       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-          [SVProgressHUD showSuccessWithStatus:@"网络异常"];
+          [SVProgressHUD showErrorWithStatus:@"网络异常"];
           if (failure)
           {
               failure(task,error);
@@ -462,7 +462,7 @@
              }
              
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-             [SVProgressHUD showSuccessWithStatus:@"网络异常"];
+             [SVProgressHUD showErrorWithStatus:@"网络异常"];
              if (failure)
              {
                  failure(task,error);
@@ -512,7 +512,7 @@
           }
           
       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-          [SVProgressHUD showSuccessWithStatus:@"网络异常"];
+          [SVProgressHUD showErrorWithStatus:@"网络异常"];
           if (failure)
           {
               failure(task,error);

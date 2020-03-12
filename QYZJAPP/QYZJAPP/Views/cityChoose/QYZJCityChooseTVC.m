@@ -473,7 +473,7 @@
     UIView * view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"view"];
     if (view == nil) {
         view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 50)];
-        view.backgroundColor = RGB(245, 245, 245);
+        view.backgroundColor = [UIColor groupTableViewBackgroundColor];
         UILabel * lb = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, ScreenW - 30, 50)];
         lb.font = kFont(15);
         [view addSubview:lb];

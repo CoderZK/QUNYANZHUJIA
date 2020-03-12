@@ -159,7 +159,7 @@
     if (view == nil ) {
         view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 10)];
         view.clipsToBounds = YES;
-        view.backgroundColor = RGB(245, 245, 245);
+        view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     }
     return view;
 }
@@ -229,6 +229,8 @@
 
 - (void)luYinAction:(UIButton *)button {
 
+    [self.tableView endEditing:YES];
+    
     QYZJRecommendTwoCell * cell = (QYZJRecommendTwoCell *)button.superview;
     NSIndexPath  * indexPath = [self.tableView indexPathForCell:cell];
 

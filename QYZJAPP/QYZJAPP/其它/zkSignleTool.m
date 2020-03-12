@@ -31,6 +31,15 @@ static zkSignleTool * tool = nil;
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"isLogin"];
 }
 
+- (void)setIsOpenSm:(BOOL)isOpenSm {
+    [[NSUserDefaults standardUserDefaults] setBool:isOpenSm forKey:@"isOpenSm"];
+       [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)isOpenSm {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"isOpenSm"];
+}
+
 - (void)setIsUp:(BOOL)isUp {
     [[NSUserDefaults standardUserDefaults] setBool:isUp forKey:@"isUp"];
     [[NSUserDefaults standardUserDefaults] synchronize];

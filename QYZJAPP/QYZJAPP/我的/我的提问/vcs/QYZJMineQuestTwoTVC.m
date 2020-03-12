@@ -151,6 +151,7 @@
     [self.closeBt addTarget:self action:@selector(yuYinAction:) forControlEvents:UIControlEventTouchUpInside];
     self.closeBt.tag = 11;
     
+    
     [self.view addSubview:self.yuYinV];
     
     
@@ -232,6 +233,7 @@
     
     self.audioStr = nil;
     
+    [self.tableView endEditing:YES];
     
     [[QYZJLuYinView LuYinTool] show];
     Weak(weakSelf);
@@ -436,7 +438,7 @@
     if (view == nil ) {
         view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, 10)];
         view.clipsToBounds = YES;
-        view.backgroundColor = RGB(245, 245, 245);
+        view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     }
     return view;
 }
