@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface QYZJHomeOneCell : UITableViewCell
 
 @property(nonatomic,assign)id<QYZJHomeOneCellDelegate>delegate;
+@property (weak, nonatomic) IBOutlet UILabel *lll;
 
 
 @end

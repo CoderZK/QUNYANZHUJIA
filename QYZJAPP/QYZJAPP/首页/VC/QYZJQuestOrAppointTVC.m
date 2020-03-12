@@ -13,7 +13,7 @@
 @property(nonatomic,strong)IQTextView * desTV;
 @property(nonatomic,strong)UIView *whiteOneV,*whiteTwoV,*whiteThreeV,*whiteFourV;
 @property(nonatomic,strong)UIImageView *videoImgV;
-@property(nonatomic,strong)UIButton *addBt,*luyinBt,*listBt,*switchBt;
+@property(nonatomic,strong)UIButton *addBt,*luyinBt,*listBt,*switchBt,*closeBt;
 @property(nonatomic,strong)UIView *headV;
 @property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)NSMutableArray *picsArr;
@@ -111,11 +111,11 @@
     [self.whiteThreeV addSubview:self.luyinBt];
     [self.luyinBt addTarget:self action:@selector(luYinAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.listBt = [[UIButton alloc] initWithFrame:CGRectMake(155, 90, ScreenW - 155 - 20, 25)];
+    self.listBt = [[UIButton alloc] initWithFrame:CGRectMake(155, 90, ScreenW - 155 - 40, 25)];
     [self.listBt setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
     [self.listBt setImage:[UIImage imageNamed:@"sy"] forState:UIControlStateNormal];
     [self.listBt setTitle:@"32" forState:UIControlStateNormal];
-     [self.listBt setTitle:@"语音描述" forState:UIControlStateNormal];
+    [self.listBt setTitle:@"语音描述" forState:UIControlStateNormal];
     self.listBt.titleLabel.font = kFont(14);
     self.listBt.hidden = YES;
     self.listBt.layer.cornerRadius = 12.5;
@@ -125,6 +125,12 @@
     [self.listBt setTitleEdgeInsets:UIEdgeInsetsMake(0, 25, 0,  0)];
     [self.listBt addTarget:self action:@selector(listAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.whiteThreeV addSubview:self.listBt];
+    
+    self.closeBt = [[UIButton alloc] initWithFrame:CGRectMake(ScreenW - 35, 90, 20, 20)];
+    [self.closeBt setImage:[UIImage imageNamed:@"4"] forState:UIControlStateNormal];
+    [self.whiteThreeV addSubview:self.closeBt];
+    self.closeBt.hidden = YES;
+    [self.closeBt addTarget:self action:@selector(closeAcc:) forControlEvents:UIControlEventTouchUpInside];
     
     UIView * backV5 =[[UIView alloc] initWithFrame:CGRectMake(0, 134.4, ScreenW, 0.6)];
     backV5.backgroundColor = lineBackColor;
@@ -290,6 +296,7 @@
                
                self.audioStr = responseObject[@"key"];
                self.listBt.hidden = NO;
+               self.closeBt.hidden = NO;
                [self.listBt setTitle:@"需求描述" forState:UIControlStateNormal];
                [self.tableView reloadData];
                
@@ -298,6 +305,10 @@
            }];
 }
 
+-(void)closeAcc:(UIButton *)button {
+    self.audioStr = nil;
+    self.closeBt.hidden = self.listBt.hidden = YES;
+}
 
 
 - (void)deleteVideo {

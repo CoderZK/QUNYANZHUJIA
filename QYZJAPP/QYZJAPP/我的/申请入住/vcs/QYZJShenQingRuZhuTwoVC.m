@@ -84,7 +84,10 @@
     if (self.labelsTF.text.length == 0) {
         [SVProgressHUD showErrorWithStatus:@"请选择擅长标签"];
     }
-    
+    if ([self.typeID isEqualToString:@"57"] && self.codeTF.text.length == 0){
+        [SVProgressHUD showErrorWithStatus:@"你选择的是公司请输入营业执照注册码"];
+        return;
+    }
     
 //    NSMutableDictionary * dict = @{}.mutableCopy;
 //    dict[@"role_id"] = self.typeID;

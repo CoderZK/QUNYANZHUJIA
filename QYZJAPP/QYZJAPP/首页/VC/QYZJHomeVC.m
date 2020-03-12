@@ -393,8 +393,9 @@
     
     NSLog(@"%d",index);
     
-    
-    
+    if(isUPUPUP){
+        return;
+    }
     zkBannerModel  * model = self.bannerDataArr[index];
     LxmWebViewController *vc = [[LxmWebViewController alloc] init];
     [vc loadHtmlStr:model.path withBaseUrl:nil];

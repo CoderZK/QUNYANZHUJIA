@@ -13,6 +13,14 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    if (isUPUPUP) {
+        self.lll.text = @"订单";
+        
+    }else {
+        self.lll.text = @"交付";
+    }
+    
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
