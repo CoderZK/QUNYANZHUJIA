@@ -106,8 +106,13 @@
         cell.titleLB.text = @"小店名称";
         cell.timeLB.text = self.dataModel.context;
         cell.leftLB.text = self.dataModel.name;
-        cell.moneyLB.text = [NSString stringWithFormat:@"%0.2f",self.dataModel.price];
-        [cell.leftImgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:self.dataModel.pic]] placeholderImage:[UIImage imageNamed:@"789"]];
+        cell.moneyLB.text = [NSString stringWithFormat:@"￥%0.2f",self.dataModel.price];
+        NSString * ss = @"";
+        if (self.dataModel.pic.length > 0) {
+            ss = [[self.dataModel.pic componentsSeparatedByString:@","] firstObject];
+        }
+        
+        [cell.leftImgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:ss]] placeholderImage:[UIImage imageNamed:@"789"]];
         cell.clipsToBounds = YES;
         return cell;
     }

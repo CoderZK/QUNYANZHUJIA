@@ -61,7 +61,7 @@
     button.titleLabel.font = kFont(14);
     [footV addSubview:button];
     
-    
+    self.tableView.frame = CGRectMake(0, 0, ScreenW, ScreenH - 70 );
     
 }
 

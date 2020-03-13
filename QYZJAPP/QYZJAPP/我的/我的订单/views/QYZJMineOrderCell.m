@@ -29,7 +29,13 @@
     self.titleLB.text = model.shopName;
     self.leftLB.text = model.goods_name;
     self.timeLB.text = model.time;
-    [self.leftImgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:model.goods_pic]] placeholderImage:[UIImage imageNamed:@"789"]];
+
+    NSString * goodS = @"";
+    if (model.goods_pic.length > 0 ){
+        goodS = [[model.goods_pic componentsSeparatedByString:@","] firstObject];
+    }
+    
+    [self.leftImgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:goodS]] placeholderImage:[UIImage imageNamed:@"789"]];
     self.moneyLB.text = [NSString stringWithFormat:@"￥%@",model.goods_price];
     self.statusBt.layer.cornerRadius = 3;
     self.statusBt.clipsToBounds = YES;

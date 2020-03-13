@@ -88,8 +88,11 @@
     dict[@"content"] = self.searchText;
     dict[@"nick_name"] = self.searchText;
 
+    if (self.type == 0 && self.page > 1) {
+        dict[@"id"] = [self.dataArray lastObject].ID;
+        dict[@"isReturn"] = @"0";
+    }
     self.navigaV.userInteractionEnabled = self.tableView.userInteractionEnabled = NO;
-
     [zkRequestTool networkingPOST:urlStr parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         [SVProgressHUD dismiss];
         [self.tableView.mj_header endRefreshing];
