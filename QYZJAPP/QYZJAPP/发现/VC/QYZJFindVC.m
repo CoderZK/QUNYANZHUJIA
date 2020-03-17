@@ -103,9 +103,12 @@
             NSArray<QYZJFindModel *>*arr = [QYZJFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"result"]];
             if (self.page == 1) {
                 [self.dataArray removeAllObjects];
+            }else {
+                if (arr.count == 0) {
+                    return ;
+                }
             }
             [self.dataArray addObjectsFromArray:arr];
-            
             [self.tableView reloadData];
         }else {
             [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"key"]] message:responseObject[@"message"]];
