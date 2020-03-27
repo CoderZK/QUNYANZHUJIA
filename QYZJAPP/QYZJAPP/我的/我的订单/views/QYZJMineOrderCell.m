@@ -111,6 +111,14 @@
                           self.statusBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
                           break;
                       }
+                    case 5:
+                    {
+                        ss = @"支付";
+                        self.statusBt.layer.borderColor = OrangeColor.CGColor;
+                        self.statusBt.layer.borderWidth = 1;
+                        self.statusBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+                        break;
+                    }
                   default:
                       break;
               }

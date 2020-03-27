@@ -107,6 +107,9 @@
     self.number = number;
     self.money = money;
     NSString * str = [NSString stringWithFormat:@"￥%0.2f",money];
+    if (isUPUPUP) {
+        str = @"确定";
+    }
     KKKKFootView * view = [[PublicFuntionTool shareTool] createFootvWithTitle:str andImgaeName:@""];
     self.footV = view;
     Weak(weakSelf);
@@ -341,6 +344,9 @@
         self.money = money;
         self.number = number;
         NSString * str = [NSString stringWithFormat:@"￥%0.2f",money];
+        if (isUPUPUP) {
+            str = @"确定";
+        }
         self.footV.titleStr = str;
     }else {
       self.dataArray[indexPath.row].isSelect = !self.dataArray[indexPath.row].isSelect;

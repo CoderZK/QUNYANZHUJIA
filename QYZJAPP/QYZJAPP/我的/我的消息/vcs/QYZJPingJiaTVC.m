@@ -49,7 +49,13 @@
     [headV addSubview:grayV];
     
     UIImageView * imgV = [[UIImageView alloc] initWithFrame:CGRectMake(15, 25, 45, 45)];
-    [imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:self.model.goods_pic]] placeholderImage:[UIImage imageNamed:@"789"] options:SDWebImageRetryFailed];
+    
+    NSString * goodS = @"";
+    if (_model.goods_pic.length > 0 ){
+        goodS = [[_model.goods_pic componentsSeparatedByString:@","] firstObject];
+    }
+    
+    [imgV sd_setImageWithURL:[NSURL URLWithString:[QYZJURLDefineTool getImgURLWithStr:goodS]] placeholderImage:[UIImage imageNamed:@"789"] options:SDWebImageRetryFailed];
     [headV addSubview:imgV];
     
     

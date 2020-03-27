@@ -27,6 +27,7 @@
 #import "TabBarController.h"
 #import "QYZJRecommendVC.h"
 #import "QYZJMineOrderTVC.h"
+#import "QYZJQuestOrAppointTVC.h"
 @interface QYZJHomeVC ()<zkLunBoCellDelegate,QYZJHomeOneCellDelegate,QYZJHomeTwoCellDelegate,UITabBarControllerDelegate>
 @property(nonatomic,strong)NSString *passwordStr;
 @property(nonatomic,strong)NSMutableArray<zkBannerModel *> *bannerDataArr;
@@ -267,6 +268,9 @@
         [button setTitle:@" >" forState:UIControlStateNormal];
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [view addSubview:button];
+        
+        
+        
     }
     
     UIButton * bt = (UIButton*)[view viewWithTag:100];
@@ -345,6 +349,17 @@
         }
         
         if (isUPUPUP) {
+         if([zkSignleTool shareTool].role == 1) {
+               [SVProgressHUD showErrorWithStatus:@"您已经是服务方,不能提问和预约"];
+               return ;
+           }
+           
+           QYZJQuestOrAppointTVC * vc =[[QYZJQuestOrAppointTVC alloc] init];
+           vc.hidesBottomBarWhenPushed = YES;
+           vc.type = 1;
+           vc.cityID = self.cityID;
+           vc.isMore = YES;
+           [self.navigationController pushViewController:vc animated:YES];
             return;
         }
         

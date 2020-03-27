@@ -62,6 +62,12 @@
     self.tyepLB1.text = str1;
     self.typeLB2.text = str2;
     
+    if (isUPUPUP) {
+        self.tyepLB1.hidden = self.typeLB2.hidden = YES;
+    }else {
+        self.tyepLB1.hidden = self.typeLB2.hidden = NO;
+    }
+    
 }
 
 @end

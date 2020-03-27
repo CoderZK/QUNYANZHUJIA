@@ -131,7 +131,7 @@
     
     if ([model.status intValue]== 1 || [model.status intValue]== 2) {
         [self actionWithStatus:[model.status intValue]withModel:model withIndex:button.tag];
-    }else if ([model.status intValue] == 0) {
+    }else if ([model.status intValue] == 0 || [model.status intValue] == 5) {
   
         [self wecharPayWithID:model.ID money:[model.goods_pic floatValue]];
         

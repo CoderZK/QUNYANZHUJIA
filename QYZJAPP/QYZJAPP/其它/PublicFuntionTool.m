@@ -165,7 +165,7 @@ static PublicFuntionTool * tool = nil;
     UIButton * button =[UIButton buttonWithType:UIButtonTypeCustom];
     button.tag = 100;
     button.frame = CGRectMake(20, 10, ScreenW - 40, 40);
-    [button setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
     if (imgName.length > 0) {
         [button setImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
         [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 0)];

@@ -65,6 +65,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (isUPUPUP && (indexPath.row == 2 || indexPath.row == 3)) {
+        return 0;
+    }
     return 80;
     
 }
@@ -100,6 +103,7 @@
     cell.imgV.image = [UIImage imageNamed:[NSString stringWithFormat:@"xx_%d",indexPath.row + 1]];
     cell.titleLB.text = self.titleArr[indexPath.row];
     cell.numberStr = [NSString stringWithFormat:@"%d",indexPath.row * 3];
+    cell.clipsToBounds = YES;
     
     if (self.dataDict != nil) {
         if (indexPath.row == 0) {

@@ -38,7 +38,6 @@
     self.tableView.estimatedRowHeight = 1;
     
     self.whiteView = [[UIView alloc] init];
-
     self.whiteView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.whiteView.mj_w = ScreenW ;
     self.whiteView.mj_h = 60;

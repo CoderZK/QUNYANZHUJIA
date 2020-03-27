@@ -97,6 +97,7 @@
     
     QYZJMineYuYueCell * cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.model = self.dataArray[indexPath.section];
+   
     return cell;
     
 }
