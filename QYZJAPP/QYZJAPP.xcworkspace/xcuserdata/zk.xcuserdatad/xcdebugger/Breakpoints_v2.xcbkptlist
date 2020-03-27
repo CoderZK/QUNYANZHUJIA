@@ -159,34 +159,34 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "A5E615C3-BD89-42F5-B2D2-6AAC9FD81608 - 78e70a21eaba995b"
+                  uuid = "A5E615C3-BD89-42F5-B2D2-6AAC9FD81608 - 78cbf04f9ab02fb9"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[QYZJRuZhuThreeVC ruZHu]"
-                  moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;"
+                  moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;&#x6d4b;&#x8bd5;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E6%88%91%E7%9A%84/%E7%94%B3%E8%AF%B7%E5%85%A5%E4%BD%8F/vcs/QYZJRuZhuThreeVC.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "111"
                   endingLineNumber = "111"
-                  offsetFromSymbolStart = "1097">
+                  offsetFromSymbolStart = "1064">
                </Location>
                <Location
-                  uuid = "A5E615C3-BD89-42F5-B2D2-6AAC9FD81608 - e7424fb2ee98e26"
+                  uuid = "A5E615C3-BD89-42F5-B2D2-6AAC9FD81608 - e58de955ee338c4"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__25-[QYZJRuZhuThreeVC ruZHu]_block_invoke"
-                  moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;"
+                  moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;&#x6d4b;&#x8bd5;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E6%88%91%E7%9A%84/%E7%94%B3%E8%AF%B7%E5%85%A5%E4%BD%8F/vcs/QYZJRuZhuThreeVC.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "113"
                   endingLineNumber = "113"
-                  offsetFromSymbolStart = "72">
+                  offsetFromSymbolStart = "88">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -383,34 +383,34 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "41EAE7DB-7C60-414D-95F2-480CF63E08B1 - e67087ff85b4e79e"
+                  uuid = "41EAE7DB-7C60-414D-95F2-480CF63E08B1 - e65c7d91f5be517c"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__31-[QYZJZengZhiFuWuTVC VipAction]_block_invoke"
-                  moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;"
+                  moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;&#x6d4b;&#x8bd5;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E6%88%91%E7%9A%84/VC/QYZJZengZhiFuWuTVC.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "109"
                   endingLineNumber = "109"
-                  offsetFromSymbolStart = "457">
+                  offsetFromSymbolStart = "420">
                </Location>
                <Location
-                  uuid = "41EAE7DB-7C60-414D-95F2-480CF63E08B1 - 62a611b2009cbf69"
+                  uuid = "41EAE7DB-7C60-414D-95F2-480CF63E08B1 - 628aebdc7096098b"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__31-[QYZJZengZhiFuWuTVC VipAction]_block_invoke_2"
-                  moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;"
+                  moduleName = "&#x7fa4;&#x71d5;&#x7b51;&#x5bb6;&#x6d4b;&#x8bd5;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zk/Documents/%E9%A1%B9%E7%9B%AE/%E7%BE%A4%E7%87%95%E7%AD%91%E5%AE%B61/QYZJAPP/QYZJAPP/%E6%88%91%E7%9A%84/VC/QYZJZengZhiFuWuTVC.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "109"
                   endingLineNumber = "109"
-                  offsetFromSymbolStart = "12">
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -476,6 +476,38 @@
             startingLineNumber = "374"
             endingLineNumber = "374"
             landmarkName = "-sitAnswerActionWithModel:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CF80B2B2-050C-49A2-BB09-A4AECCB1CC27"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QYZJAPP/&#x6211;&#x7684;/VC/QYZJMineZhiBoTVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "-viewDidDisappear:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E9C9BF8D-D6EC-40DA-A035-15F4ABB35DEE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QYZJAPP/&#x6211;&#x7684;/VC/QYZJMineZhiBoTVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "-dealloc"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -307,6 +307,14 @@
             QYZJHomeOneCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeOneCell" forIndexPath:indexPath];
             cell.delegate = self;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+              if (isUPUPUP) {
+                   cell.lll.text = @"订单";
+                   
+               }else {
+                   cell.lll.text = @"交付";
+               }
+            
             return cell;
         }else {
             QYZJHomeTwoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"QYZJHomeTwoCell" forIndexPath:indexPath];

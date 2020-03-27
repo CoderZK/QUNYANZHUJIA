@@ -133,7 +133,7 @@
                 
             }
         }else {
-            [button setBackgroundImage:[UIImage imageNamed:@"bg_1"] forState:UIControlStateNormal];
+            [button setBackgroundImage:[UIImage imageNamed:@"backorange"] forState:UIControlStateNormal];
             [button setTitle:@"新增" forState:UIControlStateNormal];
             button.layer.borderColor = OrangeColor.CGColor;
             [button setTitleColor:OrangeColor forState:UIControlStateNormal];

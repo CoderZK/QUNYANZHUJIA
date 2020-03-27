@@ -316,6 +316,8 @@
         [SVProgressHUD showErrorWithStatus:@"信息填写不完整"];
         return ;
     }
+    
+    
     if ([self cheackFullMessage]) {
         QYZJFindModel * model = [[QYZJFindModel alloc] init];
         [self.dataArray addObject:model];

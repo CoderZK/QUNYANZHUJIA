@@ -124,7 +124,7 @@
         [SVProgressHUD showErrorWithStatus:@"请输入签单金额和获取佣金金额"];
         return;
     }
-    if (self.contracturlArr.count == 0 || self.budgeturlArr.count == 0 || self.drawingurlArr.count == 0 || self.changetableurlArr.count == 0) {
+    if (self.contracturlArr.count == 0 || self.budgeturlArr.count == 0 || self.drawingurlArr.count  == 0) {
         [SVProgressHUD showErrorWithStatus:@"资料填写不完整"];
         return;
     }

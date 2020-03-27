@@ -19,6 +19,13 @@
 
 @implementation QYZJMineZhiBoTVC
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+//    self.avPlayer = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:@""]];
+    [self.avPlayer pause];
+    [self.avPlayer seekToTime:(CMTimeMake(0, 1))];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"装修直播";
@@ -161,5 +168,10 @@
     
 }
 
+
+- (void)dealloc{
+    NSLog(@"%@",@"-----");
+
+}
 
 @end
