@@ -75,7 +75,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    
     self.tabBarController.delegate = self;
     
     self.tool = [[QYZJLocationTool alloc] init];

@@ -110,7 +110,7 @@
         self.videoView.mj_h = (ScreenW - 20) * 9 / 16 + 20;
         [self.videoView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         UIImageView * imgV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10,(ScreenW - 20) , (ScreenW - 20) * 9 / 16)];
-        imgV.image = [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:dataModel.video_url] size:CGSizeMake((ScreenW - 20), (ScreenW - 20) * 9 / 16)];
+        imgV.image = [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:[dataModel.video_url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] size:CGSizeMake((ScreenW - 20), (ScreenW - 20) * 9 / 16)];
         UIButton * button = [[UIButton alloc]init];
         button.frame = CGRectMake((ScreenW - 20)/2 - 25, ((ScreenW - 20) * 9 / 16)/2-25, 50, 50);
         [button setBackgroundImage:[UIImage imageNamed:@"29"] forState:UIControlStateNormal];

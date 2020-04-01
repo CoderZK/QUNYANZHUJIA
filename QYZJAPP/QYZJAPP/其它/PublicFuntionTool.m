@@ -30,6 +30,11 @@ static PublicFuntionTool * tool = nil;
 #pragma mark ---- 获取图片第一帧
 + (UIImage *)firstFrameWithVideoURL:(NSURL *)url size:(CGSize)size
 {
+    
+    if (url == nil) {
+        [UIImage imageNamed:@"789"];
+    }
+    
     // 获取视频第一帧
     NSDictionary *opts = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:AVURLAssetPreferPreciseDurationAndTimingKey];
     AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:url options:opts];
@@ -41,7 +46,7 @@ static PublicFuntionTool * tool = nil;
     {
         return [UIImage imageWithCGImage:img];
     }
-    return nil;
+    return [UIImage imageNamed:@"789"];
 }
 
 + (void)presentVideoVCWithNSString:(NSString *)videoStr isBenDiPath:(BOOL)isBenDi{

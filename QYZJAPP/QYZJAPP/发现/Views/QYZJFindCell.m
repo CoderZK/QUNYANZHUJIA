@@ -410,7 +410,7 @@
     NSMutableArray * arr = @[].mutableCopy;
     if (videArr.count > 0) {
         for (NSString *str in videArr) {
-            [arr addObject:[PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:str] size:CGSizeMake(ww, hh)]];
+            [arr addObject:[PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:[str stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]] size:CGSizeMake(ww, hh)]];
         }
     }
     if (pictArr.count>0) {

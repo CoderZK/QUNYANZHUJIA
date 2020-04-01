@@ -16,6 +16,7 @@
     NSMutableDictionary *mDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
     NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
     [mDict setValue:device forKey:@"device_id"];
+    mDict[@"channel-ios"] = @"1";
     [mDict setValue:@1 forKey:@"channel"];
     if (![mDict.allKeys containsObject:@"NoToken"]) {
         //不传token
@@ -273,6 +274,7 @@
     NSMutableDictionary *mDict = [NSMutableDictionary dictionary];
        NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
        [mDict setValue:device forKey:@"device_id"];
+       mDict[@"channel-ios"] = @"1";
        [mDict setValue:@1 forKey:@"channel"];
        mDict[@"token"] = [zkSignleTool shareTool].session_token;
        NSString *version = [NSString stringWithFormat:@"V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
@@ -315,6 +317,7 @@
     NSMutableDictionary *mDict = [NSMutableDictionary dictionary];
     NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
     [mDict setValue:device forKey:@"device_id"];
+    mDict[@"channel-ios"] = @"1";
     [mDict setValue:@1 forKey:@"channel"];
     mDict[@"token"] = [zkSignleTool shareTool].session_token;
     NSString *version = [NSString stringWithFormat:@"V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
@@ -356,6 +359,7 @@
     NSMutableDictionary *mDict = [NSMutableDictionary dictionary];
     NSString *device = [NSString stringWithFormat:@"%@",[[UIDevice currentDevice] identifierForVendor]];
     [mDict setValue:device forKey:@"device_id"];
+    mDict[@"channel-ios"] = @"1";
     [mDict setValue:@1 forKey:@"channel"];
     mDict[@"token"] = [zkSignleTool shareTool].session_token;
     NSString *version = [NSString stringWithFormat:@"V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];

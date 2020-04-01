@@ -129,7 +129,7 @@
             dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
             dispatch_async(queue, ^{
                 // 这里放异步执行任务代码
-              model.videoImg =  [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:[QYZJURLDefineTool getVideoURLWithStr:model.videoUrl]] size:CGSizeMake((ScreenW- 100) , (ScreenW- 120) * 3/4)];
+              model.videoImg =  [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:[QYZJURLDefineTool getVideoURLWithStr:[model.videoUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]] size:CGSizeMake((ScreenW- 100) , (ScreenW- 120) * 3/4)];
             });
         }else {
             self.imgVideo.image = model.videoImg;

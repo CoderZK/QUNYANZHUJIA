@@ -333,7 +333,7 @@
         self.addBt.hidden = YES;
         self.videoImgV.hidden = NO;
         self.whiteTwoV.mj_h = (ScreenW - 110)*9/16 + 20;
-        self.videoImgV.image = [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:[QYZJURLDefineTool getVideoURLWithStr:videoStr]] size:CGSizeMake((ScreenW - 110), (ScreenW - 110)*9/16)];
+        self.videoImgV.image = [PublicFuntionTool firstFrameWithVideoURL:[NSURL URLWithString:[QYZJURLDefineTool getVideoURLWithStr:[videoStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]] size:CGSizeMake((ScreenW - 110), (ScreenW - 110)*9/16)];
         self.headV.mj_h = CGRectGetMaxY(self.whiteTwoV.frame);
         self.tableView.tableHeaderView = self.headV;
         

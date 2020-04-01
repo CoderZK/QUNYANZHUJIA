@@ -13,6 +13,7 @@ static QYZJLuYinView * tool = nil;
 @property(nonatomic,strong)UIButton *Bt,*closeBt;
 @property (nonatomic,strong) AVAudioRecorder *audioRecorder;//音频录音机
 @property(nonatomic,strong)NSData *audioData;
+@property(nonatomic,strong)AVAudioPlayer *audioPlayer;
 
 @end
 
@@ -159,6 +160,14 @@ static QYZJLuYinView * tool = nil;
  */
 -(AVAudioRecorder *)audioRecorder{
     if (!_audioRecorder) {
+        
+        AVAudioSession* session = [AVAudioSession sharedInstance];
+
+        [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+
+        [session setActive:YES error:nil];
+        
+        
         //创建录音文件保存路径
         NSURL *url=[self getSavePath];
         //创建录音格式设置
@@ -223,6 +232,31 @@ static QYZJLuYinView * tool = nil;
     
 }
 
+
+- (void)playRecord
+{
+     NSError *error = nil;
+
+//     self.avaudioPlayer = [[AVAudioPlayer alloc] initWithData:self.audioData error:&error];
+    self.audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:[self getSavePath] error:&error];
+
+   //设置代理
+   self.audioPlayer.delegate = self;
+
+   //将播放文件加载到缓冲区
+   [self.audioPlayer prepareToPlay];
+
+
+    [[AVAudioSession sharedInstance] overrideOutputAudioPort:(AVAudioSessionPortOverrideSpeaker) error:&error];;
+    self.audioPlayer.numberOfLoops = 0;
+    self.audioPlayer.volume =1;
+    
+    [self.audioPlayer play];
+
+
+
+}
+
 -(void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag{
     
     NSMutableDictionary * recordSetting = [NSMutableDictionary dictionary];
@@ -233,6 +267,9 @@ static QYZJLuYinView * tool = nil;
     
     NSString *cafFilePath = recorder.url.path;    //caf文件路径
     NSLog(@"\n录音文件位置%@",cafFilePath);
+    
+
+    
     
     self.audioData = [NSData dataWithContentsOfFile:cafFilePath];
     
