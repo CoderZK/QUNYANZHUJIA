@@ -125,6 +125,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL isOverRepairTime;
 @property(nonatomic,assign)BOOL isService;
 @property(nonatomic,assign)BOOL virtual_num_expire;
+@property(nonatomic,assign)BOOL is_be_recommend; //是否是需求人
 
 @property(nonatomic,assign)CGFloat price;
 @property(nonatomic,assign)CGFloat moneyCharging;

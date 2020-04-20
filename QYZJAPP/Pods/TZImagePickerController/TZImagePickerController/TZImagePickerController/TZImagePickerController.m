@@ -57,8 +57,8 @@
 
     // Default appearance, you can reset these after this method
     // 默认的外观，你可以在这个方法后重置
-    self.oKButtonTitleColorNormal   = [UIColor colorWithRed:(83/255.0) green:(179/255.0) blue:(17/255.0) alpha:1.0];
-    self.oKButtonTitleColorDisabled = [UIColor colorWithRed:(83/255.0) green:(179/255.0) blue:(17/255.0) alpha:0.5];
+    self.oKButtonTitleColorNormal   = [UIColor colorWithRed:(255/255.0) green:(114/255.0) blue:(49/255.0) alpha:1.0];
+    self.oKButtonTitleColorDisabled = [UIColor colorWithRed:(255/255.0) green:(114/255.0) blue:(49/255.0) alpha:0.5];
     
     self.navigationBar.barTintColor = [UIColor colorWithRed:(34/255.0) green:(34/255.0)  blue:(34/255.0) alpha:1.0];
     self.navigationBar.tintColor = [UIColor whiteColor];
@@ -274,7 +274,7 @@
     self.cannotSelectLayerColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
     self.allowCameraLocation = YES;
     
-    self.iconThemeColor = [UIColor colorWithRed:31 / 255.0 green:185 / 255.0 blue:34 / 255.0 alpha:1.0];
+    self.iconThemeColor = [UIColor colorWithRed:(255/255.0) green:(114/255.0) blue:(49/255.0) alpha:1.0]; //[UIColor colorWithRed:31 / 255.0 green:185 / 255.0 blue:34 / 255.0 alpha:1.0];
     [self configDefaultBtnTitle];
     
     CGFloat cropViewWH = MIN(self.view.tz_width, self.view.tz_height) / 3 * 2;

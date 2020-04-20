@@ -89,6 +89,12 @@
         if ([responseObject[@"key"] intValue]== 1) {
             
             self.dataModel = [QYZJWorkModel mj_objectWithKeyValues:responseObject[@"result"]];
+            
+            if (self.dataModel.is_self && self.dataModel.is_be_recommend == NO) {
+                 [self.tableView reloadData];
+                return;
+            }
+            
             [self setFootVWithStatus:[self.dataModel.status intValue]];
             [self.tableView reloadData];
             

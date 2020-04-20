@@ -386,7 +386,7 @@
 		335010EB20EE05C000F8486B /* UIButton+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Badge.m"; sourceTree = "<group>"; };
 		335010EC20EE05C100F8486B /* UIButton+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Badge.h"; sourceTree = "<group>"; };
 		335010ED20EE05C100F8486B /* NSString+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Size.h"; sourceTree = "<group>"; };
-		337F3E5620E9FE3B00C5526A /* 群燕筑家.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "群燕筑家.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		337F3E5620E9FE3B00C5526A /* 群燕筑家测试.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "群燕筑家测试.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		337F3E5920E9FE3B00C5526A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		337F3E5A20E9FE3B00C5526A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		337F3E5C20E9FE3C00C5526A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -1039,7 +1039,7 @@
 		337F3E5720E9FE3B00C5526A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				337F3E5620E9FE3B00C5526A /* 群燕筑家.app */,
+				337F3E5620E9FE3B00C5526A /* 群燕筑家测试.app */,
 				337F3E6E20E9FE5400C5526A /* QYZJAPPTests.xctest */,
 				337F3E7920E9FE5400C5526A /* QYZJAPPUITests.xctest */,
 			);
@@ -2382,7 +2382,7 @@
 			);
 			name = QYZJAPP;
 			productName = QYZJAPP;
-			productReference = 337F3E5620E9FE3B00C5526A /* 群燕筑家.app */;
+			productReference = 337F3E5620E9FE3B00C5526A /* 群燕筑家测试.app */;
 			productType = "com.apple.product-type.application";
 		};
 		337F3E6D20E9FE5400C5526A /* QYZJAPPTests */ = {
@@ -3058,7 +3058,7 @@
 				);
 				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.com.qun.app;
-				PRODUCT_NAME = "群燕筑家";
+				PRODUCT_NAME = "群燕筑家测试";
 				PROVISIONING_PROFILE = "3bdcf4b3-e396-4d7a-ab2b-739f2269ddaa";
 				PROVISIONING_PROFILE_SPECIFIER = comcomqunDEV;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3071,7 +3071,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "QYZJAPP/群燕筑家.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 4744VSH78G;
@@ -3095,8 +3095,8 @@
 				);
 				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.com.qun.app;
-				PRODUCT_NAME = "群燕筑家";
-				PROVISIONING_PROFILE_SPECIFIER = comcomqunDIS;
+				PRODUCT_NAME = "群燕筑家测试";
+				PROVISIONING_PROFILE_SPECIFIER = comcomqunDEV;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
