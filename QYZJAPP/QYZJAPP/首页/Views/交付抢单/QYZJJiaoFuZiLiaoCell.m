@@ -105,6 +105,9 @@
     }else {
         [[zkPhotoShowVC alloc] initWithArray:self.dataArray index:button.tag - 100];
         
+        
+        
+        
     }
 }
 

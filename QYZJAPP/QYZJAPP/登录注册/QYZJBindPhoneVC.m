@@ -172,6 +172,9 @@
             [zkSignleTool shareTool].isOpenSm = userModel.isOpenSm;
             [zkSignleTool shareTool].isLogin = YES;
             [zkSignleTool shareTool].isBindWebChat = YES;
+            
+            [[zkSignleTool shareTool] uploadDeviceToken];
+            
             if (self.dissBlock != nil) {
                 self.dissBlock(YES);
                 [self.navigationController popViewControllerAnimated:YES];

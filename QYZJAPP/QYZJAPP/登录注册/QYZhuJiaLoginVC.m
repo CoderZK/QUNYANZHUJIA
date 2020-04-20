@@ -88,6 +88,9 @@
                 [zkSignleTool shareTool].telphone = userModel.telphone;
                 [zkSignleTool shareTool].isLogin = YES;
                 [zkSignleTool shareTool].isOpenSm = userModel.isOpenSm;
+                
+                [[zkSignleTool shareTool] uploadDeviceToken];
+                
                 if (userModel.app_openid.length > 0) {
                     [zkSignleTool shareTool].isBindWebChat = YES;
                 }
@@ -280,6 +283,9 @@
             [zkSignleTool shareTool].isOpenSm = userModel.isOpenSm;
             [zkSignleTool shareTool].isLogin = YES;
             [zkSignleTool shareTool].isBindWebChat = YES;
+            
+            [[zkSignleTool shareTool] uploadDeviceToken];
+            
             [self dismissViewControllerAnimated:YES completion:nil];
             
             
