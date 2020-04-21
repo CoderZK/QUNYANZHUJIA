@@ -17,6 +17,13 @@
 
 @implementation QYZJJiaoFuListTVC
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.page = 1;
+    [self getData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -26,9 +33,9 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"QYZJJiaoFuListCell" bundle:nil] forCellReuseIdentifier:@"cell"];
 
-    self.page = 1;
+     self.page = 1;
      self.dataArray = @[].mutableCopy;
-     [self getData];
+    
      self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
          self.page = 1;
          [self getData];
@@ -39,6 +46,7 @@
      }];
     
 }
+
 
 - (void)getData {
     
@@ -103,10 +111,12 @@
                     break;
                 }
             }
-          QYZJCreateShiGongQingDanTVC * vc =[[QYZJCreateShiGongQingDanTVC alloc] init];
-          vc.hidesBottomBarWhenPushed = YES;
-          vc.ID = model.ID;
-          [weakSelf.navigationController pushViewController:vc animated:YES];
+//          QYZJCreateShiGongQingDanTVC * vc =[[QYZJCreateShiGongQingDanTVC alloc] init];
+//          vc.hidesBottomBarWhenPushed = YES;
+//          vc.ID = model.demand_grab_sheet_id;
+//          [weakSelf.navigationController pushViewController:vc animated:YES];
+        
+        [weakSelf jiaoFuActionWithdemand_grab_sheet_id: model.demand_grab_sheet_id];
         
     };
     
@@ -124,6 +134,42 @@
     
     
 }
+
+
+//交付中
+
+- (void)jiaoFuActionWithdemand_grab_sheet_id:(NSString *)demand_grab_sheet_id {
+    
+    
+    [SVProgressHUD show];
+    NSMutableDictionary * dict = @{}.mutableCopy;
+    dict[@"demand_grab_sheet_id"] = demand_grab_sheet_id;
+    [zkRequestTool networkingPOST:[QYZJURLDefineTool user_createTurnoverURL] parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [SVProgressHUD dismiss];
+        if ([responseObject[@"key"] intValue]== 1) {
+            
+            QYZJCreateShiGongQingDanTVC * vc =[[QYZJCreateShiGongQingDanTVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.ID = responseObject[@"result"][@"turnover_id"];
+//            vc.IDTwo = self.ID;
+//            vc.isRob = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        
+        }else {
+            [self showAlertWithKey:[NSString stringWithFormat:@"%@",responseObject[@"code"]] message:responseObject[@"message"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+    }];
+    
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
