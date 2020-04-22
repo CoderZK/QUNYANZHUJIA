@@ -127,6 +127,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     QYZJFindModel * model = self.dataArray[indexPath.row];
+    
     if ((model.is_service && [model.user_status intValue] == 1) || (!model.is_service && [model.user_status intValue] == 3)) {
         QYZJCreateShiGongQingDanTVC * vc =[[QYZJCreateShiGongQingDanTVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
