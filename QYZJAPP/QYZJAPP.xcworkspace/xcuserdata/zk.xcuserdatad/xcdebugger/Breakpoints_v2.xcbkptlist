@@ -39,16 +39,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AA196AD5-9BD6-45D0-AEE9-30D45F8C112E"
+            uuid = "776ECC39-4106-4DCA-A662-EA9D58B7BA10"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJHomePayTVC.m"
+            filePath = "QYZJAPP/&#x9996;&#x9875;/VC/QYZJMinePayDetailVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "-setFootVWithStatus:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
