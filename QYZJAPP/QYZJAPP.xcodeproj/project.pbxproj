@@ -3056,11 +3056,11 @@
 					"$(PROJECT_DIR)/QYZJAPP/3rd",
 					"$(PROJECT_DIR)/QYZJAPP/3rd/UMessage_Sdk_1.3.0",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.com.qun.app;
 				PRODUCT_NAME = "群燕筑家测试";
 				PROVISIONING_PROFILE = "3bdcf4b3-e396-4d7a-ab2b-739f2269ddaa";
-				PROVISIONING_PROFILE_SPECIFIER = comcomqunDEV;
+				PROVISIONING_PROFILE_SPECIFIER = qqqqqqqqqqqqqqq;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -3071,7 +3071,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "QYZJAPP/群燕筑家.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 4744VSH78G;
@@ -3093,10 +3093,10 @@
 					"$(PROJECT_DIR)/QYZJAPP/3rd",
 					"$(PROJECT_DIR)/QYZJAPP/3rd/UMessage_Sdk_1.3.0",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.com.qun.app;
 				PRODUCT_NAME = "群燕筑家测试";
-				PROVISIONING_PROFILE_SPECIFIER = comcomqunDEV;
+				PROVISIONING_PROFILE_SPECIFIER = AHAH;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

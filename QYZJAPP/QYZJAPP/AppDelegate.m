@@ -146,12 +146,38 @@
 {
 
         [UMessage registerDeviceToken:deviceToken];
-        //2.获取到deviceToken
-        NSString *token = [[[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]] stringByReplacingOccurrencesOfString:@" " withString:@""];
-        //将deviceToken给后台
-        NSLog(@"send_token:%@",token);
-        [zkSignleTool shareTool].deviceToken = token;
-        [[zkSignleTool shareTool] uploadDeviceToken];
+    
+       NSString * token = @"";
+    
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 13) {
+               if (![deviceToken isKindOfClass:[NSData class]]) {
+                   //记录获取token失败的描述
+                   return;
+               }
+               const unsigned *tokenBytes = (const unsigned *)[deviceToken bytes];
+               token = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
+                                     ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
+                                     ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
+                                     ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+               NSLog(@"deviceToken1:%@", token);
+           } else {
+              token = [NSString
+                              stringWithFormat:@"%@",deviceToken];
+               token = [token stringByReplacingOccurrencesOfString:@"<" withString:@""];
+               token = [token stringByReplacingOccurrencesOfString:@">" withString:@""];
+               token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+            
+           }
+          [zkSignleTool shareTool].deviceToken = token;
+          [[zkSignleTool shareTool] uploadDeviceToken];
+    
+    
+//        //2.获取到deviceToken
+//        NSString *token2 = [[[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]] stringByReplacingOccurrencesOfString:@" " withString:@""];
+//        //将deviceToken给后台
+//        NSLog(@"send_token:%@",token2);
+//        [zkSignleTool shareTool].deviceToken = token;
+//        [[zkSignleTool shareTool] uploadDeviceToken];
    
     
 }
