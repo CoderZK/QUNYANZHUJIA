@@ -15,8 +15,8 @@ typedef NS_ENUM(NSInteger, ARRAYTYPE) {
     titleArray,//单列标题
     AreaArray,//地区不限
     AreaArrayTwo,//地区和城市不限
-    ArerArrayNormal//正常三列城市
-    
+    ArerArrayNormal,//正常三列城市
+    titleArrThree
 };
 
 @protocol zkPickViewDelelgate <NSObject>
